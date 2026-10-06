@@ -620,3 +620,9 @@ if (!globalThis.OCamlRuntime) {
   };
 })();
 }
+let a={};
+const b=globalThis.OCamlRuntime.caml_closure(1, (e) => { let f;if(e.$tag===0){ const g=e[0];return 3.141592653589793*g*g;} else return e.$tag===1?e[0]*e[1]:void 0;});
+const c=globalThis.OCamlRuntime.caml_closure(1, (e) => { let f;try { let g, h;if(e!==0){ if(e!==1)throw{$ocamlExit:4, $ocamlArgs:[]};else return"one";} else return"zero";} catch(i){ if(i.$ocamlExit===4)return"many";else throw i;} });
+const d=globalThis.OCamlRuntime.caml_closure(1, (e) => e<=1?1:e*globalThis.OCamlRuntime.caml_apply(d, [e-1]));
+a={$tag:0, "0":b, "1":c, "2":d};
+export default a;

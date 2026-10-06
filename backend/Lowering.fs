@@ -110,8 +110,8 @@ module Lowering =
                     cc.Vars[p.Id] <- v
                     v) in
 
-            Function(ids, None, None, Return(expr cc b))
-        | LExpr.Apply(f, xs) -> app (expr c f) (List.map (expr c) xs)
+            rt c "caml_closure" [ Value(Int(List.length ps)); Function(ids, None, None, Return(tailExpr cc b)) ]
+        | LExpr.Apply(f, xs) -> rt c "caml_apply" [ expr c f; NewTuple(List.map (expr c) xs, []) ]
         | LExpr.Let(n, v, b) ->
             let cc = clone c in
             let x = vid n in
@@ -177,8 +177,8 @@ module Lowering =
                 None
             )
         | LExpr.Prim(p, xs) -> prim c p xs
-        | LExpr.Switch(x, cs, bs, fail) -> switch c (expr c x) cs bs fail
-        | LExpr.StringSwitch(x, cs, fail) -> switchString c (expr c x) cs fail
+        | LExpr.Switch(x, cs, bs, fail) -> switch c false (expr c x) cs bs fail
+        | LExpr.StringSwitch(x, cs, fail) -> switchString c false (expr c x) cs fail
         | LExpr.StaticRaise(tag, xs) -> StatementExpr(Throw(staticPayload tag (List.map (expr c) xs)), None)
         | LExpr.StaticCatch(body, tag, ps, handler) ->
             let result = id "exitResult"
@@ -214,6 +214,31 @@ module Lowering =
                 If(isAnyStaticExit (Var exn), throw (Var exn), ExprStatement(VarSet(result, expr cc handler)))
 
             StatementExpr(TryWith(ExprStatement(VarSet(result, expr c body)), Some exn, catchStmt), Some result)
+
+    and tailExpr c e =
+        match e with
+        | LExpr.Apply(f, xs) -> rt c "caml_trampoline_return" [ expr c f; NewTuple(List.map (expr c) xs, []) ]
+        | LExpr.If(a, b, d) -> Conditional(expr c a, tailExpr c b, tailExpr c d)
+        | LExpr.Seq(a, b) -> Sequential[ expr c a; tailExpr c b ]
+        | LExpr.Let(n, v, b) ->
+            let cc = clone c
+            let x = vid n
+            cc.Vars[n.Id] <- x
+            Expression.Let(x, expr c v, tailExpr cc b)
+        | LExpr.LetRec(bs, b) ->
+            let cc = clone c
+
+            let ids =
+                bs
+                |> List.map (fun (n, _) ->
+                    let x = vid n in
+                    cc.Vars[n.Id] <- x
+                    n, x)
+
+            LetRec(List.map2 (fun (_, x) (_, v) -> x, expr cc v) ids bs, tailExpr cc b)
+        | LExpr.Switch(x, cs, bs, fail) -> switch c true (expr c x) cs bs fail
+        | LExpr.StringSwitch(x, cs, fail) -> switchString c true (expr c x) cs fail
+        | _ -> expr c e
 
     and prim c p xs =
         let es = List.map (expr c) xs
@@ -291,6 +316,7 @@ module Lowering =
         | "identity", [ a ] -> a
         | "makelazy", [ f ] -> rt c "caml_lazy_make" [ f ]
         | "makeforward", [ v ] -> rt c "caml_lazy_make_forward" [ v ]
+        | "atomic_load", [ r; _ ] -> rt c "caml_atomic_load" [ r ]
         | "not", [ a ] -> Unary(UnaryOperator.Not, a)
         | "negint", [ a ]
         | "negfloat", [ a ] -> Unary(UnaryOperator.Inversion, a)
@@ -316,9 +342,10 @@ module Lowering =
         | "ccall", _ -> rt c p.Name.Value es
         | tag, _ -> failwith $"Lambda primitive '{tag}' is not lowered yet"
 
-    and switch c x cs bs fail =
+    and switch c tail x cs bs fail =
         let xv: Expression = x
         let tag: Expression = ItemGet(xv, Value(String "$tag"), Purity.Pure)
+        let body = if tail then tailExpr else expr
 
         let cases: (Expression * LExpr) list =
             (cs
@@ -331,10 +358,11 @@ module Lowering =
             | Some z -> expr c z
             | None -> Undefined
 
-        List.foldBack (fun (test, b) acc -> Conditional(test, expr c b, acc)) cases fallback
+        List.foldBack (fun (test, b) acc -> Conditional(test, body c b, acc)) cases fallback
 
-    and switchString c x cs fail =
+    and switchString c tail x cs fail =
         let xv: Expression = x
+        let body = if tail then tailExpr else expr
 
         let cases: (Expression * LExpr) list =
             cs
@@ -345,7 +373,7 @@ module Lowering =
             | Some z -> expr c z
             | None -> Undefined
 
-        List.foldBack (fun (test, b) acc -> Conditional(test, expr c b, acc)) cases fallback
+        List.foldBack (fun (test, b) acc -> Conditional(test, body c b, acc)) cases fallback
 
     let compile (ir: UnitIR) =
         let gs = Dictionary<string, Id>()
@@ -369,7 +397,7 @@ module Lowering =
 
         let me = mutableId ir.ModuleIdent in
         gs[ir.ModuleIdent] <- me
-        let init = VarDeclaration(me, Undefined)
+        let init = VarDeclaration(me, Object [])
         let body = ExprStatement(expr c ir.Code)
         let export = ExportDecl(true, ExprStatement(Var me))
         imports @ [ init; body; export ], runtime.Value

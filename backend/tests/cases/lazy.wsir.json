@@ -1,0 +1,67 @@
+{
+  "schema": "wsocaml-ir-4",
+  "unit": "Lz",
+  "moduleIdent": "Lz",
+  "mainModuleBlockSize": 1,
+  "requiredGlobals": [],
+  "code": {
+    "tag": "prim",
+    "prim": { "tag": "setglobal", "name": "Lz" },
+    "args": [
+      {
+        "tag": "let",
+        "var": { "id": "l_1", "name": "l" },
+        "value": {
+          "tag": "prim",
+          "prim": { "tag": "makelazy" },
+          "args": [
+            {
+              "tag": "fun",
+              "params": [],
+              "body": {
+                "tag": "prim",
+                "prim": { "tag": "addint" },
+                "args": [
+                  { "tag": "const", "value": { "tag": "int", "value": "40" } },
+                  { "tag": "const", "value": { "tag": "int", "value": "2" } }
+                ]
+              }
+            }
+          ]
+        },
+        "body": {
+          "tag": "prim",
+          "prim": { "tag": "makeblock", "blockTag": 0, "mutable": false },
+          "args": [
+            {
+              "tag": "prim",
+              "prim": { "tag": "ccall", "name": "caml_lazy_force" },
+              "args": [ { "tag": "var", "var": { "id": "l_1", "name": "l" } } ]
+            },
+            {
+              "tag": "prim",
+              "prim": { "tag": "ccall", "name": "caml_lazy_force" },
+              "args": [ { "tag": "var", "var": { "id": "l_1", "name": "l" } } ]
+            },
+            {
+              "tag": "prim",
+              "prim": { "tag": "ccall", "name": "caml_lazy_force" },
+              "args": [
+                {
+                  "tag": "prim",
+                  "prim": { "tag": "makeforward" },
+                  "args": [ { "tag": "const", "value": { "tag": "int", "value": "99" } } ]
+                }
+              ]
+            },
+            {
+              "tag": "prim",
+              "prim": { "tag": "ccall", "name": "caml_lazy_force" },
+              "args": [ { "tag": "const", "value": { "tag": "int", "value": "5" } } ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

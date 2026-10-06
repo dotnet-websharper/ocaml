@@ -1,0 +1,18 @@
+{
+  "schema": "wsocaml-ir-4",
+  "unit": "Offset",
+  "moduleIdent": "Offset",
+  "mainModuleBlockSize": 1,
+  "requiredGlobals": [],
+  "code": {
+    "tag": "prim",
+    "prim": { "tag": "setglobal", "name": "Offset" },
+    "args": [
+      {
+        "tag": "prim",
+        "prim": { "tag": "offsetint", "value": 5 },
+        "args": [ { "tag": "const", "value": { "tag": "int", "value": "10" } } ]
+      }
+    ]
+  }
+}

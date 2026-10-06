@@ -620,3 +620,7 @@ if (!globalThis.OCamlRuntime) {
   };
 })();
 }
+let a={};
+const b=globalThis.OCamlRuntime.caml_create_bytes(3);
+a=(b[0]=72,b[1]=105,b[2]=33,{$tag:0, "0":globalThis.OCamlRuntime.caml_bytes_to_string(b), "1":globalThis.OCamlRuntime.caml_string_unsafe_get("AB", 1)});
+export default a;

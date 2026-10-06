@@ -1,0 +1,36 @@
+{
+  "schema": "wsocaml-ir-4",
+  "unit": "Shadow",
+  "moduleIdent": "Shadow",
+  "mainModuleBlockSize": 1,
+  "requiredGlobals": [],
+  "code": {
+    "tag": "prim",
+    "prim": { "tag": "setglobal", "name": "Shadow" },
+    "args": [
+      {
+        "tag": "let",
+        "var": { "id": "x_1", "name": "x" },
+        "value": { "tag": "const", "value": { "tag": "int", "value": "1" } },
+        "body": {
+          "tag": "let",
+          "var": { "id": "f_2", "name": "f" },
+          "value": {
+            "tag": "let",
+            "var": { "id": "x_3", "name": "x" },
+            "value": { "tag": "const", "value": { "tag": "int", "value": "2" } },
+            "body": { "tag": "var", "var": { "id": "x_3", "name": "x" } }
+          },
+          "body": {
+            "tag": "prim",
+            "prim": { "tag": "addint" },
+            "args": [
+              { "tag": "var", "var": { "id": "x_1", "name": "x" } },
+              { "tag": "var", "var": { "id": "f_2", "name": "f" } }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

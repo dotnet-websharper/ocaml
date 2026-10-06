@@ -620,3 +620,6 @@ if (!globalThis.OCamlRuntime) {
   };
 })();
 }
+let a={};
+a={$tag:0, "0":globalThis.OCamlRuntime.caml_bint_add("int64", globalThis.OCamlRuntime.caml_int64_of_string("5"), globalThis.OCamlRuntime.caml_int64_of_string("7")), "1":globalThis.OCamlRuntime.caml_bint_mul("int64", globalThis.OCamlRuntime.caml_int64_of_string("1000000000000"), globalThis.OCamlRuntime.caml_int64_of_string("3")), "2":globalThis.OCamlRuntime.caml_bint_add("int32", 2000000000, 2000000000), "3":globalThis.OCamlRuntime.caml_bint_of_int("int32", 42), "4":globalThis.OCamlRuntime.caml_bint_lsl("int64", globalThis.OCamlRuntime.caml_int64_of_string("1"), 40), "5":globalThis.OCamlRuntime.caml_bint_comp("int64", "gt", globalThis.OCamlRuntime.caml_int64_of_string("5"), globalThis.OCamlRuntime.caml_int64_of_string("3"))};
+export default a;

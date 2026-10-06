@@ -1,0 +1,51 @@
+{
+  "schema": "wsocaml-ir-4",
+  "unit": "Divmod",
+  "moduleIdent": "Divmod",
+  "mainModuleBlockSize": 1,
+  "requiredGlobals": [],
+  "code": {
+    "tag": "prim",
+    "prim": { "tag": "setglobal", "name": "Divmod" },
+    "args": [
+      {
+        "tag": "prim",
+        "prim": { "tag": "makeblock", "blockTag": 0, "mutable": false },
+        "args": [
+          {
+            "tag": "prim",
+            "prim": { "tag": "divint", "safe": true },
+            "args": [
+              { "tag": "const", "value": { "tag": "int", "value": "7" } },
+              { "tag": "const", "value": { "tag": "int", "value": "2" } }
+            ]
+          },
+          {
+            "tag": "prim",
+            "prim": { "tag": "divint", "safe": true },
+            "args": [
+              { "tag": "const", "value": { "tag": "int", "value": "-7" } },
+              { "tag": "const", "value": { "tag": "int", "value": "2" } }
+            ]
+          },
+          {
+            "tag": "prim",
+            "prim": { "tag": "modint", "safe": true },
+            "args": [
+              { "tag": "const", "value": { "tag": "int", "value": "7" } },
+              { "tag": "const", "value": { "tag": "int", "value": "2" } }
+            ]
+          },
+          {
+            "tag": "prim",
+            "prim": { "tag": "modint", "safe": true },
+            "args": [
+              { "tag": "const", "value": { "tag": "int", "value": "-7" } },
+              { "tag": "const", "value": { "tag": "int", "value": "2" } }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

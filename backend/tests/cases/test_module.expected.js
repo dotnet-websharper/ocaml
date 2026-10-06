@@ -620,3 +620,8 @@ if (!globalThis.OCamlRuntime) {
   };
 })();
 }
+let a={};
+const b=globalThis.OCamlRuntime.caml_closure(2, (d, e) => d+e);
+const c=globalThis.OCamlRuntime.caml_closure(1, (d) => d*d);
+a={$tag:0, "0":b, "1":c, "2":globalThis.OCamlRuntime.caml_apply(b, [20, 22])===42?globalThis.OCamlRuntime.caml_apply(c, [6]):0};
+export default a;

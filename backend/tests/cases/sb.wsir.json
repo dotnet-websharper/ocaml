@@ -1,0 +1,77 @@
+{
+  "schema": "wsocaml-ir-4",
+  "unit": "Sb",
+  "moduleIdent": "Sb",
+  "mainModuleBlockSize": 1,
+  "requiredGlobals": [],
+  "code": {
+    "tag": "prim",
+    "prim": { "tag": "setglobal", "name": "Sb" },
+    "args": [
+      {
+        "tag": "let",
+        "var": { "id": "b_1", "name": "b" },
+        "value": {
+          "tag": "prim",
+          "prim": { "tag": "ccall", "name": "caml_create_bytes" },
+          "args": [ { "tag": "const", "value": { "tag": "int", "value": "3" } } ]
+        },
+        "body": {
+          "tag": "seq",
+          "first": {
+            "tag": "prim",
+            "prim": { "tag": "bytesset" },
+            "args": [
+              { "tag": "var", "var": { "id": "b_1", "name": "b" } },
+              { "tag": "const", "value": { "tag": "int", "value": "0" } },
+              { "tag": "const", "value": { "tag": "int", "value": "72" } }
+            ]
+          },
+          "second": {
+            "tag": "seq",
+            "first": {
+              "tag": "prim",
+              "prim": { "tag": "bytesset" },
+              "args": [
+                { "tag": "var", "var": { "id": "b_1", "name": "b" } },
+                { "tag": "const", "value": { "tag": "int", "value": "1" } },
+                { "tag": "const", "value": { "tag": "int", "value": "105" } }
+              ]
+            },
+            "second": {
+              "tag": "seq",
+              "first": {
+                "tag": "prim",
+                "prim": { "tag": "bytesset" },
+                "args": [
+                  { "tag": "var", "var": { "id": "b_1", "name": "b" } },
+                  { "tag": "const", "value": { "tag": "int", "value": "2" } },
+                  { "tag": "const", "value": { "tag": "int", "value": "33" } }
+                ]
+              },
+              "second": {
+                "tag": "prim",
+                "prim": { "tag": "makeblock", "blockTag": 0, "mutable": false },
+                "args": [
+                  {
+                    "tag": "prim",
+                    "prim": { "tag": "bytes_to_string" },
+                    "args": [ { "tag": "var", "var": { "id": "b_1", "name": "b" } } ]
+                  },
+                  {
+                    "tag": "prim",
+                    "prim": { "tag": "stringref" },
+                    "args": [
+                      { "tag": "const", "value": { "tag": "string", "value": "AB" } },
+                      { "tag": "const", "value": { "tag": "int", "value": "1" } }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

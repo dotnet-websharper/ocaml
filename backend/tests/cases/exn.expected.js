@@ -620,3 +620,7 @@ if (!globalThis.OCamlRuntime) {
   };
 })();
 }
+let a={};
+const b={$tag:248, "0":"Exn.E", "1":globalThis.OCamlRuntime.caml_fresh_oo_id(0)};
+a={$tag:0, "0":b, "1":globalThis.OCamlRuntime.caml_closure(1, (c) => { let d;try { let e;if(c<0)throw{$tag:0, "0":b, "1":c};else e=0;return c+1;} catch(h){ if(h.$ocamlExit!==void 0)throw h;else { let f;try { let g;if(h[0]===b)return h[1];else throw{$ocamlExit:1, $ocamlArgs:[]};} catch(i){ if(i.$ocamlExit===1)throw h;else throw i;} } } })};
+export default a;

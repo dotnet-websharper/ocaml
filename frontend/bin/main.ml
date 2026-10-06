@@ -106,6 +106,7 @@ let primitive p =
   | Psetfield_computed _ -> simple "setfield_computed"
   | Pmakelazyblock Lazy_tag -> simple "makelazy"
   | Pmakelazyblock Forward_tag -> simple "makeforward"
+  | Patomic_load -> simple "atomic_load"
   | Pfloatfield i -> jtag "field" [ ("index", `Int i) ]
   | Psetfloatfield (i, _) -> jtag "setfield" [ ("index", `Int i) ]
   | Psequand -> simple "and"
@@ -190,7 +191,7 @@ let primitive p =
   | Pccall d -> jtag "ccall" [ ("name", `String d.prim_name) ]
   | Popaque -> simple "opaque"
   | Ppoll -> simple "poll"
-  | _ -> failwith ("unsupported Lambda primitive: " ^ Printlambda.name_of_primitive p)
+  | p -> failwith ("unsupported Lambda primitive: " ^ Printlambda.name_of_primitive p)
 
 let rec lambda = function
   | Lvar id -> jtag "var" [ ("var", id_json id) ]

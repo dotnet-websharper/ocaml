@@ -1,0 +1,64 @@
+{
+  "schema": "wsocaml-ir-4",
+  "unit": "Bint",
+  "moduleIdent": "Bint",
+  "mainModuleBlockSize": 1,
+  "requiredGlobals": [],
+  "code": {
+    "tag": "prim",
+    "prim": { "tag": "setglobal", "name": "Bint" },
+    "args": [
+      {
+        "tag": "prim",
+        "prim": { "tag": "makeblock", "blockTag": 0, "mutable": false },
+        "args": [
+          {
+            "tag": "prim",
+            "prim": { "tag": "addbint", "kind": "int64" },
+            "args": [
+              { "tag": "const", "value": { "tag": "int64", "value": "5" } },
+              { "tag": "const", "value": { "tag": "int64", "value": "7" } }
+            ]
+          },
+          {
+            "tag": "prim",
+            "prim": { "tag": "mulbint", "kind": "int64" },
+            "args": [
+              { "tag": "const", "value": { "tag": "int64", "value": "1000000000000" } },
+              { "tag": "const", "value": { "tag": "int64", "value": "3" } }
+            ]
+          },
+          {
+            "tag": "prim",
+            "prim": { "tag": "addbint", "kind": "int32" },
+            "args": [
+              { "tag": "const", "value": { "tag": "int32", "value": "2000000000" } },
+              { "tag": "const", "value": { "tag": "int32", "value": "2000000000" } }
+            ]
+          },
+          {
+            "tag": "prim",
+            "prim": { "tag": "bintofint", "kind": "int32" },
+            "args": [ { "tag": "const", "value": { "tag": "int", "value": "42" } } ]
+          },
+          {
+            "tag": "prim",
+            "prim": { "tag": "lslbint", "kind": "int64" },
+            "args": [
+              { "tag": "const", "value": { "tag": "int64", "value": "1" } },
+              { "tag": "const", "value": { "tag": "int", "value": "40" } }
+            ]
+          },
+          {
+            "tag": "prim",
+            "prim": { "tag": "bintcomp", "kind": "int64", "op": "gt" },
+            "args": [
+              { "tag": "const", "value": { "tag": "int64", "value": "5" } },
+              { "tag": "const", "value": { "tag": "int64", "value": "3" } }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

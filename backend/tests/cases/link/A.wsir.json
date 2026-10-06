@@ -1,0 +1,31 @@
+{
+  "schema": "wsocaml-ir-4",
+  "unit": "A",
+  "moduleIdent": "A",
+  "mainModuleBlockSize": 1,
+  "requiredGlobals": [],
+  "code": {
+    "tag": "prim",
+    "prim": { "tag": "setglobal", "name": "A" },
+    "args": [
+      {
+        "tag": "prim",
+        "prim": { "tag": "makeblock", "blockTag": 0, "mutable": false },
+        "args": [
+          {
+            "tag": "fun",
+            "params": [ { "id": "x_1", "name": "x" } ],
+            "body": {
+              "tag": "prim",
+              "prim": { "tag": "addint" },
+              "args": [
+                { "tag": "var", "var": { "id": "x_1", "name": "x" } },
+                { "tag": "const", "value": { "tag": "int", "value": "1" } }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

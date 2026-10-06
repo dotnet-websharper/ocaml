@@ -620,3 +620,6 @@ if (!globalThis.OCamlRuntime) {
   };
 })();
 }
+let a={};
+a={$tag:0, "0":globalThis.OCamlRuntime.caml_div(7, 2), "1":globalThis.OCamlRuntime.caml_div(-7, 2), "2":globalThis.OCamlRuntime.caml_mod(7, 2), "3":globalThis.OCamlRuntime.caml_mod(-7, 2)};
+export default a;

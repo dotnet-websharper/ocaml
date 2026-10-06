@@ -620,3 +620,8 @@ if (!globalThis.OCamlRuntime) {
   };
 })();
 }
+let a={};
+const b={$tag:0, "0":1, "1":2};
+const c={$tag:0, "0":1, "1":2};
+a={$tag:0, "0":globalThis.OCamlRuntime.caml_compare(b, {$tag:0, "0":1, "1":3}), "1":globalThis.OCamlRuntime.caml_equal(b, c), "2":globalThis.OCamlRuntime.caml_obj_tag({$tag:1, "0":99, "1":100}), "3":globalThis.OCamlRuntime.caml_array_make(3, 7).length, "4":globalThis.OCamlRuntime.caml_hash(b), "5":globalThis.OCamlRuntime.caml_hash(c)};
+export default a;

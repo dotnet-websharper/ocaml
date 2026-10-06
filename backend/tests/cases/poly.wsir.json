@@ -1,0 +1,118 @@
+{
+  "schema": "wsocaml-ir-4",
+  "unit": "Poly",
+  "moduleIdent": "Poly",
+  "mainModuleBlockSize": 1,
+  "requiredGlobals": [],
+  "code": {
+    "tag": "prim",
+    "prim": { "tag": "setglobal", "name": "Poly" },
+    "args": [
+      {
+        "tag": "let",
+        "var": { "id": "a_1", "name": "a" },
+        "value": {
+          "tag": "prim",
+          "prim": { "tag": "makeblock", "blockTag": 0, "mutable": false },
+          "args": [
+            { "tag": "const", "value": { "tag": "int", "value": "1" } },
+            { "tag": "const", "value": { "tag": "int", "value": "2" } }
+          ]
+        },
+        "body": {
+          "tag": "let",
+          "var": { "id": "b_2", "name": "b" },
+          "value": {
+            "tag": "prim",
+            "prim": { "tag": "makeblock", "blockTag": 0, "mutable": false },
+            "args": [
+              { "tag": "const", "value": { "tag": "int", "value": "1" } },
+              { "tag": "const", "value": { "tag": "int", "value": "3" } }
+            ]
+          },
+          "body": {
+            "tag": "let",
+            "var": { "id": "c_3", "name": "c" },
+            "value": {
+              "tag": "prim",
+              "prim": { "tag": "makeblock", "blockTag": 0, "mutable": false },
+              "args": [
+                { "tag": "const", "value": { "tag": "int", "value": "1" } },
+                { "tag": "const", "value": { "tag": "int", "value": "2" } }
+              ]
+            },
+            "body": {
+              "tag": "let",
+              "var": { "id": "d_4", "name": "d" },
+              "value": {
+                "tag": "prim",
+                "prim": { "tag": "makeblock", "blockTag": 1, "mutable": false },
+                "args": [
+                  { "tag": "const", "value": { "tag": "int", "value": "99" } },
+                  { "tag": "const", "value": { "tag": "int", "value": "100" } }
+                ]
+              },
+              "body": {
+                "tag": "prim",
+                "prim": { "tag": "makeblock", "blockTag": 0, "mutable": false },
+                "args": [
+                  {
+                    "tag": "prim",
+                    "prim": { "tag": "ccall", "name": "caml_compare" },
+                    "args": [
+                      { "tag": "var", "var": { "id": "a_1", "name": "a" } },
+                      { "tag": "var", "var": { "id": "b_2", "name": "b" } }
+                    ]
+                  },
+                  {
+                    "tag": "prim",
+                    "prim": { "tag": "ccall", "name": "caml_equal" },
+                    "args": [
+                      { "tag": "var", "var": { "id": "a_1", "name": "a" } },
+                      { "tag": "var", "var": { "id": "c_3", "name": "c" } }
+                    ]
+                  },
+                  {
+                    "tag": "prim",
+                    "prim": { "tag": "ccall", "name": "caml_obj_tag" },
+                    "args": [
+                      { "tag": "var", "var": { "id": "d_4", "name": "d" } }
+                    ]
+                  },
+                  {
+                    "tag": "prim",
+                    "prim": { "tag": "arraylength", "kind": "int" },
+                    "args": [
+                      {
+                        "tag": "prim",
+                        "prim": { "tag": "ccall", "name": "caml_array_make" },
+                        "args": [
+                          { "tag": "const", "value": { "tag": "int", "value": "3" } },
+                          { "tag": "const", "value": { "tag": "int", "value": "7" } }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "prim",
+                    "prim": { "tag": "ccall", "name": "caml_hash" },
+                    "args": [
+                      { "tag": "var", "var": { "id": "a_1", "name": "a" } }
+                    ]
+                  },
+                  {
+                    "tag": "prim",
+                    "prim": { "tag": "ccall", "name": "caml_hash" },
+                    "args": [
+                      { "tag": "var", "var": { "id": "c_3", "name": "c" } }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

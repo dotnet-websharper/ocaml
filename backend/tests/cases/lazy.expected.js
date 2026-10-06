@@ -620,3 +620,7 @@ if (!globalThis.OCamlRuntime) {
   };
 })();
 }
+let a={};
+const b=globalThis.OCamlRuntime.caml_lazy_make(globalThis.OCamlRuntime.caml_closure(0, () => 40+2));
+a={$tag:0, "0":globalThis.OCamlRuntime.caml_lazy_force(b), "1":globalThis.OCamlRuntime.caml_lazy_force(b), "2":globalThis.OCamlRuntime.caml_lazy_force(globalThis.OCamlRuntime.caml_lazy_make_forward(99)), "3":globalThis.OCamlRuntime.caml_lazy_force(5)};
+export default a;

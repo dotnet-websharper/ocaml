@@ -620,3 +620,6 @@ if (!globalThis.OCamlRuntime) {
   };
 })();
 }
+let a={};
+a={$tag:0, "0":globalThis.OCamlRuntime.caml_closure(1, () => { globalThis.OCamlRuntime.caml_print_string("hello ");globalThis.OCamlRuntime.caml_print_int(42);return globalThis.OCamlRuntime.caml_print_newline(0);})};
+export default a;
