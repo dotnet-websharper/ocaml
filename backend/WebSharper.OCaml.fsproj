@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>wsocaml</ToolCommandName>
+    <PackageId>WebSharper.OCaml</PackageId>
+    <Version>0.2.0</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="WebSharper.Compiler.Common" Version="10.*" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Ir.fs" />
+    <Compile Include="Lowering.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Runtime.js" LogicalName="wsocaml-runtime.js" />
+  </ItemGroup>
+</Project>

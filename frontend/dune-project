@@ -1,0 +1,7 @@
+(lang dune 3.11)
+(name websharper-ocaml)
+(generate_opam_files true)
+(package
+ (name websharper-ocaml)
+ (synopsis "Typed OCaml frontend for WebSharper")
+ (depends (ocaml (= 5.4.1)) dune yojson))
