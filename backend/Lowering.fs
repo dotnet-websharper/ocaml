@@ -30,19 +30,23 @@ module Lowering =
     let app f xs =
         Application(f, xs, ApplicationInfo.None)
 
-    let rec lit =
+    let rt (c: Ctx) name args =
+        c.Runtime.Value <- true
+        app (GlobalAccess(Address.LibAddr [ "OCamlRuntime"; name ])) args
+
+    let rec lit c =
         function
         | LConst.I x -> Value(Int x)
         | LConst.F x -> Value(Double x)
         | LConst.S x -> Value(String x)
-        | LConst.C x -> Value(Char x)
+        | LConst.C x -> Value(Int(int x))
         | LConst.I32 x -> Value(Int(int x))
-        | LConst.I64 x -> Value(Double(float x))
-        | LConst.NI x -> Value(Double(float x))
+        | LConst.I64 x -> rt c "caml_int64_of_string" [ Value(String(string x)) ]
+        | LConst.NI x -> rt c "caml_nativeint_of_string" [ Value(String(string x)) ]
         | LConst.Block(tag, xs) ->
             Object(
                 ("$tag", MemberKind.Simple, Value(Int tag))
-                :: (xs |> List.mapi (fun i x -> string i, MemberKind.Simple, lit x))
+                :: (xs |> List.mapi (fun i x -> string i, MemberKind.Simple, lit c x))
             )
         | LConst.FloatArray xs -> NewTuple(xs |> List.map (fun x -> Value(Double x)), [])
 
@@ -95,7 +99,7 @@ module Lowering =
     let rec expr c =
         function
         | LExpr.Var n -> getVar c n.Id
-        | LExpr.Const k -> lit k
+        | LExpr.Const k -> lit c k
         | LExpr.Fun(ps, b) ->
             let cc = clone c in
 
@@ -240,32 +244,76 @@ module Lowering =
         | "subfloat", [ a; b ] -> bin BinaryOperator.Substract a b
         | "mulint", [ a; b ]
         | "mulfloat", [ a; b ] -> bin BinaryOperator.Multiply a b
-        | "divint", [ a; b ]
         | "divfloat", [ a; b ] -> bin BinaryOperator.Divide a b
-        | "modint", [ a; b ] -> bin BinaryOperator.Modulo a b
+        | "divint", [ a; b ] -> rt c "caml_div" [ a; b ]
+        | "modint", [ a; b ] -> rt c "caml_mod" [ a; b ]
         | "and", [ a; b ] -> bin BinaryOperator.And a b
         | "or", [ a; b ] -> bin BinaryOperator.Or a b
+        | "bitand", [ a; b ] -> bin BinaryOperator.BitwiseAnd a b
+        | "bitor", [ a; b ] -> bin BinaryOperator.BitwiseOr a b
+        | "bitxor", [ a; b ] -> bin BinaryOperator.BitwiseXor a b
+        | "lsl", [ a; b ] -> bin BinaryOperator.LeftShift a b
+        | "lsr", [ a; b ] -> bin BinaryOperator.UnsignedRightShift a b
+        | "asr", [ a; b ] -> bin BinaryOperator.RightShift a b
+        | "bytes_to_string", [ a ] -> rt c "caml_bytes_to_string" [ a ]
+        | "bytes_of_string", [ a ] -> rt c "caml_bytes_of_string" [ a ]
+        | "isint", [ a ] -> rt c "caml_is_int" [ a ]
+        | "isout", [ i; a ] -> rt c "caml_is_out" [ i; a ]
+        | "intcompare", [ a; b ] -> rt c "caml_compare_ints" [ a; b ]
+        | "compare_floats", [ a; b ] -> rt c "caml_compare_floats" [ a; b ]
+        | "dup_array", [ a ] -> rt c "caml_dup_array" [ a ]
+        | "bintofint", [ a ] -> rt c "caml_bint_of_int" [ Value(String p.Kind.Value); a ]
+        | "intofbint", [ a ] -> rt c "caml_int_of_bint" [ Value(String p.Kind.Value); a ]
+        | "negbint", [ a ] -> rt c "caml_bint_neg" [ Value(String p.Kind.Value); a ]
+        | "addbint", [ a; b ] -> rt c "caml_bint_add" [ Value(String p.Kind.Value); a; b ]
+        | "subbint", [ a; b ] -> rt c "caml_bint_sub" [ Value(String p.Kind.Value); a; b ]
+        | "mulbint", [ a; b ] -> rt c "caml_bint_mul" [ Value(String p.Kind.Value); a; b ]
+        | "andbint", [ a; b ] -> rt c "caml_bint_and" [ Value(String p.Kind.Value); a; b ]
+        | "orbint", [ a; b ] -> rt c "caml_bint_or" [ Value(String p.Kind.Value); a; b ]
+        | "xorbint", [ a; b ] -> rt c "caml_bint_xor" [ Value(String p.Kind.Value); a; b ]
+        | "lslbint", [ a; b ] -> rt c "caml_bint_lsl" [ Value(String p.Kind.Value); a; b ]
+        | "lsrbint", [ a; b ] -> rt c "caml_bint_lsr" [ Value(String p.Kind.Value); a; b ]
+        | "asrbint", [ a; b ] -> rt c "caml_bint_asr" [ Value(String p.Kind.Value); a; b ]
+        | "divbint", [ a; b ] -> rt c "caml_bint_div" [ Value(String p.Kind.Value); a; b ]
+        | "modbint", [ a; b ] -> rt c "caml_bint_mod" [ Value(String p.Kind.Value); a; b ]
+        | "bintcomp", [ a; b ] -> rt c "caml_bint_comp" [ Value(String p.Kind.Value); Value(String p.Op.Value); a; b ]
+        | "compare_bints", [ a; b ] -> rt c "caml_bint_compare" [ Value(String p.Kind.Value); a; b ]
+        | "cvtbint", [ a ] -> rt c "caml_bint_conv" [ Value(String p.Src.Value); Value(String p.Kind.Value); a ]
+        | "bbswap", [ a ] -> rt c "caml_bint_bswap" [ Value(String p.Kind.Value); a ]
+        | "bytes_set16", [ b; i; v ] -> rt c "caml_bytes_set16" [ b; i; v ]
+        | "bytes_set32", [ b; i; v ] -> rt c "caml_bytes_set32" [ b; i; v ]
+        | "bytes_set64", [ b; i; v ] -> rt c "caml_bytes_set64" [ b; i; v ]
+        | "bytes_get16", [ b; i ] -> rt c "caml_bytes_get16" [ b; i ]
+        | "bytes_get32", [ b; i ] -> rt c "caml_bytes_get32" [ b; i ]
+        | "bytes_get64", [ b; i ] -> rt c "caml_bytes_get64" [ b; i ]
+        | "ctconst", _ -> Value(Int p.Value.Value)
+        | "bswap16", [ a ] -> rt c "caml_bswap16" [ a ]
+        | "identity", [ a ] -> a
+        | "makelazy", [ f ] -> rt c "caml_lazy_make" [ f ]
+        | "makeforward", [ v ] -> rt c "caml_lazy_make_forward" [ v ]
         | "not", [ a ] -> Unary(UnaryOperator.Not, a)
         | "negint", [ a ]
         | "negfloat", [ a ] -> Unary(UnaryOperator.Inversion, a)
         | "intcomp", [ a; b ]
         | "floatcomp", [ a; b ] -> cmp p.Op.Value a b
         | "offsetint", [ a ] -> bin BinaryOperator.Add a (Value(Int p.Value.Value))
+        | "offsetref", [ r ] ->
+            Sequential
+                [ ItemSet(r, Value(Int 0), Binary(prop r 0, BinaryOperator.Add, Value(Int p.Value.Value)))
+                  Undefined ]
         | "makearray", _ -> NewTuple(es, [])
         | "arraylength", [ a ]
         | "stringlength", [ a ]
         | "byteslength", [ a ] -> ItemGet(a, Value(String "length"), Purity.Pure)
         | "arrayref", [ a; i ]
-        | "stringref", [ a; i ]
         | "bytesref", [ a; i ] -> ItemGet(a, i, Purity.Pure)
+        | "stringref", [ a; i ] -> rt c "caml_string_unsafe_get" [ a; i ]
         | "arrayset", [ a; i; v ]
         | "bytesset", [ a; i; v ] -> ItemSet(a, i, v)
         | "opaque", [ a ] -> a
         | "poll", [] -> Undefined
         | "raise", [ x ] -> StatementExpr(Throw x, None)
-        | "ccall", _ ->
-            c.Runtime.Value <- true
-            app (GlobalAccess(Address.LibAddr [ "OCamlRuntime"; p.Name.Value ])) es
+        | "ccall", _ -> rt c p.Name.Value es
         | tag, _ -> failwith $"Lambda primitive '{tag}' is not lowered yet"
 
     and switch c x cs bs fail =
@@ -317,7 +365,7 @@ module Lowering =
             |> List.map (fun n ->
                 let v = id n in
                 gs[n] <- v
-                Import(None, Some v, [], "./" + n + ".js"))
+                Import(Some v, None, [], "./" + n + ".js"))
 
         let me = mutableId ir.ModuleIdent in
         gs[ir.ModuleIdent] <- me

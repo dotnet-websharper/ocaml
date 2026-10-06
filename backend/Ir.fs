@@ -32,6 +32,7 @@ type Prim =
         BlockTag: int option
         Op: string option
         Kind: string option
+        Src: string option
         Mutable: bool option
         Value: int option
         Safe: bool option
@@ -97,7 +98,7 @@ module Json =
 
     let private prim (e: JsonElement) =
         let oi n =
-            optProp n e |> Option.map (fun x -> x.GetInt32())
+            optProp n e |> Option.map (fun x -> int (x.GetInt64()))
 
         let os n =
             optProp n e |> Option.map (fun x -> x.GetString())
@@ -112,6 +113,7 @@ module Json =
             BlockTag = oi "blockTag"
             Op = os "op"
             Kind = os "kind"
+            Src = os "src"
             Mutable = ob "mutable"
             Value = oi "value"
             Safe = ob "safe"
@@ -156,7 +158,8 @@ module Json =
         | x -> failwith $"unknown lambda node {x}"
 
     let read path =
-        use d = JsonDocument.Parse(System.IO.File.ReadAllText path)
+        let opts = JsonDocumentOptions(MaxDepth = 1024)
+        use d = JsonDocument.Parse(System.IO.File.ReadAllText path, opts)
         let r = d.RootElement
 
         {

@@ -12,6 +12,11 @@ open Lambda
 
 let jtag tag fields = `Assoc (("tag", `String tag) :: fields)
 
+let norm_float s =
+  if String.contains s 'p' || String.contains s 'P' || String.contains s 'x' || String.contains s 'X'
+  then Printf.sprintf "%.17g" (float_of_string s)
+  else s
+
 (* [Ident.unique_name] is the semantic identity used to resolve references.
    [Ident.name] is the source-oriented spelling used only as a JS name hint. *)
 let id_json id =
@@ -22,7 +27,7 @@ let id_json id =
 
 let const = function
   | Const_int x -> jtag "int" [ ("value", `String (string_of_int x)) ]
-  | Const_float x -> jtag "float" [ ("value", `String x) ]
+  | Const_float x -> jtag "float" [ ("value", `String (norm_float x)) ]
   | Const_char x -> jtag "char" [ ("value", `String (String.make 1 x)) ]
   | Const_string (x, _, _) -> jtag "string" [ ("value", `String x) ]
   | Const_int32 x -> jtag "int32" [ ("value", `String (Int32.to_string x)) ]
@@ -38,7 +43,7 @@ let rec structured_const = function
           ("blockTag", `Int tag); ("items", `List (List.map structured_const xs));
         ]
   | Const_float_array xs ->
-      jtag "float_array" [ ("items", `List (List.map (fun x -> `String x) xs)) ]
+      jtag "float_array" [ ("items", `List (List.map (fun x -> `String (norm_float x)) xs)) ]
   | Const_immstring s -> jtag "string" [ ("value", `String s) ]
 
 let int_cmp = function
@@ -67,6 +72,16 @@ let array_kind = function
   | Pintarray -> "int"
   | Pfloatarray -> "float"
 
+let ctconst_value = function
+  | Big_endian -> 0
+  | Word_size -> 64
+  | Int_size -> 63
+  | Max_wosize -> 4611686018427387903
+  | Ostype_unix -> 1
+  | Ostype_win32 -> 0
+  | Ostype_cygwin -> 0
+  | Backend_type -> 0
+
 let boxed_kind = function
   | Pnativeint -> "nativeint"
   | Pint32 -> "int32"
@@ -89,6 +104,8 @@ let primitive p =
   | Pfield_computed -> simple "field_computed"
   | Psetfield (i, _, _) -> jtag "setfield" [ ("index", `Int i) ]
   | Psetfield_computed _ -> simple "setfield_computed"
+  | Pmakelazyblock Lazy_tag -> simple "makelazy"
+  | Pmakelazyblock Forward_tag -> simple "makeforward"
   | Pfloatfield i -> jtag "field" [ ("index", `Int i) ]
   | Psetfloatfield (i, _) -> jtag "setfield" [ ("index", `Int i) ]
   | Psequand -> simple "and"
@@ -107,7 +124,11 @@ let primitive p =
   | Plsrint -> simple "lsr"
   | Pasrint -> simple "asr"
   | Pintcomp c -> jtag "intcomp" [ ("op", `String (int_cmp c)) ]
+  | Pcompare_ints -> simple "intcompare"
+  | Pcompare_floats -> simple "compare_floats"
+  | Pduparray (k, _) -> jtag "dup_array" [ ("kind", `String (array_kind k)) ]
   | Poffsetint n -> jtag "offsetint" [ ("value", `Int n) ]
+  | Poffsetref n -> jtag "offsetref" [ ("value", `Int n) ]
   | Pintoffloat -> simple "intoffloat"
   | Pfloatofint -> simple "floatofint"
   | Pnegfloat -> simple "negfloat"
@@ -144,6 +165,24 @@ let primitive p =
   | Pandbint k -> jtag "andbint" [ ("kind", `String (boxed_kind k)) ]
   | Porbint k -> jtag "orbint" [ ("kind", `String (boxed_kind k)) ]
   | Pxorbint k -> jtag "xorbint" [ ("kind", `String (boxed_kind k)) ]
+  | Plslbint k -> jtag "lslbint" [ ("kind", `String (boxed_kind k)) ]
+  | Plsrbint k -> jtag "lsrbint" [ ("kind", `String (boxed_kind k)) ]
+  | Pasrbint k -> jtag "asrbint" [ ("kind", `String (boxed_kind k)) ]
+  | Pdivbint { size; _ } -> jtag "divbint" [ ("kind", `String (boxed_kind size)) ]
+  | Pmodbint { size; _ } -> jtag "modbint" [ ("kind", `String (boxed_kind size)) ]
+  | Pcompare_bints k -> jtag "compare_bints" [ ("kind", `String (boxed_kind k)) ]
+  | Pcvtbint (s, d) ->
+      jtag "cvtbint"
+        [ ("src", `String (boxed_kind s)); ("kind", `String (boxed_kind d)) ]
+  | Pbbswap k -> jtag "bbswap" [ ("kind", `String (boxed_kind k)) ]
+  | Pbytes_set_16 s -> jtag "bytes_set16" [ ("safe", `Bool s) ]
+  | Pbytes_set_32 s -> jtag "bytes_set32" [ ("safe", `Bool s) ]
+  | Pbytes_set_64 s -> jtag "bytes_set64" [ ("safe", `Bool s) ]
+  | Pbytes_load_16 s -> jtag "bytes_get16" [ ("safe", `Bool s) ]
+  | Pbytes_load_32 s -> jtag "bytes_get32" [ ("safe", `Bool s) ]
+  | Pbytes_load_64 s -> jtag "bytes_get64" [ ("safe", `Bool s) ]
+  | Pctconst c -> jtag "ctconst" [ ("value", `Int (ctconst_value c)) ]
+  | Pbswap16 -> simple "bswap16"
   | Pbintcomp (k, c) ->
       jtag "bintcomp"
         [ ("kind", `String (boxed_kind k)); ("op", `String (int_cmp c)) ]
@@ -151,7 +190,7 @@ let primitive p =
   | Pccall d -> jtag "ccall" [ ("name", `String d.prim_name) ]
   | Popaque -> simple "opaque"
   | Ppoll -> simple "poll"
-  | _ -> failwith "unsupported Lambda primitive"
+  | _ -> failwith ("unsupported Lambda primitive: " ^ Printlambda.name_of_primitive p)
 
 let rec lambda = function
   | Lvar id -> jtag "var" [ ("var", id_json id) ]
