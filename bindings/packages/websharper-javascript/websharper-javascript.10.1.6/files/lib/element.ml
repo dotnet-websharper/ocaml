@@ -75,9 +75,9 @@ external scroll : t -> unit = "ws:WebSharper.JavaScript!globalThis.Element#Scrol
 (* inline *)
 external scroll_2 : t -> ScrollOptions.t -> unit = "ws:WebSharper.JavaScript!globalThis.Element#Scroll|WebSharper.JavaScript.Dom.ScrollOptions" "ws:WebSharper.JavaScript!globalThis.Element#Scroll|WebSharper.JavaScript.Dom.ScrollOptions"
 (* inline *)
-external getBoundingClientRect : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Element#GetBoundingClientRect|" "ws:WebSharper.JavaScript!globalThis.Element#GetBoundingClientRect|"
+external getBoundingClientRect : t -> DOMRect.t = "ws:WebSharper.JavaScript!globalThis.Element#GetBoundingClientRect|" "ws:WebSharper.JavaScript!globalThis.Element#GetBoundingClientRect|"
 (* inline *)
-external getClientRects : t -> (Js.t) array = "ws:WebSharper.JavaScript!globalThis.Element#GetClientRects|" "ws:WebSharper.JavaScript!globalThis.Element#GetClientRects|"
+external getClientRects : t -> (DOMRect.t) array = "ws:WebSharper.JavaScript!globalThis.Element#GetClientRects|" "ws:WebSharper.JavaScript!globalThis.Element#GetClientRects|"
 (* inline *)
 external getAnimations : t -> (Animation.t) array = "ws:WebSharper.JavaScript!globalThis.Element#GetAnimations|" "ws:WebSharper.JavaScript!globalThis.Element#GetAnimations|"
 (* inline *)
@@ -201,7 +201,7 @@ external get_ClassName : t -> string = "ws:WebSharper.JavaScript!globalThis.Elem
 (* inline *)
 external set_ClassName : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Element#set_ClassName|System.String" "ws:WebSharper.JavaScript!globalThis.Element#set_ClassName|System.String"
 (* inline *)
-external get_ClassList : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Element#get_ClassList|" "ws:WebSharper.JavaScript!globalThis.Element#get_ClassList|"
+external get_ClassList : t -> DOMTokenList.t = "ws:WebSharper.JavaScript!globalThis.Element#get_ClassList|" "ws:WebSharper.JavaScript!globalThis.Element#get_ClassList|"
 (* inline *)
 external get_Attributes : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Element#get_Attributes|" "ws:WebSharper.JavaScript!globalThis.Element#get_Attributes|"
 (* inline *)

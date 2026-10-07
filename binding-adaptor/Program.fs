@@ -79,44 +79,93 @@ let private lastSegment (fullName: string) =
     let last = fullName.Substring(fullName.LastIndexOf('.') + 1)
     if last.Contains "`" then last.Substring(0, last.IndexOf '`') else last
 
-let gen (dll: string) (pkgId: string) (version: string) (outRoot: string) (filter: string option) =
+let gen
+    (dll: string)
+    (pkgId: string)
+    (version: string)
+    (outRoot: string)
+    (filter: string option)
+    (references: string list)
+    =
     let info = loadInfo dll
 
-    let allClasses =
-        info.Classes
+    let classesOf (i: WebSharper.Core.Metadata.Info) (pkg: string) =
+        i.Classes
         |> Seq.choose (fun kv ->
             let (a, _custom, ci) = kv.Value
+            let td = kv.Key.Value
             match ci with
-            | Some ci -> Some(a, ci)
-            | None -> None)
+            | Some ci when a.Address.Length > 0 && validModuleName (classModuleName td a) -> Some(a, td, ci, pkg)
+            | _ -> None)
         |> Seq.toList
 
-    let moduleSet =
-        allClasses
-        |> List.map (fun (a, _) -> classModuleName a)
-        |> Set.ofList
+    let allClasses = classesOf info pkgId
 
-    let arityOf (m: string) =
+    let localByFull =
+        allClasses |> List.map (fun (a, td, _, _) -> td.FullName, classModuleName td a) |> Map.ofList
+
+    let localModules = allClasses |> List.map (fun (a, td, _, _) -> classModuleName td a) |> Set.ofList
+
+    let localArity (m: string) =
         allClasses
-        |> List.tryFind (fun (a, _) -> classModuleName a = m)
-        |> Option.map (fun (_, ci) -> ci.Generics.Length)
+        |> List.tryPick (fun (a, td, ci, _) ->
+            if classModuleName td a = m then Some ci.Generics.Length else None)
         |> Option.defaultValue 0
+
+    // referenced WebSharper assemblies: types resolve to their generated modules
+    let externalClasses =
+        references
+        |> List.collect (fun refDll -> classesOf (loadInfo refDll) (defaultId refDll))
+
+    let externalByFull =
+        externalClasses |> List.map (fun (a, td, _, _) -> td.FullName, classModuleName td a) |> Map.ofList
+
+    let externalModules =
+        externalClasses |> List.map (fun (a, td, _, _) -> classModuleName td a) |> Set.ofList
+
+    let externalArity (m: string) =
+        externalClasses
+        |> List.tryPick (fun (a, td, ci, _) ->
+            if classModuleName td a = m then Some ci.Generics.Length else None)
+        |> Option.defaultValue 0
+
+    let externalPkg (m: string) =
+        externalClasses
+        |> List.tryPick (fun (a, td, _, p) -> if classModuleName td a = m then Some p else None)
+
+    let deps = System.Collections.Generic.HashSet<string>()
+
+    let env : TypeEnv =
+        { LocalModules = localModules
+          LocalArity = localArity
+          LocalByFull = localByFull
+          ExternalByFull = externalByFull
+          ExternalModules = externalModules
+          ExternalArity = externalArity
+          ExternalPkg = externalPkg
+          Deps = deps }
 
     let selected =
         allClasses
-        |> List.filter (fun (a, _) ->
+        |> List.filter (fun (a, _, _, _) ->
             match filter with
             | None -> true
             | Some f -> (addressString a).Contains(f, StringComparison.OrdinalIgnoreCase))
-        |> List.sortBy (fun (a, _) -> addressString a)
+        |> List.sortBy (fun (a, _, _, _) -> addressString a)
     let assemblyName = Path.GetFileNameWithoutExtension dll
 
-    let rawModules = selected |> List.map (fun (a, ci) -> classModuleName a, ci)
+    let rawModules = selected |> List.map (fun (a, td, ci, _) -> classModuleName td a, ci)
     let nodeSet = rawModules |> List.map fst |> Set.ofList
 
     let edges =
         rawModules
-        |> List.map (fun (m, ci) -> m, (referencedModules ci |> List.filter nodeSet.Contains |> Set.ofList))
+        |> List.map (fun (m, ci) ->
+            let refs =
+                referencedModules ci
+                |> List.choose (fun fn -> Map.tryFind fn localByFull)
+                |> List.filter nodeSet.Contains
+                |> Set.ofList
+            m, refs)
         |> Map.ofList
 
     let scc = stronglyConnected (Set.toList nodeSet) edges
@@ -128,8 +177,8 @@ let gen (dll: string) (pkgId: string) (version: string) (outRoot: string) (filte
 
     let generated =
         selected
-        |> List.map (fun (a, ci) ->
-            generateClass moduleSet arityOf (opaqueFor (classModuleName a)) assemblyName a ci)
+        |> List.map (fun (a, td, ci, _) ->
+            generateClass env (opaqueFor (classModuleName td a)) assemblyName a td ci)
 
     let used = System.Collections.Generic.HashSet<string>()
     let unique =
@@ -152,19 +201,26 @@ let gen (dll: string) (pkgId: string) (version: string) (outRoot: string) (filte
         let g = { g with Module = name }
         File.WriteAllText(Path.Combine(libDir, lowerFirst name + ".ml"), renderClass g)
 
-    File.WriteAllText(Path.Combine(libDir, "js.ml"), jsModule)
+    // The shared `Js` module lives in the base package; packages with
+    // references resolve it through their dependencies instead of redefining it.
+    let emitJs = List.isEmpty references
+    if emitJs then
+        File.WriteAllText(Path.Combine(libDir, "js.ml"), jsModule)
 
     let libName = pkgId.Replace("-", "_")
-    let allModules = "js" :: (unique |> List.map (fun (n, _) -> lowerFirst n))
+    let allModules =
+        (if emitJs then [ "js" ] else []) @ (unique |> List.map (fun (n, _) -> lowerFirst n))
+    let depList = deps |> Seq.filter (fun d -> d <> pkgId) |> Seq.sort |> Seq.toList
     let duneLib =
-        [ "(library"
-          " (name " + libName + ")"
-          " (public_name " + pkgId + ")"
-          " (wrapped false)"
-          " (modules " + String.concat " " allModules + "))"
-          "" ]
+        ([ "(library"
+           " (name " + libName + ")"
+           " (public_name " + pkgId + ")"
+           " (wrapped false)"
+           " (modules " + String.concat " " allModules + ")" ]
+         @ (if depList = [] then [] else [ " (libraries " + String.concat " " depList + ")" ])
+         @ [ ")" ])
         |> String.concat "\n"
-    File.WriteAllText(Path.Combine(libDir, "dune"), duneLib)
+    File.WriteAllText(Path.Combine(libDir, "dune"), duneLib + "\n")
     File.WriteAllText(Path.Combine(srcDir, "dune-project"), "(lang dune 3.0)\n")
 
     let opam =
@@ -179,6 +235,7 @@ let gen (dll: string) (pkgId: string) (version: string) (outRoot: string) (filte
           "depends: ["
           "  \"ocaml\" {>= \"5.0\"}"
           "  \"dune\" {>= \"3.0\"}"
+          yield! [ for d in depList -> "  \"" + d + "\"" ]
           "]"
           "build: ["
           "  [\"dune\" \"build\" \"-p\" name \"-j\" jobs]"
@@ -227,6 +284,7 @@ let main argv =
             let mutable version = ""
             let mutable dest = ""
             let mutable filter = None
+            let references = ResizeArray<string>()
 
             let rec parse =
                 function
@@ -242,17 +300,20 @@ let main argv =
                 | "--filter" :: v :: t ->
                     filter <- Some v
                     parse t
+                | "--reference" :: v :: t ->
+                    references.Add v
+                    parse t
                 | [] -> ()
                 | x :: _ -> failwith $"unknown option {x}"
 
             parse rest
             if version = "" then failwith "gen requires --version"
             if dest = "" then failwith "gen requires --dest"
-            gen dll id version dest filter
+            gen dll id version dest filter (List.ofSeq references)
             0
         | _ ->
             eprintfn
-                "usage:\n  binding-adaptor dump <assembly.dll> [--filter <substr>]\n  binding-adaptor gen <assembly.dll> --version <ver> --dest <opam-repo> [--id <pkg-id>] [--filter <substr>]"
+                "usage:\n  binding-adaptor dump <assembly.dll> [--filter <substr>]\n  binding-adaptor gen <assembly.dll> --version <ver> --dest <opam-repo> [--id <pkg-id>] [--filter <substr>] [--reference <assembly.dll>]..."
             2
     with e ->
         eprintfn "%s" (e.ToString())

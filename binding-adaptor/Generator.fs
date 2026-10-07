@@ -68,6 +68,16 @@ type TypeCtx =
     { Lookup: string -> (string * int) option
       mutable Fresh: int }
 
+type TypeEnv =
+    { LocalModules: Set<string>
+      LocalArity: string -> int
+      LocalByFull: Map<string, string>
+      ExternalByFull: Map<string, string>
+      ExternalModules: Set<string>
+      ExternalArity: string -> int
+      ExternalPkg: string -> string option
+      Deps: System.Collections.Generic.HashSet<string> }
+
 let rec mapType (ctx: TypeCtx) (t: Type) : string =
     match t with
     | Type.VoidType -> "unit"
@@ -78,12 +88,13 @@ let rec mapType (ctx: TypeCtx) (t: Type) : string =
         | None ->
             match ctx.Lookup td.FullName with
             | Some (m, arity) ->
-                let gs = c.Generics |> List.map (mapType ctx)
+                let gs0 = c.Generics |> List.map (mapType ctx)
                 let gs =
-                    if List.length gs >= arity then gs
+                    if List.length gs0 >= arity then
+                        List.truncate arity gs0
                     else
-                        gs
-                        @ [ for _ in List.length gs .. arity - 1 ->
+                        gs0
+                        @ [ for _ in List.length gs0 .. arity - 1 ->
                                 ctx.Fresh <- ctx.Fresh + 1
                                 typeParamName (8 + ctx.Fresh) ]
                 let name = if m = "" then "t" else m + ".t"
@@ -148,10 +159,29 @@ let lastSegment (fullName: string) =
     let last = fullName.Substring(fullName.LastIndexOf('.') + 1)
     if last.Contains "`" then last.Substring(0, last.IndexOf '`') else last
 
-let classModuleName (address: Address) =
-    let last = List.last address.Address
-    let last = if last.Contains "`" then last.Substring(0, last.IndexOf '`') else last
-    upperFirst last
+let simpleTypeName (fullName: string) =
+    let i = max (fullName.LastIndexOf '.') (fullName.LastIndexOf '+')
+    let s = if i >= 0 then fullName.Substring(i + 1) else fullName
+    if s.Contains "`" then s.Substring(0, s.IndexOf '`') else s
+
+let validModuleName (s: string) =
+    s.Length > 0
+    && Char.IsLetter s.[0]
+    && (s |> Seq.forall (fun c -> Char.IsLetterOrDigit c || c = '_' || c = '\''))
+
+// A JS address path identifies thin/JS classes; handwritten ([<JavaScript>])
+// libraries use a placeholder path ("default") and are identified by their .NET
+// type name instead.
+let classModuleName (td: TypeDefinitionInfo) (address: Address) =
+    let jsName =
+        match List.ofSeq address.Address with
+        | [] | [ "default" ] -> None
+        | xs -> Some(List.last xs)
+    let raw =
+        match jsName with
+        | Some n -> if n.Contains "`" then n.Substring(0, n.IndexOf '`') else n
+        | None -> simpleTypeName td.FullName
+    upperFirst raw
 
 type Member =
     { Name: string
@@ -178,7 +208,7 @@ let referencedModules (ci: ClassInfo) : string list =
         | Type.ConcreteType c ->
             let td = c.Entity.Value
             if (builtinType td.FullName).IsNone then
-                acc.Add(upperFirst (lastSegment td.FullName)) |> ignore
+                acc.Add td.FullName |> ignore
             c.Generics |> List.iter go
         | Type.ArrayType(e, _) -> go e
         | Type.TupleType(ts, _) -> ts |> List.iter go
@@ -231,27 +261,45 @@ let stronglyConnected (nodes: string list) (edges: Map<string, Set<string>>) : M
     result |> Seq.map (fun kv -> kv.Key, kv.Value) |> Map.ofSeq
 
 let generateClass
-    (moduleSet: Set<string>)
-    (arityOf: string -> int)
+    (env: TypeEnv)
     (opaque: Set<string>)
     (assemblyName: string)
     (address: Address)
+    (td: TypeDefinitionInfo)
     (ci: ClassInfo)
     : GeneratedClass =
 
-    let moduleName = classModuleName address
+    let moduleName = classModuleName td address
     let generics = ci.Generics.Length
     let addrString = address.ToString()
     let qual = assemblyName + "!" + addrString
     let recv = receiverType generics
 
+    let addDep (m: string) =
+        match env.ExternalPkg m with
+        | Some p -> env.Deps.Add p |> ignore
+        | None -> ()
+
     let ctx : TypeCtx =
         { Lookup =
             (fun fullName ->
-                let m = upperFirst (lastSegment fullName)
-                if m = moduleName then Some("", generics)
-                elif moduleSet.Contains m && not (opaque.Contains m) then Some(m, arityOf m)
-                else None)
+                match Map.tryFind fullName env.LocalByFull with
+                | Some m when m = moduleName -> Some("", generics)
+                | Some m when not (opaque.Contains m) -> Some(m, env.LocalArity m)
+                | Some _ -> None
+                | None ->
+                    match Map.tryFind fullName env.ExternalByFull with
+                    | Some m ->
+                        addDep m
+                        Some(m, env.ExternalArity m)
+                    | None ->
+                        let m = upperFirst (lastSegment fullName)
+                        if m = moduleName then Some("", generics)
+                        elif env.LocalModules.Contains m && not (opaque.Contains m) then Some(m, env.LocalArity m)
+                        elif env.ExternalModules.Contains m then
+                            addDep m
+                            Some(m, env.ExternalArity m)
+                        else None)
           Fresh = 0 }
 
     let used = System.Collections.Generic.Dictionary<string, int>()

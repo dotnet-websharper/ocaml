@@ -7,6 +7,6 @@ external getParameter : t -> string -> Js.t = "ws:WebSharper.JavaScript!globalTh
 (* inline *)
 external setParameter : t -> string * Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.DOMConfiguration#SetParameter|(System.String,System.Object)" "ws:WebSharper.JavaScript!globalThis.DOMConfiguration#SetParameter|(System.String,System.Object)"
 (* inline *)
-external get_ParameterNames : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.DOMConfiguration#get_ParameterNames|" "ws:WebSharper.JavaScript!globalThis.DOMConfiguration#get_ParameterNames|"
+external get_ParameterNames : t -> DOMStringList.t = "ws:WebSharper.JavaScript!globalThis.DOMConfiguration#get_ParameterNames|" "ws:WebSharper.JavaScript!globalThis.DOMConfiguration#get_ParameterNames|"
 (* inline *)
-external set_ParameterNames : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.DOMConfiguration#set_ParameterNames|WebSharper.JavaScript.Dom.StringList" "ws:WebSharper.JavaScript!globalThis.DOMConfiguration#set_ParameterNames|WebSharper.JavaScript.Dom.StringList"
+external set_ParameterNames : t -> DOMStringList.t -> unit = "ws:WebSharper.JavaScript!globalThis.DOMConfiguration#set_ParameterNames|WebSharper.JavaScript.Dom.StringList" "ws:WebSharper.JavaScript!globalThis.DOMConfiguration#set_ParameterNames|WebSharper.JavaScript.Dom.StringList"

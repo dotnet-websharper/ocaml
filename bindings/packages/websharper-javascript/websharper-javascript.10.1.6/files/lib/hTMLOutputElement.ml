@@ -31,4 +31,4 @@ external set_Name : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.H
 (* inline *)
 external get_Form : t -> HTMLFormElement.t = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_Form|" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_Form|"
 (* inline *)
-external get_HtmlFor : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_HtmlFor|" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_HtmlFor|"
+external get_HtmlFor : t -> DOMTokenList.t = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_HtmlFor|" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_HtmlFor|"
