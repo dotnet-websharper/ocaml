@@ -1,0 +1,4 @@
+hello from wsocaml
+a warning
+now an error
+{"x":1,"y":[2,3]}

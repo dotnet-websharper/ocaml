@@ -25,12 +25,17 @@ let private runtimePrelude () =
     use r = new StreamReader(s)
     r.ReadToEnd()
 
+let private bindings (refs: ResizeArray<string>) =
+    if refs.Count = 0 then None
+    else Some(WebSharper.OCaml.Bindings.load (List.ofSeq refs))
+
 [<EntryPoint>]
 let main argv =
     try
         let mutable input = ""
         let mutable output = "wsocaml-out"
         let mutable compact = false
+        let references = ResizeArray<string>()
 
         let rec args i =
             if i < argv.Length then
@@ -40,6 +45,9 @@ let main argv =
                     args (i + 2)
                 | "--output" ->
                     output <- argv[i + 1]
+                    args (i + 2)
+                | "--reference" ->
+                    references.Add argv[i + 1]
                     args (i + 2)
                 | "--compact" ->
                     compact <- true
@@ -71,7 +79,7 @@ let main argv =
             | Import _ | ExportDecl _ -> s
             | _ -> stripper.TransformStatement (Breaker.BreakStatement (Breaker.optimizer.TransformStatement s))
 
-        let stmts, usesRuntime = compile ir
+        let stmts, usesRuntime = compile (bindings references) ir
 
         let ast = stmts |> List.map normalize
         let jsAst, _ = JavaScriptWriter.transformProgram Output.JavaScript pref ast

@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# Build a wsocaml app that consumes the OCaml bindings in bindings/.
+# Build a wsocaml app that consumes the legacy hand-authored OCaml bindings in bindings-legacy/.
 #   build-js-app.sh <entry.ml> [out-dir]
 set -euo pipefail
 root="$(cd "$(dirname "$0")/.." && pwd)"
 fe="$root/frontend/_build/default/bin/main.exe"
 be="$root/backend/bin/Debug/net10.0/WebSharper.OCaml.dll"
 s="$(ocamlc -where)"
-bdir="$root/bindings"
+bdir="$root/bindings-legacy"
 entry="$1"
 out="${2:-$root/out}"
 mkdir -p "$out"

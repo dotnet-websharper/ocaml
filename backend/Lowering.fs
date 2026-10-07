@@ -19,6 +19,7 @@ module Lowering =
             Globals: Dictionary<string, Id>
             Current: string
             Runtime: bool ref
+            Bindings: WebSharper.OCaml.Bindings.Context option
         }
 
     let id n = Id.New(n, false)
@@ -77,6 +78,14 @@ module Lowering =
 
     let exitTag = "$ocamlExit"
     let exitArgs = "$ocamlArgs"
+
+    let splitOn (ch: char) (s: string) =
+        match s.IndexOf ch with
+        | -1 -> s, ""
+        | i -> s.Substring(0, i), s.Substring(i + 1)
+
+    let tryClass (c: Ctx) (asm: string) (addr: string) =
+        c.Bindings |> Option.bind (fun ctx -> WebSharper.OCaml.Bindings.findClass ctx asm addr)
 
     let staticPayload tag args =
         Object
@@ -401,6 +410,49 @@ module Lowering =
                 | _ -> failwith "jssp: expects receiver and value"
             elif name.StartsWith "js:" then
                 app (globalAddr ()) es
+            elif name.StartsWith "wsnew:" then
+                let asm, addr = splitOn '!' (name.Substring 6)
+                match tryClass c asm addr with
+                | Some e -> New(GlobalAccess e.Address, [], es)
+                | None -> failwith $"wsnew: unknown class {addr}"
+            elif name.StartsWith "wsget:" then
+                let qual, field = splitOn '#' (name.Substring 6)
+                let asm, addr = splitOn '!' qual
+                match tryClass c asm addr with
+                | Some e ->
+                    match WebSharper.OCaml.Bindings.findField e.Class field with
+                    | Some f ->
+                        if f.CompiledForm.IsStaticField then
+                            ItemGet(GlobalAccess e.Address, Value(String field), Purity.Pure)
+                        else
+                            match es with
+                            | [ recv ] -> ItemGet(recv, Value(String field), Purity.Pure)
+                            | _ -> failwith "wsget: expects a receiver"
+                    | None -> failwith $"wsget: unknown field {field}"
+                | None -> failwith $"wsget: unknown class {addr}"
+            elif name.StartsWith "ws:" then
+                let parts = (name.Substring 3).Split('|')
+                let qual, mn = splitOn '#' parts.[0]
+                let ps = parts.[1..] |> Array.toList |> List.filter (fun s -> s <> "")
+                let asm, addr = splitOn '!' qual
+                match tryClass c asm addr with
+                | Some e ->
+                    match WebSharper.OCaml.Bindings.findMethod e.Class mn ps with
+                    | Some(mi, cmi) ->
+                        let form = cmi.CompiledForm
+                        if form.IsNew then
+                            New(GlobalAccess e.Address, [], es)
+                        elif form.IsInstance then
+                            match es with
+                            | recv :: rest ->
+                                app (ItemGet(recv, Value(String(WebSharper.OCaml.Bindings.methodJsName mi)), Purity.Pure)) rest
+                            | [] -> failwith "ws: instance method expects a receiver"
+                        elif form.IsInline then
+                            WebSharper.OCaml.Bindings.substituteHoles es cmi.Expression
+                        else
+                            app (ItemGet(GlobalAccess e.Address, Value(String(WebSharper.OCaml.Bindings.methodJsName mi)), Purity.Pure)) es
+                    | None -> failwith $"ws: unknown member {mn}"
+                | None -> failwith $"ws: unknown class {addr}"
             else
                 rt c name es
         | tag, _ -> failwith $"Lambda primitive '{tag}' is not lowered yet"
@@ -438,7 +490,7 @@ module Lowering =
 
         List.foldBack (fun (test, b) acc -> Conditional(test, body c b, acc)) cases fallback
 
-    let compile (ir: UnitIR) =
+    let compile (bindings: WebSharper.OCaml.Bindings.Context option) (ir: UnitIR) =
         let gs = Dictionary<string, Id>()
         let runtime = ref false
 
@@ -448,6 +500,7 @@ module Lowering =
                 Globals = gs
                 Current = ir.ModuleIdent
                 Runtime = runtime
+                Bindings = bindings
             }
 
         let imports =

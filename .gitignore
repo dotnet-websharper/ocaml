@@ -1,4 +1,5 @@
 node_modules/
-bindings/*.cmi
-bindings/*.cmo
+bindings-legacy/*.cmi
+bindings-legacy/*.cmo
 out/
+_build/

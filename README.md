@@ -1,33 +1,81 @@
-# wsocaml Lambda prototype
+# wsocaml — an OCaml frontend for WebSharper
 
-This revision uses OCaml's own executable lowering instead of serializing `Typedtree` patterns:
+`wsocaml` compiles OCaml to JavaScript through WebSharper's AST and runtime:
 
-`Parse -> Typemod.type_structure -> Translmod.transl_implementation -> Lambda.program -> wsocaml-ir-3 -> WebSharper AST -> JavaScript`
+```
+Parse -> Typemod.type_structure -> Translmod.transl_implementation -> Lambda.program
+  -> wsocaml-ir-4 -> WebSharper AST -> JavaScript
+```
 
-This removes the OCaml 5.4 `Tpat_value`/computation-pattern GADT boundary from wsocaml.
+OCaml itself handles typing and pattern-match compilation; the frontend serializes
+Lambda into `wsocaml-ir-4`, and the backend lowers it to WebSharper AST and emits JS.
+
+## Layout
+
+| Path | Purpose |
+| --- | --- |
+| `frontend/` | OCaml (dune) frontend: `.ml` → `wsocaml-ir-4` |
+| `backend/` | F#/.NET backend: `.wsir.json` → `.js` (also handles WebSharper bindings) |
+| `binding-adaptor/` | F# tool: WebSharper binding assembly → OCaml opam package |
+| `bindings/` | local opam repository of generated bindings (`websharper-xxx`) |
+| `bindings-legacy/` | earlier hand-authored bindings (used by the app tests) |
+| `examples/` | dune projects built on the generated bindings |
+| `scripts/` | build/test helpers |
+| `backend/tests/` | test harness (IR fixtures + apps) |
 
 ## Build
 
 Frontend (OCaml 5.4.1):
 
-    cd frontend
-    opam install dune yojson
-    dune build
+    cd frontend && opam install dune yojson && dune build
 
-Backend:
+Backend and adaptor:
 
-    cd backend
-    dotnet restore
-    dotnet build
+    dotnet build backend
+    dotnet build binding-adaptor
 
-## Frontend
+## Using WebSharper bindings
 
-    dune exec wsocaml-frontend -- --input ../examples/hello/hello.ml --output hello.wsir.json
+Generate an OCaml opam package from a WebSharper binding assembly (the package id
+defaults to `websharper-<name>`; use `--id` to override):
 
-## Backend
+    dotnet binding-adaptor/bin/Debug/net10.0/binding-adaptor.dll gen \
+      ~/.nuget/packages/websharper/10.1.6.677/lib/netstandard2.0/WebSharper.JavaScript.dll \
+      --version 10.1.6 --dest ./bindings
 
-    dotnet run --project backend/WebSharper.OCaml.fsproj -- --ir frontend/hello.wsir.json --output out
+Add the local repository and consume the package:
 
-## Status
+    opam repo add wsocaml ./bindings
+    opam install websharper-javascript
 
-This is still a compiler prototype, not a complete OCaml implementation. OCaml itself now handles typing and pattern-match compilation. The Lambda serializer covers the core Lambda forms and a useful primitive subset; unsupported runtime primitives, objects, static catches and exceptions fail explicitly. The backend consumes `wsocaml-ir-3` directly and lowers it to WebSharper AST.
+Each generated OCaml module (e.g. `Console`, `Date`, `JSON`) declares `external`s
+tagged with the WebSharper member address, e.g.
+`external log_2 : 'a -> unit = "ws:WebSharper.JavaScript!globalThis.console#Log|'0"`.
+The backend resolves these addresses against WebSharper metadata passed with
+`--reference <assembly.dll>`, inlining inline bodies and emitting thin
+static/instance/new access.
+
+## Examples
+
+Each example is a dune project producing a directory of JS. Install the
+bindings first, then build:
+
+    opam repo add wsocaml ./bindings
+    opam install websharper-javascript
+
+    cd examples/js && dune build && node _build/default/out/Main.js
+
+`examples/js` references the binding package directly in its `dune` file
+(`(libraries websharper-javascript)` and
+`%{lib:websharper-javascript:console.ml}`), so `dune build` type-checks the
+example against the installed opam package and then emits JS. `examples/hello`
+and `examples/basics` compile plain OCaml units and need no bindings.
+
+## Tests
+
+    bash backend/tests/run-tests.sh            # build the backend and run all tests
+    bash backend/tests/run-tests.sh --no-build # skip the backend build
+    bash backend/tests/run-tests.sh --update   # refresh goldens
+
+The harness covers IR fixtures plus apps: legacy bindings (`apps/`) and generated
+WebSharper bindings (`apps-ws/`, via `scripts/build-ws-app.sh`).

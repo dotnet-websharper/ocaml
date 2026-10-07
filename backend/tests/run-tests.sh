@@ -200,6 +200,42 @@ if [ -d "$apps" ]; then
   done
 fi
 
+apps_ws="$here/apps-ws"
+wsroot="$(cd "$here/../.." && pwd)"
+if [ -d "$apps_ws" ]; then
+  wslib="$(ls -d "$wsroot"/bindings/packages/websharper-javascript/*/files/lib 2>/dev/null | head -n 1 || true)"
+  if [ -z "$wslib" ]; then
+    echo "SKIP ws apps (no generated websharper-javascript package; run binding-adaptor)"
+  else
+    for ml in "$apps_ws"/*.ml; do
+      [ -f "$ml" ] || continue
+      aname="$(basename "$ml" .ml)"
+      aout="$tmp/ws_$aname"
+      mkdir -p "$aout"
+      if ! bash "$here/../../scripts/build-ws-app.sh" "$wslib" "$ml" "$aout" > "$tmp/ws_$aname.build" 2>&1; then
+        echo "FAIL ws $aname (build)"
+        sed 's/^/    /' "$tmp/ws_$aname.build"
+        fail=$((fail + 1))
+        continue
+      fi
+      node "$aout/Main.js" > "$tmp/ws_$aname.actual" 2>&1 || true
+      expectedOut="$apps_ws/$aname.out"
+      if [ "$update" = 1 ]; then
+        cp "$tmp/ws_$aname.actual" "$expectedOut"
+        echo "updated ws_$aname.out"
+      fi
+      if [ -f "$expectedOut" ] && ! diff -u "$expectedOut" "$tmp/ws_$aname.actual" > "$tmp/ws_$aname.diff"; then
+        echo "FAIL ws $aname (output mismatch)"
+        sed 's/^/    /' "$tmp/ws_$aname.diff"
+        fail=$((fail + 1))
+        continue
+      fi
+      echo "PASS ws $aname"
+      pass=$((pass + 1))
+    done
+  fi
+fi
+
 echo
 echo "passed: $pass, failed: $fail"
 [ "$fail" = 0 ]

@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ir.fs" />
+    <Compile Include="Bindings.fs" />
     <Compile Include="Lowering.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
