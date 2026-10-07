@@ -1,0 +1,10 @@
+url host=example.com
+encoded=5
+clicked 10,20
+key=A
+ping received
+box present: true
+box text: hello
+input value: typed
+option value: opt1
+localStorage k: v

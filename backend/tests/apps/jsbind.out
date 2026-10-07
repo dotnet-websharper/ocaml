@@ -1,0 +1,5 @@
+hello from bindings
+max=8 sqrt=1.414 pi=3.1416
+len=2 join=10,20
+json=[1,2,3]
+year=2026

@@ -60,6 +60,8 @@ STDLIB = {
     "open_out": "(fn) => 0",
     "open_out_bin": "(fn) => 0",
     "open_out_gen": "(m, p, fn) => 0",
+    "^": "(a, b) => String(a) + String(b)",
+    "@": "(a, b) => { const s = []; let l = a; while (l !== 0) { s.push(l['0']); l = l['1']; } let r = b; for (let i = s.length - 1; i >= 0; i--) r = { $tag: 0, '0': s[i], '1': r }; return r; }",
 }
 
 ARRAY = {
@@ -542,7 +544,7 @@ def clambda_fields(cmx):
 
 
 def value_name(d):
-    m = re.match(r"function\s+\S*\$([A-Za-z0-9_]+?)_\d+", d)
+    m = re.match(r"function\s+\S*\$([^\s]+?)_\d+", d)
     return m.group(1) if m else None
 
 

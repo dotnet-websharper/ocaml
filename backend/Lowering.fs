@@ -339,7 +339,70 @@ module Lowering =
         | "opaque", [ a ] -> a
         | "poll", [] -> Undefined
         | "raise", [ x ] -> StatementExpr(Throw x, None)
-        | "ccall", _ -> rt c p.Name.Value es
+        | "ccall", _ ->
+            let name = p.Name.Value
+            let parts () = (name.Substring(name.IndexOf(':') + 1)).Split '.' |> Array.toList
+
+            let globalAddr () = GlobalAccess(Address.LibAddr(parts ()))
+
+            if name.StartsWith "jsnew0:" then
+                New(GlobalAccess(Address.LibAddr(parts ())), [], [])
+            elif name.StartsWith "jsnew:" then
+                New(globalAddr (), [], es)
+            elif name.StartsWith "js0:" then
+                app (globalAddr ()) []
+            elif name.StartsWith "jsget:" then
+                match parts () with
+                | [ single ] -> GlobalAccess(Address.LibAddr [ single ])
+                | ps ->
+                    let obj, prop =
+                        match List.rev ps with
+                        | p :: rest -> List.rev rest, p
+                        | [] -> [], ""
+
+                    ItemGet(GlobalAccess(Address.LibAddr obj), Value(String prop), Purity.Pure)
+            elif name = "jsdget" then
+                match es with
+                | [ o; k ] -> ItemGet(o, k, Purity.Pure)
+                | _ -> failwith "jsdget: expects object and key"
+            elif name = "jsdset" then
+                match es with
+                | [ o; k; v ] -> ItemSet(o, k, v)
+                | _ -> failwith "jsdset: expects object, key and value"
+            elif name.StartsWith "jsset:" then
+                let ps = parts () in
+
+                let obj, prop =
+                    match List.rev ps with
+                    | p :: rest -> List.rev rest, p
+                    | [] -> [], ""
+
+                match es with
+                | [ v ] -> ItemSet(GlobalAccess(Address.LibAddr obj), Value(String prop), v)
+                | _ -> failwith "jsset expects one argument"
+            elif name.StartsWith "jse:" then
+                match es with
+                | recv :: rest ->
+                    app
+                        (ItemGet(recv, Value(String "addEventListener"), Purity.Pure))
+                        (Value(String(name.Substring 4)) :: rest)
+                | [] -> failwith "jse: expects a receiver and a listener"
+            elif name.StartsWith "jsm:" then
+                match es with
+                | recv :: rest -> app (ItemGet(recv, Value(String(name.Substring 4)), Purity.Pure)) rest
+                | [] -> failwith "jsm: expects a receiver"
+            elif name.StartsWith "jsgp:" then
+                match es with
+                | [ recv ] -> ItemGet(recv, Value(String(name.Substring 5)), Purity.Pure)
+                | _ -> failwith "jsgp: expects a receiver"
+            elif name.StartsWith "jssp:" then
+                match es with
+                | [ recv; v ] -> ItemSet(recv, Value(String(name.Substring 5)), v)
+                | _ -> failwith "jssp: expects receiver and value"
+            elif name.StartsWith "js:" then
+                app (globalAddr ()) es
+            else
+                rt c name es
         | tag, _ -> failwith $"Lambda primitive '{tag}' is not lowered yet"
 
     and switch c tail x cs bs fail =

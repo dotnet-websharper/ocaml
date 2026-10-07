@@ -166,6 +166,40 @@ for d in "$cases"/*/; do
   fi
 done
 
+apps="$here/apps"
+if [ -d "$apps" ]; then
+  for ml in "$apps"/*.ml; do
+    [ -f "$ml" ] || continue
+    aname="$(basename "$ml" .ml)"
+    aout="$tmp/app_$aname"
+    mkdir -p "$aout"
+    if ! bash "$here/../../scripts/build-js-app.sh" "$ml" "$aout" > "$tmp/app_$aname.build" 2>&1; then
+      echo "FAIL app $aname (build)"
+      sed 's/^/    /' "$tmp/app_$aname.build"
+      fail=$((fail + 1))
+      continue
+    fi
+    if [ -f "$apps/$aname.mjs" ]; then
+      node "$apps/$aname.mjs" "$aout" > "$tmp/app_$aname.actual" 2>&1 || true
+    else
+      node "$aout/Main.js" > "$tmp/app_$aname.actual" 2>&1 || true
+    fi
+    expectedOut="$apps/$aname.out"
+    if [ "$update" = 1 ]; then
+      cp "$tmp/app_$aname.actual" "$expectedOut"
+      echo "updated app_$aname.out"
+    fi
+    if [ -f "$expectedOut" ] && ! diff -u "$expectedOut" "$tmp/app_$aname.actual" > "$tmp/app_$aname.diff"; then
+      echo "FAIL app $aname (output mismatch)"
+      sed 's/^/    /' "$tmp/app_$aname.diff"
+      fail=$((fail + 1))
+      continue
+    fi
+    echo "PASS app $aname"
+    pass=$((pass + 1))
+  done
+fi
+
 echo
 echo "passed: $pass, failed: $fail"
 [ "$fail" = 0 ]
