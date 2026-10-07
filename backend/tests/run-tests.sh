@@ -218,7 +218,11 @@ if [ -d "$apps_ws" ]; then
         fail=$((fail + 1))
         continue
       fi
-      node "$aout/Main.js" > "$tmp/ws_$aname.actual" 2>&1 || true
+      if [ -f "$apps_ws/$aname.mjs" ]; then
+        node "$apps_ws/$aname.mjs" "$aout" > "$tmp/ws_$aname.actual" 2>&1 || true
+      else
+        node "$aout/Main.js" > "$tmp/ws_$aname.actual" 2>&1 || true
+      fi
       expectedOut="$apps_ws/$aname.out"
       if [ "$update" = 1 ]; then
         cp "$tmp/ws_$aname.actual" "$expectedOut"

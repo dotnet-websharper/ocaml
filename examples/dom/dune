@@ -1,0 +1,14 @@
+(library
+ (name example_dom)
+ (modules dom)
+ (libraries websharper-javascript))
+
+(rule
+ (target (dir out))
+ (deps dom.ml build.sh)
+ (action
+  (run bash build.sh out %{lib:websharper-javascript:console.ml})))
+
+(alias
+ (name default)
+ (deps example_dom.cmxa out))

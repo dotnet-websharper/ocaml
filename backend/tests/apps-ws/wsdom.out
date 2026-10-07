@@ -1,0 +1,7 @@
+tag=DIV
+html=<b>hello</b>
+found=box
+box present: true
+box className: greeting
+box text before: hello
+box text after: pinged
