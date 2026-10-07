@@ -188,7 +188,13 @@ let primitive p =
       jtag "bintcomp"
         [ ("kind", `String (boxed_kind k)); ("op", `String (int_cmp c)) ]
   | Praise _ -> simple "raise"
-  | Pccall d -> jtag "ccall" [ ("name", `String d.prim_name) ]
+  | Pccall d ->
+      let name =
+        match String.index_opt d.prim_name ' ' with
+        | Some i -> String.sub d.prim_name 0 i
+        | None -> d.prim_name
+      in
+      jtag "ccall" [ ("name", `String name) ]
   | Popaque -> simple "opaque"
   | Ppoll -> simple "poll"
   | p -> failwith ("unsupported Lambda primitive: " ^ Printlambda.name_of_primitive p)
