@@ -5,4 +5,4 @@ external error : t -> unit = "ws:WebSharper.JavaScript!globalThis.WritableStream
 (* inline *)
 external error_2 : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultController#Error|System.Object" "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultController#Error|System.Object"
 (* inline *)
-external get_Signal : t -> AbortSignal.t = "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultController#get_Signal|" "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultController#get_Signal|"
+external get_Signal : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultController#get_Signal|" "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultController#get_Signal|"

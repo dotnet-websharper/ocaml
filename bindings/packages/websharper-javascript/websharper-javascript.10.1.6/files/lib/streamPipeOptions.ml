@@ -13,6 +13,6 @@ external get_PreventClose : t -> bool = "ws:WebSharper.JavaScript!globalThis.Str
 (* inline *)
 external set_PreventClose : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.StreamPipeOptions#set_PreventClose|System.Boolean" "ws:WebSharper.JavaScript!globalThis.StreamPipeOptions#set_PreventClose|System.Boolean"
 (* inline *)
-external get_Signal : t -> AbortSignal.t = "ws:WebSharper.JavaScript!globalThis.StreamPipeOptions#get_Signal|" "ws:WebSharper.JavaScript!globalThis.StreamPipeOptions#get_Signal|"
+external get_Signal : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.StreamPipeOptions#get_Signal|" "ws:WebSharper.JavaScript!globalThis.StreamPipeOptions#get_Signal|"
 (* inline *)
-external create : AbortSignal.t -> t = "wsnew:WebSharper.JavaScript!globalThis.StreamPipeOptions" "wsnew:WebSharper.JavaScript!globalThis.StreamPipeOptions"
+external create : EventTarget.t -> t = "wsnew:WebSharper.JavaScript!globalThis.StreamPipeOptions" "wsnew:WebSharper.JavaScript!globalThis.StreamPipeOptions"

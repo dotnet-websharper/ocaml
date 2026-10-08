@@ -3,7 +3,7 @@ type t
 (* inline *)
 external matrixTransform : t -> t = "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#MatrixTransform|" "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#MatrixTransform|"
 (* inline *)
-external matrixTransform_2 : t -> DOMMatrixInit.t -> t = "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#MatrixTransform|WebSharper.JavaScript.DOMMatrixInit" "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#MatrixTransform|WebSharper.JavaScript.DOMMatrixInit"
+external matrixTransform_2 : t -> DOMMatrix2DInit.t -> t = "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#MatrixTransform|WebSharper.JavaScript.DOMMatrixInit" "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#MatrixTransform|WebSharper.JavaScript.DOMMatrixInit"
 (* inline *)
 external fromPoint : unit -> t = "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#FromPoint|" "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#FromPoint|"
 (* inline *)

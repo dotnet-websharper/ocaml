@@ -68,6 +68,12 @@ across packages do not collide (`Websharper_javascript.Event.t`,
 lives in the unwrapped `websharper-runtime` package. Use `open Websharper_javascript`
 (etc.) to bring a package's modules into scope.
 
+Cyclic type hierarchies (e.g. the DOM `EventTarget`/`Node`/`Element`/`Document`
+graph) are collapsed to a single shared abstract type so cross-references keep
+their real types instead of `Js.t` — `Document.t = Element.t = Node.t =
+EventTarget.t`, and `Document.getElementById : Document.t -> string -> Element.t`
+(the representative is chosen as the base with the largest subclass tree).
+
 ## Examples
 
 Each example is a dune project producing a directory of JS. Install the

@@ -5,9 +5,9 @@ external pipeTo : t -> WritableStream.t -> (unit) Promise.t = "ws:WebSharper.Jav
 (* inline *)
 external pipeTo_2 : t -> WritableStream.t -> StreamPipeOptions.t -> (unit) Promise.t = "ws:WebSharper.JavaScript!globalThis.ReadableStream#PipeTo|WebSharper.JavaScript.WritableStream|WebSharper.JavaScript.StreamPipeOptions" "ws:WebSharper.JavaScript!globalThis.ReadableStream#PipeTo|WebSharper.JavaScript.WritableStream|WebSharper.JavaScript.StreamPipeOptions"
 (* inline *)
-external pipeThrough : t -> Js.t -> t = "ws:WebSharper.JavaScript!globalThis.ReadableStream#PipeThrough|WebSharper.JavaScript.ReadableWritablePair" "ws:WebSharper.JavaScript!globalThis.ReadableStream#PipeThrough|WebSharper.JavaScript.ReadableWritablePair"
+external pipeThrough : t -> t -> t = "ws:WebSharper.JavaScript!globalThis.ReadableStream#PipeThrough|WebSharper.JavaScript.ReadableWritablePair" "ws:WebSharper.JavaScript!globalThis.ReadableStream#PipeThrough|WebSharper.JavaScript.ReadableWritablePair"
 (* inline *)
-external pipeThrough_2 : t -> Js.t -> StreamPipeOptions.t -> t = "ws:WebSharper.JavaScript!globalThis.ReadableStream#PipeThrough|WebSharper.JavaScript.ReadableWritablePair|WebSharper.JavaScript.StreamPipeOptions" "ws:WebSharper.JavaScript!globalThis.ReadableStream#PipeThrough|WebSharper.JavaScript.ReadableWritablePair|WebSharper.JavaScript.StreamPipeOptions"
+external pipeThrough_2 : t -> t -> StreamPipeOptions.t -> t = "ws:WebSharper.JavaScript!globalThis.ReadableStream#PipeThrough|WebSharper.JavaScript.ReadableWritablePair|WebSharper.JavaScript.StreamPipeOptions" "ws:WebSharper.JavaScript!globalThis.ReadableStream#PipeThrough|WebSharper.JavaScript.ReadableWritablePair|WebSharper.JavaScript.StreamPipeOptions"
 (* inline *)
 external getReader : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.ReadableStream#GetReader|" "ws:WebSharper.JavaScript!globalThis.ReadableStream#GetReader|"
 (* inline *)

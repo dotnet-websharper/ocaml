@@ -7,14 +7,14 @@ external get_AttributeNamespace : t -> string = "ws:WebSharper.JavaScript!global
 (* inline *)
 external get_AttributeName : t -> string = "ws:WebSharper.JavaScript!globalThis.MutationRecord#get_AttributeName|" "ws:WebSharper.JavaScript!globalThis.MutationRecord#get_AttributeName|"
 (* inline *)
-external get_NextSibling : t -> Node.t = "ws:WebSharper.JavaScript!globalThis.MutationRecord#get_NextSibling|" "ws:WebSharper.JavaScript!globalThis.MutationRecord#get_NextSibling|"
+external get_NextSibling : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.MutationRecord#get_NextSibling|" "ws:WebSharper.JavaScript!globalThis.MutationRecord#get_NextSibling|"
 (* inline *)
-external get_PreviousSibling : t -> Node.t = "ws:WebSharper.JavaScript!globalThis.MutationRecord#get_PreviousSibling|" "ws:WebSharper.JavaScript!globalThis.MutationRecord#get_PreviousSibling|"
+external get_PreviousSibling : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.MutationRecord#get_PreviousSibling|" "ws:WebSharper.JavaScript!globalThis.MutationRecord#get_PreviousSibling|"
 (* inline *)
-external get_RemovedNodes : t -> NodeList.t = "ws:WebSharper.JavaScript!globalThis.MutationRecord#get_RemovedNodes|" "ws:WebSharper.JavaScript!globalThis.MutationRecord#get_RemovedNodes|"
+external get_RemovedNodes : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.MutationRecord#get_RemovedNodes|" "ws:WebSharper.JavaScript!globalThis.MutationRecord#get_RemovedNodes|"
 (* inline *)
-external get_AddedNodes : t -> NodeList.t = "ws:WebSharper.JavaScript!globalThis.MutationRecord#get_AddedNodes|" "ws:WebSharper.JavaScript!globalThis.MutationRecord#get_AddedNodes|"
+external get_AddedNodes : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.MutationRecord#get_AddedNodes|" "ws:WebSharper.JavaScript!globalThis.MutationRecord#get_AddedNodes|"
 (* inline *)
-external get_Target : t -> Node.t = "ws:WebSharper.JavaScript!globalThis.MutationRecord#get_Target|" "ws:WebSharper.JavaScript!globalThis.MutationRecord#get_Target|"
+external get_Target : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.MutationRecord#get_Target|" "ws:WebSharper.JavaScript!globalThis.MutationRecord#get_Target|"
 (* inline *)
 external get_Type : t -> string = "ws:WebSharper.JavaScript!globalThis.MutationRecord#get_Type|" "ws:WebSharper.JavaScript!globalThis.MutationRecord#get_Type|"

@@ -19,15 +19,15 @@ external set_FirstRender : t -> bool -> unit = "ws:WebSharper.UI!WebSharper.UI/W
 (* inline *)
 external get_RenderFirst : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#get_RenderFirst|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#get_RenderFirst|"
 (* instance *)
-external embed : t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#Embed|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#Embed|"
+external embed : t -> TemplateHole.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#Embed|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#Embed|"
 (* instance *)
 external get_Navigator : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#get_Navigator|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#get_Navigator|"
 (* instance *)
-external end_ : t -> Doc.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#End|WebSharper.UI.Doc" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#End|WebSharper.UI.Doc"
+external end_ : t -> TemplateHole.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#End|WebSharper.UI.Doc" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#End|WebSharper.UI.Doc"
 (* instance *)
 external restart : t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#Restart|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#Restart|"
 (* instance *)
-external cancel : t -> Doc.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#Cancel|WebSharper.UI.Doc" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#Cancel|WebSharper.UI.Doc"
+external cancel : t -> TemplateHole.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#Cancel|WebSharper.UI.Doc" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#Cancel|WebSharper.UI.Doc"
 (* instance *)
 external add : t -> Js.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#Add|WebSharper.UI.FlowPage" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#Add|WebSharper.UI.FlowPage"
 (* instance *)

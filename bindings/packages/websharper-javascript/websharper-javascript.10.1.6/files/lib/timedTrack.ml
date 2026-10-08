@@ -13,9 +13,9 @@ external onLoad : t -> unit = "ws:WebSharper.JavaScript!globalThis.TimedTrack#On
 (* inline *)
 external onload : t -> unit = "ws:WebSharper.JavaScript!globalThis.TimedTrack#Onload|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#Onload|"
 (* inline *)
-external get_ActiveCues : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_ActiveCues|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_ActiveCues|"
+external get_ActiveCues : t -> t = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_ActiveCues|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_ActiveCues|"
 (* inline *)
-external get_Cues : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_Cues|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_Cues|"
+external get_Cues : t -> t = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_Cues|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_Cues|"
 (* inline *)
 external get_Mode : t -> int = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_Mode|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_Mode|"
 (* inline *)

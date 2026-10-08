@@ -7,25 +7,25 @@ external vertexAttribPointer : t -> int -> int -> Enum.t -> bool -> int -> int -
 (* inline *)
 external vertexAttrib4fv : t -> int -> (float) array -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib4fv|System.Int32|System.Double[]" "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib4fv|System.Int32|System.Double[]"
 (* inline *)
-external vertexAttrib4fv_2 : t -> int -> Float32Array.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib4fv|System.Int32|WebSharper.JavaScript.Float32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib4fv|System.Int32|WebSharper.JavaScript.Float32Array"
+external vertexAttrib4fv_2 : t -> int -> ArrayBufferView.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib4fv|System.Int32|WebSharper.JavaScript.Float32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib4fv|System.Int32|WebSharper.JavaScript.Float32Array"
 (* inline *)
 external vertexAttrib4f : t -> int -> float -> float -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib4f|System.Int32|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib4f|System.Int32|System.Double|System.Double|System.Double|System.Double"
 (* inline *)
 external vertexAttrib3fv : t -> int -> (float) array -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib3fv|System.Int32|System.Double[]" "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib3fv|System.Int32|System.Double[]"
 (* inline *)
-external vertexAttrib3fv_2 : t -> int -> Float32Array.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib3fv|System.Int32|WebSharper.JavaScript.Float32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib3fv|System.Int32|WebSharper.JavaScript.Float32Array"
+external vertexAttrib3fv_2 : t -> int -> ArrayBufferView.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib3fv|System.Int32|WebSharper.JavaScript.Float32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib3fv|System.Int32|WebSharper.JavaScript.Float32Array"
 (* inline *)
 external vertexAttrib3f : t -> int -> float -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib3f|System.Int32|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib3f|System.Int32|System.Double|System.Double|System.Double"
 (* inline *)
 external vertexAttrib2fv : t -> int -> (float) array -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib2fv|System.Int32|System.Double[]" "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib2fv|System.Int32|System.Double[]"
 (* inline *)
-external vertexAttrib2fv_2 : t -> int -> Float32Array.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib2fv|System.Int32|WebSharper.JavaScript.Float32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib2fv|System.Int32|WebSharper.JavaScript.Float32Array"
+external vertexAttrib2fv_2 : t -> int -> ArrayBufferView.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib2fv|System.Int32|WebSharper.JavaScript.Float32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib2fv|System.Int32|WebSharper.JavaScript.Float32Array"
 (* inline *)
 external vertexAttrib2f : t -> int -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib2f|System.Int32|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib2f|System.Int32|System.Double|System.Double"
 (* inline *)
 external vertexAttrib1fv : t -> int -> (float) array -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib1fv|System.Int32|System.Double[]" "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib1fv|System.Int32|System.Double[]"
 (* inline *)
-external vertexAttrib1fv_2 : t -> int -> Float32Array.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib1fv|System.Int32|WebSharper.JavaScript.Float32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib1fv|System.Int32|WebSharper.JavaScript.Float32Array"
+external vertexAttrib1fv_2 : t -> int -> ArrayBufferView.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib1fv|System.Int32|WebSharper.JavaScript.Float32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib1fv|System.Int32|WebSharper.JavaScript.Float32Array"
 (* inline *)
 external vertexAttrib1f : t -> int -> float -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib1f|System.Int32|System.Double" "ws:WebSharper.JavaScript!globalThis.RenderingContext#VertexAttrib1f|System.Int32|System.Double"
 (* inline *)
@@ -35,65 +35,65 @@ external useProgram : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.R
 (* inline *)
 external uniformMatrix4fv : t -> Js.t -> bool -> (float) array -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#UniformMatrix4fv|WebSharper.JavaScript.WebGL.UniformLocation|System.Boolean|System.Double[]" "ws:WebSharper.JavaScript!globalThis.RenderingContext#UniformMatrix4fv|WebSharper.JavaScript.WebGL.UniformLocation|System.Boolean|System.Double[]"
 (* inline *)
-external uniformMatrix4fv_2 : t -> Js.t -> bool -> Float32Array.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#UniformMatrix4fv|WebSharper.JavaScript.WebGL.UniformLocation|System.Boolean|WebSharper.JavaScript.Float32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#UniformMatrix4fv|WebSharper.JavaScript.WebGL.UniformLocation|System.Boolean|WebSharper.JavaScript.Float32Array"
+external uniformMatrix4fv_2 : t -> Js.t -> bool -> ArrayBufferView.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#UniformMatrix4fv|WebSharper.JavaScript.WebGL.UniformLocation|System.Boolean|WebSharper.JavaScript.Float32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#UniformMatrix4fv|WebSharper.JavaScript.WebGL.UniformLocation|System.Boolean|WebSharper.JavaScript.Float32Array"
 (* inline *)
 external uniformMatrix3fv : t -> Js.t -> bool -> (float) array -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#UniformMatrix3fv|WebSharper.JavaScript.WebGL.UniformLocation|System.Boolean|System.Double[]" "ws:WebSharper.JavaScript!globalThis.RenderingContext#UniformMatrix3fv|WebSharper.JavaScript.WebGL.UniformLocation|System.Boolean|System.Double[]"
 (* inline *)
-external uniformMatrix3fv_2 : t -> Js.t -> bool -> Float32Array.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#UniformMatrix3fv|WebSharper.JavaScript.WebGL.UniformLocation|System.Boolean|WebSharper.JavaScript.Float32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#UniformMatrix3fv|WebSharper.JavaScript.WebGL.UniformLocation|System.Boolean|WebSharper.JavaScript.Float32Array"
+external uniformMatrix3fv_2 : t -> Js.t -> bool -> ArrayBufferView.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#UniformMatrix3fv|WebSharper.JavaScript.WebGL.UniformLocation|System.Boolean|WebSharper.JavaScript.Float32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#UniformMatrix3fv|WebSharper.JavaScript.WebGL.UniformLocation|System.Boolean|WebSharper.JavaScript.Float32Array"
 (* inline *)
 external uniformMatrix2fv : t -> Js.t -> bool -> (float) array -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#UniformMatrix2fv|WebSharper.JavaScript.WebGL.UniformLocation|System.Boolean|System.Double[]" "ws:WebSharper.JavaScript!globalThis.RenderingContext#UniformMatrix2fv|WebSharper.JavaScript.WebGL.UniformLocation|System.Boolean|System.Double[]"
 (* inline *)
-external uniformMatrix2fv_2 : t -> Js.t -> bool -> Float32Array.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#UniformMatrix2fv|WebSharper.JavaScript.WebGL.UniformLocation|System.Boolean|WebSharper.JavaScript.Float32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#UniformMatrix2fv|WebSharper.JavaScript.WebGL.UniformLocation|System.Boolean|WebSharper.JavaScript.Float32Array"
+external uniformMatrix2fv_2 : t -> Js.t -> bool -> ArrayBufferView.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#UniformMatrix2fv|WebSharper.JavaScript.WebGL.UniformLocation|System.Boolean|WebSharper.JavaScript.Float32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#UniformMatrix2fv|WebSharper.JavaScript.WebGL.UniformLocation|System.Boolean|WebSharper.JavaScript.Float32Array"
 (* inline *)
 external uniform4iv : t -> Js.t -> (int) array -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform4iv|WebSharper.JavaScript.WebGL.UniformLocation|System.Int32[]" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform4iv|WebSharper.JavaScript.WebGL.UniformLocation|System.Int32[]"
 (* inline *)
-external uniform4iv_2 : t -> Js.t -> Int32Array.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform4iv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Int32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform4iv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Int32Array"
+external uniform4iv_2 : t -> Js.t -> ArrayBufferView.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform4iv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Int32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform4iv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Int32Array"
 (* inline *)
 external uniform4i : t -> Js.t -> int -> int -> int -> int -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform4i|WebSharper.JavaScript.WebGL.UniformLocation|System.Int32|System.Int32|System.Int32|System.Int32" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform4i|WebSharper.JavaScript.WebGL.UniformLocation|System.Int32|System.Int32|System.Int32|System.Int32"
 (* inline *)
 external uniform4fv : t -> Js.t -> (float) array -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform4fv|WebSharper.JavaScript.WebGL.UniformLocation|System.Double[]" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform4fv|WebSharper.JavaScript.WebGL.UniformLocation|System.Double[]"
 (* inline *)
-external uniform4fv_2 : t -> Js.t -> Float32Array.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform4fv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Float32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform4fv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Float32Array"
+external uniform4fv_2 : t -> Js.t -> ArrayBufferView.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform4fv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Float32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform4fv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Float32Array"
 (* inline *)
 external uniform4f : t -> Js.t -> float -> float -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform4f|WebSharper.JavaScript.WebGL.UniformLocation|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform4f|WebSharper.JavaScript.WebGL.UniformLocation|System.Double|System.Double|System.Double|System.Double"
 (* inline *)
 external uniform3iv : t -> Js.t -> (int) array -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform3iv|WebSharper.JavaScript.WebGL.UniformLocation|System.Int32[]" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform3iv|WebSharper.JavaScript.WebGL.UniformLocation|System.Int32[]"
 (* inline *)
-external uniform3iv_2 : t -> Js.t -> Int32Array.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform3iv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Int32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform3iv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Int32Array"
+external uniform3iv_2 : t -> Js.t -> ArrayBufferView.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform3iv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Int32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform3iv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Int32Array"
 (* inline *)
 external uniform3i : t -> Js.t -> int -> int -> int -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform3i|WebSharper.JavaScript.WebGL.UniformLocation|System.Int32|System.Int32|System.Int32" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform3i|WebSharper.JavaScript.WebGL.UniformLocation|System.Int32|System.Int32|System.Int32"
 (* inline *)
 external uniform3fv : t -> Js.t -> (float) array -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform3fv|WebSharper.JavaScript.WebGL.UniformLocation|System.Double[]" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform3fv|WebSharper.JavaScript.WebGL.UniformLocation|System.Double[]"
 (* inline *)
-external uniform3fv_2 : t -> Js.t -> Float32Array.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform3fv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Float32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform3fv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Float32Array"
+external uniform3fv_2 : t -> Js.t -> ArrayBufferView.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform3fv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Float32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform3fv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Float32Array"
 (* inline *)
 external uniform3f : t -> Js.t -> float -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform3f|WebSharper.JavaScript.WebGL.UniformLocation|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform3f|WebSharper.JavaScript.WebGL.UniformLocation|System.Double|System.Double|System.Double"
 (* inline *)
 external uniform2iv : t -> Js.t -> (int) array -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform2iv|WebSharper.JavaScript.WebGL.UniformLocation|System.Int32[]" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform2iv|WebSharper.JavaScript.WebGL.UniformLocation|System.Int32[]"
 (* inline *)
-external uniform2iv_2 : t -> Js.t -> Int32Array.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform2iv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Int32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform2iv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Int32Array"
+external uniform2iv_2 : t -> Js.t -> ArrayBufferView.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform2iv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Int32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform2iv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Int32Array"
 (* inline *)
 external uniform2i : t -> Js.t -> int -> int -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform2i|WebSharper.JavaScript.WebGL.UniformLocation|System.Int32|System.Int32" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform2i|WebSharper.JavaScript.WebGL.UniformLocation|System.Int32|System.Int32"
 (* inline *)
 external uniform2fv : t -> Js.t -> (float) array -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform2fv|WebSharper.JavaScript.WebGL.UniformLocation|System.Double[]" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform2fv|WebSharper.JavaScript.WebGL.UniformLocation|System.Double[]"
 (* inline *)
-external uniform2fv_2 : t -> Js.t -> Float32Array.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform2fv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Float32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform2fv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Float32Array"
+external uniform2fv_2 : t -> Js.t -> ArrayBufferView.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform2fv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Float32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform2fv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Float32Array"
 (* inline *)
 external uniform2f : t -> Js.t -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform2f|WebSharper.JavaScript.WebGL.UniformLocation|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform2f|WebSharper.JavaScript.WebGL.UniformLocation|System.Double|System.Double"
 (* inline *)
 external uniform1iv : t -> Js.t -> (int) array -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform1iv|WebSharper.JavaScript.WebGL.UniformLocation|System.Int32[]" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform1iv|WebSharper.JavaScript.WebGL.UniformLocation|System.Int32[]"
 (* inline *)
-external uniform1iv_2 : t -> Js.t -> Int32Array.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform1iv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Int32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform1iv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Int32Array"
+external uniform1iv_2 : t -> Js.t -> ArrayBufferView.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform1iv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Int32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform1iv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Int32Array"
 (* inline *)
 external uniform1i : t -> Js.t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform1i|WebSharper.JavaScript.WebGL.UniformLocation|System.Int32" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform1i|WebSharper.JavaScript.WebGL.UniformLocation|System.Int32"
 (* inline *)
 external uniform1fv : t -> Js.t -> (float) array -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform1fv|WebSharper.JavaScript.WebGL.UniformLocation|System.Double[]" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform1fv|WebSharper.JavaScript.WebGL.UniformLocation|System.Double[]"
 (* inline *)
-external uniform1fv_2 : t -> Js.t -> Float32Array.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform1fv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Float32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform1fv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Float32Array"
+external uniform1fv_2 : t -> Js.t -> ArrayBufferView.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform1fv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Float32Array" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform1fv|WebSharper.JavaScript.WebGL.UniformLocation|WebSharper.JavaScript.Float32Array"
 (* inline *)
 external uniform1f : t -> Js.t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform1f|WebSharper.JavaScript.WebGL.UniformLocation|System.Double" "ws:WebSharper.JavaScript!globalThis.RenderingContext#Uniform1f|WebSharper.JavaScript.WebGL.UniformLocation|System.Double"
 (* inline *)
-external texSubImage2D : t -> Enum.t -> int -> int -> int -> Enum.t -> Enum.t -> Element.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#TexSubImage2D|WebSharper.JavaScript.WebGL.Enum|System.Int32|System.Int32|System.Int32|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.JavaScript!globalThis.RenderingContext#TexSubImage2D|WebSharper.JavaScript.WebGL.Enum|System.Int32|System.Int32|System.Int32|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.Dom.Element"
+external texSubImage2D : t -> Enum.t -> int -> int -> int -> Enum.t -> Enum.t -> EventTarget.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#TexSubImage2D|WebSharper.JavaScript.WebGL.Enum|System.Int32|System.Int32|System.Int32|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.JavaScript!globalThis.RenderingContext#TexSubImage2D|WebSharper.JavaScript.WebGL.Enum|System.Int32|System.Int32|System.Int32|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.Dom.Element"
 (* inline *)
 external texSubImage2D_2 : t -> Enum.t -> int -> int -> int -> Enum.t -> Enum.t -> ImageData.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#TexSubImage2D|WebSharper.JavaScript.WebGL.Enum|System.Int32|System.Int32|System.Int32|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.ImageData" "ws:WebSharper.JavaScript!globalThis.RenderingContext#TexSubImage2D|WebSharper.JavaScript.WebGL.Enum|System.Int32|System.Int32|System.Int32|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.ImageData"
 (* inline *)
@@ -105,7 +105,7 @@ external texParameteri_2 : t -> Enum.t -> Enum.t -> int -> unit = "ws:WebSharper
 (* inline *)
 external texParameterf : t -> Enum.t -> Enum.t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#TexParameterf|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.WebGL.Enum|System.Double" "ws:WebSharper.JavaScript!globalThis.RenderingContext#TexParameterf|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.WebGL.Enum|System.Double"
 (* inline *)
-external texImage2D : t -> Enum.t -> int -> Enum.t -> Enum.t -> Enum.t -> Element.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#TexImage2D|WebSharper.JavaScript.WebGL.Enum|System.Int32|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.JavaScript!globalThis.RenderingContext#TexImage2D|WebSharper.JavaScript.WebGL.Enum|System.Int32|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.Dom.Element"
+external texImage2D : t -> Enum.t -> int -> Enum.t -> Enum.t -> Enum.t -> EventTarget.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#TexImage2D|WebSharper.JavaScript.WebGL.Enum|System.Int32|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.JavaScript!globalThis.RenderingContext#TexImage2D|WebSharper.JavaScript.WebGL.Enum|System.Int32|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.Dom.Element"
 (* inline *)
 external texImage2D_2 : t -> Enum.t -> int -> Enum.t -> Enum.t -> Enum.t -> ImageData.t -> unit = "ws:WebSharper.JavaScript!globalThis.RenderingContext#TexImage2D|WebSharper.JavaScript.WebGL.Enum|System.Int32|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.ImageData" "ws:WebSharper.JavaScript!globalThis.RenderingContext#TexImage2D|WebSharper.JavaScript.WebGL.Enum|System.Int32|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.WebGL.Enum|WebSharper.JavaScript.ImageData"
 (* inline *)
@@ -317,7 +317,7 @@ external get_DrawingBufferHeight : t -> int = "ws:WebSharper.JavaScript!globalTh
 (* inline *)
 external get_DrawingBufferWidth : t -> int = "ws:WebSharper.JavaScript!globalThis.RenderingContext#get_DrawingBufferWidth|" "ws:WebSharper.JavaScript!globalThis.RenderingContext#get_DrawingBufferWidth|"
 (* inline *)
-external get_Canvas : t -> Element.t = "ws:WebSharper.JavaScript!globalThis.RenderingContext#get_Canvas|" "ws:WebSharper.JavaScript!globalThis.RenderingContext#get_Canvas|"
+external get_Canvas : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.RenderingContext#get_Canvas|" "ws:WebSharper.JavaScript!globalThis.RenderingContext#get_Canvas|"
 (* inline *)
 external get_BROWSER_DEFAULT_WEBGL : t -> Enum.t = "ws:WebSharper.JavaScript!globalThis.RenderingContext#get_BROWSER_DEFAULT_WEBGL|" "ws:WebSharper.JavaScript!globalThis.RenderingContext#get_BROWSER_DEFAULT_WEBGL|"
 (* inline *)

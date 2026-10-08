@@ -5,7 +5,7 @@ external revokeObjectURL : string -> unit = "ws:WebSharper.JavaScript!globalThis
 (* inline *)
 external createObjectURL : Blob.t -> string = "ws:WebSharper.JavaScript!globalThis.URL#CreateObjectURL|WebSharper.JavaScript.Blob" "ws:WebSharper.JavaScript!globalThis.URL#CreateObjectURL|WebSharper.JavaScript.Blob"
 (* inline *)
-external createObjectURL_2 : File.t -> string = "ws:WebSharper.JavaScript!globalThis.URL#CreateObjectURL|WebSharper.JavaScript.File" "ws:WebSharper.JavaScript!globalThis.URL#CreateObjectURL|WebSharper.JavaScript.File"
+external createObjectURL_2 : Blob.t -> string = "ws:WebSharper.JavaScript!globalThis.URL#CreateObjectURL|WebSharper.JavaScript.File" "ws:WebSharper.JavaScript!globalThis.URL#CreateObjectURL|WebSharper.JavaScript.File"
 (* inline *)
 external get_Username : t -> string = "ws:WebSharper.JavaScript!globalThis.URL#get_Username|" "ws:WebSharper.JavaScript!globalThis.URL#get_Username|"
 (* inline *)

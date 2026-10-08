@@ -13,11 +13,11 @@ external removeEventListener_5 : t -> string -> Js.t -> bool -> unit = "ws:WebSh
 (* inline *)
 external removeEventListener_6 : t -> string -> Js.t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.EventTarget#RemoveEventListener|System.String|System.Action`1<WebSharper.JavaScript.Dom.Event>|System.Boolean" "ws:WebSharper.JavaScript!globalThis.EventTarget#RemoveEventListener|System.String|System.Action`1<WebSharper.JavaScript.Dom.Event>|System.Boolean"
 (* inline *)
-external dispatchEvent : t -> Js.t -> bool = "ws:WebSharper.JavaScript!globalThis.EventTarget#DispatchEvent|WebSharper.JavaScript.Dom.Event" "ws:WebSharper.JavaScript!globalThis.EventTarget#DispatchEvent|WebSharper.JavaScript.Dom.Event"
+external dispatchEvent : t -> t -> bool = "ws:WebSharper.JavaScript!globalThis.EventTarget#DispatchEvent|WebSharper.JavaScript.Dom.Event" "ws:WebSharper.JavaScript!globalThis.EventTarget#DispatchEvent|WebSharper.JavaScript.Dom.Event"
 (* inline *)
-external addEventListener : t -> string -> Js.t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.EventTarget#AddEventListener|System.String|System.Action|WebSharper.JavaScript.Dom.AddEventListenerOptions" "ws:WebSharper.JavaScript!globalThis.EventTarget#AddEventListener|System.String|System.Action|WebSharper.JavaScript.Dom.AddEventListenerOptions"
+external addEventListener : t -> string -> Js.t -> t -> unit = "ws:WebSharper.JavaScript!globalThis.EventTarget#AddEventListener|System.String|System.Action|WebSharper.JavaScript.Dom.AddEventListenerOptions" "ws:WebSharper.JavaScript!globalThis.EventTarget#AddEventListener|System.String|System.Action|WebSharper.JavaScript.Dom.AddEventListenerOptions"
 (* inline *)
-external addEventListener_2 : t -> string -> Js.t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.EventTarget#AddEventListener|System.String|System.Action`1<WebSharper.JavaScript.Dom.Event>|WebSharper.JavaScript.Dom.AddEventListenerOptions" "ws:WebSharper.JavaScript!globalThis.EventTarget#AddEventListener|System.String|System.Action`1<WebSharper.JavaScript.Dom.Event>|WebSharper.JavaScript.Dom.AddEventListenerOptions"
+external addEventListener_2 : t -> string -> Js.t -> t -> unit = "ws:WebSharper.JavaScript!globalThis.EventTarget#AddEventListener|System.String|System.Action`1<WebSharper.JavaScript.Dom.Event>|WebSharper.JavaScript.Dom.AddEventListenerOptions" "ws:WebSharper.JavaScript!globalThis.EventTarget#AddEventListener|System.String|System.Action`1<WebSharper.JavaScript.Dom.Event>|WebSharper.JavaScript.Dom.AddEventListenerOptions"
 (* inline *)
 external addEventListener_3 : t -> string -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.EventTarget#AddEventListener|System.String|System.Action" "ws:WebSharper.JavaScript!globalThis.EventTarget#AddEventListener|System.String|System.Action"
 (* inline *)

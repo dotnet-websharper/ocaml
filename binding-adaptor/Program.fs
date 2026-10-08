@@ -187,14 +187,6 @@ let gen
 
     let deps = System.Collections.Generic.HashSet<string>()
 
-    let env : TypeEnv =
-        { LocalModules = localModules
-          LocalArity = localArity
-          LocalByFull = localByFull
-          ExternalByFull = externalByFull
-          ExternalSimple = externalSimple
-          Deps = deps }
-
     let selected =
         allClasses
         |> List.filter (fun (a, _, _, _) ->
@@ -220,9 +212,119 @@ let gen
 
     let scc = stronglyConnected (Set.toList nodeSet) edges
 
+    let ciOf =
+        allClasses
+        |> List.map (fun (a, td, ci, _) -> classModuleName td a, ci)
+        |> Map.ofList
+
+    // Collapse type hierarchies into a single shared type: union classes with
+    // their base class / implemented interfaces, and union members of each
+    // member-reference cycle (SCC). Members alias the representative, which
+    // references no other member, so no module cycle remains and cross-refs no
+    // longer fall back to Js.t.
+    let parent = System.Collections.Generic.Dictionary<string, string>()
+    let find (x: string) =
+        let mutable x = x
+        while parent.[x] <> x do
+            x <- parent.[x]
+        x
+    let union a b =
+        let ra = find a
+        let rb = find b
+        if ra <> rb then parent.[ra] <- rb
+    for m in nodeSet do
+        parent.[m] <- m
+    let unionFull m (fn: string) =
+        match Map.tryFind fn localByFull with
+        | Some(r: string) -> if localArity m = 0 && localArity r = 0 then union m r
+        | None -> ()
+    for (a, td, ci, _) in allClasses do
+        let m = classModuleName td a
+        if nodeSet.Contains m then
+            match ci.BaseClass with
+            | Some bc -> unionFull m bc.Entity.Value.FullName
+            | None -> ()
+            for i in ci.Implements do
+                unionFull m i.Entity.Value.FullName
+    for kv in scc do
+        if kv.Value.Count > 1 then
+            let ms = kv.Value |> Set.toList |> List.filter (fun m -> localArity m = 0)
+            match ms with
+            | _ :: _ :: _ ->
+                for x in ms.Tail do
+                    union ms.Head x
+            | _ -> ()
+
+    let groups =
+        nodeSet
+        |> Set.toList
+        |> List.groupBy find
+        |> List.map snd
+        |> List.filter (fun ms -> List.length ms > 1)
+
+    let indegIn (ms: string list) (m: string) =
+        ms
+        |> List.sumBy (fun m2 ->
+            match Map.tryFind m2 edges with
+            | Some rs when rs.Contains m -> 1
+            | _ -> 0)
+
+    let hasBase (m: string) =
+        match Map.tryFind m ciOf with
+        | Some ci -> ci.BaseClass.IsSome
+        | None -> false
+
+    // Prefer, as the representative, a root (no base) with the largest subclass
+    // tree, so the collapsed type gets a sensible name (e.g. EventTarget).
+    let children = System.Collections.Generic.Dictionary<string, ResizeArray<string>>()
+    for (a, td, ci, _) in allClasses do
+        match ci.BaseClass with
+        | Some bc ->
+            match Map.tryFind bc.Entity.Value.FullName localByFull with
+            | Some b ->
+                if not (children.ContainsKey b) then children.[b] <- ResizeArray()
+                children.[b].Add(classModuleName td a)
+            | None -> ()
+        | None -> ()
+
+    let descendantCount (root: string) =
+        let seen = System.Collections.Generic.HashSet<string>()
+        let stack = System.Collections.Generic.Stack<string>()
+        stack.Push root
+        while stack.Count > 0 do
+            let x = stack.Pop()
+            match children.TryGetValue x with
+            | true, cs ->
+                for c in cs do
+                    if seen.Add c then stack.Push c
+            | _ -> ()
+        seen.Count
+
+    let repOf =
+        [ for ms in groups do
+            if ms |> List.forall (fun m -> localArity m = 0) then
+                let rep =
+                    ms
+                    |> List.sortBy (fun m -> (if hasBase m then 1 else 0), -(descendantCount m + indegIn ms m), m)
+                    |> List.head
+                for m in ms do
+                    yield m, rep ]
+        |> Map.ofList
+
+    let collapsed = repOf |> Map.toList |> List.map fst |> Set.ofList
+
+    let env : TypeEnv =
+        { LocalModules = localModules
+          LocalArity = localArity
+          LocalByFull = localByFull
+          RepOf = (fun m -> Map.tryFind m repOf)
+          ExternalByFull = externalByFull
+          ExternalSimple = externalSimple
+          Deps = deps }
+
     let opaqueFor (m: string) =
         match Map.tryFind m scc with
-        | Some comp when comp.Count > 1 -> Set.remove m comp
+        | Some comp when comp.Count > 1 && not (collapsed.Contains m) -> Set.remove m comp
         | _ -> Set.empty
 
     let generated =

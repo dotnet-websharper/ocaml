@@ -3,4 +3,4 @@ type t
 (* inline *)
 external getDOMImplementationList : t -> string -> DOMImplementationList.t = "ws:WebSharper.JavaScript!globalThis.DOMImplementationSource#GetDOMImplementationList|System.String" "ws:WebSharper.JavaScript!globalThis.DOMImplementationSource#GetDOMImplementationList|System.String"
 (* inline *)
-external getDOMImplementation : t -> string -> DOMImplementation.t = "ws:WebSharper.JavaScript!globalThis.DOMImplementationSource#GetDOMImplementation|System.String" "ws:WebSharper.JavaScript!globalThis.DOMImplementationSource#GetDOMImplementation|System.String"
+external getDOMImplementation : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.DOMImplementationSource#GetDOMImplementation|System.String" "ws:WebSharper.JavaScript!globalThis.DOMImplementationSource#GetDOMImplementation|System.String"

@@ -72,6 +72,8 @@ type TypeEnv =
     { LocalModules: Set<string>
       LocalArity: string -> int
       LocalByFull: Map<string, string>
+      // member module -> representative module of its cyclic type-cluster
+      RepOf: string -> string option
       ExternalByFull: Map<string, string * int * string>
       ExternalSimple: Map<string, string * int * string>
       Deps: System.Collections.Generic.HashSet<string> }
@@ -194,6 +196,9 @@ type Member =
 type GeneratedClass =
     { Module: string
       Generics: int
+      // For members of a collapsed cyclic cluster: the representative module
+      // whose abstract type this module aliases (type t = Rep.t).
+      Alias: string option
       Address: Address
       Methods: Member list
       Fields: Member list
@@ -223,6 +228,12 @@ let referencedModules (ci: ClassInfo) : string list =
         go kv.Value.Type
     for kv in ci.Constructors do
         kv.Key.Value.CtorParameters |> List.iter go
+    // Base classes / implemented interfaces keep a type hierarchy in one cluster.
+    (match ci.BaseClass with
+     | Some bc -> go (Type.ConcreteType bc)
+     | None -> ())
+    for i in ci.Implements do
+        go (Type.ConcreteType i)
     acc |> Seq.toList
 
 let stronglyConnected (nodes: string list) (edges: Map<string, Set<string>>) : Map<string, Set<string>> =
@@ -276,21 +287,28 @@ let generateClass
     let addrString = address.ToString()
     let qual = assemblyName + "!" + addrString
     let recv = receiverType generics
+    let alias =
+        match env.RepOf moduleName with
+        | Some r when r <> moduleName -> Some r
+        | _ -> None
 
     let ctx : TypeCtx =
         { Lookup =
             (fun fullName ->
+                let redirect m = match env.RepOf m with Some r -> r | None -> m
                 match Map.tryFind fullName env.LocalByFull with
-                | Some m when m = moduleName -> Some("", generics)
-                | Some m when not (opaque.Contains m) -> Some(m, env.LocalArity m)
-                | Some _ -> None
+                | Some m ->
+                    let m = redirect m
+                    if m = moduleName then Some("", generics)
+                    elif not (opaque.Contains m) then Some(m, env.LocalArity m)
+                    else None
                 | None ->
                     match Map.tryFind fullName env.ExternalByFull with
                     | Some(qm, ar, pkg) ->
                         env.Deps.Add pkg |> ignore
                         Some(qm, ar)
                     | None ->
-                        let s = simpleTypeName fullName
+                        let s = redirect (simpleTypeName fullName)
                         if s = moduleName then Some("", generics)
                         elif env.LocalModules.Contains s && not (opaque.Contains s) then Some(s, env.LocalArity s)
                         else
@@ -362,6 +380,7 @@ let generateClass
 
     { Module = moduleName
       Generics = generics
+      Alias = alias
       Address = address
       Methods = methods
       Fields = fields
@@ -376,7 +395,9 @@ let renderClass (g: GeneratedClass) =
         if g.Generics = 0 then ""
         else "(" + String.concat ", " [ for i in 0 .. g.Generics - 1 -> typeParamName i ] + ") "
     sb.AppendLine Header |> ignore
-    sb.AppendLine(sprintf "type %st" tparams) |> ignore
+    match g.Alias with
+    | Some rep -> sb.AppendLine(sprintf "type %st = %s.t" tparams rep) |> ignore
+    | None -> sb.AppendLine(sprintf "type %st" tparams) |> ignore
     for m in g.Methods do sb.Append(renderMember m) |> ignore
     for m in g.Fields do sb.Append(renderMember m) |> ignore
     for m in g.Constructors do sb.Append(renderMember m) |> ignore

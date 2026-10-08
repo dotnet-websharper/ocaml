@@ -3,7 +3,7 @@ type t
 (* inline *)
 external get_Uri : t -> string = "ws:WebSharper.JavaScript!globalThis.DOMLocator#get_Uri|" "ws:WebSharper.JavaScript!globalThis.DOMLocator#get_Uri|"
 (* inline *)
-external get_RelatedNode : t -> Node.t = "ws:WebSharper.JavaScript!globalThis.DOMLocator#get_RelatedNode|" "ws:WebSharper.JavaScript!globalThis.DOMLocator#get_RelatedNode|"
+external get_RelatedNode : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.DOMLocator#get_RelatedNode|" "ws:WebSharper.JavaScript!globalThis.DOMLocator#get_RelatedNode|"
 (* inline *)
 external get_Utf16Offset : t -> int = "ws:WebSharper.JavaScript!globalThis.DOMLocator#get_Utf16Offset|" "ws:WebSharper.JavaScript!globalThis.DOMLocator#get_Utf16Offset|"
 (* inline *)

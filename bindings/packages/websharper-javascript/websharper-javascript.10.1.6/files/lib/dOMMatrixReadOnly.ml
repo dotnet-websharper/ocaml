@@ -3,17 +3,17 @@ type t
 (* inline *)
 external toJSON : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#ToJSON|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#ToJSON|"
 (* inline *)
-external toFloat64Array : t -> Float64Array.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#ToFloat64Array|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#ToFloat64Array|"
+external toFloat64Array : t -> ArrayBufferView.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#ToFloat64Array|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#ToFloat64Array|"
 (* inline *)
-external toFloat32Array : t -> Float32Array.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#ToFloat32Array|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#ToFloat32Array|"
+external toFloat32Array : t -> ArrayBufferView.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#ToFloat32Array|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#ToFloat32Array|"
 (* inline *)
-external transformPoint : t -> DOMPoint.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#TransformPoint|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#TransformPoint|"
+external transformPoint : t -> DOMPointReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#TransformPoint|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#TransformPoint|"
 (* inline *)
-external transformPoint_2 : t -> DOMPointInit.t -> DOMPoint.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#TransformPoint|WebSharper.JavaScript.DOMPointInit" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#TransformPoint|WebSharper.JavaScript.DOMPointInit"
+external transformPoint_2 : t -> DOMPointInit.t -> DOMPointReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#TransformPoint|WebSharper.JavaScript.DOMPointInit" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#TransformPoint|WebSharper.JavaScript.DOMPointInit"
 (* inline *)
 external multiply : t -> t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#Multiply|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#Multiply|"
 (* inline *)
-external multiply_2 : t -> DOMMatrixInit.t -> t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#Multiply|WebSharper.JavaScript.DOMMatrixInit" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#Multiply|WebSharper.JavaScript.DOMMatrixInit"
+external multiply_2 : t -> DOMMatrix2DInit.t -> t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#Multiply|WebSharper.JavaScript.DOMMatrixInit" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#Multiply|WebSharper.JavaScript.DOMMatrixInit"
 (* inline *)
 external skewY : t -> t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#SkewY|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#SkewY|"
 (* inline *)
@@ -91,11 +91,11 @@ external flipY : t -> t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly
 (* inline *)
 external flipX : t -> t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#FlipX|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#FlipX|"
 (* inline *)
-external fromFloat64Array : Float64Array.t -> t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#FromFloat64Array|WebSharper.JavaScript.Float64Array" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#FromFloat64Array|WebSharper.JavaScript.Float64Array"
+external fromFloat64Array : ArrayBufferView.t -> t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#FromFloat64Array|WebSharper.JavaScript.Float64Array" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#FromFloat64Array|WebSharper.JavaScript.Float64Array"
 (* inline *)
-external fromFloat32Array : Float32Array.t -> t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#FromFloat32Array|WebSharper.JavaScript.Float32Array" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#FromFloat32Array|WebSharper.JavaScript.Float32Array"
+external fromFloat32Array : ArrayBufferView.t -> t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#FromFloat32Array|WebSharper.JavaScript.Float32Array" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#FromFloat32Array|WebSharper.JavaScript.Float32Array"
 (* inline *)
-external fromMatrix : DOMMatrixInit.t -> t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#FromMatrix|WebSharper.JavaScript.DOMMatrixInit" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#FromMatrix|WebSharper.JavaScript.DOMMatrixInit"
+external fromMatrix : DOMMatrix2DInit.t -> t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#FromMatrix|WebSharper.JavaScript.DOMMatrixInit" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#FromMatrix|WebSharper.JavaScript.DOMMatrixInit"
 (* inline *)
 external get_IsIdentity : t -> bool = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_IsIdentity|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_IsIdentity|"
 (* inline *)
