@@ -6,6 +6,7 @@ open Websharper_javascript
 let () =
   let v = Websharper_ui.Var.create 0 in
   Websharper_ui.Var.set v 41;
+  let _macro = Websharper_ui.TemplateHole.makeText "a" "b" in
   let _ = Websharper_ui.Doc.append
             (Websharper_ui.Doc.text "hello ")
             (Websharper_ui.Doc.text "ui") in

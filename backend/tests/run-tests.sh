@@ -290,6 +290,41 @@ if [ -d "$cases_ws" ]; then
   done
 fi
 
+# WebSharper.UI apps (A'' pipeline via build-ui-app.sh).
+apps_ui="$here/apps-ui"
+if [ -d "$apps_ui" ] && command -v ocamlfind > /dev/null 2>&1 && ocamlfind query websharper-ui > /dev/null 2>&1; then
+  for ml in "$apps_ui"/*.ml; do
+    [ -f "$ml" ] || continue
+    aname="$(basename "$ml" .ml)"
+    aout="$tmp/ui_$aname"
+    mkdir -p "$aout"
+    if ! bash "$here/../../scripts/build-ui-app.sh" "$ml" "$aout" > "$tmp/ui_$aname.build" 2>&1; then
+      echo "FAIL ui $aname (build)"
+      sed 's/^/    /' "$tmp/ui_$aname.build"
+      fail=$((fail + 1))
+      continue
+    fi
+    if [ -f "$apps_ui/$aname.mjs" ]; then
+      node "$apps_ui/$aname.mjs" "$aout" > "$tmp/ui_$aname.actual" 2>&1 || true
+    else
+      node "$aout/Main.js" > "$tmp/ui_$aname.actual" 2>&1 || true
+    fi
+    expectedOut="$apps_ui/$aname.out"
+    if [ "$update" = 1 ]; then
+      cp "$tmp/ui_$aname.actual" "$expectedOut"
+      echo "updated ui_$aname.out"
+    fi
+    if [ -f "$expectedOut" ] && ! diff -u "$expectedOut" "$tmp/ui_$aname.actual" > "$tmp/ui_$aname.diff"; then
+      echo "FAIL ui $aname (output mismatch)"
+      sed 's/^/    /' "$tmp/ui_$aname.diff"
+      fail=$((fail + 1))
+      continue
+    fi
+    echo "PASS ui $aname"
+    pass=$((pass + 1))
+  done
+fi
+
 echo
 echo "passed: $pass, failed: $fail"
 [ "$fail" = 0 ]
