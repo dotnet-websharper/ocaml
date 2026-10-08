@@ -126,9 +126,10 @@ let main argv =
 
         let stripper = CastStripper()
 
-        let normalize s =
+        let rec normalize s =
             match s with
             | Import _ | ExportDecl _ -> s
+            | Block ss -> Block(ss |> List.map normalize)
             | _ -> stripper.TransformStatement (Breaker.BreakStatement (Breaker.optimizer.TransformStatement s))
 
         if references.Count > 0 && wsCompile then

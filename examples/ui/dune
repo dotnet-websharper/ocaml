@@ -1,11 +1,11 @@
 (library
  (name example_ui)
- (modules ui)
+ (modules wsui ui)
  (libraries websharper-ui websharper-javascript))
 
 (rule
  (target (dir out))
- (deps ui.ml build.sh)
+ (deps ui.ml wsui.ml build.sh)
  (action
   (run bash build.sh out)))
 

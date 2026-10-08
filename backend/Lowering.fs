@@ -616,4 +616,8 @@ module Lowering =
         let me = mutableId ir.ModuleIdent
         globalExprs[ir.ModuleIdent] <- Var me
 
-        Block [ VarDeclaration(me, Object []); ExprStatement(expr c ir.Code) ], runtime.Value
+        Block
+            [ VarDeclaration(me, Object [])
+              ExprStatement(expr c ir.Code)
+              ExportDecl(true, ExprStatement(Var me)) ],
+        runtime.Value
