@@ -7,7 +7,7 @@ external get_ValueObj : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.U
 (* instance *)
 external get_Name : t -> string = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarDomElement::default#get_Name|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarDomElement::default#get_Name|"
 (* instance *)
-external applyVarHole : t -> Websharper_javascript.Element.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarDomElement::default#ApplyVarHole|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarDomElement::default#ApplyVarHole|WebSharper.JavaScript.Dom.Element"
+external applyVarHole : t -> WebSharper_JavaScript.Element.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarDomElement::default#ApplyVarHole|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarDomElement::default#ApplyVarHole|WebSharper.JavaScript.Dom.Element"
 (* instance *)
 external withName : t -> string -> TemplateHole.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarDomElement::default#WithName|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarDomElement::default#WithName|System.String"
 (* instance *)

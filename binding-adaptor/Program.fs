@@ -284,6 +284,17 @@ let gen
     let externalClasses =
         refEntries |> List.collect (fun (pkg, _, i) -> classesOf i pkg)
 
+    // Wrapper module of a referenced package: the WebSharper assembly name with
+    // '.' replaced by '_' (WebSharper.JavaScript -> WebSharper_JavaScript).
+    let wrapperOf =
+        refEntries
+        |> List.map (fun (pkg, refDll, _) ->
+            pkg, upperFirst ((Path.GetFileNameWithoutExtension refDll).Replace('.', '_')))
+        |> Map.ofList
+
+    let wrapOf (pkg: string) =
+        Map.tryFind pkg wrapperOf |> Option.defaultValue (upperFirst (pkg.Replace('-', '_')))
+
     let externalByFull =
         [ for pkg, cs in externalClasses |> List.groupBy (fun (_, _, _, p) -> p) do
             let refSpec = Map.tryFind pkg refSpecs |> Option.defaultValue Spec.empty
@@ -292,10 +303,10 @@ let gen
 
             for (a, td, ci, _) in cs do
                 if not (refAliases.ContainsKey td.FullName) then
-                    yield td.FullName, (wrapModule pkg + "." + names.[td.FullName], ci.Generics.Length, pkg)
+                    yield td.FullName, (wrapOf pkg + "." + names.[td.FullName], ci.Generics.Length, pkg)
 
             for KeyValue(t, al) in refAliases do
-                yield t, (wrapModule pkg + "." + al, 0, pkg) ]
+                yield t, (wrapOf pkg + "." + al, 0, pkg) ]
         |> Map.ofList
 
     let externalSimple =
@@ -303,7 +314,7 @@ let gen
             let refSpec = Map.tryFind pkg refSpecs |> Option.defaultValue Spec.empty
             let names = finalNamesFor refSpec cs
             for (a, td, ci, _) in cs do
-                yield classModuleName td a, (wrapModule pkg + "." + names.[td.FullName], ci.Generics.Length, pkg) ]
+                yield classModuleName td a, (wrapOf pkg + "." + names.[td.FullName], ci.Generics.Length, pkg) ]
         |> Map.ofList
 
     let deps = System.Collections.Generic.HashSet<string>()
@@ -500,7 +511,8 @@ let gen
         let g = { g with Module = name }
         File.WriteAllText(Path.Combine(libDir, lowerFirst name + ".ml"), renderClass g)
 
-    let libName = pkgId.Replace("-", "_")
+    // Dune wraps library `webSharper_JavaScript` in module `WebSharper_JavaScript`.
+    let libName = lowerFirst (assemblyName.Replace(".", "_"))
     let allModules = unique |> List.map (fun (n, _) -> lowerFirst n)
     let depList =
         ("websharper-runtime" :: (deps |> Seq.filter (fun d -> d <> pkgId && d <> "websharper-runtime") |> Seq.toList))

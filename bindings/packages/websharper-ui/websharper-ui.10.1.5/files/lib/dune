@@ -1,5 +1,5 @@
 (library
- (name websharper_ui)
+ (name webSharper_UI)
  (public_name websharper-ui)
  (modules slot var view concreteVar updates fromView submitter model arrayStorage localStorageBackend listModel reactiveExtensions doubleInterpolation easing trans animatedAttrNode dynamicAttrNode attr checkedInput client templateHole elt text textView attribute event eventQ eventE afterRender afterRenderQ afterRenderE varStr varStrList varBool varDateTime varFile varDomElement varInt varIntUnchecked varFloat varFloatUnchecked uninitVar docElemNode doc elt2 eltUpdater proxy flowState flow flowBuilder attr2)
  (libraries websharper-javascript websharper-runtime websharper-stdlib)

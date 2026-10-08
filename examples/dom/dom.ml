@@ -2,7 +2,7 @@
    DOM type hierarchy is collapsed to a single abstract type (EventTarget.t), so
    no coercions are needed between Document/Element/Node/Event. *)
 
-open Websharper_javascript
+open WebSharper_JavaScript
 
 let () =
   let window = Window.get_Self () in

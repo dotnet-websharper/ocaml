@@ -11,11 +11,11 @@ external get_ValueObj : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.U
 (* instance *)
 external get_Name : t -> string = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarStr::default#get_Name|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarStr::default#get_Name|"
 (* instance *)
-external applyVarHole : t -> Websharper_javascript.Element.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarStr::default#ApplyVarHole|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarStr::default#ApplyVarHole|WebSharper.JavaScript.Dom.Element"
+external applyVarHole : t -> WebSharper_JavaScript.Element.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarStr::default#ApplyVarHole|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarStr::default#ApplyVarHole|WebSharper.JavaScript.Dom.Element"
 (* instance *)
 external withName : t -> string -> TemplateHole.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarStr::default#WithName|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarStr::default#WithName|System.String"
 (* instance *)
-external addAttribute : t -> Js.t -> Websharper_javascript.Element.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarStr::default#AddAttribute|fn|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarStr::default#AddAttribute|fn|WebSharper.JavaScript.Dom.Element"
+external addAttribute : t -> Js.t -> WebSharper_JavaScript.Element.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarStr::default#AddAttribute|fn|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarStr::default#AddAttribute|fn|WebSharper.JavaScript.Dom.Element"
 (* instance *)
 external get_fillWith : t -> (string) Var.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarStr::default#fillWith" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarStr::default#fillWith"
 (* instance *)

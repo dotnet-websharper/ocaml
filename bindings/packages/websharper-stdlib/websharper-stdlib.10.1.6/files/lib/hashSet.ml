@@ -37,9 +37,9 @@ external exceptWith : ('a) t -> Js.t -> unit = "ws:WebSharper.StdLib!WebSharper.
 (* instance *)
 external contains : ('a) t -> 'a -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#Contains|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#Contains|'0"
 (* instance *)
-external arrRemove : ('a) t -> 'a -> ('a) Websharper_javascript.Array.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#arrRemove|'0|WebSharper.JavaScript.Array`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#arrRemove|'0|WebSharper.JavaScript.Array`1<'0>"
+external arrRemove : ('a) t -> 'a -> ('a) WebSharper_JavaScript.Array.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#arrRemove|'0|WebSharper.JavaScript.Array`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#arrRemove|'0|WebSharper.JavaScript.Array`1<'0>"
 (* instance *)
-external arrContains : ('a) t -> 'a -> ('a) Websharper_javascript.Array.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#arrContains|'0|WebSharper.JavaScript.Array`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#arrContains|'0|WebSharper.JavaScript.Array`1<'0>"
+external arrContains : ('a) t -> 'a -> ('a) WebSharper_JavaScript.Array.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#arrContains|'0|WebSharper.JavaScript.Array`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#arrContains|'0|WebSharper.JavaScript.Array`1<'0>"
 (* inline *)
 external copyTo : ('a) t -> ('a) array -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#CopyTo|'0[]" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#CopyTo|'0[]"
 (* instance *)
@@ -51,9 +51,9 @@ external get_count : ('a) t -> int = "wsget:WebSharper.StdLib!WebSharper.StdLib/
 (* instance *)
 external set_count : ('a) t -> int -> unit = "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#count" "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#count"
 (* instance *)
-external get_data : ('a) t -> (('a) Websharper_javascript.Array.t) Websharper_javascript.Array.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#data" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#data"
+external get_data : ('a) t -> (('a) WebSharper_JavaScript.Array.t) WebSharper_JavaScript.Array.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#data" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#data"
 (* instance *)
-external set_data : ('a) t -> (('a) Websharper_javascript.Array.t) Websharper_javascript.Array.t -> unit = "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#data" "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#data"
+external set_data : ('a) t -> (('a) WebSharper_JavaScript.Array.t) WebSharper_JavaScript.Array.t -> unit = "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#data" "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#data"
 (* instance *)
 external get_hash : ('a) t -> Js.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#hash" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#hash"
 (* instance *)

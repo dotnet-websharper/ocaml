@@ -3,13 +3,13 @@ type ('a, 'b) t
 (* inline *)
 external get_Var : ('a, 'b) t -> (('b) array) Var.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#get_Var|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#get_Var|"
 (* inline *)
-external get_Storage : ('a, 'b) t -> Websharper_javascript.Storage.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#get_Storage|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#get_Storage|"
+external get_Storage : ('a, 'b) t -> WebSharper_JavaScript.Storage.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#get_Storage|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#get_Storage|"
 (* inline *)
 external get_View : ('a, 'b) t -> (Js.t) View.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#get_View|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#get_View|"
 (* inline *)
 external get_ViewState : ('a, 'b) t -> (Js.t) View.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#get_ViewState|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#get_ViewState|"
 (* inline *)
-external get_itemSnaps : ('a, 'b) t -> ('a, Js.t) Websharper_stdlib.Dictionary.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#get_itemSnaps|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#get_itemSnaps|"
+external get_itemSnaps : ('a, 'b) t -> ('a, Js.t) WebSharper_StdLib.Dictionary.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#get_itemSnaps|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#get_itemSnaps|"
 (* inline *)
 external get_Value : ('a, 'b) t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#get_Value|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#get_Value|"
 (* instance *)
@@ -91,20 +91,20 @@ external lensInto : ('a, 'b) t -> Js.t -> Js.t -> 'a -> ('c) Var.t = "ws:WebShar
 (* instance *)
 external lensInto' : ('a, 'b) t -> Js.t -> Js.t -> 'a -> ('c) View.t -> ('c) Var.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#LensInto'|fn|fn|'0|WebSharper.UI.View`1<'2>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#LensInto'|fn|fn|'0|WebSharper.UI.View`1<'2>"
 (* instance *)
-external get_it : ('a, 'b) t -> ('a, Js.t) Websharper_stdlib.Dictionary.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#it" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#it"
+external get_it : ('a, 'b) t -> ('a, Js.t) WebSharper_StdLib.Dictionary.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#it" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#it"
 (* instance *)
 external get_v : ('a, 'b) t -> (Js.t) View.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#v" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#v"
 (* instance *)
-external get_storage : ('a, 'b) t -> Websharper_javascript.Storage.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#storage" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#storage"
+external get_storage : ('a, 'b) t -> WebSharper_JavaScript.Storage.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#storage" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#storage"
 (* instance *)
 external get_var : ('a, 'b) t -> (('b) array) Var.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#var" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#var"
 (* instance *)
 external get_key171 : ('a, 'b) t -> Js.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#key@171" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#key@171"
 (* new *)
-external create : Js.t -> Websharper_javascript.Storage.t -> ('a, 'b) t = "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default" "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default"
+external create : Js.t -> WebSharper_JavaScript.Storage.t -> ('a, 'b) t = "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default" "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default"
 (* new *)
 external create_2 : Js.t -> ('a, 'b) t = "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default" "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default"
 (* new *)
 external create_3 : Js.t -> Js.t -> ('a, 'b) t = "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default" "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default"
 (* new *)
-external create_4 : Js.t -> (('b) array) Var.t -> Websharper_javascript.Storage.t -> ('a, 'b) t = "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default" "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default"
+external create_4 : Js.t -> (('b) array) Var.t -> WebSharper_JavaScript.Storage.t -> ('a, 'b) t = "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default" "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default"

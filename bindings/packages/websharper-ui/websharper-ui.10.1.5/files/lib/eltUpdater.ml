@@ -19,4 +19,4 @@ external get_holeUpdates : t -> ((int * (unit) View.t) array) Var.t = "wsget:Web
 (* instance *)
 external get_treeNode : t -> Js.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#treeNode" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#treeNode"
 (* new *)
-external create : Js.t -> (unit) View.t -> Websharper_javascript.Element.t -> Updates.t -> ((int * (unit) View.t) array) Var.t -> t = "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default" "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default"
+external create : Js.t -> (unit) View.t -> WebSharper_JavaScript.Element.t -> Updates.t -> ((int * (unit) View.t) array) Var.t -> t = "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default" "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default"

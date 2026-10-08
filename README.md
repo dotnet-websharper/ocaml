@@ -63,9 +63,9 @@ automatically:
       --reference .../WebSharper.JavaScript.dll --reference .../WebSharper.StdLib.dll
 
 Each binding package is a **wrapped** dune library, so identically-named types
-across packages do not collide (`Websharper_javascript.Event.t`,
-`Websharper_stdlib.Event.t`, `Websharper_ui.Event.t`). The shared `Js` module
-lives in the unwrapped `websharper-runtime` package. Use `open Websharper_javascript`
+across packages do not collide (`WebSharper_JavaScript.Event.t`,
+`WebSharper_StdLib.Event.t`, `WebSharper_UI.Event.t`). The shared `Js` module
+lives in the unwrapped `websharper-runtime` package. Use `open WebSharper_JavaScript`
 (etc.) to bring a package's modules into scope.
 
 Cyclic type hierarchies (e.g. the DOM `EventTarget`/`Node`/`Element`/`Document`

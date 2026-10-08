@@ -1,4 +1,4 @@
-open Websharper_javascript
+open WebSharper_JavaScript
 
 let () =
   Console.log "hello from wsocaml";
