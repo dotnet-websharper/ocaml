@@ -158,6 +158,9 @@ let main argv =
                 let stmts = stmts |> List.map normalize
                 let jsAst, _ = JavaScriptWriter.transformProgram Output.JavaScript pref stmts
                 let js = Writer.ProgramToString pref jsAst
+                // Relative imports of required OCaml units are emitted as
+                // "././<unit>.js" (AssemblyName "."); collapse to "./<unit>.js".
+                let js = js.Replace("././", "./")
                 let js = if usesRuntime then runtimePrelude () + js else js
                 let target = if name = "$EntryPoint" then ir.Unit + ".js" else name + ".js"
                 File.WriteAllText(Path.Combine(output, target), js)
