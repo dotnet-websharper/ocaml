@@ -21,9 +21,13 @@ module Bindings =
     type Entry =
         { Assembly: string
           Address: Address
-          Class: ClassInfo }
+          Class: ClassInfo
+          TypeKey: Hashed<TypeDefinitionInfo> }
 
-    type Context = { Entries: Entry list }
+    type Context =
+        { Entries: Entry list
+          RefMeta: Info
+          Comp: WebSharper.Compiler.Compilation }
 
     let private lowerFirst (s: string) =
         if String.IsNullOrEmpty s then s
@@ -45,22 +49,40 @@ module Bindings =
         | _ -> "?"
 
     let load (paths: string list) : Context =
-        let entries =
+        let metadatas =
             paths
-            |> List.collect (fun path ->
+            |> List.map (fun path ->
                 let asm = Assembly.LoadFrom(Path.GetFullPath path)
-                let name = Path.GetFileNameWithoutExtension path
-                match IO.LoadMetadata asm with
+                Path.GetFileNameWithoutExtension path, IO.LoadMetadata asm)
+
+        let infos = metadatas |> List.choose snd
+
+        let refMeta =
+            if infos.IsEmpty then Info.Empty
+            else Info.UnionWithoutDependencies infos
+
+        let entries =
+            metadatas
+            |> List.collect (fun (name, m) ->
+                match m with
                 | None -> []
                 | Some info ->
                     info.Classes
                     |> Seq.choose (fun kv ->
                         let (a, _custom, ci) = kv.Value
                         match ci with
-                        | Some ci -> Some { Assembly = name; Address = a; Class = ci }
+                        | Some ci ->
+                            Some
+                                { Assembly = name
+                                  Address = a
+                                  Class = ci
+                                  TypeKey = kv.Key }
                         | None -> None)
                     |> Seq.toList)
-        { Entries = entries }
+
+        { Entries = entries
+          RefMeta = refMeta
+          Comp = WebSharper.Compiler.Compilation(refMeta) }
 
     let findClass (ctx: Context) (asm: string) (addr: string) =
         let matches (e: Entry) = e.Address.ToString() = addr
@@ -73,7 +95,20 @@ module Bindings =
         |> Seq.tryPick (fun kv ->
             let mi = kv.Key.Value
             let ps = mi.Parameters |> List.map typeDisplay
-            if mi.MethodName = name && ps = paramDisplays then Some(mi, kv.Value) else None)
+            if mi.MethodName = name && ps = paramDisplays then Some(kv.Key, mi, kv.Value) else None)
+
+    let findCtor (ci: ClassInfo) (argCount: int) =
+        ci.Constructors
+        |> Seq.tryPick (fun kv ->
+            if kv.Key.Value.CtorParameters.Length = argCount then Some kv.Key else None)
+
+    let fieldHashed (e: Entry) (name: string) = name
+
+    let concrete (td: Hashed<TypeDefinitionInfo>) : Concrete<Hashed<TypeDefinitionInfo>> =
+        { Generics = []; Entity = td }
+
+    let concreteM (m: Hashed<MethodInfo>) : Concrete<Hashed<MethodInfo>> =
+        { Generics = []; Entity = m }
 
     let findField (ci: ClassInfo) (name: string) =
         match ci.Fields.TryGetValue name with

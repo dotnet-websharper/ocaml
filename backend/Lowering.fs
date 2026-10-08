@@ -20,6 +20,7 @@ module Lowering =
             Current: string
             Runtime: bool ref
             Bindings: WebSharper.OCaml.Bindings.Context option
+            Ws: bool
         }
 
     let id n = Id.New(n, false)
@@ -413,7 +414,13 @@ module Lowering =
             elif name.StartsWith "wsnew:" then
                 let asm, addr = splitOn '!' (name.Substring 6)
                 match tryClass c asm addr with
-                | Some e -> New(GlobalAccess e.Address, [], es)
+                | Some e ->
+                    if c.Ws then
+                        match WebSharper.OCaml.Bindings.findCtor e.Class es.Length with
+                        | Some ctorKey -> Ctor(WebSharper.OCaml.Bindings.concrete e.TypeKey, ctorKey, es)
+                        | None -> failwith $"wsnew: no constructor with {es.Length} args for {addr}"
+                    else
+                        New(GlobalAccess e.Address, [], es)
                 | None -> failwith $"wsnew: unknown class {addr}"
             elif name.StartsWith "wsget:" then
                 let qual, field = splitOn '#' (name.Substring 6)
@@ -422,7 +429,14 @@ module Lowering =
                 | Some e ->
                     match WebSharper.OCaml.Bindings.findField e.Class field with
                     | Some f ->
-                        if f.CompiledForm.IsStaticField then
+                        if c.Ws then
+                            let td = WebSharper.OCaml.Bindings.concrete e.TypeKey
+                            if f.CompiledForm.IsStaticField then FieldGet(None, td, field)
+                            else
+                                match es with
+                                | [ recv ] -> FieldGet(Some recv, td, field)
+                                | _ -> failwith "wsget: expects a receiver"
+                        elif f.CompiledForm.IsStaticField then
                             ItemGet(GlobalAccess e.Address, Value(String field), Purity.Pure)
                         else
                             match es with
@@ -437,7 +451,18 @@ module Lowering =
                 | Some e ->
                     match WebSharper.OCaml.Bindings.findField e.Class field with
                     | Some f ->
-                        if f.CompiledForm.IsStaticField then
+                        let static_ = f.CompiledForm.IsStaticField
+                        if c.Ws then
+                            let td = WebSharper.OCaml.Bindings.concrete e.TypeKey
+                            if static_ then
+                                match es with
+                                | [ v ] -> FieldSet(None, td, field, v)
+                                | _ -> failwith "wsset: expects a value"
+                            else
+                                match es with
+                                | [ recv; v ] -> FieldSet(Some recv, td, field, v)
+                                | _ -> failwith "wsset: expects a receiver and a value"
+                        elif static_ then
                             match es with
                             | [ v ] -> ItemSet(GlobalAccess e.Address, Value(String field), v)
                             | _ -> failwith "wsset: expects a value"
@@ -455,28 +480,37 @@ module Lowering =
                 match tryClass c asm addr with
                 | Some e ->
                     match WebSharper.OCaml.Bindings.findMethod e.Class mn ps with
-                    | Some(mi, cmi) ->
-                        let form = cmi.CompiledForm
-                        if form.IsMacro then
-                            failwith $"ws: '{mn}' is a WebSharper macro; macros are not supported"
-                        elif form.IsNew then
-                            New(GlobalAccess e.Address, [], es)
-                        elif form.IsInline then
-                            WebSharper.OCaml.Bindings.substituteHoles es cmi.Expression
-                        elif WebSharper.OCaml.Bindings.hasBody cmi.Expression then
-                            // Compiled (Static/Func/Instance) body stored in metadata:
-                            // inline it (hole-based) or apply the function value.
-                            if WebSharper.OCaml.Bindings.maxHole cmi.Expression >= 0 then
-                                WebSharper.OCaml.Bindings.substituteHoles es cmi.Expression
+                    | Some(hkey, mi, cmi) ->
+                        if c.Ws then
+                            let td = WebSharper.OCaml.Bindings.concrete e.TypeKey
+                            let m = WebSharper.OCaml.Bindings.concreteM hkey
+                            // Instance methods get the receiver as `this`; the
+                            // receiver is present iff the call has one more arg
+                            // than the metadata parameters.
+                            if es.Length = mi.Parameters.Length + 1 then
+                                Call(Some es.Head, td, m, es.Tail)
                             else
-                                app cmi.Expression es
-                        elif form.IsInstance then
-                            match es with
-                            | recv :: rest ->
-                                app (ItemGet(recv, Value(String(WebSharper.OCaml.Bindings.methodJsName mi)), Purity.Pure)) rest
-                            | [] -> failwith "ws: instance method expects a receiver"
+                                Call(None, td, m, es)
                         else
-                            app (ItemGet(GlobalAccess e.Address, Value(String(WebSharper.OCaml.Bindings.methodJsName mi)), Purity.Pure)) es
+                            let form = cmi.CompiledForm
+                            if form.IsMacro then
+                                failwith $"ws: '{mn}' is a WebSharper macro; macros are not supported"
+                            elif form.IsNew then
+                                New(GlobalAccess e.Address, [], es)
+                            elif form.IsInline then
+                                WebSharper.OCaml.Bindings.substituteHoles es cmi.Expression
+                            elif WebSharper.OCaml.Bindings.hasBody cmi.Expression then
+                                if WebSharper.OCaml.Bindings.maxHole cmi.Expression >= 0 then
+                                    WebSharper.OCaml.Bindings.substituteHoles es cmi.Expression
+                                else
+                                    app cmi.Expression es
+                            elif form.IsInstance then
+                                match es with
+                                | recv :: rest ->
+                                    app (ItemGet(recv, Value(String(WebSharper.OCaml.Bindings.methodJsName mi)), Purity.Pure)) rest
+                                | [] -> failwith "ws: instance method expects a receiver"
+                            else
+                                app (ItemGet(GlobalAccess e.Address, Value(String(WebSharper.OCaml.Bindings.methodJsName mi)), Purity.Pure)) es
                     | None -> failwith $"ws: unknown member {mn}"
                 | None -> failwith $"ws: unknown class {addr}"
             else
@@ -527,6 +561,7 @@ module Lowering =
                 Current = ir.ModuleIdent
                 Runtime = runtime
                 Bindings = bindings
+                Ws = false
             }
 
         let imports =
@@ -543,3 +578,20 @@ module Lowering =
         let body = ExprStatement(expr c ir.Code)
         let export = ExportDecl(true, ExprStatement(Var me))
         imports @ [ init; body; export ], runtime.Value
+
+    // Lower just the module body to a single statement suitable as a
+    // WebSharper entry point (used by the compilation/packager pipeline).
+    let compileEntry (bindings: WebSharper.OCaml.Bindings.Context option) (ir: UnitIR) =
+        let runtime = ref false
+
+        let c =
+            {
+                Vars = Dictionary()
+                Globals = Dictionary()
+                Current = ir.ModuleIdent
+                Runtime = runtime
+                Bindings = bindings
+                Ws = true
+            }
+
+        ExprStatement(expr c ir.Code), runtime.Value

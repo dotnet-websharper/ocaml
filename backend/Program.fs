@@ -80,6 +80,7 @@ let main argv =
         let mutable output = "wsocaml-out"
         let mutable compact = false
         let mutable packageRefs = false
+        let mutable wsCompile = false
         let references = ResizeArray<string>()
 
         let rec args i =
@@ -96,6 +97,9 @@ let main argv =
                     args (i + 2)
                 | "--package-references" ->
                     packageRefs <- true
+                    args (i + 1)
+                | "--ws-compile" ->
+                    wsCompile <- true
                     args (i + 1)
                 | "--compact" ->
                     compact <- true
@@ -127,16 +131,54 @@ let main argv =
             | Import _ | ExportDecl _ -> s
             | _ -> stripper.TransformStatement (Breaker.BreakStatement (Breaker.optimizer.TransformStatement s))
 
-        let stmts, usesRuntime = compile (bindings references) ir
+        if references.Count > 0 && wsCompile then
+            // A'' path: produce a WebSharper program (entry point with member
+            // references) and let CompileFull + JavaScriptPackager resolve and
+            // package it against the referenced metadata.
+            let ctx = (bindings references).Value
+            let stmt, usesRuntime = compileEntry (Some ctx) ir
 
-        let ast = stmts |> List.map normalize
-        let jsAst, _ = JavaScriptWriter.transformProgram Output.JavaScript pref ast
-        let js = Writer.ProgramToString pref jsAst
-        let code = if usesRuntime then runtimePrelude () + js else js
-        File.WriteAllText(Path.Combine(output, ir.Unit + ".js"), code)
+            let comp = ctx.Comp
+            comp.SetEntryPoint stmt
+            Translator.DotNetToJavaScript.CompileFull comp
 
-        if packageRefs then
+            let current = comp.ToCurrentMetadata()
+
+            let pkg =
+                JavaScriptPackager.packageAssembly
+                    JavaScriptPackager.O.JavaScript
+                    ctx.RefMeta
+                    current
+                    ir.Unit
+                    false
+                    comp.EntryPoint
+                    JavaScriptPackager.EntryPointStyle.RequiredEntryPoint
+
+            for (name, stmts) in pkg do
+                let stmts = stmts |> List.map normalize
+                let jsAst, _ = JavaScriptWriter.transformProgram Output.JavaScript pref stmts
+                let js = Writer.ProgramToString pref jsAst
+                let js = if usesRuntime then runtimePrelude () + js else js
+                let target = if name = "$EntryPoint" then ir.Unit + ".js" else name + ".js"
+                File.WriteAllText(Path.Combine(output, target), js)
+
             packageReferences (List.ofSeq references) output pref
+        else if references.Count = 0 then
+            let stmts, usesRuntime = compile None ir
+            let ast = stmts |> List.map normalize
+            let jsAst, _ = JavaScriptWriter.transformProgram Output.JavaScript pref ast
+            let js = Writer.ProgramToString pref jsAst
+            let code = if usesRuntime then runtimePrelude () + js else js
+            File.WriteAllText(Path.Combine(output, ir.Unit + ".js"), code)
+        else
+            let stmts, usesRuntime = compile (bindings references) ir
+            let ast = stmts |> List.map normalize
+            let jsAst, _ = JavaScriptWriter.transformProgram Output.JavaScript pref ast
+            let js = Writer.ProgramToString pref jsAst
+            let code = if usesRuntime then runtimePrelude () + js else js
+            File.WriteAllText(Path.Combine(output, ir.Unit + ".js"), code)
+
+        ignore packageRefs
 
         0
     with e ->
