@@ -36,7 +36,7 @@ for f in "$srcdir"/*.ml; do
   sibs+=("$f")
 done
 
-if [ "${#sibs[@]}" -gt 0 ]; then
+if [ -n "${sibs[*]:-}" ]; then
   cp "${sibs[@]}" "$work/"
   (cd "$work" && ocamldep -sort *.ml 2>/dev/null | tr ' ' '\n' | grep -v '^$') > "$work/order.txt"
   while IFS= read -r f; do
@@ -51,7 +51,7 @@ compile_unit() {
   dotnet "$be" --ir "$out/$unit.wsir.json" --output "$out" --ws-compile "${refs[@]}" --compact
 }
 
-for f in "${sibs[@]}"; do
+for f in ${sibs[@]+"${sibs[@]}"}; do
   n="$(basename "$f" .ml)"
   compile_unit "$f" "$(echo "${n:0:1}" | tr '[:lower:]' '[:upper:]')${n:1}"
 done

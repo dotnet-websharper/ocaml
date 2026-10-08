@@ -158,23 +158,43 @@ let gen
 
     // Assign final (deduped) module names up front, so that intra-module
     // self-references match the emitted (possibly suffixed) module name.
-    let dedupNames (cs: (Address * TypeDefinitionInfo * ClassInfo * string) list) =
-        let used = System.Collections.Generic.HashSet<string>()
+    // A class is a "static helper" if it has no instance members (e.g.
+    // WebSharper.UI's non-generic Var holding only static factories).
+    let isStaticHelperCi (ci: ClassInfo) =
+        (ci.Methods |> Seq.forall (fun kv -> not kv.Value.CompiledForm.IsInstance))
+        && (ci.Fields |> Seq.forall (fun kv -> not kv.Value.CompiledForm.IsInstanceField))
 
-        cs
-        |> List.sortBy (fun (a, _, _, _) -> addressString a)
-        |> List.map (fun (a, td, _, _) ->
-            let baseName = classModuleName td a
-            let mutable name = baseName
-            let mutable i = 2
-            while used.Contains name do
-                name <- baseName + string i
-                i <- i + 1
-            used.Add name |> ignore
-            td.FullName, name)
-        |> Map.ofList
+    let isDefaultAddr (a: Address) =
+        match a.Address with
+        | [ "default" ] -> true
+        | _ -> false
 
-    let targetNames = dedupNames allClasses
+    // Assign final module names: same-named handwritten classes merge into one
+    // module when exactly one is the generic type and the rest are static
+    // helpers; other collisions get numeric suffixes.
+    let computeFinalNames (cs: (Address * TypeDefinitionInfo * ClassInfo * string) list) =
+        let dict = System.Collections.Generic.Dictionary<string, string>()
+
+        let groups = cs |> List.groupBy (fun (a, td, _, _) -> classModuleName td a)
+
+        for baseName, group in groups do
+            let sorted = group |> List.sortBy (fun (a, _, _, _) -> addressString a)
+
+            let mergeable =
+                List.length sorted > 1
+                && sorted |> List.forall (fun (a, _, _, _) -> isDefaultAddr a)
+                && (let maxG = sorted |> List.map (fun (_, _, ci, _) -> ci.Generics.Length) |> List.max
+                    let primaries = sorted |> List.filter (fun (_, _, ci, _) -> ci.Generics.Length = maxG)
+                    let others = sorted |> List.filter (fun (_, _, ci, _) -> ci.Generics.Length <> maxG)
+                    List.length primaries = 1 && others |> List.forall (fun (_, _, ci, _) -> isStaticHelperCi ci))
+
+            sorted
+            |> List.iteri (fun i (_, td, _, _) ->
+                dict.[td.FullName] <- (if mergeable || i = 0 then baseName else baseName + string (i + 1)))
+
+        dict |> Seq.map (fun kv -> kv.Key, kv.Value) |> Map.ofSeq
+
+    let targetNames = computeFinalNames allClasses
     let moduleOf (td: TypeDefinitionInfo) = targetNames.[td.FullName]
 
     let localByFull =
@@ -184,8 +204,7 @@ let gen
 
     let localArity (m: string) =
         allClasses
-        |> List.tryPick (fun (_, td, ci, _) -> if moduleOf td = m then Some ci.Generics.Length else None)
-        |> Option.defaultValue 0
+        |> List.fold (fun acc (_, td, ci, _) -> if moduleOf td = m then max acc ci.Generics.Length else acc) 0
 
     // referenced WebSharper assemblies: types resolve to their generated modules
     let externalClasses =
@@ -195,14 +214,14 @@ let gen
     // qualified module name (wrapped library), arity, owning package
     let externalByFull =
         [ for pkg, cs in externalClasses |> List.groupBy (fun (_, _, _, p) -> p) do
-            let names = dedupNames cs
+            let names = computeFinalNames cs
             for (a, td, ci, _) in cs do
                 yield td.FullName, (wrapModule pkg + "." + names.[td.FullName], ci.Generics.Length, pkg) ]
         |> Map.ofList
 
     let externalSimple =
         [ for pkg, cs in externalClasses |> List.groupBy (fun (_, _, _, p) -> p) do
-            let names = dedupNames cs
+            let names = computeFinalNames cs
             for (a, td, ci, _) in cs do
                 yield classModuleName td a, (wrapModule pkg + "." + names.[td.FullName], ci.Generics.Length, pkg) ]
         |> Map.ofList
@@ -361,17 +380,36 @@ let gen
         |> List.map (fun (a, td, ci, _) ->
             generateClass env (opaqueFor (moduleOf td)) assemblyName (isAbstract td) (moduleOf td) a td ci)
 
-    let used = System.Collections.Generic.HashSet<string>()
+    // Merge classes that share the same address into one module (disambiguating
+    // member-name clashes); e.g. a generic type and its static-helper type.
+    let mergeGroup (gs: GeneratedClass list) =
+        match gs with
+        | [ g ] -> g
+        | _ ->
+            let used = System.Collections.Generic.Dictionary<string, int>()
+
+            let uniq (baseName: string) =
+                match used.TryGetValue baseName with
+                | true, n ->
+                    used.[baseName] <- n + 1
+                    sprintf "%s_%d" baseName (n + 1)
+                | _ ->
+                    used.[baseName] <- 1
+                    baseName
+
+            let rename (m: Member) = { m with Name = uniq m.Name }
+            let best = gs |> List.maxBy (fun g -> g.Generics)
+
+            { best with
+                Methods = gs |> List.collect (fun g -> g.Methods) |> List.map rename
+                Fields = gs |> List.collect (fun g -> g.Fields) |> List.map rename
+                Constructors = gs |> List.collect (fun g -> g.Constructors) |> List.map rename
+                Alias = None }
+
     let unique =
         generated
-        |> List.map (fun g ->
-            let mutable name = g.Module
-            let mutable i = 2
-            while used.Contains name do
-                name <- g.Module + string i
-                i <- i + 1
-            used.Add name |> ignore
-            name, g)
+        |> List.groupBy (fun g -> g.Module)
+        |> List.map (fun (name, gs) -> name, mergeGroup gs)
 
     let pkgDir = Path.Combine(outRoot, "packages", pkgId, pkgId + "." + version)
     let srcDir = Path.Combine(pkgDir, "files")

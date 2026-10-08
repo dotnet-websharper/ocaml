@@ -1,8 +1,12 @@
 open Websharper_javascript
-open Wsui
 
+(* Uses the generated websharper-ui bindings directly: the generic Var and its
+   static-helper Var were merged into one module, so Var.create/Var.set/Var.get
+   all live under Websharper_ui.Var. *)
 let () =
-  let v = Var.create 0 in
-  Var.set v 41;
-  let _doc = Doc.append (Doc.text "hello ") (Doc.text "ui") in
-  Console.log_2 (Printf.sprintf "v=%d" (Var.get v))
+  let v = Websharper_ui.Var.create_2 0 in
+  Websharper_ui.Var.set v 41;
+  let _ = Websharper_ui.Doc.append
+            (Websharper_ui.Doc.textNode "hello ")
+            (Websharper_ui.Doc.textNode "ui") in
+  Console.log_2 (Printf.sprintf "v=%d" (Websharper_ui.Var.get v))

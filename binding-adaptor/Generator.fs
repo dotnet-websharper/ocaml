@@ -287,7 +287,7 @@ let generateClass
     let generics = ci.Generics.Length
     let addrString = address.ToString()
     let qual = assemblyName + "!" + addrString
-    let recv = receiverType generics
+    let recv = receiverType (env.LocalArity moduleName)
     let alias =
         match env.RepOf moduleName with
         | Some r when r <> moduleName -> Some r
@@ -300,7 +300,7 @@ let generateClass
                 match Map.tryFind fullName env.LocalByFull with
                 | Some m ->
                     let m = redirect m
-                    if m = moduleName then Some("", generics)
+                    if m = moduleName then Some("", env.LocalArity moduleName)
                     elif not (opaque.Contains m) then Some(m, env.LocalArity m)
                     else None
                 | None ->
@@ -310,7 +310,7 @@ let generateClass
                         Some(qm, ar)
                     | None ->
                         let s = redirect (simpleTypeName fullName)
-                        if s = moduleName then Some("", generics)
+                        if s = moduleName then Some("", env.LocalArity moduleName)
                         elif env.LocalModules.Contains s && not (opaque.Contains s) then Some(s, env.LocalArity s)
                         else
                             match Map.tryFind s env.ExternalSimple with

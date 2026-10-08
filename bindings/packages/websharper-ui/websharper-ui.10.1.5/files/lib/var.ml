@@ -22,3 +22,33 @@ external get_Value : ('a) t -> 'a = "ws:WebSharper.UI!WebSharper.UI/WebSharper.U
 external set_Value : ('a) t -> 'a -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#set_Value|'0" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#set_Value|'0"
 (* inline *)
 external lens : ('a) t -> Js.t -> Js.t -> ('b) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#Lens|fn|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#Lens|fn|fn"
+(* inline *)
+external get_2 : ('a) t -> 'a = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Get|WebSharper.UI.Var`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Get|WebSharper.UI.Var`1<'0>"
+(* inline *)
+external getId : ('a) t -> string = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#GetId|WebSharper.UI.Var`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#GetId|WebSharper.UI.Var`1<'0>"
+(* inline *)
+external op_Dynamic : 'a -> string -> 'b = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#op_Dynamic|'0|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#op_Dynamic|'0|System.String"
+(* inline *)
+external op_DynamicAssignment : 'a -> string -> 'b -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#op_DynamicAssignment|'0|System.String|'1" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#op_DynamicAssignment|'0|System.String|'1"
+(* inline *)
+external make : ('a) View.t -> Js.t -> ('a) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Make|WebSharper.UI.View`1<'0>|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Make|WebSharper.UI.View`1<'0>|fn"
+(* static *)
+external mapLens : Js.t -> Js.t -> (('a) Websharper_stdlib.FSharpList.t) t -> (Js.t) View.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#MapLens|fn|fn|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#MapLens|fn|fn|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>"
+(* static *)
+external lens_2 : ('a) t -> Js.t -> Js.t -> ('b) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Lens|WebSharper.UI.Var`1<'0>|fn|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Lens|WebSharper.UI.Var`1<'0>|fn|fn"
+(* static *)
+external update_2 : ('a) t -> Js.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Update|WebSharper.UI.Var`1<'0>|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Update|WebSharper.UI.Var`1<'0>|fn"
+(* static *)
+external setFinal_2 : ('a) t -> 'a -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#SetFinal|WebSharper.UI.Var`1<'0>|'0" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#SetFinal|WebSharper.UI.Var`1<'0>|'0"
+(* static *)
+external set_2 : ('a) t -> 'a -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Set|WebSharper.UI.Var`1<'0>|'0" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Set|WebSharper.UI.Var`1<'0>|'0"
+(* static *)
+external createWaiting : unit -> ('a) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#CreateWaiting|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#CreateWaiting|"
+(* static *)
+external create : unit -> (unit) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Create|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Create|"
+(* static *)
+external createLogged : string -> 'a -> ('a) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#CreateLogged|System.String|'0" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#CreateLogged|System.String|'0"
+(* static *)
+external create_2 : 'a -> ('a) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Create|'0" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Create|'0"
+(* new *)
+external create_3 : unit -> ('a) t = "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default" "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default"
