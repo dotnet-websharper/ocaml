@@ -347,7 +347,13 @@ let generateClass
         |> Seq.sortBy (fun kv ->
             let mi = kv.Key.Value
             let hasArray = mi.Parameters |> List.exists (function Type.ArrayType _ -> true | _ -> false)
-            (if hasArray then 1 else 0), mi.Parameters.Length)
+            let isPrimary =
+                match memberSpecs |> List.tryPick (fun m -> if m.Member = mi.MethodName then m.Primary else None) with
+                | Some p ->
+                    let sig_ = mi.Parameters |> List.map typeDisplay |> String.concat "|"
+                    sig_ = p || string mi.Parameters.Length = p
+                | None -> false
+            (if isPrimary then 0 else 1), (if hasArray then 1 else 0), mi.Parameters.Length)
         |> Seq.filter (fun kv -> not (isSkipped kv.Key.Value.MethodName))
         |> Seq.map (fun kv ->
             let mi = kv.Key.Value

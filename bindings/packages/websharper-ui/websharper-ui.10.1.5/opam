@@ -58,7 +58,7 @@ extra-files: [
   ["lib/trans.ml" "md5=0795cbf30c48e60c7191c1ccc8d6029b"]
   ["lib/uninitVar.ml" "md5=c8050d0e73d4bcedd903dbceb5fe61e0"]
   ["lib/updates.ml" "md5=eef2f17a58b0c5a9c3649961bf567cff"]
-  ["lib/var.ml" "md5=59099f217bb4bd45c5e5cdf9f2b112c9"]
+  ["lib/var.ml" "md5=5f69844f64c5b75dc6af6e6278375926"]
   ["lib/varBool.ml" "md5=fe4f4c6ec793bbafde314f8fddc7d8a3"]
   ["lib/varDateTime.ml" "md5=04a34e4be88850a60a118fa20f0d4c1c"]
   ["lib/varDomElement.ml" "md5=437e29f72cd2114f9b3c4f2fbcc327a2"]

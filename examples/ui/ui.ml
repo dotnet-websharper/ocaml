@@ -4,7 +4,7 @@ open Websharper_javascript
    static-helper Var were merged into one module, so Var.create/Var.set/Var.get
    all live under Websharper_ui.Var. *)
 let () =
-  let v = Websharper_ui.Var.create_2 0 in
+  let v = Websharper_ui.Var.create 0 in
   Websharper_ui.Var.set v 41;
   let _ = Websharper_ui.Doc.append
             (Websharper_ui.Doc.text "hello ")

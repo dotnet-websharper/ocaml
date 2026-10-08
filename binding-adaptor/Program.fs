@@ -146,15 +146,12 @@ let gen
     =
     let info = loadInfo dll
 
-    // Projection spec: explicit --spec, else <pkgId>.spec beside the assembly or
-    // in ./specs/.
-    let spec =
+    // Projection spec discovery: explicit --spec, else <pkg>.spec beside the
+    // assembly or in ./specs/.
+    let discoverSpec (pkg: string) (dllPath: string) : Spec =
         let candidates =
-            match specPath with
-            | Some p -> [ p ]
-            | None ->
-                [ Path.Combine(Path.GetDirectoryName(Path.GetFullPath dll), pkgId + ".spec")
-                  Path.Combine("specs", pkgId + ".spec") ]
+            [ Path.Combine(Path.GetDirectoryName(Path.GetFullPath dllPath), pkg + ".spec")
+              Path.Combine("specs", pkg + ".spec") ]
 
         match candidates |> List.tryFind File.Exists with
         | Some p ->
@@ -162,8 +159,12 @@ let gen
             Spec.load p
         | None -> Spec.empty
 
-    let skipTypes =
-        spec.Modules |> List.filter (fun m -> m.Skip) |> List.map (fun m -> m.Type) |> Set.ofList
+    let spec =
+        match specPath with
+        | Some p when File.Exists p ->
+            printfn "using spec %s" p
+            Spec.load p
+        | _ -> discoverSpec pkgId dll
 
     let classesOf (i: WebSharper.Core.Metadata.Info) (pkg: string) =
         i.Classes
@@ -175,19 +176,6 @@ let gen
             | _ -> None)
         |> Seq.toList
 
-    let allClasses =
-        classesOf info pkgId |> List.filter (fun (_, td, _, _) -> not (skipTypes.Contains td.FullName))
-
-    // Module name overrides and forced merges from the spec.
-    let nameOverride =
-        spec.Modules
-        |> List.choose (fun m -> m.Name |> Option.map (fun n -> m.Type, n))
-        |> Map.ofList
-
-    let forcedBase = System.Collections.Generic.Dictionary<string, string>()
-
-    // Assign final (deduped) module names up front, so that intra-module
-    // self-references match the emitted (possibly suffixed) module name.
     // A class is a "static helper" if it has no instance members (e.g.
     // WebSharper.UI's non-generic Var holding only static factories).
     let isStaticHelperCi (ci: ClassInfo) =
@@ -199,40 +187,52 @@ let gen
         | [ "default" ] -> true
         | _ -> false
 
-    // Populate forced merges: every type in a spec module's "merge" list joins
-    // that module's base name.
-    for m in spec.Modules do
-        if m.Merge.Length > 0 then
-            let ownerBase =
-                match Map.tryFind m.Type nameOverride with
-                | Some n -> n
-                | None ->
-                    allClasses
-                    |> List.tryPick (fun (a, td, _, _) ->
-                        if td.FullName = m.Type then Some(classModuleName td a) else None)
-                    |> Option.defaultValue (upperFirst (lastSegment m.Type))
+    let aliasesOf (s: Spec) =
+        s.Modules
+        |> List.choose (fun m -> m.Alias |> Option.map (fun al -> m.Type, al))
+        |> Map.ofList
 
-            forcedBase.[m.Type] <- ownerBase
-
-            for t in m.Merge do
-                forcedBase.[t] <- ownerBase
-
-    let effBase (a: Address, td: TypeDefinitionInfo, _: ClassInfo, _: string) =
-        match forcedBase.TryGetValue td.FullName with
-        | true, b -> b
-        | _ ->
-            match Map.tryFind td.FullName nameOverride with
-            | Some n -> n
-            | None -> classModuleName td a
+    let skippedOf (s: Spec) =
+        s.Modules |> List.filter (fun m -> m.Skip) |> List.map (fun m -> m.Type) |> Set.ofList
 
     // Assign final module names: same-named handwritten classes merge into one
     // module when exactly one is the generic type and the rest are static
     // helpers (or when forced by the spec); other collisions get suffixes.
-    let computeFinalNames (cs: (Address * TypeDefinitionInfo * ClassInfo * string) list) =
-        let dict = System.Collections.Generic.Dictionary<string, string>()
-        let groups = cs |> List.groupBy effBase
+    let finalNamesFor (s: Spec) (cs: (Address * TypeDefinitionInfo * ClassInfo * string) list) =
+        let nameOverride =
+            s.Modules
+            |> List.choose (fun m -> m.Name |> Option.map (fun n -> m.Type, n))
+            |> Map.ofList
 
-        for baseName, group in groups do
+        let forcedBase = System.Collections.Generic.Dictionary<string, string>()
+
+        for m in s.Modules do
+            if m.Merge.Length > 0 then
+                let ownerBase =
+                    match Map.tryFind m.Type nameOverride with
+                    | Some n -> n
+                    | None ->
+                        cs
+                        |> List.tryPick (fun (a, td, _, _) ->
+                            if td.FullName = m.Type then Some(classModuleName td a) else None)
+                        |> Option.defaultValue (upperFirst (lastSegment m.Type))
+
+                forcedBase.[m.Type] <- ownerBase
+
+                for t in m.Merge do
+                    forcedBase.[t] <- ownerBase
+
+        let effBase (a: Address, td: TypeDefinitionInfo, _: ClassInfo, _: string) =
+            match forcedBase.TryGetValue td.FullName with
+            | true, b -> b
+            | _ ->
+                match Map.tryFind td.FullName nameOverride with
+                | Some n -> n
+                | None -> classModuleName td a
+
+        let dict = System.Collections.Generic.Dictionary<string, string>()
+
+        for baseName, group in cs |> List.groupBy effBase do
             let sorted = group |> List.sortBy (fun (a, _, _, _) -> addressString a)
 
             let forced =
@@ -253,11 +253,20 @@ let gen
 
         dict |> Seq.map (fun kv -> kv.Key, kv.Value) |> Map.ofSeq
 
-    let targetNames = computeFinalNames allClasses
+    let targetAliases = aliasesOf spec
+
+    let allClasses =
+        classesOf info pkgId
+        |> List.filter (fun (_, td, _, _) ->
+            not ((skippedOf spec).Contains td.FullName) && not (targetAliases.ContainsKey td.FullName))
+
+    let targetNames = finalNamesFor spec allClasses
     let moduleOf (td: TypeDefinitionInfo) = targetNames.[td.FullName]
 
     let localByFull =
-        allClasses |> List.map (fun (_, td, _, _) -> td.FullName, moduleOf td) |> Map.ofList
+        (allClasses |> List.map (fun (_, td, _, _) -> td.FullName, moduleOf td))
+        @ (targetAliases |> Map.toList)
+        |> Map.ofList
 
     let localModules = allClasses |> List.map (fun (_, td, _, _) -> moduleOf td) |> Set.ofList
 
@@ -265,22 +274,34 @@ let gen
         allClasses
         |> List.fold (fun acc (_, td, ci, _) -> if moduleOf td = m then max acc ci.Generics.Length else acc) 0
 
-    // referenced WebSharper assemblies: types resolve to their generated modules
-    let externalClasses =
-        references
-        |> List.collect (fun refDll -> classesOf (loadInfo refDll) (defaultId refDll))
+    // Referenced assemblies, each with its own projection spec.
+    let refEntries =
+        references |> List.map (fun refDll -> let pkg = defaultId refDll in pkg, refDll, loadInfo refDll)
 
-    // qualified module name (wrapped library), arity, owning package
+    let refSpecs =
+        refEntries |> List.map (fun (pkg, refDll, _) -> pkg, discoverSpec pkg refDll) |> Map.ofList
+
+    let externalClasses =
+        refEntries |> List.collect (fun (pkg, _, i) -> classesOf i pkg)
+
     let externalByFull =
         [ for pkg, cs in externalClasses |> List.groupBy (fun (_, _, _, p) -> p) do
-            let names = computeFinalNames cs
+            let refSpec = Map.tryFind pkg refSpecs |> Option.defaultValue Spec.empty
+            let names = finalNamesFor refSpec cs
+            let refAliases = aliasesOf refSpec
+
             for (a, td, ci, _) in cs do
-                yield td.FullName, (wrapModule pkg + "." + names.[td.FullName], ci.Generics.Length, pkg) ]
+                if not (refAliases.ContainsKey td.FullName) then
+                    yield td.FullName, (wrapModule pkg + "." + names.[td.FullName], ci.Generics.Length, pkg)
+
+            for KeyValue(t, al) in refAliases do
+                yield t, (wrapModule pkg + "." + al, 0, pkg) ]
         |> Map.ofList
 
     let externalSimple =
         [ for pkg, cs in externalClasses |> List.groupBy (fun (_, _, _, p) -> p) do
-            let names = computeFinalNames cs
+            let refSpec = Map.tryFind pkg refSpecs |> Option.defaultValue Spec.empty
+            let names = finalNamesFor refSpec cs
             for (a, td, ci, _) in cs do
                 yield classModuleName td a, (wrapModule pkg + "." + names.[td.FullName], ci.Generics.Length, pkg) ]
         |> Map.ofList

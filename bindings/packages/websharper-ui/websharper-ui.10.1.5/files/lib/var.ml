@@ -23,15 +23,15 @@ external set_Value : ('a) t -> 'a -> unit = "ws:WebSharper.UI!WebSharper.UI/WebS
 (* inline *)
 external lens : ('a) t -> Js.t -> Js.t -> ('b) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#Lens|fn|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#Lens|fn|fn"
 (* static *)
+external create : 'a -> ('a) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Create|'0" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Create|'0"
+(* static *)
 external createWaiting : unit -> ('a) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#CreateWaiting|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#CreateWaiting|"
 (* static *)
-external create : unit -> (unit) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Create|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Create|"
+external create_2 : unit -> (unit) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Create|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Create|"
 (* inline *)
 external get_2 : ('a) t -> 'a = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Get|WebSharper.UI.Var`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Get|WebSharper.UI.Var`1<'0>"
 (* inline *)
 external getId : ('a) t -> string = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#GetId|WebSharper.UI.Var`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#GetId|WebSharper.UI.Var`1<'0>"
-(* static *)
-external create_2 : 'a -> ('a) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Create|'0" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Create|'0"
 (* inline *)
 external op_Dynamic : 'a -> string -> 'b = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#op_Dynamic|'0|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#op_Dynamic|'0|System.String"
 (* inline *)
