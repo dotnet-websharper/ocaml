@@ -22,5 +22,3 @@ external get_Value : ('a) t -> 'a = "ws:WebSharper.UI!WebSharper.UI/WebSharper.U
 external set_Value : ('a) t -> 'a -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#set_Value|'0" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#set_Value|'0"
 (* inline *)
 external lens : ('a) t -> Js.t -> Js.t -> ('b) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#Lens|fn|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#Lens|fn|fn"
-(* new *)
-external create : unit -> ('a) t = "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default" "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default"

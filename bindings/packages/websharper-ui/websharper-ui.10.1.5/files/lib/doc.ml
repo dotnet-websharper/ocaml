@@ -160,5 +160,3 @@ external mk : Js.t -> (unit) View.t -> TemplateHole.t = "ws:WebSharper.UI!WebSha
 external get_updates : t -> (unit) View.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#updates" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#updates"
 (* instance *)
 external get_docNode : t -> Js.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#docNode" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#docNode"
-(* new *)
-external create : Js.t -> (unit) View.t -> t = "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default" "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default"

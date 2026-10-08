@@ -277,6 +277,7 @@ let generateClass
     (env: TypeEnv)
     (opaque: Set<string>)
     (assemblyName: string)
+    (isAbstract: bool)
     (address: Address)
     (td: TypeDefinitionInfo)
     (ci: ClassInfo)
@@ -379,17 +380,22 @@ let generateClass
                 [ getter; setter ])
         |> Seq.toList
 
+    // Abstract classes have no usable constructor: `new Abstract()` yields an
+    // empty object. Their instances come from static factory methods instead.
     let ctors =
-        ci.Constructors
-        |> Seq.map (fun kv ->
-            let cinfo = kv.Key.Value
-            let cts = cinfo.CtorParameters |> List.map (mapType ctx)
-            let cts = if cts = [] then [ "unit" ] else cts
-            { Name = unique "create"
-              Signature = String.concat " -> " (cts @ [ recv ])
-              Tag = sprintf "wsnew:%s" qual
-              Kinds = methodKinds kv.Value.CompiledForm })
-        |> Seq.toList
+        if isAbstract then
+            []
+        else
+            ci.Constructors
+            |> Seq.map (fun kv ->
+                let cinfo = kv.Key.Value
+                let cts = cinfo.CtorParameters |> List.map (mapType ctx)
+                let cts = if cts = [] then [ "unit" ] else cts
+                { Name = unique "create"
+                  Signature = String.concat " -> " (cts @ [ recv ])
+                  Tag = sprintf "wsnew:%s" qual
+                  Kinds = methodKinds kv.Value.CompiledForm })
+            |> Seq.toList
 
     { Module = moduleName
       Generics = generics

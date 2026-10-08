@@ -56,5 +56,3 @@ external forTextView : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI
 external applyVarHole : t -> Websharper_javascript.Element.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#ApplyVarHole|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#ApplyVarHole|WebSharper.JavaScript.Dom.Element"
 (* instance *)
 external addAttribute : t -> Js.t -> Websharper_javascript.Element.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#AddAttribute|fn|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#AddAttribute|fn|WebSharper.JavaScript.Dom.Element"
-(* new *)
-external create : unit -> t = "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default" "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default"

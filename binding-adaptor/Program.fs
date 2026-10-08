@@ -327,10 +327,17 @@ let gen
         | Some comp when comp.Count > 1 && not (collapsed.Contains m) -> Set.remove m comp
         | _ -> Set.empty
 
+    let targetAsm = System.Reflection.Assembly.LoadFrom(Path.GetFullPath dll)
+
+    let isAbstract (td: TypeDefinitionInfo) =
+        match targetAsm.GetType td.FullName with
+        | null -> false
+        | t -> t.IsAbstract
+
     let generated =
         selected
         |> List.map (fun (a, td, ci, _) ->
-            generateClass env (opaqueFor (classModuleName td a)) assemblyName a td ci)
+            generateClass env (opaqueFor (classModuleName td a)) assemblyName (isAbstract td) a td ci)
 
     let used = System.Collections.Generic.HashSet<string>()
     let unique =
