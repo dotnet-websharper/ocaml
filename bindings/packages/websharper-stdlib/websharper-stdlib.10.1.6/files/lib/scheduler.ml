@@ -8,5 +8,7 @@ external fork : t -> Js.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebS
 external get_robin : t -> Js.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency.Scheduler::default#robin" "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency.Scheduler::default#robin"
 (* instance *)
 external get_idle : t -> bool = "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency.Scheduler::default#idle" "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency.Scheduler::default#idle"
+(* instance *)
+external set_idle : t -> bool -> unit = "wsset:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency.Scheduler::default#idle" "wsset:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency.Scheduler::default#idle"
 (* new *)
 external create : unit -> t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency.Scheduler::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency.Scheduler::default"

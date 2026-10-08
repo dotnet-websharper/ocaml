@@ -13,6 +13,8 @@ external addHole : t -> DocElemNode.t -> unit = "ws:WebSharper.UI!WebSharper.UI/
 (* instance *)
 external get_origHoles : t -> (DocElemNode.t) array = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#origHoles" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#origHoles"
 (* instance *)
+external set_origHoles : t -> (DocElemNode.t) array -> unit = "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#origHoles" "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#origHoles"
+(* instance *)
 external get_holeUpdates : t -> ((int * (unit) View.t) array) Var.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#holeUpdates" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#holeUpdates"
 (* instance *)
 external get_treeNode : t -> Js.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#treeNode" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#treeNode"

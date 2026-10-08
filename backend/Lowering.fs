@@ -430,6 +430,23 @@ module Lowering =
                             | _ -> failwith "wsget: expects a receiver"
                     | None -> failwith $"wsget: unknown field {field}"
                 | None -> failwith $"wsget: unknown class {addr}"
+            elif name.StartsWith "wsset:" then
+                let qual, field = splitOn '#' (name.Substring 6)
+                let asm, addr = splitOn '!' qual
+                match tryClass c asm addr with
+                | Some e ->
+                    match WebSharper.OCaml.Bindings.findField e.Class field with
+                    | Some f ->
+                        if f.CompiledForm.IsStaticField then
+                            match es with
+                            | [ v ] -> ItemSet(GlobalAccess e.Address, Value(String field), v)
+                            | _ -> failwith "wsset: expects a value"
+                        else
+                            match es with
+                            | [ recv; v ] -> ItemSet(recv, Value(String field), v)
+                            | _ -> failwith "wsset: expects a receiver and a value"
+                    | None -> failwith $"wsset: unknown field {field}"
+                | None -> failwith $"wsset: unknown class {addr}"
             elif name.StartsWith "ws:" then
                 let parts = (name.Substring 3).Split('|')
                 let qual, mn = splitOn '#' parts.[0]
@@ -440,15 +457,24 @@ module Lowering =
                     match WebSharper.OCaml.Bindings.findMethod e.Class mn ps with
                     | Some(mi, cmi) ->
                         let form = cmi.CompiledForm
-                        if form.IsNew then
+                        if form.IsMacro then
+                            failwith $"ws: '{mn}' is a WebSharper macro; macros are not supported"
+                        elif form.IsNew then
                             New(GlobalAccess e.Address, [], es)
+                        elif form.IsInline then
+                            WebSharper.OCaml.Bindings.substituteHoles es cmi.Expression
+                        elif WebSharper.OCaml.Bindings.hasBody cmi.Expression then
+                            // Compiled (Static/Func/Instance) body stored in metadata:
+                            // inline it (hole-based) or apply the function value.
+                            if WebSharper.OCaml.Bindings.maxHole cmi.Expression >= 0 then
+                                WebSharper.OCaml.Bindings.substituteHoles es cmi.Expression
+                            else
+                                app cmi.Expression es
                         elif form.IsInstance then
                             match es with
                             | recv :: rest ->
                                 app (ItemGet(recv, Value(String(WebSharper.OCaml.Bindings.methodJsName mi)), Purity.Pure)) rest
                             | [] -> failwith "ws: instance method expects a receiver"
-                        elif form.IsInline then
-                            WebSharper.OCaml.Bindings.substituteHoles es cmi.Expression
                         else
                             app (ItemGet(GlobalAccess e.Address, Value(String(WebSharper.OCaml.Bindings.methodJsName mi)), Purity.Pure)) es
                     | None -> failwith $"ws: unknown member {mn}"

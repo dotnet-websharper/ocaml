@@ -357,13 +357,26 @@ let generateClass
 
     let fields =
         ci.Fields
-        |> Seq.map (fun kv ->
-            let name = unique ("get_" + sanitize (lowerFirst kv.Key))
+        |> Seq.collect (fun kv ->
+            let f = kv.Value.CompiledForm
             let ty = mapType ctx kv.Value.Type
-            { Name = name
-              Signature = sprintf "%s -> %s" recv ty
-              Tag = sprintf "wsget:%s#%s" qual kv.Key
-              Kinds = fieldKinds kv.Value.CompiledForm })
+            let baseName = sanitize (lowerFirst kv.Key)
+            let getter =
+                { Name = unique ("get_" + baseName)
+                  Signature = sprintf "%s -> %s" recv ty
+                  Tag = sprintf "wsget:%s#%s" qual kv.Key
+                  Kinds = fieldKinds f }
+            if kv.Value.ReadOnly then
+                [ getter ]
+            else
+                let setter =
+                    { Name = unique ("set_" + baseName)
+                      Signature =
+                        if f.IsStaticField then sprintf "%s -> unit" ty
+                        else sprintf "%s -> %s -> unit" recv ty
+                      Tag = sprintf "wsset:%s#%s" qual kv.Key
+                      Kinds = fieldKinds f }
+                [ getter; setter ])
         |> Seq.toList
 
     let ctors =

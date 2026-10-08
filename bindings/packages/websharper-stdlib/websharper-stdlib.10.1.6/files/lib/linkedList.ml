@@ -37,11 +37,19 @@ external addAfter : ('a) t -> Js.t -> 'a -> Js.t = "ws:WebSharper.StdLib!WebShar
 (* instance *)
 external get_p : ('a) t -> Js.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#p" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#p"
 (* instance *)
+external set_p : ('a) t -> Js.t -> unit = "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#p" "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#p"
+(* instance *)
 external get_n : ('a) t -> Js.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#n" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#n"
+(* instance *)
+external set_n : ('a) t -> Js.t -> unit = "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#n" "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#n"
 (* instance *)
 external get_c : ('a) t -> int = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#c" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#c"
 (* instance *)
+external set_c : ('a) t -> int -> unit = "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#c" "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#c"
+(* instance *)
 external get_init85 : ('a) t -> int = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#init@85" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#init@85"
+(* instance *)
+external set_init85 : ('a) t -> int -> unit = "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#init@85" "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#init@85"
 (* new *)
 external create : unit -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default"
 (* new *)

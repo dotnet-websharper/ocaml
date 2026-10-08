@@ -90,3 +90,20 @@ module Bindings =
     let substituteHoles (holes: Expression list) (body: Expression) =
         let t = HoleSubstitution(holes)
         t.TransformExpression body
+
+    type private MaxHoleProbe() =
+        inherit Transformer()
+        member val Max = -1 with get, set
+        override this.TransformHole(i: int) =
+            if i > this.Max then this.Max <- i
+            Hole i
+
+    let maxHole (body: Expression) =
+        let p = MaxHoleProbe()
+        p.TransformExpression body |> ignore
+        p.Max
+
+    let hasBody (e: Expression) =
+        match e with
+        | Undefined -> false
+        | _ -> true

@@ -81,7 +81,11 @@ external append_14 : t -> string -> Object.t = "ws:WebSharper.StdLib!WebSharper.
 (* instance *)
 external get_strings : t -> (string) array = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#strings" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#strings"
 (* instance *)
+external set_strings : t -> (string) array -> unit = "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#strings" "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#strings"
+(* instance *)
 external get_init11 : t -> int = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#init@11" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#init@11"
+(* instance *)
+external set_init11 : t -> int -> unit = "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#init@11" "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#init@11"
 (* new *)
 external create : string -> t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default"
 (* new *)

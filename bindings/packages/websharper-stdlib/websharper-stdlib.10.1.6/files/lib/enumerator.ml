@@ -7,6 +7,8 @@ external moveNext : ('a) t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/Sys
 (* instance *)
 external get_i : ('a) t -> int = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1.Enumerator::default#i" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1.Enumerator::default#i"
 (* instance *)
+external set_i : ('a) t -> int -> unit = "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1.Enumerator::default#i" "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1.Enumerator::default#i"
+(* instance *)
 external get_arr : ('a) t -> ('a) array = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1.Enumerator::default#arr" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1.Enumerator::default#arr"
 (* new *)
 external create : ('a) array -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1.Enumerator::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1.Enumerator::default"

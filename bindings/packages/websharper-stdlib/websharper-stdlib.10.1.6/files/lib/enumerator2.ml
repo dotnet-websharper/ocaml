@@ -2,5 +2,7 @@
 type ('a) t
 (* instance *)
 external get_c : ('a) t -> Js.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1.Enumerator::default#c" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1.Enumerator::default#c"
+(* instance *)
+external set_c : ('a) t -> Js.t -> unit = "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1.Enumerator::default#c" "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1.Enumerator::default#c"
 (* new *)
 external create : Js.t -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1.Enumerator::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1.Enumerator::default"

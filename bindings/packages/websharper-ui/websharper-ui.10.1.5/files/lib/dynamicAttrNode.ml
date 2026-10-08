@@ -5,7 +5,11 @@ external get_updates : ('a) t -> (unit) View.t = "wsget:WebSharper.UI!WebSharper
 (* instance *)
 external get_dirty : ('a) t -> bool = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DynamicAttrNode`1::default#dirty" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DynamicAttrNode`1::default#dirty"
 (* instance *)
+external set_dirty : ('a) t -> bool -> unit = "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DynamicAttrNode`1::default#dirty" "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DynamicAttrNode`1::default#dirty"
+(* instance *)
 external get_value : ('a) t -> 'a = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DynamicAttrNode`1::default#value" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DynamicAttrNode`1::default#value"
+(* instance *)
+external set_value : ('a) t -> 'a -> unit = "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DynamicAttrNode`1::default#value" "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DynamicAttrNode`1::default#value"
 (* instance *)
 external get_push : ('a) t -> Js.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DynamicAttrNode`1::default#push" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DynamicAttrNode`1::default#push"
 (* new *)

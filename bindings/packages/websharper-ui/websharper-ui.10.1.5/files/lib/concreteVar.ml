@@ -21,8 +21,14 @@ external get_view : ('a) t -> ('a) View.t = "wsget:WebSharper.UI!WebSharper.UI/W
 (* instance *)
 external get_snap : ('a) t -> Js.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default#snap" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default#snap"
 (* instance *)
+external set_snap : ('a) t -> Js.t -> unit = "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default#snap" "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default#snap"
+(* instance *)
 external get_current : ('a) t -> 'a = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default#current" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default#current"
 (* instance *)
+external set_current : ('a) t -> 'a -> unit = "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default#current" "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default#current"
+(* instance *)
 external get_isConst66 : ('a) t -> bool = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default#isConst@66" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default#isConst@66"
+(* instance *)
+external set_isConst66 : ('a) t -> bool -> unit = "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default#isConst@66" "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default#isConst@66"
 (* new *)
 external create : bool -> Js.t -> 'a -> ('a) t = "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default" "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default"

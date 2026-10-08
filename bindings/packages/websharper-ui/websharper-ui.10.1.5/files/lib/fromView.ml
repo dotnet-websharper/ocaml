@@ -19,6 +19,8 @@ external get_view590 : ('a) t -> ('a) View.t = "wsget:WebSharper.UI!WebSharper.U
 (* instance *)
 external get_current : ('a) t -> 'a = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.FromView`1::default#current" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.FromView`1::default#current"
 (* instance *)
+external set_current : ('a) t -> 'a -> unit = "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.FromView`1::default#current" "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.FromView`1::default#current"
+(* instance *)
 external get_id : ('a) t -> int = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.FromView`1::default#id" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.FromView`1::default#id"
 (* instance *)
 external get_set : ('a) t -> Js.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.FromView`1::default#set" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.FromView`1::default#set"

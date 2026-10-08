@@ -23,9 +23,15 @@ external get_r : t -> (Js.t) array = "wsget:WebSharper.StdLib!WebSharper.StdLib/
 (* instance *)
 external get_pending : t -> Js.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#pending" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#pending"
 (* instance *)
+external set_pending : t -> Js.t -> unit = "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#pending" "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#pending"
+(* instance *)
 external get_c : t -> bool = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#c" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#c"
 (* instance *)
+external set_c : t -> bool -> unit = "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#c" "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#c"
+(* instance *)
 external get_init158 : t -> int = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#init@158" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#init@158"
+(* instance *)
+external set_init158 : t -> int -> unit = "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#init@158" "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#init@158"
 (* inline *)
 external create : int -> t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default"
 (* inline *)

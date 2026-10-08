@@ -1,0 +1,2 @@
+{"schema":"wsocaml-ir-4","unit":"FieldSet","moduleIdent":"FieldSet","mainModuleBlockSize":0,"requiredGlobals":[],
+ "code":{"tag":"prim","prim":{"tag":"ccall","name":"wsset:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#c"},"args":[{"tag":"const","value":{"tag":"int","value":"0"}},{"tag":"const","value":{"tag":"int","value":"1"}}]}}

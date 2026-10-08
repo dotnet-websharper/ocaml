@@ -23,6 +23,8 @@ external execute : ('a) t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/Syst
 (* instance *)
 external get_result284 : ('a) t -> 'a = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task`1::default#result@284" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task`1::default#result@284"
 (* instance *)
+external set_result284 : ('a) t -> 'a -> unit = "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task`1::default#result@284" "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task`1::default#result@284"
+(* instance *)
 external get_func : ('a) t -> Js.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task`1::default#func" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task`1::default#func"
 (* new *)
 external create : Js.t -> Js.t -> Js.t -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task`1::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task`1::default"

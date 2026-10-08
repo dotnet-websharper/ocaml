@@ -240,6 +240,56 @@ if [ -d "$apps_ws" ]; then
   fi
 fi
 
+# WebSharper-binding IR fixtures (need a referenced assembly).
+cases_ws="$here/cases-ws"
+if [ -d "$cases_ws" ]; then
+  wsref="$root/bin/Debug/net10.0/WebSharper.StdLib.dll"
+  for ir in "$cases_ws"/*.wsir.json; do
+    [ -f "$ir" ] || continue
+    name="$(basename "$ir" .wsir.json)"
+    out="$tmp/cws_$name"
+    mkdir -p "$out"
+    errfile="$cases_ws/$name.expected.err"
+    if dotnet "$dll" --ir "$ir" --output "$out" --reference "$wsref" --compact > "$tmp/cws_$name.log" 2>&1; then
+      if [ -f "$errfile" ]; then
+        echo "FAIL ws-case $name (expected failure)"
+        fail=$((fail + 1))
+        continue
+      fi
+      js="$(ls "$out"/*.js 2>/dev/null | head -n 1 || true)"
+      expected="$cases_ws/$name.expected.js"
+      if [ "$update" = 1 ] && [ -n "$js" ]; then
+        cp "$js" "$expected"
+        echo "updated $name.expected.js"
+      fi
+      ok=1
+      if [ -f "$expected" ] && ! diff -u "$expected" "$js" > "$tmp/cws_$name.diff"; then
+        echo "FAIL ws-case $name (js mismatch)"
+        sed 's/^/    /' "$tmp/cws_$name.diff"
+        ok=0
+      fi
+      if [ "$ok" = 1 ] && ! node --check "$js" > /dev/null 2>&1; then
+        echo "FAIL ws-case $name (node --check)"
+        ok=0
+      fi
+    else
+      if [ -f "$errfile" ] && grep -qF "$(cat "$errfile")" "$tmp/cws_$name.log"; then
+        ok=1
+      else
+        echo "FAIL ws-case $name (unexpected failure)"
+        sed 's/^/    /' "$tmp/cws_$name.log"
+        ok=0
+      fi
+    fi
+    if [ "$ok" = 1 ]; then
+      echo "PASS ws-case $name"
+      pass=$((pass + 1))
+    else
+      fail=$((fail + 1))
+    fi
+  done
+fi
+
 echo
 echo "passed: $pass, failed: $fail"
 [ "$fail" = 0 ]

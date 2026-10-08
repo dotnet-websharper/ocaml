@@ -22,6 +22,8 @@ external getHashCode : t -> int = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.
 external equals : t -> Js.t -> bool = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#Equals|System.Object" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#Equals|System.Object"
 (*  *)
 external get_render : t -> Js.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#Render" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#Render"
+(*  *)
+external set_render : t -> Js.t -> unit = "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#Render" "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#Render"
 (* instance *)
 external get_elKey : t -> int = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#ElKey" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#ElKey"
 (* instance *)
@@ -30,6 +32,8 @@ external get_el : t -> Websharper_javascript.Element.t = "wsget:WebSharper.UI!We
 external get_delimiters : t -> Js.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#Delimiters" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#Delimiters"
 (* instance *)
 external get_children : t -> Js.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#Children" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#Children"
+(* instance *)
+external set_children : t -> Js.t -> unit = "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#Children" "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#Children"
 (* instance *)
 external get_attr : t -> Js.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#Attr" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#Attr"
 (* static *)

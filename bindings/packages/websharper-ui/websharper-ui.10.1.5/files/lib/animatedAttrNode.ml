@@ -9,9 +9,15 @@ external get_updates : ('a) t -> (unit) View.t = "wsget:WebSharper.UI!WebSharper
 (* instance *)
 external get_dirty : ('a) t -> bool = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.AnimatedAttrNode`1::default#dirty" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.AnimatedAttrNode`1::default#dirty"
 (* instance *)
+external set_dirty : ('a) t -> bool -> unit = "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.AnimatedAttrNode`1::default#dirty" "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.AnimatedAttrNode`1::default#dirty"
+(* instance *)
 external get_visible : ('a) t -> Js.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.AnimatedAttrNode`1::default#visible" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.AnimatedAttrNode`1::default#visible"
 (* instance *)
+external set_visible : ('a) t -> Js.t -> unit = "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.AnimatedAttrNode`1::default#visible" "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.AnimatedAttrNode`1::default#visible"
+(* instance *)
 external get_logical : ('a) t -> Js.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.AnimatedAttrNode`1::default#logical" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.AnimatedAttrNode`1::default#logical"
+(* instance *)
+external set_logical : ('a) t -> Js.t -> unit = "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.AnimatedAttrNode`1::default#logical" "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.AnimatedAttrNode`1::default#logical"
 (* instance *)
 external get_push : ('a) t -> Js.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.AnimatedAttrNode`1::default#push" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.AnimatedAttrNode`1::default#push"
 (* instance *)

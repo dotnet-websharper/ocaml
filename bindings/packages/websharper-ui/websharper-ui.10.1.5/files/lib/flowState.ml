@@ -37,12 +37,18 @@ external get_renderFirst : t -> Js.t = "wsget:WebSharper.UI!WebSharper.UI/WebSha
 (* instance *)
 external get_firstRender : t -> bool = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#FirstRender" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#FirstRender"
 (* instance *)
+external set_firstRender : t -> bool -> unit = "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#FirstRender" "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#FirstRender"
+(* instance *)
 external get_endedOn : t -> Js.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#EndedOn" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#EndedOn"
+(* instance *)
+external set_endedOn : t -> Js.t -> unit = "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#EndedOn" "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#EndedOn"
 (* instance *)
 external get_pages : t -> Js.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#Pages" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#Pages"
 (* instance *)
 external get_index : t -> (int) Var.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#Index" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#Index"
 (* instance *)
 external get_id : t -> int = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#Id" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#Id"
+(* instance *)
+external set_id : t -> int -> unit = "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#Id" "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#Id"
 (* static *)
 external create : int -> (int) Var.t -> Js.t -> Js.t -> bool -> Js.t -> t = "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default" "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default"

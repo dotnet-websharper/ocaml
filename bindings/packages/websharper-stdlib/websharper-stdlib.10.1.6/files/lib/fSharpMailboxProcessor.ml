@@ -39,13 +39,19 @@ external get_Error : ('a) t -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Mi
 (* instance *)
 external get_defaultTimeout : ('a) t -> int = "wsget:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.FSharpMailboxProcessor`1::default#DefaultTimeout@" "wsget:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.FSharpMailboxProcessor`1::default#DefaultTimeout@"
 (* instance *)
+external set_defaultTimeout : ('a) t -> int -> unit = "wsset:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.FSharpMailboxProcessor`1::default#DefaultTimeout@" "wsset:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.FSharpMailboxProcessor`1::default#DefaultTimeout@"
+(* instance *)
 external get_savedCont : ('a) t -> Js.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.FSharpMailboxProcessor`1::default#savedCont" "wsget:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.FSharpMailboxProcessor`1::default#savedCont"
+(* instance *)
+external set_savedCont : ('a) t -> Js.t -> unit = "wsset:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.FSharpMailboxProcessor`1::default#savedCont" "wsset:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.FSharpMailboxProcessor`1::default#savedCont"
 (* instance *)
 external get_mailbox : ('a) t -> ('a) LinkedList.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.FSharpMailboxProcessor`1::default#mailbox" "wsget:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.FSharpMailboxProcessor`1::default#mailbox"
 (* instance *)
 external get_errorEvent : ('a) t -> (Object.t) FSharpEvent.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.FSharpMailboxProcessor`1::default#errorEvent" "wsget:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.FSharpMailboxProcessor`1::default#errorEvent"
 (* instance *)
 external get_started : ('a) t -> bool = "wsget:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.FSharpMailboxProcessor`1::default#started" "wsget:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.FSharpMailboxProcessor`1::default#started"
+(* instance *)
+external set_started : ('a) t -> bool -> unit = "wsset:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.FSharpMailboxProcessor`1::default#started" "wsset:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.FSharpMailboxProcessor`1::default#started"
 (* instance *)
 external get_token : ('a) t -> Js.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.FSharpMailboxProcessor`1::default#token" "wsget:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.FSharpMailboxProcessor`1::default#token"
 (* instance *)

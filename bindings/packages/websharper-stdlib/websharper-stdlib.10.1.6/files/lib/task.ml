@@ -93,9 +93,13 @@ external execute : t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Th
 (* instance *)
 external get_exc35 : t -> Object.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#exc@35" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#exc@35"
 (* instance *)
+external set_exc35 : t -> Object.t -> unit = "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#exc@35" "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#exc@35"
+(* instance *)
 external get_continuations : t -> (Object.t) array = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#continuations" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#continuations"
 (* instance *)
 external get_status31 : t -> Js.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#status@31" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#status@31"
+(* instance *)
+external set_status31 : t -> Js.t -> unit = "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#status@31" "wsset:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#status@31"
 (* instance *)
 external get_token : t -> Js.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#token" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#token"
 (* instance *)

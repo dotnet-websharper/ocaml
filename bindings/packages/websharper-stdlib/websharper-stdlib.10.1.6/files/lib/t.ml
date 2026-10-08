@@ -11,6 +11,8 @@ external get_Current : ('a, 'b) t -> 'b = "ws:WebSharper.StdLib!WebSharper.StdLi
 (* instance *)
 external get_e : ('a, 'b) t -> int = "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator.T`2::default#e" "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator.T`2::default#e"
 (* instance *)
+external set_e : ('a, 'b) t -> int -> unit = "wsset:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator.T`2::default#e" "wsset:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator.T`2::default#e"
+(* instance *)
 external get_d : ('a, 'b) t -> Js.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator.T`2::default#d" "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator.T`2::default#d"
 (* instance *)
 external get_n : ('a, 'b) t -> Js.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator.T`2::default#n" "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator.T`2::default#n"

@@ -23,6 +23,10 @@ external get_varView : t -> (unit) View.t = "wsget:WebSharper.UI!WebSharper.UI/W
 (* instance *)
 external get_snap : t -> Js.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Updates::default#Snap" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Updates::default#Snap"
 (* instance *)
+external set_snap : t -> Js.t -> unit = "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.Updates::default#Snap" "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.Updates::default#Snap"
+(* instance *)
 external get_current : t -> (unit) View.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Updates::default#Current" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Updates::default#Current"
+(* instance *)
+external set_current : t -> (unit) View.t -> unit = "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.Updates::default#Current" "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.Updates::default#Current"
 (* static *)
 external create_2 : (unit) View.t -> Js.t -> (unit) View.t -> t = "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.Updates::default" "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.Updates::default"

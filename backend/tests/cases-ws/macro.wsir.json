@@ -1,0 +1,2 @@
+{"schema":"wsocaml-ir-4","unit":"Macro","moduleIdent":"Macro","mainModuleBlockSize":0,"requiredGlobals":[],
+ "code":{"tag":"prim","prim":{"tag":"ccall","name":"ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Comparer`1::default#get_Default|"},"args":[]}}
