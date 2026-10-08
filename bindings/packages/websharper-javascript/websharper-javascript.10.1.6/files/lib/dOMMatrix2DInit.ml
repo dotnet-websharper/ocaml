@@ -3,41 +3,41 @@ type t
 (* inline *)
 external get_M22 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#get_M22|" "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#get_M22|"
 (* inline *)
-external set_M22 : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_M22|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_M22|System.Double"
-(* inline *)
 external get_M21 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#get_M21|" "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#get_M21|"
-(* inline *)
-external set_M21 : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_M21|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_M21|System.Double"
 (* inline *)
 external get_M12 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#get_M12|" "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#get_M12|"
 (* inline *)
-external set_M12 : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_M12|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_M12|System.Double"
-(* inline *)
 external get_M11 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#get_M11|" "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#get_M11|"
-(* inline *)
-external set_M11 : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_M11|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_M11|System.Double"
 (* inline *)
 external get_F : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#get_F|" "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#get_F|"
 (* inline *)
-external set_F : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_F|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_F|System.Double"
-(* inline *)
 external get_E : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#get_E|" "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#get_E|"
-(* inline *)
-external set_E : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_E|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_E|System.Double"
 (* inline *)
 external get_D : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#get_D|" "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#get_D|"
 (* inline *)
-external set_D : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_D|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_D|System.Double"
-(* inline *)
 external get_C : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#get_C|" "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#get_C|"
-(* inline *)
-external set_C : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_C|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_C|System.Double"
 (* inline *)
 external get_B : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#get_B|" "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#get_B|"
 (* inline *)
-external set_B : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_B|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_B|System.Double"
-(* inline *)
 external get_A : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#get_A|" "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#get_A|"
+(* inline *)
+external set_M22 : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_M22|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_M22|System.Double"
+(* inline *)
+external set_M21 : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_M21|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_M21|System.Double"
+(* inline *)
+external set_M12 : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_M12|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_M12|System.Double"
+(* inline *)
+external set_M11 : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_M11|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_M11|System.Double"
+(* inline *)
+external set_F : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_F|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_F|System.Double"
+(* inline *)
+external set_E : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_E|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_E|System.Double"
+(* inline *)
+external set_D : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_D|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_D|System.Double"
+(* inline *)
+external set_C : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_C|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_C|System.Double"
+(* inline *)
+external set_B : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_B|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_B|System.Double"
 (* inline *)
 external set_A : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_A|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix2DInit#set_A|System.Double"
 (* inline *)

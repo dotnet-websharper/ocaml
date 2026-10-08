@@ -3,9 +3,9 @@ type ('a, 'b) t
 (* instance *)
 external getHashCode : ('a, 'b) t -> int = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Abbrev.Slot`2::default#GetHashCode|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Abbrev.Slot`2::default#GetHashCode|"
 (* instance *)
-external equals : ('a, 'b) t -> Js.t -> bool = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Abbrev.Slot`2::default#Equals|System.Object" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Abbrev.Slot`2::default#Equals|System.Object"
-(* instance *)
 external get_Value : ('a, 'b) t -> 'a = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Abbrev.Slot`2::default#get_Value|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Abbrev.Slot`2::default#get_Value|"
+(* instance *)
+external equals : ('a, 'b) t -> Js.t -> bool = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Abbrev.Slot`2::default#Equals|System.Object" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Abbrev.Slot`2::default#Equals|System.Object"
 (* instance *)
 external get_value : ('a, 'b) t -> 'a = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Abbrev.Slot`2::default#value" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Abbrev.Slot`2::default#value"
 (* instance *)

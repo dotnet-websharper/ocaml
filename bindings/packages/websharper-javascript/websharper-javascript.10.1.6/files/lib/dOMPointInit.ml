@@ -3,17 +3,17 @@ type t
 (* inline *)
 external get_W : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMPointInit#get_W|" "ws:WebSharper.JavaScript!globalThis.DOMPointInit#get_W|"
 (* inline *)
-external set_W : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.DOMPointInit#set_W|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMPointInit#set_W|System.Double"
-(* inline *)
 external get_Z : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMPointInit#get_Z|" "ws:WebSharper.JavaScript!globalThis.DOMPointInit#get_Z|"
-(* inline *)
-external set_Z : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.DOMPointInit#set_Z|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMPointInit#set_Z|System.Double"
 (* inline *)
 external get_Y : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMPointInit#get_Y|" "ws:WebSharper.JavaScript!globalThis.DOMPointInit#get_Y|"
 (* inline *)
-external set_Y : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.DOMPointInit#set_Y|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMPointInit#set_Y|System.Double"
-(* inline *)
 external get_X : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMPointInit#get_X|" "ws:WebSharper.JavaScript!globalThis.DOMPointInit#get_X|"
+(* inline *)
+external set_W : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.DOMPointInit#set_W|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMPointInit#set_W|System.Double"
+(* inline *)
+external set_Z : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.DOMPointInit#set_Z|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMPointInit#set_Z|System.Double"
+(* inline *)
+external set_Y : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.DOMPointInit#set_Y|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMPointInit#set_Y|System.Double"
 (* inline *)
 external set_X : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.DOMPointInit#set_X|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMPointInit#set_X|System.Double"
 (* inline *)

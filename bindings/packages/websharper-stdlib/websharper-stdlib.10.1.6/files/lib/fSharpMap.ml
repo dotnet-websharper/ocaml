@@ -5,13 +5,17 @@ external getEnumerator : ('a, 'b) t -> Js.t = "ws:WebSharper.StdLib!WebSharper.S
 (* instance *)
 external get_Count : ('a, 'b) t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#get_Count|" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#get_Count|"
 (* instance *)
-external equals : ('a, 'b) t -> Js.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#Equals|System.Object" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#Equals|System.Object"
-(* instance *)
 external getHashCode : ('a, 'b) t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#GetHashCode|" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#GetHashCode|"
 (* instance *)
 external get_Values : ('a, 'b) t -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#get_Values|" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#get_Values|"
 (* instance *)
 external get_Keys : ('a, 'b) t -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#get_Keys|" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#get_Keys|"
+(* instance *)
+external get_IsEmpty : ('a, 'b) t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#get_IsEmpty|" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#get_IsEmpty|"
+(* instance *)
+external get_Tree : ('a, 'b) t -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#get_Tree|" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#get_Tree|"
+(* instance *)
+external equals : ('a, 'b) t -> Js.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#Equals|System.Object" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#Equals|System.Object"
 (* instance *)
 external tryFind : ('a, 'b) t -> 'a -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#TryFind|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#TryFind|'0"
 (* instance *)
@@ -19,17 +23,13 @@ external remove : ('a, 'b) t -> 'a -> ('a, 'b) t = "ws:WebSharper.StdLib!WebShar
 (* instance *)
 external get_Item : ('a, 'b) t -> 'a -> 'b = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#get_Item|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#get_Item|'0"
 (* instance *)
-external get_IsEmpty : ('a, 'b) t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#get_IsEmpty|" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#get_IsEmpty|"
+external containsKey : ('a, 'b) t -> 'a -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#ContainsKey|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#ContainsKey|'0"
 (* instance *)
 external tryGetValue : ('a, 'b) t -> 'a -> 'b -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#TryGetValue|'0|'1" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#TryGetValue|'0|'1"
-(* instance *)
-external containsKey : ('a, 'b) t -> 'a -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#ContainsKey|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#ContainsKey|'0"
 (* instance *)
 external change : ('a, 'b) t -> 'a -> Js.t -> ('a, 'b) t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#Change|'0|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#Change|'0|fn"
 (* instance *)
 external add : ('a, 'b) t -> 'a -> 'b -> ('a, 'b) t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#Add|'0|'1" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#Add|'0|'1"
-(* instance *)
-external get_Tree : ('a, 'b) t -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#get_Tree|" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#get_Tree|"
 (* instance *)
 external get_tree : ('a, 'b) t -> Js.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#tree" "wsget:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#tree"
 (* new *)

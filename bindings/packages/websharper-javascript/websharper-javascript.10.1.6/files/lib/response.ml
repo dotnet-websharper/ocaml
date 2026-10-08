@@ -13,8 +13,6 @@ external arrayBuffer : t -> (ArrayBuffer.t) Promise.t = "ws:WebSharper.JavaScrip
 (* inline *)
 external clone : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Response#Clone|" "ws:WebSharper.JavaScript!globalThis.Response#Clone|"
 (* inline *)
-external redirect : string -> int -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Response#Redirect|System.String|System.Int32" "ws:WebSharper.JavaScript!globalThis.Response#Redirect|System.String|System.Int32"
-(* inline *)
 external error : unit -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Response#Error|" "ws:WebSharper.JavaScript!globalThis.Response#Error|"
 (* inline *)
 external get_BodyUsed : t -> bool = "ws:WebSharper.JavaScript!globalThis.Response#get_BodyUsed|" "ws:WebSharper.JavaScript!globalThis.Response#get_BodyUsed|"
@@ -36,6 +34,8 @@ external get_Redirected : t -> bool = "ws:WebSharper.JavaScript!globalThis.Respo
 external get_Ok : t -> bool = "ws:WebSharper.JavaScript!globalThis.Response#get_Ok|" "ws:WebSharper.JavaScript!globalThis.Response#get_Ok|"
 (* inline *)
 external get_Headers : t -> Headers.t = "ws:WebSharper.JavaScript!globalThis.Response#get_Headers|" "ws:WebSharper.JavaScript!globalThis.Response#get_Headers|"
+(* inline *)
+external redirect : string -> int -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Response#Redirect|System.String|System.Int32" "ws:WebSharper.JavaScript!globalThis.Response#Redirect|System.String|System.Int32"
 (* inline *)
 external create : unit -> t = "wsnew:WebSharper.JavaScript!globalThis.Response" "wsnew:WebSharper.JavaScript!globalThis.Response"
 (* inline *)

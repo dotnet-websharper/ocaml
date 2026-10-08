@@ -3,11 +3,11 @@ type ('a, 'b) t
 (* inline *)
 external get_State : ('a, 'b) t -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator.T`2::default#get_State|" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator.T`2::default#get_State|"
 (* inline *)
+external get_Current : ('a, 'b) t -> 'b = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator.T`2::default#get_Current|" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator.T`2::default#get_Current|"
+(* inline *)
 external set_Current : ('a, 'b) t -> 'b -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator.T`2::default#set_Current|'1" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator.T`2::default#set_Current|'1"
 (* inline *)
 external set_State : ('a, 'b) t -> 'a -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator.T`2::default#set_State|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator.T`2::default#set_State|'0"
-(* inline *)
-external get_Current : ('a, 'b) t -> 'b = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator.T`2::default#get_Current|" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator.T`2::default#get_Current|"
 (* instance *)
 external get_e : ('a, 'b) t -> int = "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator.T`2::default#e" "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator.T`2::default#e"
 (* instance *)

@@ -5,14 +5,6 @@ external then_ : ('a) t -> Js.t -> ('b) t = "ws:WebSharper.JavaScript!globalThis
 (* inline *)
 external then__2 : ('a) t -> Js.t -> ('b) t = "ws:WebSharper.JavaScript!globalThis.Promise#Then|System.Func`2<'0,WebSharper.JavaScript.Promise`1<'1>>" "ws:WebSharper.JavaScript!globalThis.Promise#Then|System.Func`2<'0,WebSharper.JavaScript.Promise`1<'1>>"
 (* inline *)
-external then__3 : ('a) t -> Js.t -> Js.t -> ('b) t = "ws:WebSharper.JavaScript!globalThis.Promise#Then|System.Func`2<'0,'1>|System.Func`2<System.Object,'1>" "ws:WebSharper.JavaScript!globalThis.Promise#Then|System.Func`2<'0,'1>|System.Func`2<System.Object,'1>"
-(* inline *)
-external then__4 : ('a) t -> Js.t -> Js.t -> ('b) t = "ws:WebSharper.JavaScript!globalThis.Promise#Then|System.Func`2<'0,'1>|System.Func`2<System.Object,WebSharper.JavaScript.Promise`1<'1>>" "ws:WebSharper.JavaScript!globalThis.Promise#Then|System.Func`2<'0,'1>|System.Func`2<System.Object,WebSharper.JavaScript.Promise`1<'1>>"
-(* inline *)
-external then__5 : ('a) t -> Js.t -> Js.t -> ('b) t = "ws:WebSharper.JavaScript!globalThis.Promise#Then|System.Func`2<'0,WebSharper.JavaScript.Promise`1<'1>>|System.Func`2<System.Object,'1>" "ws:WebSharper.JavaScript!globalThis.Promise#Then|System.Func`2<'0,WebSharper.JavaScript.Promise`1<'1>>|System.Func`2<System.Object,'1>"
-(* inline *)
-external then__6 : ('a) t -> Js.t -> Js.t -> ('b) t = "ws:WebSharper.JavaScript!globalThis.Promise#Then|System.Func`2<'0,WebSharper.JavaScript.Promise`1<'1>>|System.Func`2<System.Object,WebSharper.JavaScript.Promise`1<'1>>" "ws:WebSharper.JavaScript!globalThis.Promise#Then|System.Func`2<'0,WebSharper.JavaScript.Promise`1<'1>>|System.Func`2<System.Object,WebSharper.JavaScript.Promise`1<'1>>"
-(* inline *)
 external finally : ('a) t -> Js.t -> ('a) t = "ws:WebSharper.JavaScript!globalThis.Promise#Finally|System.Action" "ws:WebSharper.JavaScript!globalThis.Promise#Finally|System.Action"
 (* inline *)
 external catch : ('a) t -> Js.t -> ('b) t = "ws:WebSharper.JavaScript!globalThis.Promise#Catch|System.Func`2<System.Object,'1>" "ws:WebSharper.JavaScript!globalThis.Promise#Catch|System.Func`2<System.Object,'1>"
@@ -24,6 +16,14 @@ external resolve : ('a) t -> ('a) t = "ws:WebSharper.JavaScript!globalThis.Promi
 external resolve_2 : 'a -> ('a) t = "ws:WebSharper.JavaScript!globalThis.Promise#Resolve|'0" "ws:WebSharper.JavaScript!globalThis.Promise#Resolve|'0"
 (* inline *)
 external reject : Js.t -> ('a) t = "ws:WebSharper.JavaScript!globalThis.Promise#Reject|System.Object" "ws:WebSharper.JavaScript!globalThis.Promise#Reject|System.Object"
+(* inline *)
+external then__3 : ('a) t -> Js.t -> Js.t -> ('b) t = "ws:WebSharper.JavaScript!globalThis.Promise#Then|System.Func`2<'0,'1>|System.Func`2<System.Object,'1>" "ws:WebSharper.JavaScript!globalThis.Promise#Then|System.Func`2<'0,'1>|System.Func`2<System.Object,'1>"
+(* inline *)
+external then__4 : ('a) t -> Js.t -> Js.t -> ('b) t = "ws:WebSharper.JavaScript!globalThis.Promise#Then|System.Func`2<'0,'1>|System.Func`2<System.Object,WebSharper.JavaScript.Promise`1<'1>>" "ws:WebSharper.JavaScript!globalThis.Promise#Then|System.Func`2<'0,'1>|System.Func`2<System.Object,WebSharper.JavaScript.Promise`1<'1>>"
+(* inline *)
+external then__5 : ('a) t -> Js.t -> Js.t -> ('b) t = "ws:WebSharper.JavaScript!globalThis.Promise#Then|System.Func`2<'0,WebSharper.JavaScript.Promise`1<'1>>|System.Func`2<System.Object,'1>" "ws:WebSharper.JavaScript!globalThis.Promise#Then|System.Func`2<'0,WebSharper.JavaScript.Promise`1<'1>>|System.Func`2<System.Object,'1>"
+(* inline *)
+external then__6 : ('a) t -> Js.t -> Js.t -> ('b) t = "ws:WebSharper.JavaScript!globalThis.Promise#Then|System.Func`2<'0,WebSharper.JavaScript.Promise`1<'1>>|System.Func`2<System.Object,WebSharper.JavaScript.Promise`1<'1>>" "ws:WebSharper.JavaScript!globalThis.Promise#Then|System.Func`2<'0,WebSharper.JavaScript.Promise`1<'1>>|System.Func`2<System.Object,WebSharper.JavaScript.Promise`1<'1>>"
 (* inline *)
 external race : (('a) t) array -> ('a) t = "ws:WebSharper.JavaScript!globalThis.Promise#Race|WebSharper.JavaScript.Promise`1<'0>[]" "ws:WebSharper.JavaScript!globalThis.Promise#Race|WebSharper.JavaScript.Promise`1<'0>[]"
 (* inline *)

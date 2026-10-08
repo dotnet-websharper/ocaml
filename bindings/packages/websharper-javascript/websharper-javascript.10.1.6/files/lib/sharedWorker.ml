@@ -5,9 +5,9 @@ external get_Port : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Sh
 (* inline *)
 external get_OnError : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.SharedWorker#get_OnError|" "ws:WebSharper.JavaScript!globalThis.SharedWorker#get_OnError|"
 (* inline *)
-external set_OnError : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.SharedWorker#set_OnError|System.Action`1<WebSharper.JavaScript.ErrorEvent>" "ws:WebSharper.JavaScript!globalThis.SharedWorker#set_OnError|System.Action`1<WebSharper.JavaScript.ErrorEvent>"
-(* inline *)
 external get_Onerror : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.SharedWorker#get_Onerror|" "ws:WebSharper.JavaScript!globalThis.SharedWorker#get_Onerror|"
+(* inline *)
+external set_OnError : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.SharedWorker#set_OnError|System.Action`1<WebSharper.JavaScript.ErrorEvent>" "ws:WebSharper.JavaScript!globalThis.SharedWorker#set_OnError|System.Action`1<WebSharper.JavaScript.ErrorEvent>"
 (* inline *)
 external set_Onerror : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.SharedWorker#set_Onerror|System.Action`1<WebSharper.JavaScript.ErrorEvent>" "ws:WebSharper.JavaScript!globalThis.SharedWorker#set_Onerror|System.Action`1<WebSharper.JavaScript.ErrorEvent>"
 (* inline *)

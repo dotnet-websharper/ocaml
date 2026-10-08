@@ -5,8 +5,8 @@ external createHTMLDocument : t -> EventTarget.t = "ws:WebSharper.JavaScript!glo
 (* inline *)
 external createHTMLDocument_2 : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.DOMImplementation#CreateHTMLDocument|System.String" "ws:WebSharper.JavaScript!globalThis.DOMImplementation#CreateHTMLDocument|System.String"
 (* inline *)
+external hasFeature : t -> string -> string -> bool = "ws:WebSharper.JavaScript!globalThis.DOMImplementation#HasFeature|System.String|System.String" "ws:WebSharper.JavaScript!globalThis.DOMImplementation#HasFeature|System.String|System.String"
+(* inline *)
 external createDocument : t -> string -> string -> EventTarget.t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.DOMImplementation#CreateDocument|System.String|System.String|WebSharper.JavaScript.Dom.DocumentType" "ws:WebSharper.JavaScript!globalThis.DOMImplementation#CreateDocument|System.String|System.String|WebSharper.JavaScript.Dom.DocumentType"
 (* inline *)
 external createDocumentType : t -> string -> string -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.DOMImplementation#CreateDocumentType|System.String|System.String|System.String" "ws:WebSharper.JavaScript!globalThis.DOMImplementation#CreateDocumentType|System.String|System.String|System.String"
-(* inline *)
-external hasFeature : t -> string -> string -> bool = "ws:WebSharper.JavaScript!globalThis.DOMImplementation#HasFeature|System.String|System.String" "ws:WebSharper.JavaScript!globalThis.DOMImplementation#HasFeature|System.String|System.String"

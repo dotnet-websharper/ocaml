@@ -3,11 +3,7 @@ type t
 (* inline *)
 external matrixTransform : t -> t = "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#MatrixTransform|" "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#MatrixTransform|"
 (* inline *)
-external matrixTransform_2 : t -> DOMMatrix2DInit.t -> t = "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#MatrixTransform|WebSharper.JavaScript.DOMMatrixInit" "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#MatrixTransform|WebSharper.JavaScript.DOMMatrixInit"
-(* inline *)
 external fromPoint : unit -> t = "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#FromPoint|" "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#FromPoint|"
-(* inline *)
-external fromPoint_2 : DOMPointInit.t -> t = "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#FromPoint|WebSharper.JavaScript.DOMPointInit" "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#FromPoint|WebSharper.JavaScript.DOMPointInit"
 (* inline *)
 external get_W : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#get_W|" "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#get_W|"
 (* inline *)
@@ -16,6 +12,10 @@ external get_Z : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMPointReadO
 external get_Y : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#get_Y|" "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#get_Y|"
 (* inline *)
 external get_X : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#get_X|" "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#get_X|"
+(* inline *)
+external matrixTransform_2 : t -> DOMMatrix2DInit.t -> t = "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#MatrixTransform|WebSharper.JavaScript.DOMMatrixInit" "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#MatrixTransform|WebSharper.JavaScript.DOMMatrixInit"
+(* inline *)
+external fromPoint_2 : DOMPointInit.t -> t = "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#FromPoint|WebSharper.JavaScript.DOMPointInit" "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#FromPoint|WebSharper.JavaScript.DOMPointInit"
 (* inline *)
 external create : unit -> t = "wsnew:WebSharper.JavaScript!globalThis.DOMPointReadOnly" "wsnew:WebSharper.JavaScript!globalThis.DOMPointReadOnly"
 (* inline *)

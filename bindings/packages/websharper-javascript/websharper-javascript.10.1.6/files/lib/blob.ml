@@ -7,11 +7,11 @@ external text : t -> (string) Promise.t = "ws:WebSharper.JavaScript!globalThis.B
 (* inline *)
 external arrayBuffer : t -> (ArrayBuffer.t) Promise.t = "ws:WebSharper.JavaScript!globalThis.Blob#ArrayBuffer|" "ws:WebSharper.JavaScript!globalThis.Blob#ArrayBuffer|"
 (* inline *)
-external slice : t -> int -> int -> string -> t = "ws:WebSharper.JavaScript!globalThis.Blob#Slice|System.Int32|System.Int32|System.String" "ws:WebSharper.JavaScript!globalThis.Blob#Slice|System.Int32|System.Int32|System.String"
-(* inline *)
 external get_Type : t -> string = "ws:WebSharper.JavaScript!globalThis.Blob#get_Type|" "ws:WebSharper.JavaScript!globalThis.Blob#get_Type|"
 (* inline *)
 external get_Size : t -> int = "ws:WebSharper.JavaScript!globalThis.Blob#get_Size|" "ws:WebSharper.JavaScript!globalThis.Blob#get_Size|"
+(* inline *)
+external slice : t -> int -> int -> string -> t = "ws:WebSharper.JavaScript!globalThis.Blob#Slice|System.Int32|System.Int32|System.String" "ws:WebSharper.JavaScript!globalThis.Blob#Slice|System.Int32|System.Int32|System.String"
 (* inline *)
 external create : (ArrayBuffer.t) array -> t = "wsnew:WebSharper.JavaScript!globalThis.Blob" "wsnew:WebSharper.JavaScript!globalThis.Blob"
 (* inline *)

@@ -3,11 +3,11 @@ type t = Doc.t
 (* instance *)
 external removeAllUpdated : t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#RemoveAllUpdated|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#RemoveAllUpdated|"
 (* instance *)
+external clearHoles : t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#ClearHoles|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#ClearHoles|"
+(* instance *)
 external removeUpdated : t -> Doc.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#RemoveUpdated|WebSharper.UI.Elt" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#RemoveUpdated|WebSharper.UI.Elt"
 (* instance *)
 external addUpdated : t -> Doc.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#AddUpdated|WebSharper.UI.Elt" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#AddUpdated|WebSharper.UI.Elt"
-(* instance *)
-external clearHoles : t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#ClearHoles|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#ClearHoles|"
 (* instance *)
 external addHole : t -> DocElemNode.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#AddHole|WebSharper.UI.Client.DocElemNode" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#AddHole|WebSharper.UI.Client.DocElemNode"
 (* instance *)

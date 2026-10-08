@@ -9,11 +9,11 @@ external get_Last : ('a) t -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Sys
 (* instance *)
 external getEnumerator : ('a) t -> ('a) Enumerator2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#GetEnumerator|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#GetEnumerator|"
 (* instance *)
-external copyTo : ('a) t -> ('a) array -> int -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#CopyTo|'0[]|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#CopyTo|'0[]|System.Int32"
-(* instance *)
 external removeLast : ('a) t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#RemoveLast|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#RemoveLast|"
 (* instance *)
 external removeFirst : ('a) t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#RemoveFirst|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#RemoveFirst|"
+(* instance *)
+external clear : ('a) t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#Clear|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#Clear|"
 (* instance *)
 external remove : ('a) t -> 'a -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#Remove|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#Remove|'0"
 (* instance *)
@@ -25,8 +25,6 @@ external find : ('a) t -> 'a -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/S
 (* instance *)
 external contains : ('a) t -> 'a -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#Contains|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#Contains|'0"
 (* instance *)
-external clear : ('a) t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#Clear|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#Clear|"
-(* instance *)
 external addLast : ('a) t -> 'a -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#AddLast|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#AddLast|'0"
 (* instance *)
 external addFirst : ('a) t -> 'a -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#AddFirst|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#AddFirst|'0"
@@ -34,6 +32,8 @@ external addFirst : ('a) t -> 'a -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdL
 external addBefore : ('a) t -> Js.t -> 'a -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#AddBefore|System.Collections.Generic.LinkedListNode`1<'0>|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#AddBefore|System.Collections.Generic.LinkedListNode`1<'0>|'0"
 (* instance *)
 external addAfter : ('a) t -> Js.t -> 'a -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#AddAfter|System.Collections.Generic.LinkedListNode`1<'0>|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#AddAfter|System.Collections.Generic.LinkedListNode`1<'0>|'0"
+(* instance *)
+external copyTo : ('a) t -> ('a) array -> int -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#CopyTo|'0[]|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#CopyTo|'0[]|System.Int32"
 (* instance *)
 external get_p : ('a) t -> Js.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#p" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#p"
 (* instance *)

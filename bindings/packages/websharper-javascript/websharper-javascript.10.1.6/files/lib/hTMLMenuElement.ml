@@ -3,8 +3,8 @@ type t = EventTarget.t
 (* inline *)
 external get_Label : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLMenuElement#get_Label|" "ws:WebSharper.JavaScript!globalThis.HTMLMenuElement#get_Label|"
 (* inline *)
-external set_Label : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMenuElement#set_Label|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLMenuElement#set_Label|System.String"
-(* inline *)
 external get_Type : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLMenuElement#get_Type|" "ws:WebSharper.JavaScript!globalThis.HTMLMenuElement#get_Type|"
+(* inline *)
+external set_Label : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMenuElement#set_Label|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLMenuElement#set_Label|System.String"
 (* inline *)
 external set_Type : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMenuElement#set_Type|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLMenuElement#set_Type|System.String"

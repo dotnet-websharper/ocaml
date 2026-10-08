@@ -333,6 +333,12 @@ let generateClass
 
     let methods =
         ci.Methods
+        // Order overloads so the primary (no params-array, richer signature)
+        // gets the bare name; the rest are suffixed by `unique`.
+        |> Seq.sortBy (fun kv ->
+            let mi = kv.Key.Value
+            let hasArray = mi.Parameters |> List.exists (function Type.ArrayType _ -> true | _ -> false)
+            (if hasArray then 1 else 0), mi.Parameters.Length)
         |> Seq.map (fun kv ->
             let mi = kv.Key.Value
             let cmi = kv.Value

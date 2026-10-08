@@ -5,9 +5,9 @@ external valueOf : t -> Object2.t = "ws:WebSharper.JavaScript!globalThis.BigInt#
 (* inline *)
 external toString : t -> string = "ws:WebSharper.JavaScript!globalThis.BigInt#ToString|" "ws:WebSharper.JavaScript!globalThis.BigInt#ToString|"
 (* inline *)
-external toString_2 : t -> int -> string = "ws:WebSharper.JavaScript!globalThis.BigInt#ToString|System.Int32" "ws:WebSharper.JavaScript!globalThis.BigInt#ToString|System.Int32"
-(* inline *)
 external toLocaleString : t -> string = "ws:WebSharper.JavaScript!globalThis.BigInt#ToLocaleString|" "ws:WebSharper.JavaScript!globalThis.BigInt#ToLocaleString|"
+(* inline *)
+external toString_2 : t -> int -> string = "ws:WebSharper.JavaScript!globalThis.BigInt#ToString|System.Int32" "ws:WebSharper.JavaScript!globalThis.BigInt#ToString|System.Int32"
 (* inline *)
 external toLocaleString_2 : t -> string -> string = "ws:WebSharper.JavaScript!globalThis.BigInt#ToLocaleString|System.String" "ws:WebSharper.JavaScript!globalThis.BigInt#ToLocaleString|System.String"
 (* inline *)

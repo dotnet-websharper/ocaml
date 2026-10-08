@@ -7,13 +7,13 @@ external get_Value : t -> (unit) View.t = "ws:WebSharper.UI!WebSharper.UI/WebSha
 (* inline *)
 external get_Current : t -> (unit) View.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Updates::default#get_Current|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Updates::default#get_Current|"
 (* inline *)
-external set_Current : t -> (unit) View.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Updates::default#set_Current|WebSharper.UI.View`1<void>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Updates::default#set_Current|WebSharper.UI.View`1<void>"
-(* inline *)
 external get_Snap : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Updates::default#get_Snap|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Updates::default#get_Snap|"
 (* inline *)
-external set_Snap : t -> Js.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Updates::default#set_Snap|WebSharper.UI.Snap`1<void>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Updates::default#set_Snap|WebSharper.UI.Snap`1<void>"
-(* inline *)
 external get_VarView : t -> (unit) View.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Updates::default#get_VarView|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Updates::default#get_VarView|"
+(* inline *)
+external set_Current : t -> (unit) View.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Updates::default#set_Current|WebSharper.UI.View`1<void>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Updates::default#set_Current|WebSharper.UI.View`1<void>"
+(* inline *)
+external set_Snap : t -> Js.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Updates::default#set_Snap|WebSharper.UI.Snap`1<void>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Updates::default#set_Snap|WebSharper.UI.Snap`1<void>"
 (* static *)
 external create : (unit) View.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Updates::default#Create|WebSharper.UI.View`1<void>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Updates::default#Create|WebSharper.UI.View`1<void>"
 (* instance *)

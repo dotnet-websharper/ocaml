@@ -5,8 +5,6 @@ external get_Attr : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Cl
 (* inline *)
 external get_Children : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#get_Children|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#get_Children|"
 (* inline *)
-external set_Children : t -> Js.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#set_Children|WebSharper.UI.Client.DocNode" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#set_Children|WebSharper.UI.Client.DocNode"
-(* inline *)
 external get_Delimiters : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#get_Delimiters|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#get_Delimiters|"
 (* inline *)
 external get_El : t -> Websharper_javascript.Element.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#get_El|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#get_El|"
@@ -14,10 +12,12 @@ external get_El : t -> Websharper_javascript.Element.t = "ws:WebSharper.UI!WebSh
 external get_ElKey : t -> int = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#get_ElKey|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#get_ElKey|"
 (* inline *)
 external get_Render : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#get_Render|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#get_Render|"
-(* inline *)
-external set_Render : t -> Js.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#set_Render|Microsoft.FSharp.Core.FSharpOption`1<fn>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#set_Render|Microsoft.FSharp.Core.FSharpOption`1<fn>"
 (* instance *)
 external getHashCode : t -> int = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#GetHashCode|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#GetHashCode|"
+(* inline *)
+external set_Children : t -> Js.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#set_Children|WebSharper.UI.Client.DocNode" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#set_Children|WebSharper.UI.Client.DocNode"
+(* inline *)
+external set_Render : t -> Js.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#set_Render|Microsoft.FSharp.Core.FSharpOption`1<fn>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#set_Render|Microsoft.FSharp.Core.FSharpOption`1<fn>"
 (* instance *)
 external equals : t -> Js.t -> bool = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#Equals|System.Object" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#Equals|System.Object"
 (*  *)

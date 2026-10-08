@@ -3,61 +3,61 @@ type t
 (* inline *)
 external get_FrameRate : t -> float = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_FrameRate|" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_FrameRate|"
 (* inline *)
-external set_FrameRate : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_FrameRate|System.Double" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_FrameRate|System.Double"
-(* inline *)
 external get_AspectRatio : t -> float = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_AspectRatio|" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_AspectRatio|"
-(* inline *)
-external set_AspectRatio : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_AspectRatio|System.Double" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_AspectRatio|System.Double"
 (* inline *)
 external get_Latency : t -> float = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_Latency|" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_Latency|"
 (* inline *)
-external set_Latency : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_Latency|System.Double" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_Latency|System.Double"
-(* inline *)
 external get_SampleSize : t -> int64 = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_SampleSize|" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_SampleSize|"
-(* inline *)
-external set_SampleSize : t -> int64 -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_SampleSize|System.UInt64" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_SampleSize|System.UInt64"
 (* inline *)
 external get_SampleRate : t -> int64 = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_SampleRate|" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_SampleRate|"
 (* inline *)
-external set_SampleRate : t -> int64 -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_SampleRate|System.UInt64" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_SampleRate|System.UInt64"
-(* inline *)
 external get_ChannelCount : t -> int64 = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_ChannelCount|" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_ChannelCount|"
-(* inline *)
-external set_ChannelCount : t -> int64 -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_ChannelCount|System.UInt64" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_ChannelCount|System.UInt64"
 (* inline *)
 external get_Height : t -> int64 = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_Height|" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_Height|"
 (* inline *)
-external set_Height : t -> int64 -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_Height|System.UInt64" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_Height|System.UInt64"
-(* inline *)
 external get_Width : t -> int64 = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_Width|" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_Width|"
-(* inline *)
-external set_Width : t -> int64 -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_Width|System.UInt64" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_Width|System.UInt64"
 (* inline *)
 external get_GroupId : t -> string = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_GroupId|" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_GroupId|"
 (* inline *)
-external set_GroupId : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_GroupId|System.String" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_GroupId|System.String"
-(* inline *)
 external get_DeviceId : t -> string = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_DeviceId|" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_DeviceId|"
-(* inline *)
-external set_DeviceId : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_DeviceId|System.String" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_DeviceId|System.String"
 (* inline *)
 external get_NoiseSuppression : t -> bool = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_NoiseSuppression|" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_NoiseSuppression|"
 (* inline *)
-external set_NoiseSuppression : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_NoiseSuppression|System.Boolean" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_NoiseSuppression|System.Boolean"
-(* inline *)
 external get_AutoGainControl : t -> bool = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_AutoGainControl|" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_AutoGainControl|"
-(* inline *)
-external set_AutoGainControl : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_AutoGainControl|System.Boolean" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_AutoGainControl|System.Boolean"
 (* inline *)
 external get_EchoCancellation : t -> bool = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_EchoCancellation|" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_EchoCancellation|"
 (* inline *)
-external set_EchoCancellation : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_EchoCancellation|System.Boolean" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_EchoCancellation|System.Boolean"
-(* inline *)
 external get_ResizeMode : t -> string = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_ResizeMode|" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_ResizeMode|"
 (* inline *)
-external set_ResizeMode : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_ResizeMode|System.String" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_ResizeMode|System.String"
-(* inline *)
 external get_FacingMode : t -> string = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_FacingMode|" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#get_FacingMode|"
+(* inline *)
+external set_FrameRate : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_FrameRate|System.Double" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_FrameRate|System.Double"
+(* inline *)
+external set_AspectRatio : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_AspectRatio|System.Double" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_AspectRatio|System.Double"
+(* inline *)
+external set_Latency : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_Latency|System.Double" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_Latency|System.Double"
+(* inline *)
+external set_SampleSize : t -> int64 -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_SampleSize|System.UInt64" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_SampleSize|System.UInt64"
+(* inline *)
+external set_SampleRate : t -> int64 -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_SampleRate|System.UInt64" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_SampleRate|System.UInt64"
+(* inline *)
+external set_ChannelCount : t -> int64 -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_ChannelCount|System.UInt64" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_ChannelCount|System.UInt64"
+(* inline *)
+external set_Height : t -> int64 -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_Height|System.UInt64" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_Height|System.UInt64"
+(* inline *)
+external set_Width : t -> int64 -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_Width|System.UInt64" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_Width|System.UInt64"
+(* inline *)
+external set_GroupId : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_GroupId|System.String" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_GroupId|System.String"
+(* inline *)
+external set_DeviceId : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_DeviceId|System.String" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_DeviceId|System.String"
+(* inline *)
+external set_NoiseSuppression : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_NoiseSuppression|System.Boolean" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_NoiseSuppression|System.Boolean"
+(* inline *)
+external set_AutoGainControl : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_AutoGainControl|System.Boolean" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_AutoGainControl|System.Boolean"
+(* inline *)
+external set_EchoCancellation : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_EchoCancellation|System.Boolean" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_EchoCancellation|System.Boolean"
+(* inline *)
+external set_ResizeMode : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_ResizeMode|System.String" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_ResizeMode|System.String"
 (* inline *)
 external set_FacingMode : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_FacingMode|System.String" "ws:WebSharper.JavaScript!globalThis.MediaTrackSettings#set_FacingMode|System.String"
 (* inline *)

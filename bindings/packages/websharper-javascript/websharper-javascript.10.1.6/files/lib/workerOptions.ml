@@ -3,13 +3,13 @@ type t
 (* inline *)
 external get_Name : t -> string = "ws:WebSharper.JavaScript!globalThis.WorkerOptions#get_Name|" "ws:WebSharper.JavaScript!globalThis.WorkerOptions#get_Name|"
 (* inline *)
-external set_Name : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.WorkerOptions#set_Name|System.String" "ws:WebSharper.JavaScript!globalThis.WorkerOptions#set_Name|System.String"
-(* inline *)
 external get_Credentials : t -> string = "ws:WebSharper.JavaScript!globalThis.WorkerOptions#get_Credentials|" "ws:WebSharper.JavaScript!globalThis.WorkerOptions#get_Credentials|"
 (* inline *)
-external set_Credentials : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.WorkerOptions#set_Credentials|System.String" "ws:WebSharper.JavaScript!globalThis.WorkerOptions#set_Credentials|System.String"
-(* inline *)
 external get_Type : t -> WorkerType.t = "ws:WebSharper.JavaScript!globalThis.WorkerOptions#get_Type|" "ws:WebSharper.JavaScript!globalThis.WorkerOptions#get_Type|"
+(* inline *)
+external set_Name : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.WorkerOptions#set_Name|System.String" "ws:WebSharper.JavaScript!globalThis.WorkerOptions#set_Name|System.String"
+(* inline *)
+external set_Credentials : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.WorkerOptions#set_Credentials|System.String" "ws:WebSharper.JavaScript!globalThis.WorkerOptions#set_Credentials|System.String"
 (* inline *)
 external set_Type : t -> WorkerType.t -> unit = "ws:WebSharper.JavaScript!globalThis.WorkerOptions#set_Type|WebSharper.JavaScript.WorkerType" "ws:WebSharper.JavaScript!globalThis.WorkerOptions#set_Type|WebSharper.JavaScript.WorkerType"
 (* inline *)

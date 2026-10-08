@@ -3,35 +3,35 @@ type t
 (* inline *)
 external get_PreserveDrawingBufferOpt : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.ContextAttributes#get_PreserveDrawingBufferOpt|" "ws:WebSharper.JavaScript!globalThis.ContextAttributes#get_PreserveDrawingBufferOpt|"
 (* inline *)
+external get_PremultipliedAlphaOpt : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.ContextAttributes#get_PremultipliedAlphaOpt|" "ws:WebSharper.JavaScript!globalThis.ContextAttributes#get_PremultipliedAlphaOpt|"
+(* inline *)
+external get_AntialiasOpt : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.ContextAttributes#get_AntialiasOpt|" "ws:WebSharper.JavaScript!globalThis.ContextAttributes#get_AntialiasOpt|"
+(* inline *)
+external get_StencilOpt : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.ContextAttributes#get_StencilOpt|" "ws:WebSharper.JavaScript!globalThis.ContextAttributes#get_StencilOpt|"
+(* inline *)
+external get_DepthOpt : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.ContextAttributes#get_DepthOpt|" "ws:WebSharper.JavaScript!globalThis.ContextAttributes#get_DepthOpt|"
+(* inline *)
+external get_AlphaOpt : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.ContextAttributes#get_AlphaOpt|" "ws:WebSharper.JavaScript!globalThis.ContextAttributes#get_AlphaOpt|"
+(* inline *)
 external set_PreserveDrawingBufferOpt : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.ContextAttributes#set_PreserveDrawingBufferOpt|WebSharper.JavaScript.Optional`1<System.Boolean>" "ws:WebSharper.JavaScript!globalThis.ContextAttributes#set_PreserveDrawingBufferOpt|WebSharper.JavaScript.Optional`1<System.Boolean>"
 (* inline *)
 external set_PreserveDrawingBuffer : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.ContextAttributes#set_PreserveDrawingBuffer|System.Boolean" "ws:WebSharper.JavaScript!globalThis.ContextAttributes#set_PreserveDrawingBuffer|System.Boolean"
-(* inline *)
-external get_PremultipliedAlphaOpt : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.ContextAttributes#get_PremultipliedAlphaOpt|" "ws:WebSharper.JavaScript!globalThis.ContextAttributes#get_PremultipliedAlphaOpt|"
 (* inline *)
 external set_PremultipliedAlphaOpt : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.ContextAttributes#set_PremultipliedAlphaOpt|WebSharper.JavaScript.Optional`1<System.Boolean>" "ws:WebSharper.JavaScript!globalThis.ContextAttributes#set_PremultipliedAlphaOpt|WebSharper.JavaScript.Optional`1<System.Boolean>"
 (* inline *)
 external set_PremultipliedAlpha : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.ContextAttributes#set_PremultipliedAlpha|System.Boolean" "ws:WebSharper.JavaScript!globalThis.ContextAttributes#set_PremultipliedAlpha|System.Boolean"
 (* inline *)
-external get_AntialiasOpt : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.ContextAttributes#get_AntialiasOpt|" "ws:WebSharper.JavaScript!globalThis.ContextAttributes#get_AntialiasOpt|"
-(* inline *)
 external set_AntialiasOpt : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.ContextAttributes#set_AntialiasOpt|WebSharper.JavaScript.Optional`1<System.Boolean>" "ws:WebSharper.JavaScript!globalThis.ContextAttributes#set_AntialiasOpt|WebSharper.JavaScript.Optional`1<System.Boolean>"
 (* inline *)
 external set_Antialias : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.ContextAttributes#set_Antialias|System.Boolean" "ws:WebSharper.JavaScript!globalThis.ContextAttributes#set_Antialias|System.Boolean"
-(* inline *)
-external get_StencilOpt : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.ContextAttributes#get_StencilOpt|" "ws:WebSharper.JavaScript!globalThis.ContextAttributes#get_StencilOpt|"
 (* inline *)
 external set_StencilOpt : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.ContextAttributes#set_StencilOpt|WebSharper.JavaScript.Optional`1<System.Boolean>" "ws:WebSharper.JavaScript!globalThis.ContextAttributes#set_StencilOpt|WebSharper.JavaScript.Optional`1<System.Boolean>"
 (* inline *)
 external set_Stencil : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.ContextAttributes#set_Stencil|System.Boolean" "ws:WebSharper.JavaScript!globalThis.ContextAttributes#set_Stencil|System.Boolean"
 (* inline *)
-external get_DepthOpt : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.ContextAttributes#get_DepthOpt|" "ws:WebSharper.JavaScript!globalThis.ContextAttributes#get_DepthOpt|"
-(* inline *)
 external set_DepthOpt : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.ContextAttributes#set_DepthOpt|WebSharper.JavaScript.Optional`1<System.Boolean>" "ws:WebSharper.JavaScript!globalThis.ContextAttributes#set_DepthOpt|WebSharper.JavaScript.Optional`1<System.Boolean>"
 (* inline *)
 external set_Depth : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.ContextAttributes#set_Depth|System.Boolean" "ws:WebSharper.JavaScript!globalThis.ContextAttributes#set_Depth|System.Boolean"
-(* inline *)
-external get_AlphaOpt : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.ContextAttributes#get_AlphaOpt|" "ws:WebSharper.JavaScript!globalThis.ContextAttributes#get_AlphaOpt|"
 (* inline *)
 external set_AlphaOpt : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.ContextAttributes#set_AlphaOpt|WebSharper.JavaScript.Optional`1<System.Boolean>" "ws:WebSharper.JavaScript!globalThis.ContextAttributes#set_AlphaOpt|WebSharper.JavaScript.Optional`1<System.Boolean>"
 (* inline *)

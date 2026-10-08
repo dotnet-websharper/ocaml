@@ -7,9 +7,9 @@ external get_Self : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Error#get_S
 (* inline *)
 external get_Message : t -> string = "ws:WebSharper.JavaScript!globalThis.Error#get_Message|" "ws:WebSharper.JavaScript!globalThis.Error#get_Message|"
 (* inline *)
-external set_Message : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Error#set_Message|System.String" "ws:WebSharper.JavaScript!globalThis.Error#set_Message|System.String"
-(* inline *)
 external get_Name : t -> string = "ws:WebSharper.JavaScript!globalThis.Error#get_Name|" "ws:WebSharper.JavaScript!globalThis.Error#get_Name|"
+(* inline *)
+external set_Message : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Error#set_Message|System.String" "ws:WebSharper.JavaScript!globalThis.Error#set_Message|System.String"
 (* inline *)
 external create : unit -> t = "wsnew:WebSharper.JavaScript!globalThis.Error" "wsnew:WebSharper.JavaScript!globalThis.Error"
 (* inline *)

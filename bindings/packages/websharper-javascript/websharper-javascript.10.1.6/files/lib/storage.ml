@@ -3,12 +3,12 @@ type t
 (* inline *)
 external clear : t -> unit = "ws:WebSharper.JavaScript!globalThis.Storage#Clear|" "ws:WebSharper.JavaScript!globalThis.Storage#Clear|"
 (* inline *)
-external removeItem : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Storage#RemoveItem|System.String" "ws:WebSharper.JavaScript!globalThis.Storage#RemoveItem|System.String"
+external get_Length : t -> int = "ws:WebSharper.JavaScript!globalThis.Storage#get_Length|" "ws:WebSharper.JavaScript!globalThis.Storage#get_Length|"
 (* inline *)
-external setItem : t -> string -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Storage#SetItem|System.String|System.String" "ws:WebSharper.JavaScript!globalThis.Storage#SetItem|System.String|System.String"
+external removeItem : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Storage#RemoveItem|System.String" "ws:WebSharper.JavaScript!globalThis.Storage#RemoveItem|System.String"
 (* inline *)
 external getItem : t -> string -> string = "ws:WebSharper.JavaScript!globalThis.Storage#GetItem|System.String" "ws:WebSharper.JavaScript!globalThis.Storage#GetItem|System.String"
 (* inline *)
 external key : t -> int -> string = "ws:WebSharper.JavaScript!globalThis.Storage#Key|System.Int32" "ws:WebSharper.JavaScript!globalThis.Storage#Key|System.Int32"
 (* inline *)
-external get_Length : t -> int = "ws:WebSharper.JavaScript!globalThis.Storage#get_Length|" "ws:WebSharper.JavaScript!globalThis.Storage#get_Length|"
+external setItem : t -> string -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Storage#SetItem|System.String|System.String" "ws:WebSharper.JavaScript!globalThis.Storage#SetItem|System.String|System.String"

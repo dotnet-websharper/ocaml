@@ -3,11 +3,11 @@ type t = TemplateHole.t
 (* instance *)
 external get_Value : t -> Attr.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.Attribute::default#get_Value|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.Attribute::default#get_Value|"
 (* instance *)
-external withName : t -> string -> TemplateHole.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.Attribute::default#WithName|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.Attribute::default#WithName|System.String"
-(* instance *)
 external get_ValueObj : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.Attribute::default#get_ValueObj|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.Attribute::default#get_ValueObj|"
 (* instance *)
 external get_Name : t -> string = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.Attribute::default#get_Name|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.Attribute::default#get_Name|"
+(* instance *)
+external withName : t -> string -> TemplateHole.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.Attribute::default#WithName|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.Attribute::default#WithName|System.String"
 (* instance *)
 external get_fillWith : t -> Attr.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.Attribute::default#fillWith" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.Attribute::default#fillWith"
 (* instance *)

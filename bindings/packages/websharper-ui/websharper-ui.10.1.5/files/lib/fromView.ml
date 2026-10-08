@@ -3,6 +3,10 @@ type ('a) t
 (* instance *)
 external get_Id : ('a) t -> string = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FromView`1::default#get_Id|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FromView`1::default#get_Id|"
 (* instance *)
+external get : ('a) t -> 'a = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FromView`1::default#Get|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FromView`1::default#Get|"
+(* instance *)
+external get_View : ('a) t -> ('a) View.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FromView`1::default#get_View|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FromView`1::default#get_View|"
+(* instance *)
 external setFinal : ('a) t -> 'a -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FromView`1::default#SetFinal|'0" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FromView`1::default#SetFinal|'0"
 (* instance *)
 external update : ('a) t -> Js.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FromView`1::default#Update|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FromView`1::default#Update|fn"
@@ -10,10 +14,6 @@ external update : ('a) t -> Js.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSh
 external updateMaybe : ('a) t -> Js.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FromView`1::default#UpdateMaybe|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FromView`1::default#UpdateMaybe|fn"
 (* instance *)
 external set : ('a) t -> 'a -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FromView`1::default#Set|'0" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FromView`1::default#Set|'0"
-(* instance *)
-external get : ('a) t -> 'a = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FromView`1::default#Get|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FromView`1::default#Get|"
-(* instance *)
-external get_View : ('a) t -> ('a) View.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FromView`1::default#get_View|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FromView`1::default#get_View|"
 (* instance *)
 external get_view590 : ('a) t -> ('a) View.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.FromView`1::default#view@590" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.FromView`1::default#view@590"
 (* instance *)

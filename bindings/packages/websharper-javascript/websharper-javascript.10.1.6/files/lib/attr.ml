@@ -11,8 +11,8 @@ external get_OwnerElement : t -> EventTarget.t = "ws:WebSharper.JavaScript!globa
 (* inline *)
 external get_Value : t -> string = "ws:WebSharper.JavaScript!globalThis.Attr#get_Value|" "ws:WebSharper.JavaScript!globalThis.Attr#get_Value|"
 (* inline *)
-external set_Value : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Attr#set_Value|System.String" "ws:WebSharper.JavaScript!globalThis.Attr#set_Value|System.String"
-(* inline *)
 external get_Specified : t -> bool = "ws:WebSharper.JavaScript!globalThis.Attr#get_Specified|" "ws:WebSharper.JavaScript!globalThis.Attr#get_Specified|"
 (* inline *)
 external get_Name : t -> string = "ws:WebSharper.JavaScript!globalThis.Attr#get_Name|" "ws:WebSharper.JavaScript!globalThis.Attr#get_Name|"
+(* inline *)
+external set_Value : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Attr#set_Value|System.String" "ws:WebSharper.JavaScript!globalThis.Attr#set_Value|System.String"

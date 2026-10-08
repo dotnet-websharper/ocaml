@@ -3,16 +3,16 @@ type t
 (* inline *)
 external get_PreventCancel : t -> bool = "ws:WebSharper.JavaScript!globalThis.StreamPipeOptions#get_PreventCancel|" "ws:WebSharper.JavaScript!globalThis.StreamPipeOptions#get_PreventCancel|"
 (* inline *)
-external set_PreventCancel : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.StreamPipeOptions#set_PreventCancel|System.Boolean" "ws:WebSharper.JavaScript!globalThis.StreamPipeOptions#set_PreventCancel|System.Boolean"
-(* inline *)
 external get_PreventAbort : t -> bool = "ws:WebSharper.JavaScript!globalThis.StreamPipeOptions#get_PreventAbort|" "ws:WebSharper.JavaScript!globalThis.StreamPipeOptions#get_PreventAbort|"
-(* inline *)
-external set_PreventAbort : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.StreamPipeOptions#set_PreventAbort|System.Boolean" "ws:WebSharper.JavaScript!globalThis.StreamPipeOptions#set_PreventAbort|System.Boolean"
 (* inline *)
 external get_PreventClose : t -> bool = "ws:WebSharper.JavaScript!globalThis.StreamPipeOptions#get_PreventClose|" "ws:WebSharper.JavaScript!globalThis.StreamPipeOptions#get_PreventClose|"
 (* inline *)
-external set_PreventClose : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.StreamPipeOptions#set_PreventClose|System.Boolean" "ws:WebSharper.JavaScript!globalThis.StreamPipeOptions#set_PreventClose|System.Boolean"
-(* inline *)
 external get_Signal : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.StreamPipeOptions#get_Signal|" "ws:WebSharper.JavaScript!globalThis.StreamPipeOptions#get_Signal|"
+(* inline *)
+external set_PreventCancel : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.StreamPipeOptions#set_PreventCancel|System.Boolean" "ws:WebSharper.JavaScript!globalThis.StreamPipeOptions#set_PreventCancel|System.Boolean"
+(* inline *)
+external set_PreventAbort : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.StreamPipeOptions#set_PreventAbort|System.Boolean" "ws:WebSharper.JavaScript!globalThis.StreamPipeOptions#set_PreventAbort|System.Boolean"
+(* inline *)
+external set_PreventClose : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.StreamPipeOptions#set_PreventClose|System.Boolean" "ws:WebSharper.JavaScript!globalThis.StreamPipeOptions#set_PreventClose|System.Boolean"
 (* inline *)
 external create : EventTarget.t -> t = "wsnew:WebSharper.JavaScript!globalThis.StreamPipeOptions" "wsnew:WebSharper.JavaScript!globalThis.StreamPipeOptions"

@@ -3,8 +3,6 @@ type t
 (* inline *)
 external sort : t -> unit = "ws:WebSharper.JavaScript!globalThis.URLSearchParams#Sort|" "ws:WebSharper.JavaScript!globalThis.URLSearchParams#Sort|"
 (* inline *)
-external set : t -> string -> string -> unit = "ws:WebSharper.JavaScript!globalThis.URLSearchParams#Set|System.String|System.String" "ws:WebSharper.JavaScript!globalThis.URLSearchParams#Set|System.String|System.String"
-(* inline *)
 external has : t -> string -> bool = "ws:WebSharper.JavaScript!globalThis.URLSearchParams#Has|System.String" "ws:WebSharper.JavaScript!globalThis.URLSearchParams#Has|System.String"
 (* inline *)
 external getAll : t -> string -> (string) array = "ws:WebSharper.JavaScript!globalThis.URLSearchParams#GetAll|System.String" "ws:WebSharper.JavaScript!globalThis.URLSearchParams#GetAll|System.String"
@@ -12,6 +10,8 @@ external getAll : t -> string -> (string) array = "ws:WebSharper.JavaScript!glob
 external get : t -> string -> string = "ws:WebSharper.JavaScript!globalThis.URLSearchParams#Get|System.String" "ws:WebSharper.JavaScript!globalThis.URLSearchParams#Get|System.String"
 (* inline *)
 external delete : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.URLSearchParams#Delete|System.String" "ws:WebSharper.JavaScript!globalThis.URLSearchParams#Delete|System.String"
+(* inline *)
+external set : t -> string -> string -> unit = "ws:WebSharper.JavaScript!globalThis.URLSearchParams#Set|System.String|System.String" "ws:WebSharper.JavaScript!globalThis.URLSearchParams#Set|System.String|System.String"
 (* inline *)
 external append : t -> string -> string -> unit = "ws:WebSharper.JavaScript!globalThis.URLSearchParams#Append|System.String|System.String" "ws:WebSharper.JavaScript!globalThis.URLSearchParams#Append|System.String|System.String"
 (* inline *)

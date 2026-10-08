@@ -3,11 +3,11 @@ type t
 (* inline *)
 external takeRecords : t -> (MutationRecord.t) array = "ws:WebSharper.JavaScript!globalThis.MutationObserver#TakeRecords|" "ws:WebSharper.JavaScript!globalThis.MutationObserver#TakeRecords|"
 (* inline *)
+external disconnect : t -> unit = "ws:WebSharper.JavaScript!globalThis.MutationObserver#Disconnect|" "ws:WebSharper.JavaScript!globalThis.MutationObserver#Disconnect|"
+(* inline *)
 external observe : t -> EventTarget.t -> unit = "ws:WebSharper.JavaScript!globalThis.MutationObserver#Observe|WebSharper.JavaScript.Dom.Node" "ws:WebSharper.JavaScript!globalThis.MutationObserver#Observe|WebSharper.JavaScript.Dom.Node"
 (* inline *)
 external observe_2 : t -> EventTarget.t -> MutationObserverInit.t -> unit = "ws:WebSharper.JavaScript!globalThis.MutationObserver#Observe|WebSharper.JavaScript.Dom.Node|WebSharper.JavaScript.Dom.MutationObserverInit" "ws:WebSharper.JavaScript!globalThis.MutationObserver#Observe|WebSharper.JavaScript.Dom.Node|WebSharper.JavaScript.Dom.MutationObserverInit"
-(* inline *)
-external disconnect : t -> unit = "ws:WebSharper.JavaScript!globalThis.MutationObserver#Disconnect|" "ws:WebSharper.JavaScript!globalThis.MutationObserver#Disconnect|"
 (* inline *)
 external create : Js.t -> t = "wsnew:WebSharper.JavaScript!globalThis.MutationObserver" "wsnew:WebSharper.JavaScript!globalThis.MutationObserver"
 (* inline *)

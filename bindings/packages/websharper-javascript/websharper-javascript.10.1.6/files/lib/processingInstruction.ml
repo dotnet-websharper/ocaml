@@ -3,6 +3,6 @@ type t = EventTarget.t
 (* inline *)
 external get_Data : t -> string = "ws:WebSharper.JavaScript!globalThis.ProcessingInstruction#get_Data|" "ws:WebSharper.JavaScript!globalThis.ProcessingInstruction#get_Data|"
 (* inline *)
-external set_Data : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.ProcessingInstruction#set_Data|System.String" "ws:WebSharper.JavaScript!globalThis.ProcessingInstruction#set_Data|System.String"
-(* inline *)
 external get_Target : t -> string = "ws:WebSharper.JavaScript!globalThis.ProcessingInstruction#get_Target|" "ws:WebSharper.JavaScript!globalThis.ProcessingInstruction#get_Target|"
+(* inline *)
+external set_Data : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.ProcessingInstruction#set_Data|System.String" "ws:WebSharper.JavaScript!globalThis.ProcessingInstruction#set_Data|System.String"

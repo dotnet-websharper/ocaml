@@ -3,10 +3,6 @@ type t
 (* inline *)
 external getBounds : t -> DOMRectReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMQuad#GetBounds|" "ws:WebSharper.JavaScript!globalThis.DOMQuad#GetBounds|"
 (* inline *)
-external fromQuad : DOMQuadInit.t -> t = "ws:WebSharper.JavaScript!globalThis.DOMQuad#FromQuad|WebSharper.JavaScript.DOMQuadInit" "ws:WebSharper.JavaScript!globalThis.DOMQuad#FromQuad|WebSharper.JavaScript.DOMQuadInit"
-(* inline *)
-external fromRect : DOMRectInit.t -> t = "ws:WebSharper.JavaScript!globalThis.DOMQuad#FromRect|WebSharper.JavaScript.DOMRectInit" "ws:WebSharper.JavaScript!globalThis.DOMQuad#FromRect|WebSharper.JavaScript.DOMRectInit"
-(* inline *)
 external get_P4 : t -> DOMPointReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMQuad#get_P4|" "ws:WebSharper.JavaScript!globalThis.DOMQuad#get_P4|"
 (* inline *)
 external get_P3 : t -> DOMPointReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMQuad#get_P3|" "ws:WebSharper.JavaScript!globalThis.DOMQuad#get_P3|"
@@ -14,5 +10,9 @@ external get_P3 : t -> DOMPointReadOnly.t = "ws:WebSharper.JavaScript!globalThis
 external get_P2 : t -> DOMPointReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMQuad#get_P2|" "ws:WebSharper.JavaScript!globalThis.DOMQuad#get_P2|"
 (* inline *)
 external get_P1 : t -> DOMPointReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMQuad#get_P1|" "ws:WebSharper.JavaScript!globalThis.DOMQuad#get_P1|"
+(* inline *)
+external fromQuad : DOMQuadInit.t -> t = "ws:WebSharper.JavaScript!globalThis.DOMQuad#FromQuad|WebSharper.JavaScript.DOMQuadInit" "ws:WebSharper.JavaScript!globalThis.DOMQuad#FromQuad|WebSharper.JavaScript.DOMQuadInit"
+(* inline *)
+external fromRect : DOMRectInit.t -> t = "ws:WebSharper.JavaScript!globalThis.DOMQuad#FromRect|WebSharper.JavaScript.DOMRectInit" "ws:WebSharper.JavaScript!globalThis.DOMQuad#FromRect|WebSharper.JavaScript.DOMRectInit"
 (* inline *)
 external create : DOMPointInit.t -> DOMPointInit.t -> DOMPointInit.t -> DOMPointInit.t -> t = "wsnew:WebSharper.JavaScript!globalThis.DOMQuad" "wsnew:WebSharper.JavaScript!globalThis.DOMQuad"

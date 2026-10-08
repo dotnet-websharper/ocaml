@@ -15,11 +15,11 @@ let () =
   Element.set_InnerHTML div "<b>hello</b>";
   ignore (Node.appendChild body div);
 
-  Console.log_2 ("tag=" ^ Element.get_TagName div);
-  Console.log_2 ("html=" ^ Element.get_InnerHTML div);
+  Console.log ("tag=" ^ Element.get_TagName div);
+  Console.log ("html=" ^ Element.get_InnerHTML div);
 
-  EventTarget.addEventListener_3 div "ping" (Js.of_js (fun () ->
+  EventTarget.addEventListener div "ping" (Js.of_js (fun () ->
     Element.set_InnerHTML div "pinged"));
 
   let found : Element.t = Document.getElementById document "box" in
-  Console.log_2 ("found=" ^ Element.get_Id found)
+  Console.log ("found=" ^ Element.get_Id found)

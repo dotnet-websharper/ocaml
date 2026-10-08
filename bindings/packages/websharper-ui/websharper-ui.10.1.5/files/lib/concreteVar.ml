@@ -5,6 +5,8 @@ external get_Id : ('a) t -> string = "ws:WebSharper.UI!WebSharper.UI/WebSharper.
 (* instance *)
 external get_View : ('a) t -> ('a) View.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default#get_View|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default#get_View|"
 (* instance *)
+external get : ('a) t -> 'a = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default#Get|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default#Get|"
+(* instance *)
 external updateMaybe : ('a) t -> Js.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default#UpdateMaybe|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default#UpdateMaybe|fn"
 (* instance *)
 external update : ('a) t -> Js.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default#Update|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default#Update|fn"
@@ -12,8 +14,6 @@ external update : ('a) t -> Js.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSh
 external setFinal : ('a) t -> 'a -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default#SetFinal|'0" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default#SetFinal|'0"
 (* instance *)
 external set : ('a) t -> 'a -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default#Set|'0" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default#Set|'0"
-(* instance *)
-external get : ('a) t -> 'a = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default#Get|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default#Get|"
 (* instance *)
 external get_id : ('a) t -> int = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default#id" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.ConcreteVar`1::default#id"
 (* instance *)

@@ -3,13 +3,13 @@ type t
 (* inline *)
 external get_MaximumAge : t -> int = "ws:WebSharper.JavaScript!globalThis.PositionOptions#get_MaximumAge|" "ws:WebSharper.JavaScript!globalThis.PositionOptions#get_MaximumAge|"
 (* inline *)
-external set_MaximumAge : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.PositionOptions#set_MaximumAge|System.Int32" "ws:WebSharper.JavaScript!globalThis.PositionOptions#set_MaximumAge|System.Int32"
-(* inline *)
 external get_Timeout : t -> int = "ws:WebSharper.JavaScript!globalThis.PositionOptions#get_Timeout|" "ws:WebSharper.JavaScript!globalThis.PositionOptions#get_Timeout|"
 (* inline *)
-external set_Timeout : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.PositionOptions#set_Timeout|System.Int32" "ws:WebSharper.JavaScript!globalThis.PositionOptions#set_Timeout|System.Int32"
-(* inline *)
 external get_EnableHighAccuracy : t -> bool = "ws:WebSharper.JavaScript!globalThis.PositionOptions#get_EnableHighAccuracy|" "ws:WebSharper.JavaScript!globalThis.PositionOptions#get_EnableHighAccuracy|"
+(* inline *)
+external set_MaximumAge : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.PositionOptions#set_MaximumAge|System.Int32" "ws:WebSharper.JavaScript!globalThis.PositionOptions#set_MaximumAge|System.Int32"
+(* inline *)
+external set_Timeout : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.PositionOptions#set_Timeout|System.Int32" "ws:WebSharper.JavaScript!globalThis.PositionOptions#set_Timeout|System.Int32"
 (* inline *)
 external set_EnableHighAccuracy : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.PositionOptions#set_EnableHighAccuracy|System.Boolean" "ws:WebSharper.JavaScript!globalThis.PositionOptions#set_EnableHighAccuracy|System.Boolean"
 (* inline *)

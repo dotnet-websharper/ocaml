@@ -3,21 +3,21 @@ type t = Object.t
 (* inline *)
 external get_Token : t -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#get_Token|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#get_Token|"
 (* inline *)
-external cancelAfter : t -> Js.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#CancelAfter|System.TimeSpan" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#CancelAfter|System.TimeSpan"
-(* inline *)
 external get_IsCancellationRequested : t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#get_IsCancellationRequested|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#get_IsCancellationRequested|"
 (* inline *)
 external dispose : t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#Dispose|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#Dispose|"
+(* instance *)
+external cancel : t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#Cancel|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#Cancel|"
+(* inline *)
+external cancelAfter : t -> Js.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#CancelAfter|System.TimeSpan" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#CancelAfter|System.TimeSpan"
+(* instance *)
+external cancelAfter_2 : t -> int -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#CancelAfter|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#CancelAfter|System.Int32"
+(* instance *)
+external cancel_2 : t -> bool -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#Cancel|System.Boolean" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#Cancel|System.Boolean"
 (* static *)
 external createLinkedTokenSource : Js.t -> Js.t -> Object.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#CreateLinkedTokenSource|System.Threading.CancellationToken|System.Threading.CancellationToken" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#CreateLinkedTokenSource|System.Threading.CancellationToken|System.Threading.CancellationToken"
 (* static *)
 external createLinkedTokenSource_2 : (Js.t) array -> Object.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#CreateLinkedTokenSource|System.Threading.CancellationToken[]" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#CreateLinkedTokenSource|System.Threading.CancellationToken[]"
-(* instance *)
-external cancelAfter_2 : t -> int -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#CancelAfter|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#CancelAfter|System.Int32"
-(* instance *)
-external cancel : t -> bool -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#Cancel|System.Boolean" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#Cancel|System.Boolean"
-(* instance *)
-external cancel_2 : t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#Cancel|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#Cancel|"
 (* instance *)
 external get_r : t -> (Js.t) array = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#r" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Threading.CancellationTokenSource::default#r"
 (* instance *)

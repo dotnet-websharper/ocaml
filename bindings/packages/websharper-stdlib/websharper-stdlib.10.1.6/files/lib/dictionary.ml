@@ -7,31 +7,31 @@ external get_Keys : ('a, 'b) t -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib
 (* instance *)
 external get_Values : ('a, 'b) t -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#get_Values|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#get_Values|"
 (* instance *)
-external remove : ('a, 'b) t -> 'a -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#Remove|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#Remove|'0"
-(* instance *)
 external getEnumerator : ('a, 'b) t -> ('a) Enumerator.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#GetEnumerator|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#GetEnumerator|"
 (* instance *)
-external set_Item : ('a, 'b) t -> 'a -> 'b -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#set_Item|'0|'1" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#set_Item|'0|'1"
+external clear : ('a, 'b) t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#Clear|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#Clear|"
+(* instance *)
+external remove : ('a, 'b) t -> 'a -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#Remove|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#Remove|'0"
 (* instance *)
 external get_Item : ('a, 'b) t -> 'a -> 'b = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#get_Item|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#get_Item|'0"
 (* instance *)
-external add : ('a, 'b) t -> 'a -> 'b -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#Add|'0|'1" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#Add|'0|'1"
-(* instance *)
 external remove_2 : ('a, 'b) t -> 'a -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#remove|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#remove|'0"
 (* instance *)
-external add_2 : ('a, 'b) t -> 'a -> 'b -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#add|'0|'1" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#add|'0|'1"
-(* instance *)
-external set : ('a, 'b) t -> 'a -> 'b -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#set|'0|'1" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#set|'0|'1"
-(* instance *)
 external get : ('a, 'b) t -> 'a -> 'b = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#get|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#get|'0"
-(* instance *)
-external tryGetValue : ('a, 'b) t -> 'a -> 'b -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#TryGetValue|'0|'1" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#TryGetValue|'0|'1"
 (* instance *)
 external containsValue : ('a, 'b) t -> 'b -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#ContainsValue|'1" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#ContainsValue|'1"
 (* instance *)
 external containsKey : ('a, 'b) t -> 'a -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#ContainsKey|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#ContainsKey|'0"
 (* instance *)
-external clear : ('a, 'b) t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#Clear|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#Clear|"
+external set_Item : ('a, 'b) t -> 'a -> 'b -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#set_Item|'0|'1" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#set_Item|'0|'1"
+(* instance *)
+external add : ('a, 'b) t -> 'a -> 'b -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#Add|'0|'1" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#Add|'0|'1"
+(* instance *)
+external add_2 : ('a, 'b) t -> 'a -> 'b -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#add|'0|'1" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#add|'0|'1"
+(* instance *)
+external set : ('a, 'b) t -> 'a -> 'b -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#set|'0|'1" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#set|'0|'1"
+(* instance *)
+external tryGetValue : ('a, 'b) t -> 'a -> 'b -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#TryGetValue|'0|'1" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#TryGetValue|'0|'1"
 (* instance *)
 external get_data : ('a, 'b) t -> ((Js.t) Websharper_javascript.Array.t) Websharper_javascript.Array.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#data" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#data"
 (* instance *)

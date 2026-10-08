@@ -5,12 +5,12 @@ external close : t -> unit = "ws:WebSharper.JavaScript!globalThis.MessagePort#Cl
 (* inline *)
 external start : t -> unit = "ws:WebSharper.JavaScript!globalThis.MessagePort#Start|" "ws:WebSharper.JavaScript!globalThis.MessagePort#Start|"
 (* inline *)
-external postMessage : t -> Js.t -> (EventTarget.t) array -> unit = "ws:WebSharper.JavaScript!globalThis.MessagePort#PostMessage|System.Object|WebSharper.JavaScript.MessagePort[]" "ws:WebSharper.JavaScript!globalThis.MessagePort#PostMessage|System.Object|WebSharper.JavaScript.MessagePort[]"
-(* inline *)
 external get_OnMessage : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MessagePort#get_OnMessage|" "ws:WebSharper.JavaScript!globalThis.MessagePort#get_OnMessage|"
-(* inline *)
-external set_OnMessage : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MessagePort#set_OnMessage|System.Action`1<WebSharper.JavaScript.MessageEvent>" "ws:WebSharper.JavaScript!globalThis.MessagePort#set_OnMessage|System.Action`1<WebSharper.JavaScript.MessageEvent>"
 (* inline *)
 external get_Onmessage : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MessagePort#get_Onmessage|" "ws:WebSharper.JavaScript!globalThis.MessagePort#get_Onmessage|"
 (* inline *)
+external set_OnMessage : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MessagePort#set_OnMessage|System.Action`1<WebSharper.JavaScript.MessageEvent>" "ws:WebSharper.JavaScript!globalThis.MessagePort#set_OnMessage|System.Action`1<WebSharper.JavaScript.MessageEvent>"
+(* inline *)
 external set_Onmessage : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MessagePort#set_Onmessage|System.Action`1<WebSharper.JavaScript.MessageEvent>" "ws:WebSharper.JavaScript!globalThis.MessagePort#set_Onmessage|System.Action`1<WebSharper.JavaScript.MessageEvent>"
+(* inline *)
+external postMessage : t -> Js.t -> (EventTarget.t) array -> unit = "ws:WebSharper.JavaScript!globalThis.MessagePort#PostMessage|System.Object|WebSharper.JavaScript.MessagePort[]" "ws:WebSharper.JavaScript!globalThis.MessagePort#PostMessage|System.Object|WebSharper.JavaScript.MessagePort[]"

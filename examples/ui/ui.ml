@@ -9,4 +9,4 @@ let () =
   let _ = Websharper_ui.Doc.append
             (Websharper_ui.Doc.textNode "hello ")
             (Websharper_ui.Doc.textNode "ui") in
-  Console.log_2 (Printf.sprintf "v=%d" (Websharper_ui.Var.get v))
+  Console.log (Printf.sprintf "v=%d" (Websharper_ui.Var.get v))

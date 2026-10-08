@@ -5,9 +5,9 @@ external get_Key : ('a, 'b) t -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/We
 (* inline *)
 external get_Value : ('a, 'b) t -> 'b = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.Pair`2::default#get_Value|" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.Pair`2::default#get_Value|"
 (* instance *)
-external equals : ('a, 'b) t -> Js.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.Pair`2::default#Equals|System.Object" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.Pair`2::default#Equals|System.Object"
-(* instance *)
 external getHashCode : ('a, 'b) t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.Pair`2::default#GetHashCode|" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.Pair`2::default#GetHashCode|"
+(* instance *)
+external equals : ('a, 'b) t -> Js.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.Pair`2::default#Equals|System.Object" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.Pair`2::default#Equals|System.Object"
 (* instance *)
 external get_value : ('a, 'b) t -> 'b = "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.Pair`2::default#Value" "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.Pair`2::default#Value"
 (* instance *)

@@ -13,560 +13,560 @@ external get_IsContentEditable : t -> bool = "ws:WebSharper.JavaScript!globalThi
 (* inline *)
 external get_ContentEditable : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_ContentEditable|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_ContentEditable|"
 (* inline *)
-external set_ContentEditable : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_ContentEditable|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_ContentEditable|System.String"
-(* inline *)
 external get_OnPaste : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnPaste|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnPaste|"
-(* inline *)
-external set_OnPaste : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnPaste|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnPaste|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onpaste : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onpaste|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onpaste|"
 (* inline *)
-external set_Onpaste : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onpaste|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onpaste|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnCut : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnCut|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnCut|"
-(* inline *)
-external set_OnCut : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnCut|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnCut|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Oncut : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Oncut|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Oncut|"
 (* inline *)
-external set_Oncut : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oncut|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oncut|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnCopy : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnCopy|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnCopy|"
-(* inline *)
-external set_OnCopy : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnCopy|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnCopy|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Oncopy : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Oncopy|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Oncopy|"
 (* inline *)
-external set_Oncopy : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oncopy|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oncopy|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnWaiting : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnWaiting|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnWaiting|"
-(* inline *)
-external set_OnWaiting : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnWaiting|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnWaiting|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onwaiting : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onwaiting|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onwaiting|"
 (* inline *)
-external set_Onwaiting : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onwaiting|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onwaiting|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnVolumeChange : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnVolumeChange|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnVolumeChange|"
-(* inline *)
-external set_OnVolumeChange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnVolumeChange|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnVolumeChange|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onvolumechange : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onvolumechange|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onvolumechange|"
 (* inline *)
-external set_Onvolumechange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onvolumechange|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onvolumechange|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnTimeUpdate : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnTimeUpdate|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnTimeUpdate|"
-(* inline *)
-external set_OnTimeUpdate : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnTimeUpdate|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnTimeUpdate|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Ontimeupdate : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Ontimeupdate|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Ontimeupdate|"
 (* inline *)
-external set_Ontimeupdate : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ontimeupdate|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ontimeupdate|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnSuspend : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnSuspend|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnSuspend|"
-(* inline *)
-external set_OnSuspend : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnSuspend|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnSuspend|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onsuspend : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onsuspend|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onsuspend|"
 (* inline *)
-external set_Onsuspend : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onsuspend|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onsuspend|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnSubmit : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnSubmit|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnSubmit|"
-(* inline *)
-external set_OnSubmit : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnSubmit|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnSubmit|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onsubmit : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onsubmit|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onsubmit|"
 (* inline *)
-external set_Onsubmit : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onsubmit|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onsubmit|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnStalled : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnStalled|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnStalled|"
-(* inline *)
-external set_OnStalled : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnStalled|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnStalled|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onstalled : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onstalled|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onstalled|"
 (* inline *)
-external set_Onstalled : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onstalled|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onstalled|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnShow : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnShow|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnShow|"
-(* inline *)
-external set_OnShow : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnShow|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnShow|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onshow : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onshow|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onshow|"
 (* inline *)
-external set_Onshow : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onshow|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onshow|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnSelect : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnSelect|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnSelect|"
-(* inline *)
-external set_OnSelect : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnSelect|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnSelect|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onselect : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onselect|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onselect|"
 (* inline *)
-external set_Onselect : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onselect|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onselect|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnSeeking : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnSeeking|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnSeeking|"
-(* inline *)
-external set_OnSeeking : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnSeeking|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnSeeking|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onseeking : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onseeking|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onseeking|"
 (* inline *)
-external set_Onseeking : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onseeking|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onseeking|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnSeeked : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnSeeked|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnSeeked|"
-(* inline *)
-external set_OnSeeked : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnSeeked|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnSeeked|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onseeked : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onseeked|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onseeked|"
 (* inline *)
-external set_Onseeked : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onseeked|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onseeked|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnScroll : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnScroll|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnScroll|"
-(* inline *)
-external set_OnScroll : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnScroll|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnScroll|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onscroll : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onscroll|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onscroll|"
 (* inline *)
-external set_Onscroll : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onscroll|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onscroll|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnResize : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnResize|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnResize|"
-(* inline *)
-external set_OnResize : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnResize|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnResize|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onresize : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onresize|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onresize|"
 (* inline *)
-external set_Onresize : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onresize|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onresize|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnReset : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnReset|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnReset|"
-(* inline *)
-external set_OnReset : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnReset|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnReset|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onreset : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onreset|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onreset|"
 (* inline *)
-external set_Onreset : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onreset|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onreset|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnRateChange : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnRateChange|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnRateChange|"
-(* inline *)
-external set_OnRateChange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnRateChange|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnRateChange|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onratechange : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onratechange|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onratechange|"
 (* inline *)
-external set_Onratechange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onratechange|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onratechange|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnProgress : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnProgress|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnProgress|"
-(* inline *)
-external set_OnProgress : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnProgress|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnProgress|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onprogress : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onprogress|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onprogress|"
 (* inline *)
-external set_Onprogress : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onprogress|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onprogress|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnPlaying : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnPlaying|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnPlaying|"
-(* inline *)
-external set_OnPlaying : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnPlaying|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnPlaying|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onplaying : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onplaying|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onplaying|"
 (* inline *)
-external set_Onplaying : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onplaying|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onplaying|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnPlay : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnPlay|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnPlay|"
-(* inline *)
-external set_OnPlay : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnPlay|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnPlay|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onplay : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onplay|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onplay|"
 (* inline *)
-external set_Onplay : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onplay|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onplay|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnPause : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnPause|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnPause|"
-(* inline *)
-external set_OnPause : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnPause|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnPause|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onpause : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onpause|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onpause|"
 (* inline *)
-external set_Onpause : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onpause|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onpause|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnWheel : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnWheel|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnWheel|"
-(* inline *)
-external set_OnWheel : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnWheel|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnWheel|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onwheel : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onwheel|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onwheel|"
 (* inline *)
-external set_Onwheel : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onwheel|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onwheel|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnMouseUp : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnMouseUp|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnMouseUp|"
-(* inline *)
-external set_OnMouseUp : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnMouseUp|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnMouseUp|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onmouseup : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onmouseup|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onmouseup|"
 (* inline *)
-external set_Onmouseup : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onmouseup|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onmouseup|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnMouseOver : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnMouseOver|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnMouseOver|"
-(* inline *)
-external set_OnMouseOver : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnMouseOver|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnMouseOver|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onmouseover : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onmouseover|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onmouseover|"
 (* inline *)
-external set_Onmouseover : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onmouseover|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onmouseover|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnMouseOut : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnMouseOut|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnMouseOut|"
-(* inline *)
-external set_OnMouseOut : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnMouseOut|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnMouseOut|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onmouseout : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onmouseout|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onmouseout|"
 (* inline *)
-external set_Onmouseout : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onmouseout|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onmouseout|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnMouseMove : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnMouseMove|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnMouseMove|"
-(* inline *)
-external set_OnMouseMove : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnMouseMove|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnMouseMove|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onmousemove : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onmousemove|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onmousemove|"
 (* inline *)
-external set_Onmousemove : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onmousemove|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onmousemove|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnMouseLeave : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnMouseLeave|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnMouseLeave|"
-(* inline *)
-external set_OnMouseLeave : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnMouseLeave|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnMouseLeave|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onmouseleave : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onmouseleave|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onmouseleave|"
 (* inline *)
-external set_Onmouseleave : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onmouseleave|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onmouseleave|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnMouseEnter : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnMouseEnter|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnMouseEnter|"
-(* inline *)
-external set_OnMouseEnter : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnMouseEnter|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnMouseEnter|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onmouseenter : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onmouseenter|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onmouseenter|"
 (* inline *)
-external set_Onmouseenter : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onmouseenter|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onmouseenter|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnMouseDown : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnMouseDown|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnMouseDown|"
-(* inline *)
-external set_OnMouseDown : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnMouseDown|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnMouseDown|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onmousedown : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onmousedown|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onmousedown|"
 (* inline *)
-external set_Onmousedown : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onmousedown|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onmousedown|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnLoadstart : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnLoadstart|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnLoadstart|"
-(* inline *)
-external set_OnLoadstart : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnLoadstart|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnLoadstart|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onloadstart : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onloadstart|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onloadstart|"
 (* inline *)
-external set_Onloadstart : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onloadstart|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onloadstart|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnLoadend : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnLoadend|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnLoadend|"
-(* inline *)
-external set_OnLoadend : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnLoadend|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnLoadend|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onloadend : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onloadend|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onloadend|"
 (* inline *)
-external set_Onloadend : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onloadend|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onloadend|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnLoadedMetadata : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnLoadedMetadata|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnLoadedMetadata|"
-(* inline *)
-external set_OnLoadedMetadata : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnLoadedMetadata|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnLoadedMetadata|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onloadedmetadata : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onloadedmetadata|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onloadedmetadata|"
 (* inline *)
-external set_Onloadedmetadata : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onloadedmetadata|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onloadedmetadata|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnLoadedData : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnLoadedData|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnLoadedData|"
-(* inline *)
-external set_OnLoadedData : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnLoadedData|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnLoadedData|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onloadeddata : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onloadeddata|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onloadeddata|"
 (* inline *)
-external set_Onloadeddata : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onloadeddata|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onloadeddata|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnLoad : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnLoad|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnLoad|"
-(* inline *)
-external set_OnLoad : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnLoad|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnLoad|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onload : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onload|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onload|"
 (* inline *)
-external set_Onload : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onload|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onload|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnKeyUp : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnKeyUp|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnKeyUp|"
-(* inline *)
-external set_OnKeyUp : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnKeyUp|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnKeyUp|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onkeyup : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onkeyup|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onkeyup|"
 (* inline *)
-external set_Onkeyup : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onkeyup|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onkeyup|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnKeyPress : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnKeyPress|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnKeyPress|"
-(* inline *)
-external set_OnKeyPress : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnKeyPress|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnKeyPress|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onkeypress : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onkeypress|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onkeypress|"
 (* inline *)
-external set_Onkeypress : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onkeypress|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onkeypress|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnKeyDown : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnKeyDown|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnKeyDown|"
-(* inline *)
-external set_OnKeyDown : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnKeyDown|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnKeyDown|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onkeydown : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onkeydown|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onkeydown|"
 (* inline *)
-external set_Onkeydown : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onkeydown|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onkeydown|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnInvalid : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnInvalid|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnInvalid|"
-(* inline *)
-external set_OnInvalid : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnInvalid|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnInvalid|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Oninvalid : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Oninvalid|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Oninvalid|"
 (* inline *)
-external set_Oninvalid : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oninvalid|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oninvalid|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnInput : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnInput|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnInput|"
-(* inline *)
-external set_OnInput : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnInput|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnInput|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Oninput : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Oninput|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Oninput|"
 (* inline *)
-external set_Oninput : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oninput|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oninput|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnFocus : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnFocus|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnFocus|"
-(* inline *)
-external set_OnFocus : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnFocus|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnFocus|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onfocus : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onfocus|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onfocus|"
 (* inline *)
-external set_Onfocus : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onfocus|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onfocus|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnError : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnError|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnError|"
-(* inline *)
-external set_OnError : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnError|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnError|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onerror : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onerror|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onerror|"
 (* inline *)
-external set_Onerror : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onerror|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onerror|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnEnded : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnEnded|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnEnded|"
-(* inline *)
-external set_OnEnded : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnEnded|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnEnded|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onended : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onended|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onended|"
 (* inline *)
-external set_Onended : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onended|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onended|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnEmptied : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnEmptied|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnEmptied|"
-(* inline *)
-external set_OnEmptied : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnEmptied|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnEmptied|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onemptied : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onemptied|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onemptied|"
 (* inline *)
-external set_Onemptied : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onemptied|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onemptied|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnDurationChange : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnDurationChange|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnDurationChange|"
-(* inline *)
-external set_OnDurationChange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDurationChange|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDurationChange|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Ondurationchange : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Ondurationchange|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Ondurationchange|"
 (* inline *)
-external set_Ondurationchange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondurationchange|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondurationchange|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnDrop : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnDrop|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnDrop|"
-(* inline *)
-external set_OnDrop : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDrop|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDrop|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Ondrop : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Ondrop|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Ondrop|"
 (* inline *)
-external set_Ondrop : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondrop|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondrop|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnDragStart : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnDragStart|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnDragStart|"
-(* inline *)
-external set_OnDragStart : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDragStart|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDragStart|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Ondragstart : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Ondragstart|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Ondragstart|"
 (* inline *)
-external set_Ondragstart : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondragstart|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondragstart|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnDragOver : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnDragOver|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnDragOver|"
-(* inline *)
-external set_OnDragOver : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDragOver|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDragOver|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Ondragover : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Ondragover|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Ondragover|"
 (* inline *)
-external set_Ondragover : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondragover|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondragover|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnDragLeave : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnDragLeave|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnDragLeave|"
-(* inline *)
-external set_OnDragLeave : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDragLeave|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDragLeave|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Ondragleave : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Ondragleave|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Ondragleave|"
 (* inline *)
-external set_Ondragleave : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondragleave|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondragleave|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnDragExit : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnDragExit|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnDragExit|"
-(* inline *)
-external set_OnDragExit : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDragExit|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDragExit|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Ondragexit : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Ondragexit|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Ondragexit|"
 (* inline *)
-external set_Ondragexit : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondragexit|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondragexit|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnDragEnter : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnDragEnter|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnDragEnter|"
-(* inline *)
-external set_OnDragEnter : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDragEnter|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDragEnter|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Ondragenter : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Ondragenter|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Ondragenter|"
 (* inline *)
-external set_Ondragenter : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondragenter|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondragenter|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnDragEnd : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnDragEnd|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnDragEnd|"
-(* inline *)
-external set_OnDragEnd : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDragEnd|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDragEnd|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Ondragend : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Ondragend|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Ondragend|"
 (* inline *)
-external set_Ondragend : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondragend|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondragend|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnDrag : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnDrag|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnDrag|"
-(* inline *)
-external set_OnDrag : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDrag|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDrag|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Ondrag : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Ondrag|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Ondrag|"
 (* inline *)
-external set_Ondrag : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondrag|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondrag|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnDblClick : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnDblClick|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnDblClick|"
-(* inline *)
-external set_OnDblClick : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDblClick|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDblClick|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Ondblclick : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Ondblclick|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Ondblclick|"
 (* inline *)
-external set_Ondblclick : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondblclick|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondblclick|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnCueChange : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnCueChange|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnCueChange|"
-(* inline *)
-external set_OnCueChange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnCueChange|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnCueChange|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Oncuechange : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Oncuechange|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Oncuechange|"
 (* inline *)
-external set_Oncuechange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oncuechange|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oncuechange|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnContextMenu : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnContextMenu|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnContextMenu|"
-(* inline *)
-external set_OnContextMenu : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnContextMenu|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnContextMenu|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Oncontextmenu : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Oncontextmenu|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Oncontextmenu|"
 (* inline *)
-external set_Oncontextmenu : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oncontextmenu|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oncontextmenu|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnClose : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnClose|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnClose|"
-(* inline *)
-external set_OnClose : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnClose|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnClose|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onclose : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onclose|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onclose|"
 (* inline *)
-external set_Onclose : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onclose|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onclose|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnClick : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnClick|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnClick|"
-(* inline *)
-external set_OnClick : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnClick|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnClick|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onclick : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onclick|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onclick|"
 (* inline *)
-external set_Onclick : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onclick|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onclick|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnChange : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnChange|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnChange|"
-(* inline *)
-external set_OnChange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnChange|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnChange|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onchange : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onchange|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onchange|"
 (* inline *)
-external set_Onchange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onchange|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onchange|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnCanPlayThrough : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnCanPlayThrough|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnCanPlayThrough|"
-(* inline *)
-external set_OnCanPlayThrough : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnCanPlayThrough|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnCanPlayThrough|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Oncanplaythrough : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Oncanplaythrough|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Oncanplaythrough|"
 (* inline *)
-external set_Oncanplaythrough : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oncanplaythrough|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oncanplaythrough|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnCanPlay : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnCanPlay|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnCanPlay|"
-(* inline *)
-external set_OnCanPlay : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnCanPlay|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnCanPlay|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Oncanplay : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Oncanplay|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Oncanplay|"
 (* inline *)
-external set_Oncanplay : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oncanplay|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oncanplay|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnCancel : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnCancel|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnCancel|"
-(* inline *)
-external set_OnCancel : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnCancel|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnCancel|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Oncancel : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Oncancel|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Oncancel|"
 (* inline *)
-external set_Oncancel : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oncancel|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oncancel|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnBlur : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnBlur|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnBlur|"
-(* inline *)
-external set_OnBlur : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnBlur|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnBlur|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onblur : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onblur|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onblur|"
 (* inline *)
-external set_Onblur : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onblur|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onblur|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnAuxClick : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnAuxClick|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnAuxClick|"
-(* inline *)
-external set_OnAuxClick : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnAuxClick|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnAuxClick|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onauxclick : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onauxclick|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onauxclick|"
 (* inline *)
-external set_Onauxclick : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onauxclick|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onauxclick|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_OnAbort : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnAbort|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_OnAbort|"
-(* inline *)
-external set_OnAbort : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnAbort|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnAbort|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external get_Onabort : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onabort|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Onabort|"
 (* inline *)
-external set_Onabort : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onabort|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onabort|System.Action`1<WebSharper.JavaScript.Dom.Event>"
-(* inline *)
 external get_InnerText : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_InnerText|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_InnerText|"
-(* inline *)
-external set_InnerText : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_InnerText|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_InnerText|System.String"
 (* inline *)
 external get_SpellCheck : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_SpellCheck|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_SpellCheck|"
 (* inline *)
-external set_SpellCheck : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_SpellCheck|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_SpellCheck|System.Boolean"
-(* inline *)
 external get_Draggable : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Draggable|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Draggable|"
-(* inline *)
-external set_Draggable : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Draggable|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Draggable|System.Boolean"
 (* inline *)
 external get_AccessKeyLabel : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_AccessKeyLabel|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_AccessKeyLabel|"
 (* inline *)
 external get_AccessKey : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_AccessKey|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_AccessKey|"
 (* inline *)
-external set_AccessKey : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_AccessKey|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_AccessKey|System.String"
-(* inline *)
 external get_Style : t -> Style.t = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Style|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Style|"
 (* inline *)
 external get_TabIndex : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_TabIndex|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_TabIndex|"
 (* inline *)
-external set_TabIndex : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_TabIndex|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_TabIndex|System.Int32"
-(* inline *)
 external get_Hidden : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Hidden|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Hidden|"
-(* inline *)
-external set_Hidden : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Hidden|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Hidden|System.Boolean"
 (* inline *)
 external get_Dir : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Dir|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Dir|"
 (* inline *)
-external set_Dir : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Dir|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Dir|System.String"
-(* inline *)
 external get_Translate : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Translate|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Translate|"
-(* inline *)
-external set_Translate : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Translate|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Translate|System.Boolean"
 (* inline *)
 external get_Lang : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Lang|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Lang|"
 (* inline *)
-external set_Lang : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Lang|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Lang|System.String"
-(* inline *)
 external get_Title : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Title|" "ws:WebSharper.JavaScript!globalThis.HTMLElement#get_Title|"
+(* inline *)
+external set_ContentEditable : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_ContentEditable|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_ContentEditable|System.String"
+(* inline *)
+external set_OnPaste : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnPaste|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnPaste|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onpaste : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onpaste|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onpaste|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnCut : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnCut|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnCut|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Oncut : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oncut|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oncut|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnCopy : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnCopy|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnCopy|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Oncopy : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oncopy|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oncopy|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnWaiting : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnWaiting|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnWaiting|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onwaiting : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onwaiting|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onwaiting|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnVolumeChange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnVolumeChange|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnVolumeChange|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onvolumechange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onvolumechange|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onvolumechange|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnTimeUpdate : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnTimeUpdate|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnTimeUpdate|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Ontimeupdate : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ontimeupdate|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ontimeupdate|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnSuspend : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnSuspend|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnSuspend|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onsuspend : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onsuspend|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onsuspend|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnSubmit : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnSubmit|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnSubmit|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onsubmit : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onsubmit|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onsubmit|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnStalled : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnStalled|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnStalled|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onstalled : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onstalled|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onstalled|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnShow : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnShow|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnShow|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onshow : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onshow|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onshow|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnSelect : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnSelect|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnSelect|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onselect : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onselect|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onselect|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnSeeking : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnSeeking|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnSeeking|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onseeking : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onseeking|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onseeking|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnSeeked : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnSeeked|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnSeeked|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onseeked : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onseeked|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onseeked|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnScroll : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnScroll|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnScroll|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onscroll : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onscroll|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onscroll|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnResize : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnResize|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnResize|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onresize : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onresize|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onresize|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnReset : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnReset|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnReset|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onreset : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onreset|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onreset|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnRateChange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnRateChange|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnRateChange|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onratechange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onratechange|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onratechange|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnProgress : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnProgress|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnProgress|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onprogress : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onprogress|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onprogress|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnPlaying : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnPlaying|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnPlaying|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onplaying : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onplaying|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onplaying|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnPlay : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnPlay|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnPlay|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onplay : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onplay|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onplay|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnPause : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnPause|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnPause|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onpause : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onpause|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onpause|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnWheel : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnWheel|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnWheel|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onwheel : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onwheel|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onwheel|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnMouseUp : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnMouseUp|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnMouseUp|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onmouseup : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onmouseup|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onmouseup|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnMouseOver : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnMouseOver|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnMouseOver|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onmouseover : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onmouseover|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onmouseover|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnMouseOut : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnMouseOut|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnMouseOut|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onmouseout : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onmouseout|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onmouseout|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnMouseMove : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnMouseMove|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnMouseMove|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onmousemove : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onmousemove|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onmousemove|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnMouseLeave : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnMouseLeave|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnMouseLeave|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onmouseleave : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onmouseleave|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onmouseleave|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnMouseEnter : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnMouseEnter|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnMouseEnter|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onmouseenter : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onmouseenter|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onmouseenter|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnMouseDown : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnMouseDown|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnMouseDown|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onmousedown : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onmousedown|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onmousedown|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnLoadstart : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnLoadstart|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnLoadstart|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onloadstart : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onloadstart|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onloadstart|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnLoadend : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnLoadend|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnLoadend|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onloadend : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onloadend|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onloadend|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnLoadedMetadata : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnLoadedMetadata|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnLoadedMetadata|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onloadedmetadata : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onloadedmetadata|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onloadedmetadata|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnLoadedData : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnLoadedData|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnLoadedData|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onloadeddata : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onloadeddata|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onloadeddata|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnLoad : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnLoad|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnLoad|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onload : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onload|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onload|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnKeyUp : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnKeyUp|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnKeyUp|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onkeyup : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onkeyup|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onkeyup|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnKeyPress : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnKeyPress|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnKeyPress|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onkeypress : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onkeypress|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onkeypress|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnKeyDown : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnKeyDown|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnKeyDown|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onkeydown : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onkeydown|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onkeydown|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnInvalid : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnInvalid|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnInvalid|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Oninvalid : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oninvalid|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oninvalid|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnInput : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnInput|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnInput|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Oninput : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oninput|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oninput|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnFocus : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnFocus|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnFocus|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onfocus : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onfocus|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onfocus|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnError : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnError|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnError|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onerror : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onerror|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onerror|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnEnded : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnEnded|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnEnded|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onended : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onended|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onended|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnEmptied : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnEmptied|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnEmptied|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onemptied : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onemptied|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onemptied|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnDurationChange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDurationChange|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDurationChange|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Ondurationchange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondurationchange|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondurationchange|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnDrop : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDrop|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDrop|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Ondrop : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondrop|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondrop|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnDragStart : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDragStart|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDragStart|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Ondragstart : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondragstart|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondragstart|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnDragOver : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDragOver|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDragOver|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Ondragover : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondragover|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondragover|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnDragLeave : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDragLeave|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDragLeave|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Ondragleave : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondragleave|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondragleave|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnDragExit : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDragExit|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDragExit|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Ondragexit : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondragexit|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondragexit|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnDragEnter : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDragEnter|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDragEnter|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Ondragenter : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondragenter|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondragenter|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnDragEnd : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDragEnd|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDragEnd|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Ondragend : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondragend|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondragend|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnDrag : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDrag|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDrag|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Ondrag : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondrag|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondrag|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnDblClick : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDblClick|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnDblClick|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Ondblclick : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondblclick|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Ondblclick|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnCueChange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnCueChange|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnCueChange|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Oncuechange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oncuechange|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oncuechange|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnContextMenu : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnContextMenu|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnContextMenu|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Oncontextmenu : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oncontextmenu|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oncontextmenu|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnClose : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnClose|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnClose|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onclose : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onclose|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onclose|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnClick : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnClick|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnClick|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onclick : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onclick|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onclick|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnChange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnChange|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnChange|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onchange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onchange|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onchange|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnCanPlayThrough : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnCanPlayThrough|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnCanPlayThrough|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Oncanplaythrough : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oncanplaythrough|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oncanplaythrough|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnCanPlay : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnCanPlay|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnCanPlay|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Oncanplay : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oncanplay|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oncanplay|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnCancel : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnCancel|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnCancel|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Oncancel : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oncancel|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Oncancel|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnBlur : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnBlur|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnBlur|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onblur : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onblur|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onblur|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnAuxClick : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnAuxClick|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnAuxClick|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onauxclick : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onauxclick|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onauxclick|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_OnAbort : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnAbort|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_OnAbort|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_Onabort : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onabort|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Onabort|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+(* inline *)
+external set_InnerText : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_InnerText|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_InnerText|System.String"
+(* inline *)
+external set_SpellCheck : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_SpellCheck|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_SpellCheck|System.Boolean"
+(* inline *)
+external set_Draggable : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Draggable|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Draggable|System.Boolean"
+(* inline *)
+external set_AccessKey : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_AccessKey|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_AccessKey|System.String"
+(* inline *)
+external set_TabIndex : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_TabIndex|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_TabIndex|System.Int32"
+(* inline *)
+external set_Hidden : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Hidden|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Hidden|System.Boolean"
+(* inline *)
+external set_Dir : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Dir|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Dir|System.String"
+(* inline *)
+external set_Translate : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Translate|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Translate|System.Boolean"
+(* inline *)
+external set_Lang : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Lang|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Lang|System.String"
 (* inline *)
 external set_Title : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Title|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLElement#set_Title|System.String"

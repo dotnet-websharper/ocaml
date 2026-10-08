@@ -3,9 +3,9 @@ type t
 (* inline *)
 external get_Min : t -> int64 = "ws:WebSharper.JavaScript!globalThis.ULongRange#get_Min|" "ws:WebSharper.JavaScript!globalThis.ULongRange#get_Min|"
 (* inline *)
-external set_Min : t -> int64 -> unit = "ws:WebSharper.JavaScript!globalThis.ULongRange#set_Min|System.UInt64" "ws:WebSharper.JavaScript!globalThis.ULongRange#set_Min|System.UInt64"
-(* inline *)
 external get_Max : t -> int64 = "ws:WebSharper.JavaScript!globalThis.ULongRange#get_Max|" "ws:WebSharper.JavaScript!globalThis.ULongRange#get_Max|"
+(* inline *)
+external set_Min : t -> int64 -> unit = "ws:WebSharper.JavaScript!globalThis.ULongRange#set_Min|System.UInt64" "ws:WebSharper.JavaScript!globalThis.ULongRange#set_Min|System.UInt64"
 (* inline *)
 external set_Max : t -> int64 -> unit = "ws:WebSharper.JavaScript!globalThis.ULongRange#set_Max|System.UInt64" "ws:WebSharper.JavaScript!globalThis.ULongRange#set_Max|System.UInt64"
 (* inline *)

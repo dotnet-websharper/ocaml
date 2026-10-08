@@ -2,8 +2,20 @@
 type t = Doc.t
 (* inline *)
 external get_Element : t -> Websharper_javascript.Element.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#get_Element|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#get_Element|"
-(* inline *)
-external onExpr : t -> string -> Js.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#onExpr|System.String|Microsoft.FSharp.Quotations.FSharpExpr`1<fn>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#onExpr|System.String|Microsoft.FSharp.Quotations.FSharpExpr`1<fn>"
+(* instance *)
+external getText : t -> string = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#GetText|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#GetText|"
+(* instance *)
+external getValue : t -> string = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#GetValue|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#GetValue|"
+(* instance *)
+external id' : t -> string = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#Id'|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#Id'|"
+(* instance *)
+external html' : t -> string = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#Html'|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#Html'|"
+(* instance *)
+external clear' : t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#Clear'|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#Clear'|"
+(* instance *)
+external toUpdater : t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#ToUpdater|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#ToUpdater|"
+(* instance *)
+external clearHoles : t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#ClearHoles|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#ClearHoles|"
 (* inline *)
 external addClass' : t -> string -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#AddClass'|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#AddClass'|System.String"
 (* inline *)
@@ -287,13 +299,9 @@ external onWaiting : t -> Js.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSha
 (* inline *)
 external onWheel : t -> Js.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#OnWheel|Microsoft.FSharp.Quotations.FSharpExpr`1<fn>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#OnWheel|Microsoft.FSharp.Quotations.FSharpExpr`1<fn>"
 (* instance *)
-external setStyle' : t -> string -> string -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#SetStyle'|System.String|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#SetStyle'|System.String|System.String"
-(* instance *)
 external hasClass' : t -> string -> bool = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#HasClass'|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#HasClass'|System.String"
 (* instance *)
 external getProperty' : t -> string -> 'a = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#GetProperty'|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#GetProperty'|System.String"
-(* instance *)
-external setProperty' : t -> string -> 'a -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#SetProperty'|System.String|'0" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#SetProperty'|System.String|'0"
 (* instance *)
 external removeAttribute' : t -> string -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#RemoveAttribute'|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#RemoveAttribute'|System.String"
 (* instance *)
@@ -301,45 +309,37 @@ external hasAttribute' : t -> string -> bool = "ws:WebSharper.UI!WebSharper.UI/W
 (* instance *)
 external getAttribute' : t -> string -> string = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#GetAttribute'|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#GetAttribute'|System.String"
 (* instance *)
-external setAttribute' : t -> string -> string -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#SetAttribute'|System.String|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#SetAttribute'|System.String|System.String"
-(* instance *)
 external setText : t -> string -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#SetText|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#SetText|System.String"
 (* instance *)
-external getText : t -> string = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#GetText|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#GetText|"
-(* instance *)
 external setValue : t -> string -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#SetValue|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#SetValue|System.String"
-(* instance *)
-external getValue : t -> string = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#GetValue|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#GetValue|"
-(* instance *)
-external id' : t -> string = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#Id'|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#Id'|"
-(* instance *)
-external html' : t -> string = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#Html'|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#Html'|"
-(* instance *)
-external clear' : t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#Clear'|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#Clear'|"
 (* instance *)
 external prependDoc : t -> Doc.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#PrependDoc|WebSharper.UI.Doc" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#PrependDoc|WebSharper.UI.Doc"
 (* instance *)
 external appendDoc : t -> Doc.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#AppendDoc|WebSharper.UI.Doc" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#AppendDoc|WebSharper.UI.Doc"
-(* static *)
-external treeNode : Js.t -> (unit) View.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#TreeNode|WebSharper.UI.Client.DocTreeNode|WebSharper.UI.View`1<void>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#TreeNode|WebSharper.UI.Client.DocTreeNode|WebSharper.UI.View`1<void>"
-(* static *)
-external new_ : Websharper_javascript.Element.t -> Attr.t -> Doc.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#New|WebSharper.JavaScript.Dom.Element|WebSharper.UI.Attr|WebSharper.UI.Doc" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#New|WebSharper.JavaScript.Dom.Element|WebSharper.UI.Attr|WebSharper.UI.Doc"
-(* instance *)
-external toUpdater : t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#ToUpdater|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#ToUpdater|"
-(* instance *)
-external onAfterRenderView : t -> ('a) View.t -> Js.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#OnAfterRenderView|WebSharper.UI.View`1<'0>|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#OnAfterRenderView|WebSharper.UI.View`1<'0>|fn"
 (* instance *)
 external onAfterRender : t -> Js.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#OnAfterRender|Microsoft.FSharp.Quotations.FSharpExpr`1<fn>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#OnAfterRender|Microsoft.FSharp.Quotations.FSharpExpr`1<fn>"
 (* instance *)
 external onAfterRender' : t -> Js.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#OnAfterRender'|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#OnAfterRender'|fn"
 (* instance *)
-external onView : t -> string -> ('a) View.t -> Js.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#onView|System.String|WebSharper.UI.View`1<'0>|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#onView|System.String|WebSharper.UI.View`1<'0>|fn"
+external addHole : t -> DocElemNode.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#AddHole|WebSharper.UI.Client.DocElemNode" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#AddHole|WebSharper.UI.Client.DocElemNode"
+(* inline *)
+external onExpr : t -> string -> Js.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#onExpr|System.String|Microsoft.FSharp.Quotations.FSharpExpr`1<fn>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#onExpr|System.String|Microsoft.FSharp.Quotations.FSharpExpr`1<fn>"
+(* instance *)
+external setStyle' : t -> string -> string -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#SetStyle'|System.String|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#SetStyle'|System.String|System.String"
+(* instance *)
+external setProperty' : t -> string -> 'a -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#SetProperty'|System.String|'0" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#SetProperty'|System.String|'0"
+(* instance *)
+external setAttribute' : t -> string -> string -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#SetAttribute'|System.String|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#SetAttribute'|System.String|System.String"
+(* static *)
+external treeNode : Js.t -> (unit) View.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#TreeNode|WebSharper.UI.Client.DocTreeNode|WebSharper.UI.View`1<void>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#TreeNode|WebSharper.UI.Client.DocTreeNode|WebSharper.UI.View`1<void>"
+(* instance *)
+external onAfterRenderView : t -> ('a) View.t -> Js.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#OnAfterRenderView|WebSharper.UI.View`1<'0>|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#OnAfterRenderView|WebSharper.UI.View`1<'0>|fn"
 (* instance *)
 external on : t -> string -> Js.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#on|System.String|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#on|System.String|fn"
+(* static *)
+external new_ : Websharper_javascript.Element.t -> Attr.t -> Doc.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#New|WebSharper.JavaScript.Dom.Element|WebSharper.UI.Attr|WebSharper.UI.Doc" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#New|WebSharper.JavaScript.Dom.Element|WebSharper.UI.Attr|WebSharper.UI.Doc"
 (* instance *)
-external clearHoles : t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#ClearHoles|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#ClearHoles|"
-(* instance *)
-external addHole : t -> DocElemNode.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#AddHole|WebSharper.UI.Client.DocElemNode" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#AddHole|WebSharper.UI.Client.DocElemNode"
+external onView : t -> string -> ('a) View.t -> Js.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#onView|System.String|WebSharper.UI.View`1<'0>|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#onView|System.String|WebSharper.UI.View`1<'0>|fn"
 (* instance *)
 external get_rvUpdates : t -> Updates.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#rvUpdates" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Elt::default#rvUpdates"
 (* instance *)

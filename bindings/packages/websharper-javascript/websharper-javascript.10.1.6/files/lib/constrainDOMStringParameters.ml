@@ -3,9 +3,9 @@ type t
 (* inline *)
 external get_Ideal : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.ConstrainDOMStringParameters#get_Ideal|" "ws:WebSharper.JavaScript!globalThis.ConstrainDOMStringParameters#get_Ideal|"
 (* inline *)
-external set_Ideal : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.ConstrainDOMStringParameters#set_Ideal|WebSharper.JavaScript.Union`2<System.String,System.String[]>" "ws:WebSharper.JavaScript!globalThis.ConstrainDOMStringParameters#set_Ideal|WebSharper.JavaScript.Union`2<System.String,System.String[]>"
-(* inline *)
 external get_Exact : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.ConstrainDOMStringParameters#get_Exact|" "ws:WebSharper.JavaScript!globalThis.ConstrainDOMStringParameters#get_Exact|"
+(* inline *)
+external set_Ideal : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.ConstrainDOMStringParameters#set_Ideal|WebSharper.JavaScript.Union`2<System.String,System.String[]>" "ws:WebSharper.JavaScript!globalThis.ConstrainDOMStringParameters#set_Ideal|WebSharper.JavaScript.Union`2<System.String,System.String[]>"
 (* inline *)
 external set_Exact : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.ConstrainDOMStringParameters#set_Exact|WebSharper.JavaScript.Union`2<System.String,System.String[]>" "ws:WebSharper.JavaScript!globalThis.ConstrainDOMStringParameters#set_Exact|WebSharper.JavaScript.Union`2<System.String,System.String[]>"
 (* inline *)

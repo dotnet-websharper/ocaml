@@ -3,17 +3,17 @@ type t
 (* inline *)
 external get_P4 : t -> DOMPointInit.t = "ws:WebSharper.JavaScript!globalThis.DOMQuadInit#get_P4|" "ws:WebSharper.JavaScript!globalThis.DOMQuadInit#get_P4|"
 (* inline *)
-external set_P4 : t -> DOMPointInit.t -> unit = "ws:WebSharper.JavaScript!globalThis.DOMQuadInit#set_P4|WebSharper.JavaScript.DOMPointInit" "ws:WebSharper.JavaScript!globalThis.DOMQuadInit#set_P4|WebSharper.JavaScript.DOMPointInit"
-(* inline *)
 external get_P3 : t -> DOMPointInit.t = "ws:WebSharper.JavaScript!globalThis.DOMQuadInit#get_P3|" "ws:WebSharper.JavaScript!globalThis.DOMQuadInit#get_P3|"
-(* inline *)
-external set_P3 : t -> DOMPointInit.t -> unit = "ws:WebSharper.JavaScript!globalThis.DOMQuadInit#set_P3|WebSharper.JavaScript.DOMPointInit" "ws:WebSharper.JavaScript!globalThis.DOMQuadInit#set_P3|WebSharper.JavaScript.DOMPointInit"
 (* inline *)
 external get_P2 : t -> DOMPointInit.t = "ws:WebSharper.JavaScript!globalThis.DOMQuadInit#get_P2|" "ws:WebSharper.JavaScript!globalThis.DOMQuadInit#get_P2|"
 (* inline *)
-external set_P2 : t -> DOMPointInit.t -> unit = "ws:WebSharper.JavaScript!globalThis.DOMQuadInit#set_P2|WebSharper.JavaScript.DOMPointInit" "ws:WebSharper.JavaScript!globalThis.DOMQuadInit#set_P2|WebSharper.JavaScript.DOMPointInit"
-(* inline *)
 external get_P1 : t -> DOMPointInit.t = "ws:WebSharper.JavaScript!globalThis.DOMQuadInit#get_P1|" "ws:WebSharper.JavaScript!globalThis.DOMQuadInit#get_P1|"
+(* inline *)
+external set_P4 : t -> DOMPointInit.t -> unit = "ws:WebSharper.JavaScript!globalThis.DOMQuadInit#set_P4|WebSharper.JavaScript.DOMPointInit" "ws:WebSharper.JavaScript!globalThis.DOMQuadInit#set_P4|WebSharper.JavaScript.DOMPointInit"
+(* inline *)
+external set_P3 : t -> DOMPointInit.t -> unit = "ws:WebSharper.JavaScript!globalThis.DOMQuadInit#set_P3|WebSharper.JavaScript.DOMPointInit" "ws:WebSharper.JavaScript!globalThis.DOMQuadInit#set_P3|WebSharper.JavaScript.DOMPointInit"
+(* inline *)
+external set_P2 : t -> DOMPointInit.t -> unit = "ws:WebSharper.JavaScript!globalThis.DOMQuadInit#set_P2|WebSharper.JavaScript.DOMPointInit" "ws:WebSharper.JavaScript!globalThis.DOMQuadInit#set_P2|WebSharper.JavaScript.DOMPointInit"
 (* inline *)
 external set_P1 : t -> DOMPointInit.t -> unit = "ws:WebSharper.JavaScript!globalThis.DOMQuadInit#set_P1|WebSharper.JavaScript.DOMPointInit" "ws:WebSharper.JavaScript!globalThis.DOMQuadInit#set_P1|WebSharper.JavaScript.DOMPointInit"
 (* inline *)

@@ -5,18 +5,18 @@ external releaseLock : t -> unit = "ws:WebSharper.JavaScript!globalThis.Writable
 (* inline *)
 external write : t -> (unit) Promise.t = "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#Write|" "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#Write|"
 (* inline *)
-external write_2 : t -> Js.t -> (unit) Promise.t = "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#Write|System.Object" "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#Write|System.Object"
-(* inline *)
 external close : t -> (unit) Promise.t = "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#Close|" "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#Close|"
 (* inline *)
 external abort : t -> (unit) Promise.t = "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#Abort|" "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#Abort|"
-(* inline *)
-external abort_2 : t -> Js.t -> (unit) Promise.t = "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#Abort|System.Object" "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#Abort|System.Object"
 (* inline *)
 external get_Ready : t -> (unit) Promise.t = "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#get_Ready|" "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#get_Ready|"
 (* inline *)
 external get_DesiredSize : t -> float = "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#get_DesiredSize|" "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#get_DesiredSize|"
 (* inline *)
 external get_Closed : t -> (unit) Promise.t = "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#get_Closed|" "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#get_Closed|"
+(* inline *)
+external write_2 : t -> Js.t -> (unit) Promise.t = "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#Write|System.Object" "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#Write|System.Object"
+(* inline *)
+external abort_2 : t -> Js.t -> (unit) Promise.t = "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#Abort|System.Object" "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#Abort|System.Object"
 (* inline *)
 external create : WritableStream.t -> t = "wsnew:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter" "wsnew:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter"

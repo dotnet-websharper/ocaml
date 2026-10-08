@@ -3,9 +3,9 @@ type t = ULongRange.t
 (* inline *)
 external get_Ideal : t -> int64 = "ws:WebSharper.JavaScript!globalThis.ConstrainULongRange#get_Ideal|" "ws:WebSharper.JavaScript!globalThis.ConstrainULongRange#get_Ideal|"
 (* inline *)
-external set_Ideal : t -> int64 -> unit = "ws:WebSharper.JavaScript!globalThis.ConstrainULongRange#set_Ideal|System.UInt64" "ws:WebSharper.JavaScript!globalThis.ConstrainULongRange#set_Ideal|System.UInt64"
-(* inline *)
 external get_Exact : t -> int64 = "ws:WebSharper.JavaScript!globalThis.ConstrainULongRange#get_Exact|" "ws:WebSharper.JavaScript!globalThis.ConstrainULongRange#get_Exact|"
+(* inline *)
+external set_Ideal : t -> int64 -> unit = "ws:WebSharper.JavaScript!globalThis.ConstrainULongRange#set_Ideal|System.UInt64" "ws:WebSharper.JavaScript!globalThis.ConstrainULongRange#set_Ideal|System.UInt64"
 (* inline *)
 external set_Exact : t -> int64 -> unit = "ws:WebSharper.JavaScript!globalThis.ConstrainULongRange#set_Exact|System.UInt64" "ws:WebSharper.JavaScript!globalThis.ConstrainULongRange#set_Exact|System.UInt64"
 (* inline *)

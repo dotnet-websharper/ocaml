@@ -5,11 +5,11 @@ external get_Key : t -> string = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.T
 (* instance *)
 external get_Value : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.EventE::default#get_Value|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.EventE::default#get_Value|"
 (* instance *)
-external withName : t -> string -> TemplateHole.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.EventE::default#WithName|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.EventE::default#WithName|System.String"
-(* instance *)
 external get_ValueObj : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.EventE::default#get_ValueObj|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.EventE::default#get_ValueObj|"
 (* instance *)
 external get_Name : t -> string = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.EventE::default#get_Name|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.EventE::default#get_Name|"
+(* instance *)
+external withName : t -> string -> TemplateHole.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.EventE::default#WithName|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.EventE::default#WithName|System.String"
 (* instance *)
 external get_fillWith : t -> Js.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.EventE::default#fillWith" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.EventE::default#fillWith"
 (* instance *)

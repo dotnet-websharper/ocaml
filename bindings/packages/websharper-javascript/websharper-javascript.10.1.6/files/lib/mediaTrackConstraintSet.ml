@@ -3,61 +3,61 @@ type t
 (* inline *)
 external get_FrameRate : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_FrameRate|" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_FrameRate|"
 (* inline *)
-external set_FrameRate : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_FrameRate|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainDoubleRange>" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_FrameRate|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainDoubleRange>"
-(* inline *)
 external get_AspectRatio : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_AspectRatio|" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_AspectRatio|"
-(* inline *)
-external set_AspectRatio : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_AspectRatio|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainDoubleRange>" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_AspectRatio|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainDoubleRange>"
 (* inline *)
 external get_Latency : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_Latency|" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_Latency|"
 (* inline *)
-external set_Latency : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_Latency|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainDoubleRange>" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_Latency|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainDoubleRange>"
-(* inline *)
 external get_SampleSize : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_SampleSize|" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_SampleSize|"
-(* inline *)
-external set_SampleSize : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_SampleSize|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainULongRange>" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_SampleSize|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainULongRange>"
 (* inline *)
 external get_SampleRate : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_SampleRate|" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_SampleRate|"
 (* inline *)
-external set_SampleRate : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_SampleRate|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainULongRange>" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_SampleRate|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainULongRange>"
-(* inline *)
 external get_ChannelCount : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_ChannelCount|" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_ChannelCount|"
-(* inline *)
-external set_ChannelCount : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_ChannelCount|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainULongRange>" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_ChannelCount|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainULongRange>"
 (* inline *)
 external get_Height : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_Height|" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_Height|"
 (* inline *)
-external set_Height : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_Height|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainULongRange>" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_Height|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainULongRange>"
-(* inline *)
 external get_Width : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_Width|" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_Width|"
-(* inline *)
-external set_Width : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_Width|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainULongRange>" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_Width|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainULongRange>"
 (* inline *)
 external get_GroupId : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_GroupId|" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_GroupId|"
 (* inline *)
-external set_GroupId : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_GroupId|WebSharper.JavaScript.Union`3<WebSharper.JavaScript.ConstrainDOMStringParameters,System.String,System.String[]>" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_GroupId|WebSharper.JavaScript.Union`3<WebSharper.JavaScript.ConstrainDOMStringParameters,System.String,System.String[]>"
-(* inline *)
 external get_DeviceId : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_DeviceId|" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_DeviceId|"
-(* inline *)
-external set_DeviceId : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_DeviceId|WebSharper.JavaScript.Union`3<WebSharper.JavaScript.ConstrainDOMStringParameters,System.String,System.String[]>" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_DeviceId|WebSharper.JavaScript.Union`3<WebSharper.JavaScript.ConstrainDOMStringParameters,System.String,System.String[]>"
 (* inline *)
 external get_NoiseSuppression : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_NoiseSuppression|" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_NoiseSuppression|"
 (* inline *)
-external set_NoiseSuppression : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_NoiseSuppression|WebSharper.JavaScript.Union`2<System.Boolean,WebSharper.JavaScript.ConstrainBooleanParameters>" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_NoiseSuppression|WebSharper.JavaScript.Union`2<System.Boolean,WebSharper.JavaScript.ConstrainBooleanParameters>"
-(* inline *)
 external get_AutoGainControl : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_AutoGainControl|" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_AutoGainControl|"
-(* inline *)
-external set_AutoGainControl : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_AutoGainControl|WebSharper.JavaScript.Union`2<System.Boolean,WebSharper.JavaScript.ConstrainBooleanParameters>" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_AutoGainControl|WebSharper.JavaScript.Union`2<System.Boolean,WebSharper.JavaScript.ConstrainBooleanParameters>"
 (* inline *)
 external get_EchoCancellation : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_EchoCancellation|" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_EchoCancellation|"
 (* inline *)
-external set_EchoCancellation : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_EchoCancellation|WebSharper.JavaScript.Union`2<System.Boolean,WebSharper.JavaScript.ConstrainBooleanParameters>" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_EchoCancellation|WebSharper.JavaScript.Union`2<System.Boolean,WebSharper.JavaScript.ConstrainBooleanParameters>"
-(* inline *)
 external get_ResizeMode : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_ResizeMode|" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_ResizeMode|"
 (* inline *)
-external set_ResizeMode : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_ResizeMode|WebSharper.JavaScript.Union`3<WebSharper.JavaScript.ConstrainDOMStringParameters,System.String,System.String[]>" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_ResizeMode|WebSharper.JavaScript.Union`3<WebSharper.JavaScript.ConstrainDOMStringParameters,System.String,System.String[]>"
-(* inline *)
 external get_FacingMode : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_FacingMode|" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#get_FacingMode|"
+(* inline *)
+external set_FrameRate : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_FrameRate|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainDoubleRange>" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_FrameRate|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainDoubleRange>"
+(* inline *)
+external set_AspectRatio : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_AspectRatio|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainDoubleRange>" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_AspectRatio|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainDoubleRange>"
+(* inline *)
+external set_Latency : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_Latency|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainDoubleRange>" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_Latency|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainDoubleRange>"
+(* inline *)
+external set_SampleSize : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_SampleSize|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainULongRange>" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_SampleSize|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainULongRange>"
+(* inline *)
+external set_SampleRate : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_SampleRate|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainULongRange>" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_SampleRate|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainULongRange>"
+(* inline *)
+external set_ChannelCount : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_ChannelCount|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainULongRange>" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_ChannelCount|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainULongRange>"
+(* inline *)
+external set_Height : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_Height|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainULongRange>" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_Height|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainULongRange>"
+(* inline *)
+external set_Width : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_Width|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainULongRange>" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_Width|WebSharper.JavaScript.Union`2<System.Double,WebSharper.JavaScript.ConstrainULongRange>"
+(* inline *)
+external set_GroupId : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_GroupId|WebSharper.JavaScript.Union`3<WebSharper.JavaScript.ConstrainDOMStringParameters,System.String,System.String[]>" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_GroupId|WebSharper.JavaScript.Union`3<WebSharper.JavaScript.ConstrainDOMStringParameters,System.String,System.String[]>"
+(* inline *)
+external set_DeviceId : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_DeviceId|WebSharper.JavaScript.Union`3<WebSharper.JavaScript.ConstrainDOMStringParameters,System.String,System.String[]>" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_DeviceId|WebSharper.JavaScript.Union`3<WebSharper.JavaScript.ConstrainDOMStringParameters,System.String,System.String[]>"
+(* inline *)
+external set_NoiseSuppression : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_NoiseSuppression|WebSharper.JavaScript.Union`2<System.Boolean,WebSharper.JavaScript.ConstrainBooleanParameters>" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_NoiseSuppression|WebSharper.JavaScript.Union`2<System.Boolean,WebSharper.JavaScript.ConstrainBooleanParameters>"
+(* inline *)
+external set_AutoGainControl : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_AutoGainControl|WebSharper.JavaScript.Union`2<System.Boolean,WebSharper.JavaScript.ConstrainBooleanParameters>" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_AutoGainControl|WebSharper.JavaScript.Union`2<System.Boolean,WebSharper.JavaScript.ConstrainBooleanParameters>"
+(* inline *)
+external set_EchoCancellation : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_EchoCancellation|WebSharper.JavaScript.Union`2<System.Boolean,WebSharper.JavaScript.ConstrainBooleanParameters>" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_EchoCancellation|WebSharper.JavaScript.Union`2<System.Boolean,WebSharper.JavaScript.ConstrainBooleanParameters>"
+(* inline *)
+external set_ResizeMode : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_ResizeMode|WebSharper.JavaScript.Union`3<WebSharper.JavaScript.ConstrainDOMStringParameters,System.String,System.String[]>" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_ResizeMode|WebSharper.JavaScript.Union`3<WebSharper.JavaScript.ConstrainDOMStringParameters,System.String,System.String[]>"
 (* inline *)
 external set_FacingMode : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_FacingMode|WebSharper.JavaScript.Union`3<WebSharper.JavaScript.ConstrainDOMStringParameters,System.String,System.String[]>" "ws:WebSharper.JavaScript!globalThis.MediaTrackConstraintSet#set_FacingMode|WebSharper.JavaScript.Union`3<WebSharper.JavaScript.ConstrainDOMStringParameters,System.String,System.String[]>"
 (* inline *)

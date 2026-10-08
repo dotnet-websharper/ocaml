@@ -3,16 +3,16 @@ type t = EventTarget.t
 (* inline *)
 external get_Poster : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLVideoElement#get_Poster|" "ws:WebSharper.JavaScript!globalThis.HTMLVideoElement#get_Poster|"
 (* inline *)
-external set_Poster : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLVideoElement#set_Poster|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLVideoElement#set_Poster|System.String"
-(* inline *)
 external get_VideoHeight : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLVideoElement#get_VideoHeight|" "ws:WebSharper.JavaScript!globalThis.HTMLVideoElement#get_VideoHeight|"
 (* inline *)
 external get_VideoWidth : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLVideoElement#get_VideoWidth|" "ws:WebSharper.JavaScript!globalThis.HTMLVideoElement#get_VideoWidth|"
 (* inline *)
 external get_Height : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLVideoElement#get_Height|" "ws:WebSharper.JavaScript!globalThis.HTMLVideoElement#get_Height|"
 (* inline *)
-external set_Height : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLVideoElement#set_Height|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLVideoElement#set_Height|System.String"
-(* inline *)
 external get_Width : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLVideoElement#get_Width|" "ws:WebSharper.JavaScript!globalThis.HTMLVideoElement#get_Width|"
+(* inline *)
+external set_Poster : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLVideoElement#set_Poster|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLVideoElement#set_Poster|System.String"
+(* inline *)
+external set_Height : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLVideoElement#set_Height|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLVideoElement#set_Height|System.String"
 (* inline *)
 external set_Width : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLVideoElement#set_Width|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLVideoElement#set_Width|System.String"

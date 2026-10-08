@@ -3,74 +3,74 @@ type t = DOMMatrixReadOnly.t
 (* inline *)
 external preMultiplySelf : t -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#PreMultiplySelf|" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#PreMultiplySelf|"
 (* inline *)
-external preMultiplySelf_2 : t -> DOMMatrix2DInit.t -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#PreMultiplySelf|WebSharper.JavaScript.DOMMatrixInit" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#PreMultiplySelf|WebSharper.JavaScript.DOMMatrixInit"
-(* inline *)
 external multiplySelf : t -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#MultiplySelf|" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#MultiplySelf|"
-(* inline *)
-external multiplySelf_2 : t -> DOMMatrix2DInit.t -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#MultiplySelf|WebSharper.JavaScript.DOMMatrixInit" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#MultiplySelf|WebSharper.JavaScript.DOMMatrixInit"
 (* inline *)
 external skewYSelf : t -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#SkewYSelf|" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#SkewYSelf|"
 (* inline *)
-external skewYSelf_2 : t -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#SkewYSelf|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#SkewYSelf|System.Double"
-(* inline *)
 external skewXSelf : t -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#SkewXSelf|" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#SkewXSelf|"
-(* inline *)
-external skewXSelf_2 : t -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#SkewXSelf|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#SkewXSelf|System.Double"
 (* inline *)
 external rotateAxisAngleSelf : t -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateAxisAngleSelf|" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateAxisAngleSelf|"
 (* inline *)
-external rotateAxisAngleSelf_2 : t -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateAxisAngleSelf|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateAxisAngleSelf|System.Double"
-(* inline *)
-external rotateAxisAngleSelf_3 : t -> float -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateAxisAngleSelf|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateAxisAngleSelf|System.Double|System.Double"
-(* inline *)
-external rotateAxisAngleSelf_4 : t -> float -> float -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateAxisAngleSelf|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateAxisAngleSelf|System.Double|System.Double|System.Double"
-(* inline *)
-external rotateAxisAngleSelf_5 : t -> float -> float -> float -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateAxisAngleSelf|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateAxisAngleSelf|System.Double|System.Double|System.Double|System.Double"
-(* inline *)
 external rotateFromVectorSelf : t -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateFromVectorSelf|" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateFromVectorSelf|"
-(* inline *)
-external rotateFromVectorSelf_2 : t -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateFromVectorSelf|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateFromVectorSelf|System.Double"
-(* inline *)
-external rotateFromVectorSelf_3 : t -> float -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateFromVectorSelf|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateFromVectorSelf|System.Double|System.Double"
 (* inline *)
 external rotateSelf : t -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateSelf|" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateSelf|"
 (* inline *)
-external rotateSelf_2 : t -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateSelf|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateSelf|System.Double"
-(* inline *)
-external rotateSelf_3 : t -> float -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateSelf|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateSelf|System.Double|System.Double"
-(* inline *)
-external rotateSelf_4 : t -> float -> float -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateSelf|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateSelf|System.Double|System.Double|System.Double"
-(* inline *)
 external scale3DSelf : t -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#Scale3DSelf|" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#Scale3DSelf|"
-(* inline *)
-external scale3DSelf_2 : t -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#Scale3DSelf|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#Scale3DSelf|System.Double"
-(* inline *)
-external scale3DSelf_3 : t -> float -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#Scale3DSelf|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#Scale3DSelf|System.Double|System.Double"
-(* inline *)
-external scale3DSelf_4 : t -> float -> float -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#Scale3DSelf|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#Scale3DSelf|System.Double|System.Double|System.Double"
-(* inline *)
-external scale3DSelf_5 : t -> float -> float -> float -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#Scale3DSelf|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#Scale3DSelf|System.Double|System.Double|System.Double|System.Double"
 (* inline *)
 external scaleSelf : t -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#ScaleSelf|" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#ScaleSelf|"
 (* inline *)
+external translateSelf : t -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#TranslateSelf|" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#TranslateSelf|"
+(* inline *)
+external invertSelf : t -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#InvertSelf|" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#InvertSelf|"
+(* inline *)
+external preMultiplySelf_2 : t -> DOMMatrix2DInit.t -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#PreMultiplySelf|WebSharper.JavaScript.DOMMatrixInit" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#PreMultiplySelf|WebSharper.JavaScript.DOMMatrixInit"
+(* inline *)
+external multiplySelf_2 : t -> DOMMatrix2DInit.t -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#MultiplySelf|WebSharper.JavaScript.DOMMatrixInit" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#MultiplySelf|WebSharper.JavaScript.DOMMatrixInit"
+(* inline *)
+external skewYSelf_2 : t -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#SkewYSelf|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#SkewYSelf|System.Double"
+(* inline *)
+external skewXSelf_2 : t -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#SkewXSelf|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#SkewXSelf|System.Double"
+(* inline *)
+external rotateAxisAngleSelf_2 : t -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateAxisAngleSelf|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateAxisAngleSelf|System.Double"
+(* inline *)
+external rotateFromVectorSelf_2 : t -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateFromVectorSelf|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateFromVectorSelf|System.Double"
+(* inline *)
+external rotateSelf_2 : t -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateSelf|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateSelf|System.Double"
+(* inline *)
+external scale3DSelf_2 : t -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#Scale3DSelf|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#Scale3DSelf|System.Double"
+(* inline *)
 external scaleSelf_2 : t -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#ScaleSelf|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#ScaleSelf|System.Double"
+(* inline *)
+external translateSelf_2 : t -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#TranslateSelf|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#TranslateSelf|System.Double"
+(* inline *)
+external rotateAxisAngleSelf_3 : t -> float -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateAxisAngleSelf|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateAxisAngleSelf|System.Double|System.Double"
+(* inline *)
+external rotateFromVectorSelf_3 : t -> float -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateFromVectorSelf|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateFromVectorSelf|System.Double|System.Double"
+(* inline *)
+external rotateSelf_3 : t -> float -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateSelf|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateSelf|System.Double|System.Double"
+(* inline *)
+external scale3DSelf_3 : t -> float -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#Scale3DSelf|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#Scale3DSelf|System.Double|System.Double"
 (* inline *)
 external scaleSelf_3 : t -> float -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#ScaleSelf|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#ScaleSelf|System.Double|System.Double"
 (* inline *)
+external translateSelf_3 : t -> float -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#TranslateSelf|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#TranslateSelf|System.Double|System.Double"
+(* inline *)
+external rotateAxisAngleSelf_4 : t -> float -> float -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateAxisAngleSelf|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateAxisAngleSelf|System.Double|System.Double|System.Double"
+(* inline *)
+external rotateSelf_4 : t -> float -> float -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateSelf|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateSelf|System.Double|System.Double|System.Double"
+(* inline *)
+external scale3DSelf_4 : t -> float -> float -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#Scale3DSelf|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#Scale3DSelf|System.Double|System.Double|System.Double"
+(* inline *)
 external scaleSelf_4 : t -> float -> float -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#ScaleSelf|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#ScaleSelf|System.Double|System.Double|System.Double"
+(* inline *)
+external translateSelf_4 : t -> float -> float -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#TranslateSelf|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#TranslateSelf|System.Double|System.Double|System.Double"
+(* inline *)
+external rotateAxisAngleSelf_5 : t -> float -> float -> float -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateAxisAngleSelf|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#RotateAxisAngleSelf|System.Double|System.Double|System.Double|System.Double"
+(* inline *)
+external scale3DSelf_5 : t -> float -> float -> float -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#Scale3DSelf|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#Scale3DSelf|System.Double|System.Double|System.Double|System.Double"
 (* inline *)
 external scaleSelf_5 : t -> float -> float -> float -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#ScaleSelf|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#ScaleSelf|System.Double|System.Double|System.Double|System.Double"
 (* inline *)
 external scaleSelf_6 : t -> float -> float -> float -> float -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#ScaleSelf|System.Double|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#ScaleSelf|System.Double|System.Double|System.Double|System.Double|System.Double"
 (* inline *)
 external scaleSelf_7 : t -> float -> float -> float -> float -> float -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#ScaleSelf|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#ScaleSelf|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double"
-(* inline *)
-external translateSelf : t -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#TranslateSelf|" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#TranslateSelf|"
-(* inline *)
-external translateSelf_2 : t -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#TranslateSelf|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#TranslateSelf|System.Double"
-(* inline *)
-external translateSelf_3 : t -> float -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#TranslateSelf|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#TranslateSelf|System.Double|System.Double"
-(* inline *)
-external translateSelf_4 : t -> float -> float -> float -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#TranslateSelf|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#TranslateSelf|System.Double|System.Double|System.Double"
-(* inline *)
-external invertSelf : t -> DOMMatrixReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrix#InvertSelf|" "ws:WebSharper.JavaScript!globalThis.DOMMatrix#InvertSelf|"

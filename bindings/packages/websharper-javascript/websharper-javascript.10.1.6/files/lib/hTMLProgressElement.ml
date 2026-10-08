@@ -7,8 +7,8 @@ external get_Position : t -> float = "ws:WebSharper.JavaScript!globalThis.HTMLPr
 (* inline *)
 external get_Max : t -> float = "ws:WebSharper.JavaScript!globalThis.HTMLProgressElement#get_Max|" "ws:WebSharper.JavaScript!globalThis.HTMLProgressElement#get_Max|"
 (* inline *)
-external set_Max : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLProgressElement#set_Max|System.Double" "ws:WebSharper.JavaScript!globalThis.HTMLProgressElement#set_Max|System.Double"
-(* inline *)
 external get_Value : t -> float = "ws:WebSharper.JavaScript!globalThis.HTMLProgressElement#get_Value|" "ws:WebSharper.JavaScript!globalThis.HTMLProgressElement#get_Value|"
+(* inline *)
+external set_Max : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLProgressElement#set_Max|System.Double" "ws:WebSharper.JavaScript!globalThis.HTMLProgressElement#set_Max|System.Double"
 (* inline *)
 external set_Value : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLProgressElement#set_Value|System.Double" "ws:WebSharper.JavaScript!globalThis.HTMLProgressElement#set_Value|System.Double"

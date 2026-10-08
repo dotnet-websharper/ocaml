@@ -7,15 +7,15 @@ external forTextView : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI
 (* instance *)
 external get_AsChoiceView : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#get_AsChoiceView|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#get_AsChoiceView|"
 (* instance *)
-external addAttribute : t -> Js.t -> Websharper_javascript.Element.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#AddAttribute|fn|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#AddAttribute|fn|WebSharper.JavaScript.Dom.Element"
+external get_ValueObj : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#get_ValueObj|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#get_ValueObj|"
+(* instance *)
+external get_Name : t -> string = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#get_Name|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#get_Name|"
 (* instance *)
 external applyVarHole : t -> Websharper_javascript.Element.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#ApplyVarHole|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#ApplyVarHole|WebSharper.JavaScript.Dom.Element"
 (* instance *)
 external withName : t -> string -> TemplateHole.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#WithName|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#WithName|System.String"
 (* instance *)
-external get_ValueObj : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#get_ValueObj|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#get_ValueObj|"
-(* instance *)
-external get_Name : t -> string = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#get_Name|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#get_Name|"
+external addAttribute : t -> Js.t -> Websharper_javascript.Element.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#AddAttribute|fn|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#AddAttribute|fn|WebSharper.JavaScript.Dom.Element"
 (* instance *)
 external get_fillWith : t -> (int) Var.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#fillWith" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#fillWith"
 (* instance *)

@@ -3,9 +3,9 @@ type t
 (* inline *)
 external get_Min : t -> float = "ws:WebSharper.JavaScript!globalThis.DoubleRange#get_Min|" "ws:WebSharper.JavaScript!globalThis.DoubleRange#get_Min|"
 (* inline *)
-external set_Min : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.DoubleRange#set_Min|System.Double" "ws:WebSharper.JavaScript!globalThis.DoubleRange#set_Min|System.Double"
-(* inline *)
 external get_Max : t -> float = "ws:WebSharper.JavaScript!globalThis.DoubleRange#get_Max|" "ws:WebSharper.JavaScript!globalThis.DoubleRange#get_Max|"
+(* inline *)
+external set_Min : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.DoubleRange#set_Min|System.Double" "ws:WebSharper.JavaScript!globalThis.DoubleRange#set_Min|System.Double"
 (* inline *)
 external set_Max : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.DoubleRange#set_Max|System.Double" "ws:WebSharper.JavaScript!globalThis.DoubleRange#set_Max|System.Double"
 (* inline *)

@@ -3,9 +3,9 @@ type t
 (* inline *)
 external get_Ideal : t -> bool = "ws:WebSharper.JavaScript!globalThis.ConstrainBooleanParameters#get_Ideal|" "ws:WebSharper.JavaScript!globalThis.ConstrainBooleanParameters#get_Ideal|"
 (* inline *)
-external set_Ideal : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.ConstrainBooleanParameters#set_Ideal|System.Boolean" "ws:WebSharper.JavaScript!globalThis.ConstrainBooleanParameters#set_Ideal|System.Boolean"
-(* inline *)
 external get_Exact : t -> bool = "ws:WebSharper.JavaScript!globalThis.ConstrainBooleanParameters#get_Exact|" "ws:WebSharper.JavaScript!globalThis.ConstrainBooleanParameters#get_Exact|"
+(* inline *)
+external set_Ideal : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.ConstrainBooleanParameters#set_Ideal|System.Boolean" "ws:WebSharper.JavaScript!globalThis.ConstrainBooleanParameters#set_Ideal|System.Boolean"
 (* inline *)
 external set_Exact : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.ConstrainBooleanParameters#set_Exact|System.Boolean" "ws:WebSharper.JavaScript!globalThis.ConstrainBooleanParameters#set_Exact|System.Boolean"
 (* inline *)

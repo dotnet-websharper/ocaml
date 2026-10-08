@@ -11,15 +11,75 @@ external save : t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRendering
 (* instance *)
 external resetTransform : t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#ResetTransform|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#ResetTransform|"
 (* instance *)
-external setTransform : t -> float -> float -> float -> float -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#SetTransform|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#SetTransform|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double"
+external clip : t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Clip|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Clip|"
 (* instance *)
-external transform : t -> float -> float -> float -> float -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Transform|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Transform|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double"
+external stroke : t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Stroke|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Stroke|"
 (* instance *)
-external translate : t -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Translate|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Translate|System.Double|System.Double"
+external fill : t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Fill|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Fill|"
+(* instance *)
+external beginPath : t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#BeginPath|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#BeginPath|"
+(* instance *)
+external scrollPathIntoView : t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#ScrollPathIntoView|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#ScrollPathIntoView|"
+(* instance *)
+external getLineDash : t -> (float) array = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#GetLineDash|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#GetLineDash|"
+(* instance *)
+external closePath : t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#ClosePath|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#ClosePath|"
+(* inline *)
+external get_Canvas : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_Canvas|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_Canvas|"
+(* inline *)
+external get_GlobalCompositeOperation : t -> GlobalCompositeOperation.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_GlobalCompositeOperation|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_GlobalCompositeOperation|"
+(* inline *)
+external get_GlobalAlpha : t -> float = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_GlobalAlpha|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_GlobalAlpha|"
+(* inline *)
+external get_ImageSmoothingQuality : t -> ImageSmoothingQuality.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_ImageSmoothingQuality|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_ImageSmoothingQuality|"
+(* inline *)
+external get_ImageSmootingEnabled : t -> bool = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_ImageSmootingEnabled|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_ImageSmootingEnabled|"
+(* inline *)
+external get_FillStyle : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_FillStyle|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_FillStyle|"
+(* inline *)
+external get_StrokeStyle : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_StrokeStyle|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_StrokeStyle|"
+(* inline *)
+external get_ShadowColor : t -> string = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_ShadowColor|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_ShadowColor|"
+(* inline *)
+external get_ShadowBlur : t -> float = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_ShadowBlur|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_ShadowBlur|"
+(* inline *)
+external get_ShadowOffsetY : t -> float = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_ShadowOffsetY|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_ShadowOffsetY|"
+(* inline *)
+external get_ShadowOffsetX : t -> float = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_ShadowOffsetX|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_ShadowOffsetX|"
+(* inline *)
+external get_Filter : t -> string = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_Filter|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_Filter|"
+(* inline *)
+external get_LineDashOffset : t -> float = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_LineDashOffset|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_LineDashOffset|"
+(* inline *)
+external get_MiterLimit : t -> float = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_MiterLimit|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_MiterLimit|"
+(* inline *)
+external get_LineJoin : t -> CanvasLineJoin.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_LineJoin|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_LineJoin|"
+(* inline *)
+external get_LineCap : t -> LineCap.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_LineCap|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_LineCap|"
+(* inline *)
+external get_LineWidth : t -> float = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_LineWidth|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_LineWidth|"
+(* inline *)
+external get_WordSpacing : t -> string = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_WordSpacing|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_WordSpacing|"
+(* inline *)
+external get_TextRendering : t -> CanvasTextRendering.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_TextRendering|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_TextRendering|"
+(* inline *)
+external get_FontVariantCaps : t -> CanvasFontVariantCaps.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_FontVariantCaps|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_FontVariantCaps|"
+(* inline *)
+external get_FontStretch : t -> CanvasFontStretch.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_FontStretch|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_FontStretch|"
+(* inline *)
+external get_FontKerning : t -> CanvasFontKerning.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_FontKerning|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_FontKerning|"
+(* inline *)
+external get_LetterSpacing : t -> string = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_LetterSpacing|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_LetterSpacing|"
+(* inline *)
+external get_Direction : t -> CanvasTextDirection.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_Direction|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_Direction|"
+(* inline *)
+external get_TextBaseline : t -> CanvasTextBaseLine.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_TextBaseline|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_TextBaseline|"
+(* inline *)
+external get_TextAlign : t -> CanvasTextAlign.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_TextAlign|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_TextAlign|"
+(* inline *)
+external get_Font : t -> string = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_Font|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_Font|"
 (* instance *)
 external rotate : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Rotate|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Rotate|System.Double"
-(* instance *)
-external scale : t -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Scale|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Scale|System.Double|System.Double"
 (* instance *)
 external createPattern : t -> HTMLImageElement.t -> CanvasPattern.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreatePattern|WebSharper.JavaScript.HTMLImageElement" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreatePattern|WebSharper.JavaScript.HTMLImageElement"
 (* instance *)
@@ -31,6 +91,82 @@ external createPattern_4 : t -> EventTarget.t -> CanvasPattern.t = "ws:WebSharpe
 (* instance *)
 external createPattern_5 : t -> OffscreenCanvas.t -> CanvasPattern.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreatePattern|WebSharper.JavaScript.OffscreenCanvas" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreatePattern|WebSharper.JavaScript.OffscreenCanvas"
 (* instance *)
+external isPointInPath : t -> Path2D.t -> bool = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInPath|WebSharper.JavaScript.Path2D" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInPath|WebSharper.JavaScript.Path2D"
+(* instance *)
+external clip_2 : t -> Path2D.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Clip|WebSharper.JavaScript.Path2D" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Clip|WebSharper.JavaScript.Path2D"
+(* instance *)
+external clip_3 : t -> CanvasFillRule.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Clip|WebSharper.JavaScript.CanvasFillRule" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Clip|WebSharper.JavaScript.CanvasFillRule"
+(* instance *)
+external stroke_2 : t -> Path2D.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Stroke|WebSharper.JavaScript.Path2D" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Stroke|WebSharper.JavaScript.Path2D"
+(* instance *)
+external fill_2 : t -> Path2D.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Fill|WebSharper.JavaScript.Path2D" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Fill|WebSharper.JavaScript.Path2D"
+(* instance *)
+external fill_3 : t -> CanvasFillRule.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Fill|WebSharper.JavaScript.CanvasFillRule" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Fill|WebSharper.JavaScript.CanvasFillRule"
+(* instance *)
+external scrollPathIntoView_2 : t -> Path2D.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#ScrollPathIntoView|WebSharper.JavaScript.Path2D" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#ScrollPathIntoView|WebSharper.JavaScript.Path2D"
+(* instance *)
+external drawFocusIfNeeded : t -> EventTarget.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#DrawFocusIfNeeded|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#DrawFocusIfNeeded|WebSharper.JavaScript.Dom.Element"
+(* instance *)
+external measureText : t -> string -> TextMetrics.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#MeasureText|System.String" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#MeasureText|System.String"
+(* instance *)
+external createImageData : t -> ImageData.t -> ImageData.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreateImageData|WebSharper.JavaScript.ImageData" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreateImageData|WebSharper.JavaScript.ImageData"
+(* inline *)
+external set_GlobalCompositeOperation : t -> GlobalCompositeOperation.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_GlobalCompositeOperation|WebSharper.JavaScript.GlobalCompositeOperation" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_GlobalCompositeOperation|WebSharper.JavaScript.GlobalCompositeOperation"
+(* inline *)
+external set_GlobalAlpha : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_GlobalAlpha|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_GlobalAlpha|System.Double"
+(* inline *)
+external set_ImageSmoothingQuality : t -> ImageSmoothingQuality.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_ImageSmoothingQuality|WebSharper.JavaScript.ImageSmoothingQuality" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_ImageSmoothingQuality|WebSharper.JavaScript.ImageSmoothingQuality"
+(* inline *)
+external set_ImageSmootingEnabled : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_ImageSmootingEnabled|System.Boolean" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_ImageSmootingEnabled|System.Boolean"
+(* inline *)
+external set_FillStyle : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_FillStyle|System.Object" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_FillStyle|System.Object"
+(* inline *)
+external set_StrokeStyle : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_StrokeStyle|System.Object" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_StrokeStyle|System.Object"
+(* inline *)
+external set_ShadowColor : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_ShadowColor|System.String" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_ShadowColor|System.String"
+(* inline *)
+external set_ShadowBlur : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_ShadowBlur|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_ShadowBlur|System.Double"
+(* inline *)
+external set_ShadowOffsetY : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_ShadowOffsetY|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_ShadowOffsetY|System.Double"
+(* inline *)
+external set_ShadowOffsetX : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_ShadowOffsetX|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_ShadowOffsetX|System.Double"
+(* inline *)
+external set_Filter : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_Filter|System.String" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_Filter|System.String"
+(* inline *)
+external set_LineDashOffset : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_LineDashOffset|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_LineDashOffset|System.Double"
+(* inline *)
+external set_MiterLimit : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_MiterLimit|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_MiterLimit|System.Double"
+(* inline *)
+external set_LineJoin : t -> CanvasLineJoin.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_LineJoin|WebSharper.JavaScript.CanvasLineJoin" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_LineJoin|WebSharper.JavaScript.CanvasLineJoin"
+(* inline *)
+external set_LineCap : t -> LineCap.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_LineCap|WebSharper.JavaScript.LineCap" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_LineCap|WebSharper.JavaScript.LineCap"
+(* inline *)
+external set_LineWidth : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_LineWidth|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_LineWidth|System.Double"
+(* inline *)
+external set_WordSpacing : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_WordSpacing|System.String" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_WordSpacing|System.String"
+(* inline *)
+external set_TextRendering : t -> CanvasTextRendering.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_TextRendering|WebSharper.JavaScript.CanvasTextRendering" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_TextRendering|WebSharper.JavaScript.CanvasTextRendering"
+(* inline *)
+external set_FontVariantCaps : t -> CanvasFontVariantCaps.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_FontVariantCaps|WebSharper.JavaScript.CanvasFontVariantCaps" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_FontVariantCaps|WebSharper.JavaScript.CanvasFontVariantCaps"
+(* inline *)
+external set_FontStretch : t -> CanvasFontStretch.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_FontStretch|WebSharper.JavaScript.CanvasFontStretch" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_FontStretch|WebSharper.JavaScript.CanvasFontStretch"
+(* inline *)
+external set_FontKerning : t -> CanvasFontKerning.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_FontKerning|WebSharper.JavaScript.CanvasFontKerning" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_FontKerning|WebSharper.JavaScript.CanvasFontKerning"
+(* inline *)
+external set_LetterSpacing : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_LetterSpacing|System.String" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_LetterSpacing|System.String"
+(* inline *)
+external set_Direction : t -> CanvasTextDirection.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_Direction|WebSharper.JavaScript.CanvasTextDirection" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_Direction|WebSharper.JavaScript.CanvasTextDirection"
+(* inline *)
+external set_TextBaseline : t -> CanvasTextBaseLine.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_TextBaseline|WebSharper.JavaScript.CanvasTextBaseLine" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_TextBaseline|WebSharper.JavaScript.CanvasTextBaseLine"
+(* inline *)
+external set_TextAlign : t -> CanvasTextAlign.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_TextAlign|WebSharper.JavaScript.CanvasTextAlign" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_TextAlign|WebSharper.JavaScript.CanvasTextAlign"
+(* inline *)
+external set_Font : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_Font|System.String" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_Font|System.String"
+(* instance *)
+external translate : t -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Translate|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Translate|System.Double|System.Double"
+(* instance *)
+external scale : t -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Scale|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Scale|System.Double|System.Double"
+(* instance *)
 external createPattern_6 : t -> HTMLImageElement.t -> Repetition.t -> CanvasPattern.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreatePattern|WebSharper.JavaScript.HTMLImageElement|WebSharper.JavaScript.Repetition" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreatePattern|WebSharper.JavaScript.HTMLImageElement|WebSharper.JavaScript.Repetition"
 (* instance *)
 external createPattern_7 : t -> SVGImageElement.t -> Repetition.t -> CanvasPattern.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreatePattern|WebSharper.JavaScript.SVGImageElement|WebSharper.JavaScript.Repetition" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreatePattern|WebSharper.JavaScript.SVGImageElement|WebSharper.JavaScript.Repetition"
@@ -41,9 +177,43 @@ external createPattern_9 : t -> EventTarget.t -> Repetition.t -> CanvasPattern.t
 (* instance *)
 external createPattern_10 : t -> OffscreenCanvas.t -> Repetition.t -> CanvasPattern.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreatePattern|WebSharper.JavaScript.OffscreenCanvas|WebSharper.JavaScript.Repetition" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreatePattern|WebSharper.JavaScript.OffscreenCanvas|WebSharper.JavaScript.Repetition"
 (* instance *)
+external isPointInStroke : t -> Path2D.t -> float -> bool = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInStroke|WebSharper.JavaScript.Path2D|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInStroke|WebSharper.JavaScript.Path2D|System.Double"
+(* instance *)
+external isPointInStroke_2 : t -> float -> float -> bool = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInStroke|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInStroke|System.Double|System.Double"
+(* instance *)
+external isPointInPath_2 : t -> Path2D.t -> CanvasFillRule.t -> bool = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInPath|WebSharper.JavaScript.Path2D|WebSharper.JavaScript.CanvasFillRule" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInPath|WebSharper.JavaScript.Path2D|WebSharper.JavaScript.CanvasFillRule"
+(* instance *)
+external isPointInPath_3 : t -> float -> float -> bool = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInPath|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInPath|System.Double|System.Double"
+(* instance *)
+external clip_4 : t -> Path2D.t -> CanvasFillRule.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Clip|WebSharper.JavaScript.Path2D|WebSharper.JavaScript.CanvasFillRule" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Clip|WebSharper.JavaScript.Path2D|WebSharper.JavaScript.CanvasFillRule"
+(* instance *)
+external fill_4 : t -> Path2D.t -> CanvasFillRule.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Fill|WebSharper.JavaScript.Path2D|WebSharper.JavaScript.CanvasFillRule" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Fill|WebSharper.JavaScript.Path2D|WebSharper.JavaScript.CanvasFillRule"
+(* instance *)
+external drawFocusIfNeeded_2 : t -> Path2D.t -> EventTarget.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#DrawFocusIfNeeded|WebSharper.JavaScript.Path2D|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#DrawFocusIfNeeded|WebSharper.JavaScript.Path2D|WebSharper.JavaScript.Dom.Element"
+(* instance *)
+external createImageData_2 : t -> float -> float -> ImageData.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreateImageData|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreateImageData|System.Double|System.Double"
+(* instance *)
+external lineTo : t -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#LineTo|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#LineTo|System.Double|System.Double"
+(* instance *)
+external moveTo : t -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#MoveTo|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#MoveTo|System.Double|System.Double"
+(* instance *)
 external createConicGradient : t -> float -> float -> float -> CanvasGradient.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreateConicGradient|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreateConicGradient|System.Double|System.Double|System.Double"
 (* instance *)
-external createRadialGradient : t -> float -> float -> float -> float -> float -> float -> CanvasGradient.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreateRadialGradient|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreateRadialGradient|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double"
+external isPointInStroke_3 : t -> Path2D.t -> float -> CanvasFillRule.t -> bool = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInStroke|WebSharper.JavaScript.Path2D|System.Double|WebSharper.JavaScript.CanvasFillRule" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInStroke|WebSharper.JavaScript.Path2D|System.Double|WebSharper.JavaScript.CanvasFillRule"
+(* instance *)
+external isPointInStroke_4 : t -> float -> float -> CanvasFillRule.t -> bool = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInStroke|System.Double|System.Double|WebSharper.JavaScript.CanvasFillRule" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInStroke|System.Double|System.Double|WebSharper.JavaScript.CanvasFillRule"
+(* instance *)
+external isPointInPath_4 : t -> float -> float -> CanvasFillRule.t -> bool = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInPath|System.Double|System.Double|WebSharper.JavaScript.CanvasFillRule" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInPath|System.Double|System.Double|WebSharper.JavaScript.CanvasFillRule"
+(* instance *)
+external strokeText : t -> string -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#StrokeText|System.String|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#StrokeText|System.String|System.Double|System.Double"
+(* instance *)
+external fillText : t -> string -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#FillText|System.String|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#FillText|System.String|System.Double|System.Double"
+(* instance *)
+external drawImage : t -> EventTarget.t -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#DrawImage|WebSharper.JavaScript.Dom.Element|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#DrawImage|WebSharper.JavaScript.Dom.Element|System.Double|System.Double"
+(* instance *)
+external putImageData : t -> ImageData.t -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#PutImageData|WebSharper.JavaScript.ImageData|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#PutImageData|WebSharper.JavaScript.ImageData|System.Double|System.Double"
+(* instance *)
+external createImageData_3 : t -> float -> float -> ImageDataSettings.t -> ImageData.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreateImageData|System.Double|System.Double|WebSharper.JavaScript.ImageDataSettings" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreateImageData|System.Double|System.Double|WebSharper.JavaScript.ImageDataSettings"
 (* instance *)
 external createLinearGradient : t -> float -> float -> float -> float -> CanvasGradient.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreateLinearGradient|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreateLinearGradient|System.Double|System.Double|System.Double|System.Double"
 (* instance *)
@@ -53,220 +223,50 @@ external fillRect : t -> float -> float -> float -> float -> unit = "ws:WebSharp
 (* instance *)
 external clearRect : t -> float -> float -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#ClearRect|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#ClearRect|System.Double|System.Double|System.Double|System.Double"
 (* instance *)
-external isPointInStroke : t -> Path2D.t -> float -> bool = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInStroke|WebSharper.JavaScript.Path2D|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInStroke|WebSharper.JavaScript.Path2D|System.Double"
-(* instance *)
-external isPointInStroke_2 : t -> Path2D.t -> float -> CanvasFillRule.t -> bool = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInStroke|WebSharper.JavaScript.Path2D|System.Double|WebSharper.JavaScript.CanvasFillRule" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInStroke|WebSharper.JavaScript.Path2D|System.Double|WebSharper.JavaScript.CanvasFillRule"
-(* instance *)
-external isPointInStroke_3 : t -> float -> float -> bool = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInStroke|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInStroke|System.Double|System.Double"
-(* instance *)
-external isPointInStroke_4 : t -> float -> float -> CanvasFillRule.t -> bool = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInStroke|System.Double|System.Double|WebSharper.JavaScript.CanvasFillRule" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInStroke|System.Double|System.Double|WebSharper.JavaScript.CanvasFillRule"
-(* instance *)
-external isPointInPath : t -> Path2D.t -> bool = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInPath|WebSharper.JavaScript.Path2D" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInPath|WebSharper.JavaScript.Path2D"
-(* instance *)
-external isPointInPath_2 : t -> Path2D.t -> CanvasFillRule.t -> bool = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInPath|WebSharper.JavaScript.Path2D|WebSharper.JavaScript.CanvasFillRule" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInPath|WebSharper.JavaScript.Path2D|WebSharper.JavaScript.CanvasFillRule"
-(* instance *)
-external isPointInPath_3 : t -> float -> float -> bool = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInPath|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInPath|System.Double|System.Double"
-(* instance *)
-external isPointInPath_4 : t -> float -> float -> CanvasFillRule.t -> bool = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInPath|System.Double|System.Double|WebSharper.JavaScript.CanvasFillRule" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#IsPointInPath|System.Double|System.Double|WebSharper.JavaScript.CanvasFillRule"
-(* instance *)
-external clip : t -> Path2D.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Clip|WebSharper.JavaScript.Path2D" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Clip|WebSharper.JavaScript.Path2D"
-(* instance *)
-external clip_2 : t -> Path2D.t -> CanvasFillRule.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Clip|WebSharper.JavaScript.Path2D|WebSharper.JavaScript.CanvasFillRule" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Clip|WebSharper.JavaScript.Path2D|WebSharper.JavaScript.CanvasFillRule"
-(* instance *)
-external clip_3 : t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Clip|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Clip|"
-(* instance *)
-external clip_4 : t -> CanvasFillRule.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Clip|WebSharper.JavaScript.CanvasFillRule" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Clip|WebSharper.JavaScript.CanvasFillRule"
-(* instance *)
-external stroke : t -> Path2D.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Stroke|WebSharper.JavaScript.Path2D" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Stroke|WebSharper.JavaScript.Path2D"
-(* instance *)
-external stroke_2 : t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Stroke|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Stroke|"
-(* instance *)
-external fill : t -> Path2D.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Fill|WebSharper.JavaScript.Path2D" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Fill|WebSharper.JavaScript.Path2D"
-(* instance *)
-external fill_2 : t -> Path2D.t -> CanvasFillRule.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Fill|WebSharper.JavaScript.Path2D|WebSharper.JavaScript.CanvasFillRule" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Fill|WebSharper.JavaScript.Path2D|WebSharper.JavaScript.CanvasFillRule"
-(* instance *)
-external fill_3 : t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Fill|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Fill|"
-(* instance *)
-external fill_4 : t -> CanvasFillRule.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Fill|WebSharper.JavaScript.CanvasFillRule" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Fill|WebSharper.JavaScript.CanvasFillRule"
-(* instance *)
-external beginPath : t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#BeginPath|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#BeginPath|"
-(* instance *)
-external scrollPathIntoView : t -> Path2D.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#ScrollPathIntoView|WebSharper.JavaScript.Path2D" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#ScrollPathIntoView|WebSharper.JavaScript.Path2D"
-(* instance *)
-external scrollPathIntoView_2 : t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#ScrollPathIntoView|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#ScrollPathIntoView|"
-(* instance *)
-external drawFocusIfNeeded : t -> Path2D.t -> EventTarget.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#DrawFocusIfNeeded|WebSharper.JavaScript.Path2D|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#DrawFocusIfNeeded|WebSharper.JavaScript.Path2D|WebSharper.JavaScript.Dom.Element"
-(* instance *)
-external drawFocusIfNeeded_2 : t -> EventTarget.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#DrawFocusIfNeeded|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#DrawFocusIfNeeded|WebSharper.JavaScript.Dom.Element"
-(* instance *)
-external measureText : t -> string -> TextMetrics.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#MeasureText|System.String" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#MeasureText|System.String"
-(* instance *)
-external strokeText : t -> string -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#StrokeText|System.String|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#StrokeText|System.String|System.Double|System.Double"
-(* instance *)
 external strokeText_2 : t -> string -> float -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#StrokeText|System.String|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#StrokeText|System.String|System.Double|System.Double|System.Double"
-(* instance *)
-external fillText : t -> string -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#FillText|System.String|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#FillText|System.String|System.Double|System.Double"
 (* instance *)
 external fillText_2 : t -> string -> float -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#FillText|System.String|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#FillText|System.String|System.Double|System.Double|System.Double"
 (* instance *)
-external drawImage : t -> EventTarget.t -> float -> float -> float -> float -> float -> float -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#DrawImage|WebSharper.JavaScript.Dom.Element|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#DrawImage|WebSharper.JavaScript.Dom.Element|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double"
-(* instance *)
-external drawImage_2 : t -> EventTarget.t -> float -> float -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#DrawImage|WebSharper.JavaScript.Dom.Element|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#DrawImage|WebSharper.JavaScript.Dom.Element|System.Double|System.Double|System.Double|System.Double"
-(* instance *)
-external drawImage_3 : t -> EventTarget.t -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#DrawImage|WebSharper.JavaScript.Dom.Element|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#DrawImage|WebSharper.JavaScript.Dom.Element|System.Double|System.Double"
-(* instance *)
-external putImageData : t -> ImageData.t -> float -> float -> float -> float -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#PutImageData|WebSharper.JavaScript.ImageData|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#PutImageData|WebSharper.JavaScript.ImageData|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double"
-(* instance *)
-external putImageData_2 : t -> ImageData.t -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#PutImageData|WebSharper.JavaScript.ImageData|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#PutImageData|WebSharper.JavaScript.ImageData|System.Double|System.Double"
-(* instance *)
 external getImageData : t -> float -> float -> float -> float -> ImageData.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#GetImageData|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#GetImageData|System.Double|System.Double|System.Double|System.Double"
-(* instance *)
-external getImageData_2 : t -> float -> float -> float -> float -> ImageDataSettings.t -> ImageData.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#GetImageData|System.Double|System.Double|System.Double|System.Double|WebSharper.JavaScript.ImageDataSettings" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#GetImageData|System.Double|System.Double|System.Double|System.Double|WebSharper.JavaScript.ImageDataSettings"
-(* instance *)
-external createImageData : t -> ImageData.t -> ImageData.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreateImageData|WebSharper.JavaScript.ImageData" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreateImageData|WebSharper.JavaScript.ImageData"
-(* instance *)
-external createImageData_2 : t -> float -> float -> ImageData.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreateImageData|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreateImageData|System.Double|System.Double"
-(* instance *)
-external createImageData_3 : t -> float -> float -> ImageDataSettings.t -> ImageData.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreateImageData|System.Double|System.Double|WebSharper.JavaScript.ImageDataSettings" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreateImageData|System.Double|System.Double|WebSharper.JavaScript.ImageDataSettings"
-(* instance *)
-external setLineDash : t -> (float) array -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#SetLineDash|System.Double[]" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#SetLineDash|System.Double[]"
-(* instance *)
-external getLineDash : t -> (float) array = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#GetLineDash|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#GetLineDash|"
 (* instance *)
 external rect : t -> float -> float -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Rect|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Rect|System.Double|System.Double|System.Double|System.Double"
 (* instance *)
-external ellipse : t -> float -> float -> float -> float -> float -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Ellipse|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Ellipse|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double"
+external quadraticCurveTo : t -> float -> float -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#QuadraticCurveTo|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#QuadraticCurveTo|System.Double|System.Double|System.Double|System.Double"
 (* instance *)
-external ellipse_2 : t -> float -> float -> float -> float -> float -> float -> float -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Ellipse|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double|System.Boolean" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Ellipse|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double|System.Boolean"
+external roundRect : t -> float -> float -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#RoundRect|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#RoundRect|System.Double|System.Double|System.Double|System.Double"
+(* instance *)
+external drawImage_2 : t -> EventTarget.t -> float -> float -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#DrawImage|WebSharper.JavaScript.Dom.Element|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#DrawImage|WebSharper.JavaScript.Dom.Element|System.Double|System.Double|System.Double|System.Double"
+(* instance *)
+external getImageData_2 : t -> float -> float -> float -> float -> ImageDataSettings.t -> ImageData.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#GetImageData|System.Double|System.Double|System.Double|System.Double|WebSharper.JavaScript.ImageDataSettings" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#GetImageData|System.Double|System.Double|System.Double|System.Double|WebSharper.JavaScript.ImageDataSettings"
 (* instance *)
 external arcTo : t -> float -> float -> float -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#ArcTo|System.Double|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#ArcTo|System.Double|System.Double|System.Double|System.Double|System.Double"
 (* instance *)
 external arc : t -> float -> float -> float -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Arc|System.Double|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Arc|System.Double|System.Double|System.Double|System.Double|System.Double"
 (* instance *)
-external arc_2 : t -> float -> float -> float -> float -> float -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Arc|System.Double|System.Double|System.Double|System.Double|System.Double|System.Boolean" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Arc|System.Double|System.Double|System.Double|System.Double|System.Double|System.Boolean"
-(* instance *)
-external quadraticCurveTo : t -> float -> float -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#QuadraticCurveTo|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#QuadraticCurveTo|System.Double|System.Double|System.Double|System.Double"
-(* instance *)
-external bezierCurveTo : t -> float -> float -> float -> float -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#BezierCurveTo|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#BezierCurveTo|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double"
-(* instance *)
-external lineTo : t -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#LineTo|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#LineTo|System.Double|System.Double"
-(* instance *)
-external moveTo : t -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#MoveTo|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#MoveTo|System.Double|System.Double"
-(* instance *)
-external roundRect : t -> float -> float -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#RoundRect|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#RoundRect|System.Double|System.Double|System.Double|System.Double"
-(* instance *)
 external roundRect_2 : t -> float -> float -> float -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#RoundRect|System.Double|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#RoundRect|System.Double|System.Double|System.Double|System.Double|System.Double"
 (* instance *)
 external roundRect_3 : t -> float -> float -> float -> float -> DOMPointInit.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#RoundRect|System.Double|System.Double|System.Double|System.Double|WebSharper.JavaScript.DOMPointInit" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#RoundRect|System.Double|System.Double|System.Double|System.Double|WebSharper.JavaScript.DOMPointInit"
 (* instance *)
+external setTransform : t -> float -> float -> float -> float -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#SetTransform|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#SetTransform|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double"
+(* instance *)
+external transform : t -> float -> float -> float -> float -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Transform|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Transform|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double"
+(* instance *)
+external createRadialGradient : t -> float -> float -> float -> float -> float -> float -> CanvasGradient.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreateRadialGradient|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#CreateRadialGradient|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double"
+(* instance *)
+external arc_2 : t -> float -> float -> float -> float -> float -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Arc|System.Double|System.Double|System.Double|System.Double|System.Double|System.Boolean" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Arc|System.Double|System.Double|System.Double|System.Double|System.Double|System.Boolean"
+(* instance *)
+external bezierCurveTo : t -> float -> float -> float -> float -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#BezierCurveTo|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#BezierCurveTo|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double"
+(* instance *)
+external putImageData_2 : t -> ImageData.t -> float -> float -> float -> float -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#PutImageData|WebSharper.JavaScript.ImageData|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#PutImageData|WebSharper.JavaScript.ImageData|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double"
+(* instance *)
+external ellipse : t -> float -> float -> float -> float -> float -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Ellipse|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Ellipse|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double"
+(* instance *)
+external ellipse_2 : t -> float -> float -> float -> float -> float -> float -> float -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Ellipse|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double|System.Boolean" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#Ellipse|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double|System.Boolean"
+(* instance *)
+external drawImage_3 : t -> EventTarget.t -> float -> float -> float -> float -> float -> float -> float -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#DrawImage|WebSharper.JavaScript.Dom.Element|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#DrawImage|WebSharper.JavaScript.Dom.Element|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double|System.Double"
+(* instance *)
+external setLineDash : t -> (float) array -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#SetLineDash|System.Double[]" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#SetLineDash|System.Double[]"
+(* instance *)
 external roundRect_4 : t -> float -> float -> float -> float -> (float) array -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#RoundRect|System.Double|System.Double|System.Double|System.Double|System.Double[]" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#RoundRect|System.Double|System.Double|System.Double|System.Double|System.Double[]"
 (* instance *)
 external roundRect_5 : t -> float -> float -> float -> float -> (DOMPointInit.t) array -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#RoundRect|System.Double|System.Double|System.Double|System.Double|WebSharper.JavaScript.DOMPointInit[]" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#RoundRect|System.Double|System.Double|System.Double|System.Double|WebSharper.JavaScript.DOMPointInit[]"
-(* instance *)
-external closePath : t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#ClosePath|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#ClosePath|"
-(* inline *)
-external get_Canvas : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_Canvas|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_Canvas|"
-(* inline *)
-external get_GlobalCompositeOperation : t -> GlobalCompositeOperation.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_GlobalCompositeOperation|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_GlobalCompositeOperation|"
-(* inline *)
-external set_GlobalCompositeOperation : t -> GlobalCompositeOperation.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_GlobalCompositeOperation|WebSharper.JavaScript.GlobalCompositeOperation" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_GlobalCompositeOperation|WebSharper.JavaScript.GlobalCompositeOperation"
-(* inline *)
-external get_GlobalAlpha : t -> float = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_GlobalAlpha|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_GlobalAlpha|"
-(* inline *)
-external set_GlobalAlpha : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_GlobalAlpha|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_GlobalAlpha|System.Double"
-(* inline *)
-external get_ImageSmoothingQuality : t -> ImageSmoothingQuality.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_ImageSmoothingQuality|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_ImageSmoothingQuality|"
-(* inline *)
-external set_ImageSmoothingQuality : t -> ImageSmoothingQuality.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_ImageSmoothingQuality|WebSharper.JavaScript.ImageSmoothingQuality" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_ImageSmoothingQuality|WebSharper.JavaScript.ImageSmoothingQuality"
-(* inline *)
-external get_ImageSmootingEnabled : t -> bool = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_ImageSmootingEnabled|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_ImageSmootingEnabled|"
-(* inline *)
-external set_ImageSmootingEnabled : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_ImageSmootingEnabled|System.Boolean" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_ImageSmootingEnabled|System.Boolean"
-(* inline *)
-external get_FillStyle : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_FillStyle|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_FillStyle|"
-(* inline *)
-external set_FillStyle : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_FillStyle|System.Object" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_FillStyle|System.Object"
-(* inline *)
-external get_StrokeStyle : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_StrokeStyle|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_StrokeStyle|"
-(* inline *)
-external set_StrokeStyle : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_StrokeStyle|System.Object" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_StrokeStyle|System.Object"
-(* inline *)
-external get_ShadowColor : t -> string = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_ShadowColor|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_ShadowColor|"
-(* inline *)
-external set_ShadowColor : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_ShadowColor|System.String" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_ShadowColor|System.String"
-(* inline *)
-external get_ShadowBlur : t -> float = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_ShadowBlur|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_ShadowBlur|"
-(* inline *)
-external set_ShadowBlur : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_ShadowBlur|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_ShadowBlur|System.Double"
-(* inline *)
-external get_ShadowOffsetY : t -> float = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_ShadowOffsetY|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_ShadowOffsetY|"
-(* inline *)
-external set_ShadowOffsetY : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_ShadowOffsetY|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_ShadowOffsetY|System.Double"
-(* inline *)
-external get_ShadowOffsetX : t -> float = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_ShadowOffsetX|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_ShadowOffsetX|"
-(* inline *)
-external set_ShadowOffsetX : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_ShadowOffsetX|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_ShadowOffsetX|System.Double"
-(* inline *)
-external get_Filter : t -> string = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_Filter|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_Filter|"
-(* inline *)
-external set_Filter : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_Filter|System.String" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_Filter|System.String"
-(* inline *)
-external get_LineDashOffset : t -> float = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_LineDashOffset|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_LineDashOffset|"
-(* inline *)
-external set_LineDashOffset : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_LineDashOffset|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_LineDashOffset|System.Double"
-(* inline *)
-external get_MiterLimit : t -> float = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_MiterLimit|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_MiterLimit|"
-(* inline *)
-external set_MiterLimit : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_MiterLimit|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_MiterLimit|System.Double"
-(* inline *)
-external get_LineJoin : t -> CanvasLineJoin.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_LineJoin|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_LineJoin|"
-(* inline *)
-external set_LineJoin : t -> CanvasLineJoin.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_LineJoin|WebSharper.JavaScript.CanvasLineJoin" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_LineJoin|WebSharper.JavaScript.CanvasLineJoin"
-(* inline *)
-external get_LineCap : t -> LineCap.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_LineCap|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_LineCap|"
-(* inline *)
-external set_LineCap : t -> LineCap.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_LineCap|WebSharper.JavaScript.LineCap" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_LineCap|WebSharper.JavaScript.LineCap"
-(* inline *)
-external get_LineWidth : t -> float = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_LineWidth|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_LineWidth|"
-(* inline *)
-external set_LineWidth : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_LineWidth|System.Double" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_LineWidth|System.Double"
-(* inline *)
-external get_WordSpacing : t -> string = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_WordSpacing|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_WordSpacing|"
-(* inline *)
-external set_WordSpacing : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_WordSpacing|System.String" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_WordSpacing|System.String"
-(* inline *)
-external get_TextRendering : t -> CanvasTextRendering.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_TextRendering|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_TextRendering|"
-(* inline *)
-external set_TextRendering : t -> CanvasTextRendering.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_TextRendering|WebSharper.JavaScript.CanvasTextRendering" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_TextRendering|WebSharper.JavaScript.CanvasTextRendering"
-(* inline *)
-external get_FontVariantCaps : t -> CanvasFontVariantCaps.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_FontVariantCaps|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_FontVariantCaps|"
-(* inline *)
-external set_FontVariantCaps : t -> CanvasFontVariantCaps.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_FontVariantCaps|WebSharper.JavaScript.CanvasFontVariantCaps" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_FontVariantCaps|WebSharper.JavaScript.CanvasFontVariantCaps"
-(* inline *)
-external get_FontStretch : t -> CanvasFontStretch.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_FontStretch|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_FontStretch|"
-(* inline *)
-external set_FontStretch : t -> CanvasFontStretch.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_FontStretch|WebSharper.JavaScript.CanvasFontStretch" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_FontStretch|WebSharper.JavaScript.CanvasFontStretch"
-(* inline *)
-external get_FontKerning : t -> CanvasFontKerning.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_FontKerning|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_FontKerning|"
-(* inline *)
-external set_FontKerning : t -> CanvasFontKerning.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_FontKerning|WebSharper.JavaScript.CanvasFontKerning" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_FontKerning|WebSharper.JavaScript.CanvasFontKerning"
-(* inline *)
-external get_LetterSpacing : t -> string = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_LetterSpacing|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_LetterSpacing|"
-(* inline *)
-external set_LetterSpacing : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_LetterSpacing|System.String" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_LetterSpacing|System.String"
-(* inline *)
-external get_Direction : t -> CanvasTextDirection.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_Direction|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_Direction|"
-(* inline *)
-external set_Direction : t -> CanvasTextDirection.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_Direction|WebSharper.JavaScript.CanvasTextDirection" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_Direction|WebSharper.JavaScript.CanvasTextDirection"
-(* inline *)
-external get_TextBaseline : t -> CanvasTextBaseLine.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_TextBaseline|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_TextBaseline|"
-(* inline *)
-external set_TextBaseline : t -> CanvasTextBaseLine.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_TextBaseline|WebSharper.JavaScript.CanvasTextBaseLine" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_TextBaseline|WebSharper.JavaScript.CanvasTextBaseLine"
-(* inline *)
-external get_TextAlign : t -> CanvasTextAlign.t = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_TextAlign|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_TextAlign|"
-(* inline *)
-external set_TextAlign : t -> CanvasTextAlign.t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_TextAlign|WebSharper.JavaScript.CanvasTextAlign" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_TextAlign|WebSharper.JavaScript.CanvasTextAlign"
-(* inline *)
-external get_Font : t -> string = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_Font|" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#get_Font|"
-(* inline *)
-external set_Font : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_Font|System.String" "ws:WebSharper.JavaScript!globalThis.CanvasRenderingContext2D#set_Font|System.String"

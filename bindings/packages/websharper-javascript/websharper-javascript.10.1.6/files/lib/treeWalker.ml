@@ -17,10 +17,10 @@ external parentNode : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.
 (* inline *)
 external get_CurrentNode : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.TreeWalker#get_CurrentNode|" "ws:WebSharper.JavaScript!globalThis.TreeWalker#get_CurrentNode|"
 (* inline *)
-external set_CurrentNode : t -> EventTarget.t -> unit = "ws:WebSharper.JavaScript!globalThis.TreeWalker#set_CurrentNode|WebSharper.JavaScript.Dom.Node" "ws:WebSharper.JavaScript!globalThis.TreeWalker#set_CurrentNode|WebSharper.JavaScript.Dom.Node"
-(* inline *)
 external get_Filter : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.TreeWalker#get_Filter|" "ws:WebSharper.JavaScript!globalThis.TreeWalker#get_Filter|"
 (* inline *)
 external get_WhatToShow : t -> int = "ws:WebSharper.JavaScript!globalThis.TreeWalker#get_WhatToShow|" "ws:WebSharper.JavaScript!globalThis.TreeWalker#get_WhatToShow|"
 (* inline *)
 external get_Root : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.TreeWalker#get_Root|" "ws:WebSharper.JavaScript!globalThis.TreeWalker#get_Root|"
+(* inline *)
+external set_CurrentNode : t -> EventTarget.t -> unit = "ws:WebSharper.JavaScript!globalThis.TreeWalker#set_CurrentNode|WebSharper.JavaScript.Dom.Node" "ws:WebSharper.JavaScript!globalThis.TreeWalker#set_CurrentNode|WebSharper.JavaScript.Dom.Node"

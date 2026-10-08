@@ -15,139 +15,43 @@ external exitPointerLock : t -> unit = "ws:WebSharper.JavaScript!globalThis.Docu
 (* inline *)
 external exitPictureInPicture : t -> (unit) Promise.t = "ws:WebSharper.JavaScript!globalThis.Document#ExitPictureInPicture|" "ws:WebSharper.JavaScript!globalThis.Document#ExitPictureInPicture|"
 (* inline *)
-external elementsFromPoint : t -> int -> int -> (EventTarget.t) array = "ws:WebSharper.JavaScript!globalThis.Document#ElementsFromPoint|System.Int32|System.Int32" "ws:WebSharper.JavaScript!globalThis.Document#ElementsFromPoint|System.Int32|System.Int32"
-(* inline *)
-external elementFromPoint : t -> int -> int -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#ElementFromPoint|System.Int32|System.Int32" "ws:WebSharper.JavaScript!globalThis.Document#ElementFromPoint|System.Int32|System.Int32"
-(* inline *)
-external createEvent : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateEvent|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateEvent|System.String"
-(* inline *)
 external createRange : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateRange|" "ws:WebSharper.JavaScript!globalThis.Document#CreateRange|"
-(* inline *)
-external createTreeWalker : t -> EventTarget.t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateTreeWalker|WebSharper.JavaScript.Dom.Node" "ws:WebSharper.JavaScript!globalThis.Document#CreateTreeWalker|WebSharper.JavaScript.Dom.Node"
-(* inline *)
-external createTreeWalker_2 : t -> EventTarget.t -> int -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateTreeWalker|WebSharper.JavaScript.Dom.Node|System.Int32" "ws:WebSharper.JavaScript!globalThis.Document#CreateTreeWalker|WebSharper.JavaScript.Dom.Node|System.Int32"
-(* inline *)
-external createTreeWalker_3 : t -> EventTarget.t -> int -> EventTarget.t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateTreeWalker|WebSharper.JavaScript.Dom.Node|System.Int32|WebSharper.JavaScript.Dom.NodeFilter" "ws:WebSharper.JavaScript!globalThis.Document#CreateTreeWalker|WebSharper.JavaScript.Dom.Node|System.Int32|WebSharper.JavaScript.Dom.NodeFilter"
-(* inline *)
-external createNodeIterator : t -> EventTarget.t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateNodeIterator|WebSharper.JavaScript.Dom.Node" "ws:WebSharper.JavaScript!globalThis.Document#CreateNodeIterator|WebSharper.JavaScript.Dom.Node"
-(* inline *)
-external createNodeIterator_2 : t -> EventTarget.t -> int -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateNodeIterator|WebSharper.JavaScript.Dom.Node|System.Int32" "ws:WebSharper.JavaScript!globalThis.Document#CreateNodeIterator|WebSharper.JavaScript.Dom.Node|System.Int32"
-(* inline *)
-external createNodeIterator_3 : t -> EventTarget.t -> int -> EventTarget.t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateNodeIterator|WebSharper.JavaScript.Dom.Node|System.Int32|WebSharper.JavaScript.Dom.NodeFilter" "ws:WebSharper.JavaScript!globalThis.Document#CreateNodeIterator|WebSharper.JavaScript.Dom.Node|System.Int32|WebSharper.JavaScript.Dom.NodeFilter"
-(* inline *)
-external queryCommandSupported : t -> string -> bool = "ws:WebSharper.JavaScript!globalThis.Document#QueryCommandSupported|System.String" "ws:WebSharper.JavaScript!globalThis.Document#QueryCommandSupported|System.String"
-(* inline *)
-external queryCommandEnabled : t -> string -> bool = "ws:WebSharper.JavaScript!globalThis.Document#QueryCommandEnabled|System.String" "ws:WebSharper.JavaScript!globalThis.Document#QueryCommandEnabled|System.String"
 (* inline *)
 external hasFocus : t -> bool = "ws:WebSharper.JavaScript!globalThis.Document#HasFocus|" "ws:WebSharper.JavaScript!globalThis.Document#HasFocus|"
 (* inline *)
 external getSelection : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Document#GetSelection|" "ws:WebSharper.JavaScript!globalThis.Document#GetSelection|"
 (* inline *)
-external getElementsByName : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#GetElementsByName|System.String" "ws:WebSharper.JavaScript!globalThis.Document#GetElementsByName|System.String"
-(* inline *)
-external execCommand : t -> string -> bool -> string -> bool = "ws:WebSharper.JavaScript!globalThis.Document#ExecCommand|System.String|System.Boolean|System.String" "ws:WebSharper.JavaScript!globalThis.Document#ExecCommand|System.String|System.Boolean|System.String"
-(* inline *)
-external writeln : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#Writeln|System.String" "ws:WebSharper.JavaScript!globalThis.Document#Writeln|System.String"
-(* inline *)
-external write : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#Write|System.String" "ws:WebSharper.JavaScript!globalThis.Document#Write|System.String"
-(* inline *)
 external open_ : t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#Open|" "ws:WebSharper.JavaScript!globalThis.Document#Open|"
 (* inline *)
 external close : t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#Close|" "ws:WebSharper.JavaScript!globalThis.Document#Close|"
 (* inline *)
-external renameNode : t -> EventTarget.t -> string -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#RenameNode|WebSharper.JavaScript.Dom.Node|System.String|System.String" "ws:WebSharper.JavaScript!globalThis.Document#RenameNode|WebSharper.JavaScript.Dom.Node|System.String|System.String"
-(* inline *)
 external normalizeDocument : t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#NormalizeDocument|" "ws:WebSharper.JavaScript!globalThis.Document#NormalizeDocument|"
-(* inline *)
-external importNode : t -> EventTarget.t -> bool -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#ImportNode|WebSharper.JavaScript.Dom.Node|System.Boolean" "ws:WebSharper.JavaScript!globalThis.Document#ImportNode|WebSharper.JavaScript.Dom.Node|System.Boolean"
-(* inline *)
-external getElementsByTagNameNS : t -> string -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#GetElementsByTagNameNS|System.String|System.String" "ws:WebSharper.JavaScript!globalThis.Document#GetElementsByTagNameNS|System.String|System.String"
-(* inline *)
-external getElementsByTagName : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#GetElementsByTagName|System.String" "ws:WebSharper.JavaScript!globalThis.Document#GetElementsByTagName|System.String"
-(* inline *)
-external getElementById : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#GetElementById|System.String" "ws:WebSharper.JavaScript!globalThis.Document#GetElementById|System.String"
-(* inline *)
-external getElementsByClassName : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#GetElementsByClassName|System.String" "ws:WebSharper.JavaScript!globalThis.Document#GetElementsByClassName|System.String"
-(* inline *)
-external enableStyleSheetForSet : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#EnableStyleSheetForSet|System.String" "ws:WebSharper.JavaScript!globalThis.Document#EnableStyleSheetForSet|System.String"
-(* inline *)
-external createTextNode : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateTextNode|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateTextNode|System.String"
-(* inline *)
-external createProcessingInstruction : t -> string -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateProcessingInstruction|System.String|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateProcessingInstruction|System.String|System.String"
-(* inline *)
-external createEntityReference : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateEntityReference|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateEntityReference|System.String"
-(* inline *)
-external createElementNS : t -> string -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateElementNS|System.String|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateElementNS|System.String|System.String"
-(* inline *)
-external createElementNS_2 : t -> string -> string -> ElementCreateOptions.t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateElementNS|System.String|System.String|WebSharper.JavaScript.Dom.ElementCreateOptions" "ws:WebSharper.JavaScript!globalThis.Document#CreateElementNS|System.String|System.String|WebSharper.JavaScript.Dom.ElementCreateOptions"
-(* inline *)
-external createElement : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateElement|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateElement|System.String"
-(* inline *)
-external createElement_2 : t -> string -> ElementCreateOptions.t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateElement|System.String|WebSharper.JavaScript.Dom.ElementCreateOptions" "ws:WebSharper.JavaScript!globalThis.Document#CreateElement|System.String|WebSharper.JavaScript.Dom.ElementCreateOptions"
 (* inline *)
 external createDocumentFragment : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateDocumentFragment|" "ws:WebSharper.JavaScript!globalThis.Document#CreateDocumentFragment|"
 (* inline *)
-external createComment : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateComment|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateComment|System.String"
+external replaceChildren : t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#ReplaceChildren|" "ws:WebSharper.JavaScript!globalThis.Document#ReplaceChildren|"
 (* inline *)
-external createCDATASection : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateCDATASection|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateCDATASection|System.String"
+external append : t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#Append|" "ws:WebSharper.JavaScript!globalThis.Document#Append|"
 (* inline *)
-external createAttributeNS : t -> string -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateAttributeNS|System.String|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateAttributeNS|System.String|System.String"
-(* inline *)
-external createAttribute : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateAttribute|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateAttribute|System.String"
-(* inline *)
-external adoptNode : t -> EventTarget.t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#AdoptNode|WebSharper.JavaScript.Dom.Node" "ws:WebSharper.JavaScript!globalThis.Document#AdoptNode|WebSharper.JavaScript.Dom.Node"
-(* inline *)
-external replaceChildren : t -> (string) array -> unit = "ws:WebSharper.JavaScript!globalThis.Document#ReplaceChildren|System.String[]" "ws:WebSharper.JavaScript!globalThis.Document#ReplaceChildren|System.String[]"
-(* inline *)
-external replaceChildren_2 : t -> (EventTarget.t) array -> unit = "ws:WebSharper.JavaScript!globalThis.Document#ReplaceChildren|WebSharper.JavaScript.Dom.Node[]" "ws:WebSharper.JavaScript!globalThis.Document#ReplaceChildren|WebSharper.JavaScript.Dom.Node[]"
-(* inline *)
-external replaceChildren_3 : t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#ReplaceChildren|" "ws:WebSharper.JavaScript!globalThis.Document#ReplaceChildren|"
-(* inline *)
-external append : t -> (string) array -> unit = "ws:WebSharper.JavaScript!globalThis.Document#Append|System.String[]" "ws:WebSharper.JavaScript!globalThis.Document#Append|System.String[]"
-(* inline *)
-external append_2 : t -> (EventTarget.t) array -> unit = "ws:WebSharper.JavaScript!globalThis.Document#Append|WebSharper.JavaScript.Dom.Node[]" "ws:WebSharper.JavaScript!globalThis.Document#Append|WebSharper.JavaScript.Dom.Node[]"
-(* inline *)
-external append_3 : t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#Append|" "ws:WebSharper.JavaScript!globalThis.Document#Append|"
-(* inline *)
-external prepend : t -> (string) array -> unit = "ws:WebSharper.JavaScript!globalThis.Document#Prepend|System.String[]" "ws:WebSharper.JavaScript!globalThis.Document#Prepend|System.String[]"
-(* inline *)
-external prepend_2 : t -> (EventTarget.t) array -> unit = "ws:WebSharper.JavaScript!globalThis.Document#Prepend|WebSharper.JavaScript.Dom.Node[]" "ws:WebSharper.JavaScript!globalThis.Document#Prepend|WebSharper.JavaScript.Dom.Node[]"
-(* inline *)
-external prepend_3 : t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#Prepend|" "ws:WebSharper.JavaScript!globalThis.Document#Prepend|"
-(* inline *)
-external querySelectorAll : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#QuerySelectorAll|System.String" "ws:WebSharper.JavaScript!globalThis.Document#QuerySelectorAll|System.String"
-(* inline *)
-external querySelector : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#QuerySelector|System.String" "ws:WebSharper.JavaScript!globalThis.Document#QuerySelector|System.String"
+external prepend : t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#Prepend|" "ws:WebSharper.JavaScript!globalThis.Document#Prepend|"
 (* inline *)
 external get_Current : unit -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Current|" "ws:WebSharper.JavaScript!globalThis.Document#get_Current|"
 (* inline *)
 external get_OnReadyStateChange : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Document#get_OnReadyStateChange|" "ws:WebSharper.JavaScript!globalThis.Document#get_OnReadyStateChange|"
 (* inline *)
-external set_OnReadyStateChange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_OnReadyStateChange|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>" "ws:WebSharper.JavaScript!globalThis.Document#set_OnReadyStateChange|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>"
-(* inline *)
 external get_OnVisibilityChange : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Document#get_OnVisibilityChange|" "ws:WebSharper.JavaScript!globalThis.Document#get_OnVisibilityChange|"
-(* inline *)
-external set_OnVisibilityChange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_OnVisibilityChange|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>" "ws:WebSharper.JavaScript!globalThis.Document#set_OnVisibilityChange|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>"
 (* inline *)
 external get_XmlVersion : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_XmlVersion|" "ws:WebSharper.JavaScript!globalThis.Document#get_XmlVersion|"
 (* inline *)
-external set_XmlVersion : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_XmlVersion|System.String" "ws:WebSharper.JavaScript!globalThis.Document#set_XmlVersion|System.String"
-(* inline *)
 external get_XmlStandalone : t -> bool = "ws:WebSharper.JavaScript!globalThis.Document#get_XmlStandalone|" "ws:WebSharper.JavaScript!globalThis.Document#get_XmlStandalone|"
 (* inline *)
-external set_XmlStandalone : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_XmlStandalone|System.Boolean" "ws:WebSharper.JavaScript!globalThis.Document#set_XmlStandalone|System.Boolean"
-(* inline *)
 external get_XmlEncoding : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_XmlEncoding|" "ws:WebSharper.JavaScript!globalThis.Document#get_XmlEncoding|"
-(* inline *)
-external set_XmlEncoding : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_XmlEncoding|System.String" "ws:WebSharper.JavaScript!globalThis.Document#set_XmlEncoding|System.String"
 (* inline *)
 external get_VisibilityState : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_VisibilityState|" "ws:WebSharper.JavaScript!globalThis.Document#get_VisibilityState|"
 (* inline *)
 external get_URL : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_URL|" "ws:WebSharper.JavaScript!globalThis.Document#get_URL|"
 (* inline *)
 external get_Title : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_Title|" "ws:WebSharper.JavaScript!globalThis.Document#get_Title|"
-(* inline *)
-external set_Title : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_Title|System.String" "ws:WebSharper.JavaScript!globalThis.Document#set_Title|System.String"
 (* inline *)
 external get_Timeline : t -> AnimationTimeLine.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Timeline|" "ws:WebSharper.JavaScript!globalThis.Document#get_Timeline|"
 (* inline *)
@@ -157,11 +61,7 @@ external get_StyleSheets : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Docu
 (* inline *)
 external get_StrictErrorChecking : t -> bool = "ws:WebSharper.JavaScript!globalThis.Document#get_StrictErrorChecking|" "ws:WebSharper.JavaScript!globalThis.Document#get_StrictErrorChecking|"
 (* inline *)
-external set_StrictErrorChecking : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_StrictErrorChecking|System.Boolean" "ws:WebSharper.JavaScript!globalThis.Document#set_StrictErrorChecking|System.Boolean"
-(* inline *)
 external get_SelectedStyleSheetSet : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_SelectedStyleSheetSet|" "ws:WebSharper.JavaScript!globalThis.Document#get_SelectedStyleSheetSet|"
-(* inline *)
-external set_SelectedStyleSheetSet : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_SelectedStyleSheetSet|System.String" "ws:WebSharper.JavaScript!globalThis.Document#set_SelectedStyleSheetSet|System.String"
 (* inline *)
 external get_Scripts : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Scripts|" "ws:WebSharper.JavaScript!globalThis.Document#get_Scripts|"
 (* inline *)
@@ -185,8 +85,6 @@ external get_LastStyleSheetSet : t -> string = "ws:WebSharper.JavaScript!globalT
 (* inline *)
 external get_Location : t -> Location.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Location|" "ws:WebSharper.JavaScript!globalThis.Document#get_Location|"
 (* inline *)
-external set_Location : t -> Location.t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_Location|WebSharper.JavaScript.Location" "ws:WebSharper.JavaScript!globalThis.Document#set_Location|WebSharper.JavaScript.Location"
-(* inline *)
 external get_Links : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Links|" "ws:WebSharper.JavaScript!globalThis.Document#get_Links|"
 (* inline *)
 external get_LastModified : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_LastModified|" "ws:WebSharper.JavaScript!globalThis.Document#get_LastModified|"
@@ -194,8 +92,6 @@ external get_LastModified : t -> string = "ws:WebSharper.JavaScript!globalThis.D
 external get_InputEncoding : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_InputEncoding|" "ws:WebSharper.JavaScript!globalThis.Document#get_InputEncoding|"
 (* inline *)
 external get_Implementation : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Implementation|" "ws:WebSharper.JavaScript!globalThis.Document#get_Implementation|"
-(* inline *)
-external set_Implementation : t -> EventTarget.t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_Implementation|WebSharper.JavaScript.Dom.Implementation" "ws:WebSharper.JavaScript!globalThis.Document#set_Implementation|WebSharper.JavaScript.Dom.Implementation"
 (* inline *)
 external get_Images : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Images|" "ws:WebSharper.JavaScript!globalThis.Document#get_Images|"
 (* inline *)
@@ -213,8 +109,6 @@ external get_Embeds : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.
 (* inline *)
 external get_Domain : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_Domain|" "ws:WebSharper.JavaScript!globalThis.Document#get_Domain|"
 (* inline *)
-external set_Domain : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_Domain|System.String" "ws:WebSharper.JavaScript!globalThis.Document#set_Domain|System.String"
-(* inline *)
 external get_DocumentURI : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_DocumentURI|" "ws:WebSharper.JavaScript!globalThis.Document#get_DocumentURI|"
 (* inline *)
 external get_DocumentElement : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_DocumentElement|" "ws:WebSharper.JavaScript!globalThis.Document#get_DocumentElement|"
@@ -223,21 +117,13 @@ external get_Doctype : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis
 (* inline *)
 external get_Dir : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_Dir|" "ws:WebSharper.JavaScript!globalThis.Document#get_Dir|"
 (* inline *)
-external set_Dir : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_Dir|System.String" "ws:WebSharper.JavaScript!globalThis.Document#set_Dir|System.String"
-(* inline *)
 external get_DesignMode : t -> DesignMode.t = "ws:WebSharper.JavaScript!globalThis.Document#get_DesignMode|" "ws:WebSharper.JavaScript!globalThis.Document#get_DesignMode|"
-(* inline *)
-external set_DesignMode : t -> DesignMode.t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_DesignMode|WebSharper.JavaScript.Dom.DesignMode" "ws:WebSharper.JavaScript!globalThis.Document#set_DesignMode|WebSharper.JavaScript.Dom.DesignMode"
 (* inline *)
 external get_DefaultView : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_DefaultView|" "ws:WebSharper.JavaScript!globalThis.Document#get_DefaultView|"
 (* inline *)
 external get_Body : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Body|" "ws:WebSharper.JavaScript!globalThis.Document#get_Body|"
 (* inline *)
-external set_Body : t -> EventTarget.t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_Body|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.JavaScript!globalThis.Document#set_Body|WebSharper.JavaScript.Dom.Element"
-(* inline *)
 external get_Cookie : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_Cookie|" "ws:WebSharper.JavaScript!globalThis.Document#get_Cookie|"
-(* inline *)
-external set_Cookie : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_Cookie|System.String" "ws:WebSharper.JavaScript!globalThis.Document#set_Cookie|System.String"
 (* inline *)
 external get_ContentType : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_ContentType|" "ws:WebSharper.JavaScript!globalThis.Document#get_ContentType|"
 (* inline *)
@@ -254,3 +140,117 @@ external get_LastElementChild : t -> Js.t = "ws:WebSharper.JavaScript!globalThis
 external get_FirstElementChild : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Document#get_FirstElementChild|" "ws:WebSharper.JavaScript!globalThis.Document#get_FirstElementChild|"
 (* inline *)
 external get_ChildElementCount : t -> int = "ws:WebSharper.JavaScript!globalThis.Document#get_ChildElementCount|" "ws:WebSharper.JavaScript!globalThis.Document#get_ChildElementCount|"
+(* inline *)
+external createEvent : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateEvent|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateEvent|System.String"
+(* inline *)
+external createTreeWalker : t -> EventTarget.t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateTreeWalker|WebSharper.JavaScript.Dom.Node" "ws:WebSharper.JavaScript!globalThis.Document#CreateTreeWalker|WebSharper.JavaScript.Dom.Node"
+(* inline *)
+external createNodeIterator : t -> EventTarget.t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateNodeIterator|WebSharper.JavaScript.Dom.Node" "ws:WebSharper.JavaScript!globalThis.Document#CreateNodeIterator|WebSharper.JavaScript.Dom.Node"
+(* inline *)
+external queryCommandSupported : t -> string -> bool = "ws:WebSharper.JavaScript!globalThis.Document#QueryCommandSupported|System.String" "ws:WebSharper.JavaScript!globalThis.Document#QueryCommandSupported|System.String"
+(* inline *)
+external queryCommandEnabled : t -> string -> bool = "ws:WebSharper.JavaScript!globalThis.Document#QueryCommandEnabled|System.String" "ws:WebSharper.JavaScript!globalThis.Document#QueryCommandEnabled|System.String"
+(* inline *)
+external getElementsByName : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#GetElementsByName|System.String" "ws:WebSharper.JavaScript!globalThis.Document#GetElementsByName|System.String"
+(* inline *)
+external writeln : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#Writeln|System.String" "ws:WebSharper.JavaScript!globalThis.Document#Writeln|System.String"
+(* inline *)
+external write : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#Write|System.String" "ws:WebSharper.JavaScript!globalThis.Document#Write|System.String"
+(* inline *)
+external getElementsByTagName : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#GetElementsByTagName|System.String" "ws:WebSharper.JavaScript!globalThis.Document#GetElementsByTagName|System.String"
+(* inline *)
+external getElementById : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#GetElementById|System.String" "ws:WebSharper.JavaScript!globalThis.Document#GetElementById|System.String"
+(* inline *)
+external getElementsByClassName : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#GetElementsByClassName|System.String" "ws:WebSharper.JavaScript!globalThis.Document#GetElementsByClassName|System.String"
+(* inline *)
+external enableStyleSheetForSet : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#EnableStyleSheetForSet|System.String" "ws:WebSharper.JavaScript!globalThis.Document#EnableStyleSheetForSet|System.String"
+(* inline *)
+external createTextNode : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateTextNode|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateTextNode|System.String"
+(* inline *)
+external createEntityReference : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateEntityReference|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateEntityReference|System.String"
+(* inline *)
+external createElement : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateElement|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateElement|System.String"
+(* inline *)
+external createComment : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateComment|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateComment|System.String"
+(* inline *)
+external createCDATASection : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateCDATASection|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateCDATASection|System.String"
+(* inline *)
+external createAttribute : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateAttribute|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateAttribute|System.String"
+(* inline *)
+external adoptNode : t -> EventTarget.t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#AdoptNode|WebSharper.JavaScript.Dom.Node" "ws:WebSharper.JavaScript!globalThis.Document#AdoptNode|WebSharper.JavaScript.Dom.Node"
+(* inline *)
+external querySelectorAll : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#QuerySelectorAll|System.String" "ws:WebSharper.JavaScript!globalThis.Document#QuerySelectorAll|System.String"
+(* inline *)
+external querySelector : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#QuerySelector|System.String" "ws:WebSharper.JavaScript!globalThis.Document#QuerySelector|System.String"
+(* inline *)
+external set_OnReadyStateChange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_OnReadyStateChange|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>" "ws:WebSharper.JavaScript!globalThis.Document#set_OnReadyStateChange|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>"
+(* inline *)
+external set_OnVisibilityChange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_OnVisibilityChange|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>" "ws:WebSharper.JavaScript!globalThis.Document#set_OnVisibilityChange|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>"
+(* inline *)
+external set_XmlVersion : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_XmlVersion|System.String" "ws:WebSharper.JavaScript!globalThis.Document#set_XmlVersion|System.String"
+(* inline *)
+external set_XmlStandalone : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_XmlStandalone|System.Boolean" "ws:WebSharper.JavaScript!globalThis.Document#set_XmlStandalone|System.Boolean"
+(* inline *)
+external set_XmlEncoding : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_XmlEncoding|System.String" "ws:WebSharper.JavaScript!globalThis.Document#set_XmlEncoding|System.String"
+(* inline *)
+external set_Title : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_Title|System.String" "ws:WebSharper.JavaScript!globalThis.Document#set_Title|System.String"
+(* inline *)
+external set_StrictErrorChecking : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_StrictErrorChecking|System.Boolean" "ws:WebSharper.JavaScript!globalThis.Document#set_StrictErrorChecking|System.Boolean"
+(* inline *)
+external set_SelectedStyleSheetSet : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_SelectedStyleSheetSet|System.String" "ws:WebSharper.JavaScript!globalThis.Document#set_SelectedStyleSheetSet|System.String"
+(* inline *)
+external set_Location : t -> Location.t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_Location|WebSharper.JavaScript.Location" "ws:WebSharper.JavaScript!globalThis.Document#set_Location|WebSharper.JavaScript.Location"
+(* inline *)
+external set_Implementation : t -> EventTarget.t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_Implementation|WebSharper.JavaScript.Dom.Implementation" "ws:WebSharper.JavaScript!globalThis.Document#set_Implementation|WebSharper.JavaScript.Dom.Implementation"
+(* inline *)
+external set_Domain : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_Domain|System.String" "ws:WebSharper.JavaScript!globalThis.Document#set_Domain|System.String"
+(* inline *)
+external set_Dir : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_Dir|System.String" "ws:WebSharper.JavaScript!globalThis.Document#set_Dir|System.String"
+(* inline *)
+external set_DesignMode : t -> DesignMode.t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_DesignMode|WebSharper.JavaScript.Dom.DesignMode" "ws:WebSharper.JavaScript!globalThis.Document#set_DesignMode|WebSharper.JavaScript.Dom.DesignMode"
+(* inline *)
+external set_Body : t -> EventTarget.t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_Body|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.JavaScript!globalThis.Document#set_Body|WebSharper.JavaScript.Dom.Element"
+(* inline *)
+external set_Cookie : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_Cookie|System.String" "ws:WebSharper.JavaScript!globalThis.Document#set_Cookie|System.String"
+(* inline *)
+external elementsFromPoint : t -> int -> int -> (EventTarget.t) array = "ws:WebSharper.JavaScript!globalThis.Document#ElementsFromPoint|System.Int32|System.Int32" "ws:WebSharper.JavaScript!globalThis.Document#ElementsFromPoint|System.Int32|System.Int32"
+(* inline *)
+external elementFromPoint : t -> int -> int -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#ElementFromPoint|System.Int32|System.Int32" "ws:WebSharper.JavaScript!globalThis.Document#ElementFromPoint|System.Int32|System.Int32"
+(* inline *)
+external createTreeWalker_2 : t -> EventTarget.t -> int -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateTreeWalker|WebSharper.JavaScript.Dom.Node|System.Int32" "ws:WebSharper.JavaScript!globalThis.Document#CreateTreeWalker|WebSharper.JavaScript.Dom.Node|System.Int32"
+(* inline *)
+external createNodeIterator_2 : t -> EventTarget.t -> int -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateNodeIterator|WebSharper.JavaScript.Dom.Node|System.Int32" "ws:WebSharper.JavaScript!globalThis.Document#CreateNodeIterator|WebSharper.JavaScript.Dom.Node|System.Int32"
+(* inline *)
+external importNode : t -> EventTarget.t -> bool -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#ImportNode|WebSharper.JavaScript.Dom.Node|System.Boolean" "ws:WebSharper.JavaScript!globalThis.Document#ImportNode|WebSharper.JavaScript.Dom.Node|System.Boolean"
+(* inline *)
+external getElementsByTagNameNS : t -> string -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#GetElementsByTagNameNS|System.String|System.String" "ws:WebSharper.JavaScript!globalThis.Document#GetElementsByTagNameNS|System.String|System.String"
+(* inline *)
+external createProcessingInstruction : t -> string -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateProcessingInstruction|System.String|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateProcessingInstruction|System.String|System.String"
+(* inline *)
+external createElementNS : t -> string -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateElementNS|System.String|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateElementNS|System.String|System.String"
+(* inline *)
+external createElement_2 : t -> string -> ElementCreateOptions.t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateElement|System.String|WebSharper.JavaScript.Dom.ElementCreateOptions" "ws:WebSharper.JavaScript!globalThis.Document#CreateElement|System.String|WebSharper.JavaScript.Dom.ElementCreateOptions"
+(* inline *)
+external createAttributeNS : t -> string -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateAttributeNS|System.String|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateAttributeNS|System.String|System.String"
+(* inline *)
+external createTreeWalker_3 : t -> EventTarget.t -> int -> EventTarget.t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateTreeWalker|WebSharper.JavaScript.Dom.Node|System.Int32|WebSharper.JavaScript.Dom.NodeFilter" "ws:WebSharper.JavaScript!globalThis.Document#CreateTreeWalker|WebSharper.JavaScript.Dom.Node|System.Int32|WebSharper.JavaScript.Dom.NodeFilter"
+(* inline *)
+external createNodeIterator_3 : t -> EventTarget.t -> int -> EventTarget.t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateNodeIterator|WebSharper.JavaScript.Dom.Node|System.Int32|WebSharper.JavaScript.Dom.NodeFilter" "ws:WebSharper.JavaScript!globalThis.Document#CreateNodeIterator|WebSharper.JavaScript.Dom.Node|System.Int32|WebSharper.JavaScript.Dom.NodeFilter"
+(* inline *)
+external execCommand : t -> string -> bool -> string -> bool = "ws:WebSharper.JavaScript!globalThis.Document#ExecCommand|System.String|System.Boolean|System.String" "ws:WebSharper.JavaScript!globalThis.Document#ExecCommand|System.String|System.Boolean|System.String"
+(* inline *)
+external renameNode : t -> EventTarget.t -> string -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#RenameNode|WebSharper.JavaScript.Dom.Node|System.String|System.String" "ws:WebSharper.JavaScript!globalThis.Document#RenameNode|WebSharper.JavaScript.Dom.Node|System.String|System.String"
+(* inline *)
+external createElementNS_2 : t -> string -> string -> ElementCreateOptions.t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateElementNS|System.String|System.String|WebSharper.JavaScript.Dom.ElementCreateOptions" "ws:WebSharper.JavaScript!globalThis.Document#CreateElementNS|System.String|System.String|WebSharper.JavaScript.Dom.ElementCreateOptions"
+(* inline *)
+external replaceChildren_2 : t -> (string) array -> unit = "ws:WebSharper.JavaScript!globalThis.Document#ReplaceChildren|System.String[]" "ws:WebSharper.JavaScript!globalThis.Document#ReplaceChildren|System.String[]"
+(* inline *)
+external replaceChildren_3 : t -> (EventTarget.t) array -> unit = "ws:WebSharper.JavaScript!globalThis.Document#ReplaceChildren|WebSharper.JavaScript.Dom.Node[]" "ws:WebSharper.JavaScript!globalThis.Document#ReplaceChildren|WebSharper.JavaScript.Dom.Node[]"
+(* inline *)
+external append_2 : t -> (string) array -> unit = "ws:WebSharper.JavaScript!globalThis.Document#Append|System.String[]" "ws:WebSharper.JavaScript!globalThis.Document#Append|System.String[]"
+(* inline *)
+external append_3 : t -> (EventTarget.t) array -> unit = "ws:WebSharper.JavaScript!globalThis.Document#Append|WebSharper.JavaScript.Dom.Node[]" "ws:WebSharper.JavaScript!globalThis.Document#Append|WebSharper.JavaScript.Dom.Node[]"
+(* inline *)
+external prepend_2 : t -> (string) array -> unit = "ws:WebSharper.JavaScript!globalThis.Document#Prepend|System.String[]" "ws:WebSharper.JavaScript!globalThis.Document#Prepend|System.String[]"
+(* inline *)
+external prepend_3 : t -> (EventTarget.t) array -> unit = "ws:WebSharper.JavaScript!globalThis.Document#Prepend|WebSharper.JavaScript.Dom.Node[]" "ws:WebSharper.JavaScript!globalThis.Document#Prepend|WebSharper.JavaScript.Dom.Node[]"

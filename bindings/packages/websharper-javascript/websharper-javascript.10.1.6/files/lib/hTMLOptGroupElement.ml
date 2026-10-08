@@ -3,8 +3,8 @@ type t = EventTarget.t
 (* inline *)
 external get_Label : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLOptGroupElement#get_Label|" "ws:WebSharper.JavaScript!globalThis.HTMLOptGroupElement#get_Label|"
 (* inline *)
-external set_Label : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLOptGroupElement#set_Label|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLOptGroupElement#set_Label|System.String"
-(* inline *)
 external get_Disabled : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLOptGroupElement#get_Disabled|" "ws:WebSharper.JavaScript!globalThis.HTMLOptGroupElement#get_Disabled|"
+(* inline *)
+external set_Label : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLOptGroupElement#set_Label|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLOptGroupElement#set_Label|System.String"
 (* inline *)
 external set_Disabled : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLOptGroupElement#set_Disabled|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLOptGroupElement#set_Disabled|System.Boolean"

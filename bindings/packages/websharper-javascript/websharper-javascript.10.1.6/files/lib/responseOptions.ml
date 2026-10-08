@@ -3,13 +3,13 @@ type t
 (* inline *)
 external get_Headers : t -> Headers.t = "ws:WebSharper.JavaScript!globalThis.ResponseOptions#get_Headers|" "ws:WebSharper.JavaScript!globalThis.ResponseOptions#get_Headers|"
 (* inline *)
-external set_Headers : t -> Headers.t -> unit = "ws:WebSharper.JavaScript!globalThis.ResponseOptions#set_Headers|WebSharper.JavaScript.Headers" "ws:WebSharper.JavaScript!globalThis.ResponseOptions#set_Headers|WebSharper.JavaScript.Headers"
-(* inline *)
 external get_StatusText : t -> string = "ws:WebSharper.JavaScript!globalThis.ResponseOptions#get_StatusText|" "ws:WebSharper.JavaScript!globalThis.ResponseOptions#get_StatusText|"
 (* inline *)
-external set_StatusText : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.ResponseOptions#set_StatusText|System.String" "ws:WebSharper.JavaScript!globalThis.ResponseOptions#set_StatusText|System.String"
-(* inline *)
 external get_Status : t -> int = "ws:WebSharper.JavaScript!globalThis.ResponseOptions#get_Status|" "ws:WebSharper.JavaScript!globalThis.ResponseOptions#get_Status|"
+(* inline *)
+external set_Headers : t -> Headers.t -> unit = "ws:WebSharper.JavaScript!globalThis.ResponseOptions#set_Headers|WebSharper.JavaScript.Headers" "ws:WebSharper.JavaScript!globalThis.ResponseOptions#set_Headers|WebSharper.JavaScript.Headers"
+(* inline *)
+external set_StatusText : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.ResponseOptions#set_StatusText|System.String" "ws:WebSharper.JavaScript!globalThis.ResponseOptions#set_StatusText|System.String"
 (* inline *)
 external set_Status : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.ResponseOptions#set_Status|System.Int32" "ws:WebSharper.JavaScript!globalThis.ResponseOptions#set_Status|System.Int32"
 (* inline *)

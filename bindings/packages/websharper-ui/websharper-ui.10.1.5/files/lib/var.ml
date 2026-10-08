@@ -7,6 +7,10 @@ external get_View : ('a) t -> ('a) View.t = "ws:WebSharper.UI!WebSharper.UI/WebS
 (* instance *)
 external get_Id : ('a) t -> string = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#get_Id|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#get_Id|"
 (* instance *)
+external get : ('a) t -> 'a = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#Get|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#Get|"
+(* inline *)
+external get_Value : ('a) t -> 'a = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#get_Value|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#get_Value|"
+(* instance *)
 external updateMaybe : ('a) t -> Js.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#UpdateMaybe|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#UpdateMaybe|fn"
 (* instance *)
 external update : ('a) t -> Js.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#Update|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#Update|fn"
@@ -14,28 +18,24 @@ external update : ('a) t -> Js.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSh
 external setFinal : ('a) t -> 'a -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#SetFinal|'0" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#SetFinal|'0"
 (* instance *)
 external set : ('a) t -> 'a -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#Set|'0" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#Set|'0"
-(* instance *)
-external get : ('a) t -> 'a = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#Get|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#Get|"
-(* inline *)
-external get_Value : ('a) t -> 'a = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#get_Value|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#get_Value|"
 (* inline *)
 external set_Value : ('a) t -> 'a -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#set_Value|'0" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#set_Value|'0"
 (* inline *)
 external lens : ('a) t -> Js.t -> Js.t -> ('b) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#Lens|fn|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#Lens|fn|fn"
+(* static *)
+external createWaiting : unit -> ('a) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#CreateWaiting|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#CreateWaiting|"
+(* static *)
+external create : unit -> (unit) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Create|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Create|"
 (* inline *)
 external get_2 : ('a) t -> 'a = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Get|WebSharper.UI.Var`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Get|WebSharper.UI.Var`1<'0>"
 (* inline *)
 external getId : ('a) t -> string = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#GetId|WebSharper.UI.Var`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#GetId|WebSharper.UI.Var`1<'0>"
+(* static *)
+external create_2 : 'a -> ('a) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Create|'0" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Create|'0"
 (* inline *)
 external op_Dynamic : 'a -> string -> 'b = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#op_Dynamic|'0|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#op_Dynamic|'0|System.String"
 (* inline *)
-external op_DynamicAssignment : 'a -> string -> 'b -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#op_DynamicAssignment|'0|System.String|'1" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#op_DynamicAssignment|'0|System.String|'1"
-(* inline *)
 external make : ('a) View.t -> Js.t -> ('a) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Make|WebSharper.UI.View`1<'0>|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Make|WebSharper.UI.View`1<'0>|fn"
-(* static *)
-external mapLens : Js.t -> Js.t -> (('a) Websharper_stdlib.FSharpList.t) t -> (Js.t) View.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#MapLens|fn|fn|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#MapLens|fn|fn|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>"
-(* static *)
-external lens_2 : ('a) t -> Js.t -> Js.t -> ('b) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Lens|WebSharper.UI.Var`1<'0>|fn|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Lens|WebSharper.UI.Var`1<'0>|fn|fn"
 (* static *)
 external update_2 : ('a) t -> Js.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Update|WebSharper.UI.Var`1<'0>|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Update|WebSharper.UI.Var`1<'0>|fn"
 (* static *)
@@ -43,12 +43,12 @@ external setFinal_2 : ('a) t -> 'a -> unit = "ws:WebSharper.UI!WebSharper.UI/Web
 (* static *)
 external set_2 : ('a) t -> 'a -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Set|WebSharper.UI.Var`1<'0>|'0" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Set|WebSharper.UI.Var`1<'0>|'0"
 (* static *)
-external createWaiting : unit -> ('a) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#CreateWaiting|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#CreateWaiting|"
-(* static *)
-external create : unit -> (unit) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Create|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Create|"
-(* static *)
 external createLogged : string -> 'a -> ('a) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#CreateLogged|System.String|'0" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#CreateLogged|System.String|'0"
+(* inline *)
+external op_DynamicAssignment : 'a -> string -> 'b -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#op_DynamicAssignment|'0|System.String|'1" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#op_DynamicAssignment|'0|System.String|'1"
 (* static *)
-external create_2 : 'a -> ('a) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Create|'0" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Create|'0"
+external mapLens : Js.t -> Js.t -> (('a) Websharper_stdlib.FSharpList.t) t -> (Js.t) View.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#MapLens|fn|fn|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#MapLens|fn|fn|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>"
+(* static *)
+external lens_2 : ('a) t -> Js.t -> Js.t -> ('b) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Lens|WebSharper.UI.Var`1<'0>|fn|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Lens|WebSharper.UI.Var`1<'0>|fn|fn"
 (* new *)
 external create_3 : unit -> ('a) t = "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default" "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default"

@@ -4,58 +4,40 @@ type t
 external get_DocNode : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#get_DocNode|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#get_DocNode|"
 (* inline *)
 external get_Updates : t -> (unit) View.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#get_Updates|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#get_Updates|"
-(* inline *)
-external elem : Websharper_javascript.Element.t -> Attr.t -> t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Elem|WebSharper.JavaScript.Dom.Element|WebSharper.UI.Attr|WebSharper.UI.Doc" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Elem|WebSharper.JavaScript.Dom.Element|WebSharper.UI.Attr|WebSharper.UI.Doc"
+(* static *)
+external get_Empty : unit -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#get_Empty|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#get_Empty|"
 (* inline *)
 external static : Websharper_javascript.Element.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Static|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Static|WebSharper.JavaScript.Dom.Element"
 (* inline *)
 external clientSide : Js.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ClientSide|Microsoft.FSharp.Quotations.FSharpExpr`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ClientSide|Microsoft.FSharp.Quotations.FSharpExpr`1<'0>"
 (* static *)
-external svgElementMixed : string -> Js.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SvgElementMixed|System.String|System.Collections.Generic.IEnumerable`1<System.Object>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SvgElementMixed|System.String|System.Collections.Generic.IEnumerable`1<System.Object>"
-(* static *)
-external svgElement : string -> Js.t -> Js.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SvgElement|System.String|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Doc>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SvgElement|System.String|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Doc>"
-(* static *)
-external elementMixed : string -> Js.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ElementMixed|System.String|System.Collections.Generic.IEnumerable`1<System.Object>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ElementMixed|System.String|System.Collections.Generic.IEnumerable`1<System.Object>"
-(* static *)
-external concatMixed : (Js.t) array -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ConcatMixed|System.Object[]" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ConcatMixed|System.Object[]"
-(* static *)
 external mixedNodes : Js.t -> Js.t * Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#MixedNodes|System.Collections.Generic.IEnumerable`1<System.Object>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#MixedNodes|System.Collections.Generic.IEnumerable`1<System.Object>"
 (* static *)
 external toMixedDoc : Js.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ToMixedDoc|System.Object" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ToMixedDoc|System.Object"
 (* static *)
-external element : string -> Js.t -> Js.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Element|System.String|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Doc>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Element|System.String|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Doc>"
+external flatten : ('a) View.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Flatten|WebSharper.UI.View`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Flatten|WebSharper.UI.View`1<'0>"
 (* static *)
-external radio : Js.t -> 'a -> ('a) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Radio|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|'0|WebSharper.UI.Var`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Radio|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|'0|WebSharper.UI.Var`1<'0>"
+external textView : (string) View.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#TextView|WebSharper.UI.View`1<System.String>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#TextView|WebSharper.UI.View`1<System.String>"
 (* static *)
-external linkView : string -> Js.t -> ('a) View.t -> Js.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#LinkView|System.String|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|WebSharper.UI.View`1<'0>|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#LinkView|System.String|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|WebSharper.UI.View`1<'0>|fn"
+external async : Js.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Async|Microsoft.FSharp.Control.FSharpAsync`1<WebSharper.UI.Doc>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Async|Microsoft.FSharp.Control.FSharpAsync`1<WebSharper.UI.Doc>"
 (* static *)
-external link : string -> Js.t -> Js.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Link|System.String|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Link|System.String|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn"
+external embedView : (t) View.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#EmbedView|WebSharper.UI.View`1<WebSharper.UI.Doc>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#EmbedView|WebSharper.UI.View`1<WebSharper.UI.Doc>"
 (* static *)
-external buttonView : string -> Js.t -> ('a) View.t -> Js.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ButtonView|System.String|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|WebSharper.UI.View`1<'0>|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ButtonView|System.String|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|WebSharper.UI.View`1<'0>|fn"
+external verbatim : string -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Verbatim|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Verbatim|System.String"
 (* static *)
-external button : string -> Js.t -> Js.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Button|System.String|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Button|System.String|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn"
+external staticProxy : Websharper_javascript.Element.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#StaticProxy|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#StaticProxy|WebSharper.JavaScript.Dom.Element"
+(* static *)
+external textNode : string -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#TextNode|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#TextNode|System.String"
+(* static *)
+external concat : Js.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Concat|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Doc>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Concat|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Doc>"
+(* static *)
+external svgElementMixed : string -> Js.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SvgElementMixed|System.String|System.Collections.Generic.IEnumerable`1<System.Object>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SvgElementMixed|System.String|System.Collections.Generic.IEnumerable`1<System.Object>"
+(* static *)
+external elementMixed : string -> Js.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ElementMixed|System.String|System.Collections.Generic.IEnumerable`1<System.Object>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ElementMixed|System.String|System.Collections.Generic.IEnumerable`1<System.Object>"
 (* static *)
 external clickable : string -> Js.t -> Websharper_javascript.Element.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Clickable|System.String|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Clickable|System.String|fn"
 (* static *)
-external checkBoxGroup : Js.t -> 'a -> (('a) Websharper_stdlib.FSharpList.t) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#CheckBoxGroup|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|'0|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#CheckBoxGroup|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|'0|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>"
-(* static *)
 external checkBox : Js.t -> (bool) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#CheckBox|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|WebSharper.UI.Var`1<System.Boolean>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#CheckBox|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|WebSharper.UI.Var`1<System.Boolean>"
-(* static *)
-external selectDynOptional : Js.t -> string -> Js.t -> (('a) Websharper_stdlib.FSharpList.t) View.t -> (Js.t) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SelectDynOptional|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|System.String|fn|WebSharper.UI.View`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>|WebSharper.UI.Var`1<Microsoft.FSharp.Core.FSharpOption`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SelectDynOptional|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|System.String|fn|WebSharper.UI.View`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>|WebSharper.UI.Var`1<Microsoft.FSharp.Core.FSharpOption`1<'0>>"
-(* static *)
-external selectOptional : Js.t -> string -> Js.t -> ('a) Websharper_stdlib.FSharpList.t -> (Js.t) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SelectOptional|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|System.String|fn|Microsoft.FSharp.Collections.FSharpList`1<'0>|WebSharper.UI.Var`1<Microsoft.FSharp.Core.FSharpOption`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SelectOptional|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|System.String|fn|Microsoft.FSharp.Collections.FSharpList`1<'0>|WebSharper.UI.Var`1<Microsoft.FSharp.Core.FSharpOption`1<'0>>"
-(* static *)
-external selectMultiple : Js.t -> Js.t -> ('a) Websharper_stdlib.FSharpList.t -> (('a) Websharper_stdlib.FSharpList.t) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SelectMultiple|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn|Microsoft.FSharp.Collections.FSharpList`1<'0>|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SelectMultiple|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn|Microsoft.FSharp.Collections.FSharpList`1<'0>|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>"
-(* static *)
-external selectMultipleDyn : Js.t -> Js.t -> (('a) Websharper_stdlib.FSharpList.t) View.t -> (('a) Websharper_stdlib.FSharpList.t) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SelectMultipleDyn|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn|WebSharper.UI.View`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SelectMultipleDyn|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn|WebSharper.UI.View`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>"
-(* static *)
-external select : Js.t -> Js.t -> ('a) Websharper_stdlib.FSharpList.t -> ('a) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Select|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn|Microsoft.FSharp.Collections.FSharpList`1<'0>|WebSharper.UI.Var`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Select|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn|Microsoft.FSharp.Collections.FSharpList`1<'0>|WebSharper.UI.Var`1<'0>"
-(* static *)
-external selectDyn : Js.t -> Js.t -> (('a) Websharper_stdlib.FSharpList.t) View.t -> ('a) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SelectDyn|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn|WebSharper.UI.View`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>|WebSharper.UI.Var`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SelectDyn|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn|WebSharper.UI.View`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>|WebSharper.UI.Var`1<'0>"
-(* static *)
-external selectMultipleImpl : Js.t -> Js.t -> (('a) Websharper_stdlib.FSharpList.t) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SelectMultipleImpl|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SelectMultipleImpl|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>"
-(* static *)
-external selectImpl : Js.t -> Js.t -> Js.t -> ('a) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SelectImpl|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn|fn|WebSharper.UI.Var`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SelectImpl|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn|fn|WebSharper.UI.Var`1<'0>"
 (* static *)
 external inputArea : Js.t -> (string) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#InputArea|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|WebSharper.UI.Var`1<System.String>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#InputArea|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|WebSharper.UI.Var`1<System.String>"
 (* static *)
@@ -97,27 +79,15 @@ external input : Js.t -> (string) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/W
 (* static *)
 external inputInternal : string -> Js.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#InputInternal|System.String|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#InputInternal|System.String|fn"
 (* static *)
-external convertSeqVarBy : Js.t -> 'c -> (('a) Websharper_stdlib.FSharpList.t) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ConvertSeqVarBy|fn|'2|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ConvertSeqVarBy|fn|'2|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>"
-(* static *)
-external convertSeqBy : Js.t -> 'c -> ('d) View.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ConvertSeqBy|fn|'2|WebSharper.UI.View`1<'3>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ConvertSeqBy|fn|'2|WebSharper.UI.View`1<'3>"
-(* static *)
 external convertSeq : Js.t -> ('b) View.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ConvertSeq|fn|WebSharper.UI.View`1<'1>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ConvertSeq|fn|WebSharper.UI.View`1<'1>"
 (* static *)
-external convertBy : Js.t -> Js.t -> ('c) View.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ConvertBy|fn|fn|WebSharper.UI.View`1<'2>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ConvertBy|fn|fn|WebSharper.UI.View`1<'2>"
-(* static *)
 external convert : Js.t -> ('b) View.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Convert|fn|WebSharper.UI.View`1<'1>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Convert|fn|WebSharper.UI.View`1<'1>"
-(* static *)
-external flatten : ('a) View.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Flatten|WebSharper.UI.View`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Flatten|WebSharper.UI.View`1<'0>"
-(* static *)
-external textView : (string) View.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#TextView|WebSharper.UI.View`1<System.String>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#TextView|WebSharper.UI.View`1<System.String>"
 (* static *)
 external runReplaceById : string -> t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#RunReplaceById|System.String|WebSharper.UI.Doc" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#RunReplaceById|System.String|WebSharper.UI.Doc"
 (* static *)
 external runById : string -> t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#RunById|System.String|WebSharper.UI.Doc" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#RunById|System.String|WebSharper.UI.Doc"
 (* static *)
 external run : Websharper_javascript.Element.t -> t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Run|WebSharper.JavaScript.Dom.Element|WebSharper.UI.Doc" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Run|WebSharper.JavaScript.Dom.Element|WebSharper.UI.Doc"
-(* static *)
-external runInPlace : bool -> Websharper_javascript.Element.t -> t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#RunInPlace|System.Boolean|WebSharper.JavaScript.Dom.Element|WebSharper.UI.Doc" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#RunInPlace|System.Boolean|WebSharper.JavaScript.Dom.Element|WebSharper.UI.Doc"
 (* static *)
 external runPrependById : string -> t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#RunPrependById|System.String|WebSharper.UI.Doc" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#RunPrependById|System.String|WebSharper.UI.Doc"
 (* static *)
@@ -135,27 +105,57 @@ external runBeforeById : string -> t -> unit = "ws:WebSharper.UI!WebSharper.UI/W
 (* static *)
 external runBefore : Websharper_javascript.Node.t -> t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#RunBefore|WebSharper.JavaScript.Dom.Node|WebSharper.UI.Doc" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#RunBefore|WebSharper.JavaScript.Dom.Node|WebSharper.UI.Doc"
 (* static *)
-external runBetween : Websharper_javascript.Node.t -> Websharper_javascript.Node.t -> t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#RunBetween|WebSharper.JavaScript.Dom.Node|WebSharper.JavaScript.Dom.Node|WebSharper.UI.Doc" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#RunBetween|WebSharper.JavaScript.Dom.Node|WebSharper.JavaScript.Dom.Node|WebSharper.UI.Doc"
-(* static *)
-external async : Js.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Async|Microsoft.FSharp.Control.FSharpAsync`1<WebSharper.UI.Doc>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Async|Microsoft.FSharp.Control.FSharpAsync`1<WebSharper.UI.Doc>"
-(* static *)
 external bindView : Js.t -> ('a) View.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#BindView|fn|WebSharper.UI.View`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#BindView|fn|WebSharper.UI.View`1<'0>"
-(* static *)
-external embedView : (t) View.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#EmbedView|WebSharper.UI.View`1<WebSharper.UI.Doc>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#EmbedView|WebSharper.UI.View`1<WebSharper.UI.Doc>"
-(* static *)
-external verbatim : string -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Verbatim|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Verbatim|System.String"
-(* static *)
-external staticProxy : Websharper_javascript.Element.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#StaticProxy|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#StaticProxy|WebSharper.JavaScript.Dom.Element"
-(* static *)
-external textNode : string -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#TextNode|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#TextNode|System.String"
-(* static *)
-external get_Empty : unit -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#get_Empty|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#get_Empty|"
-(* static *)
-external concat : Js.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Concat|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Doc>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Concat|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Doc>"
 (* static *)
 external append : t -> t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Append|WebSharper.UI.Doc|WebSharper.UI.Doc" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Append|WebSharper.UI.Doc|WebSharper.UI.Doc"
 (* static *)
 external mk : Js.t -> (unit) View.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Mk|WebSharper.UI.Client.DocNode|WebSharper.UI.View`1<void>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Mk|WebSharper.UI.Client.DocNode|WebSharper.UI.View`1<void>"
+(* inline *)
+external elem : Websharper_javascript.Element.t -> Attr.t -> t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Elem|WebSharper.JavaScript.Dom.Element|WebSharper.UI.Attr|WebSharper.UI.Doc" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Elem|WebSharper.JavaScript.Dom.Element|WebSharper.UI.Attr|WebSharper.UI.Doc"
+(* static *)
+external svgElement : string -> Js.t -> Js.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SvgElement|System.String|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Doc>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SvgElement|System.String|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Doc>"
+(* static *)
+external element : string -> Js.t -> Js.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Element|System.String|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Doc>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Element|System.String|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Doc>"
+(* static *)
+external radio : Js.t -> 'a -> ('a) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Radio|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|'0|WebSharper.UI.Var`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Radio|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|'0|WebSharper.UI.Var`1<'0>"
+(* static *)
+external link : string -> Js.t -> Js.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Link|System.String|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Link|System.String|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn"
+(* static *)
+external button : string -> Js.t -> Js.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Button|System.String|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Button|System.String|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn"
+(* static *)
+external checkBoxGroup : Js.t -> 'a -> (('a) Websharper_stdlib.FSharpList.t) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#CheckBoxGroup|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|'0|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#CheckBoxGroup|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|'0|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>"
+(* static *)
+external selectMultipleImpl : Js.t -> Js.t -> (('a) Websharper_stdlib.FSharpList.t) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SelectMultipleImpl|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SelectMultipleImpl|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>"
+(* static *)
+external convertSeqVarBy : Js.t -> 'c -> (('a) Websharper_stdlib.FSharpList.t) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ConvertSeqVarBy|fn|'2|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ConvertSeqVarBy|fn|'2|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>"
+(* static *)
+external convertSeqBy : Js.t -> 'c -> ('d) View.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ConvertSeqBy|fn|'2|WebSharper.UI.View`1<'3>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ConvertSeqBy|fn|'2|WebSharper.UI.View`1<'3>"
+(* static *)
+external convertBy : Js.t -> Js.t -> ('c) View.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ConvertBy|fn|fn|WebSharper.UI.View`1<'2>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ConvertBy|fn|fn|WebSharper.UI.View`1<'2>"
+(* static *)
+external runInPlace : bool -> Websharper_javascript.Element.t -> t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#RunInPlace|System.Boolean|WebSharper.JavaScript.Dom.Element|WebSharper.UI.Doc" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#RunInPlace|System.Boolean|WebSharper.JavaScript.Dom.Element|WebSharper.UI.Doc"
+(* static *)
+external runBetween : Websharper_javascript.Node.t -> Websharper_javascript.Node.t -> t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#RunBetween|WebSharper.JavaScript.Dom.Node|WebSharper.JavaScript.Dom.Node|WebSharper.UI.Doc" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#RunBetween|WebSharper.JavaScript.Dom.Node|WebSharper.JavaScript.Dom.Node|WebSharper.UI.Doc"
+(* static *)
+external linkView : string -> Js.t -> ('a) View.t -> Js.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#LinkView|System.String|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|WebSharper.UI.View`1<'0>|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#LinkView|System.String|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|WebSharper.UI.View`1<'0>|fn"
+(* static *)
+external buttonView : string -> Js.t -> ('a) View.t -> Js.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ButtonView|System.String|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|WebSharper.UI.View`1<'0>|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ButtonView|System.String|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|WebSharper.UI.View`1<'0>|fn"
+(* static *)
+external selectMultiple : Js.t -> Js.t -> ('a) Websharper_stdlib.FSharpList.t -> (('a) Websharper_stdlib.FSharpList.t) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SelectMultiple|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn|Microsoft.FSharp.Collections.FSharpList`1<'0>|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SelectMultiple|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn|Microsoft.FSharp.Collections.FSharpList`1<'0>|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>"
+(* static *)
+external selectMultipleDyn : Js.t -> Js.t -> (('a) Websharper_stdlib.FSharpList.t) View.t -> (('a) Websharper_stdlib.FSharpList.t) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SelectMultipleDyn|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn|WebSharper.UI.View`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SelectMultipleDyn|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn|WebSharper.UI.View`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>"
+(* static *)
+external select : Js.t -> Js.t -> ('a) Websharper_stdlib.FSharpList.t -> ('a) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Select|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn|Microsoft.FSharp.Collections.FSharpList`1<'0>|WebSharper.UI.Var`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Select|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn|Microsoft.FSharp.Collections.FSharpList`1<'0>|WebSharper.UI.Var`1<'0>"
+(* static *)
+external selectDyn : Js.t -> Js.t -> (('a) Websharper_stdlib.FSharpList.t) View.t -> ('a) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SelectDyn|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn|WebSharper.UI.View`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>|WebSharper.UI.Var`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SelectDyn|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn|WebSharper.UI.View`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>|WebSharper.UI.Var`1<'0>"
+(* static *)
+external selectImpl : Js.t -> Js.t -> Js.t -> ('a) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SelectImpl|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn|fn|WebSharper.UI.Var`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SelectImpl|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|fn|fn|WebSharper.UI.Var`1<'0>"
+(* static *)
+external selectDynOptional : Js.t -> string -> Js.t -> (('a) Websharper_stdlib.FSharpList.t) View.t -> (Js.t) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SelectDynOptional|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|System.String|fn|WebSharper.UI.View`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>|WebSharper.UI.Var`1<Microsoft.FSharp.Core.FSharpOption`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SelectDynOptional|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|System.String|fn|WebSharper.UI.View`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>|WebSharper.UI.Var`1<Microsoft.FSharp.Core.FSharpOption`1<'0>>"
+(* static *)
+external selectOptional : Js.t -> string -> Js.t -> ('a) Websharper_stdlib.FSharpList.t -> (Js.t) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SelectOptional|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|System.String|fn|Microsoft.FSharp.Collections.FSharpList`1<'0>|WebSharper.UI.Var`1<Microsoft.FSharp.Core.FSharpOption`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#SelectOptional|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|System.String|fn|Microsoft.FSharp.Collections.FSharpList`1<'0>|WebSharper.UI.Var`1<Microsoft.FSharp.Core.FSharpOption`1<'0>>"
+(* static *)
+external concatMixed : (Js.t) array -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ConcatMixed|System.Object[]" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ConcatMixed|System.Object[]"
 (* instance *)
 external get_updates : t -> (unit) View.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#updates" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#updates"
 (* instance *)

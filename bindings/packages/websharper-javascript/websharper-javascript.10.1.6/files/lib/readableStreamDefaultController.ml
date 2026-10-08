@@ -3,12 +3,12 @@ type t
 (* inline *)
 external error : t -> unit = "ws:WebSharper.JavaScript!globalThis.ReadableStreamDefaultController#Error|" "ws:WebSharper.JavaScript!globalThis.ReadableStreamDefaultController#Error|"
 (* inline *)
-external error_2 : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.ReadableStreamDefaultController#Error|System.Object" "ws:WebSharper.JavaScript!globalThis.ReadableStreamDefaultController#Error|System.Object"
-(* inline *)
 external enqueue : t -> unit = "ws:WebSharper.JavaScript!globalThis.ReadableStreamDefaultController#Enqueue|" "ws:WebSharper.JavaScript!globalThis.ReadableStreamDefaultController#Enqueue|"
-(* inline *)
-external enqueue_2 : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.ReadableStreamDefaultController#Enqueue|System.Object" "ws:WebSharper.JavaScript!globalThis.ReadableStreamDefaultController#Enqueue|System.Object"
 (* inline *)
 external close : t -> unit = "ws:WebSharper.JavaScript!globalThis.ReadableStreamDefaultController#Close|" "ws:WebSharper.JavaScript!globalThis.ReadableStreamDefaultController#Close|"
 (* inline *)
 external get_DesiredSize : t -> float = "ws:WebSharper.JavaScript!globalThis.ReadableStreamDefaultController#get_DesiredSize|" "ws:WebSharper.JavaScript!globalThis.ReadableStreamDefaultController#get_DesiredSize|"
+(* inline *)
+external error_2 : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.ReadableStreamDefaultController#Error|System.Object" "ws:WebSharper.JavaScript!globalThis.ReadableStreamDefaultController#Error|System.Object"
+(* inline *)
+external enqueue_2 : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.ReadableStreamDefaultController#Enqueue|System.Object" "ws:WebSharper.JavaScript!globalThis.ReadableStreamDefaultController#Enqueue|System.Object"

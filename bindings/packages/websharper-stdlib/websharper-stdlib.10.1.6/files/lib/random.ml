@@ -3,12 +3,12 @@ type t = Object.t
 (* inline *)
 external nextDouble : t -> float = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Random::default#NextDouble|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Random::default#NextDouble|"
 (* instance *)
-external nextBytes : t -> (int) array -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Random::default#NextBytes|System.Byte[]" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Random::default#NextBytes|System.Byte[]"
-(* instance *)
-external next : t -> int -> int -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Random::default#Next|System.Int32|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Random::default#Next|System.Int32|System.Int32"
+external next : t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Random::default#Next|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Random::default#Next|"
 (* instance *)
 external next_2 : t -> int -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Random::default#Next|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Random::default#Next|System.Int32"
 (* instance *)
-external next_3 : t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Random::default#Next|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Random::default#Next|"
+external next_3 : t -> int -> int -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Random::default#Next|System.Int32|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Random::default#Next|System.Int32|System.Int32"
+(* instance *)
+external nextBytes : t -> (int) array -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Random::default#NextBytes|System.Byte[]" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Random::default#NextBytes|System.Byte[]"
 (* new *)
 external create : unit -> t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Random::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Random::default"

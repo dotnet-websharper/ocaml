@@ -3,9 +3,9 @@ type t = DoubleRange.t
 (* inline *)
 external get_Ideal : t -> float = "ws:WebSharper.JavaScript!globalThis.ConstrainDoubleRange#get_Ideal|" "ws:WebSharper.JavaScript!globalThis.ConstrainDoubleRange#get_Ideal|"
 (* inline *)
-external set_Ideal : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.ConstrainDoubleRange#set_Ideal|System.Double" "ws:WebSharper.JavaScript!globalThis.ConstrainDoubleRange#set_Ideal|System.Double"
-(* inline *)
 external get_Exact : t -> float = "ws:WebSharper.JavaScript!globalThis.ConstrainDoubleRange#get_Exact|" "ws:WebSharper.JavaScript!globalThis.ConstrainDoubleRange#get_Exact|"
+(* inline *)
+external set_Ideal : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.ConstrainDoubleRange#set_Ideal|System.Double" "ws:WebSharper.JavaScript!globalThis.ConstrainDoubleRange#set_Ideal|System.Double"
 (* inline *)
 external set_Exact : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.ConstrainDoubleRange#set_Exact|System.Double" "ws:WebSharper.JavaScript!globalThis.ConstrainDoubleRange#set_Exact|System.Double"
 (* inline *)

@@ -3,19 +3,13 @@ type t
 (* inline *)
 external get_Id : t -> int = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#get_Id|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#get_Id|"
 (* inline *)
-external set_Id : t -> int -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#set_Id|System.Int32" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#set_Id|System.Int32"
-(* inline *)
 external get_Index : t -> (int) Var.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#get_Index|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#get_Index|"
 (* inline *)
 external get_Pages : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#get_Pages|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#get_Pages|"
 (* inline *)
 external get_EndedOn : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#get_EndedOn|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#get_EndedOn|"
 (* inline *)
-external set_EndedOn : t -> Js.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#set_EndedOn|Microsoft.FSharp.Core.FSharpOption`1<System.Int32>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#set_EndedOn|Microsoft.FSharp.Core.FSharpOption`1<System.Int32>"
-(* inline *)
 external get_FirstRender : t -> bool = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#get_FirstRender|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#get_FirstRender|"
-(* inline *)
-external set_FirstRender : t -> bool -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#set_FirstRender|System.Boolean" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#set_FirstRender|System.Boolean"
 (* inline *)
 external get_RenderFirst : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#get_RenderFirst|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#get_RenderFirst|"
 (* instance *)
@@ -23,9 +17,15 @@ external embed : t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Flow
 (* instance *)
 external get_Navigator : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#get_Navigator|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#get_Navigator|"
 (* instance *)
-external end_ : t -> Doc.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#End|WebSharper.UI.Doc" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#End|WebSharper.UI.Doc"
-(* instance *)
 external restart : t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#Restart|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#Restart|"
+(* inline *)
+external set_Id : t -> int -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#set_Id|System.Int32" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#set_Id|System.Int32"
+(* inline *)
+external set_EndedOn : t -> Js.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#set_EndedOn|Microsoft.FSharp.Core.FSharpOption`1<System.Int32>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#set_EndedOn|Microsoft.FSharp.Core.FSharpOption`1<System.Int32>"
+(* inline *)
+external set_FirstRender : t -> bool -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#set_FirstRender|System.Boolean" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#set_FirstRender|System.Boolean"
+(* instance *)
+external end_ : t -> Doc.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#End|WebSharper.UI.Doc" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#End|WebSharper.UI.Doc"
 (* instance *)
 external cancel : t -> Doc.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#Cancel|WebSharper.UI.Doc" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowState::default#Cancel|WebSharper.UI.Doc"
 (* instance *)

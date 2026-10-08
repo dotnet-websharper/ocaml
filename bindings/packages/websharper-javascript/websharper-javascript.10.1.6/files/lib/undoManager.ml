@@ -5,8 +5,6 @@ external clearRedo : t -> unit = "ws:WebSharper.JavaScript!globalThis.UndoManage
 (* inline *)
 external clearUndo : t -> unit = "ws:WebSharper.JavaScript!globalThis.UndoManager#ClearUndo|" "ws:WebSharper.JavaScript!globalThis.UndoManager#ClearUndo|"
 (* inline *)
-external remove : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.UndoManager#Remove|System.Int32" "ws:WebSharper.JavaScript!globalThis.UndoManager#Remove|System.Int32"
-(* inline *)
 external redo : t -> unit = "ws:WebSharper.JavaScript!globalThis.UndoManager#Redo|" "ws:WebSharper.JavaScript!globalThis.UndoManager#Redo|"
 (* inline *)
 external undo : t -> unit = "ws:WebSharper.JavaScript!globalThis.UndoManager#Undo|" "ws:WebSharper.JavaScript!globalThis.UndoManager#Undo|"
@@ -14,3 +12,5 @@ external undo : t -> unit = "ws:WebSharper.JavaScript!globalThis.UndoManager#Und
 external get_Position : t -> int = "ws:WebSharper.JavaScript!globalThis.UndoManager#get_Position|" "ws:WebSharper.JavaScript!globalThis.UndoManager#get_Position|"
 (* inline *)
 external get_Length : t -> int = "ws:WebSharper.JavaScript!globalThis.UndoManager#get_Length|" "ws:WebSharper.JavaScript!globalThis.UndoManager#get_Length|"
+(* inline *)
+external remove : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.UndoManager#Remove|System.Int32" "ws:WebSharper.JavaScript!globalThis.UndoManager#Remove|System.Int32"

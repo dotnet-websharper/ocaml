@@ -5,19 +5,19 @@ external getEnumerator : ('a) t -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLi
 (* instance *)
 external get_Count : ('a) t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#get_Count|" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#get_Count|"
 (* instance *)
-external equals : ('a) t -> Js.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#Equals|System.Object" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#Equals|System.Object"
-(* instance *)
 external getHashCode : ('a) t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#GetHashCode|" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#GetHashCode|"
-(* static *)
-external op_Subtraction : ('a) t -> ('a) t -> ('a) t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#op_Subtraction|Microsoft.FSharp.Collections.FSharpSet`1<'0>|Microsoft.FSharp.Collections.FSharpSet`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#op_Subtraction|Microsoft.FSharp.Collections.FSharpSet`1<'0>|Microsoft.FSharp.Collections.FSharpSet`1<'0>"
-(* static *)
-external op_Addition : ('a) t -> ('a) t -> ('a) t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#op_Addition|Microsoft.FSharp.Collections.FSharpSet`1<'0>|Microsoft.FSharp.Collections.FSharpSet`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#op_Addition|Microsoft.FSharp.Collections.FSharpSet`1<'0>|Microsoft.FSharp.Collections.FSharpSet`1<'0>"
-(* instance *)
-external remove : ('a) t -> 'a -> ('a) t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#Remove|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#Remove|'0"
 (* instance *)
 external get_MinimumElement : ('a) t -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#get_MinimumElement|" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#get_MinimumElement|"
 (* instance *)
 external get_MaximumElement : ('a) t -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#get_MaximumElement|" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#get_MaximumElement|"
+(* instance *)
+external get_Tree : ('a) t -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#get_Tree|" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#get_Tree|"
+(* instance *)
+external get_IsEmpty : ('a) t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#get_IsEmpty|" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#get_IsEmpty|"
+(* instance *)
+external equals : ('a) t -> Js.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#Equals|System.Object" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#Equals|System.Object"
+(* instance *)
+external remove : ('a) t -> 'a -> ('a) t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#Remove|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#Remove|'0"
 (* instance *)
 external isSupersetOf : ('a) t -> ('a) t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#IsSupersetOf|Microsoft.FSharp.Collections.FSharpSet`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#IsSupersetOf|Microsoft.FSharp.Collections.FSharpSet`1<'0>"
 (* instance *)
@@ -27,10 +27,6 @@ external isProperSupersetOf : ('a) t -> ('a) t -> bool = "ws:WebSharper.StdLib!W
 (* instance *)
 external isProperSubsetOf : ('a) t -> ('a) t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#IsProperSubsetOf|Microsoft.FSharp.Collections.FSharpSet`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#IsProperSubsetOf|Microsoft.FSharp.Collections.FSharpSet`1<'0>"
 (* instance *)
-external get_Tree : ('a) t -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#get_Tree|" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#get_Tree|"
-(* instance *)
-external get_IsEmpty : ('a) t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#get_IsEmpty|" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#get_IsEmpty|"
-(* instance *)
 external contains : ('a) t -> 'a -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#Contains|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#Contains|'0"
 (* instance *)
 external add : ('a) t -> 'a -> ('a) t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#Add|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#Add|'0"
@@ -38,6 +34,10 @@ external add : ('a) t -> 'a -> ('a) t = "ws:WebSharper.StdLib!WebSharper.StdLib/
 external sub : ('a) t -> ('a) t -> ('a) t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#sub|Microsoft.FSharp.Collections.FSharpSet`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#sub|Microsoft.FSharp.Collections.FSharpSet`1<'0>"
 (* instance *)
 external add_2 : ('a) t -> ('a) t -> ('a) t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#add|Microsoft.FSharp.Collections.FSharpSet`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#add|Microsoft.FSharp.Collections.FSharpSet`1<'0>"
+(* static *)
+external op_Subtraction : ('a) t -> ('a) t -> ('a) t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#op_Subtraction|Microsoft.FSharp.Collections.FSharpSet`1<'0>|Microsoft.FSharp.Collections.FSharpSet`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#op_Subtraction|Microsoft.FSharp.Collections.FSharpSet`1<'0>|Microsoft.FSharp.Collections.FSharpSet`1<'0>"
+(* static *)
+external op_Addition : ('a) t -> ('a) t -> ('a) t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#op_Addition|Microsoft.FSharp.Collections.FSharpSet`1<'0>|Microsoft.FSharp.Collections.FSharpSet`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#op_Addition|Microsoft.FSharp.Collections.FSharpSet`1<'0>|Microsoft.FSharp.Collections.FSharpSet`1<'0>"
 (* instance *)
 external get_tree : ('a) t -> Js.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#tree" "wsget:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default#tree"
 (* new *)

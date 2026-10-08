@@ -3,49 +3,49 @@ type t
 (* inline *)
 external get_Signal : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.RequestOptions#get_Signal|" "ws:WebSharper.JavaScript!globalThis.RequestOptions#get_Signal|"
 (* inline *)
-external set_Signal : t -> EventTarget.t -> unit = "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Signal|WebSharper.JavaScript.Dom.AbortSignal" "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Signal|WebSharper.JavaScript.Dom.AbortSignal"
-(* inline *)
 external get_Keepalive : t -> bool = "ws:WebSharper.JavaScript!globalThis.RequestOptions#get_Keepalive|" "ws:WebSharper.JavaScript!globalThis.RequestOptions#get_Keepalive|"
-(* inline *)
-external set_Keepalive : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Keepalive|System.Boolean" "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Keepalive|System.Boolean"
 (* inline *)
 external get_Integrity : t -> string = "ws:WebSharper.JavaScript!globalThis.RequestOptions#get_Integrity|" "ws:WebSharper.JavaScript!globalThis.RequestOptions#get_Integrity|"
 (* inline *)
-external set_Integrity : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Integrity|System.String" "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Integrity|System.String"
-(* inline *)
 external get_ReferrerPolicy : t -> ReferrerPolicy.t = "ws:WebSharper.JavaScript!globalThis.RequestOptions#get_ReferrerPolicy|" "ws:WebSharper.JavaScript!globalThis.RequestOptions#get_ReferrerPolicy|"
-(* inline *)
-external set_ReferrerPolicy : t -> ReferrerPolicy.t -> unit = "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_ReferrerPolicy|WebSharper.JavaScript.ReferrerPolicy" "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_ReferrerPolicy|WebSharper.JavaScript.ReferrerPolicy"
 (* inline *)
 external get_Referrer : t -> Referrer.t = "ws:WebSharper.JavaScript!globalThis.RequestOptions#get_Referrer|" "ws:WebSharper.JavaScript!globalThis.RequestOptions#get_Referrer|"
 (* inline *)
-external set_Referrer : t -> Referrer.t -> unit = "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Referrer|WebSharper.JavaScript.Referrer" "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Referrer|WebSharper.JavaScript.Referrer"
-(* inline *)
 external get_Redirect : t -> Redirect.t = "ws:WebSharper.JavaScript!globalThis.RequestOptions#get_Redirect|" "ws:WebSharper.JavaScript!globalThis.RequestOptions#get_Redirect|"
-(* inline *)
-external set_Redirect : t -> Redirect.t -> unit = "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Redirect|WebSharper.JavaScript.Redirect" "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Redirect|WebSharper.JavaScript.Redirect"
 (* inline *)
 external get_Cache : t -> RequestCache.t = "ws:WebSharper.JavaScript!globalThis.RequestOptions#get_Cache|" "ws:WebSharper.JavaScript!globalThis.RequestOptions#get_Cache|"
 (* inline *)
-external set_Cache : t -> RequestCache.t -> unit = "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Cache|WebSharper.JavaScript.RequestCache" "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Cache|WebSharper.JavaScript.RequestCache"
-(* inline *)
 external get_Credentials : t -> RequestCredentials.t = "ws:WebSharper.JavaScript!globalThis.RequestOptions#get_Credentials|" "ws:WebSharper.JavaScript!globalThis.RequestOptions#get_Credentials|"
-(* inline *)
-external set_Credentials : t -> RequestCredentials.t -> unit = "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Credentials|WebSharper.JavaScript.RequestCredentials" "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Credentials|WebSharper.JavaScript.RequestCredentials"
 (* inline *)
 external get_Mode : t -> RequestMode.t = "ws:WebSharper.JavaScript!globalThis.RequestOptions#get_Mode|" "ws:WebSharper.JavaScript!globalThis.RequestOptions#get_Mode|"
 (* inline *)
-external set_Mode : t -> RequestMode.t -> unit = "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Mode|WebSharper.JavaScript.RequestMode" "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Mode|WebSharper.JavaScript.RequestMode"
-(* inline *)
 external get_Body : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.RequestOptions#get_Body|" "ws:WebSharper.JavaScript!globalThis.RequestOptions#get_Body|"
-(* inline *)
-external set_Body : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Body|System.Object" "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Body|System.Object"
 (* inline *)
 external get_Headers : t -> Headers.t = "ws:WebSharper.JavaScript!globalThis.RequestOptions#get_Headers|" "ws:WebSharper.JavaScript!globalThis.RequestOptions#get_Headers|"
 (* inline *)
-external set_Headers : t -> Headers.t -> unit = "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Headers|WebSharper.JavaScript.Headers" "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Headers|WebSharper.JavaScript.Headers"
-(* inline *)
 external get_Method : t -> string = "ws:WebSharper.JavaScript!globalThis.RequestOptions#get_Method|" "ws:WebSharper.JavaScript!globalThis.RequestOptions#get_Method|"
+(* inline *)
+external set_Signal : t -> EventTarget.t -> unit = "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Signal|WebSharper.JavaScript.Dom.AbortSignal" "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Signal|WebSharper.JavaScript.Dom.AbortSignal"
+(* inline *)
+external set_Keepalive : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Keepalive|System.Boolean" "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Keepalive|System.Boolean"
+(* inline *)
+external set_Integrity : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Integrity|System.String" "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Integrity|System.String"
+(* inline *)
+external set_ReferrerPolicy : t -> ReferrerPolicy.t -> unit = "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_ReferrerPolicy|WebSharper.JavaScript.ReferrerPolicy" "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_ReferrerPolicy|WebSharper.JavaScript.ReferrerPolicy"
+(* inline *)
+external set_Referrer : t -> Referrer.t -> unit = "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Referrer|WebSharper.JavaScript.Referrer" "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Referrer|WebSharper.JavaScript.Referrer"
+(* inline *)
+external set_Redirect : t -> Redirect.t -> unit = "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Redirect|WebSharper.JavaScript.Redirect" "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Redirect|WebSharper.JavaScript.Redirect"
+(* inline *)
+external set_Cache : t -> RequestCache.t -> unit = "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Cache|WebSharper.JavaScript.RequestCache" "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Cache|WebSharper.JavaScript.RequestCache"
+(* inline *)
+external set_Credentials : t -> RequestCredentials.t -> unit = "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Credentials|WebSharper.JavaScript.RequestCredentials" "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Credentials|WebSharper.JavaScript.RequestCredentials"
+(* inline *)
+external set_Mode : t -> RequestMode.t -> unit = "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Mode|WebSharper.JavaScript.RequestMode" "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Mode|WebSharper.JavaScript.RequestMode"
+(* inline *)
+external set_Body : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Body|System.Object" "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Body|System.Object"
+(* inline *)
+external set_Headers : t -> Headers.t -> unit = "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Headers|WebSharper.JavaScript.Headers" "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Headers|WebSharper.JavaScript.Headers"
 (* inline *)
 external set_Method : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Method|System.String" "ws:WebSharper.JavaScript!globalThis.RequestOptions#set_Method|System.String"
 (* inline *)
