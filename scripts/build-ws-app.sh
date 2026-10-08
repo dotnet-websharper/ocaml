@@ -13,30 +13,51 @@ out="${3:-$root/out}"
 mkdir -p "$out"
 s="$(ocamlc -where)"
 
+runtime_dir="$(ocamlfind query websharper-runtime 2>/dev/null || opam exec -- ocamlfind query websharper-runtime 2>/dev/null || true)"
+runtime_inc=()
+if [ -n "$runtime_dir" ]; then runtime_inc=(-I "$runtime_dir"); fi
 low_first() { echo "$(echo "${1:0:1}" | tr 'A-Z' 'a-z')${1:1}"; }
 
 # 1) type-check the generated bindings -> .cmi in a scratch dir (never write to
 #    the installed package directory)
 work="$out/.deps"
 mkdir -p "$work"
-cp "$bindir"/*.ml "$work/"
+libname="$(basename "$bindir" | tr '-' '_')"
+for f in "$bindir"/*.ml; do
+  b="$(basename "$f")"
+  [ "$b" = "$libname.ml" ] && continue
+  cp "$f" "$work/"
+done
 (cd "$work" && ocamldep -sort *.ml 2>/dev/null | tr ' ' '\n' | grep -v '^$') > "$work/order.txt"
 while IFS= read -r f; do
   [ -n "$f" ] || continue
-  (cd "$work" && ocamlc -c -I "$s" "$f")
+  (cd "$work" && ocamlc -c -I "$s" "${runtime_inc[@]}" "$f")
 done < "$work/order.txt"
 
 # 2) compile the entry to IR to discover required modules
-"$fe" --input "$entry" --output "$out/Main.wsir.json" --unit Main -I "$work" -I "$s"
+"$fe" --input "$entry" --output "$out/Main.wsir.json" --unit Main -I "$bindir" -I "$work" "${runtime_inc[@]}" -I "$s"
 
 globals="$(python3 -c "import json,sys; print(' '.join(json.load(open(sys.argv[1]))['requiredGlobals']))" "$out/Main.wsir.json")"
 
-# 3) compile each required binding module to JS
+# 3) compile each required binding module to JS. Wrapped libraries expose
+#    internal units named <Lib>__<Module>; map them back to their source file.
 for g in $globals; do
   [ "$g" = "Main" ] && continue
-  f="$work/$(low_first "$g").ml"
-  [ -f "$f" ] || continue
-  "$fe" --input "$f" --output "$out/$g.wsir.json" --unit "$g" -I "$work" -I "$s"
+  src=""
+  if [ -f "$work/$(low_first "$g").ml" ]; then
+    src="$work/$(low_first "$g").ml"
+  else
+    base="${g##*__}"
+    cand="$work/$(low_first "$base").ml"
+    [ -f "$cand" ] && src="$cand"
+  fi
+  if [ -z "$src" ]; then
+    # wrapper/alias or stdlib shim: no generated code, provide an empty module
+    # (shims overwrite this in step 5)
+    printf 'let a = {};\na = { $tag: 0 };\nexport default a;\n' > "$out/$g.js"
+    continue
+  fi
+  "$fe" --input "$src" --output "$out/$g.wsir.json" --unit "$g" -I "$work" "${runtime_inc[@]}" -I "$s"
   dotnet "$be" --ir "$out/$g.wsir.json" --output "$out" --reference "$ref" --compact
 done
 

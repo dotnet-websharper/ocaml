@@ -1,3 +1,5 @@
+open Websharper_javascript
+
 (* A DOM example using the generated WebSharper.JavaScript bindings.
    Cross-module references in the generated bindings are opaque (Js.t) where
    the DOM type graph is cyclic, so we coerce explicitly here:

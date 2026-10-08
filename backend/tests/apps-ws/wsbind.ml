@@ -1,3 +1,5 @@
+open Websharper_javascript
+
 let () =
   Console.log_2 "hello from wsocaml";
   Console.warn_2 "a warning";

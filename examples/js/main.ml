@@ -1,3 +1,5 @@
+open Websharper_javascript
+
 let () =
   Console.log_2 "hello from bindings";
   Console.log_2 (Printf.sprintf "sqrt=%.3f" (Math.sqrt 2.0));

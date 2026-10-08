@@ -9,7 +9,7 @@ external set_Children : t -> Js.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebS
 (* inline *)
 external get_Delimiters : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#get_Delimiters|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#get_Delimiters|"
 (* inline *)
-external get_El : t -> Element.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#get_El|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#get_El|"
+external get_El : t -> Websharper_javascript.Element.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#get_El|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#get_El|"
 (* inline *)
 external get_ElKey : t -> int = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#get_ElKey|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#get_ElKey|"
 (* inline *)
@@ -25,7 +25,7 @@ external get_render : t -> Js.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.
 (* instance *)
 external get_elKey : t -> int = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#ElKey" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#ElKey"
 (* instance *)
-external get_el : t -> Element.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#El" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#El"
+external get_el : t -> Websharper_javascript.Element.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#El" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#El"
 (*  *)
 external get_delimiters : t -> Js.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#Delimiters" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#Delimiters"
 (* instance *)
@@ -33,4 +33,4 @@ external get_children : t -> Js.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharpe
 (* instance *)
 external get_attr : t -> Js.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#Attr" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default#Attr"
 (* static *)
-external create : Js.t -> Js.t -> Js.t -> Element.t -> int -> Js.t -> t = "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default" "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default"
+external create : Js.t -> Js.t -> Js.t -> Websharper_javascript.Element.t -> int -> Js.t -> t = "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default" "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.DocElemNode::default"

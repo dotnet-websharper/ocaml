@@ -7,9 +7,9 @@ external forTextView : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI
 (* instance *)
 external get_AsChoiceView : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#get_AsChoiceView|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#get_AsChoiceView|"
 (* instance *)
-external addAttribute : t -> Js.t -> Element.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#AddAttribute|fn|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#AddAttribute|fn|WebSharper.JavaScript.Dom.Element"
+external addAttribute : t -> Js.t -> Websharper_javascript.Element.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#AddAttribute|fn|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#AddAttribute|fn|WebSharper.JavaScript.Dom.Element"
 (* instance *)
-external applyVarHole : t -> Element.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#ApplyVarHole|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#ApplyVarHole|WebSharper.JavaScript.Dom.Element"
+external applyVarHole : t -> Websharper_javascript.Element.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#ApplyVarHole|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#ApplyVarHole|WebSharper.JavaScript.Dom.Element"
 (* instance *)
 external withName : t -> string -> TemplateHole.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#WithName|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarIntUnchecked::default#WithName|System.String"
 (* instance *)

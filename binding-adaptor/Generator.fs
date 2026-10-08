@@ -72,10 +72,8 @@ type TypeEnv =
     { LocalModules: Set<string>
       LocalArity: string -> int
       LocalByFull: Map<string, string>
-      ExternalByFull: Map<string, string>
-      ExternalModules: Set<string>
-      ExternalArity: string -> int
-      ExternalPkg: string -> string option
+      ExternalByFull: Map<string, string * int * string>
+      ExternalSimple: Map<string, string * int * string>
       Deps: System.Collections.Generic.HashSet<string> }
 
 let rec mapType (ctx: TypeCtx) (t: Type) : string =
@@ -183,6 +181,10 @@ let classModuleName (td: TypeDefinitionInfo) (address: Address) =
         | None -> simpleTypeName td.FullName
     upperFirst raw
 
+// Dune wraps library `foo_bar` in a module `Foo_bar`; generated packages are
+// wrapped so identically-named types across packages do not collide.
+let wrapModule (pkgId: string) = upperFirst (pkgId.Replace('-', '_'))
+
 type Member =
     { Name: string
       Signature: string
@@ -275,11 +277,6 @@ let generateClass
     let qual = assemblyName + "!" + addrString
     let recv = receiverType generics
 
-    let addDep (m: string) =
-        match env.ExternalPkg m with
-        | Some p -> env.Deps.Add p |> ignore
-        | None -> ()
-
     let ctx : TypeCtx =
         { Lookup =
             (fun fullName ->
@@ -289,17 +286,19 @@ let generateClass
                 | Some _ -> None
                 | None ->
                     match Map.tryFind fullName env.ExternalByFull with
-                    | Some m ->
-                        addDep m
-                        Some(m, env.ExternalArity m)
+                    | Some(qm, ar, pkg) ->
+                        env.Deps.Add pkg |> ignore
+                        Some(qm, ar)
                     | None ->
-                        let m = upperFirst (lastSegment fullName)
-                        if m = moduleName then Some("", generics)
-                        elif env.LocalModules.Contains m && not (opaque.Contains m) then Some(m, env.LocalArity m)
-                        elif env.ExternalModules.Contains m then
-                            addDep m
-                            Some(m, env.ExternalArity m)
-                        else None)
+                        let s = simpleTypeName fullName
+                        if s = moduleName then Some("", generics)
+                        elif env.LocalModules.Contains s && not (opaque.Contains s) then Some(s, env.LocalArity s)
+                        else
+                            match Map.tryFind s env.ExternalSimple with
+                            | Some(qm, ar, pkg) ->
+                                env.Deps.Add pkg |> ignore
+                                Some(qm, ar)
+                            | None -> None)
           Fresh = 0 }
 
     let used = System.Collections.Generic.Dictionary<string, int>()

@@ -75,6 +75,61 @@ let private jsModule =
       "" ]
     |> String.concat "\n"
 
+// Writes <pkg>.opam into the source tree and the repo metadata (with extra-files
+// checksums required by opam >= 2.3) into the version directory.
+let private finalizeOpamPackage (pkgDir: string) (srcDir: string) (pkgId: string) (opamBody: string) =
+    File.WriteAllText(Path.Combine(srcDir, pkgId + ".opam"), opamBody)
+
+    let md5 (path: string) =
+        use stream = File.OpenRead path
+        use md = System.Security.Cryptography.MD5.Create()
+        "md5=" + BitConverter.ToString(md.ComputeHash stream).Replace("-", "").ToLowerInvariant()
+
+    let allFiles =
+        Directory.EnumerateFiles(srcDir, "*", SearchOption.AllDirectories)
+        |> Seq.map (fun p -> Path.GetRelativePath(srcDir, p).Replace('\\', '/'))
+        |> Seq.sort
+        |> Seq.toList
+
+    let extraFiles =
+        [ "extra-files: ["
+          for f in allFiles do
+              "  [\"" + f + "\" \"" + md5 (Path.Combine(srcDir, f)) + "\"]"
+          "]" ]
+        |> String.concat "\n"
+
+    File.WriteAllText(Path.Combine(pkgDir, "opam"), opamBody + extraFiles + "\n")
+
+// The shared `Js` module lives in an unwrapped base package so every binding
+// package can reference `Js.t` without opening its own wrapper.
+let private emitRuntimePackage (outRoot: string) =
+    let version = "1.0.0"
+    let pkgId = "websharper-runtime"
+    let pkgDir = Path.Combine(outRoot, "packages", pkgId, pkgId + "." + version)
+    let srcDir = Path.Combine(pkgDir, "files")
+    let libDir = Path.Combine(srcDir, "lib")
+    Directory.CreateDirectory libDir |> ignore
+    File.WriteAllText(Path.Combine(libDir, "js.ml"), jsModule)
+    File.WriteAllText(
+        Path.Combine(libDir, "dune"),
+        "(library\n (name websharper_runtime)\n (public_name websharper-runtime)\n (wrapped false)\n (modules js))\n"
+    )
+    File.WriteAllText(Path.Combine(srcDir, "dune-project"), "(lang dune 3.0)\n")
+    let opam =
+        [ "opam-version: \"2.0\""
+          "synopsis: \"Shared runtime module (Js) for wsocaml WebSharper bindings\""
+          "maintainer: \"IntelliFactory\""
+          "authors: \"IntelliFactory\""
+          "license: \"Apache-2.0\""
+          "homepage: \"https://websharper.com/\""
+          "bug-reports: \"https://github.com/dotnet-websharper/issues\""
+          "depends: [ \"ocaml\" {>= \"5.0\"} \"dune\" {>= \"3.0\"} ]"
+          "build: [ [\"dune\" \"build\" \"-p\" name \"-j\" jobs] ]"
+          "" ]
+        |> String.concat "\n"
+    finalizeOpamPackage pkgDir srcDir pkgId opam
+
+
 let private lastSegment (fullName: string) =
     let last = fullName.Substring(fullName.LastIndexOf('.') + 1)
     if last.Contains "`" then last.Substring(0, last.IndexOf '`') else last
@@ -117,21 +172,18 @@ let gen
         references
         |> List.collect (fun refDll -> classesOf (loadInfo refDll) (defaultId refDll))
 
+    // qualified module name (wrapped library), arity, owning package
     let externalByFull =
-        externalClasses |> List.map (fun (a, td, _, _) -> td.FullName, classModuleName td a) |> Map.ofList
-
-    let externalModules =
-        externalClasses |> List.map (fun (a, td, _, _) -> classModuleName td a) |> Set.ofList
-
-    let externalArity (m: string) =
         externalClasses
-        |> List.tryPick (fun (a, td, ci, _) ->
-            if classModuleName td a = m then Some ci.Generics.Length else None)
-        |> Option.defaultValue 0
+        |> List.map (fun (a, td, ci, pkg) ->
+            td.FullName, (wrapModule pkg + "." + classModuleName td a, ci.Generics.Length, pkg))
+        |> Map.ofList
 
-    let externalPkg (m: string) =
+    let externalSimple =
         externalClasses
-        |> List.tryPick (fun (a, td, _, p) -> if classModuleName td a = m then Some p else None)
+        |> List.map (fun (a, td, ci, pkg) ->
+            classModuleName td a, (wrapModule pkg + "." + classModuleName td a, ci.Generics.Length, pkg))
+        |> Map.ofList
 
     let deps = System.Collections.Generic.HashSet<string>()
 
@@ -140,9 +192,7 @@ let gen
           LocalArity = localArity
           LocalByFull = localByFull
           ExternalByFull = externalByFull
-          ExternalModules = externalModules
-          ExternalArity = externalArity
-          ExternalPkg = externalPkg
+          ExternalSimple = externalSimple
           Deps = deps }
 
     let selected =
@@ -201,27 +251,23 @@ let gen
         let g = { g with Module = name }
         File.WriteAllText(Path.Combine(libDir, lowerFirst name + ".ml"), renderClass g)
 
-    // The shared `Js` module lives in the base package; packages with
-    // references resolve it through their dependencies instead of redefining it.
-    let emitJs = List.isEmpty references
-    if emitJs then
-        File.WriteAllText(Path.Combine(libDir, "js.ml"), jsModule)
-
     let libName = pkgId.Replace("-", "_")
-    let allModules =
-        (if emitJs then [ "js" ] else []) @ (unique |> List.map (fun (n, _) -> lowerFirst n))
-    let depList = deps |> Seq.filter (fun d -> d <> pkgId) |> Seq.sort |> Seq.toList
+    let allModules = unique |> List.map (fun (n, _) -> lowerFirst n)
+    let depList =
+        ("websharper-runtime" :: (deps |> Seq.filter (fun d -> d <> pkgId && d <> "websharper-runtime") |> Seq.toList))
+        |> List.sort
     let duneLib =
         ([ "(library"
            " (name " + libName + ")"
            " (public_name " + pkgId + ")"
-           " (wrapped false)"
-           " (modules " + String.concat " " allModules + ")" ]
-         @ (if depList = [] then [] else [ " (libraries " + String.concat " " depList + ")" ])
+           " (modules " + String.concat " " allModules + ")"
+           " (libraries " + String.concat " " depList + ")" ]
          @ [ ")" ])
         |> String.concat "\n"
     File.WriteAllText(Path.Combine(libDir, "dune"), duneLib + "\n")
     File.WriteAllText(Path.Combine(srcDir, "dune-project"), "(lang dune 3.0)\n")
+
+    emitRuntimePackage outRoot
 
     let opam =
         [ "opam-version: \"2.0\""
@@ -242,29 +288,7 @@ let gen
           "]"
           "" ]
         |> String.concat "\n"
-    File.WriteAllText(Path.Combine(srcDir, pkgId + ".opam"), opam)
-
-    // opam >= 2.3 only copies files declared in extra-files.
-    let md5 (path: string) =
-        use stream = File.OpenRead path
-        use md = System.Security.Cryptography.MD5.Create()
-        let hash = md.ComputeHash stream
-        "md5=" + BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant()
-
-    let allFiles =
-        Directory.EnumerateFiles(srcDir, "*", SearchOption.AllDirectories)
-        |> Seq.map (fun p -> Path.GetRelativePath(srcDir, p).Replace('\\', '/'))
-        |> Seq.sort
-        |> Seq.toList
-
-    let extraFiles =
-        [ "extra-files: ["
-          for f in allFiles do
-              "  [\"" + f + "\" \"" + md5 (Path.Combine(srcDir, f)) + "\"]"
-          "]" ]
-        |> String.concat "\n"
-
-    File.WriteAllText(Path.Combine(pkgDir, "opam"), opam + extraFiles + "\n")
+    finalizeOpamPackage pkgDir srcDir pkgId opam
 
     printfn "generated %d modules -> %s" (List.length unique) pkgDir
 

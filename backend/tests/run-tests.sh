@@ -203,9 +203,9 @@ fi
 apps_ws="$here/apps-ws"
 wsroot="$(cd "$here/../.." && pwd)"
 if [ -d "$apps_ws" ]; then
-  wslib="$(ls -d "$wsroot"/bindings/packages/websharper-javascript/*/files/lib 2>/dev/null | head -n 1 || true)"
+  wslib="$(ocamlfind query websharper-javascript 2>/dev/null || opam exec -- ocamlfind query websharper-javascript 2>/dev/null || true)"
   if [ -z "$wslib" ]; then
-    echo "SKIP ws apps (no generated websharper-javascript package; run binding-adaptor)"
+    echo "SKIP ws apps (websharper-javascript not installed; opam repo add wsocaml ./bindings && opam install websharper-javascript)"
   else
     for ml in "$apps_ws"/*.ml; do
       [ -f "$ml" ] || continue

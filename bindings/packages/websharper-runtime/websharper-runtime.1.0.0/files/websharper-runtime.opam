@@ -1,0 +1,9 @@
+opam-version: "2.0"
+synopsis: "Shared runtime module (Js) for wsocaml WebSharper bindings"
+maintainer: "IntelliFactory"
+authors: "IntelliFactory"
+license: "Apache-2.0"
+homepage: "https://websharper.com/"
+bug-reports: "https://github.com/dotnet-websharper/issues"
+depends: [ "ocaml" {>= "5.0"} "dune" {>= "3.0"} ]
+build: [ ["dune" "build" "-p" name "-j" jobs] ]

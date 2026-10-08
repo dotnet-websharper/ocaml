@@ -9,6 +9,7 @@ bug-reports: "https://github.com/dotnet-websharper/issues"
 depends: [
   "ocaml" {>= "5.0"}
   "dune" {>= "3.0"}
+  "websharper-runtime"
 ]
 build: [
   ["dune" "build" "-p" name "-j" jobs]
@@ -109,7 +110,7 @@ extra-files: [
   ["lib/documentType.ml" "md5=23d70487afb846bf8bd30113459df4ad"]
   ["lib/documentView.ml" "md5=962fbb931f341f2810ad78d406e6b223"]
   ["lib/doubleRange.ml" "md5=eea52809d1194f2ec9d4117483cd43af"]
-  ["lib/dune" "md5=e713f92203876790739f919c732d7a09"]
+  ["lib/dune" "md5=c10e8f7cf1dcc7469bb51029919eaa83"]
   ["lib/element.ml" "md5=4696c2f19ca14a5ca004631281665591"]
   ["lib/elementCreateOptions.ml" "md5=9d6b6480618808323d261c7639dcbc83"]
   ["lib/elementDefinitionOptions.ml" "md5=5a0992dbd7cf87d0b0b56bf83adc6b04"]
@@ -178,7 +179,6 @@ extra-files: [
   ["lib/int32Array.ml" "md5=fdc8826a89c358171d04081d25bde2a1"]
   ["lib/int8Array.ml" "md5=7a4f2973186481f1f154a3897cd96875"]
   ["lib/jSON.ml" "md5=05e6104a30773e0aa8707a53f7ec8af2"]
-  ["lib/js.ml" "md5=80e05be39a884d966b8fde67c328d944"]
   ["lib/keyLocationCode.ml" "md5=cae0d039dd93aea5456f7a12d4a54ffa"]
   ["lib/keyboardEvent.ml" "md5=d9472546e417c6d5ebfdc37fe60cfb63"]
   ["lib/lineCap.ml" "md5=b2285b52327e44b18148df1a22b4082b"]
@@ -319,5 +319,5 @@ extra-files: [
   ["lib/xMLHttpRequestEventTarget.ml" "md5=ee5b14bfa940581b484de5982078cf9d"]
   ["lib/xMLHttpRequestResponseType.ml" "md5=18e67743244b0f3bed7f0c5ec2a16c2d"]
   ["lib/xMLHttpRequestUpload.ml" "md5=962fbb931f341f2810ad78d406e6b223"]
-  ["websharper-javascript.opam" "md5=55c33b21290c0565fb2960bbecd000a0"]
+  ["websharper-javascript.opam" "md5=c02d94aa4587f7bde5443d193082b8d3"]
 ]

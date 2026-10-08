@@ -9,7 +9,7 @@ external get_Values : ('a, 'b) t -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdL
 (* instance *)
 external remove : ('a, 'b) t -> 'a -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#Remove|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#Remove|'0"
 (* instance *)
-external getEnumerator : ('a, 'b) t -> ('a, 'b) t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#GetEnumerator|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#GetEnumerator|"
+external getEnumerator : ('a, 'b) t -> ('a) Enumerator.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#GetEnumerator|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#GetEnumerator|"
 (* instance *)
 external set_Item : ('a, 'b) t -> 'a -> 'b -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#set_Item|'0|'1" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#set_Item|'0|'1"
 (* instance *)
@@ -33,7 +33,7 @@ external containsKey : ('a, 'b) t -> 'a -> bool = "ws:WebSharper.StdLib!WebSharp
 (* instance *)
 external clear : ('a, 'b) t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#Clear|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#Clear|"
 (* instance *)
-external get_data : ('a, 'b) t -> ((Js.t) Array.t) Array.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#data" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#data"
+external get_data : ('a, 'b) t -> ((Js.t) Websharper_javascript.Array.t) Websharper_javascript.Array.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#data" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#data"
 (* instance *)
 external get_count : ('a, 'b) t -> int = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#count" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#count"
 (* instance *)

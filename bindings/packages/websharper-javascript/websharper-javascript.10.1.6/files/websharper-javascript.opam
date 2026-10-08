@@ -9,6 +9,7 @@ bug-reports: "https://github.com/dotnet-websharper/issues"
 depends: [
   "ocaml" {>= "5.0"}
   "dune" {>= "3.0"}
+  "websharper-runtime"
 ]
 build: [
   ["dune" "build" "-p" name "-j" jobs]

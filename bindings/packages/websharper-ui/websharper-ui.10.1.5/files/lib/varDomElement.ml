@@ -3,7 +3,7 @@ type t
 (* instance *)
 external get_Value : t -> (Js.t) Var.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarDomElement::default#get_Value|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarDomElement::default#get_Value|"
 (* instance *)
-external applyVarHole : t -> Element.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarDomElement::default#ApplyVarHole|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarDomElement::default#ApplyVarHole|WebSharper.JavaScript.Dom.Element"
+external applyVarHole : t -> Websharper_javascript.Element.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarDomElement::default#ApplyVarHole|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarDomElement::default#ApplyVarHole|WebSharper.JavaScript.Dom.Element"
 (* instance *)
 external withName : t -> string -> TemplateHole.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarDomElement::default#WithName|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarDomElement::default#WithName|System.String"
 (* instance *)

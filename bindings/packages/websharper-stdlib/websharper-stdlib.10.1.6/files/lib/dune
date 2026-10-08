@@ -1,7 +1,6 @@
 (library
  (name websharper_stdlib)
  (public_name websharper-stdlib)
- (wrapped false)
  (modules error nonStandardPromiseRejectionException pervasives xhrProvider ajaxRemotingProvider singleNode equatableEqualityComparer baseEqualityComparer comparableComparer baseComparer scheduler t object cancellationTokenSource textWriter outTextWriter errorTextWriter keyCollection valueCollection dictionary matchFailureException indexOutOfRangeException invalidCastException operationCanceledException argumentException argumentOutOfRangeException argumentNullException invalidOperationException aggregateException timeoutException formatException overflowException taskCanceledException keyNotFoundException hashSet equalityComparer comparer fSharpList random task task2 taskCompletionSource taskBuilderBase taskBuilder stringBuilder pair fSharpMap fSharpSet enumerator enumerator2 linkedList grouping fsComparer projectionComparer compoundComparer reverseComparer orderedEnumerable queryBuilder hotStream event delegateEvent fSharpEvent fSharpDelegateEvent eventArgs fSharpMailboxProcessor)
- (libraries websharper-javascript)
+ (libraries websharper-javascript websharper-runtime)
 )

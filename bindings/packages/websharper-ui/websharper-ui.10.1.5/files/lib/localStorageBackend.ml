@@ -5,7 +5,7 @@ external clear : ('a) t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.
 (* instance *)
 external set : ('a) t -> ('a) array -> ('a) array = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Storage.LocalStorageBackend`1::default#set|'0[]" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Storage.LocalStorageBackend`1::default#set|'0[]"
 (* instance *)
-external get_storage : ('a) t -> Storage.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Storage.LocalStorageBackend`1::default#storage" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Storage.LocalStorageBackend`1::default#storage"
+external get_storage : ('a) t -> Websharper_javascript.Storage.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Storage.LocalStorageBackend`1::default#storage" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Storage.LocalStorageBackend`1::default#storage"
 (* instance *)
 external get_serializer : ('a) t -> Js.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Storage.LocalStorageBackend`1::default#serializer" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Storage.LocalStorageBackend`1::default#serializer"
 (* instance *)

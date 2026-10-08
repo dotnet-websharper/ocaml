@@ -27,9 +27,9 @@ external makeVarLens_4 : string -> Js.t -> t = "ws:WebSharper.UI!WebSharper.UI/W
 (* inline *)
 external makeVar_3 : string -> (Js.t) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#MakeVar|System.String|WebSharper.UI.Var`1<System.DateTime>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#MakeVar|System.String|WebSharper.UI.Var`1<System.DateTime>"
 (* macro *)
-external makeVarLens_5 : string -> (File.t) array -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#MakeVarLens|System.String|WebSharper.JavaScript.File[]" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#MakeVarLens|System.String|WebSharper.JavaScript.File[]"
+external makeVarLens_5 : string -> (Websharper_javascript.File.t) array -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#MakeVarLens|System.String|WebSharper.JavaScript.File[]" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#MakeVarLens|System.String|WebSharper.JavaScript.File[]"
 (* inline *)
-external makeVar_4 : string -> ((File.t) array) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#MakeVar|System.String|WebSharper.UI.Var`1<WebSharper.JavaScript.File[]>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#MakeVar|System.String|WebSharper.UI.Var`1<WebSharper.JavaScript.File[]>"
+external makeVar_4 : string -> ((Websharper_javascript.File.t) array) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#MakeVar|System.String|WebSharper.UI.Var`1<WebSharper.JavaScript.File[]>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#MakeVar|System.String|WebSharper.UI.Var`1<WebSharper.JavaScript.File[]>"
 (* macro *)
 external makeVarLens_6 : string -> (int) CheckedInput.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#MakeVarLens|System.String|WebSharper.UI.Client.CheckedInput`1<System.Int32>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#MakeVarLens|System.String|WebSharper.UI.Client.CheckedInput`1<System.Int32>"
 (* inline *)
@@ -53,8 +53,8 @@ external get_AsChoiceView : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharp
 (* instance *)
 external forTextView : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#ForTextView|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#ForTextView|"
 (* instance *)
-external applyVarHole : t -> Element.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#ApplyVarHole|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#ApplyVarHole|WebSharper.JavaScript.Dom.Element"
+external applyVarHole : t -> Websharper_javascript.Element.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#ApplyVarHole|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#ApplyVarHole|WebSharper.JavaScript.Dom.Element"
 (* instance *)
-external addAttribute : t -> Js.t -> Element.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#AddAttribute|fn|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#AddAttribute|fn|WebSharper.JavaScript.Dom.Element"
+external addAttribute : t -> Js.t -> Websharper_javascript.Element.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#AddAttribute|fn|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#AddAttribute|fn|WebSharper.JavaScript.Dom.Element"
 (* new *)
 external create : unit -> t = "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default" "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default"

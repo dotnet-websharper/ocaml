@@ -55,6 +55,19 @@ The backend resolves these addresses against WebSharper metadata passed with
 `--reference <assembly.dll>`, inlining inline bodies and emitting thin
 static/instance/new access.
 
+Generated packages reference other WebSharper packages with `--reference`; cross-
+package types are emitted qualified and the opam/dune dependencies are generated
+automatically:
+
+    dotnet .../binding-adaptor.dll gen WebSharper.UI.dll --version 10.1.5 --dest ./bindings \
+      --reference .../WebSharper.JavaScript.dll --reference .../WebSharper.StdLib.dll
+
+Each binding package is a **wrapped** dune library, so identically-named types
+across packages do not collide (`Websharper_javascript.Event.t`,
+`Websharper_stdlib.Event.t`, `Websharper_ui.Event.t`). The shared `Js` module
+lives in the unwrapped `websharper-runtime` package. Use `open Websharper_javascript`
+(etc.) to bring a package's modules into scope.
+
 ## Examples
 
 Each example is a dune project producing a directory of JS. Install the
@@ -64,12 +77,14 @@ bindings first, then build:
     opam install websharper-javascript
 
     cd examples/js && dune build && node _build/default/out/Main.js
+    cd examples/dom && dune build && node run.mjs _build/default/out
 
 `examples/js` references the binding package directly in its `dune` file
 (`(libraries websharper-javascript)` and
 `%{lib:websharper-javascript:console.ml}`), so `dune build` type-checks the
-example against the installed opam package and then emits JS. `examples/hello`
-and `examples/basics` compile plain OCaml units and need no bindings.
+example against the installed opam package and then emits JS. `examples/dom` is
+a jsdom-backed DOM example. `examples/hello` and `examples/basics` compile plain
+OCaml units and need no bindings.
 
 ## Tests
 

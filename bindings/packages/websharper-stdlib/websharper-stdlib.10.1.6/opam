@@ -10,6 +10,7 @@ depends: [
   "ocaml" {>= "5.0"}
   "dune" {>= "3.0"}
   "websharper-javascript"
+  "websharper-runtime"
 ]
 build: [
   ["dune" "build" "-p" name "-j" jobs]
@@ -28,8 +29,8 @@ extra-files: [
   ["lib/comparer.ml" "md5=9406c72bb0360c9a243f8f3c55355678"]
   ["lib/compoundComparer.ml" "md5=8584dd43f6370192761ec3bf746d4378"]
   ["lib/delegateEvent.ml" "md5=6eeea2b4a3744c1770177465df665b13"]
-  ["lib/dictionary.ml" "md5=a501400742ea837b64820bd6a8fc5496"]
-  ["lib/dune" "md5=3ed1be2540f892db765f8db08d677911"]
+  ["lib/dictionary.ml" "md5=e48ba4cc12f6fdf8e6663e6ae1732dd5"]
+  ["lib/dune" "md5=86f553168e9c4eb0c700602011b992b8"]
   ["lib/enumerator.ml" "md5=9f82bf3467b945bcecf75883fbc9c294"]
   ["lib/enumerator2.ml" "md5=ec2dc612d166f1442c89938b2e83b6eb"]
   ["lib/equalityComparer.ml" "md5=d5260d82f9d55fd976e48dc3185261a7"]
@@ -47,12 +48,12 @@ extra-files: [
   ["lib/formatException.ml" "md5=51fc314bc6a6849b4602e2f638266204"]
   ["lib/fsComparer.ml" "md5=a1270b2063409ed6757b1f2fa4ddc291"]
   ["lib/grouping.ml" "md5=ab7c7c241375fdcdc238e47a1a0e81a4"]
-  ["lib/hashSet.ml" "md5=e50f6721060cb29738ef1a3980b68986"]
+  ["lib/hashSet.ml" "md5=ebec365c4c70a448fcfc75b5098b94af"]
   ["lib/hotStream.ml" "md5=2d1e998b9e751b49535233595aa15c1c"]
   ["lib/indexOutOfRangeException.ml" "md5=dc2d33545b6f6be36ebdb4948f8de8ce"]
   ["lib/invalidCastException.ml" "md5=39121de81f5189849ff129eb46637f6e"]
   ["lib/invalidOperationException.ml" "md5=5391dd552144fe825e73966474031307"]
-  ["lib/keyCollection.ml" "md5=3593f90ba01b294e8d9638b686ee8c64"]
+  ["lib/keyCollection.ml" "md5=3c9d89c1df9ed95f025c77387458d0fd"]
   ["lib/keyNotFoundException.ml" "md5=a981c0bf7023b7946e8a04e448d4c50a"]
   ["lib/linkedList.ml" "md5=05bd714d60c0cc6bd3aaec9c0233c39c"]
   ["lib/matchFailureException.ml" "md5=12482d5fde8b12a1a5e143256f517b38"]
@@ -69,7 +70,7 @@ extra-files: [
   ["lib/random.ml" "md5=0fa5ffaa5e9f5acfa62933065f45e333"]
   ["lib/reverseComparer.ml" "md5=5e6ed0341a4c54e8025b17e25124fa22"]
   ["lib/scheduler.ml" "md5=7f43c98d6b74a58aa5ec3315777eadba"]
-  ["lib/singleNode.ml" "md5=9e86320b29d47e38a73c083f1acc0a33"]
+  ["lib/singleNode.ml" "md5=4c5c7973e7464141b1b9be3ddd4a923f"]
   ["lib/stringBuilder.ml" "md5=1339b8ca928ade9893331cd9dd779645"]
   ["lib/t.ml" "md5=745a38ede77755ead6e80f32a8239584"]
   ["lib/task.ml" "md5=3db00beaa00c4a1177d813e89cbac0d8"]
@@ -80,7 +81,7 @@ extra-files: [
   ["lib/taskCompletionSource.ml" "md5=36906b719d96b49be03b8e2a70ef6af2"]
   ["lib/textWriter.ml" "md5=867de267fe1bcab7dbe1c4a172073843"]
   ["lib/timeoutException.ml" "md5=c232c37fb5534be44027c9251bb1f0a1"]
-  ["lib/valueCollection.ml" "md5=438b0fdb05dc88e3c9473cb5608bbde8"]
+  ["lib/valueCollection.ml" "md5=19db1e5bc3ba45e1e966530e01bc0ecf"]
   ["lib/xhrProvider.ml" "md5=713bb4b72aec10f59977f69a4727d3d2"]
-  ["websharper-stdlib.opam" "md5=8a1a641717b9c07d34b66f6fae192935"]
+  ["websharper-stdlib.opam" "md5=11265f94579d85bead8f12324455e7b4"]
 ]
