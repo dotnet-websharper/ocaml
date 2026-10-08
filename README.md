@@ -74,6 +74,18 @@ their real types instead of `Js.t` — `Document.t = Element.t = Node.t =
 EventTarget.t`, and `Document.getElementById : Document.t -> string -> Element.t`
 (the representative is chosen as the base with the largest subclass tree).
 
+### Packaging referenced assemblies
+
+The backend can run the WebSharper packager over `--reference` assemblies
+(`--package-references`), emitting one ESM module per type under
+`<out>/<Assembly>/<Type>.js` plus the WebSharper runtime at
+`<out>/WebSharper.Core.JavaScript/Runtime.js`:
+
+    dotnet .../WebSharper.OCaml.dll --ir Main.wsir.json --output out --package-references \
+      --reference WebSharper.UI.dll --reference WebSharper.StdLib.dll
+
+(Linking the entry's calls to these packaged modules is the remaining step.)
+
 ## Examples
 
 Each example is a dune project producing a directory of JS. Install the

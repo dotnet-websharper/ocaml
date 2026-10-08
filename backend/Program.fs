@@ -12,6 +12,7 @@ open System.IO
 open WebSharper.OCaml
 open WebSharper.OCaml.Lowering
 open WebSharper.Core.JavaScript
+open WebSharper.Core.Metadata
 open WebSharper.Compiler
 open WebSharper.Core.AST
 
@@ -29,12 +30,56 @@ let private bindings (refs: ResizeArray<string>) =
     if refs.Count = 0 then None
     else Some(WebSharper.OCaml.Bindings.load (List.ofSeq refs))
 
+let private loadInfo (path: string) : Info =
+    let asm = Reflection.Assembly.LoadFrom(Path.GetFullPath path)
+    match IO.LoadMetadata asm with
+    | Some i -> i
+    | None -> failwithf "no WebSharper metadata in %s" path
+
+// Package referenced WebSharper assemblies with the WebSharper packager, and
+// emit the WebSharper runtime next to them.
+let private packageReferences (refs: string list) (output: string) (pref: Preferences) =
+    let infos = refs |> List.map (fun p -> Path.GetFileNameWithoutExtension p, loadInfo p)
+
+    for (asmName, info) in infos do
+        let dir = Path.Combine(output, asmName)
+        Directory.CreateDirectory dir |> ignore
+
+        let refMeta =
+            infos
+            |> List.filter (fun (n, _) -> n <> asmName)
+            |> List.map snd
+            |> Info.UnionWithoutDependencies
+
+        let res =
+            JavaScriptPackager.packageAssembly
+                JavaScriptPackager.O.JavaScript
+                refMeta
+                info
+                asmName
+                false
+                None
+                JavaScriptPackager.EntryPointStyle.LibraryBundle
+
+        for (name, stmts) in res do
+            let jsAst, _ = JavaScriptWriter.transformProgram Output.JavaScript pref stmts
+            File.WriteAllText(Path.Combine(dir, name + ".js"), Writer.ProgramToString pref jsAst)
+
+    let cjs = Reflection.Assembly.Load("WebSharper.Core.JavaScript")
+    use s = cjs.GetManifestResourceStream "WebSharper.Core.JavaScript.Runtime.js"
+    use r = new StreamReader(s)
+    let rtjs = r.ReadToEnd()
+    let rtDir = Path.Combine(output, "WebSharper.Core.JavaScript")
+    Directory.CreateDirectory rtDir |> ignore
+    File.WriteAllText(Path.Combine(rtDir, "Runtime.js"), rtjs)
+
 [<EntryPoint>]
 let main argv =
     try
         let mutable input = ""
         let mutable output = "wsocaml-out"
         let mutable compact = false
+        let mutable packageRefs = false
         let references = ResizeArray<string>()
 
         let rec args i =
@@ -49,6 +94,9 @@ let main argv =
                 | "--reference" ->
                     references.Add argv[i + 1]
                     args (i + 2)
+                | "--package-references" ->
+                    packageRefs <- true
+                    args (i + 1)
                 | "--compact" ->
                     compact <- true
                     args (i + 1)
@@ -86,6 +134,10 @@ let main argv =
         let js = Writer.ProgramToString pref jsAst
         let code = if usesRuntime then runtimePrelude () + js else js
         File.WriteAllText(Path.Combine(output, ir.Unit + ".js"), code)
+
+        if packageRefs then
+            packageReferences (List.ofSeq references) output pref
+
         0
     with e ->
         eprintfn "%s" (e.ToString())
