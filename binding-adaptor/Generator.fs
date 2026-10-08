@@ -278,12 +278,12 @@ let generateClass
     (opaque: Set<string>)
     (assemblyName: string)
     (isAbstract: bool)
+    (moduleName: string)
     (address: Address)
     (td: TypeDefinitionInfo)
     (ci: ClassInfo)
     : GeneratedClass =
 
-    let moduleName = classModuleName td address
     let generics = ci.Generics.Length
     let addrString = address.ToString()
     let qual = assemblyName + "!" + addrString

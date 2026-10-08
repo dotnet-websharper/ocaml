@@ -156,15 +156,35 @@ let gen
 
     let allClasses = classesOf info pkgId
 
-    let localByFull =
-        allClasses |> List.map (fun (a, td, _, _) -> td.FullName, classModuleName td a) |> Map.ofList
+    // Assign final (deduped) module names up front, so that intra-module
+    // self-references match the emitted (possibly suffixed) module name.
+    let dedupNames (cs: (Address * TypeDefinitionInfo * ClassInfo * string) list) =
+        let used = System.Collections.Generic.HashSet<string>()
 
-    let localModules = allClasses |> List.map (fun (a, td, _, _) -> classModuleName td a) |> Set.ofList
+        cs
+        |> List.sortBy (fun (a, _, _, _) -> addressString a)
+        |> List.map (fun (a, td, _, _) ->
+            let baseName = classModuleName td a
+            let mutable name = baseName
+            let mutable i = 2
+            while used.Contains name do
+                name <- baseName + string i
+                i <- i + 1
+            used.Add name |> ignore
+            td.FullName, name)
+        |> Map.ofList
+
+    let targetNames = dedupNames allClasses
+    let moduleOf (td: TypeDefinitionInfo) = targetNames.[td.FullName]
+
+    let localByFull =
+        allClasses |> List.map (fun (_, td, _, _) -> td.FullName, moduleOf td) |> Map.ofList
+
+    let localModules = allClasses |> List.map (fun (_, td, _, _) -> moduleOf td) |> Set.ofList
 
     let localArity (m: string) =
         allClasses
-        |> List.tryPick (fun (a, td, ci, _) ->
-            if classModuleName td a = m then Some ci.Generics.Length else None)
+        |> List.tryPick (fun (_, td, ci, _) -> if moduleOf td = m then Some ci.Generics.Length else None)
         |> Option.defaultValue 0
 
     // referenced WebSharper assemblies: types resolve to their generated modules
@@ -174,15 +194,17 @@ let gen
 
     // qualified module name (wrapped library), arity, owning package
     let externalByFull =
-        externalClasses
-        |> List.map (fun (a, td, ci, pkg) ->
-            td.FullName, (wrapModule pkg + "." + classModuleName td a, ci.Generics.Length, pkg))
+        [ for pkg, cs in externalClasses |> List.groupBy (fun (_, _, _, p) -> p) do
+            let names = dedupNames cs
+            for (a, td, ci, _) in cs do
+                yield td.FullName, (wrapModule pkg + "." + names.[td.FullName], ci.Generics.Length, pkg) ]
         |> Map.ofList
 
     let externalSimple =
-        externalClasses
-        |> List.map (fun (a, td, ci, pkg) ->
-            classModuleName td a, (wrapModule pkg + "." + classModuleName td a, ci.Generics.Length, pkg))
+        [ for pkg, cs in externalClasses |> List.groupBy (fun (_, _, _, p) -> p) do
+            let names = dedupNames cs
+            for (a, td, ci, _) in cs do
+                yield classModuleName td a, (wrapModule pkg + "." + names.[td.FullName], ci.Generics.Length, pkg) ]
         |> Map.ofList
 
     let deps = System.Collections.Generic.HashSet<string>()
@@ -196,7 +218,7 @@ let gen
         |> List.sortBy (fun (a, _, _, _) -> addressString a)
     let assemblyName = Path.GetFileNameWithoutExtension dll
 
-    let rawModules = selected |> List.map (fun (a, td, ci, _) -> classModuleName td a, ci)
+    let rawModules = selected |> List.map (fun (_, td, ci, _) -> moduleOf td, ci)
     let nodeSet = rawModules |> List.map fst |> Set.ofList
 
     let edges =
@@ -214,7 +236,7 @@ let gen
 
     let ciOf =
         allClasses
-        |> List.map (fun (a, td, ci, _) -> classModuleName td a, ci)
+        |> List.map (fun (_, td, ci, _) -> moduleOf td, ci)
         |> Map.ofList
 
     // Collapse type hierarchies into a single shared type: union classes with
@@ -239,7 +261,7 @@ let gen
         | Some(r: string) -> if localArity m = 0 && localArity r = 0 then union m r
         | None -> ()
     for (a, td, ci, _) in allClasses do
-        let m = classModuleName td a
+        let m = moduleOf td
         if nodeSet.Contains m then
             match ci.BaseClass with
             | Some bc -> unionFull m bc.Entity.Value.FullName
@@ -283,7 +305,7 @@ let gen
             match Map.tryFind bc.Entity.Value.FullName localByFull with
             | Some b ->
                 if not (children.ContainsKey b) then children.[b] <- ResizeArray()
-                children.[b].Add(classModuleName td a)
+                children.[b].Add(moduleOf td)
             | None -> ()
         | None -> ()
 
@@ -337,7 +359,7 @@ let gen
     let generated =
         selected
         |> List.map (fun (a, td, ci, _) ->
-            generateClass env (opaqueFor (classModuleName td a)) assemblyName (isAbstract td) a td ci)
+            generateClass env (opaqueFor (moduleOf td)) assemblyName (isAbstract td) (moduleOf td) a td ci)
 
     let used = System.Collections.Generic.HashSet<string>()
     let unique =

@@ -75,9 +75,9 @@ external scroll : t -> unit = "ws:WebSharper.JavaScript!globalThis.Element#Scrol
 (* inline *)
 external scroll_2 : t -> ScrollOptions.t -> unit = "ws:WebSharper.JavaScript!globalThis.Element#Scroll|WebSharper.JavaScript.Dom.ScrollOptions" "ws:WebSharper.JavaScript!globalThis.Element#Scroll|WebSharper.JavaScript.Dom.ScrollOptions"
 (* inline *)
-external getBoundingClientRect : t -> DOMRectReadOnly.t = "ws:WebSharper.JavaScript!globalThis.Element#GetBoundingClientRect|" "ws:WebSharper.JavaScript!globalThis.Element#GetBoundingClientRect|"
+external getBoundingClientRect : t -> DOMRect.t = "ws:WebSharper.JavaScript!globalThis.Element#GetBoundingClientRect|" "ws:WebSharper.JavaScript!globalThis.Element#GetBoundingClientRect|"
 (* inline *)
-external getClientRects : t -> (DOMRectReadOnly.t) array = "ws:WebSharper.JavaScript!globalThis.Element#GetClientRects|" "ws:WebSharper.JavaScript!globalThis.Element#GetClientRects|"
+external getClientRects : t -> (DOMRect.t) array = "ws:WebSharper.JavaScript!globalThis.Element#GetClientRects|" "ws:WebSharper.JavaScript!globalThis.Element#GetClientRects|"
 (* inline *)
 external getAnimations : t -> (Animation.t) array = "ws:WebSharper.JavaScript!globalThis.Element#GetAnimations|" "ws:WebSharper.JavaScript!globalThis.Element#GetAnimations|"
 (* inline *)

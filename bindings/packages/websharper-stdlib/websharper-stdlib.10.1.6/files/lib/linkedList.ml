@@ -7,7 +7,7 @@ external get_First : ('a) t -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Sy
 (* inline *)
 external get_Last : ('a) t -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#get_Last|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#get_Last|"
 (* instance *)
-external getEnumerator : ('a) t -> ('a) Enumerator.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#GetEnumerator|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#GetEnumerator|"
+external getEnumerator : ('a) t -> ('a) Enumerator2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#GetEnumerator|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#GetEnumerator|"
 (* instance *)
 external copyTo : ('a) t -> ('a) array -> int -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#CopyTo|'0[]|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default#CopyTo|'0[]|System.Int32"
 (* instance *)
