@@ -7,6 +7,12 @@ root="$(cd "$(dirname "$0")/.." && pwd)"
 fe="$root/frontend/_build/default/bin/main.exe"
 be="$root/backend/bin/Debug/net10.0/WebSharper.OCaml.dll"
 ref="$root/backend/bin/Debug/net10.0/WebSharper.JavaScript.dll"
+extra_refs="${WS_REFS:-}"
+ws_compile="${WS_COMPILE:-0}"
+ref_args=(--reference "$ref")
+for r in $extra_refs; do ref_args+=(--reference "$r"); done
+backend_flags=()
+if [ "$ws_compile" = "1" ]; then backend_flags+=(--ws-compile); fi
 bindir="$1"
 entry="$2"
 out="${3:-$root/out}"
@@ -58,11 +64,11 @@ for g in $globals; do
     continue
   fi
   "$fe" --input "$src" --output "$out/$g.wsir.json" --unit "$g" -I "$work" "${runtime_inc[@]}" -I "$s"
-  dotnet "$be" --ir "$out/$g.wsir.json" --output "$out" --reference "$ref" --compact
+  dotnet "$be" --ir "$out/$g.wsir.json" --output "$out" "${ref_args[@]}" ${backend_flags[@]+"${backend_flags[@]}"} --compact
 done
 
 # 4) compile the entry to JS
-dotnet "$be" --ir "$out/Main.wsir.json" --output "$out" --reference "$ref" --compact
+dotnet "$be" --ir "$out/Main.wsir.json" --output "$out" "${ref_args[@]}" ${backend_flags[@]+"${backend_flags[@]}"} --compact
 
 # 5) stdlib shims
 for shim in "$root"/backend/tests/Stdlib*.js; do

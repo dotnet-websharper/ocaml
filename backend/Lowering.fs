@@ -420,9 +420,13 @@ module Lowering =
                 match tryClass c asm addr with
                 | Some e ->
                     if c.Ws then
-                        match WebSharper.OCaml.Bindings.findCtor e.Class es.Length with
-                        | Some ctorKey -> Ctor(WebSharper.OCaml.Bindings.concrete e.TypeKey, ctorKey, es)
-                        | None -> failwith $"wsnew: no constructor with {es.Length} args for {addr}"
+                        let tryCtor n =
+                            if n >= 0 then WebSharper.OCaml.Bindings.findCtor e.Class n else None
+                        match tryCtor es.Length, (if es.Length > 0 then tryCtor (es.Length - 1) else None) with
+                        | Some ctorKey, _ -> Ctor(WebSharper.OCaml.Bindings.concrete e.TypeKey, ctorKey, es)
+                        | None, Some ctorKey ->
+                            Ctor(WebSharper.OCaml.Bindings.concrete e.TypeKey, ctorKey, List.truncate (es.Length - 1) es)
+                        | _ -> failwith $"wsnew: no matching constructor for {addr}"
                     else
                         New(GlobalAccess e.Address, [], es)
                 | None -> failwith $"wsnew: unknown class {addr}"
