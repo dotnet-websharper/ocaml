@@ -132,12 +132,12 @@ let main argv =
             | _ -> stripper.TransformStatement (Breaker.BreakStatement (Breaker.optimizer.TransformStatement s))
 
         if references.Count > 0 && wsCompile then
-            // A'' path: produce a WebSharper program (entry point with member
-            // references) and let CompileFull + JavaScriptPackager resolve and
-            // package it against the referenced metadata.
+            // A'' path: lower member calls to WebSharper nodes and let
+            // CompileFull + JavaScriptPackager resolve and package the program
+            // (imports, module object and entry) against the referenced metadata.
             let ctx = (bindings references).Value
+            ctx.Comp.AssemblyName <- "."
             let stmt, usesRuntime = compileEntry (Some ctx) ir
-
             let comp = ctx.Comp
             comp.SetEntryPoint stmt
             Translator.DotNetToJavaScript.CompileFull comp
@@ -164,14 +164,14 @@ let main argv =
 
             packageReferences (List.ofSeq references) output pref
         else if references.Count = 0 then
-            let stmts, usesRuntime = compile None ir
+            let stmts, usesRuntime = compile false None ir
             let ast = stmts |> List.map normalize
             let jsAst, _ = JavaScriptWriter.transformProgram Output.JavaScript pref ast
             let js = Writer.ProgramToString pref jsAst
             let code = if usesRuntime then runtimePrelude () + js else js
             File.WriteAllText(Path.Combine(output, ir.Unit + ".js"), code)
         else
-            let stmts, usesRuntime = compile (bindings references) ir
+            let stmts, usesRuntime = compile false (bindings references) ir
             let ast = stmts |> List.map normalize
             let jsAst, _ = JavaScriptWriter.transformProgram Output.JavaScript pref ast
             let js = Writer.ProgramToString pref jsAst

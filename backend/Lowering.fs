@@ -17,6 +17,7 @@ module Lowering =
         {
             Vars: Dictionary<string, Id>
             Globals: Dictionary<string, Id>
+            GlobalExprs: Dictionary<string, Expression>
             Current: string
             Runtime: bool ref
             Bindings: WebSharper.OCaml.Bindings.Context option
@@ -58,12 +59,15 @@ module Lowering =
         | _ -> GlobalAccess(Address.LibAddr [ n ])
 
     let getGlobal c n =
-        match c.Globals.TryGetValue n with
-        | true, v -> Var v
+        match c.GlobalExprs.TryGetValue n with
+        | true, e -> e
         | _ ->
-            let v = mutableId n
-            c.Globals[n] <- v
-            Var v
+            match c.Globals.TryGetValue n with
+            | true, v -> Var v
+            | _ ->
+                let v = mutableId n
+                c.Globals[n] <- v
+                Var v
 
     let bin op a b = Binary(a, op, b)
 
@@ -550,7 +554,7 @@ module Lowering =
 
         List.foldBack (fun (test, b) acc -> Conditional(test, body c b, acc)) cases fallback
 
-    let compile (bindings: WebSharper.OCaml.Bindings.Context option) (ir: UnitIR) =
+    let compile (ws: bool) (bindings: WebSharper.OCaml.Bindings.Context option) (ir: UnitIR) =
         let gs = Dictionary<string, Id>()
         let runtime = ref false
 
@@ -558,10 +562,11 @@ module Lowering =
             {
                 Vars = Dictionary()
                 Globals = gs
+                GlobalExprs = Dictionary()
                 Current = ir.ModuleIdent
                 Runtime = runtime
                 Bindings = bindings
-                Ws = false
+                Ws = ws
             }
 
         let imports =
@@ -583,15 +588,28 @@ module Lowering =
     // WebSharper entry point (used by the compilation/packager pipeline).
     let compileEntry (bindings: WebSharper.OCaml.Bindings.Context option) (ir: UnitIR) =
         let runtime = ref false
+        let globalExprs = Dictionary<string, Expression>()
 
         let c =
             {
                 Vars = Dictionary()
                 Globals = Dictionary()
+                GlobalExprs = globalExprs
                 Current = ir.ModuleIdent
                 Runtime = runtime
                 Bindings = bindings
                 Ws = true
             }
 
-        ExprStatement(expr c ir.Code), runtime.Value
+        // Required OCaml units become WebSharper JS imports so the packager
+        // emits `import ... from "./<unit>.js"` instead of MISSINGVAR.
+        let icomp = bindings.Value.Comp :> WebSharper.Core.Metadata.ICompilation
+
+        for n in ir.RequiredGlobals do
+            if n <> ir.ModuleIdent then
+                globalExprs[n] <- icomp.AddJSImport(None, "./" + n + ".js")
+
+        let me = mutableId ir.ModuleIdent
+        globalExprs[ir.ModuleIdent] <- Var me
+
+        Block [ VarDeclaration(me, Object []); ExprStatement(expr c ir.Code) ], runtime.Value
