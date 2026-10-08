@@ -7,6 +7,6 @@ let () =
   let v = Websharper_ui.Var.create_2 0 in
   Websharper_ui.Var.set v 41;
   let _ = Websharper_ui.Doc.append
-            (Websharper_ui.Doc.textNode "hello ")
-            (Websharper_ui.Doc.textNode "ui") in
+            (Websharper_ui.Doc.text "hello ")
+            (Websharper_ui.Doc.text "ui") in
   Console.log (Printf.sprintf "v=%d" (Websharper_ui.Var.get v))

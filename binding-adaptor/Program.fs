@@ -17,6 +17,7 @@ open WebSharper.Core
 open WebSharper.Core.AST
 open WebSharper.Core.Metadata
 open BindingAdaptor.Generator
+open BindingAdaptor.Spec
 
 let loadInfo (path: string) : Info =
     let asm = Assembly.LoadFrom(Path.GetFullPath path)
@@ -141,8 +142,28 @@ let gen
     (outRoot: string)
     (filter: string option)
     (references: string list)
+    (specPath: string option)
     =
     let info = loadInfo dll
+
+    // Projection spec: explicit --spec, else <pkgId>.spec beside the assembly or
+    // in ./specs/.
+    let spec =
+        let candidates =
+            match specPath with
+            | Some p -> [ p ]
+            | None ->
+                [ Path.Combine(Path.GetDirectoryName(Path.GetFullPath dll), pkgId + ".spec")
+                  Path.Combine("specs", pkgId + ".spec") ]
+
+        match candidates |> List.tryFind File.Exists with
+        | Some p ->
+            printfn "using spec %s" p
+            Spec.load p
+        | None -> Spec.empty
+
+    let skipTypes =
+        spec.Modules |> List.filter (fun m -> m.Skip) |> List.map (fun m -> m.Type) |> Set.ofList
 
     let classesOf (i: WebSharper.Core.Metadata.Info) (pkg: string) =
         i.Classes
@@ -154,7 +175,16 @@ let gen
             | _ -> None)
         |> Seq.toList
 
-    let allClasses = classesOf info pkgId
+    let allClasses =
+        classesOf info pkgId |> List.filter (fun (_, td, _, _) -> not (skipTypes.Contains td.FullName))
+
+    // Module name overrides and forced merges from the spec.
+    let nameOverride =
+        spec.Modules
+        |> List.choose (fun m -> m.Name |> Option.map (fun n -> m.Type, n))
+        |> Map.ofList
+
+    let forcedBase = System.Collections.Generic.Dictionary<string, string>()
 
     // Assign final (deduped) module names up front, so that intra-module
     // self-references match the emitted (possibly suffixed) module name.
@@ -169,24 +199,53 @@ let gen
         | [ "default" ] -> true
         | _ -> false
 
+    // Populate forced merges: every type in a spec module's "merge" list joins
+    // that module's base name.
+    for m in spec.Modules do
+        if m.Merge.Length > 0 then
+            let ownerBase =
+                match Map.tryFind m.Type nameOverride with
+                | Some n -> n
+                | None ->
+                    allClasses
+                    |> List.tryPick (fun (a, td, _, _) ->
+                        if td.FullName = m.Type then Some(classModuleName td a) else None)
+                    |> Option.defaultValue (upperFirst (lastSegment m.Type))
+
+            forcedBase.[m.Type] <- ownerBase
+
+            for t in m.Merge do
+                forcedBase.[t] <- ownerBase
+
+    let effBase (a: Address, td: TypeDefinitionInfo, _: ClassInfo, _: string) =
+        match forcedBase.TryGetValue td.FullName with
+        | true, b -> b
+        | _ ->
+            match Map.tryFind td.FullName nameOverride with
+            | Some n -> n
+            | None -> classModuleName td a
+
     // Assign final module names: same-named handwritten classes merge into one
     // module when exactly one is the generic type and the rest are static
-    // helpers; other collisions get numeric suffixes.
+    // helpers (or when forced by the spec); other collisions get suffixes.
     let computeFinalNames (cs: (Address * TypeDefinitionInfo * ClassInfo * string) list) =
         let dict = System.Collections.Generic.Dictionary<string, string>()
-
-        let groups = cs |> List.groupBy (fun (a, td, _, _) -> classModuleName td a)
+        let groups = cs |> List.groupBy effBase
 
         for baseName, group in groups do
             let sorted = group |> List.sortBy (fun (a, _, _, _) -> addressString a)
 
+            let forced =
+                sorted |> List.exists (fun (_, td, _, _) -> forcedBase.ContainsKey td.FullName)
+
             let mergeable =
-                List.length sorted > 1
-                && sorted |> List.forall (fun (a, _, _, _) -> isDefaultAddr a)
-                && (let maxG = sorted |> List.map (fun (_, _, ci, _) -> ci.Generics.Length) |> List.max
-                    let primaries = sorted |> List.filter (fun (_, _, ci, _) -> ci.Generics.Length = maxG)
-                    let others = sorted |> List.filter (fun (_, _, ci, _) -> ci.Generics.Length <> maxG)
-                    List.length primaries = 1 && others |> List.forall (fun (_, _, ci, _) -> isStaticHelperCi ci))
+                forced
+                || (List.length sorted > 1
+                    && sorted |> List.forall (fun (a, _, _, _) -> isDefaultAddr a)
+                    && (let maxG = sorted |> List.map (fun (_, _, ci, _) -> ci.Generics.Length) |> List.max
+                        let primaries = sorted |> List.filter (fun (_, _, ci, _) -> ci.Generics.Length = maxG)
+                        let others = sorted |> List.filter (fun (_, _, ci, _) -> ci.Generics.Length <> maxG)
+                        List.length primaries = 1 && others |> List.forall (fun (_, _, ci, _) -> isStaticHelperCi ci)))
 
             sorted
             |> List.iteri (fun i (_, td, _, _) ->
@@ -378,7 +437,7 @@ let gen
     let generated =
         selected
         |> List.map (fun (a, td, ci, _) ->
-            generateClass env (opaqueFor (moduleOf td)) assemblyName (isAbstract td) (moduleOf td) a td ci)
+            generateClass env (opaqueFor (moduleOf td)) spec assemblyName (isAbstract td) (moduleOf td) a td ci)
 
     // Merge classes that share the same address into one module (disambiguating
     // member-name clashes); e.g. a generic type and its static-helper type.
@@ -477,6 +536,7 @@ let main argv =
             let mutable version = ""
             let mutable dest = ""
             let mutable filter = None
+            let mutable specPath = None
             let references = ResizeArray<string>()
 
             let rec parse =
@@ -493,6 +553,9 @@ let main argv =
                 | "--filter" :: v :: t ->
                     filter <- Some v
                     parse t
+                | "--spec" :: v :: t ->
+                    specPath <- Some v
+                    parse t
                 | "--reference" :: v :: t ->
                     references.Add v
                     parse t
@@ -502,7 +565,7 @@ let main argv =
             parse rest
             if version = "" then failwith "gen requires --version"
             if dest = "" then failwith "gen requires --dest"
-            gen dll id version dest filter (List.ofSeq references)
+            gen dll id version dest filter (List.ofSeq references) specPath
             0
         | _ ->
             eprintfn

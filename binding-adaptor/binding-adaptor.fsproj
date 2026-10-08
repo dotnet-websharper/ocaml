@@ -11,6 +11,7 @@
     <PackageReference Include="WebSharper.Compiler.Common" Version="10.*" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Spec.fs" />
     <Compile Include="Generator.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>

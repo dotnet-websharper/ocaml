@@ -10,6 +10,7 @@
 module BindingAdaptor.Generator
 
 open System
+open BindingAdaptor.Spec
 open System.Text
 open WebSharper.Core
 open WebSharper.Core.AST
@@ -276,6 +277,7 @@ let stronglyConnected (nodes: string list) (edges: Map<string, Set<string>>) : M
 let generateClass
     (env: TypeEnv)
     (opaque: Set<string>)
+    (spec: Spec)
     (assemblyName: string)
     (isAbstract: bool)
     (moduleName: string)
@@ -288,6 +290,13 @@ let generateClass
     let addrString = address.ToString()
     let qual = assemblyName + "!" + addrString
     let recv = receiverType (env.LocalArity moduleName)
+
+    let memberSpecs = spec.Members |> List.filter (fun m -> m.Type = td.FullName)
+    let renameOf (wsName: string) =
+        memberSpecs |> List.tryPick (fun m -> if m.Member = wsName && m.Name.IsSome then m.Name else None)
+    let isSkipped (wsName: string) =
+        memberSpecs |> List.exists (fun m -> m.Member = wsName && m.Skip)
+
     let alias =
         match env.RepOf moduleName with
         | Some r when r <> moduleName -> Some r
@@ -339,6 +348,7 @@ let generateClass
             let mi = kv.Key.Value
             let hasArray = mi.Parameters |> List.exists (function Type.ArrayType _ -> true | _ -> false)
             (if hasArray then 1 else 0), mi.Parameters.Length)
+        |> Seq.filter (fun kv -> not (isSkipped kv.Key.Value.MethodName))
         |> Seq.map (fun kv ->
             let mi = kv.Key.Value
             let cmi = kv.Value
@@ -352,7 +362,9 @@ let generateClass
                 @ (mi.Parameters |> List.map (mapType ctx))
             let argTypes = if argTypes = [] then [ "unit" ] else argTypes
             let ret = mapType ctx mi.ReturnType
-            let name = unique (sanitize (lowerFirst mi.MethodName))
+            let name =
+                unique (renameOf mi.MethodName |> Option.map sanitize
+                        |> Option.defaultWith (fun () -> sanitize (lowerFirst mi.MethodName)))
             let tag =
                 let ps = mi.Parameters |> List.map typeDisplay
                 sprintf "ws:%s#%s|%s" qual mi.MethodName (String.concat "|" ps)
@@ -364,6 +376,7 @@ let generateClass
 
     let fields =
         ci.Fields
+        |> Seq.filter (fun kv -> not (isSkipped kv.Key))
         |> Seq.collect (fun kv ->
             let f = kv.Value.CompiledForm
             let ty = mapType ctx kv.Value.Type

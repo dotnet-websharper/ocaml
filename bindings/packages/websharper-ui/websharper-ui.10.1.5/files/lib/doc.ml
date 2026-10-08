@@ -27,7 +27,7 @@ external verbatim : string -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.
 (* static *)
 external staticProxy : Websharper_javascript.Element.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#StaticProxy|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#StaticProxy|WebSharper.JavaScript.Dom.Element"
 (* static *)
-external textNode : string -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#TextNode|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#TextNode|System.String"
+external text : string -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#TextNode|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#TextNode|System.String"
 (* static *)
 external concat : Js.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Concat|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Doc>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#Concat|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Doc>"
 (* static *)
