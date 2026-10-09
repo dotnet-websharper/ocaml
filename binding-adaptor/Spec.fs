@@ -46,11 +46,15 @@ type MemberSpec =
 
 type Spec =
     { Modules: ModuleSpec list
-      Members: MemberSpec list }
+      Members: MemberSpec list
+      // When set, module names follow the declaration hierarchy
+      // (WebSharper.UI.Client.Elt -> Client.Elt, Html+Elt -> Html.Elt).
+      Qualify: bool }
 
 let empty =
     { Modules = []
-      Members = [] }
+      Members = []
+      Qualify = false }
 
 let private str (e: JsonElement) (n: string) =
     match e.TryGetProperty n with
@@ -99,4 +103,4 @@ let load (path: string) : Spec =
               Primary = str m "primary"
               Skip = skipOr m } ]
 
-    { Modules = modules; Members = members }
+    { Modules = modules; Members = members; Qualify = boolProp root "qualified" false }

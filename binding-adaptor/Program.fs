@@ -216,6 +216,7 @@ let gen
             let td = kv.Key.Value
             match ci with
             | Some ci when validModuleName (classModuleName td a) && usable ci
+                           && not (td.FullName.Contains "$")
                            && isPublicType asmPath td.FullName ->
                 Some(a, td, ci, pkg)
             | _ -> None)
@@ -243,24 +244,43 @@ let gen
     // Assign final module names: same-named handwritten classes merge into one
     // module when exactly one is the generic type and the rest are static
     // helpers (or when forced by the spec); other collisions get suffixes.
-    let finalNamesFor (s: Spec) (cs: (Address * TypeDefinitionInfo * ClassInfo * string) list) =
+    let rootNs = Path.GetFileNameWithoutExtension dll
+
+    // Flat module name. With `qualified`, types not directly in the root
+    // namespace are disambiguated by their immediate parent
+    // (Client.Elt -> ClientElt, Html+Elt -> HtmlElt).
+    let defaultPath (qualify: bool) (root: string) (a: Address) (td: TypeDefinitionInfo) =
+        if qualify then
+            match modulePathOf root td with
+            | [] -> [ classModuleName td a ]
+            | [ leaf ] -> [ leaf ]
+            | path -> [ path.[path.Length - 2] + path.[path.Length - 1] ]
+        else
+            [ classModuleName td a ]
+
+    let pathOfName (n: string) = n.Split('.') |> Array.toList
+
+    // Assign final module paths: same-path classes merge when exactly one is the
+    // generic type and the rest are static helpers (or when forced by the spec);
+    // other collisions get a numeric suffix on the last segment.
+    let finalNamesFor (s: Spec) (root: string) (cs: (Address * TypeDefinitionInfo * ClassInfo * string) list) =
         let nameOverride =
             s.Modules
-            |> List.choose (fun m -> m.Name |> Option.map (fun n -> m.Type, n))
+            |> List.choose (fun m -> m.Name |> Option.map (fun n -> m.Type, pathOfName n))
             |> Map.ofSeq
 
-        let forcedBase = System.Collections.Generic.Dictionary<string, string>()
+        let forcedBase = System.Collections.Generic.Dictionary<string, string list>()
 
         for m in s.Modules do
             if m.Merge.Length > 0 then
                 let ownerBase =
                     match Map.tryFind m.Type nameOverride with
-                    | Some n -> n
+                    | Some p -> p
                     | None ->
                         cs
                         |> List.tryPick (fun (a, td, _, _) ->
-                            if td.FullName = m.Type then Some(classModuleName td a) else None)
-                        |> Option.defaultValue (upperFirst (lastSegment m.Type))
+                            if td.FullName = m.Type then Some(defaultPath s.Qualify root a td) else None)
+                        |> Option.defaultValue (pathOfName (upperFirst (lastSegment m.Type)))
 
                 forcedBase.[m.Type] <- ownerBase
 
@@ -272,12 +292,12 @@ let gen
             | true, b -> b
             | _ ->
                 match Map.tryFind td.FullName nameOverride with
-                | Some n -> n
-                | None -> classModuleName td a
+                | Some p -> p
+                | None -> defaultPath s.Qualify root a td
 
-        let dict = System.Collections.Generic.Dictionary<string, string>()
+        let dict = System.Collections.Generic.Dictionary<string, string list>()
 
-        for baseName, group in cs |> List.groupBy effBase do
+        for basePath, group in cs |> List.groupBy effBase do
             // Prototype-bearing types (default export) keep the bare module
             // name; module-root types (empty address) are suffixed after them.
             let sorted =
@@ -296,9 +316,12 @@ let gen
                         let others = sorted |> List.filter (fun (_, _, ci, _) -> ci.Generics.Length <> maxG)
                         List.length primaries = 1 && others |> List.forall (fun (_, _, ci, _) -> isStaticHelperCi ci)))
 
+            let suffix (p: string list) (n: int) =
+                List.mapi (fun i seg -> if i = p.Length - 1 then seg + string n else seg) p
+
             sorted
             |> List.iteri (fun i (_, td, _, _) ->
-                dict.[td.FullName] <- (if mergeable || i = 0 then baseName else baseName + string (i + 1)))
+                dict.[td.FullName] <- (if mergeable || i = 0 then basePath else suffix basePath (i + 1)))
 
         dict |> Seq.map (fun kv -> kv.Key, kv.Value) |> Map.ofSeq
 
@@ -309,8 +332,9 @@ let gen
         |> List.filter (fun (_, td, _, _) ->
             not ((skippedOf spec).Contains td.FullName) && not (targetAliases.ContainsKey td.FullName))
 
-    let targetNames = finalNamesFor spec allClasses
-    let moduleOf (td: TypeDefinitionInfo) = targetNames.[td.FullName]
+    let targetNames = finalNamesFor spec rootNs allClasses
+    let pathOf (td: TypeDefinitionInfo) = targetNames.[td.FullName]
+    let moduleOf (td: TypeDefinitionInfo) = String.concat "." (pathOf td)
 
     let localByFull =
         (allClasses |> List.map (fun (_, td, _, _) -> td.FullName, moduleOf td))
@@ -330,6 +354,11 @@ let gen
     let refSpecs =
         refEntries |> List.map (fun (pkg, refDll, _) -> pkg, discoverSpec pkg refDll) |> Map.ofList
 
+    let refRootOf =
+        refEntries
+        |> List.map (fun (pkg, refDll, _) -> pkg, Path.GetFileNameWithoutExtension refDll)
+        |> Map.ofList
+
     let externalClasses =
         refEntries |> List.collect (fun (pkg, refDll, i) -> classesOf refDll i pkg)
 
@@ -347,12 +376,12 @@ let gen
     let externalByFull =
         [ for pkg, cs in externalClasses |> List.groupBy (fun (_, _, _, p) -> p) do
             let refSpec = Map.tryFind pkg refSpecs |> Option.defaultValue Spec.empty
-            let names = finalNamesFor refSpec cs
+            let names = finalNamesFor refSpec (Map.tryFind pkg refRootOf |> Option.defaultValue pkg) cs
             let refAliases = aliasesOf refSpec
 
             for (a, td, ci, _) in cs do
                 if not (refAliases.ContainsKey td.FullName) then
-                    yield td.FullName, (wrapOf pkg + "." + names.[td.FullName], ci.Generics.Length, pkg)
+                    yield td.FullName, (wrapOf pkg + "." + String.concat "." names.[td.FullName], ci.Generics.Length, pkg)
 
             for KeyValue(t, al) in refAliases do
                 yield t, (wrapOf pkg + "." + al, 0, pkg) ]
@@ -361,9 +390,9 @@ let gen
     let externalSimple =
         [ for pkg, cs in externalClasses |> List.groupBy (fun (_, _, _, p) -> p) do
             let refSpec = Map.tryFind pkg refSpecs |> Option.defaultValue Spec.empty
-            let names = finalNamesFor refSpec cs
+            let names = finalNamesFor refSpec (Map.tryFind pkg refRootOf |> Option.defaultValue pkg) cs
             for (a, td, ci, _) in cs do
-                yield classModuleName td a, (wrapOf pkg + "." + names.[td.FullName], ci.Generics.Length, pkg) ]
+                yield classModuleName td a, (wrapOf pkg + "." + String.concat "." names.[td.FullName], ci.Generics.Length, pkg) ]
         |> Map.ofSeq
 
     let deps = System.Collections.Generic.HashSet<string>()
@@ -574,13 +603,36 @@ let gen
     for stale in Directory.EnumerateFiles(libDir, "*.ml") do
         File.Delete stale
 
-    for (name, g) in unique do
-        let g = { g with Module = name }
-        File.WriteAllText(Path.Combine(libDir, lowerFirst name + ".ml"), renderClass g)
+    // Emit one file per top-level module, nesting submodules per the assigned
+    // paths (e.g. Html.Elt, Client.Elt).
+    let generatedByPath =
+        unique |> List.map (fun (name, g) -> name.Split('.'), { g with Module = name })
+
+    let rec renderItems (sb: StringBuilder) (items: (string[] * GeneratedClass) list) =
+        match items |> List.tryPick (fun (p, g) -> if p.Length = 1 then Some g else None) with
+        | Some g -> sb.Append(renderClassBody g) |> ignore
+        | None -> ()
+
+        let subs =
+            items
+            |> List.filter (fun (p, _) -> p.Length > 1)
+            |> List.groupBy (fun (p, _) -> p.[1])
+
+        for seg, grp in subs do
+            sb.AppendLine("module " + seg + " = struct") |> ignore
+            renderItems sb (grp |> List.map (fun (p, g) -> p.[1..], g))
+            sb.AppendLine("end") |> ignore
+
+    let allModules =
+        [ for head, group in generatedByPath |> List.groupBy (fun (p, _) -> p.[0]) do
+            let sb = StringBuilder()
+            sb.AppendLine Header |> ignore
+            renderItems sb group
+            File.WriteAllText(Path.Combine(libDir, lowerFirst head + ".ml"), sb.ToString())
+            yield lowerFirst head ]
 
     // Dune wraps library `webSharper_JavaScript` in module `WebSharper_JavaScript`.
     let libName = lowerFirst (assemblyName.Replace(".", "_"))
-    let allModules = unique |> List.map (fun (n, _) -> lowerFirst n)
     let depList =
         ("websharper-runtime" :: (deps |> Seq.filter (fun d -> d <> pkgId && d <> "websharper-runtime") |> Seq.toList))
         |> List.sort

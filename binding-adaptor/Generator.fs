@@ -484,12 +484,11 @@ let generateClass
 let renderMember (m: Member) =
     sprintf "(* %s *)\nexternal %s : %s = \"%s\" \"%s\"\n" m.Kinds m.Name m.Signature m.Tag m.Tag
 
-let renderClass (g: GeneratedClass) =
+let renderClassBody (g: GeneratedClass) =
     let sb = StringBuilder()
     let tparams =
         if g.Generics = 0 then ""
         else "(" + String.concat ", " [ for i in 0 .. g.Generics - 1 -> typeParamName i ] + ") "
-    sb.AppendLine Header |> ignore
     match g.Alias with
     | Some rep -> sb.AppendLine(sprintf "type %st = %s.t" tparams rep) |> ignore
     | None -> sb.AppendLine(sprintf "type %st" tparams) |> ignore
@@ -497,3 +496,30 @@ let renderClass (g: GeneratedClass) =
     for m in g.Fields do sb.Append(renderMember m) |> ignore
     for m in g.Constructors do sb.Append(renderMember m) |> ignore
     sb.ToString()
+
+let renderClass (g: GeneratedClass) =
+    Header + "\n" + renderClassBody g
+
+// Module path (dotted segments) following the declaration hierarchy, used when
+// the package opts into nested modules: WebSharper.UI.Client.Elt -> [Client; Elt],
+// WebSharper.UI.HtmlModule+Elt -> [Html; Elt].
+let modulePathOf (root: string) (td: TypeDefinitionInfo) : string list =
+    let fn = td.FullName
+
+    let rest =
+        if fn.StartsWith(root + ".") then fn.Substring(root.Length + 1)
+        elif fn = root then ""
+        else fn
+
+    rest.Split([| '.'; '+' |])
+    |> Array.toList
+    |> List.choose (fun seg ->
+        let seg =
+            if seg.Contains "`" then seg.Substring(0, seg.IndexOf '`') else seg
+        if seg = "" then
+            None
+        else
+            let seg =
+                if seg.EndsWith "Module" && seg.Length > 6 then seg.Substring(0, seg.Length - 6)
+                else seg
+            Some(upperFirst seg))

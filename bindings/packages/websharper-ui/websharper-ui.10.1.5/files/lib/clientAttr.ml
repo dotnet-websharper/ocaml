@@ -5,11 +5,11 @@ external static : (WebSharper_JavaScript.Element.t -> unit) -> Attr.t = "ws:WebS
 (* func *)
 external checked : (bool) Var.t -> Attr.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Attr::#Checked|WebSharper.UI.Var`1<System.Boolean>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Attr::#Checked|WebSharper.UI.Var`1<System.Boolean>"
 (* func *)
-external floatValue : ((float) CheckedInput.t) Var.t -> Attr.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Attr::#FloatValue|WebSharper.UI.Var`1<WebSharper.UI.Client.CheckedInput`1<System.Double>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Attr::#FloatValue|WebSharper.UI.Var`1<WebSharper.UI.Client.CheckedInput`1<System.Double>>"
+external floatValue : ((float) ClientCheckedInput.t) Var.t -> Attr.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Attr::#FloatValue|WebSharper.UI.Var`1<WebSharper.UI.Client.CheckedInput`1<System.Double>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Attr::#FloatValue|WebSharper.UI.Var`1<WebSharper.UI.Client.CheckedInput`1<System.Double>>"
 (* func *)
 external floatValueUnchecked : (float) Var.t -> Attr.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Attr::#FloatValueUnchecked|WebSharper.UI.Var`1<System.Double>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Attr::#FloatValueUnchecked|WebSharper.UI.Var`1<System.Double>"
 (* func *)
-external intValue : ((int) CheckedInput.t) Var.t -> Attr.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Attr::#IntValue|WebSharper.UI.Var`1<WebSharper.UI.Client.CheckedInput`1<System.Int32>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Attr::#IntValue|WebSharper.UI.Var`1<WebSharper.UI.Client.CheckedInput`1<System.Int32>>"
+external intValue : ((int) ClientCheckedInput.t) Var.t -> Attr.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Attr::#IntValue|WebSharper.UI.Var`1<WebSharper.UI.Client.CheckedInput`1<System.Int32>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Attr::#IntValue|WebSharper.UI.Var`1<WebSharper.UI.Client.CheckedInput`1<System.Int32>>"
 (* func *)
 external intValueUnchecked : (int) Var.t -> Attr.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Attr::#IntValueUnchecked|WebSharper.UI.Var`1<System.Int32>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Attr::#IntValueUnchecked|WebSharper.UI.Var`1<System.Int32>"
 (* func *)
