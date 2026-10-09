@@ -307,6 +307,10 @@ let gen
             let forced =
                 sorted |> List.exists (fun (_, td, _, _) -> forcedBase.ContainsKey td.FullName)
 
+            // Merge a same-named static-helper module into the one generic type
+            // (e.g. `Var<'T>` + `module Var`, or `View<'T>` + `module View` when
+            // forced by the spec). Auto-merge requires every member to share the
+            // default address, so it does not accidentally fuse unrelated types.
             let mergeable =
                 forced
                 || (List.length sorted > 1
@@ -318,6 +322,7 @@ let gen
 
             let suffix (p: string list) (n: int) =
                 List.mapi (fun i seg -> if i = p.Length - 1 then seg + string n else seg) p
+
 
             sorted
             |> List.iteri (fun i (_, td, _, _) ->
@@ -409,12 +414,16 @@ let gen
     let rawModules = selected |> List.map (fun (_, td, ci, _) -> moduleOf td, ci)
     let nodeSet = rawModules |> List.map fst |> Set.ofList
 
+    // Union references of all classes that share a module (a merged type plus
+    // its static-helper module), so cycle detection sees the full edge set.
     let edges =
         rawModules
-        |> List.map (fun (m, ci) ->
+        |> List.groupBy fst
+        |> List.map (fun (m, gs) ->
             let refs =
-                referencedModules ci
-                |> List.choose (fun fn -> Map.tryFind fn localByFull)
+                gs
+                |> List.collect (fun (_, ci) ->
+                    referencedModules ci |> List.choose (fun fn -> Map.tryFind fn localByFull))
                 |> List.filter nodeSet.Contains
                 |> Set.ofList
             m, refs)
