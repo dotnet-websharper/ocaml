@@ -111,7 +111,7 @@ if (!globalThis.OCamlRuntime) {
     var arity = f.arity;
     function curried() {
       var args = Array.prototype.slice.call(arguments);
-      if (args.length >= arity) return caml_apply_core(f, args);
+      if (args.length >= arity) return caml_apply(f, args);
       return function () {
         return curried.apply(null, args.concat(Array.prototype.slice.call(arguments)));
       };
