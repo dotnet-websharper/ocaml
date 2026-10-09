@@ -7,13 +7,13 @@ external zeroCreate : int -> ('a) array = "ws:WebSharper.StdLib!WebSharper.StdLi
 (* inline *)
 external singleton : 'a -> ('a) array = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#Singleton|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#Singleton|'0"
 (* func *)
-external transpose : (('a) array) IEnumerable2.t -> (('a) array) array = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#Transpose|System.Collections.Generic.IEnumerable`1<'0[]>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#Transpose|System.Collections.Generic.IEnumerable`1<'0[]>"
+external transpose : (('a) array) list -> (('a) array) array = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#Transpose|System.Collections.Generic.IEnumerable`1<'0[]>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#Transpose|System.Collections.Generic.IEnumerable`1<'0[]>"
 (* func *)
-external ofSeq : ('a) IEnumerable2.t -> ('a) array = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#OfSeq|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#OfSeq|System.Collections.Generic.IEnumerable`1<'0>"
+external ofSeq : ('a) list -> ('a) array = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#OfSeq|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#OfSeq|System.Collections.Generic.IEnumerable`1<'0>"
 (* func *)
 external ofList : ('a) FSharpList.t -> ('a) array = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#OfList|Microsoft.FSharp.Collections.FSharpList`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#OfList|Microsoft.FSharp.Collections.FSharpList`1<'0>"
 (* func *)
-external concat : (('a) array) IEnumerable2.t -> ('a) array = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#Concat|System.Collections.Generic.IEnumerable`1<'0[]>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#Concat|System.Collections.Generic.IEnumerable`1<'0[]>"
+external concat : (('a) array) list -> ('a) array = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#Concat|System.Collections.Generic.IEnumerable`1<'0[]>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#Concat|System.Collections.Generic.IEnumerable`1<'0[]>"
 (* inline *)
 external push : Js.t -> Js.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#push|System.Object|System.Object" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#push|System.Object|System.Object"
 (* func *)
@@ -153,7 +153,7 @@ external findIndexBack : ('a -> bool) -> ('a) array -> int = "ws:WebSharper.StdL
 (* func *)
 external findBack : ('a -> bool) -> ('a) array -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#FindBack|fn|'0[]" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#FindBack|fn|'0[]"
 (* func *)
-external except : ('a) IEnumerable2.t -> ('a) array -> ('a) array = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#Except|System.Collections.Generic.IEnumerable`1<'0>|'0[]" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#Except|System.Collections.Generic.IEnumerable`1<'0>|'0[]"
+external except : ('a) list -> ('a) array -> ('a) array = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#Except|System.Collections.Generic.IEnumerable`1<'0>|'0[]" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#Except|System.Collections.Generic.IEnumerable`1<'0>|'0[]"
 (* func *)
 external distinctBy : ('a -> 'b) -> ('a) array -> ('a) array = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#DistinctBy|fn|'0[]" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#DistinctBy|fn|'0[]"
 (* func *)
@@ -241,7 +241,7 @@ external updateAt : int -> 'a -> ('a) array -> ('a) array = "ws:WebSharper.StdLi
 (* func *)
 external removeManyAt : int -> int -> ('a) array -> ('a) array = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#RemoveManyAt|System.Int32|System.Int32|'0[]" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#RemoveManyAt|System.Int32|System.Int32|'0[]"
 (* func *)
-external insertManyAt : int -> ('a) IEnumerable2.t -> ('a) array -> ('a) array = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#InsertManyAt|System.Int32|System.Collections.Generic.IEnumerable`1<'0>|'0[]" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#InsertManyAt|System.Int32|System.Collections.Generic.IEnumerable`1<'0>|'0[]"
+external insertManyAt : int -> ('a) list -> ('a) array -> ('a) array = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#InsertManyAt|System.Int32|System.Collections.Generic.IEnumerable`1<'0>|'0[]" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#InsertManyAt|System.Int32|System.Collections.Generic.IEnumerable`1<'0>|'0[]"
 (* func *)
 external insertAt : int -> 'a -> ('a) array -> ('a) array = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#InsertAt|System.Int32|'0|'0[]" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#InsertAt|System.Int32|'0|'0[]"
 (* func *)

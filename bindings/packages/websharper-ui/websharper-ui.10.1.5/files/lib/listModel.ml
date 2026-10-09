@@ -27,7 +27,7 @@ external key_2 : ('a, 'b) t -> 'b -> 'a = "ws:WebSharper.UI!WebSharper.UI/WebSha
 (* inline *)
 external add : ('a, 'b) t -> 'b -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#Add|'1" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#Add|'1"
 (* inline *)
-external set_value : ('a, 'b) t -> ('b) WebSharper_StdLib.IEnumerable2.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#set_Value|System.Collections.Generic.IEnumerable`1<'1>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#set_Value|System.Collections.Generic.IEnumerable`1<'1>"
+external set_value : ('a, 'b) t -> ('b) list -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#set_Value|System.Collections.Generic.IEnumerable`1<'1>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#set_Value|System.Collections.Generic.IEnumerable`1<'1>"
 (* inline *)
 external map : ('a, 'b) t -> ('b -> 'c) -> (('c) WebSharper_StdLib.IEnumerable2.t) View.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#Map|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#Map|fn"
 (* inline *)
@@ -59,7 +59,7 @@ external containsKeyAsView : ('a, 'b) t -> 'a -> (bool) View.t = "ws:WebSharper.
 (* instance *)
 external containsKey : ('a, 'b) t -> 'a -> bool = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#ContainsKey|'0" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#ContainsKey|'0"
 (* instance *)
-external set : ('a, 'b) t -> ('b) WebSharper_StdLib.IEnumerable2.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#Set|System.Collections.Generic.IEnumerable`1<'1>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#Set|System.Collections.Generic.IEnumerable`1<'1>"
+external set : ('a, 'b) t -> ('b) list -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#Set|System.Collections.Generic.IEnumerable`1<'1>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#Set|System.Collections.Generic.IEnumerable`1<'1>"
 (* instance *)
 external iter : ('a, 'b) t -> ('b -> unit) -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#Iter|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#Iter|fn"
 (* instance *)
@@ -69,11 +69,11 @@ external removeBy : ('a, 'b) t -> ('b -> bool) -> unit = "ws:WebSharper.UI!WebSh
 (* instance *)
 external remove : ('a, 'b) t -> 'b -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#Remove|'1" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#Remove|'1"
 (* instance *)
-external prependMany : ('a, 'b) t -> ('b) WebSharper_StdLib.IEnumerable2.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#PrependMany|System.Collections.Generic.IEnumerable`1<'1>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#PrependMany|System.Collections.Generic.IEnumerable`1<'1>"
+external prependMany : ('a, 'b) t -> ('b) list -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#PrependMany|System.Collections.Generic.IEnumerable`1<'1>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#PrependMany|System.Collections.Generic.IEnumerable`1<'1>"
 (* instance *)
 external prepend : ('a, 'b) t -> 'b -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#Prepend|'1" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#Prepend|'1"
 (* instance *)
-external appendMany : ('a, 'b) t -> ('b) WebSharper_StdLib.IEnumerable2.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#AppendMany|System.Collections.Generic.IEnumerable`1<'1>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#AppendMany|System.Collections.Generic.IEnumerable`1<'1>"
+external appendMany : ('a, 'b) t -> ('b) list -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#AppendMany|System.Collections.Generic.IEnumerable`1<'1>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#AppendMany|System.Collections.Generic.IEnumerable`1<'1>"
 (* instance *)
 external append : ('a, 'b) t -> 'b -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#Append|'1" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default#Append|'1"
 (* instance *)
@@ -105,6 +105,6 @@ external create : Js.t -> Storage2.t -> ('a, 'b) t = "wsnew:WebSharper.UI!WebSha
 (* new *)
 external create_2 : Js.t -> ('a, 'b) t = "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default" "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default"
 (* new *)
-external create_3 : Js.t -> ('b) WebSharper_StdLib.IEnumerable2.t -> ('a, 'b) t = "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default" "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default"
+external create_3 : Js.t -> ('b) list -> ('a, 'b) t = "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default" "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default"
 (* new *)
 external create_4 : Js.t -> (('b) array) Var.t -> Storage2.t -> ('a, 'b) t = "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default" "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel`2::default"

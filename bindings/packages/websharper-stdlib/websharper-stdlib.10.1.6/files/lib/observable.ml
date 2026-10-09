@@ -7,7 +7,7 @@ external new_ : (IObserver.t -> IDisposable.t) -> IObservable.t = "ws:WebSharper
 (* inline *)
 external heat : IObservable.t -> IObservable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Control.Observable::#Heat|System.IObservable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Control.Observable::#Heat|System.IObservable`1<'0>"
 (* func *)
-external sequence : (IObservable.t) IEnumerable2.t -> IObservable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Control.Observable::#Sequence|System.Collections.Generic.IEnumerable`1<System.IObservable`1<'0>>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Control.Observable::#Sequence|System.Collections.Generic.IEnumerable`1<System.IObservable`1<'0>>"
+external sequence : (IObservable.t) list -> IObservable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Control.Observable::#Sequence|System.Collections.Generic.IEnumerable`1<System.IObservable`1<'0>>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Control.Observable::#Sequence|System.Collections.Generic.IEnumerable`1<System.IObservable`1<'0>>"
 (* func *)
 external selectMany : IObservable.t -> IObservable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Control.Observable::#SelectMany|System.IObservable`1<System.IObservable`1<'0>>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Control.Observable::#SelectMany|System.IObservable`1<System.IObservable`1<'0>>"
 (* func *)

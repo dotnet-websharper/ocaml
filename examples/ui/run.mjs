@@ -9,7 +9,14 @@ const dom = new JSDOM('<!DOCTYPE html><html><body><div id="root"></div></body></
 });
 globalThis.window = dom.window;
 globalThis.document = dom.window.document;
+globalThis.requestAnimationFrame = dom.window.requestAnimationFrame.bind(dom.window);
+globalThis.cancelAnimationFrame = dom.window.cancelAnimationFrame.bind(dom.window);
 
 await import(pathToFileURL(resolve(appDir, 'Main.js')).href);
 
-console.log('root:', dom.window.document.getElementById('root').textContent);
+setTimeout(() => {
+  const root = dom.window.document.getElementById('root');
+  console.log('root:', root.textContent);
+  console.log('html:', root.innerHTML);
+  process.exit(0);
+}, 50);

@@ -15,7 +15,7 @@ external tryWith : t -> Js.t -> (Object.t -> Js.t) -> Js.t = "ws:WebSharper.StdL
 (* inline *)
 external tryFinally : t -> Js.t -> (unit -> unit) -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.TaskBuilderBase::default#TryFinally|Microsoft.FSharp.Core.CompilerServices.ResumableCode`2<Microsoft.FSharp.Control.TaskStateMachineData`1<'0>,'1>|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.TaskBuilderBase::default#TryFinally|Microsoft.FSharp.Core.CompilerServices.ResumableCode`2<Microsoft.FSharp.Control.TaskStateMachineData`1<'0>,'1>|fn"
 (* inline *)
-external for_ : t -> ('a) IEnumerable2.t -> ('a -> Js.t) -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.TaskBuilderBase::default#For|System.Collections.Generic.IEnumerable`1<'0>|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.TaskBuilderBase::default#For|System.Collections.Generic.IEnumerable`1<'0>|fn"
+external for_ : t -> ('a) list -> ('a -> Js.t) -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.TaskBuilderBase::default#For|System.Collections.Generic.IEnumerable`1<'0>|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.TaskBuilderBase::default#For|System.Collections.Generic.IEnumerable`1<'0>|fn"
 (* inline *)
 external using : t -> 'a -> ('a -> Js.t) -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.TaskBuilderBase::default#Using|'0|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.TaskBuilderBase::default#Using|'0|fn"
 (* new *)

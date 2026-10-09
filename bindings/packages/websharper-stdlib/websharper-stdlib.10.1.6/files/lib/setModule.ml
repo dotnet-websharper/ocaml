@@ -11,11 +11,11 @@ external ofTree : ('a) Tree.t -> ('a) FSharpSet.t = "ws:WebSharper.StdLib!WebSha
 (* inline *)
 external count : ('a) FSharpSet.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#Count|Microsoft.FSharp.Collections.FSharpSet`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#Count|Microsoft.FSharp.Collections.FSharpSet`1<'0>"
 (* inline *)
-external intersectMany : (('a) FSharpSet.t) IEnumerable2.t -> ('a) FSharpSet.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#IntersectMany|System.Collections.Generic.IEnumerable`1<Microsoft.FSharp.Collections.FSharpSet`1<'0>>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#IntersectMany|System.Collections.Generic.IEnumerable`1<Microsoft.FSharp.Collections.FSharpSet`1<'0>>"
+external intersectMany : (('a) FSharpSet.t) list -> ('a) FSharpSet.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#IntersectMany|System.Collections.Generic.IEnumerable`1<Microsoft.FSharp.Collections.FSharpSet`1<'0>>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#IntersectMany|System.Collections.Generic.IEnumerable`1<Microsoft.FSharp.Collections.FSharpSet`1<'0>>"
 (* inline *)
 external isEmpty : ('a) FSharpSet.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#IsEmpty|Microsoft.FSharp.Collections.FSharpSet`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#IsEmpty|Microsoft.FSharp.Collections.FSharpSet`1<'0>"
 (* inline *)
-external ofSeq : ('a) IEnumerable2.t -> ('a) FSharpSet.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#OfSeq|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#OfSeq|System.Collections.Generic.IEnumerable`1<'0>"
+external ofSeq : ('a) list -> ('a) FSharpSet.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#OfSeq|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#OfSeq|System.Collections.Generic.IEnumerable`1<'0>"
 (* inline *)
 external maxElement : ('a) FSharpSet.t -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#MaxElement|Microsoft.FSharp.Collections.FSharpSet`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#MaxElement|Microsoft.FSharp.Collections.FSharpSet`1<'0>"
 (* inline *)
@@ -31,7 +31,7 @@ external toList : ('a) FSharpSet.t -> ('a) FSharpList.t = "ws:WebSharper.StdLib!
 (* inline *)
 external toSeq : ('a) FSharpSet.t -> ('a) IEnumerable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#ToSeq|Microsoft.FSharp.Collections.FSharpSet`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#ToSeq|Microsoft.FSharp.Collections.FSharpSet`1<'0>"
 (* inline *)
-external unionMany : (('a) FSharpSet.t) IEnumerable2.t -> ('a) FSharpSet.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#UnionMany|System.Collections.Generic.IEnumerable`1<Microsoft.FSharp.Collections.FSharpSet`1<'0>>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#UnionMany|System.Collections.Generic.IEnumerable`1<Microsoft.FSharp.Collections.FSharpSet`1<'0>>"
+external unionMany : (('a) FSharpSet.t) list -> ('a) FSharpSet.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#UnionMany|System.Collections.Generic.IEnumerable`1<Microsoft.FSharp.Collections.FSharpSet`1<'0>>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#UnionMany|System.Collections.Generic.IEnumerable`1<Microsoft.FSharp.Collections.FSharpSet`1<'0>>"
 (* inline *)
 external add : 'a -> ('a) FSharpSet.t -> ('a) FSharpSet.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#Add|'0|Microsoft.FSharp.Collections.FSharpSet`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#Add|'0|Microsoft.FSharp.Collections.FSharpSet`1<'0>"
 (* inline *)

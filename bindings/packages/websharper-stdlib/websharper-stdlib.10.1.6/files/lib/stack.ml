@@ -21,4 +21,4 @@ external create : ('a) array -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.Std
 (* inline *)
 external create_2 : unit -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Stack`1::" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Stack`1::"
 (* inline *)
-external create_3 : ('a) IEnumerable2.t -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Stack`1::" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Stack`1::"
+external create_3 : ('a) list -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Stack`1::" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Stack`1::"

@@ -129,6 +129,18 @@ let rec mapType (ctx: TypeCtx) (t: Type) : string =
     | Type.ByRefType u -> mapType ctx u
     | _ -> "Js.t"
 
+// WebSharper `IEnumerable` parameters are presented as OCaml lists; the
+// backend converts them to JS arrays at the call boundary. Return/field types
+// stay opaque (`IEnumerable2.t`).
+let rec paramType (ctx: TypeCtx) (t: Type) : string =
+    match t with
+    | Type.ConcreteType c when c.Entity.Value.FullName.StartsWith "System.Collections.Generic.IEnumerable" ->
+        match c.Generics with
+        | [ g ] -> "(" + mapType ctx g + ") list"
+        | _ -> "Js.t list"
+    | Type.ConcreteType c when c.Entity.Value.FullName = "System.Collections.IEnumerable" -> "Js.t list"
+    | _ -> mapType ctx t
+
 let rec typeDisplay (t: Type) : string =
     match t with
     | Type.VoidType -> "void"
@@ -404,7 +416,7 @@ let generateClass
                 || (form.IsInline && mh >= mi.Parameters.Length)
             let argTypes =
                 (if isInstance then [ recv ] else [])
-                @ (mi.Parameters |> List.map (mapType ctx))
+                @ (mi.Parameters |> List.map (paramType ctx))
             let argTypes = if argTypes = [] then [ "unit" ] else argTypes
             let ret = mapType ctx mi.ReturnType
             let name =
@@ -453,7 +465,7 @@ let generateClass
             ci.Constructors
             |> Seq.map (fun kv ->
                 let cinfo = kv.Key.Value
-                let cts = cinfo.CtorParameters |> List.map (mapType ctx)
+                let cts = cinfo.CtorParameters |> List.map (paramType ctx)
                 let cts = if cts = [] then [ "unit" ] else cts
                 { Name = unique "create"
                   Signature = String.concat " -> " (cts @ [ recv ])

@@ -120,6 +120,17 @@ if (!globalThis.OCamlRuntime) {
     return curried;
   }
 
+  // Adapter for passing an OCaml list (cons cells, `0` for []) where JS/
+  // WebSharper expects an IEnumerable; WebSharper accepts JS arrays there.
+  function caml_list_to_array(xs) {
+    var a = [];
+    while (typeof xs === "object" && xs !== null) {
+      a.push(xs[0]);
+      xs = xs[1];
+    }
+    return a;
+  }
+
   function caml_trampoline_return(f, args) {
     return { tramp: f, args: args };
   }
@@ -157,6 +168,7 @@ if (!globalThis.OCamlRuntime) {
     },
     caml_closure: caml_closure,
     caml_to_js: caml_to_js,
+    caml_list_to_array: caml_list_to_array,
     caml_apply: caml_apply,
     caml_trampoline: caml_trampoline,
     caml_trampoline_return: caml_trampoline_return,

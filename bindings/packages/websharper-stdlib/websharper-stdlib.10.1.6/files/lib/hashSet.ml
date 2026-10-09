@@ -11,29 +11,29 @@ external add : ('a) t -> 'a -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/Sy
 (* instance *)
 external add_2 : ('a) t -> 'a -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#add|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#add|'0"
 (* instance *)
-external unionWith : ('a) t -> ('a) IEnumerable2.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#UnionWith|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#UnionWith|System.Collections.Generic.IEnumerable`1<'0>"
+external unionWith : ('a) t -> ('a) list -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#UnionWith|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#UnionWith|System.Collections.Generic.IEnumerable`1<'0>"
 (* instance *)
-external symmetricExceptWith : ('a) t -> ('a) IEnumerable2.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#SymmetricExceptWith|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#SymmetricExceptWith|System.Collections.Generic.IEnumerable`1<'0>"
+external symmetricExceptWith : ('a) t -> ('a) list -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#SymmetricExceptWith|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#SymmetricExceptWith|System.Collections.Generic.IEnumerable`1<'0>"
 (* instance *)
-external setEquals : ('a) t -> ('a) IEnumerable2.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#SetEquals|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#SetEquals|System.Collections.Generic.IEnumerable`1<'0>"
+external setEquals : ('a) t -> ('a) list -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#SetEquals|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#SetEquals|System.Collections.Generic.IEnumerable`1<'0>"
 (* instance *)
 external removeWhere : ('a) t -> Js.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#RemoveWhere|System.Predicate`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#RemoveWhere|System.Predicate`1<'0>"
 (* instance *)
 external remove : ('a) t -> 'a -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#Remove|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#Remove|'0"
 (* instance *)
-external overlaps : ('a) t -> ('a) IEnumerable2.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#Overlaps|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#Overlaps|System.Collections.Generic.IEnumerable`1<'0>"
+external overlaps : ('a) t -> ('a) list -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#Overlaps|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#Overlaps|System.Collections.Generic.IEnumerable`1<'0>"
 (* instance *)
-external isSupersetOf : ('a) t -> ('a) IEnumerable2.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#IsSupersetOf|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#IsSupersetOf|System.Collections.Generic.IEnumerable`1<'0>"
+external isSupersetOf : ('a) t -> ('a) list -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#IsSupersetOf|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#IsSupersetOf|System.Collections.Generic.IEnumerable`1<'0>"
 (* instance *)
-external isSubsetOf : ('a) t -> ('a) IEnumerable2.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#IsSubsetOf|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#IsSubsetOf|System.Collections.Generic.IEnumerable`1<'0>"
+external isSubsetOf : ('a) t -> ('a) list -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#IsSubsetOf|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#IsSubsetOf|System.Collections.Generic.IEnumerable`1<'0>"
 (* instance *)
-external isProperSupersetOf : ('a) t -> ('a) IEnumerable2.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#IsProperSupersetOf|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#IsProperSupersetOf|System.Collections.Generic.IEnumerable`1<'0>"
+external isProperSupersetOf : ('a) t -> ('a) list -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#IsProperSupersetOf|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#IsProperSupersetOf|System.Collections.Generic.IEnumerable`1<'0>"
 (* instance *)
-external isProperSubsetOf : ('a) t -> ('a) IEnumerable2.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#IsProperSubsetOf|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#IsProperSubsetOf|System.Collections.Generic.IEnumerable`1<'0>"
+external isProperSubsetOf : ('a) t -> ('a) list -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#IsProperSubsetOf|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#IsProperSubsetOf|System.Collections.Generic.IEnumerable`1<'0>"
 (* instance *)
-external intersectWith : ('a) t -> ('a) IEnumerable2.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#IntersectWith|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#IntersectWith|System.Collections.Generic.IEnumerable`1<'0>"
+external intersectWith : ('a) t -> ('a) list -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#IntersectWith|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#IntersectWith|System.Collections.Generic.IEnumerable`1<'0>"
 (* instance *)
-external exceptWith : ('a) t -> ('a) IEnumerable2.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#ExceptWith|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#ExceptWith|System.Collections.Generic.IEnumerable`1<'0>"
+external exceptWith : ('a) t -> ('a) list -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#ExceptWith|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#ExceptWith|System.Collections.Generic.IEnumerable`1<'0>"
 (* instance *)
 external contains : ('a) t -> 'a -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#Contains|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#Contains|'0"
 (* instance *)
@@ -59,12 +59,12 @@ external get_hash : ('a) t -> ('a -> int) = "wsget:WebSharper.StdLib!WebSharper.
 (* instance *)
 external get_equals : ('a) t -> ('a * 'a, bool) FuncWithArgs.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#equals" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#equals"
 (* new *)
-external create : ('a) IEnumerable2.t -> IEqualityComparer2.t -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default"
+external create : ('a) list -> IEqualityComparer2.t -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default"
 (* new *)
 external create_2 : IEqualityComparer2.t -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default"
 (* new *)
-external create_3 : ('a) IEnumerable2.t -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default"
+external create_3 : ('a) list -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default"
 (* new *)
 external create_4 : unit -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default"
 (* new *)
-external create_5 : ('a) IEnumerable2.t -> ('a * 'a, bool) FuncWithArgs.t -> ('a -> int) -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default"
+external create_5 : ('a) list -> ('a * 'a, bool) FuncWithArgs.t -> ('a -> int) -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default"

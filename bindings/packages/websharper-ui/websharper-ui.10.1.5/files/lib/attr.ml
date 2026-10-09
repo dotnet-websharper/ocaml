@@ -5,7 +5,7 @@ external empty : unit -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Attr:
 (* inline *)
 external onAfterRenderImpl : Js.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Attr::default#OnAfterRenderImpl|Microsoft.FSharp.Quotations.FSharpExpr`1<fn>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Attr::default#OnAfterRenderImpl|Microsoft.FSharp.Quotations.FSharpExpr`1<fn>"
 (* static *)
-external concat : (t) WebSharper_StdLib.IEnumerable2.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Attr::default#Concat|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Attr::default#Concat|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>"
+external concat : (t) list -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Attr::default#Concat|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Attr::default#Concat|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>"
 (* inline *)
 external append : t -> t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Attr::default#Append|WebSharper.UI.Attr|WebSharper.UI.Attr" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Attr::default#Append|WebSharper.UI.Attr|WebSharper.UI.Attr"
 (* inline *)

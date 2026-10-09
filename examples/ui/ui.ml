@@ -1,12 +1,14 @@
-open WebSharper_JavaScript
 open WebSharper_UI
+open WebSharper_UI.Html
 
-(* The generic Var and its static-helper Var are merged into one module, so
-   Var.create/Var.set/Var.get all live under Var. *)
+(* HTML built with the WebSharper.UI combinators: `div`, `h1`, `b`, `ul`, `li`
+   take attribute and child lists. *)
 let () =
-  let v = Var.create 0 in
-  Var.set v 41;
-  (* macro: expands to the TemplateHoleModule.Text constructor *)
-  let _macro = TemplateHole.makeText "a" "b" in
-  let _ = Doc.append (Doc.text "hello ") (Doc.text "ui") in
-  Console.log (Printf.sprintf "v=%d" (Var.get v))
+  let view =
+    div []
+      [ h1 [] [ Doc.text "Hello "; b [] [ Doc.text "WebSharper.UI" ] ];
+        ul []
+          [ li [] [ Doc.text "one" ];
+            li [] [ Doc.text "two" ] ] ]
+  in
+  Doc.runById "root" view

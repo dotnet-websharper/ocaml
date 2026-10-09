@@ -1,13 +1,13 @@
 (library
  (name example_dom)
  (modules dom)
- (libraries websharper-javascript))
+ (libraries websharper-ui websharper-javascript))
 
 (rule
  (target (dir out))
  (deps dom.ml build.sh)
  (action
-  (run bash build.sh out %{lib:websharper-javascript:console.ml})))
+  (run bash build.sh out)))
 
 (alias
  (name default)

@@ -5,4 +5,4 @@ external source : ('a, 'b) t -> ('a) IEnumerable2.t = "ws:WebSharper.StdLib!WebS
 (* instance *)
 external get_source : ('a, 'b) t -> ('a) IEnumerable2.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Linq.QuerySource`2::#source" "wsget:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Linq.QuerySource`2::#source"
 (* inline *)
-external create : ('a) IEnumerable2.t -> ('a, 'b) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Linq.QuerySource`2::" "wsnew:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Linq.QuerySource`2::"
+external create : ('a) list -> ('a, 'b) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Linq.QuerySource`2::" "wsnew:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Linq.QuerySource`2::"

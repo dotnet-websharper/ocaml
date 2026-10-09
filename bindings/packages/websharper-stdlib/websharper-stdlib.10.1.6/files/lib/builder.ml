@@ -21,7 +21,7 @@ external bind_3 : t -> ('a) Task2.t -> ('a -> ('b) WebSharper_JavaScript.Promise
 (* inline *)
 external using : t -> 'a -> ('a -> ('b) WebSharper_JavaScript.Promise.t) -> ('b) WebSharper_JavaScript.Promise.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise.Builder::#Using|'0|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise.Builder::#Using|'0|fn"
 (* inline *)
-external for_ : t -> ('a) IEnumerable2.t -> ('a -> (unit) WebSharper_JavaScript.Promise.t) -> (unit) WebSharper_JavaScript.Promise.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise.Builder::#For|System.Collections.Generic.IEnumerable`1<'0>|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise.Builder::#For|System.Collections.Generic.IEnumerable`1<'0>|fn"
+external for_ : t -> ('a) list -> ('a -> (unit) WebSharper_JavaScript.Promise.t) -> (unit) WebSharper_JavaScript.Promise.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise.Builder::#For|System.Collections.Generic.IEnumerable`1<'0>|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise.Builder::#For|System.Collections.Generic.IEnumerable`1<'0>|fn"
 (* inline *)
 external combine : t -> ('a) WebSharper_JavaScript.Promise.t -> ('a) WebSharper_JavaScript.Promise.t -> ('a) WebSharper_JavaScript.Promise.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise.Builder::#Combine|WebSharper.JavaScript.Promise`1<'0>|WebSharper.JavaScript.Promise`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise.Builder::#Combine|WebSharper.JavaScript.Promise`1<'0>|WebSharper.JavaScript.Promise`1<'0>"
 (* inline *)

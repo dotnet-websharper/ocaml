@@ -1,15 +1,13 @@
-open WebSharper_StdLib
-open WebSharper_JavaScript
 open WebSharper_UI
+open WebSharper_UI.Html
 
-(* A reactive view: a click handler updates a Var, and a textView bound to its
-   View re-renders the DOM. Exercises rendering, event handling, and the
-   reactive update scheduler. *)
+(* A reactive view built with the WebSharper.UI HTML combinators: attributes and
+   inner nodes are plain OCaml lists. *)
 let () =
   let v = Var.create "before" in
   let view =
-    Doc.element "div"
-      (SeqModule.ofArray [| On.click (fun _ _ -> Var.set v "after") |])
-      (SeqModule.ofArray [| Doc.textView (Var.view v) |])
+    div
+      [ On.click (fun _ _ -> Var.set v "after") ]
+      [ Doc.textView (Var.view v) ]
   in
   Doc.runById "root" view

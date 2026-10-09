@@ -37,7 +37,7 @@ external randomChoice : ('a) FSharpList.t -> 'a = "ws:WebSharper.StdLib!WebSharp
 (* inline *)
 external randomShuffle : ('a) FSharpList.t -> ('a) FSharpList.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#RandomShuffle|Microsoft.FSharp.Collections.FSharpList`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#RandomShuffle|Microsoft.FSharp.Collections.FSharpList`1<'0>"
 (* func *)
-external concat : (('a) FSharpList.t) IEnumerable2.t -> ('a) FSharpList.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#Concat|System.Collections.Generic.IEnumerable`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#Concat|System.Collections.Generic.IEnumerable`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>"
+external concat : (('a) FSharpList.t) list -> ('a) FSharpList.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#Concat|System.Collections.Generic.IEnumerable`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#Concat|System.Collections.Generic.IEnumerable`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>"
 (* func *)
 external head : ('a) FSharpList.t -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#Head|Microsoft.FSharp.Collections.FSharpList`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#Head|Microsoft.FSharp.Collections.FSharpList`1<'0>"
 (* func *)
@@ -47,7 +47,7 @@ external max : ('a) FSharpList.t -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib
 (* func *)
 external min : ('a) FSharpList.t -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#Min|Microsoft.FSharp.Collections.FSharpList`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#Min|Microsoft.FSharp.Collections.FSharpList`1<'0>"
 (* func *)
-external ofSeq : ('a) IEnumerable2.t -> ('a) FSharpList.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#OfSeq|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#OfSeq|System.Collections.Generic.IEnumerable`1<'0>"
+external ofSeq : ('a) list -> ('a) FSharpList.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#OfSeq|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#OfSeq|System.Collections.Generic.IEnumerable`1<'0>"
 (* func *)
 external reverse : ('a) FSharpList.t -> ('a) FSharpList.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#Reverse|Microsoft.FSharp.Collections.FSharpList`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#Reverse|Microsoft.FSharp.Collections.FSharpList`1<'0>"
 (* func *)
@@ -57,7 +57,7 @@ external sortDescending : ('a) FSharpList.t -> ('a) FSharpList.t = "ws:WebSharpe
 (* func *)
 external tail : ('a) FSharpList.t -> ('a) FSharpList.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#Tail|Microsoft.FSharp.Collections.FSharpList`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#Tail|Microsoft.FSharp.Collections.FSharpList`1<'0>"
 (* func *)
-external transpose : (('a) FSharpList.t) IEnumerable2.t -> (('a) FSharpList.t) FSharpList.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#Transpose|System.Collections.Generic.IEnumerable`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#Transpose|System.Collections.Generic.IEnumerable`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>"
+external transpose : (('a) FSharpList.t) list -> (('a) FSharpList.t) FSharpList.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#Transpose|System.Collections.Generic.IEnumerable`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#Transpose|System.Collections.Generic.IEnumerable`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>"
 (* func *)
 external unzip : ('a * 'b) FSharpList.t -> ('a) FSharpList.t * ('b) FSharpList.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#Unzip|Microsoft.FSharp.Collections.FSharpList`1<('0,'1)>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#Unzip|Microsoft.FSharp.Collections.FSharpList`1<('0,'1)>"
 (* func *)
@@ -187,7 +187,7 @@ external distinctBy : ('a -> 'b) -> ('a) FSharpList.t -> ('a) FSharpList.t = "ws
 (* func *)
 external splitInto : int -> ('a) FSharpList.t -> (('a) FSharpList.t) FSharpList.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#SplitInto|System.Int32|Microsoft.FSharp.Collections.FSharpList`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#SplitInto|System.Int32|Microsoft.FSharp.Collections.FSharpList`1<'0>"
 (* func *)
-external except : ('a) IEnumerable2.t -> ('a) FSharpList.t -> ('a) FSharpList.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#Except|System.Collections.Generic.IEnumerable`1<'0>|Microsoft.FSharp.Collections.FSharpList`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#Except|System.Collections.Generic.IEnumerable`1<'0>|Microsoft.FSharp.Collections.FSharpList`1<'0>"
+external except : ('a) list -> ('a) FSharpList.t -> ('a) FSharpList.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#Except|System.Collections.Generic.IEnumerable`1<'0>|Microsoft.FSharp.Collections.FSharpList`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#Except|System.Collections.Generic.IEnumerable`1<'0>|Microsoft.FSharp.Collections.FSharpList`1<'0>"
 (* func *)
 external tryFindBack : ('a -> bool) -> ('a) FSharpList.t -> ('a) FSharpOption.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#TryFindBack|fn|Microsoft.FSharp.Collections.FSharpList`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#TryFindBack|fn|Microsoft.FSharp.Collections.FSharpList`1<'0>"
 (* func *)
@@ -245,7 +245,7 @@ external mapFoldBack : ('a -> ('b -> 'c * 'b)) -> ('a) FSharpList.t -> 'b -> ('c
 (* func *)
 external insertAt : int -> 'a -> ('a) FSharpList.t -> ('a) FSharpList.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#InsertAt|System.Int32|'0|Microsoft.FSharp.Collections.FSharpList`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#InsertAt|System.Int32|'0|Microsoft.FSharp.Collections.FSharpList`1<'0>"
 (* func *)
-external insertManyAt : int -> ('a) IEnumerable2.t -> ('a) FSharpList.t -> ('a) FSharpList.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#InsertManyAt|System.Int32|System.Collections.Generic.IEnumerable`1<'0>|Microsoft.FSharp.Collections.FSharpList`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#InsertManyAt|System.Int32|System.Collections.Generic.IEnumerable`1<'0>|Microsoft.FSharp.Collections.FSharpList`1<'0>"
+external insertManyAt : int -> ('a) list -> ('a) FSharpList.t -> ('a) FSharpList.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#InsertManyAt|System.Int32|System.Collections.Generic.IEnumerable`1<'0>|Microsoft.FSharp.Collections.FSharpList`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#InsertManyAt|System.Int32|System.Collections.Generic.IEnumerable`1<'0>|Microsoft.FSharp.Collections.FSharpList`1<'0>"
 (* func *)
 external removeManyAt : int -> int -> ('a) FSharpList.t -> ('a) FSharpList.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#RemoveManyAt|System.Int32|System.Int32|Microsoft.FSharp.Collections.FSharpList`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#RemoveManyAt|System.Int32|System.Int32|Microsoft.FSharp.Collections.FSharpList`1<'0>"
 (* func *)

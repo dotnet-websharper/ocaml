@@ -55,9 +55,9 @@ external compareTo : t -> string -> int = "ws:WebSharper.StdLib!WebSharper.StdLi
 (* inline *)
 external compareTo_2 : t -> Js.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.String::#CompareTo|System.Object" "ws:WebSharper.StdLib!WebSharper.StdLib/System.String::#CompareTo|System.Object"
 (* inline *)
-external concat_2 : (string) IEnumerable2.t -> string = "ws:WebSharper.StdLib!WebSharper.StdLib/System.String::#Concat|System.Collections.Generic.IEnumerable`1<System.String>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.String::#Concat|System.Collections.Generic.IEnumerable`1<System.String>"
+external concat_2 : (string) list -> string = "ws:WebSharper.StdLib!WebSharper.StdLib/System.String::#Concat|System.Collections.Generic.IEnumerable`1<System.String>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.String::#Concat|System.Collections.Generic.IEnumerable`1<System.String>"
 (* inline *)
-external concat_3 : ('a) IEnumerable2.t -> string = "ws:WebSharper.StdLib!WebSharper.StdLib/System.String::#Concat|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.String::#Concat|System.Collections.Generic.IEnumerable`1<'0>"
+external concat_3 : ('a) list -> string = "ws:WebSharper.StdLib!WebSharper.StdLib/System.String::#Concat|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.String::#Concat|System.Collections.Generic.IEnumerable`1<'0>"
 (* inline *)
 external concat_4 : Js.t -> string = "ws:WebSharper.StdLib!WebSharper.StdLib/System.String::#Concat|System.Object" "ws:WebSharper.StdLib!WebSharper.StdLib/System.String::#Concat|System.Object"
 (* inline *)
@@ -103,7 +103,7 @@ external concat_7 : Js.t -> Js.t -> string = "ws:WebSharper.StdLib!WebSharper.St
 (* inline *)
 external indexOf_4 : t -> char -> int -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.String::#IndexOf|System.Char|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/System.String::#IndexOf|System.Char|System.Int32"
 (* inline *)
-external join : string -> (string) IEnumerable2.t -> string = "ws:WebSharper.StdLib!WebSharper.StdLib/System.String::#Join|System.String|System.Collections.Generic.IEnumerable`1<System.String>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.String::#Join|System.String|System.Collections.Generic.IEnumerable`1<System.String>"
+external join : string -> (string) list -> string = "ws:WebSharper.StdLib!WebSharper.StdLib/System.String::#Join|System.String|System.Collections.Generic.IEnumerable`1<System.String>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.String::#Join|System.String|System.Collections.Generic.IEnumerable`1<System.String>"
 (* inline *)
 external lastIndexOf_4 : t -> char -> int -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.String::#LastIndexOf|System.Char|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/System.String::#LastIndexOf|System.Char|System.Int32"
 (* inline *)

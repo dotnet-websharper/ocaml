@@ -7,9 +7,9 @@ external get_innerExceptions : t -> (Object.t) array = "wsget:WebSharper.StdLib!
 (* new *)
 external create : string -> Object.t -> t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.AggregateException::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.AggregateException::default"
 (* new *)
-external create_2 : string -> (Object.t) IEnumerable2.t -> t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.AggregateException::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.AggregateException::default"
+external create_2 : string -> (Object.t) list -> t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.AggregateException::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.AggregateException::default"
 (* new *)
-external create_3 : (Object.t) IEnumerable2.t -> t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.AggregateException::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.AggregateException::default"
+external create_3 : (Object.t) list -> t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.AggregateException::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.AggregateException::default"
 (* new *)
 external create_4 : (Object.t) array -> t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.AggregateException::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.AggregateException::default"
 (* new *)

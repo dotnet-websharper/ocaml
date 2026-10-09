@@ -7,7 +7,7 @@ external viewState : ('a, 'b) ListModel.t -> (('b) ListModelState.t) View.t = "w
 (* inline *)
 external key : ('a, 'b) ListModel.t -> ('b -> 'a) = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel::#Key|WebSharper.UI.ListModel`2<'0,'1>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel::#Key|WebSharper.UI.ListModel`2<'0,'1>"
 (* func *)
-external fromSeq : ('a) WebSharper_StdLib.IEnumerable2.t -> ('a, 'a) ListModel.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel::#FromSeq|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel::#FromSeq|System.Collections.Generic.IEnumerable`1<'0>"
+external fromSeq : ('a) list -> ('a, 'a) ListModel.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel::#FromSeq|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel::#FromSeq|System.Collections.Generic.IEnumerable`1<'0>"
 (* inline *)
 external map : ('a -> 'b) -> ('c, 'a) ListModel.t -> (('b) WebSharper_StdLib.IEnumerable2.t) View.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel::#Map|fn|WebSharper.UI.ListModel`2<'2,'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel::#Map|fn|WebSharper.UI.ListModel`2<'2,'0>"
 (* inline *)
@@ -15,7 +15,7 @@ external mapView : ('a -> (('b) View.t -> 'c)) -> ('a, 'b) ListModel.t -> (('c) 
 (* inline *)
 external mapLens : ('a -> (('b) Var.t -> 'c)) -> ('a, 'b) ListModel.t -> (('c) WebSharper_StdLib.IEnumerable2.t) View.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel::#MapLens|fn|WebSharper.UI.ListModel`2<'0,'1>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel::#MapLens|fn|WebSharper.UI.ListModel`2<'0,'1>"
 (* func *)
-external create : ('b -> 'a) -> ('b) WebSharper_StdLib.IEnumerable2.t -> ('a, 'b) ListModel.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel::#Create|fn|System.Collections.Generic.IEnumerable`1<'1>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel::#Create|fn|System.Collections.Generic.IEnumerable`1<'1>"
+external create : ('b -> 'a) -> ('b) list -> ('a, 'b) ListModel.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel::#Create|fn|System.Collections.Generic.IEnumerable`1<'1>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel::#Create|fn|System.Collections.Generic.IEnumerable`1<'1>"
 (* func *)
 external createWithStorage : ('b -> 'a) -> Storage2.t -> ('a, 'b) ListModel.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel::#CreateWithStorage|fn|WebSharper.UI.Storage`1<'1>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.ListModel::#CreateWithStorage|fn|WebSharper.UI.Storage`1<'1>"
 (* func *)

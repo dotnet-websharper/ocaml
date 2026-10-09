@@ -13,9 +13,9 @@ external defaultToUndefined : 'a -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib
 (* inline *)
 external op_BangDotDotDot : Js.t -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Pervasives::#op_BangDotDotDot|System.Object" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Pervasives::#op_BangDotDotDot|System.Object"
 (* macro *)
-external new_ : (string * Js.t) IEnumerable2.t -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Pervasives::#New|System.Collections.Generic.IEnumerable`1<(System.String,System.Object)>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Pervasives::#New|System.Collections.Generic.IEnumerable`1<(System.String,System.Object)>"
+external new_ : (string * Js.t) list -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Pervasives::#New|System.Collections.Generic.IEnumerable`1<(System.String,System.Object)>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Pervasives::#New|System.Collections.Generic.IEnumerable`1<(System.String,System.Object)>"
 (* func *)
-external newFromSeq : (string * Js.t) IEnumerable2.t -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Pervasives::#NewFromSeq|System.Collections.Generic.IEnumerable`1<(System.String,System.Object)>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Pervasives::#NewFromSeq|System.Collections.Generic.IEnumerable`1<(System.String,System.Object)>"
+external newFromSeq : (string * Js.t) list -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Pervasives::#NewFromSeq|System.Collections.Generic.IEnumerable`1<(System.String,System.Object)>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Pervasives::#NewFromSeq|System.Collections.Generic.IEnumerable`1<(System.String,System.Object)>"
 (* inline *)
 external op_MultiplyDot : 'a -> 'b -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Pervasives::#op_MultiplyDot|'0|'1" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Pervasives::#op_MultiplyDot|'0|'1"
 (* inline *)
@@ -59,6 +59,6 @@ external op_Dynamic : Js.t -> string -> 'a = "ws:WebSharper.StdLib!WebSharper.St
 (* inline *)
 external op_EqualsGreater : string -> Js.t -> string * Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Pervasives::#op_EqualsGreater|System.String|System.Object" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Pervasives::#op_EqualsGreater|System.String|System.Object"
 (* macro *)
-external getJS : Js.t -> (string) IEnumerable2.t -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Pervasives::#GetJS|System.Object|System.Collections.Generic.IEnumerable`1<System.String>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Pervasives::#GetJS|System.Object|System.Collections.Generic.IEnumerable`1<System.String>"
+external getJS : Js.t -> (string) list -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Pervasives::#GetJS|System.Object|System.Collections.Generic.IEnumerable`1<System.String>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Pervasives::#GetJS|System.Object|System.Collections.Generic.IEnumerable`1<System.String>"
 (* inline *)
 external op_DynamicAssignment : Js.t -> string -> Js.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Pervasives::#op_DynamicAssignment|System.Object|System.String|System.Object" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Pervasives::#op_DynamicAssignment|System.Object|System.String|System.Object"

@@ -5,4 +5,4 @@ external get_primary : ('a) t -> IComparer2.t = "wsget:WebSharper.StdLib!WebShar
 (* instance *)
 external get_source : ('a) t -> ('a) IEnumerable2.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.OrderedEnumerable`1::default#source" "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.OrderedEnumerable`1::default#source"
 (* new *)
-external create : ('a) IEnumerable2.t -> IComparer2.t -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/WebSharper.OrderedEnumerable`1::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/WebSharper.OrderedEnumerable`1::default"
+external create : ('a) list -> IComparer2.t -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/WebSharper.OrderedEnumerable`1::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/WebSharper.OrderedEnumerable`1::default"

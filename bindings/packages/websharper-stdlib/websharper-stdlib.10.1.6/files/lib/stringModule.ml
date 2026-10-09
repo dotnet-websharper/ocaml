@@ -29,7 +29,7 @@ external endsWith : string -> string -> bool = "ws:WebSharper.StdLib!WebSharper.
 (* func *)
 external collect : (char -> string) -> string -> string = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.StringModule::#Collect|fn|System.String" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.StringModule::#Collect|fn|System.String"
 (* func *)
-external concat : string -> (string) IEnumerable2.t -> string = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.StringModule::#Concat|System.String|System.Collections.Generic.IEnumerable`1<System.String>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.StringModule::#Concat|System.String|System.Collections.Generic.IEnumerable`1<System.String>"
+external concat : string -> (string) list -> string = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.StringModule::#Concat|System.String|System.Collections.Generic.IEnumerable`1<System.String>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.StringModule::#Concat|System.String|System.Collections.Generic.IEnumerable`1<System.String>"
 (* func *)
 external exists : (char -> bool) -> string -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.StringModule::#Exists|fn|System.String" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.StringModule::#Exists|fn|System.String"
 (* func *)

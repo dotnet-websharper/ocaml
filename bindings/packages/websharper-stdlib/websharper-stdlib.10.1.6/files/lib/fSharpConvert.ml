@@ -45,7 +45,7 @@ external option_2 : ('a) Nullable2.t -> ('a) FSharpOption.t = "ws:WebSharper.Std
 (* inline *)
 external some : 'a -> ('a) FSharpOption.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.FSharpConvert::#Some|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.FSharpConvert::#Some|'0"
 (* inline *)
-external list : ('a) IEnumerable2.t -> ('a) FSharpList.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.FSharpConvert::#List|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.FSharpConvert::#List|System.Collections.Generic.IEnumerable`1<'0>"
+external list : ('a) list -> ('a) FSharpList.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.FSharpConvert::#List|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.FSharpConvert::#List|System.Collections.Generic.IEnumerable`1<'0>"
 (* inline *)
 external ref_2 : 'a -> ('a) FSharpRef.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.FSharpConvert::#Ref|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.FSharpConvert::#Ref|'0"
 (* inline *)

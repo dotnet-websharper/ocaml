@@ -33,6 +33,6 @@ external add : ('a, 'b) t -> 'a -> 'b -> ('a, 'b) t = "ws:WebSharper.StdLib!WebS
 (* instance *)
 external get_tree : ('a, 'b) t -> (('a, 'b) Pair.t) Tree.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#tree" "wsget:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default#tree"
 (* new *)
-external create : ('a * 'b) IEnumerable2.t -> ('a, 'b) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default"
+external create : ('a * 'b) list -> ('a, 'b) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default"
 (* new *)
 external create_2 : (('a, 'b) Pair.t) Tree.t -> ('a, 'b) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpMap`2::default"

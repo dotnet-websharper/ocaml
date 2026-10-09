@@ -1,6 +1,7 @@
 {
   "modules": [
-    { "type": "WebSharper.UI.Var`1", "name": "Var", "merge": ["WebSharper.UI.Var"] }
+    { "type": "WebSharper.UI.Var`1", "name": "Var", "merge": ["WebSharper.UI.Var"] },
+    { "type": "WebSharper.UI.HtmlModule", "name": "Html" }
   ],
   "members": [
     { "type": "WebSharper.UI.Doc", "member": "TextNode", "name": "text" },

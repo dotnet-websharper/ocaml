@@ -21,6 +21,6 @@ external using : t -> 'a -> ('a -> FSharpAsync.t) -> FSharpAsync.t = "ws:WebShar
 (* inline *)
 external while_ : t -> (unit -> bool) -> FSharpAsync.t -> FSharpAsync.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.FSharpAsyncBuilder::#While|fn|Microsoft.FSharp.Control.FSharpAsync`1<void>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.FSharpAsyncBuilder::#While|fn|Microsoft.FSharp.Control.FSharpAsync`1<void>"
 (* inline *)
-external for_ : t -> ('a) IEnumerable2.t -> ('a -> FSharpAsync.t) -> FSharpAsync.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.FSharpAsyncBuilder::#For|System.Collections.Generic.IEnumerable`1<'0>|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.FSharpAsyncBuilder::#For|System.Collections.Generic.IEnumerable`1<'0>|fn"
+external for_ : t -> ('a) list -> ('a -> FSharpAsync.t) -> FSharpAsync.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.FSharpAsyncBuilder::#For|System.Collections.Generic.IEnumerable`1<'0>|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.FSharpAsyncBuilder::#For|System.Collections.Generic.IEnumerable`1<'0>|fn"
 (* inline *)
 external create : unit -> t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.FSharpAsyncBuilder::" "wsnew:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.FSharpAsyncBuilder::"

@@ -25,7 +25,7 @@ external max : ('a) Tree.t -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSh
 (* func *)
 external min : ('a) Tree.t -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.BalancedTree::#Min|WebSharper.Collections.BalancedTree+Tree`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.BalancedTree::#Min|WebSharper.Collections.BalancedTree+Tree`1<'0>"
 (* func *)
-external ofSeq : ('a) IEnumerable2.t -> ('a) Tree.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.BalancedTree::#OfSeq|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.BalancedTree::#OfSeq|System.Collections.Generic.IEnumerable`1<'0>"
+external ofSeq : ('a) list -> ('a) Tree.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.BalancedTree::#OfSeq|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.BalancedTree::#OfSeq|System.Collections.Generic.IEnumerable`1<'0>"
 (* inline *)
 external unshift : 'a -> 'b -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.BalancedTree::#unshift|'0|'1" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.BalancedTree::#unshift|'0|'1"
 (* func *)

@@ -43,6 +43,6 @@ external get_tree : ('a) t -> ('a) Tree.t = "wsget:WebSharper.StdLib!WebSharper.
 (* new *)
 external create : unit -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default"
 (* new *)
-external create_2 : ('a) IEnumerable2.t -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default"
+external create_2 : ('a) list -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default"
 (* new *)
 external create_3 : ('a) Tree.t -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.FSharpSet`1::default"

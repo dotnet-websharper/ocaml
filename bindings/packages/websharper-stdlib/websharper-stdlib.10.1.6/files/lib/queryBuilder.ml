@@ -23,7 +23,7 @@ external quote : t -> Js.t -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Mic
 (* inline *)
 external run : t -> Js.t -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Linq.QueryBuilder::default#Run|Microsoft.FSharp.Quotations.FSharpExpr`1<Microsoft.FSharp.Linq.QuerySource`2<'0,System.Linq.IQueryable>>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Linq.QueryBuilder::default#Run|Microsoft.FSharp.Quotations.FSharpExpr`1<Microsoft.FSharp.Linq.QuerySource`2<'0,System.Linq.IQueryable>>"
 (* inline *)
-external source : t -> ('a) IEnumerable2.t -> ('a, IEnumerable.t) QuerySource.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Linq.QueryBuilder::default#Source|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Linq.QueryBuilder::default#Source|System.Collections.Generic.IEnumerable`1<'0>"
+external source : t -> ('a) list -> ('a, IEnumerable.t) QuerySource.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Linq.QueryBuilder::default#Source|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Linq.QueryBuilder::default#Source|System.Collections.Generic.IEnumerable`1<'0>"
 (* inline *)
 external source_2 : t -> Js.t -> ('a, 'b) QuerySource.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Linq.QueryBuilder::default#Source|System.Linq.IQueryable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Linq.QueryBuilder::default#Source|System.Linq.IQueryable`1<'0>"
 (* inline *)
@@ -31,7 +31,7 @@ external yield : t -> 'a -> ('a, 'b) QuerySource.t = "ws:WebSharper.StdLib!WebSh
 (* inline *)
 external yieldFrom : t -> ('a, 'b) QuerySource.t -> ('a, 'b) QuerySource.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Linq.QueryBuilder::default#YieldFrom|Microsoft.FSharp.Linq.QuerySource`2<'0,'1>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Linq.QueryBuilder::default#YieldFrom|Microsoft.FSharp.Linq.QuerySource`2<'0,'1>"
 (* static *)
-external checkThenBySource : ('a) IEnumerable2.t -> IOrderedEnumerable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Linq.QueryBuilder::default#CheckThenBySource|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Linq.QueryBuilder::default#CheckThenBySource|System.Collections.Generic.IEnumerable`1<'0>"
+external checkThenBySource : ('a) list -> IOrderedEnumerable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Linq.QueryBuilder::default#CheckThenBySource|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Linq.QueryBuilder::default#CheckThenBySource|System.Collections.Generic.IEnumerable`1<'0>"
 (* inline *)
 external all : t -> ('a, 'b) QuerySource.t -> ('a -> bool) -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Linq.QueryBuilder::default#All|Microsoft.FSharp.Linq.QuerySource`2<'0,'1>|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Linq.QueryBuilder::default#All|Microsoft.FSharp.Linq.QuerySource`2<'0,'1>|fn"
 (* inline *)

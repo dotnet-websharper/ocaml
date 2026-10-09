@@ -15,4 +15,4 @@ external ofAsync : FSharpAsync.t -> ('a) WebSharper_JavaScript.Promise.t = "ws:W
 (* func *)
 external unwrapExn : Js.t -> Object.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise::#unwrapExn|System.Object" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise::#unwrapExn|System.Object"
 (* func *)
-external for_ : ('a) IEnumerable2.t -> ('a -> (unit) WebSharper_JavaScript.Promise.t) -> (unit) WebSharper_JavaScript.Promise.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise::#For|System.Collections.Generic.IEnumerable`1<'0>|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise::#For|System.Collections.Generic.IEnumerable`1<'0>|fn"
+external for_ : ('a) list -> ('a -> (unit) WebSharper_JavaScript.Promise.t) -> (unit) WebSharper_JavaScript.Promise.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise::#For|System.Collections.Generic.IEnumerable`1<'0>|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise::#For|System.Collections.Generic.IEnumerable`1<'0>|fn"

@@ -9,25 +9,25 @@ external outOfBounds : unit -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/WebS
 (* func *)
 external insufficientElements : unit -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#InsufficientElements|" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#InsufficientElements|"
 (* func *)
-external seqLast : ('a) IEnumerable2.t -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#SeqLast|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#SeqLast|System.Collections.Generic.IEnumerable`1<'0>"
+external seqLast : ('a) list -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#SeqLast|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#SeqLast|System.Collections.Generic.IEnumerable`1<'0>"
 (* func *)
-external seqTryLast : ('a) IEnumerable2.t -> ('a) FSharpOption.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#SeqTryLast|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#SeqTryLast|System.Collections.Generic.IEnumerable`1<'0>"
+external seqTryLast : ('a) list -> ('a) FSharpOption.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#SeqTryLast|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#SeqTryLast|System.Collections.Generic.IEnumerable`1<'0>"
 (* func *)
-external seqTryHead : ('a) IEnumerable2.t -> ('a) FSharpOption.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#SeqTryHead|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#SeqTryHead|System.Collections.Generic.IEnumerable`1<'0>"
+external seqTryHead : ('a) list -> ('a) FSharpOption.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#SeqTryHead|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#SeqTryHead|System.Collections.Generic.IEnumerable`1<'0>"
 (* func *)
 external randomizerNext : (unit -> float) -> int -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#RandomizerNext|fn|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#RandomizerNext|fn|System.Int32"
 (* func *)
 external listSkipWhile : ('a -> bool) -> ('a) FSharpList.t -> ('a) FSharpList.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#ListSkipWhile|fn|Microsoft.FSharp.Collections.FSharpList`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#ListSkipWhile|fn|Microsoft.FSharp.Collections.FSharpList`1<'0>"
 (* func *)
-external seqContains : 'a -> ('a) IEnumerable2.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#SeqContains|'0|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#SeqContains|'0|System.Collections.Generic.IEnumerable`1<'0>"
+external seqContains : 'a -> ('a) list -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#SeqContains|'0|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#SeqContains|'0|System.Collections.Generic.IEnumerable`1<'0>"
 (* func *)
 external listSkip : int -> ('a) FSharpList.t -> ('a) FSharpList.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#ListSkip|System.Int32|Microsoft.FSharp.Collections.FSharpList`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#ListSkip|System.Int32|Microsoft.FSharp.Collections.FSharpList`1<'0>"
 (* func *)
-external seqExcept : ('a) IEnumerable2.t -> ('a) IEnumerable2.t -> ('a) IEnumerable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#SeqExcept|System.Collections.Generic.IEnumerable`1<'0>|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#SeqExcept|System.Collections.Generic.IEnumerable`1<'0>|System.Collections.Generic.IEnumerable`1<'0>"
+external seqExcept : ('a) list -> ('a) list -> ('a) IEnumerable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#SeqExcept|System.Collections.Generic.IEnumerable`1<'0>|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#SeqExcept|System.Collections.Generic.IEnumerable`1<'0>|System.Collections.Generic.IEnumerable`1<'0>"
 (* func *)
-external seqChunkBySize : int -> ('a) IEnumerable2.t -> (('a) array) IEnumerable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#SeqChunkBySize|System.Int32|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#SeqChunkBySize|System.Int32|System.Collections.Generic.IEnumerable`1<'0>"
+external seqChunkBySize : int -> ('a) list -> (('a) array) IEnumerable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#SeqChunkBySize|System.Int32|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#SeqChunkBySize|System.Int32|System.Collections.Generic.IEnumerable`1<'0>"
 (* func *)
-external seqTryItem : int -> ('a) IEnumerable2.t -> ('a) FSharpOption.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#SeqTryItem|System.Int32|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#SeqTryItem|System.Int32|System.Collections.Generic.IEnumerable`1<'0>"
+external seqTryItem : int -> ('a) list -> ('a) FSharpOption.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#SeqTryItem|System.Int32|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#SeqTryItem|System.Int32|System.Collections.Generic.IEnumerable`1<'0>"
 (* func *)
 external arrayRandomShuffleInPlace : ('a) array -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#ArrayRandomShuffleInPlace|'0[]" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.CollectionInternals::#ArrayRandomShuffleInPlace|'0[]"
 (* func *)

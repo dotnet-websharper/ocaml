@@ -53,4 +53,4 @@ external set_init85 : ('a) t -> int -> unit = "wsset:WebSharper.StdLib!WebSharpe
 (* new *)
 external create : unit -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default"
 (* new *)
-external create_2 : ('a) IEnumerable2.t -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default"
+external create_2 : ('a) list -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.LinkedList`1::default"

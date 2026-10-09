@@ -31,9 +31,9 @@ external onCancel : (unit -> unit) -> ((IDisposable.t) AsyncBody.t -> unit) = "w
 (* func *)
 external startChildAsTask : (('a) AsyncBody.t -> unit) -> ((('a) Task2.t) AsyncBody.t -> unit) = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#StartChildAsTask|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#StartChildAsTask|fn"
 (* func *)
-external sequential : ((('a) AsyncBody.t -> unit)) IEnumerable2.t -> ((('a) array) AsyncBody.t -> unit) = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#Sequential|System.Collections.Generic.IEnumerable`1<fn>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#Sequential|System.Collections.Generic.IEnumerable`1<fn>"
+external sequential : ((('a) AsyncBody.t -> unit)) list -> ((('a) array) AsyncBody.t -> unit) = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#Sequential|System.Collections.Generic.IEnumerable`1<fn>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#Sequential|System.Collections.Generic.IEnumerable`1<fn>"
 (* func *)
-external parallel : ((('a) AsyncBody.t -> unit)) IEnumerable2.t -> ((('a) array) AsyncBody.t -> unit) = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#Parallel|System.Collections.Generic.IEnumerable`1<fn>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#Parallel|System.Collections.Generic.IEnumerable`1<fn>"
+external parallel : ((('a) AsyncBody.t -> unit)) list -> ((('a) array) AsyncBody.t -> unit) = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#Parallel|System.Collections.Generic.IEnumerable`1<fn>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#Parallel|System.Collections.Generic.IEnumerable`1<fn>"
 (* func *)
 external sleep : int -> ((unit) AsyncBody.t -> unit) = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#Sleep|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#Sleep|System.Int32"
 (* func *)
@@ -57,7 +57,7 @@ external cancel : ('a) AsyncBody.t -> unit = "ws:WebSharper.StdLib!WebSharper.St
 (* inline *)
 external push : 'a -> 'b -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#push|'0|'1" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#push|'0|'1"
 (* func *)
-external for_ : ('a) IEnumerable2.t -> ('a -> ((unit) AsyncBody.t -> unit)) -> ((unit) AsyncBody.t -> unit) = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#For|System.Collections.Generic.IEnumerable`1<'0>|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#For|System.Collections.Generic.IEnumerable`1<'0>|fn"
+external for_ : ('a) list -> ('a -> ((unit) AsyncBody.t -> unit)) -> ((unit) AsyncBody.t -> unit) = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#For|System.Collections.Generic.IEnumerable`1<'0>|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#For|System.Collections.Generic.IEnumerable`1<'0>|fn"
 (* func *)
 external while_ : (unit -> bool) -> ((unit) AsyncBody.t -> unit) -> ((unit) AsyncBody.t -> unit) = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#While|fn|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#While|fn|fn"
 (* func *)
@@ -67,7 +67,7 @@ external tryCancelled : (('a) AsyncBody.t -> unit) -> (Object.t -> unit) -> (('a
 (* func *)
 external startChild : (('a) AsyncBody.t -> unit) -> (int) FSharpOption.t -> (((('a) AsyncBody.t -> unit)) AsyncBody.t -> unit) = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#StartChild|fn|Microsoft.FSharp.Core.FSharpOption`1<System.Int32>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#StartChild|fn|Microsoft.FSharp.Core.FSharpOption`1<System.Int32>"
 (* func *)
-external parallelWithMaxDegree : ((('a) AsyncBody.t -> unit)) IEnumerable2.t -> int -> ((('a) array) AsyncBody.t -> unit) = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#ParallelWithMaxDegree|System.Collections.Generic.IEnumerable`1<fn>|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#ParallelWithMaxDegree|System.Collections.Generic.IEnumerable`1<fn>|System.Int32"
+external parallelWithMaxDegree : ((('a) AsyncBody.t -> unit)) list -> int -> ((('a) array) AsyncBody.t -> unit) = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#ParallelWithMaxDegree|System.Collections.Generic.IEnumerable`1<fn>|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#ParallelWithMaxDegree|System.Collections.Generic.IEnumerable`1<fn>|System.Int32"
 (* func *)
 external startImmediateAsTask : (('a) AsyncBody.t -> unit) -> (CT.t) FSharpOption.t -> ('a) Task2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#StartImmediateAsTask|fn|Microsoft.FSharp.Core.FSharpOption`1<WebSharper.Concurrency+CT>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#StartImmediateAsTask|fn|Microsoft.FSharp.Core.FSharpOption`1<WebSharper.Concurrency+CT>"
 (* func *)

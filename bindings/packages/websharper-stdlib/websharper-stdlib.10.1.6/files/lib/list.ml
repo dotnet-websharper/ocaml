@@ -19,7 +19,7 @@ external trimExcess : ('a) t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/S
 (* inline *)
 external add : ('a) t -> 'a -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#Add|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#Add|'0"
 (* inline *)
-external addRange : ('a) t -> ('a) IEnumerable2.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#AddRange|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#AddRange|System.Collections.Generic.IEnumerable`1<'0>"
+external addRange : ('a) t -> ('a) list -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#AddRange|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#AddRange|System.Collections.Generic.IEnumerable`1<'0>"
 (* inline *)
 external binarySearch : ('a) t -> 'a -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#BinarySearch|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#BinarySearch|'0"
 (* inline *)
@@ -71,7 +71,7 @@ external indexOf_2 : ('a) t -> 'a -> int -> int = "ws:WebSharper.StdLib!WebSharp
 (* inline *)
 external insert : ('a) t -> int -> 'a -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#Insert|System.Int32|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#Insert|System.Int32|'0"
 (* inline *)
-external insertRange : ('a) t -> int -> ('a) IEnumerable2.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#InsertRange|System.Int32|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#InsertRange|System.Int32|System.Collections.Generic.IEnumerable`1<'0>"
+external insertRange : ('a) t -> int -> ('a) list -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#InsertRange|System.Int32|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#InsertRange|System.Int32|System.Collections.Generic.IEnumerable`1<'0>"
 (* inline *)
 external set_item : ('a) t -> int -> 'a -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#set_Item|System.Int32|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#set_Item|System.Int32|'0"
 (* inline *)
@@ -105,4 +105,4 @@ external create_2 : unit -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/
 (* inline *)
 external create_3 : int -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::"
 (* inline *)
-external create_4 : ('a) IEnumerable2.t -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::"
+external create_4 : ('a) list -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::"

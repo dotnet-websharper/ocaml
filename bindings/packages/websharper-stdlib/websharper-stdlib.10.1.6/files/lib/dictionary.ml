@@ -57,4 +57,4 @@ external create_5 : int -> ('a, 'b) t = "wsnew:WebSharper.StdLib!WebSharper.StdL
 (* new *)
 external create_6 : unit -> ('a, 'b) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default"
 (* new *)
-external create_7 : (('a, 'b) KeyValuePair.t) IEnumerable2.t -> ('a * 'a, bool) FuncWithArgs.t -> ('a -> int) -> ('a, 'b) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default"
+external create_7 : (('a, 'b) KeyValuePair.t) list -> ('a * 'a, bool) FuncWithArgs.t -> ('a -> int) -> ('a, 'b) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default"

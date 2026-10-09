@@ -1,25 +1,23 @@
-(* A DOM example using the generated WebSharper.JavaScript bindings. The cyclic
-   DOM type hierarchy is collapsed to a single abstract type (EventTarget.t), so
-   no coercions are needed between Document/Element/Node/Event. *)
-
 open WebSharper_JavaScript
+open WebSharper_UI
+open WebSharper_UI.Html
 
+(* Build the DOM with the WebSharper.UI HTML combinators, then verify and
+   interact with it through the WebSharper.JavaScript DOM bindings. *)
 let () =
-  let window = Window.self () in
-  let document : Document.t = Window.document window in
-  let body : Node.t = Document.body document in
+  let view =
+    div
+      [ Attr.create "id" "box"; Attr.create "class" "greeting" ]
+      [ b [] [ Doc.text "hello" ] ]
+  in
+  Doc.runById "root" view;
 
-  let div : Element.t = Document.createElement document "div" in
-  Element.set_id div "box";
-  Element.set_className div "greeting";
-  Element.set_innerHTML div "<b>hello</b>";
-  ignore (Node.appendChild body div);
+  let document : Document.t = Window.document (Window.self ()) in
+  let box : Element.t = Document.getElementById document "box" in
+  Console.log ("tag=" ^ Element.tagName box);
+  Console.log ("html=" ^ Element.innerHTML box);
 
-  Console.log ("tag=" ^ Element.tagName div);
-  Console.log ("html=" ^ Element.innerHTML div);
+  EventTarget.addEventListener box "ping" (Js.of_js (fun () ->
+    Element.set_innerHTML box "pinged"));
 
-  EventTarget.addEventListener div "ping" (Js.of_js (fun () ->
-    Element.set_innerHTML div "pinged"));
-
-  let found : Element.t = Document.getElementById document "box" in
-  Console.log ("found=" ^ Element.id found)
+  Console.log ("found=" ^ Element.id box)

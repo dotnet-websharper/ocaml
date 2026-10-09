@@ -13,7 +13,7 @@ external isEmpty : ('a, 'b) FSharpMap.t -> bool = "ws:WebSharper.StdLib!WebSharp
 (* inline *)
 external count : ('a, 'b) FSharpMap.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.MapModule::#Count|Microsoft.FSharp.Collections.FSharpMap`2<'0,'1>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.MapModule::#Count|Microsoft.FSharp.Collections.FSharpMap`2<'0,'1>"
 (* inline *)
-external ofSeq : ('a * 'b) IEnumerable2.t -> ('a, 'b) FSharpMap.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.MapModule::#OfSeq|System.Collections.Generic.IEnumerable`1<('0,'1)>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.MapModule::#OfSeq|System.Collections.Generic.IEnumerable`1<('0,'1)>"
+external ofSeq : ('a * 'b) list -> ('a, 'b) FSharpMap.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.MapModule::#OfSeq|System.Collections.Generic.IEnumerable`1<('0,'1)>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.MapModule::#OfSeq|System.Collections.Generic.IEnumerable`1<('0,'1)>"
 (* inline *)
 external ofList : ('a * 'b) FSharpList.t -> ('a, 'b) FSharpMap.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.MapModule::#OfList|Microsoft.FSharp.Collections.FSharpList`1<('0,'1)>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.MapModule::#OfList|Microsoft.FSharp.Collections.FSharpList`1<('0,'1)>"
 (* inline *)

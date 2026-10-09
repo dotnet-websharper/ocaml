@@ -9,7 +9,7 @@ external constAsync : WebSharper_StdLib.FSharpAsync.t -> ('a) View.t = "ws:WebSh
 (* func *)
 external const : 'a -> ('a) View.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#Const|'0" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#Const|'0"
 (* func *)
-external sequence : (('a) View.t) WebSharper_StdLib.IEnumerable2.t -> (('a) WebSharper_StdLib.IEnumerable2.t) View.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#Sequence|System.Collections.Generic.IEnumerable`1<WebSharper.UI.View`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#Sequence|System.Collections.Generic.IEnumerable`1<WebSharper.UI.View`1<'0>>"
+external sequence : (('a) View.t) list -> (('a) WebSharper_StdLib.IEnumerable2.t) View.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#Sequence|System.Collections.Generic.IEnumerable`1<WebSharper.UI.View`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#Sequence|System.Collections.Generic.IEnumerable`1<WebSharper.UI.View`1<'0>>"
 (* func *)
 external joinInner : (('a) View.t) View.t -> ('a) View.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#JoinInner|WebSharper.UI.View`1<WebSharper.UI.View`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#JoinInner|WebSharper.UI.View`1<WebSharper.UI.View`1<'0>>"
 (* func *)

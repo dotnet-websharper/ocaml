@@ -103,7 +103,7 @@ external ref : 'a -> ('a) FSharpRef.t = "ws:WebSharper.StdLib!WebSharper.StdLib/
 (* inline *)
 external round : 'a -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#Round|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#Round|'0"
 (* inline *)
-external createSequence : ('a) IEnumerable2.t -> ('a) IEnumerable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#CreateSequence|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#CreateSequence|System.Collections.Generic.IEnumerable`1<'0>"
+external createSequence : ('a) list -> ('a) IEnumerable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#CreateSequence|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#CreateSequence|System.Collections.Generic.IEnumerable`1<'0>"
 (* macro *)
 external sin : 'a -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#Sin|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#Sin|'0"
 (* macro *)

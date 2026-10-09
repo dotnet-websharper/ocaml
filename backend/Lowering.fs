@@ -257,18 +257,23 @@ module Lowering =
     and prim c p xs =
         let es = List.map (expr c) xs
 
-        // An OCaml closure passed where JS/WebSharper expects a curried `fn`
-        // must be adapted so it can be called as f(a)(b) from JS.
-        let wrapFnArgs (parameters: Type list) (args: Expression list) =
+        // Adapt OCaml argument values to what JS/WebSharper expects:
+        //  - closures for `fn` parameters must be callable curried from JS;
+        //  - lists for `IEnumerable` parameters must become JS arrays.
+        let adaptArg (t: Type) (e: Expression) =
+            match t with
+            | Type.FSharpFuncType _ -> rt c "caml_to_js" [ e ]
+            | Type.ConcreteType tc
+                when tc.Entity.Value.FullName.StartsWith "System.Collections.Generic.IEnumerable"
+                     || tc.Entity.Value.FullName.StartsWith "System.Collections.IEnumerable" ->
+                rt c "caml_list_to_array" [ e ]
+            | _ -> e
+
+        let adaptArgs (parameters: Type list) (args: Expression list) =
             let n = parameters.Length
             let extra = args.Length - n
             args
-            |> List.mapi (fun i e ->
-                if i < extra then e
-                else
-                    match parameters.[i - extra] with
-                    | Type.FSharpFuncType _ -> rt c "caml_to_js" [ e ]
-                    | _ -> e)
+            |> List.mapi (fun i e -> if i < extra then e else adaptArg parameters.[i - extra] e)
 
         match p.Tag, es with
         | "ignore", [ x ] ->
@@ -434,11 +439,20 @@ module Lowering =
                 | Some e ->
                     if c.Ws then
                         let tryCtor n =
-                            if n >= 0 then WebSharper.OCaml.Bindings.findCtor e.Class n else None
+                            if n >= 0 then
+                                e.Class.Constructors
+                                |> Seq.tryPick (fun kv ->
+                                    if kv.Key.Value.CtorParameters.Length = n then
+                                        Some(kv.Key, kv.Key.Value.CtorParameters)
+                                    else None)
+                            else None
                         match tryCtor es.Length, (if es.Length > 0 then tryCtor (es.Length - 1) else None) with
-                        | Some ctorKey, _ -> Ctor(WebSharper.OCaml.Bindings.concrete e.TypeKey, ctorKey, es)
-                        | None, Some ctorKey ->
-                            Ctor(WebSharper.OCaml.Bindings.concrete e.TypeKey, ctorKey, List.truncate (es.Length - 1) es)
+                        | Some(ctorKey, ps), _ -> Ctor(WebSharper.OCaml.Bindings.concrete e.TypeKey, ctorKey, adaptArgs ps es)
+                        | None, Some(ctorKey, ps) ->
+                            Ctor(
+                                WebSharper.OCaml.Bindings.concrete e.TypeKey,
+                                ctorKey,
+                                adaptArgs ps (List.truncate (es.Length - 1) es))
                         | _ -> failwith $"wsnew: no matching constructor for {addr}"
                     else
                         New(GlobalAccess e.Address, [], es)
@@ -502,7 +516,7 @@ module Lowering =
                 | Some e ->
                     match WebSharper.OCaml.Bindings.findMethod e.Class mn ps with
                     | Some(hkey, mi, cmi) ->
-                        let es = wrapFnArgs mi.Parameters es
+                        let es = adaptArgs mi.Parameters es
                         if c.Ws then
                             let td = WebSharper.OCaml.Bindings.concrete e.TypeKey
                             let m = WebSharper.OCaml.Bindings.concreteM hkey

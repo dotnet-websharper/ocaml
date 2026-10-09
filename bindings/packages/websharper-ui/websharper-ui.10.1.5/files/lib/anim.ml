@@ -13,7 +13,7 @@ external pack : t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Anim::#Pa
 (* func *)
 external const : 'a -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Anim::#Const|'0" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Anim::#Const|'0"
 (* func *)
-external concat : (t) WebSharper_StdLib.IEnumerable2.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Anim::#Concat|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Anim>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Anim::#Concat|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Anim>"
+external concat : (t) list -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Anim::#Concat|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Anim>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Anim::#Concat|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Anim>"
 (* func *)
 external set_useAnimations : bool -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Anim::#set_UseAnimations|System.Boolean" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Anim::#set_UseAnimations|System.Boolean"
 (* func *)
