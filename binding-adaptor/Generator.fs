@@ -96,7 +96,10 @@ type TypeEnv =
       // Types that a [<Proxy>] provides the JS representation for: their
       // proxy-injected representation members must not surface as API.
       ProxiedTargets: Set<string>
-      CustomOf: string -> CustomTypeInfo }
+      CustomOf: string -> CustomTypeInfo
+      // For a module in a multi-member cycle: the name of the shared types
+      // module that holds its (and its siblings') abstract type.
+      TypesModuleOf: string -> string option }
 
 let rec mapType (ctx: TypeCtx) (t: Type) : string =
     match t with
@@ -338,9 +341,19 @@ let generateClass
         memberSpecs |> List.exists (fun m -> m.Member = wsName && m.Skip)
 
     let alias =
-        match env.RepOf moduleName with
-        | Some r when r <> moduleName -> Some r
-        | _ -> None
+        match env.TypesModuleOf moduleName with
+        | Some t -> Some(t + "." + moduleName)
+        | None ->
+            match env.RepOf moduleName with
+            | Some r when r <> moduleName -> Some r
+            | _ -> None
+
+    // A reference to a sibling in the same cycle is routed through the shared
+    // types module, so member files do not depend on each other.
+    let routeRef (m: string) =
+        match env.TypesModuleOf moduleName, env.TypesModuleOf m with
+        | Some t, Some _ -> t + "." + m
+        | _ -> m
 
     let ctx : TypeCtx =
         { Lookup =
@@ -350,7 +363,7 @@ let generateClass
                 | Some m ->
                     let m = redirect m
                     if m = moduleName then Some("", env.LocalArity moduleName)
-                    elif not (opaque.Contains m) then Some(m, env.LocalArity m)
+                    elif not (opaque.Contains m) then Some(routeRef m, env.LocalArity m)
                     else None
                 | None ->
                     match Map.tryFind fullName env.ExternalByFull with
@@ -360,7 +373,7 @@ let generateClass
                     | None ->
                         let s = redirect (simpleTypeName fullName)
                         if s = moduleName then Some("", env.LocalArity moduleName)
-                        elif env.LocalModules.Contains s && not (opaque.Contains s) then Some(s, env.LocalArity s)
+                        elif env.LocalModules.Contains s && not (opaque.Contains s) then Some(routeRef s, env.LocalArity s)
                         else
                             match Map.tryFind s env.ExternalSimple with
                             | Some(qm, ar, pkg) ->
@@ -490,7 +503,7 @@ let renderClassBody (g: GeneratedClass) =
         if g.Generics = 0 then ""
         else "(" + String.concat ", " [ for i in 0 .. g.Generics - 1 -> typeParamName i ] + ") "
     match g.Alias with
-    | Some rep -> sb.AppendLine(sprintf "type %st = %s.t" tparams rep) |> ignore
+    | Some rep -> sb.AppendLine("type " + tparams + "t = " + tparams + rep + ".t") |> ignore
     | None -> sb.AppendLine(sprintf "type %st" tparams) |> ignore
     for m in g.Methods do sb.Append(renderMember m) |> ignore
     for m in g.Fields do sb.Append(renderMember m) |> ignore

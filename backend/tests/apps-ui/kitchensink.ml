@@ -22,7 +22,7 @@ let () =
       [ h1 [] [ Doc.text "Kitchen Sink" ];
         p
           [ On.click (fun _ _ -> Var.set count (Var.get count + 1)) ]
-          [ Doc.text "count: "; Doc.textView (View.map (Var.view count) (fun n -> Printf.sprintf "%d" n)) ];
+          [ Doc.text "count: "; Doc.textView (View.map (fun n -> Printf.sprintf "%d" n) (Var.view count)) ];
         ul [] (List.map (fun s -> li [] [ Doc.text s ]) [ "one"; "two"; "three" ]) ]
   in
   Doc.runById "root" view

@@ -314,7 +314,7 @@ let gen
             let mergeable =
                 forced
                 || (List.length sorted > 1
-                    && sorted |> List.forall (fun (a, _, _, _) -> isDefaultAddr a)
+                    && (s.Qualify || sorted |> List.forall (fun (a, _, _, _) -> isDefaultAddr a))
                     && (let maxG = sorted |> List.map (fun (_, _, ci, _) -> ci.Generics.Length) |> List.max
                         let primaries = sorted |> List.filter (fun (_, _, ci, _) -> ci.Generics.Length = maxG)
                         let others = sorted |> List.filter (fun (_, _, ci, _) -> ci.Generics.Length <> maxG)
@@ -532,6 +532,25 @@ let gen
 
     let collapsed = repOf |> Map.toList |> List.map fst |> Set.ofList
 
+    // Multi-member cycles that are not collapsed type clusters (e.g.
+    // Var/View/ViewBuilder) are broken structurally: a shared "<members>Types"
+    // module holds the abstract types, and each member file aliases its type and
+    // defines its externally-tagged members, referring to siblings via the types
+    // module.
+    let typeSplitGroups =
+        scc
+        |> Map.toList
+        |> List.map (fun (_, comp) -> comp |> Set.toList |> List.sort)
+        |> List.filter (fun ms -> List.length ms > 1 && not (List.exists collapsed.Contains ms))
+        |> List.distinct
+
+    let typesModuleOf =
+        [ for ms in typeSplitGroups do
+            let t = String.concat "" ms + "Types"
+            for m in ms do
+              yield m, t ]
+        |> Map.ofList
+
     let proxiedTargets = proxyTargets (dll :: references)
 
     let customByFull =
@@ -553,12 +572,10 @@ let gen
           ExternalSimple = externalSimple
           Deps = deps
           ProxiedTargets = proxiedTargets
-          CustomOf = customOf }
+          CustomOf = customOf
+          TypesModuleOf = (fun m -> Map.tryFind m typesModuleOf) }
 
-    let opaqueFor (m: string) =
-        match Map.tryFind m scc with
-        | Some comp when comp.Count > 1 && not (collapsed.Contains m) -> Set.remove m comp
-        | _ -> Set.empty
+    let opaqueFor (_: string) = Set.empty
 
     let targetAsm = System.Reflection.Assembly.LoadFrom(Path.GetFullPath dll)
 
@@ -595,8 +612,7 @@ let gen
             { best with
                 Methods = gs |> List.collect (fun g -> g.Methods) |> List.map rename
                 Fields = gs |> List.collect (fun g -> g.Fields) |> List.map rename
-                Constructors = gs |> List.collect (fun g -> g.Constructors) |> List.map rename
-                Alias = None }
+                Constructors = gs |> List.collect (fun g -> g.Constructors) |> List.map rename }
 
     let unique =
         generated
@@ -632,13 +648,33 @@ let gen
             renderItems sb (grp |> List.map (fun (p, g) -> p.[1..], g))
             sb.AppendLine("end") |> ignore
 
-    let allModules =
-        [ for head, group in generatedByPath |> List.groupBy (fun (p, _) -> p.[0]) do
+    // Shared types modules for multi-member cycles.
+    let genOf (n: string) = unique |> List.find (fun (m, _) -> m = n) |> snd
+
+    let tparamsOf (g: GeneratedClass) =
+        if g.Generics = 0 then ""
+        else "(" + String.concat ", " [ for i in 0 .. g.Generics - 1 -> typeParamName i ] + ") "
+
+    let typesModules =
+        [ for ms in typeSplitGroups do
+            let tFile = String.concat "" ms + "Types"
             let sb = StringBuilder()
             sb.AppendLine Header |> ignore
-            renderItems sb group
-            File.WriteAllText(Path.Combine(libDir, lowerFirst head + ".ml"), sb.ToString())
-            yield lowerFirst head ]
+            for m in ms do
+                sb.AppendLine("module " + m + " = struct") |> ignore
+                sb.AppendLine(sprintf "type %st" (tparamsOf (genOf m))) |> ignore
+                sb.AppendLine("end") |> ignore
+            File.WriteAllText(Path.Combine(libDir, lowerFirst tFile + ".ml"), sb.ToString())
+            yield lowerFirst tFile ]
+
+    let allModules =
+        typesModules
+        @ [ for head, group in generatedByPath |> List.groupBy (fun (p, _) -> p.[0]) do
+                let sb = StringBuilder()
+                sb.AppendLine Header |> ignore
+                renderItems sb group
+                File.WriteAllText(Path.Combine(libDir, lowerFirst head + ".ml"), sb.ToString())
+                yield lowerFirst head ]
 
     // Dune wraps library `webSharper_JavaScript` in module `WebSharper_JavaScript`.
     let libName = lowerFirst (assemblyName.Replace(".", "_"))
