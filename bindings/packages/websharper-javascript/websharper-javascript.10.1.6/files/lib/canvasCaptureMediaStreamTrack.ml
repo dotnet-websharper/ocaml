@@ -3,4 +3,4 @@ type t = EventTarget.t
 (* inline *)
 external requestFrame : t -> unit = "ws:WebSharper.JavaScript!globalThis.CanvasCaptureMediaStreamTrack#RequestFrame|" "ws:WebSharper.JavaScript!globalThis.CanvasCaptureMediaStreamTrack#RequestFrame|"
 (* inline *)
-external get_Canvas : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.CanvasCaptureMediaStreamTrack#get_Canvas|" "ws:WebSharper.JavaScript!globalThis.CanvasCaptureMediaStreamTrack#get_Canvas|"
+external canvas : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.CanvasCaptureMediaStreamTrack#get_Canvas|" "ws:WebSharper.JavaScript!globalThis.CanvasCaptureMediaStreamTrack#get_Canvas|"

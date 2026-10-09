@@ -9,8 +9,8 @@ external redo : t -> unit = "ws:WebSharper.JavaScript!globalThis.UndoManager#Red
 (* inline *)
 external undo : t -> unit = "ws:WebSharper.JavaScript!globalThis.UndoManager#Undo|" "ws:WebSharper.JavaScript!globalThis.UndoManager#Undo|"
 (* inline *)
-external get_Position : t -> int = "ws:WebSharper.JavaScript!globalThis.UndoManager#get_Position|" "ws:WebSharper.JavaScript!globalThis.UndoManager#get_Position|"
+external position : t -> int = "ws:WebSharper.JavaScript!globalThis.UndoManager#get_Position|" "ws:WebSharper.JavaScript!globalThis.UndoManager#get_Position|"
 (* inline *)
-external get_Length : t -> int = "ws:WebSharper.JavaScript!globalThis.UndoManager#get_Length|" "ws:WebSharper.JavaScript!globalThis.UndoManager#get_Length|"
+external length : t -> int = "ws:WebSharper.JavaScript!globalThis.UndoManager#get_Length|" "ws:WebSharper.JavaScript!globalThis.UndoManager#get_Length|"
 (* inline *)
 external remove : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.UndoManager#Remove|System.Int32" "ws:WebSharper.JavaScript!globalThis.UndoManager#Remove|System.Int32"

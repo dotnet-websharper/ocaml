@@ -13,31 +13,31 @@ external arrayBuffer : t -> (ArrayBuffer.t) Promise.t = "ws:WebSharper.JavaScrip
 (* inline *)
 external clone : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Request#Clone|" "ws:WebSharper.JavaScript!globalThis.Request#Clone|"
 (* inline *)
-external get_BodyUsed : t -> bool = "ws:WebSharper.JavaScript!globalThis.Request#get_BodyUsed|" "ws:WebSharper.JavaScript!globalThis.Request#get_BodyUsed|"
+external bodyUsed : t -> bool = "ws:WebSharper.JavaScript!globalThis.Request#get_BodyUsed|" "ws:WebSharper.JavaScript!globalThis.Request#get_BodyUsed|"
 (* inline *)
-external get_Body : t -> ReadableStream.t = "ws:WebSharper.JavaScript!globalThis.Request#get_Body|" "ws:WebSharper.JavaScript!globalThis.Request#get_Body|"
+external body : t -> ReadableStream.t = "ws:WebSharper.JavaScript!globalThis.Request#get_Body|" "ws:WebSharper.JavaScript!globalThis.Request#get_Body|"
 (* inline *)
-external get_Url : t -> string = "ws:WebSharper.JavaScript!globalThis.Request#get_Url|" "ws:WebSharper.JavaScript!globalThis.Request#get_Url|"
+external url : t -> string = "ws:WebSharper.JavaScript!globalThis.Request#get_Url|" "ws:WebSharper.JavaScript!globalThis.Request#get_Url|"
 (* inline *)
-external get_ReferrerPolicy : t -> ReferrerPolicy.t = "ws:WebSharper.JavaScript!globalThis.Request#get_ReferrerPolicy|" "ws:WebSharper.JavaScript!globalThis.Request#get_ReferrerPolicy|"
+external referrerPolicy : t -> ReferrerPolicy.t = "ws:WebSharper.JavaScript!globalThis.Request#get_ReferrerPolicy|" "ws:WebSharper.JavaScript!globalThis.Request#get_ReferrerPolicy|"
 (* inline *)
-external get_Referrer : t -> Referrer.t = "ws:WebSharper.JavaScript!globalThis.Request#get_Referrer|" "ws:WebSharper.JavaScript!globalThis.Request#get_Referrer|"
+external referrer : t -> Referrer.t = "ws:WebSharper.JavaScript!globalThis.Request#get_Referrer|" "ws:WebSharper.JavaScript!globalThis.Request#get_Referrer|"
 (* inline *)
-external get_Redirect : t -> Redirect.t = "ws:WebSharper.JavaScript!globalThis.Request#get_Redirect|" "ws:WebSharper.JavaScript!globalThis.Request#get_Redirect|"
+external redirect : t -> Redirect.t = "ws:WebSharper.JavaScript!globalThis.Request#get_Redirect|" "ws:WebSharper.JavaScript!globalThis.Request#get_Redirect|"
 (* inline *)
-external get_Mode : t -> RequestMode.t = "ws:WebSharper.JavaScript!globalThis.Request#get_Mode|" "ws:WebSharper.JavaScript!globalThis.Request#get_Mode|"
+external mode : t -> RequestMode.t = "ws:WebSharper.JavaScript!globalThis.Request#get_Mode|" "ws:WebSharper.JavaScript!globalThis.Request#get_Mode|"
 (* inline *)
-external get_Method : t -> string = "ws:WebSharper.JavaScript!globalThis.Request#get_Method|" "ws:WebSharper.JavaScript!globalThis.Request#get_Method|"
+external method_ : t -> string = "ws:WebSharper.JavaScript!globalThis.Request#get_Method|" "ws:WebSharper.JavaScript!globalThis.Request#get_Method|"
 (* inline *)
-external get_Integrity : t -> string = "ws:WebSharper.JavaScript!globalThis.Request#get_Integrity|" "ws:WebSharper.JavaScript!globalThis.Request#get_Integrity|"
+external integrity : t -> string = "ws:WebSharper.JavaScript!globalThis.Request#get_Integrity|" "ws:WebSharper.JavaScript!globalThis.Request#get_Integrity|"
 (* inline *)
-external get_Headers : t -> Headers.t = "ws:WebSharper.JavaScript!globalThis.Request#get_Headers|" "ws:WebSharper.JavaScript!globalThis.Request#get_Headers|"
+external headers : t -> Headers.t = "ws:WebSharper.JavaScript!globalThis.Request#get_Headers|" "ws:WebSharper.JavaScript!globalThis.Request#get_Headers|"
 (* inline *)
-external get_Destination : t -> RequestDestination.t = "ws:WebSharper.JavaScript!globalThis.Request#get_Destination|" "ws:WebSharper.JavaScript!globalThis.Request#get_Destination|"
+external destination : t -> RequestDestination.t = "ws:WebSharper.JavaScript!globalThis.Request#get_Destination|" "ws:WebSharper.JavaScript!globalThis.Request#get_Destination|"
 (* inline *)
-external get_Credentials : t -> RequestCredentials.t = "ws:WebSharper.JavaScript!globalThis.Request#get_Credentials|" "ws:WebSharper.JavaScript!globalThis.Request#get_Credentials|"
+external credentials : t -> RequestCredentials.t = "ws:WebSharper.JavaScript!globalThis.Request#get_Credentials|" "ws:WebSharper.JavaScript!globalThis.Request#get_Credentials|"
 (* inline *)
-external get_Cache : t -> RequestCache.t = "ws:WebSharper.JavaScript!globalThis.Request#get_Cache|" "ws:WebSharper.JavaScript!globalThis.Request#get_Cache|"
+external cache : t -> RequestCache.t = "ws:WebSharper.JavaScript!globalThis.Request#get_Cache|" "ws:WebSharper.JavaScript!globalThis.Request#get_Cache|"
 (* inline *)
 external create : EventTarget.t -> t = "wsnew:WebSharper.JavaScript!globalThis.Request" "wsnew:WebSharper.JavaScript!globalThis.Request"
 (* inline *)

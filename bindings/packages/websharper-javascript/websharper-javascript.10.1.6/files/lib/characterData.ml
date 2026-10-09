@@ -9,17 +9,17 @@ external before : t -> unit = "ws:WebSharper.JavaScript!globalThis.CharacterData
 (* inline *)
 external after : t -> unit = "ws:WebSharper.JavaScript!globalThis.CharacterData#After|" "ws:WebSharper.JavaScript!globalThis.CharacterData#After|"
 (* inline *)
-external get_Length : t -> int = "ws:WebSharper.JavaScript!globalThis.CharacterData#get_Length|" "ws:WebSharper.JavaScript!globalThis.CharacterData#get_Length|"
+external length : t -> int = "ws:WebSharper.JavaScript!globalThis.CharacterData#get_Length|" "ws:WebSharper.JavaScript!globalThis.CharacterData#get_Length|"
 (* inline *)
-external get_Data : t -> string = "ws:WebSharper.JavaScript!globalThis.CharacterData#get_Data|" "ws:WebSharper.JavaScript!globalThis.CharacterData#get_Data|"
+external data : t -> string = "ws:WebSharper.JavaScript!globalThis.CharacterData#get_Data|" "ws:WebSharper.JavaScript!globalThis.CharacterData#get_Data|"
 (* inline *)
-external get_PreviousElementSibling : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.CharacterData#get_PreviousElementSibling|" "ws:WebSharper.JavaScript!globalThis.CharacterData#get_PreviousElementSibling|"
+external previousElementSibling : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.CharacterData#get_PreviousElementSibling|" "ws:WebSharper.JavaScript!globalThis.CharacterData#get_PreviousElementSibling|"
 (* inline *)
-external get_NextElementSibling : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.CharacterData#get_NextElementSibling|" "ws:WebSharper.JavaScript!globalThis.CharacterData#get_NextElementSibling|"
+external nextElementSibling : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.CharacterData#get_NextElementSibling|" "ws:WebSharper.JavaScript!globalThis.CharacterData#get_NextElementSibling|"
 (* inline *)
 external appendData : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.CharacterData#AppendData|System.String" "ws:WebSharper.JavaScript!globalThis.CharacterData#AppendData|System.String"
 (* inline *)
-external set_Data : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.CharacterData#set_Data|System.String" "ws:WebSharper.JavaScript!globalThis.CharacterData#set_Data|System.String"
+external set_data : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.CharacterData#set_Data|System.String" "ws:WebSharper.JavaScript!globalThis.CharacterData#set_Data|System.String"
 (* inline *)
 external deleteData : t -> int -> int -> unit = "ws:WebSharper.JavaScript!globalThis.CharacterData#DeleteData|System.Int32|System.Int32" "ws:WebSharper.JavaScript!globalThis.CharacterData#DeleteData|System.Int32|System.Int32"
 (* inline *)

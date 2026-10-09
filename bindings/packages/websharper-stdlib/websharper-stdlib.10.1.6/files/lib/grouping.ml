@@ -3,8 +3,8 @@ type ('a, 'b) t
 (* inline *)
 external asArray : ('a, 'b) t -> ('b) array = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Grouping`2::default#AsArray|" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Grouping`2::default#AsArray|"
 (* instance *)
-external get_v : ('a, 'b) t -> Js.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Grouping`2::default#v" "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Grouping`2::default#v"
+external get_v : ('a, 'b) t -> ('b) List.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Grouping`2::default#v" "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Grouping`2::default#v"
 (* instance *)
 external get_k : ('a, 'b) t -> 'a = "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Grouping`2::default#k" "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Grouping`2::default#k"
 (* new *)
-external create : 'a -> Js.t -> ('a, 'b) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Grouping`2::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Grouping`2::default"
+external create : 'a -> ('b) List.t -> ('a, 'b) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Grouping`2::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Grouping`2::default"

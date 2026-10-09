@@ -3,18 +3,18 @@ type t = EventTarget.t
 (* inline *)
 external throwIfAborted : t -> unit = "ws:WebSharper.JavaScript!globalThis.AbortSignal#ThrowIfAborted|" "ws:WebSharper.JavaScript!globalThis.AbortSignal#ThrowIfAborted|"
 (* inline *)
-external get_OnAbort : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.AbortSignal#get_OnAbort|" "ws:WebSharper.JavaScript!globalThis.AbortSignal#get_OnAbort|"
+external onAbort : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.AbortSignal#get_OnAbort|" "ws:WebSharper.JavaScript!globalThis.AbortSignal#get_OnAbort|"
 (* inline *)
-external get_Onabort : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.AbortSignal#get_Onabort|" "ws:WebSharper.JavaScript!globalThis.AbortSignal#get_Onabort|"
+external onabort : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.AbortSignal#get_Onabort|" "ws:WebSharper.JavaScript!globalThis.AbortSignal#get_Onabort|"
 (* inline *)
-external get_Reason : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.AbortSignal#get_Reason|" "ws:WebSharper.JavaScript!globalThis.AbortSignal#get_Reason|"
+external reason : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.AbortSignal#get_Reason|" "ws:WebSharper.JavaScript!globalThis.AbortSignal#get_Reason|"
 (* inline *)
-external get_Aborted : t -> bool = "ws:WebSharper.JavaScript!globalThis.AbortSignal#get_Aborted|" "ws:WebSharper.JavaScript!globalThis.AbortSignal#get_Aborted|"
+external aborted : t -> bool = "ws:WebSharper.JavaScript!globalThis.AbortSignal#get_Aborted|" "ws:WebSharper.JavaScript!globalThis.AbortSignal#get_Aborted|"
 (* inline *)
 external timeout : int -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.AbortSignal#Timeout|System.Int32" "ws:WebSharper.JavaScript!globalThis.AbortSignal#Timeout|System.Int32"
 (* inline *)
 external abort : Js.t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.AbortSignal#Abort|System.Object" "ws:WebSharper.JavaScript!globalThis.AbortSignal#Abort|System.Object"
 (* inline *)
-external set_OnAbort : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.AbortSignal#set_OnAbort|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>" "ws:WebSharper.JavaScript!globalThis.AbortSignal#set_OnAbort|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>"
+external set_onAbort : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.AbortSignal#set_OnAbort|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>" "ws:WebSharper.JavaScript!globalThis.AbortSignal#set_OnAbort|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>"
 (* inline *)
-external set_Onabort : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.AbortSignal#set_Onabort|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>" "ws:WebSharper.JavaScript!globalThis.AbortSignal#set_Onabort|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>"
+external set_onabort : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.AbortSignal#set_Onabort|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>" "ws:WebSharper.JavaScript!globalThis.AbortSignal#set_Onabort|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>"

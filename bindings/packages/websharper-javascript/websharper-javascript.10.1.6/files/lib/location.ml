@@ -5,48 +5,48 @@ external toString : t -> string = "ws:WebSharper.JavaScript!globalThis.Location#
 (* inline *)
 external reload : t -> unit = "ws:WebSharper.JavaScript!globalThis.Location#Reload|" "ws:WebSharper.JavaScript!globalThis.Location#Reload|"
 (* inline *)
-external get_Password : t -> string = "ws:WebSharper.JavaScript!globalThis.Location#get_Password|" "ws:WebSharper.JavaScript!globalThis.Location#get_Password|"
+external password : t -> string = "ws:WebSharper.JavaScript!globalThis.Location#get_Password|" "ws:WebSharper.JavaScript!globalThis.Location#get_Password|"
 (* inline *)
-external get_Username : t -> string = "ws:WebSharper.JavaScript!globalThis.Location#get_Username|" "ws:WebSharper.JavaScript!globalThis.Location#get_Username|"
+external username : t -> string = "ws:WebSharper.JavaScript!globalThis.Location#get_Username|" "ws:WebSharper.JavaScript!globalThis.Location#get_Username|"
 (* inline *)
-external get_Origin : t -> string = "ws:WebSharper.JavaScript!globalThis.Location#get_Origin|" "ws:WebSharper.JavaScript!globalThis.Location#get_Origin|"
+external origin : t -> string = "ws:WebSharper.JavaScript!globalThis.Location#get_Origin|" "ws:WebSharper.JavaScript!globalThis.Location#get_Origin|"
 (* inline *)
-external get_Hash : t -> string = "ws:WebSharper.JavaScript!globalThis.Location#get_Hash|" "ws:WebSharper.JavaScript!globalThis.Location#get_Hash|"
+external hash : t -> string = "ws:WebSharper.JavaScript!globalThis.Location#get_Hash|" "ws:WebSharper.JavaScript!globalThis.Location#get_Hash|"
 (* inline *)
-external get_Search : t -> string = "ws:WebSharper.JavaScript!globalThis.Location#get_Search|" "ws:WebSharper.JavaScript!globalThis.Location#get_Search|"
+external search : t -> string = "ws:WebSharper.JavaScript!globalThis.Location#get_Search|" "ws:WebSharper.JavaScript!globalThis.Location#get_Search|"
 (* inline *)
-external get_Pathname : t -> string = "ws:WebSharper.JavaScript!globalThis.Location#get_Pathname|" "ws:WebSharper.JavaScript!globalThis.Location#get_Pathname|"
+external pathname : t -> string = "ws:WebSharper.JavaScript!globalThis.Location#get_Pathname|" "ws:WebSharper.JavaScript!globalThis.Location#get_Pathname|"
 (* inline *)
-external get_Port : t -> string = "ws:WebSharper.JavaScript!globalThis.Location#get_Port|" "ws:WebSharper.JavaScript!globalThis.Location#get_Port|"
+external port : t -> string = "ws:WebSharper.JavaScript!globalThis.Location#get_Port|" "ws:WebSharper.JavaScript!globalThis.Location#get_Port|"
 (* inline *)
-external get_Hostname : t -> string = "ws:WebSharper.JavaScript!globalThis.Location#get_Hostname|" "ws:WebSharper.JavaScript!globalThis.Location#get_Hostname|"
+external hostname : t -> string = "ws:WebSharper.JavaScript!globalThis.Location#get_Hostname|" "ws:WebSharper.JavaScript!globalThis.Location#get_Hostname|"
 (* inline *)
-external get_Host : t -> string = "ws:WebSharper.JavaScript!globalThis.Location#get_Host|" "ws:WebSharper.JavaScript!globalThis.Location#get_Host|"
+external host : t -> string = "ws:WebSharper.JavaScript!globalThis.Location#get_Host|" "ws:WebSharper.JavaScript!globalThis.Location#get_Host|"
 (* inline *)
-external get_Protocol : t -> string = "ws:WebSharper.JavaScript!globalThis.Location#get_Protocol|" "ws:WebSharper.JavaScript!globalThis.Location#get_Protocol|"
+external protocol : t -> string = "ws:WebSharper.JavaScript!globalThis.Location#get_Protocol|" "ws:WebSharper.JavaScript!globalThis.Location#get_Protocol|"
 (* inline *)
-external get_Href : t -> string = "ws:WebSharper.JavaScript!globalThis.Location#get_Href|" "ws:WebSharper.JavaScript!globalThis.Location#get_Href|"
+external href : t -> string = "ws:WebSharper.JavaScript!globalThis.Location#get_Href|" "ws:WebSharper.JavaScript!globalThis.Location#get_Href|"
 (* inline *)
 external replace : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Location#Replace|System.String" "ws:WebSharper.JavaScript!globalThis.Location#Replace|System.String"
 (* inline *)
 external assign : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Location#Assign|System.String" "ws:WebSharper.JavaScript!globalThis.Location#Assign|System.String"
 (* inline *)
-external set_Password : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Location#set_Password|System.String" "ws:WebSharper.JavaScript!globalThis.Location#set_Password|System.String"
+external set_password : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Location#set_Password|System.String" "ws:WebSharper.JavaScript!globalThis.Location#set_Password|System.String"
 (* inline *)
-external set_Username : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Location#set_Username|System.String" "ws:WebSharper.JavaScript!globalThis.Location#set_Username|System.String"
+external set_username : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Location#set_Username|System.String" "ws:WebSharper.JavaScript!globalThis.Location#set_Username|System.String"
 (* inline *)
-external set_Hash : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Location#set_Hash|System.String" "ws:WebSharper.JavaScript!globalThis.Location#set_Hash|System.String"
+external set_hash : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Location#set_Hash|System.String" "ws:WebSharper.JavaScript!globalThis.Location#set_Hash|System.String"
 (* inline *)
-external set_Search : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Location#set_Search|System.String" "ws:WebSharper.JavaScript!globalThis.Location#set_Search|System.String"
+external set_search : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Location#set_Search|System.String" "ws:WebSharper.JavaScript!globalThis.Location#set_Search|System.String"
 (* inline *)
-external set_Pathname : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Location#set_Pathname|System.String" "ws:WebSharper.JavaScript!globalThis.Location#set_Pathname|System.String"
+external set_pathname : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Location#set_Pathname|System.String" "ws:WebSharper.JavaScript!globalThis.Location#set_Pathname|System.String"
 (* inline *)
-external set_Port : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Location#set_Port|System.String" "ws:WebSharper.JavaScript!globalThis.Location#set_Port|System.String"
+external set_port : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Location#set_Port|System.String" "ws:WebSharper.JavaScript!globalThis.Location#set_Port|System.String"
 (* inline *)
-external set_Hostname : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Location#set_Hostname|System.String" "ws:WebSharper.JavaScript!globalThis.Location#set_Hostname|System.String"
+external set_hostname : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Location#set_Hostname|System.String" "ws:WebSharper.JavaScript!globalThis.Location#set_Hostname|System.String"
 (* inline *)
-external set_Host : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Location#set_Host|System.String" "ws:WebSharper.JavaScript!globalThis.Location#set_Host|System.String"
+external set_host : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Location#set_Host|System.String" "ws:WebSharper.JavaScript!globalThis.Location#set_Host|System.String"
 (* inline *)
-external set_Protocol : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Location#set_Protocol|System.String" "ws:WebSharper.JavaScript!globalThis.Location#set_Protocol|System.String"
+external set_protocol : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Location#set_Protocol|System.String" "ws:WebSharper.JavaScript!globalThis.Location#set_Protocol|System.String"
 (* inline *)
-external set_Href : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Location#set_Href|System.String" "ws:WebSharper.JavaScript!globalThis.Location#set_Href|System.String"
+external set_href : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Location#set_Href|System.String" "ws:WebSharper.JavaScript!globalThis.Location#set_Href|System.String"

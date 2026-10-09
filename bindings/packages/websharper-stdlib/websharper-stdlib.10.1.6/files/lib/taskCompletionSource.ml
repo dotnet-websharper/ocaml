@@ -5,19 +5,19 @@ external trySetCanceled : ('a) t -> bool = "ws:WebSharper.StdLib!WebSharper.StdL
 (* instance *)
 external setCanceled : ('a) t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#SetCanceled|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#SetCanceled|"
 (* instance *)
-external get_Task : ('a) t -> ('a) Task2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#get_Task|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#get_Task|"
+external task : ('a) t -> ('a) Task2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#get_Task|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#get_Task|"
 (* instance *)
 external trySetResult : ('a) t -> 'a -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#TrySetResult|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#TrySetResult|'0"
 (* instance *)
-external trySetException : ('a) t -> Js.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#TrySetException|System.Collections.Generic.IEnumerable`1<System.Exception>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#TrySetException|System.Collections.Generic.IEnumerable`1<System.Exception>"
+external trySetException : ('a) t -> (Object.t) IEnumerable2.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#TrySetException|System.Collections.Generic.IEnumerable`1<System.Exception>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#TrySetException|System.Collections.Generic.IEnumerable`1<System.Exception>"
 (* instance *)
 external trySetException_2 : ('a) t -> Object.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#TrySetException|System.Exception" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#TrySetException|System.Exception"
 (* instance *)
-external trySetCanceled_2 : ('a) t -> Js.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#TrySetCanceled|System.Threading.CancellationToken" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#TrySetCanceled|System.Threading.CancellationToken"
+external trySetCanceled_2 : ('a) t -> CancellationToken.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#TrySetCanceled|System.Threading.CancellationToken" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#TrySetCanceled|System.Threading.CancellationToken"
 (* instance *)
 external setResult : ('a) t -> 'a -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#SetResult|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#SetResult|'0"
 (* instance *)
-external setException : ('a) t -> Js.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#SetException|System.Collections.Generic.IEnumerable`1<System.Exception>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#SetException|System.Collections.Generic.IEnumerable`1<System.Exception>"
+external setException : ('a) t -> (Object.t) IEnumerable2.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#SetException|System.Collections.Generic.IEnumerable`1<System.Exception>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#SetException|System.Collections.Generic.IEnumerable`1<System.Exception>"
 (* instance *)
 external setException_2 : ('a) t -> Object.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#SetException|System.Exception" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#SetException|System.Exception"
 (* instance *)

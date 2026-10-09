@@ -9,14 +9,14 @@ external removeUpdated : t -> Doc.t -> unit = "ws:WebSharper.UI!WebSharper.UI/We
 (* instance *)
 external addUpdated : t -> Doc.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#AddUpdated|WebSharper.UI.Elt" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#AddUpdated|WebSharper.UI.Elt"
 (* instance *)
-external addHole : t -> DocElemNode.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#AddHole|WebSharper.UI.Client.DocElemNode" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#AddHole|WebSharper.UI.Client.DocElemNode"
+external addHole : t -> Js.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#AddHole|WebSharper.UI.Client.DocElemNode" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#AddHole|WebSharper.UI.Client.DocElemNode"
 (* instance *)
-external get_origHoles : t -> (DocElemNode.t) array = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#origHoles" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#origHoles"
+external get_origHoles : t -> (Js.t) array = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#origHoles" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#origHoles"
 (* instance *)
-external set_origHoles : t -> (DocElemNode.t) array -> unit = "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#origHoles" "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#origHoles"
+external set_origHoles : t -> (Js.t) array -> unit = "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#origHoles" "wsset:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#origHoles"
 (* instance *)
 external get_holeUpdates : t -> ((int * (unit) View.t) array) Var.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#holeUpdates" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#holeUpdates"
 (* instance *)
 external get_treeNode : t -> Js.t = "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#treeNode" "wsget:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default#treeNode"
 (* new *)
-external create : Js.t -> (unit) View.t -> WebSharper_JavaScript.Element.t -> Updates.t -> ((int * (unit) View.t) array) Var.t -> t = "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default" "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default"
+external create : Js.t -> (unit) View.t -> WebSharper_JavaScript.Element.t -> Js.t -> ((int * (unit) View.t) array) Var.t -> t = "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default" "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.EltUpdater::default"

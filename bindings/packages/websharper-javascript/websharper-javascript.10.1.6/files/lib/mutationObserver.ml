@@ -9,6 +9,6 @@ external observe : t -> EventTarget.t -> unit = "ws:WebSharper.JavaScript!global
 (* inline *)
 external observe_2 : t -> EventTarget.t -> MutationObserverInit.t -> unit = "ws:WebSharper.JavaScript!globalThis.MutationObserver#Observe|WebSharper.JavaScript.Dom.Node|WebSharper.JavaScript.Dom.MutationObserverInit" "ws:WebSharper.JavaScript!globalThis.MutationObserver#Observe|WebSharper.JavaScript.Dom.Node|WebSharper.JavaScript.Dom.MutationObserverInit"
 (* inline *)
-external create : Js.t -> t = "wsnew:WebSharper.JavaScript!globalThis.MutationObserver" "wsnew:WebSharper.JavaScript!globalThis.MutationObserver"
+external create : ((MutationRecord.t) array * t -> unit) -> t = "wsnew:WebSharper.JavaScript!globalThis.MutationObserver" "wsnew:WebSharper.JavaScript!globalThis.MutationObserver"
 (* inline *)
 external create_2 : Js.t -> t = "wsnew:WebSharper.JavaScript!globalThis.MutationObserver" "wsnew:WebSharper.JavaScript!globalThis.MutationObserver"

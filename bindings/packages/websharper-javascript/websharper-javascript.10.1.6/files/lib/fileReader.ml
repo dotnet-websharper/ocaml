@@ -3,35 +3,35 @@ type ('a) t
 (* inline *)
 external abort : ('a) t -> unit = "ws:WebSharper.JavaScript!globalThis.FileReader#Abort|" "ws:WebSharper.JavaScript!globalThis.FileReader#Abort|"
 (* inline *)
-external get_OnLoadEnd : ('a) t -> Js.t = "ws:WebSharper.JavaScript!globalThis.FileReader#get_OnLoadEnd|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_OnLoadEnd|"
+external onLoadEnd : ('a) t -> Js.t = "ws:WebSharper.JavaScript!globalThis.FileReader#get_OnLoadEnd|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_OnLoadEnd|"
 (* inline *)
-external get_Onloadend : ('a) t -> Js.t = "ws:WebSharper.JavaScript!globalThis.FileReader#get_Onloadend|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_Onloadend|"
+external onloadend : ('a) t -> Js.t = "ws:WebSharper.JavaScript!globalThis.FileReader#get_Onloadend|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_Onloadend|"
 (* inline *)
-external get_OnError : ('a) t -> Js.t = "ws:WebSharper.JavaScript!globalThis.FileReader#get_OnError|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_OnError|"
+external onError : ('a) t -> Js.t = "ws:WebSharper.JavaScript!globalThis.FileReader#get_OnError|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_OnError|"
 (* inline *)
-external get_Onerror : ('a) t -> Js.t = "ws:WebSharper.JavaScript!globalThis.FileReader#get_Onerror|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_Onerror|"
+external onerror : ('a) t -> Js.t = "ws:WebSharper.JavaScript!globalThis.FileReader#get_Onerror|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_Onerror|"
 (* inline *)
-external get_OnAbort : ('a) t -> Js.t = "ws:WebSharper.JavaScript!globalThis.FileReader#get_OnAbort|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_OnAbort|"
+external onAbort : ('a) t -> Js.t = "ws:WebSharper.JavaScript!globalThis.FileReader#get_OnAbort|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_OnAbort|"
 (* inline *)
-external get_Onabort : ('a) t -> Js.t = "ws:WebSharper.JavaScript!globalThis.FileReader#get_Onabort|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_Onabort|"
+external onabort : ('a) t -> Js.t = "ws:WebSharper.JavaScript!globalThis.FileReader#get_Onabort|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_Onabort|"
 (* inline *)
-external get_OnLoad : ('a) t -> Js.t = "ws:WebSharper.JavaScript!globalThis.FileReader#get_OnLoad|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_OnLoad|"
+external onLoad : ('a) t -> Js.t = "ws:WebSharper.JavaScript!globalThis.FileReader#get_OnLoad|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_OnLoad|"
 (* inline *)
-external get_Onload : ('a) t -> Js.t = "ws:WebSharper.JavaScript!globalThis.FileReader#get_Onload|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_Onload|"
+external onload : ('a) t -> Js.t = "ws:WebSharper.JavaScript!globalThis.FileReader#get_Onload|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_Onload|"
 (* inline *)
-external get_OnProgress : ('a) t -> Js.t = "ws:WebSharper.JavaScript!globalThis.FileReader#get_OnProgress|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_OnProgress|"
+external onProgress : ('a) t -> Js.t = "ws:WebSharper.JavaScript!globalThis.FileReader#get_OnProgress|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_OnProgress|"
 (* inline *)
-external get_Onprogress : ('a) t -> Js.t = "ws:WebSharper.JavaScript!globalThis.FileReader#get_Onprogress|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_Onprogress|"
+external onprogress : ('a) t -> Js.t = "ws:WebSharper.JavaScript!globalThis.FileReader#get_Onprogress|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_Onprogress|"
 (* inline *)
-external get_OnLoadStart : ('a) t -> Js.t = "ws:WebSharper.JavaScript!globalThis.FileReader#get_OnLoadStart|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_OnLoadStart|"
+external onLoadStart : ('a) t -> Js.t = "ws:WebSharper.JavaScript!globalThis.FileReader#get_OnLoadStart|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_OnLoadStart|"
 (* inline *)
-external get_Onloadstart : ('a) t -> Js.t = "ws:WebSharper.JavaScript!globalThis.FileReader#get_Onloadstart|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_Onloadstart|"
+external onloadstart : ('a) t -> Js.t = "ws:WebSharper.JavaScript!globalThis.FileReader#get_Onloadstart|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_Onloadstart|"
 (* inline *)
-external get_Error : ('a) t -> Js.t = "ws:WebSharper.JavaScript!globalThis.FileReader#get_Error|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_Error|"
+external error : ('a) t -> Js.t = "ws:WebSharper.JavaScript!globalThis.FileReader#get_Error|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_Error|"
 (* inline *)
-external get_Result : ('a) t -> 'a = "ws:WebSharper.JavaScript!globalThis.FileReader#get_Result|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_Result|"
+external result : ('a) t -> 'a = "ws:WebSharper.JavaScript!globalThis.FileReader#get_Result|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_Result|"
 (* inline *)
-external get_ReadyState : ('a) t -> FileReaderReadyState.t = "ws:WebSharper.JavaScript!globalThis.FileReader#get_ReadyState|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_ReadyState|"
+external readyState : ('a) t -> FileReaderReadyState.t = "ws:WebSharper.JavaScript!globalThis.FileReader#get_ReadyState|" "ws:WebSharper.JavaScript!globalThis.FileReader#get_ReadyState|"
 (* inline *)
 external readAsBinaryString : ('a) t -> Blob.t -> unit = "ws:WebSharper.JavaScript!globalThis.FileReader#ReadAsBinaryString|WebSharper.JavaScript.Blob" "ws:WebSharper.JavaScript!globalThis.FileReader#ReadAsBinaryString|WebSharper.JavaScript.Blob"
 (* inline *)
@@ -41,29 +41,29 @@ external readAsText : ('a) t -> Blob.t -> unit = "ws:WebSharper.JavaScript!globa
 (* inline *)
 external readAsArrayBuffer_ : ('a) t -> Blob.t -> unit = "ws:WebSharper.JavaScript!globalThis.FileReader#ReadAsArrayBuffer_|WebSharper.JavaScript.Blob" "ws:WebSharper.JavaScript!globalThis.FileReader#ReadAsArrayBuffer_|WebSharper.JavaScript.Blob"
 (* inline *)
-external set_OnLoadEnd : ('a) t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.FileReader#set_OnLoadEnd|System.Action`1<WebSharper.JavaScript.ProgressEvent>" "ws:WebSharper.JavaScript!globalThis.FileReader#set_OnLoadEnd|System.Action`1<WebSharper.JavaScript.ProgressEvent>"
+external set_onLoadEnd : ('a) t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.FileReader#set_OnLoadEnd|System.Action`1<WebSharper.JavaScript.ProgressEvent>" "ws:WebSharper.JavaScript!globalThis.FileReader#set_OnLoadEnd|System.Action`1<WebSharper.JavaScript.ProgressEvent>"
 (* inline *)
-external set_Onloadend : ('a) t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.FileReader#set_Onloadend|System.Action`1<WebSharper.JavaScript.ProgressEvent>" "ws:WebSharper.JavaScript!globalThis.FileReader#set_Onloadend|System.Action`1<WebSharper.JavaScript.ProgressEvent>"
+external set_onloadend : ('a) t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.FileReader#set_Onloadend|System.Action`1<WebSharper.JavaScript.ProgressEvent>" "ws:WebSharper.JavaScript!globalThis.FileReader#set_Onloadend|System.Action`1<WebSharper.JavaScript.ProgressEvent>"
 (* inline *)
-external set_OnError : ('a) t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.FileReader#set_OnError|System.Action`1<WebSharper.JavaScript.ProgressEvent>" "ws:WebSharper.JavaScript!globalThis.FileReader#set_OnError|System.Action`1<WebSharper.JavaScript.ProgressEvent>"
+external set_onError : ('a) t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.FileReader#set_OnError|System.Action`1<WebSharper.JavaScript.ProgressEvent>" "ws:WebSharper.JavaScript!globalThis.FileReader#set_OnError|System.Action`1<WebSharper.JavaScript.ProgressEvent>"
 (* inline *)
-external set_Onerror : ('a) t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.FileReader#set_Onerror|System.Action`1<WebSharper.JavaScript.ProgressEvent>" "ws:WebSharper.JavaScript!globalThis.FileReader#set_Onerror|System.Action`1<WebSharper.JavaScript.ProgressEvent>"
+external set_onerror : ('a) t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.FileReader#set_Onerror|System.Action`1<WebSharper.JavaScript.ProgressEvent>" "ws:WebSharper.JavaScript!globalThis.FileReader#set_Onerror|System.Action`1<WebSharper.JavaScript.ProgressEvent>"
 (* inline *)
-external set_OnAbort : ('a) t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.FileReader#set_OnAbort|System.Action`1<WebSharper.JavaScript.ProgressEvent>" "ws:WebSharper.JavaScript!globalThis.FileReader#set_OnAbort|System.Action`1<WebSharper.JavaScript.ProgressEvent>"
+external set_onAbort : ('a) t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.FileReader#set_OnAbort|System.Action`1<WebSharper.JavaScript.ProgressEvent>" "ws:WebSharper.JavaScript!globalThis.FileReader#set_OnAbort|System.Action`1<WebSharper.JavaScript.ProgressEvent>"
 (* inline *)
-external set_Onabort : ('a) t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.FileReader#set_Onabort|System.Action`1<WebSharper.JavaScript.ProgressEvent>" "ws:WebSharper.JavaScript!globalThis.FileReader#set_Onabort|System.Action`1<WebSharper.JavaScript.ProgressEvent>"
+external set_onabort : ('a) t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.FileReader#set_Onabort|System.Action`1<WebSharper.JavaScript.ProgressEvent>" "ws:WebSharper.JavaScript!globalThis.FileReader#set_Onabort|System.Action`1<WebSharper.JavaScript.ProgressEvent>"
 (* inline *)
-external set_OnLoad : ('a) t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.FileReader#set_OnLoad|System.Action`1<WebSharper.JavaScript.ProgressEvent>" "ws:WebSharper.JavaScript!globalThis.FileReader#set_OnLoad|System.Action`1<WebSharper.JavaScript.ProgressEvent>"
+external set_onLoad : ('a) t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.FileReader#set_OnLoad|System.Action`1<WebSharper.JavaScript.ProgressEvent>" "ws:WebSharper.JavaScript!globalThis.FileReader#set_OnLoad|System.Action`1<WebSharper.JavaScript.ProgressEvent>"
 (* inline *)
-external set_Onload : ('a) t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.FileReader#set_Onload|System.Action`1<WebSharper.JavaScript.ProgressEvent>" "ws:WebSharper.JavaScript!globalThis.FileReader#set_Onload|System.Action`1<WebSharper.JavaScript.ProgressEvent>"
+external set_onload : ('a) t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.FileReader#set_Onload|System.Action`1<WebSharper.JavaScript.ProgressEvent>" "ws:WebSharper.JavaScript!globalThis.FileReader#set_Onload|System.Action`1<WebSharper.JavaScript.ProgressEvent>"
 (* inline *)
-external set_OnProgress : ('a) t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.FileReader#set_OnProgress|System.Action`1<WebSharper.JavaScript.ProgressEvent>" "ws:WebSharper.JavaScript!globalThis.FileReader#set_OnProgress|System.Action`1<WebSharper.JavaScript.ProgressEvent>"
+external set_onProgress : ('a) t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.FileReader#set_OnProgress|System.Action`1<WebSharper.JavaScript.ProgressEvent>" "ws:WebSharper.JavaScript!globalThis.FileReader#set_OnProgress|System.Action`1<WebSharper.JavaScript.ProgressEvent>"
 (* inline *)
-external set_Onprogress : ('a) t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.FileReader#set_Onprogress|System.Action`1<WebSharper.JavaScript.ProgressEvent>" "ws:WebSharper.JavaScript!globalThis.FileReader#set_Onprogress|System.Action`1<WebSharper.JavaScript.ProgressEvent>"
+external set_onprogress : ('a) t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.FileReader#set_Onprogress|System.Action`1<WebSharper.JavaScript.ProgressEvent>" "ws:WebSharper.JavaScript!globalThis.FileReader#set_Onprogress|System.Action`1<WebSharper.JavaScript.ProgressEvent>"
 (* inline *)
-external set_OnLoadStart : ('a) t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.FileReader#set_OnLoadStart|System.Action`1<WebSharper.JavaScript.ProgressEvent>" "ws:WebSharper.JavaScript!globalThis.FileReader#set_OnLoadStart|System.Action`1<WebSharper.JavaScript.ProgressEvent>"
+external set_onLoadStart : ('a) t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.FileReader#set_OnLoadStart|System.Action`1<WebSharper.JavaScript.ProgressEvent>" "ws:WebSharper.JavaScript!globalThis.FileReader#set_OnLoadStart|System.Action`1<WebSharper.JavaScript.ProgressEvent>"
 (* inline *)
-external set_Onloadstart : ('a) t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.FileReader#set_Onloadstart|System.Action`1<WebSharper.JavaScript.ProgressEvent>" "ws:WebSharper.JavaScript!globalThis.FileReader#set_Onloadstart|System.Action`1<WebSharper.JavaScript.ProgressEvent>"
+external set_onloadstart : ('a) t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.FileReader#set_Onloadstart|System.Action`1<WebSharper.JavaScript.ProgressEvent>" "ws:WebSharper.JavaScript!globalThis.FileReader#set_Onloadstart|System.Action`1<WebSharper.JavaScript.ProgressEvent>"
 (* inline *)
 external readAsBinaryString_2 : ('a) t -> Blob.t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.FileReader#ReadAsBinaryString|WebSharper.JavaScript.Blob|System.String" "ws:WebSharper.JavaScript!globalThis.FileReader#ReadAsBinaryString|WebSharper.JavaScript.Blob|System.String"
 (* inline *)

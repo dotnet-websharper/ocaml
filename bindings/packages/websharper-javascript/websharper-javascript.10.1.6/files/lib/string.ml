@@ -15,11 +15,11 @@ external toLowerCase : t -> string = "ws:WebSharper.JavaScript!globalThis.String
 (* inline *)
 external search : t -> int = "ws:WebSharper.JavaScript!globalThis.String#Search|" "ws:WebSharper.JavaScript!globalThis.String#Search|"
 (* inline *)
-external get_Prototype : unit -> Object2.t = "ws:WebSharper.JavaScript!globalThis.String#get_Prototype|" "ws:WebSharper.JavaScript!globalThis.String#get_Prototype|"
+external prototype : unit -> Object2.t = "ws:WebSharper.JavaScript!globalThis.String#get_Prototype|" "ws:WebSharper.JavaScript!globalThis.String#get_Prototype|"
 (* inline *)
-external get_Self : t -> string = "ws:WebSharper.JavaScript!globalThis.String#get_Self|" "ws:WebSharper.JavaScript!globalThis.String#get_Self|"
+external self : t -> string = "ws:WebSharper.JavaScript!globalThis.String#get_Self|" "ws:WebSharper.JavaScript!globalThis.String#get_Self|"
 (* inline *)
-external get_Length : t -> int = "ws:WebSharper.JavaScript!globalThis.String#get_Length|" "ws:WebSharper.JavaScript!globalThis.String#get_Length|"
+external length : t -> int = "ws:WebSharper.JavaScript!globalThis.String#get_Length|" "ws:WebSharper.JavaScript!globalThis.String#get_Length|"
 (* inline *)
 external substring : t -> int -> string = "ws:WebSharper.JavaScript!globalThis.String#Substring|System.Int32" "ws:WebSharper.JavaScript!globalThis.String#Substring|System.Int32"
 (* inline *)
@@ -75,7 +75,7 @@ external replace : t -> Object2.t -> string -> string = "ws:WebSharper.JavaScrip
 (* inline *)
 external replace_2 : t -> Object2.t -> Js.t -> string = "ws:WebSharper.JavaScript!globalThis.String#Replace|WebSharper.JavaScript.RegExp|System.Func`2<System.Object,System.String>" "ws:WebSharper.JavaScript!globalThis.String#Replace|WebSharper.JavaScript.RegExp|System.Func`2<System.Object,System.String>"
 (* inline *)
-external replace_3 : t -> Object2.t -> Js.t -> string = "ws:WebSharper.JavaScript!globalThis.String#Replace|WebSharper.JavaScript.RegExp|fn" "ws:WebSharper.JavaScript!globalThis.String#Replace|WebSharper.JavaScript.RegExp|fn"
+external replace_3 : t -> Object2.t -> ((Js.t) array -> string) -> string = "ws:WebSharper.JavaScript!globalThis.String#Replace|WebSharper.JavaScript.RegExp|fn" "ws:WebSharper.JavaScript!globalThis.String#Replace|WebSharper.JavaScript.RegExp|fn"
 (* inline *)
 external replace_4 : t -> Object2.t -> Js.t -> string = "ws:WebSharper.JavaScript!globalThis.String#Replace|WebSharper.JavaScript.RegExp|WebSharper.JavaScript.ParamsFunc`2<System.Object,System.String>" "ws:WebSharper.JavaScript!globalThis.String#Replace|WebSharper.JavaScript.RegExp|WebSharper.JavaScript.ParamsFunc`2<System.Object,System.String>"
 (* inline *)
@@ -83,7 +83,7 @@ external replace_5 : t -> string -> string -> string = "ws:WebSharper.JavaScript
 (* inline *)
 external replace_6 : t -> string -> Js.t -> string = "ws:WebSharper.JavaScript!globalThis.String#Replace|System.String|System.Func`2<System.Object,System.String>" "ws:WebSharper.JavaScript!globalThis.String#Replace|System.String|System.Func`2<System.Object,System.String>"
 (* inline *)
-external replace_7 : t -> string -> Js.t -> string = "ws:WebSharper.JavaScript!globalThis.String#Replace|System.String|fn" "ws:WebSharper.JavaScript!globalThis.String#Replace|System.String|fn"
+external replace_7 : t -> string -> ((Js.t) array -> string) -> string = "ws:WebSharper.JavaScript!globalThis.String#Replace|System.String|fn" "ws:WebSharper.JavaScript!globalThis.String#Replace|System.String|fn"
 (* inline *)
 external replace_8 : t -> string -> Js.t -> string = "ws:WebSharper.JavaScript!globalThis.String#Replace|System.String|WebSharper.JavaScript.ParamsFunc`2<System.Object,System.String>" "ws:WebSharper.JavaScript!globalThis.String#Replace|System.String|WebSharper.JavaScript.ParamsFunc`2<System.Object,System.String>"
 (* inline *)

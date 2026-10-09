@@ -13,35 +13,35 @@ external pop : ('a) t -> 'a = "ws:WebSharper.JavaScript!globalThis.Array#Pop|" "
 (* inline *)
 external join : ('a) t -> string = "ws:WebSharper.JavaScript!globalThis.Array#Join|" "ws:WebSharper.JavaScript!globalThis.Array#Join|"
 (* inline *)
-external get_Self : ('a) t -> ('a) array = "ws:WebSharper.JavaScript!globalThis.Array#get_Self|" "ws:WebSharper.JavaScript!globalThis.Array#get_Self|"
+external self : ('a) t -> ('a) array = "ws:WebSharper.JavaScript!globalThis.Array#get_Self|" "ws:WebSharper.JavaScript!globalThis.Array#get_Self|"
 (* inline *)
-external get_Length : ('a) t -> int = "ws:WebSharper.JavaScript!globalThis.Array#get_Length|" "ws:WebSharper.JavaScript!globalThis.Array#get_Length|"
+external length : ('a) t -> int = "ws:WebSharper.JavaScript!globalThis.Array#get_Length|" "ws:WebSharper.JavaScript!globalThis.Array#get_Length|"
 (* inline *)
-external filter : ('a) t -> Js.t -> ('a) array = "ws:WebSharper.JavaScript!globalThis.Array#Filter|fn" "ws:WebSharper.JavaScript!globalThis.Array#Filter|fn"
+external filter : ('a) t -> ('a * int * ('a) array -> bool) -> ('a) array = "ws:WebSharper.JavaScript!globalThis.Array#Filter|fn" "ws:WebSharper.JavaScript!globalThis.Array#Filter|fn"
 (* inline *)
 external filter_2 : ('a) t -> Js.t -> ('a) array = "ws:WebSharper.JavaScript!globalThis.Array#Filter|System.Func`4<'0,System.Int32,'0[],System.Boolean>" "ws:WebSharper.JavaScript!globalThis.Array#Filter|System.Func`4<'0,System.Int32,'0[],System.Boolean>"
 (* inline *)
-external map : ('a) t -> Js.t -> ('b) array = "ws:WebSharper.JavaScript!globalThis.Array#Map|fn" "ws:WebSharper.JavaScript!globalThis.Array#Map|fn"
+external map : ('a) t -> ('a * int * ('a) array -> 'b) -> ('b) array = "ws:WebSharper.JavaScript!globalThis.Array#Map|fn" "ws:WebSharper.JavaScript!globalThis.Array#Map|fn"
 (* inline *)
 external map_2 : ('a) t -> Js.t -> ('b) array = "ws:WebSharper.JavaScript!globalThis.Array#Map|System.Func`4<'0,System.Int32,'0[],'1>" "ws:WebSharper.JavaScript!globalThis.Array#Map|System.Func`4<'0,System.Int32,'0[],'1>"
 (* inline *)
-external forEach : ('a) t -> Js.t -> bool = "ws:WebSharper.JavaScript!globalThis.Array#ForEach|fn" "ws:WebSharper.JavaScript!globalThis.Array#ForEach|fn"
+external forEach : ('a) t -> ('a * int * ('a) array -> bool) -> bool = "ws:WebSharper.JavaScript!globalThis.Array#ForEach|fn" "ws:WebSharper.JavaScript!globalThis.Array#ForEach|fn"
 (* inline *)
 external forEach_2 : ('a) t -> Js.t -> bool = "ws:WebSharper.JavaScript!globalThis.Array#ForEach|System.Func`4<'0,System.Int32,'0[],System.Boolean>" "ws:WebSharper.JavaScript!globalThis.Array#ForEach|System.Func`4<'0,System.Int32,'0[],System.Boolean>"
 (* inline *)
-external some : ('a) t -> Js.t -> bool = "ws:WebSharper.JavaScript!globalThis.Array#Some|fn" "ws:WebSharper.JavaScript!globalThis.Array#Some|fn"
+external some : ('a) t -> ('a * int * ('a) array -> bool) -> bool = "ws:WebSharper.JavaScript!globalThis.Array#Some|fn" "ws:WebSharper.JavaScript!globalThis.Array#Some|fn"
 (* inline *)
 external some_2 : ('a) t -> Js.t -> bool = "ws:WebSharper.JavaScript!globalThis.Array#Some|System.Func`4<'0,System.Int32,'0[],System.Boolean>" "ws:WebSharper.JavaScript!globalThis.Array#Some|System.Func`4<'0,System.Int32,'0[],System.Boolean>"
 (* inline *)
-external every : ('a) t -> Js.t -> bool = "ws:WebSharper.JavaScript!globalThis.Array#Every|fn" "ws:WebSharper.JavaScript!globalThis.Array#Every|fn"
+external every : ('a) t -> ('a * int * ('a) array -> bool) -> bool = "ws:WebSharper.JavaScript!globalThis.Array#Every|fn" "ws:WebSharper.JavaScript!globalThis.Array#Every|fn"
 (* inline *)
 external every_2 : ('a) t -> Js.t -> bool = "ws:WebSharper.JavaScript!globalThis.Array#Every|System.Func`4<'0,System.Int32,'0[],System.Boolean>" "ws:WebSharper.JavaScript!globalThis.Array#Every|System.Func`4<'0,System.Int32,'0[],System.Boolean>"
 (* inline *)
-external reduceRight : ('a) t -> Js.t -> 'a = "ws:WebSharper.JavaScript!globalThis.Array#ReduceRight|fn" "ws:WebSharper.JavaScript!globalThis.Array#ReduceRight|fn"
+external reduceRight : ('a) t -> ('a * 'a * int * ('a) array -> 'a) -> 'a = "ws:WebSharper.JavaScript!globalThis.Array#ReduceRight|fn" "ws:WebSharper.JavaScript!globalThis.Array#ReduceRight|fn"
 (* inline *)
 external reduceRight_2 : ('a) t -> Js.t -> 'a = "ws:WebSharper.JavaScript!globalThis.Array#ReduceRight|System.Func`5<'0,'0,System.Int32,'0[],'0>" "ws:WebSharper.JavaScript!globalThis.Array#ReduceRight|System.Func`5<'0,'0,System.Int32,'0[],'0>"
 (* inline *)
-external reduce : ('a) t -> Js.t -> 'a = "ws:WebSharper.JavaScript!globalThis.Array#Reduce|fn" "ws:WebSharper.JavaScript!globalThis.Array#Reduce|fn"
+external reduce : ('a) t -> ('a * 'a * int * ('a) array -> 'a) -> 'a = "ws:WebSharper.JavaScript!globalThis.Array#Reduce|fn" "ws:WebSharper.JavaScript!globalThis.Array#Reduce|fn"
 (* inline *)
 external reduce_2 : ('a) t -> Js.t -> 'a = "ws:WebSharper.JavaScript!globalThis.Array#Reduce|System.Func`5<'0,'0,System.Int32,'0[],'0>" "ws:WebSharper.JavaScript!globalThis.Array#Reduce|System.Func`5<'0,'0,System.Int32,'0[],'0>"
 (* inline *)
@@ -51,7 +51,7 @@ external indexOf : ('a) t -> 'a -> int = "ws:WebSharper.JavaScript!globalThis.Ar
 (* inline *)
 external unshift : ('a) t -> 'a -> int = "ws:WebSharper.JavaScript!globalThis.Array#Unshift|'0" "ws:WebSharper.JavaScript!globalThis.Array#Unshift|'0"
 (* inline *)
-external sort_2 : ('a) t -> Js.t -> ('a) array = "ws:WebSharper.JavaScript!globalThis.Array#Sort|fn" "ws:WebSharper.JavaScript!globalThis.Array#Sort|fn"
+external sort_2 : ('a) t -> ('a * 'a -> int) -> ('a) array = "ws:WebSharper.JavaScript!globalThis.Array#Sort|fn" "ws:WebSharper.JavaScript!globalThis.Array#Sort|fn"
 (* inline *)
 external sort_3 : ('a) t -> Js.t -> ('a) array = "ws:WebSharper.JavaScript!globalThis.Array#Sort|System.Func`3<'0,'0,System.Int32>" "ws:WebSharper.JavaScript!globalThis.Array#Sort|System.Func`3<'0,'0,System.Int32>"
 (* inline *)
@@ -63,35 +63,35 @@ external join_2 : ('a) t -> string -> string = "ws:WebSharper.JavaScript!globalT
 (* inline *)
 external concat : ('a) t -> 'a -> ('a) array = "ws:WebSharper.JavaScript!globalThis.Array#Concat|'0" "ws:WebSharper.JavaScript!globalThis.Array#Concat|'0"
 (* inline *)
-external get_Item : ('a) t -> int -> 'a = "ws:WebSharper.JavaScript!globalThis.Array#get_Item|System.Int32" "ws:WebSharper.JavaScript!globalThis.Array#get_Item|System.Int32"
+external item : ('a) t -> int -> 'a = "ws:WebSharper.JavaScript!globalThis.Array#get_Item|System.Int32" "ws:WebSharper.JavaScript!globalThis.Array#get_Item|System.Int32"
 (* inline *)
-external set_Length : ('a) t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.Array#set_Length|System.Int32" "ws:WebSharper.JavaScript!globalThis.Array#set_Length|System.Int32"
+external set_length : ('a) t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.Array#set_Length|System.Int32" "ws:WebSharper.JavaScript!globalThis.Array#set_Length|System.Int32"
 (* inline *)
-external filter_3 : ('a) t -> Js.t -> 'b -> ('a) array = "ws:WebSharper.JavaScript!globalThis.Array#Filter|fn|'1" "ws:WebSharper.JavaScript!globalThis.Array#Filter|fn|'1"
+external filter_3 : ('a) t -> ('b -> ('a * int * ('a) array -> bool)) -> 'b -> ('a) array = "ws:WebSharper.JavaScript!globalThis.Array#Filter|fn|'1" "ws:WebSharper.JavaScript!globalThis.Array#Filter|fn|'1"
 (* inline *)
 external filter_4 : ('a) t -> Js.t -> 'b -> ('a) array = "ws:WebSharper.JavaScript!globalThis.Array#Filter|WebSharper.JavaScript.ThisFunc`5<'1,'0,System.Int32,'0[],System.Boolean>|'1" "ws:WebSharper.JavaScript!globalThis.Array#Filter|WebSharper.JavaScript.ThisFunc`5<'1,'0,System.Int32,'0[],System.Boolean>|'1"
 (* inline *)
-external map_3 : ('a) t -> Js.t -> 'b -> ('c) array = "ws:WebSharper.JavaScript!globalThis.Array#Map|fn|'1" "ws:WebSharper.JavaScript!globalThis.Array#Map|fn|'1"
+external map_3 : ('a) t -> ('b -> ('a * int * ('a) array -> 'c)) -> 'b -> ('c) array = "ws:WebSharper.JavaScript!globalThis.Array#Map|fn|'1" "ws:WebSharper.JavaScript!globalThis.Array#Map|fn|'1"
 (* inline *)
 external map_4 : ('a) t -> Js.t -> 'b -> ('c) array = "ws:WebSharper.JavaScript!globalThis.Array#Map|WebSharper.JavaScript.ThisFunc`5<'1,'0,System.Int32,'0[],'2>|'1" "ws:WebSharper.JavaScript!globalThis.Array#Map|WebSharper.JavaScript.ThisFunc`5<'1,'0,System.Int32,'0[],'2>|'1"
 (* inline *)
-external forEach_3 : ('a) t -> Js.t -> 'b -> bool = "ws:WebSharper.JavaScript!globalThis.Array#ForEach|fn|'1" "ws:WebSharper.JavaScript!globalThis.Array#ForEach|fn|'1"
+external forEach_3 : ('a) t -> ('b -> ('a * int * ('a) array -> bool)) -> 'b -> bool = "ws:WebSharper.JavaScript!globalThis.Array#ForEach|fn|'1" "ws:WebSharper.JavaScript!globalThis.Array#ForEach|fn|'1"
 (* inline *)
 external forEach_4 : ('a) t -> Js.t -> 'b -> bool = "ws:WebSharper.JavaScript!globalThis.Array#ForEach|WebSharper.JavaScript.ThisFunc`5<'1,'0,System.Int32,'0[],System.Boolean>|'1" "ws:WebSharper.JavaScript!globalThis.Array#ForEach|WebSharper.JavaScript.ThisFunc`5<'1,'0,System.Int32,'0[],System.Boolean>|'1"
 (* inline *)
-external some_3 : ('a) t -> Js.t -> 'b -> bool = "ws:WebSharper.JavaScript!globalThis.Array#Some|fn|'1" "ws:WebSharper.JavaScript!globalThis.Array#Some|fn|'1"
+external some_3 : ('a) t -> ('b -> ('a * int * ('a) array -> bool)) -> 'b -> bool = "ws:WebSharper.JavaScript!globalThis.Array#Some|fn|'1" "ws:WebSharper.JavaScript!globalThis.Array#Some|fn|'1"
 (* inline *)
 external some_4 : ('a) t -> Js.t -> 'b -> bool = "ws:WebSharper.JavaScript!globalThis.Array#Some|WebSharper.JavaScript.ThisFunc`5<'1,'0,System.Int32,'0[],System.Boolean>|'1" "ws:WebSharper.JavaScript!globalThis.Array#Some|WebSharper.JavaScript.ThisFunc`5<'1,'0,System.Int32,'0[],System.Boolean>|'1"
 (* inline *)
-external every_3 : ('a) t -> Js.t -> 'b -> bool = "ws:WebSharper.JavaScript!globalThis.Array#Every|fn|'1" "ws:WebSharper.JavaScript!globalThis.Array#Every|fn|'1"
+external every_3 : ('a) t -> ('b -> ('a * int * ('a) array -> bool)) -> 'b -> bool = "ws:WebSharper.JavaScript!globalThis.Array#Every|fn|'1" "ws:WebSharper.JavaScript!globalThis.Array#Every|fn|'1"
 (* inline *)
 external every_4 : ('a) t -> Js.t -> 'b -> bool = "ws:WebSharper.JavaScript!globalThis.Array#Every|WebSharper.JavaScript.ThisFunc`5<'1,'0,System.Int32,'0[],System.Boolean>|'1" "ws:WebSharper.JavaScript!globalThis.Array#Every|WebSharper.JavaScript.ThisFunc`5<'1,'0,System.Int32,'0[],System.Boolean>|'1"
 (* inline *)
-external reduceRight_3 : ('a) t -> Js.t -> 'b -> 'b = "ws:WebSharper.JavaScript!globalThis.Array#ReduceRight|fn|'1" "ws:WebSharper.JavaScript!globalThis.Array#ReduceRight|fn|'1"
+external reduceRight_3 : ('a) t -> ('b * 'a * int * ('a) array -> 'b) -> 'b -> 'b = "ws:WebSharper.JavaScript!globalThis.Array#ReduceRight|fn|'1" "ws:WebSharper.JavaScript!globalThis.Array#ReduceRight|fn|'1"
 (* inline *)
 external reduceRight_4 : ('a) t -> Js.t -> 'b -> 'b = "ws:WebSharper.JavaScript!globalThis.Array#ReduceRight|System.Func`5<'1,'0,System.Int32,'0[],'1>|'1" "ws:WebSharper.JavaScript!globalThis.Array#ReduceRight|System.Func`5<'1,'0,System.Int32,'0[],'1>|'1"
 (* inline *)
-external reduce_3 : ('a) t -> Js.t -> 'b -> 'b = "ws:WebSharper.JavaScript!globalThis.Array#Reduce|fn|'1" "ws:WebSharper.JavaScript!globalThis.Array#Reduce|fn|'1"
+external reduce_3 : ('a) t -> ('b * 'a * int * ('a) array -> 'b) -> 'b -> 'b = "ws:WebSharper.JavaScript!globalThis.Array#Reduce|fn|'1" "ws:WebSharper.JavaScript!globalThis.Array#Reduce|fn|'1"
 (* inline *)
 external reduce_4 : ('a) t -> Js.t -> 'b -> 'b = "ws:WebSharper.JavaScript!globalThis.Array#Reduce|System.Func`5<'1,'0,System.Int32,'0[],'1>|'1" "ws:WebSharper.JavaScript!globalThis.Array#Reduce|System.Func`5<'1,'0,System.Int32,'0[],'1>|'1"
 (* inline *)
@@ -101,7 +101,7 @@ external indexOf_2 : ('a) t -> 'a -> int -> int = "ws:WebSharper.JavaScript!glob
 (* inline *)
 external slice_3 : ('a) t -> int -> int -> ('a) array = "ws:WebSharper.JavaScript!globalThis.Array#Slice|System.Int32|System.Int32" "ws:WebSharper.JavaScript!globalThis.Array#Slice|System.Int32|System.Int32"
 (* inline *)
-external set_Item : ('a) t -> int -> 'a -> unit = "ws:WebSharper.JavaScript!globalThis.Array#set_Item|System.Int32|'0" "ws:WebSharper.JavaScript!globalThis.Array#set_Item|System.Int32|'0"
+external set_item : ('a) t -> int -> 'a -> unit = "ws:WebSharper.JavaScript!globalThis.Array#set_Item|System.Int32|'0" "ws:WebSharper.JavaScript!globalThis.Array#set_Item|System.Int32|'0"
 (* inline *)
 external unshift_2 : ('a) t -> ('a) array -> int = "ws:WebSharper.JavaScript!globalThis.Array#Unshift|'0[]" "ws:WebSharper.JavaScript!globalThis.Array#Unshift|'0[]"
 (* inline *)

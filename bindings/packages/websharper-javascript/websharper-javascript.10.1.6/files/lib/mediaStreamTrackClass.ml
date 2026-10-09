@@ -13,42 +13,42 @@ external stop : t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrac
 (* inline *)
 external clone : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#Clone|" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#Clone|"
 (* inline *)
-external get_OnUnmute : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_OnUnmute|" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_OnUnmute|"
+external onUnmute : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_OnUnmute|" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_OnUnmute|"
 (* inline *)
-external get_Onunmute : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_Onunmute|" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_Onunmute|"
+external onunmute : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_Onunmute|" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_Onunmute|"
 (* inline *)
-external get_OnMute : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_OnMute|" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_OnMute|"
+external onMute : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_OnMute|" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_OnMute|"
 (* inline *)
-external get_Onmute : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_Onmute|" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_Onmute|"
+external onmute : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_Onmute|" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_Onmute|"
 (* inline *)
-external get_OnEnded : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_OnEnded|" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_OnEnded|"
+external onEnded : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_OnEnded|" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_OnEnded|"
 (* inline *)
-external get_Onended : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_Onended|" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_Onended|"
+external onended : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_Onended|" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_Onended|"
 (* inline *)
-external get_ReadyState : t -> MediaStreamTrackState.t = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_ReadyState|" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_ReadyState|"
+external readyState : t -> MediaStreamTrackState.t = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_ReadyState|" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_ReadyState|"
 (* inline *)
-external get_Enabled : t -> bool = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_Enabled|" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_Enabled|"
+external enabled : t -> bool = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_Enabled|" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_Enabled|"
 (* inline *)
-external get_Label : t -> string = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_Label|" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_Label|"
+external label : t -> string = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_Label|" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_Label|"
 (* inline *)
-external get_Id : t -> string = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_Id|" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_Id|"
+external id : t -> string = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_Id|" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_Id|"
 (* inline *)
-external get_Kind : t -> string = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_Kind|" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_Kind|"
+external kind : t -> string = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_Kind|" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_Kind|"
 (* inline *)
-external get_ContentHint : t -> MediaStreamTrackContentHint.t = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_ContentHint|" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_ContentHint|"
+external contentHint : t -> MediaStreamTrackContentHint.t = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_ContentHint|" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#get_ContentHint|"
 (* inline *)
 external applyConstraints_2 : t -> MediaTrackConstraintSet.t -> (unit) Promise.t = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#ApplyConstraints|WebSharper.JavaScript.MediaTrackConstraints" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#ApplyConstraints|WebSharper.JavaScript.MediaTrackConstraints"
 (* inline *)
-external set_OnUnmute : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#set_OnUnmute|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#set_OnUnmute|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>"
+external set_onUnmute : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#set_OnUnmute|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#set_OnUnmute|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>"
 (* inline *)
-external set_Onunmute : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#set_Onunmute|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#set_Onunmute|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>"
+external set_onunmute : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#set_Onunmute|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#set_Onunmute|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>"
 (* inline *)
-external set_OnMute : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#set_OnMute|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#set_OnMute|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>"
+external set_onMute : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#set_OnMute|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#set_OnMute|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>"
 (* inline *)
-external set_Onmute : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#set_Onmute|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#set_Onmute|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>"
+external set_onmute : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#set_Onmute|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#set_Onmute|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>"
 (* inline *)
-external set_OnEnded : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#set_OnEnded|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#set_OnEnded|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>"
+external set_onEnded : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#set_OnEnded|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#set_OnEnded|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>"
 (* inline *)
-external set_Onended : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#set_Onended|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#set_Onended|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>"
+external set_onended : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#set_Onended|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#set_Onended|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>"
 (* inline *)
-external set_Enabled : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#set_Enabled|System.Boolean" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#set_Enabled|System.Boolean"
+external set_enabled : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#set_Enabled|System.Boolean" "ws:WebSharper.JavaScript!globalThis.MediaStreamTrackClass#set_Enabled|System.Boolean"

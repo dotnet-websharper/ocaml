@@ -7,9 +7,9 @@ external assignedElements : t -> (EventTarget.t) array = "ws:WebSharper.JavaScri
 (* inline *)
 external assignedNodes : t -> (EventTarget.t) array = "ws:WebSharper.JavaScript!globalThis.HTMLSlotElement#AssignedNodes|" "ws:WebSharper.JavaScript!globalThis.HTMLSlotElement#AssignedNodes|"
 (* inline *)
-external get_OnSlotChange : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLSlotElement#get_OnSlotChange|" "ws:WebSharper.JavaScript!globalThis.HTMLSlotElement#get_OnSlotChange|"
+external onSlotChange : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLSlotElement#get_OnSlotChange|" "ws:WebSharper.JavaScript!globalThis.HTMLSlotElement#get_OnSlotChange|"
 (* inline *)
-external get_Name : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLSlotElement#get_Name|" "ws:WebSharper.JavaScript!globalThis.HTMLSlotElement#get_Name|"
+external name : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLSlotElement#get_Name|" "ws:WebSharper.JavaScript!globalThis.HTMLSlotElement#get_Name|"
 (* inline *)
 external onslotchange : t -> EventTarget.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLSlotElement#Onslotchange|WebSharper.JavaScript.Dom.Event" "ws:WebSharper.JavaScript!globalThis.HTMLSlotElement#Onslotchange|WebSharper.JavaScript.Dom.Event"
 (* inline *)
@@ -17,9 +17,9 @@ external assignedElements_2 : t -> AssignedNodesOptions.t -> (EventTarget.t) arr
 (* inline *)
 external assignedNodes_2 : t -> AssignedNodesOptions.t -> (EventTarget.t) array = "ws:WebSharper.JavaScript!globalThis.HTMLSlotElement#AssignedNodes|WebSharper.JavaScript.AssignedNodesOptions" "ws:WebSharper.JavaScript!globalThis.HTMLSlotElement#AssignedNodes|WebSharper.JavaScript.AssignedNodesOptions"
 (* inline *)
-external set_OnSlotChange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLSlotElement#set_OnSlotChange|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>" "ws:WebSharper.JavaScript!globalThis.HTMLSlotElement#set_OnSlotChange|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>"
+external set_onSlotChange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLSlotElement#set_OnSlotChange|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>" "ws:WebSharper.JavaScript!globalThis.HTMLSlotElement#set_OnSlotChange|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>"
 (* inline *)
-external set_Name : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLSlotElement#set_Name|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLSlotElement#set_Name|System.String"
+external set_name : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLSlotElement#set_Name|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLSlotElement#set_Name|System.String"
 (* inline *)
 external replaceWith_2 : t -> (EventTarget.t) array -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLSlotElement#ReplaceWith|WebSharper.JavaScript.Dom.Element[]" "ws:WebSharper.JavaScript!globalThis.HTMLSlotElement#ReplaceWith|WebSharper.JavaScript.Dom.Element[]"
 (* inline *)

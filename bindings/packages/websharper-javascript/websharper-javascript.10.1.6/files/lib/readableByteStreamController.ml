@@ -5,9 +5,9 @@ external error : t -> unit = "ws:WebSharper.JavaScript!globalThis.ReadableByteSt
 (* inline *)
 external close : t -> unit = "ws:WebSharper.JavaScript!globalThis.ReadableByteStreamController#Close|" "ws:WebSharper.JavaScript!globalThis.ReadableByteStreamController#Close|"
 (* inline *)
-external get_DesiredSize : t -> float = "ws:WebSharper.JavaScript!globalThis.ReadableByteStreamController#get_DesiredSize|" "ws:WebSharper.JavaScript!globalThis.ReadableByteStreamController#get_DesiredSize|"
+external desiredSize : t -> float = "ws:WebSharper.JavaScript!globalThis.ReadableByteStreamController#get_DesiredSize|" "ws:WebSharper.JavaScript!globalThis.ReadableByteStreamController#get_DesiredSize|"
 (* inline *)
-external get_ByobRequest : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.ReadableByteStreamController#get_ByobRequest|" "ws:WebSharper.JavaScript!globalThis.ReadableByteStreamController#get_ByobRequest|"
+external byobRequest : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.ReadableByteStreamController#get_ByobRequest|" "ws:WebSharper.JavaScript!globalThis.ReadableByteStreamController#get_ByobRequest|"
 (* inline *)
 external error_2 : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.ReadableByteStreamController#Error|System.Object" "ws:WebSharper.JavaScript!globalThis.ReadableByteStreamController#Error|System.Object"
 (* inline *)

@@ -25,6 +25,40 @@ let loadInfo (path: string) : Info =
     | Some i -> i
     | None -> failwithf "no WebSharper metadata found in %s" path
 
+// Only project publicly visible CLR types; internal helpers must not surface.
+let isPublicType (asmPath: string) (fullName: string) =
+    try
+        let asm = Assembly.LoadFrom(Path.GetFullPath asmPath)
+        match asm.GetType fullName with
+        | null -> true
+        | t -> t.IsVisible
+    with _ -> true
+
+// Full names of types that some [<Proxy>] type provides the JS representation
+// for. Metadata folds the proxy into its target, so we discover the relation
+// from the assembly's attributes.
+let proxyTargets (asmPaths: string list) : Set<string> =
+    let acc = System.Collections.Generic.HashSet<string>()
+
+    let typesOf (p: string) =
+        try
+            let asm = Assembly.LoadFrom(Path.GetFullPath p)
+            try asm.GetTypes()
+            with :? ReflectionTypeLoadException as e -> e.Types |> Array.filter (fun t -> not (isNull t))
+        with _ -> [||]
+
+    for p in asmPaths do
+        for t in typesOf p do
+            try
+                for a in t.GetCustomAttributesData() do
+                    if a.AttributeType.Name = "ProxyAttribute" && a.ConstructorArguments.Count = 1 then
+                        match a.ConstructorArguments.[0].Value with
+                        | :? System.Type as target -> acc.Add target.FullName |> ignore
+                        | _ -> ()
+            with _ -> ()
+
+    Set.ofSeq acc
+
 let addressString (a: Address) = String.concat "." a.Address
 
 let private defaultId (dll: string) =
@@ -166,13 +200,24 @@ let gen
             Spec.load p
         | _ -> discoverSpec pkgId dll
 
-    let classesOf (i: WebSharper.Core.Metadata.Info) (pkg: string) =
+    let classesOf (asmPath: string) (i: WebSharper.Core.Metadata.Info) (pkg: string) =
+        // A class is "usable" if it has at least one member a caller can supply
+        // from OCaml. Classes whose only members take quotations (`Expr<...>`,
+        // i.e. the server-side counterparts of a client proxy) or that have no
+        // members at all produce nothing useful.
+        let usable (ci: ClassInfo) =
+            ci.Methods |> Seq.exists (fun kv -> kv.Key.Value.Parameters |> List.exists isQuotationType |> not)
+            || ci.Fields.Count > 0
+            || ci.Constructors.Count > 0
+
         i.Classes
         |> Seq.choose (fun kv ->
             let (a, _custom, ci) = kv.Value
             let td = kv.Key.Value
             match ci with
-            | Some ci when a.Address.Length > 0 && validModuleName (classModuleName td a) -> Some(a, td, ci, pkg)
+            | Some ci when validModuleName (classModuleName td a) && usable ci
+                           && isPublicType asmPath td.FullName ->
+                Some(a, td, ci, pkg)
             | _ -> None)
         |> Seq.toList
 
@@ -190,7 +235,7 @@ let gen
     let aliasesOf (s: Spec) =
         s.Modules
         |> List.choose (fun m -> m.Alias |> Option.map (fun al -> m.Type, al))
-        |> Map.ofList
+        |> Map.ofSeq
 
     let skippedOf (s: Spec) =
         s.Modules |> List.filter (fun m -> m.Skip) |> List.map (fun m -> m.Type) |> Set.ofList
@@ -202,7 +247,7 @@ let gen
         let nameOverride =
             s.Modules
             |> List.choose (fun m -> m.Name |> Option.map (fun n -> m.Type, n))
-            |> Map.ofList
+            |> Map.ofSeq
 
         let forcedBase = System.Collections.Generic.Dictionary<string, string>()
 
@@ -233,7 +278,11 @@ let gen
         let dict = System.Collections.Generic.Dictionary<string, string>()
 
         for baseName, group in cs |> List.groupBy effBase do
-            let sorted = group |> List.sortBy (fun (a, _, _, _) -> addressString a)
+            // Prototype-bearing types (default export) keep the bare module
+            // name; module-root types (empty address) are suffixed after them.
+            let sorted =
+                group
+                |> List.sortBy (fun (a, _, _, _) -> (if isDefaultAddr a then 0 else 1), addressString a)
 
             let forced =
                 sorted |> List.exists (fun (_, td, _, _) -> forcedBase.ContainsKey td.FullName)
@@ -256,7 +305,7 @@ let gen
     let targetAliases = aliasesOf spec
 
     let allClasses =
-        classesOf info pkgId
+        classesOf dll info pkgId
         |> List.filter (fun (_, td, _, _) ->
             not ((skippedOf spec).Contains td.FullName) && not (targetAliases.ContainsKey td.FullName))
 
@@ -266,7 +315,7 @@ let gen
     let localByFull =
         (allClasses |> List.map (fun (_, td, _, _) -> td.FullName, moduleOf td))
         @ (targetAliases |> Map.toList)
-        |> Map.ofList
+        |> Map.ofSeq
 
     let localModules = allClasses |> List.map (fun (_, td, _, _) -> moduleOf td) |> Set.ofList
 
@@ -282,7 +331,7 @@ let gen
         refEntries |> List.map (fun (pkg, refDll, _) -> pkg, discoverSpec pkg refDll) |> Map.ofList
 
     let externalClasses =
-        refEntries |> List.collect (fun (pkg, _, i) -> classesOf i pkg)
+        refEntries |> List.collect (fun (pkg, refDll, i) -> classesOf refDll i pkg)
 
     // Wrapper module of a referenced package: the WebSharper assembly name with
     // '.' replaced by '_' (WebSharper.JavaScript -> WebSharper_JavaScript).
@@ -290,7 +339,7 @@ let gen
         refEntries
         |> List.map (fun (pkg, refDll, _) ->
             pkg, upperFirst ((Path.GetFileNameWithoutExtension refDll).Replace('.', '_')))
-        |> Map.ofList
+        |> Map.ofSeq
 
     let wrapOf (pkg: string) =
         Map.tryFind pkg wrapperOf |> Option.defaultValue (upperFirst (pkg.Replace('-', '_')))
@@ -307,7 +356,7 @@ let gen
 
             for KeyValue(t, al) in refAliases do
                 yield t, (wrapOf pkg + "." + al, 0, pkg) ]
-        |> Map.ofList
+        |> Map.ofSeq
 
     let externalSimple =
         [ for pkg, cs in externalClasses |> List.groupBy (fun (_, _, _, p) -> p) do
@@ -315,7 +364,7 @@ let gen
             let names = finalNamesFor refSpec cs
             for (a, td, ci, _) in cs do
                 yield classModuleName td a, (wrapOf pkg + "." + names.[td.FullName], ci.Generics.Length, pkg) ]
-        |> Map.ofList
+        |> Map.ofSeq
 
     let deps = System.Collections.Generic.HashSet<string>()
 
@@ -340,14 +389,14 @@ let gen
                 |> List.filter nodeSet.Contains
                 |> Set.ofList
             m, refs)
-        |> Map.ofList
+        |> Map.ofSeq
 
     let scc = stronglyConnected (Set.toList nodeSet) edges
 
     let ciOf =
         allClasses
         |> List.map (fun (_, td, ci, _) -> moduleOf td, ci)
-        |> Map.ofList
+        |> Map.ofSeq
 
     // Collapse type hierarchies into a single shared type: union classes with
     // their base class / implemented interfaces, and union members of each
@@ -441,9 +490,21 @@ let gen
                     |> List.head
                 for m in ms do
                     yield m, rep ]
-        |> Map.ofList
+        |> Map.ofSeq
 
     let collapsed = repOf |> Map.toList |> List.map fst |> Set.ofList
+
+    let proxiedTargets = proxyTargets (dll :: references)
+
+    let customByFull =
+        info.Classes
+        |> Seq.map (fun kv -> kv.Key.Value.FullName, kv.Value |> fun (_, c, _) -> c)
+        |> Map.ofSeq
+
+    let customOf (fn: string) =
+        match Map.tryFind fn customByFull with
+        | Some c -> c
+        | None -> NotCustomType
 
     let env : TypeEnv =
         { LocalModules = localModules
@@ -452,7 +513,9 @@ let gen
           RepOf = (fun m -> Map.tryFind m repOf)
           ExternalByFull = externalByFull
           ExternalSimple = externalSimple
-          Deps = deps }
+          Deps = deps
+          ProxiedTargets = proxiedTargets
+          CustomOf = customOf }
 
     let opaqueFor (m: string) =
         match Map.tryFind m scc with
@@ -506,6 +569,10 @@ let gen
     let srcDir = Path.Combine(pkgDir, "files")
     let libDir = Path.Combine(srcDir, "lib")
     Directory.CreateDirectory libDir |> ignore
+
+    // Remove modules from a previous generation so renames do not leave stale files.
+    for stale in Directory.EnumerateFiles(libDir, "*.ml") do
+        File.Delete stale
 
     for (name, g) in unique do
         let g = { g with Module = name }

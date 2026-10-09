@@ -3,35 +3,35 @@ type t = EventTarget.t
 (* inline *)
 external close : t -> unit = "ws:WebSharper.JavaScript!globalThis.EventSource#Close|" "ws:WebSharper.JavaScript!globalThis.EventSource#Close|"
 (* inline *)
-external get_OnOpen : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.EventSource#get_OnOpen|" "ws:WebSharper.JavaScript!globalThis.EventSource#get_OnOpen|"
+external onOpen : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.EventSource#get_OnOpen|" "ws:WebSharper.JavaScript!globalThis.EventSource#get_OnOpen|"
 (* inline *)
-external get_Onopen : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.EventSource#get_Onopen|" "ws:WebSharper.JavaScript!globalThis.EventSource#get_Onopen|"
+external onopen : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.EventSource#get_Onopen|" "ws:WebSharper.JavaScript!globalThis.EventSource#get_Onopen|"
 (* inline *)
-external get_OnMessage : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.EventSource#get_OnMessage|" "ws:WebSharper.JavaScript!globalThis.EventSource#get_OnMessage|"
+external onMessage : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.EventSource#get_OnMessage|" "ws:WebSharper.JavaScript!globalThis.EventSource#get_OnMessage|"
 (* inline *)
-external get_Onmessage : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.EventSource#get_Onmessage|" "ws:WebSharper.JavaScript!globalThis.EventSource#get_Onmessage|"
+external onmessage : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.EventSource#get_Onmessage|" "ws:WebSharper.JavaScript!globalThis.EventSource#get_Onmessage|"
 (* inline *)
-external get_OnError : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.EventSource#get_OnError|" "ws:WebSharper.JavaScript!globalThis.EventSource#get_OnError|"
+external onError : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.EventSource#get_OnError|" "ws:WebSharper.JavaScript!globalThis.EventSource#get_OnError|"
 (* inline *)
-external get_Onerror : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.EventSource#get_Onerror|" "ws:WebSharper.JavaScript!globalThis.EventSource#get_Onerror|"
+external onerror : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.EventSource#get_Onerror|" "ws:WebSharper.JavaScript!globalThis.EventSource#get_Onerror|"
 (* inline *)
-external get_WithCredentials : t -> bool = "ws:WebSharper.JavaScript!globalThis.EventSource#get_WithCredentials|" "ws:WebSharper.JavaScript!globalThis.EventSource#get_WithCredentials|"
+external withCredentials : t -> bool = "ws:WebSharper.JavaScript!globalThis.EventSource#get_WithCredentials|" "ws:WebSharper.JavaScript!globalThis.EventSource#get_WithCredentials|"
 (* inline *)
-external get_Url : t -> string = "ws:WebSharper.JavaScript!globalThis.EventSource#get_Url|" "ws:WebSharper.JavaScript!globalThis.EventSource#get_Url|"
+external url : t -> string = "ws:WebSharper.JavaScript!globalThis.EventSource#get_Url|" "ws:WebSharper.JavaScript!globalThis.EventSource#get_Url|"
 (* inline *)
-external get_ReadyState : t -> ReadyState.t = "ws:WebSharper.JavaScript!globalThis.EventSource#get_ReadyState|" "ws:WebSharper.JavaScript!globalThis.EventSource#get_ReadyState|"
+external readyState : t -> ReadyState.t = "ws:WebSharper.JavaScript!globalThis.EventSource#get_ReadyState|" "ws:WebSharper.JavaScript!globalThis.EventSource#get_ReadyState|"
 (* inline *)
-external set_OnOpen : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.EventSource#set_OnOpen|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.EventSource#set_OnOpen|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+external set_onOpen : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.EventSource#set_OnOpen|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.EventSource#set_OnOpen|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
-external set_Onopen : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.EventSource#set_Onopen|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.EventSource#set_Onopen|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+external set_onopen : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.EventSource#set_Onopen|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.EventSource#set_Onopen|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
-external set_OnMessage : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.EventSource#set_OnMessage|System.Action`1<WebSharper.JavaScript.MessageEvent>" "ws:WebSharper.JavaScript!globalThis.EventSource#set_OnMessage|System.Action`1<WebSharper.JavaScript.MessageEvent>"
+external set_onMessage : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.EventSource#set_OnMessage|System.Action`1<WebSharper.JavaScript.MessageEvent>" "ws:WebSharper.JavaScript!globalThis.EventSource#set_OnMessage|System.Action`1<WebSharper.JavaScript.MessageEvent>"
 (* inline *)
-external set_Onmessage : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.EventSource#set_Onmessage|System.Action`1<WebSharper.JavaScript.MessageEvent>" "ws:WebSharper.JavaScript!globalThis.EventSource#set_Onmessage|System.Action`1<WebSharper.JavaScript.MessageEvent>"
+external set_onmessage : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.EventSource#set_Onmessage|System.Action`1<WebSharper.JavaScript.MessageEvent>" "ws:WebSharper.JavaScript!globalThis.EventSource#set_Onmessage|System.Action`1<WebSharper.JavaScript.MessageEvent>"
 (* inline *)
-external set_OnError : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.EventSource#set_OnError|System.Action`1<WebSharper.JavaScript.ErrorEvent>" "ws:WebSharper.JavaScript!globalThis.EventSource#set_OnError|System.Action`1<WebSharper.JavaScript.ErrorEvent>"
+external set_onError : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.EventSource#set_OnError|System.Action`1<WebSharper.JavaScript.ErrorEvent>" "ws:WebSharper.JavaScript!globalThis.EventSource#set_OnError|System.Action`1<WebSharper.JavaScript.ErrorEvent>"
 (* inline *)
-external set_Onerror : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.EventSource#set_Onerror|System.Action`1<WebSharper.JavaScript.ErrorEvent>" "ws:WebSharper.JavaScript!globalThis.EventSource#set_Onerror|System.Action`1<WebSharper.JavaScript.ErrorEvent>"
+external set_onerror : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.EventSource#set_Onerror|System.Action`1<WebSharper.JavaScript.ErrorEvent>" "ws:WebSharper.JavaScript!globalThis.EventSource#set_Onerror|System.Action`1<WebSharper.JavaScript.ErrorEvent>"
 (* inline *)
 external create : string -> t = "wsnew:WebSharper.JavaScript!globalThis.EventSource" "wsnew:WebSharper.JavaScript!globalThis.EventSource"
 (* inline *)

@@ -7,7 +7,7 @@ external close : t -> (unit) Promise.t = "ws:WebSharper.JavaScript!globalThis.Wr
 (* inline *)
 external abort : t -> (unit) Promise.t = "ws:WebSharper.JavaScript!globalThis.WritableStream#Abort|" "ws:WebSharper.JavaScript!globalThis.WritableStream#Abort|"
 (* inline *)
-external get_Locked : t -> bool = "ws:WebSharper.JavaScript!globalThis.WritableStream#get_Locked|" "ws:WebSharper.JavaScript!globalThis.WritableStream#get_Locked|"
+external locked : t -> bool = "ws:WebSharper.JavaScript!globalThis.WritableStream#get_Locked|" "ws:WebSharper.JavaScript!globalThis.WritableStream#get_Locked|"
 (* inline *)
 external abort_2 : t -> Js.t -> (unit) Promise.t = "ws:WebSharper.JavaScript!globalThis.WritableStream#Abort|System.Object" "ws:WebSharper.JavaScript!globalThis.WritableStream#Abort|System.Object"
 (* inline *)

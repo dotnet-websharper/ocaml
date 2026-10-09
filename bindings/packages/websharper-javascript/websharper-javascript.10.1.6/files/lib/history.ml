@@ -7,15 +7,15 @@ external back : t -> unit = "ws:WebSharper.JavaScript!globalThis.History#Back|" 
 (* inline *)
 external go : t -> unit = "ws:WebSharper.JavaScript!globalThis.History#Go|" "ws:WebSharper.JavaScript!globalThis.History#Go|"
 (* inline *)
-external get_ScrollRestoration : t -> ScrollRestoration.t = "ws:WebSharper.JavaScript!globalThis.History#get_ScrollRestoration|" "ws:WebSharper.JavaScript!globalThis.History#get_ScrollRestoration|"
+external scrollRestoration : t -> ScrollRestoration.t = "ws:WebSharper.JavaScript!globalThis.History#get_ScrollRestoration|" "ws:WebSharper.JavaScript!globalThis.History#get_ScrollRestoration|"
 (* inline *)
-external get_State : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.History#get_State|" "ws:WebSharper.JavaScript!globalThis.History#get_State|"
+external state : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.History#get_State|" "ws:WebSharper.JavaScript!globalThis.History#get_State|"
 (* inline *)
-external get_Length : t -> int = "ws:WebSharper.JavaScript!globalThis.History#get_Length|" "ws:WebSharper.JavaScript!globalThis.History#get_Length|"
+external length : t -> int = "ws:WebSharper.JavaScript!globalThis.History#get_Length|" "ws:WebSharper.JavaScript!globalThis.History#get_Length|"
 (* inline *)
 external go_2 : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.History#Go|System.Int32" "ws:WebSharper.JavaScript!globalThis.History#Go|System.Int32"
 (* inline *)
-external set_ScrollRestoration : t -> ScrollRestoration.t -> unit = "ws:WebSharper.JavaScript!globalThis.History#set_ScrollRestoration|WebSharper.JavaScript.ScrollRestoration" "ws:WebSharper.JavaScript!globalThis.History#set_ScrollRestoration|WebSharper.JavaScript.ScrollRestoration"
+external set_scrollRestoration : t -> ScrollRestoration.t -> unit = "ws:WebSharper.JavaScript!globalThis.History#set_ScrollRestoration|WebSharper.JavaScript.ScrollRestoration" "ws:WebSharper.JavaScript!globalThis.History#set_ScrollRestoration|WebSharper.JavaScript.ScrollRestoration"
 (* inline *)
 external replaceState : t -> Js.t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.History#ReplaceState|System.Object|System.String" "ws:WebSharper.JavaScript!globalThis.History#ReplaceState|System.Object|System.String"
 (* inline *)

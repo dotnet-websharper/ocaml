@@ -3,21 +3,21 @@ type t
 (* inline *)
 external random : unit -> float = "ws:WebSharper.JavaScript!globalThis.Math#Random|" "ws:WebSharper.JavaScript!globalThis.Math#Random|"
 (* inline *)
-external get_SQRT2 : unit -> float = "ws:WebSharper.JavaScript!globalThis.Math#get_SQRT2|" "ws:WebSharper.JavaScript!globalThis.Math#get_SQRT2|"
+external sQRT2 : unit -> float = "ws:WebSharper.JavaScript!globalThis.Math#get_SQRT2|" "ws:WebSharper.JavaScript!globalThis.Math#get_SQRT2|"
 (* inline *)
-external get_SQRT1_2 : unit -> float = "ws:WebSharper.JavaScript!globalThis.Math#get_SQRT1_2|" "ws:WebSharper.JavaScript!globalThis.Math#get_SQRT1_2|"
+external sQRT1_2 : unit -> float = "ws:WebSharper.JavaScript!globalThis.Math#get_SQRT1_2|" "ws:WebSharper.JavaScript!globalThis.Math#get_SQRT1_2|"
 (* inline *)
-external get_PI : unit -> float = "ws:WebSharper.JavaScript!globalThis.Math#get_PI|" "ws:WebSharper.JavaScript!globalThis.Math#get_PI|"
+external pI : unit -> float = "ws:WebSharper.JavaScript!globalThis.Math#get_PI|" "ws:WebSharper.JavaScript!globalThis.Math#get_PI|"
 (* inline *)
-external get_LOG10E : unit -> float = "ws:WebSharper.JavaScript!globalThis.Math#get_LOG10E|" "ws:WebSharper.JavaScript!globalThis.Math#get_LOG10E|"
+external lOG10E : unit -> float = "ws:WebSharper.JavaScript!globalThis.Math#get_LOG10E|" "ws:WebSharper.JavaScript!globalThis.Math#get_LOG10E|"
 (* inline *)
-external get_LOG2E : unit -> float = "ws:WebSharper.JavaScript!globalThis.Math#get_LOG2E|" "ws:WebSharper.JavaScript!globalThis.Math#get_LOG2E|"
+external lOG2E : unit -> float = "ws:WebSharper.JavaScript!globalThis.Math#get_LOG2E|" "ws:WebSharper.JavaScript!globalThis.Math#get_LOG2E|"
 (* inline *)
-external get_LN2 : unit -> float = "ws:WebSharper.JavaScript!globalThis.Math#get_LN2|" "ws:WebSharper.JavaScript!globalThis.Math#get_LN2|"
+external lN2 : unit -> float = "ws:WebSharper.JavaScript!globalThis.Math#get_LN2|" "ws:WebSharper.JavaScript!globalThis.Math#get_LN2|"
 (* inline *)
-external get_LN10 : unit -> float = "ws:WebSharper.JavaScript!globalThis.Math#get_LN10|" "ws:WebSharper.JavaScript!globalThis.Math#get_LN10|"
+external lN10 : unit -> float = "ws:WebSharper.JavaScript!globalThis.Math#get_LN10|" "ws:WebSharper.JavaScript!globalThis.Math#get_LN10|"
 (* inline *)
-external get_E : unit -> float = "ws:WebSharper.JavaScript!globalThis.Math#get_E|" "ws:WebSharper.JavaScript!globalThis.Math#get_E|"
+external e : unit -> float = "ws:WebSharper.JavaScript!globalThis.Math#get_E|" "ws:WebSharper.JavaScript!globalThis.Math#get_E|"
 (* inline *)
 external trunc : float -> float = "ws:WebSharper.JavaScript!globalThis.Math#Trunc|System.Double" "ws:WebSharper.JavaScript!globalThis.Math#Trunc|System.Double"
 (* inline *)

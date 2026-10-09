@@ -7,7 +7,7 @@ external toFloat64Array : t -> ArrayBufferView.t = "ws:WebSharper.JavaScript!glo
 (* inline *)
 external toFloat32Array : t -> ArrayBufferView.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#ToFloat32Array|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#ToFloat32Array|"
 (* inline *)
-external transformPoint : t -> DOMPointReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#TransformPoint|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#TransformPoint|"
+external transformPoint : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#TransformPoint|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#TransformPoint|"
 (* inline *)
 external multiply : t -> t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#Multiply|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#Multiply|"
 (* inline *)
@@ -35,55 +35,55 @@ external flipY : t -> t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly
 (* inline *)
 external flipX : t -> t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#FlipX|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#FlipX|"
 (* inline *)
-external get_IsIdentity : t -> bool = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_IsIdentity|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_IsIdentity|"
+external isIdentity : t -> bool = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_IsIdentity|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_IsIdentity|"
 (* inline *)
-external get_Is2D : t -> bool = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_Is2D|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_Is2D|"
+external is2D : t -> bool = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_Is2D|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_Is2D|"
 (* inline *)
-external get_M44 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M44|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M44|"
+external m44 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M44|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M44|"
 (* inline *)
-external get_M43 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M43|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M43|"
+external m43 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M43|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M43|"
 (* inline *)
-external get_M42 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M42|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M42|"
+external m42 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M42|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M42|"
 (* inline *)
-external get_M41 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M41|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M41|"
+external m41 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M41|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M41|"
 (* inline *)
-external get_M34 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M34|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M34|"
+external m34 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M34|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M34|"
 (* inline *)
-external get_M33 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M33|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M33|"
+external m33 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M33|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M33|"
 (* inline *)
-external get_M32 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M32|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M32|"
+external m32 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M32|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M32|"
 (* inline *)
-external get_M31 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M31|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M31|"
+external m31 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M31|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M31|"
 (* inline *)
-external get_M24 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M24|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M24|"
+external m24 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M24|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M24|"
 (* inline *)
-external get_M23 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M23|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M23|"
+external m23 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M23|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M23|"
 (* inline *)
-external get_M22 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M22|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M22|"
+external m22 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M22|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M22|"
 (* inline *)
-external get_M21 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M21|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M21|"
+external m21 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M21|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M21|"
 (* inline *)
-external get_M14 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M14|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M14|"
+external m14 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M14|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M14|"
 (* inline *)
-external get_M13 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M13|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M13|"
+external m13 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M13|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M13|"
 (* inline *)
-external get_M12 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M12|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M12|"
+external m12 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M12|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M12|"
 (* inline *)
-external get_M11 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M11|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M11|"
+external m11 : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M11|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_M11|"
 (* inline *)
-external get_F : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_F|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_F|"
+external f : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_F|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_F|"
 (* inline *)
-external get_E : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_E|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_E|"
+external e : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_E|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_E|"
 (* inline *)
-external get_D : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_D|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_D|"
+external d : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_D|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_D|"
 (* inline *)
-external get_C : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_C|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_C|"
+external c : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_C|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_C|"
 (* inline *)
-external get_B : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_B|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_B|"
+external b : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_B|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_B|"
 (* inline *)
-external get_A : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_A|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_A|"
+external a : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_A|" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#get_A|"
 (* inline *)
-external transformPoint_2 : t -> DOMPointInit.t -> DOMPointReadOnly.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#TransformPoint|WebSharper.JavaScript.DOMPointInit" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#TransformPoint|WebSharper.JavaScript.DOMPointInit"
+external transformPoint_2 : t -> DOMPointInit.t -> Js.t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#TransformPoint|WebSharper.JavaScript.DOMPointInit" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#TransformPoint|WebSharper.JavaScript.DOMPointInit"
 (* inline *)
 external multiply_2 : t -> DOMMatrix2DInit.t -> t = "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#Multiply|WebSharper.JavaScript.DOMMatrixInit" "ws:WebSharper.JavaScript!globalThis.DOMMatrixReadOnly#Multiply|WebSharper.JavaScript.DOMMatrixInit"
 (* inline *)

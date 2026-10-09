@@ -7,12 +7,12 @@ external showModal : t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLDialog
 (* inline *)
 external show : t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLDialogElement#Show|" "ws:WebSharper.JavaScript!globalThis.HTMLDialogElement#Show|"
 (* inline *)
-external get_ReturnValue : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLDialogElement#get_ReturnValue|" "ws:WebSharper.JavaScript!globalThis.HTMLDialogElement#get_ReturnValue|"
+external returnValue : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLDialogElement#get_ReturnValue|" "ws:WebSharper.JavaScript!globalThis.HTMLDialogElement#get_ReturnValue|"
 (* inline *)
-external get_Open : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLDialogElement#get_Open|" "ws:WebSharper.JavaScript!globalThis.HTMLDialogElement#get_Open|"
+external open_ : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLDialogElement#get_Open|" "ws:WebSharper.JavaScript!globalThis.HTMLDialogElement#get_Open|"
 (* inline *)
 external close_2 : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLDialogElement#Close|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLDialogElement#Close|System.String"
 (* inline *)
-external set_ReturnValue : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLDialogElement#set_ReturnValue|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLDialogElement#set_ReturnValue|System.String"
+external set_returnValue : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLDialogElement#set_ReturnValue|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLDialogElement#set_ReturnValue|System.String"
 (* inline *)
-external set_Open : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLDialogElement#set_Open|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLDialogElement#set_Open|System.Boolean"
+external set_open : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLDialogElement#set_Open|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLDialogElement#set_Open|System.Boolean"

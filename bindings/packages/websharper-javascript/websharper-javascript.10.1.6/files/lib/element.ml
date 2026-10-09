@@ -37,67 +37,67 @@ external append : t -> unit = "ws:WebSharper.JavaScript!globalThis.Element#Appen
 (* inline *)
 external prepend : t -> unit = "ws:WebSharper.JavaScript!globalThis.Element#Prepend|" "ws:WebSharper.JavaScript!globalThis.Element#Prepend|"
 (* inline *)
-external get_ShadowRoot : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Element#get_ShadowRoot|" "ws:WebSharper.JavaScript!globalThis.Element#get_ShadowRoot|"
+external shadowRoot : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Element#get_ShadowRoot|" "ws:WebSharper.JavaScript!globalThis.Element#get_ShadowRoot|"
 (* inline *)
-external get_OnFullscreenError : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Element#get_OnFullscreenError|" "ws:WebSharper.JavaScript!globalThis.Element#get_OnFullscreenError|"
+external onFullscreenError : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Element#get_OnFullscreenError|" "ws:WebSharper.JavaScript!globalThis.Element#get_OnFullscreenError|"
 (* inline *)
-external get_Onfullscreenerror : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Element#get_Onfullscreenerror|" "ws:WebSharper.JavaScript!globalThis.Element#get_Onfullscreenerror|"
+external onfullscreenerror : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Element#get_Onfullscreenerror|" "ws:WebSharper.JavaScript!globalThis.Element#get_Onfullscreenerror|"
 (* inline *)
-external get_OnFullscreenChange : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Element#get_OnFullscreenChange|" "ws:WebSharper.JavaScript!globalThis.Element#get_OnFullscreenChange|"
+external onFullscreenChange : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Element#get_OnFullscreenChange|" "ws:WebSharper.JavaScript!globalThis.Element#get_OnFullscreenChange|"
 (* inline *)
-external get_Onfullscreenchange : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Element#get_Onfullscreenchange|" "ws:WebSharper.JavaScript!globalThis.Element#get_Onfullscreenchange|"
+external onfullscreenchange : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Element#get_Onfullscreenchange|" "ws:WebSharper.JavaScript!globalThis.Element#get_Onfullscreenchange|"
 (* inline *)
-external get_ClientHeight : t -> float = "ws:WebSharper.JavaScript!globalThis.Element#get_ClientHeight|" "ws:WebSharper.JavaScript!globalThis.Element#get_ClientHeight|"
+external clientHeight : t -> float = "ws:WebSharper.JavaScript!globalThis.Element#get_ClientHeight|" "ws:WebSharper.JavaScript!globalThis.Element#get_ClientHeight|"
 (* inline *)
-external get_ClientWidth : t -> float = "ws:WebSharper.JavaScript!globalThis.Element#get_ClientWidth|" "ws:WebSharper.JavaScript!globalThis.Element#get_ClientWidth|"
+external clientWidth : t -> float = "ws:WebSharper.JavaScript!globalThis.Element#get_ClientWidth|" "ws:WebSharper.JavaScript!globalThis.Element#get_ClientWidth|"
 (* inline *)
-external get_ClientLeft : t -> float = "ws:WebSharper.JavaScript!globalThis.Element#get_ClientLeft|" "ws:WebSharper.JavaScript!globalThis.Element#get_ClientLeft|"
+external clientLeft : t -> float = "ws:WebSharper.JavaScript!globalThis.Element#get_ClientLeft|" "ws:WebSharper.JavaScript!globalThis.Element#get_ClientLeft|"
 (* inline *)
-external get_ClientTop : t -> float = "ws:WebSharper.JavaScript!globalThis.Element#get_ClientTop|" "ws:WebSharper.JavaScript!globalThis.Element#get_ClientTop|"
+external clientTop : t -> float = "ws:WebSharper.JavaScript!globalThis.Element#get_ClientTop|" "ws:WebSharper.JavaScript!globalThis.Element#get_ClientTop|"
 (* inline *)
-external get_ScrollHeight : t -> float = "ws:WebSharper.JavaScript!globalThis.Element#get_ScrollHeight|" "ws:WebSharper.JavaScript!globalThis.Element#get_ScrollHeight|"
+external scrollHeight : t -> float = "ws:WebSharper.JavaScript!globalThis.Element#get_ScrollHeight|" "ws:WebSharper.JavaScript!globalThis.Element#get_ScrollHeight|"
 (* inline *)
-external get_ScrollWidth : t -> float = "ws:WebSharper.JavaScript!globalThis.Element#get_ScrollWidth|" "ws:WebSharper.JavaScript!globalThis.Element#get_ScrollWidth|"
+external scrollWidth : t -> float = "ws:WebSharper.JavaScript!globalThis.Element#get_ScrollWidth|" "ws:WebSharper.JavaScript!globalThis.Element#get_ScrollWidth|"
 (* inline *)
-external get_ScrollLeft : t -> float = "ws:WebSharper.JavaScript!globalThis.Element#get_ScrollLeft|" "ws:WebSharper.JavaScript!globalThis.Element#get_ScrollLeft|"
+external scrollLeft : t -> float = "ws:WebSharper.JavaScript!globalThis.Element#get_ScrollLeft|" "ws:WebSharper.JavaScript!globalThis.Element#get_ScrollLeft|"
 (* inline *)
-external get_ScrollTop : t -> float = "ws:WebSharper.JavaScript!globalThis.Element#get_ScrollTop|" "ws:WebSharper.JavaScript!globalThis.Element#get_ScrollTop|"
+external scrollTop : t -> float = "ws:WebSharper.JavaScript!globalThis.Element#get_ScrollTop|" "ws:WebSharper.JavaScript!globalThis.Element#get_ScrollTop|"
 (* inline *)
-external get_Slot : t -> string = "ws:WebSharper.JavaScript!globalThis.Element#get_Slot|" "ws:WebSharper.JavaScript!globalThis.Element#get_Slot|"
+external slot : t -> string = "ws:WebSharper.JavaScript!globalThis.Element#get_Slot|" "ws:WebSharper.JavaScript!globalThis.Element#get_Slot|"
 (* inline *)
-external get_Prefix : t -> string = "ws:WebSharper.JavaScript!globalThis.Element#get_Prefix|" "ws:WebSharper.JavaScript!globalThis.Element#get_Prefix|"
+external prefix : t -> string = "ws:WebSharper.JavaScript!globalThis.Element#get_Prefix|" "ws:WebSharper.JavaScript!globalThis.Element#get_Prefix|"
 (* inline *)
-external get_OuterHTML : t -> string = "ws:WebSharper.JavaScript!globalThis.Element#get_OuterHTML|" "ws:WebSharper.JavaScript!globalThis.Element#get_OuterHTML|"
+external outerHTML : t -> string = "ws:WebSharper.JavaScript!globalThis.Element#get_OuterHTML|" "ws:WebSharper.JavaScript!globalThis.Element#get_OuterHTML|"
 (* inline *)
-external get_NamespaceURI : t -> string = "ws:WebSharper.JavaScript!globalThis.Element#get_NamespaceURI|" "ws:WebSharper.JavaScript!globalThis.Element#get_NamespaceURI|"
+external namespaceURI : t -> string = "ws:WebSharper.JavaScript!globalThis.Element#get_NamespaceURI|" "ws:WebSharper.JavaScript!globalThis.Element#get_NamespaceURI|"
 (* inline *)
-external get_LocalName : t -> string = "ws:WebSharper.JavaScript!globalThis.Element#get_LocalName|" "ws:WebSharper.JavaScript!globalThis.Element#get_LocalName|"
+external localName : t -> string = "ws:WebSharper.JavaScript!globalThis.Element#get_LocalName|" "ws:WebSharper.JavaScript!globalThis.Element#get_LocalName|"
 (* inline *)
-external get_InnerHTML : t -> string = "ws:WebSharper.JavaScript!globalThis.Element#get_InnerHTML|" "ws:WebSharper.JavaScript!globalThis.Element#get_InnerHTML|"
+external innerHTML : t -> string = "ws:WebSharper.JavaScript!globalThis.Element#get_InnerHTML|" "ws:WebSharper.JavaScript!globalThis.Element#get_InnerHTML|"
 (* inline *)
-external get_Id : t -> string = "ws:WebSharper.JavaScript!globalThis.Element#get_Id|" "ws:WebSharper.JavaScript!globalThis.Element#get_Id|"
+external id : t -> string = "ws:WebSharper.JavaScript!globalThis.Element#get_Id|" "ws:WebSharper.JavaScript!globalThis.Element#get_Id|"
 (* inline *)
-external get_ClassName : t -> string = "ws:WebSharper.JavaScript!globalThis.Element#get_ClassName|" "ws:WebSharper.JavaScript!globalThis.Element#get_ClassName|"
+external className : t -> string = "ws:WebSharper.JavaScript!globalThis.Element#get_ClassName|" "ws:WebSharper.JavaScript!globalThis.Element#get_ClassName|"
 (* inline *)
-external get_ClassList : t -> DOMTokenList.t = "ws:WebSharper.JavaScript!globalThis.Element#get_ClassList|" "ws:WebSharper.JavaScript!globalThis.Element#get_ClassList|"
+external classList : t -> DOMTokenList.t = "ws:WebSharper.JavaScript!globalThis.Element#get_ClassList|" "ws:WebSharper.JavaScript!globalThis.Element#get_ClassList|"
 (* inline *)
-external get_Attributes : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Element#get_Attributes|" "ws:WebSharper.JavaScript!globalThis.Element#get_Attributes|"
+external attributes : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Element#get_Attributes|" "ws:WebSharper.JavaScript!globalThis.Element#get_Attributes|"
 (* inline *)
-external get_TagName : t -> string = "ws:WebSharper.JavaScript!globalThis.Element#get_TagName|" "ws:WebSharper.JavaScript!globalThis.Element#get_TagName|"
+external tagName : t -> string = "ws:WebSharper.JavaScript!globalThis.Element#get_TagName|" "ws:WebSharper.JavaScript!globalThis.Element#get_TagName|"
 (* inline *)
-external get_SchemaTypeInfo : t -> TypeInfo.t = "ws:WebSharper.JavaScript!globalThis.Element#get_SchemaTypeInfo|" "ws:WebSharper.JavaScript!globalThis.Element#get_SchemaTypeInfo|"
+external schemaTypeInfo : t -> TypeInfo.t = "ws:WebSharper.JavaScript!globalThis.Element#get_SchemaTypeInfo|" "ws:WebSharper.JavaScript!globalThis.Element#get_SchemaTypeInfo|"
 (* inline *)
-external get_PreviousElementSibling : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Element#get_PreviousElementSibling|" "ws:WebSharper.JavaScript!globalThis.Element#get_PreviousElementSibling|"
+external previousElementSibling : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Element#get_PreviousElementSibling|" "ws:WebSharper.JavaScript!globalThis.Element#get_PreviousElementSibling|"
 (* inline *)
-external get_NextElementSibling : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Element#get_NextElementSibling|" "ws:WebSharper.JavaScript!globalThis.Element#get_NextElementSibling|"
+external nextElementSibling : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Element#get_NextElementSibling|" "ws:WebSharper.JavaScript!globalThis.Element#get_NextElementSibling|"
 (* inline *)
-external get_Children : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Element#get_Children|" "ws:WebSharper.JavaScript!globalThis.Element#get_Children|"
+external children : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Element#get_Children|" "ws:WebSharper.JavaScript!globalThis.Element#get_Children|"
 (* inline *)
-external get_LastElementChild : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Element#get_LastElementChild|" "ws:WebSharper.JavaScript!globalThis.Element#get_LastElementChild|"
+external lastElementChild : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Element#get_LastElementChild|" "ws:WebSharper.JavaScript!globalThis.Element#get_LastElementChild|"
 (* inline *)
-external get_FirstElementChild : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Element#get_FirstElementChild|" "ws:WebSharper.JavaScript!globalThis.Element#get_FirstElementChild|"
+external firstElementChild : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Element#get_FirstElementChild|" "ws:WebSharper.JavaScript!globalThis.Element#get_FirstElementChild|"
 (* inline *)
-external get_ChildElementCount : t -> int = "ws:WebSharper.JavaScript!globalThis.Element#get_ChildElementCount|" "ws:WebSharper.JavaScript!globalThis.Element#get_ChildElementCount|"
+external childElementCount : t -> int = "ws:WebSharper.JavaScript!globalThis.Element#get_ChildElementCount|" "ws:WebSharper.JavaScript!globalThis.Element#get_ChildElementCount|"
 (* inline *)
 external attachShadow : t -> ShadowRootInit.t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Element#AttachShadow|WebSharper.JavaScript.Dom.ShadowRootInit" "ws:WebSharper.JavaScript!globalThis.Element#AttachShadow|WebSharper.JavaScript.Dom.ShadowRootInit"
 (* inline *)
@@ -143,29 +143,29 @@ external querySelectorAll : t -> string -> EventTarget.t = "ws:WebSharper.JavaSc
 (* inline *)
 external querySelector : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Element#QuerySelector|System.String" "ws:WebSharper.JavaScript!globalThis.Element#QuerySelector|System.String"
 (* inline *)
-external set_OnFullscreenError : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Element#set_OnFullscreenError|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>" "ws:WebSharper.JavaScript!globalThis.Element#set_OnFullscreenError|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>"
+external set_onFullscreenError : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Element#set_OnFullscreenError|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>" "ws:WebSharper.JavaScript!globalThis.Element#set_OnFullscreenError|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>"
 (* inline *)
-external set_Onfullscreenerror : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Element#set_Onfullscreenerror|System.Action" "ws:WebSharper.JavaScript!globalThis.Element#set_Onfullscreenerror|System.Action"
+external set_onfullscreenerror : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Element#set_Onfullscreenerror|System.Action" "ws:WebSharper.JavaScript!globalThis.Element#set_Onfullscreenerror|System.Action"
 (* inline *)
-external set_OnFullscreenChange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Element#set_OnFullscreenChange|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>" "ws:WebSharper.JavaScript!globalThis.Element#set_OnFullscreenChange|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>"
+external set_onFullscreenChange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Element#set_OnFullscreenChange|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>" "ws:WebSharper.JavaScript!globalThis.Element#set_OnFullscreenChange|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>"
 (* inline *)
-external set_Onfullscreenchange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Element#set_Onfullscreenchange|System.Action" "ws:WebSharper.JavaScript!globalThis.Element#set_Onfullscreenchange|System.Action"
+external set_onfullscreenchange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Element#set_Onfullscreenchange|System.Action" "ws:WebSharper.JavaScript!globalThis.Element#set_Onfullscreenchange|System.Action"
 (* inline *)
-external set_ScrollLeft : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.Element#set_ScrollLeft|System.Double" "ws:WebSharper.JavaScript!globalThis.Element#set_ScrollLeft|System.Double"
+external set_scrollLeft : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.Element#set_ScrollLeft|System.Double" "ws:WebSharper.JavaScript!globalThis.Element#set_ScrollLeft|System.Double"
 (* inline *)
-external set_ScrollTop : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.Element#set_ScrollTop|System.Double" "ws:WebSharper.JavaScript!globalThis.Element#set_ScrollTop|System.Double"
+external set_scrollTop : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.Element#set_ScrollTop|System.Double" "ws:WebSharper.JavaScript!globalThis.Element#set_ScrollTop|System.Double"
 (* inline *)
-external set_Slot : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Element#set_Slot|System.String" "ws:WebSharper.JavaScript!globalThis.Element#set_Slot|System.String"
+external set_slot : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Element#set_Slot|System.String" "ws:WebSharper.JavaScript!globalThis.Element#set_Slot|System.String"
 (* inline *)
-external set_InnerHTML : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Element#set_InnerHTML|System.String" "ws:WebSharper.JavaScript!globalThis.Element#set_InnerHTML|System.String"
+external set_innerHTML : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Element#set_InnerHTML|System.String" "ws:WebSharper.JavaScript!globalThis.Element#set_InnerHTML|System.String"
 (* inline *)
-external set_Id : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Element#set_Id|System.String" "ws:WebSharper.JavaScript!globalThis.Element#set_Id|System.String"
+external set_id : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Element#set_Id|System.String" "ws:WebSharper.JavaScript!globalThis.Element#set_Id|System.String"
 (* inline *)
-external set_ClassName : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Element#set_ClassName|System.String" "ws:WebSharper.JavaScript!globalThis.Element#set_ClassName|System.String"
+external set_className : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Element#set_ClassName|System.String" "ws:WebSharper.JavaScript!globalThis.Element#set_ClassName|System.String"
 (* inline *)
-external set_TagName : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Element#set_TagName|System.String" "ws:WebSharper.JavaScript!globalThis.Element#set_TagName|System.String"
+external set_tagName : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Element#set_TagName|System.String" "ws:WebSharper.JavaScript!globalThis.Element#set_TagName|System.String"
 (* inline *)
-external set_SchemaTypeInfo : t -> TypeInfo.t -> unit = "ws:WebSharper.JavaScript!globalThis.Element#set_SchemaTypeInfo|WebSharper.JavaScript.Dom.TypeInfo" "ws:WebSharper.JavaScript!globalThis.Element#set_SchemaTypeInfo|WebSharper.JavaScript.Dom.TypeInfo"
+external set_schemaTypeInfo : t -> TypeInfo.t -> unit = "ws:WebSharper.JavaScript!globalThis.Element#set_SchemaTypeInfo|WebSharper.JavaScript.Dom.TypeInfo" "ws:WebSharper.JavaScript!globalThis.Element#set_SchemaTypeInfo|WebSharper.JavaScript.Dom.TypeInfo"
 (* inline *)
 external insertAdjacentHTML : t -> string -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Element#InsertAdjacentHTML|System.String|System.String" "ws:WebSharper.JavaScript!globalThis.Element#InsertAdjacentHTML|System.String|System.String"
 (* inline *)

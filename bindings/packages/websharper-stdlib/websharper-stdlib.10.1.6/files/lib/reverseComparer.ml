@@ -3,6 +3,6 @@ type ('a, 'b) t
 (* instance *)
 external get_projection : ('a, 'b) t -> Js.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.ReverseComparer`2::default#projection" "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.ReverseComparer`2::default#projection"
 (* instance *)
-external get_primary : ('a, 'b) t -> Js.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.ReverseComparer`2::default#primary" "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.ReverseComparer`2::default#primary"
+external get_primary : ('a, 'b) t -> IComparer2.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.ReverseComparer`2::default#primary" "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.ReverseComparer`2::default#primary"
 (* new *)
-external create : Js.t -> Js.t -> ('a, 'b) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/WebSharper.ReverseComparer`2::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/WebSharper.ReverseComparer`2::default"
+external create : IComparer2.t -> Js.t -> ('a, 'b) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/WebSharper.ReverseComparer`2::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/WebSharper.ReverseComparer`2::default"

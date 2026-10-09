@@ -15,25 +15,25 @@ external clone : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Respo
 (* inline *)
 external error : unit -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Response#Error|" "ws:WebSharper.JavaScript!globalThis.Response#Error|"
 (* inline *)
-external get_BodyUsed : t -> bool = "ws:WebSharper.JavaScript!globalThis.Response#get_BodyUsed|" "ws:WebSharper.JavaScript!globalThis.Response#get_BodyUsed|"
+external bodyUsed : t -> bool = "ws:WebSharper.JavaScript!globalThis.Response#get_BodyUsed|" "ws:WebSharper.JavaScript!globalThis.Response#get_BodyUsed|"
 (* inline *)
-external get_Body : t -> ReadableStream.t = "ws:WebSharper.JavaScript!globalThis.Response#get_Body|" "ws:WebSharper.JavaScript!globalThis.Response#get_Body|"
+external body : t -> ReadableStream.t = "ws:WebSharper.JavaScript!globalThis.Response#get_Body|" "ws:WebSharper.JavaScript!globalThis.Response#get_Body|"
 (* inline *)
-external get_UseFinalURL : t -> bool = "ws:WebSharper.JavaScript!globalThis.Response#get_UseFinalURL|" "ws:WebSharper.JavaScript!globalThis.Response#get_UseFinalURL|"
+external useFinalURL : t -> bool = "ws:WebSharper.JavaScript!globalThis.Response#get_UseFinalURL|" "ws:WebSharper.JavaScript!globalThis.Response#get_UseFinalURL|"
 (* inline *)
-external get_Url : t -> string = "ws:WebSharper.JavaScript!globalThis.Response#get_Url|" "ws:WebSharper.JavaScript!globalThis.Response#get_Url|"
+external url : t -> string = "ws:WebSharper.JavaScript!globalThis.Response#get_Url|" "ws:WebSharper.JavaScript!globalThis.Response#get_Url|"
 (* inline *)
-external get_Type : t -> ResponseType.t = "ws:WebSharper.JavaScript!globalThis.Response#get_Type|" "ws:WebSharper.JavaScript!globalThis.Response#get_Type|"
+external type_ : t -> ResponseType.t = "ws:WebSharper.JavaScript!globalThis.Response#get_Type|" "ws:WebSharper.JavaScript!globalThis.Response#get_Type|"
 (* inline *)
-external get_StatusText : t -> string = "ws:WebSharper.JavaScript!globalThis.Response#get_StatusText|" "ws:WebSharper.JavaScript!globalThis.Response#get_StatusText|"
+external statusText : t -> string = "ws:WebSharper.JavaScript!globalThis.Response#get_StatusText|" "ws:WebSharper.JavaScript!globalThis.Response#get_StatusText|"
 (* inline *)
-external get_Status : t -> int = "ws:WebSharper.JavaScript!globalThis.Response#get_Status|" "ws:WebSharper.JavaScript!globalThis.Response#get_Status|"
+external status : t -> int = "ws:WebSharper.JavaScript!globalThis.Response#get_Status|" "ws:WebSharper.JavaScript!globalThis.Response#get_Status|"
 (* inline *)
-external get_Redirected : t -> bool = "ws:WebSharper.JavaScript!globalThis.Response#get_Redirected|" "ws:WebSharper.JavaScript!globalThis.Response#get_Redirected|"
+external redirected : t -> bool = "ws:WebSharper.JavaScript!globalThis.Response#get_Redirected|" "ws:WebSharper.JavaScript!globalThis.Response#get_Redirected|"
 (* inline *)
-external get_Ok : t -> bool = "ws:WebSharper.JavaScript!globalThis.Response#get_Ok|" "ws:WebSharper.JavaScript!globalThis.Response#get_Ok|"
+external ok : t -> bool = "ws:WebSharper.JavaScript!globalThis.Response#get_Ok|" "ws:WebSharper.JavaScript!globalThis.Response#get_Ok|"
 (* inline *)
-external get_Headers : t -> Headers.t = "ws:WebSharper.JavaScript!globalThis.Response#get_Headers|" "ws:WebSharper.JavaScript!globalThis.Response#get_Headers|"
+external headers : t -> Headers.t = "ws:WebSharper.JavaScript!globalThis.Response#get_Headers|" "ws:WebSharper.JavaScript!globalThis.Response#get_Headers|"
 (* inline *)
 external redirect : string -> int -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Response#Redirect|System.String|System.Int32" "ws:WebSharper.JavaScript!globalThis.Response#Redirect|System.String|System.Int32"
 (* inline *)

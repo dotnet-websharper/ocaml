@@ -7,108 +7,108 @@ external play : t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElemen
 (* inline *)
 external load : t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#Load|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#Load|"
 (* inline *)
-external get_Tracks : t -> (TimedTrack.t) array = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Tracks|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Tracks|"
+external tracks : t -> (TimedTrack.t) array = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Tracks|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Tracks|"
 (* inline *)
-external get_Muted : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Muted|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Muted|"
+external muted : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Muted|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Muted|"
 (* inline *)
-external get_Volume : t -> float = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Volume|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Volume|"
+external volume : t -> float = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Volume|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Volume|"
 (* inline *)
-external get_Controls : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Controls|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Controls|"
+external controls : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Controls|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Controls|"
 (* inline *)
-external get_Preload : t -> Preload.t = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Preload|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Preload|"
+external preload : t -> Preload.t = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Preload|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Preload|"
 (* inline *)
-external get_MediaGroup : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_MediaGroup|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_MediaGroup|"
+external mediaGroup : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_MediaGroup|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_MediaGroup|"
 (* inline *)
-external get_DisableRemotePlayback : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_DisableRemotePlayback|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_DisableRemotePlayback|"
+external disableRemotePlayback : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_DisableRemotePlayback|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_DisableRemotePlayback|"
 (* inline *)
-external get_DefaultMuted : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_DefaultMuted|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_DefaultMuted|"
+external defaultMuted : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_DefaultMuted|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_DefaultMuted|"
 (* inline *)
-external get_CrossOrigin : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_CrossOrigin|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_CrossOrigin|"
+external crossOrigin : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_CrossOrigin|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_CrossOrigin|"
 (* inline *)
-external get_InitialTime : t -> float = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_InitialTime|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_InitialTime|"
+external initialTime : t -> float = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_InitialTime|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_InitialTime|"
 (* inline *)
-external get_Duration : t -> float = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Duration|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Duration|"
+external duration : t -> float = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Duration|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Duration|"
 (* inline *)
-external get_Paused : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Paused|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Paused|"
+external paused : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Paused|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Paused|"
 (* inline *)
-external get_Ended : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Ended|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Ended|"
+external ended : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Ended|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Ended|"
 (* inline *)
-external get_Seekable : t -> TimeRanges.t = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Seekable|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Seekable|"
+external seekable : t -> TimeRanges.t = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Seekable|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Seekable|"
 (* inline *)
-external get_Played : t -> TimeRanges.t = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Played|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Played|"
+external played : t -> TimeRanges.t = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Played|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Played|"
 (* inline *)
-external get_StartOffsetTime : t -> Date.t = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_StartOffsetTime|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_StartOffsetTime|"
+external startOffsetTime : t -> Date.t = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_StartOffsetTime|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_StartOffsetTime|"
 (* inline *)
-external get_PlaybackRate : t -> float = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_PlaybackRate|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_PlaybackRate|"
+external playbackRate : t -> float = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_PlaybackRate|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_PlaybackRate|"
 (* inline *)
-external get_DefaultPlaybackRate : t -> float = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_DefaultPlaybackRate|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_DefaultPlaybackRate|"
+external defaultPlaybackRate : t -> float = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_DefaultPlaybackRate|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_DefaultPlaybackRate|"
 (* inline *)
-external get_CurrentTime : t -> float = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_CurrentTime|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_CurrentTime|"
+external currentTime : t -> float = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_CurrentTime|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_CurrentTime|"
 (* inline *)
-external get_Loop : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Loop|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Loop|"
+external loop : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Loop|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Loop|"
 (* inline *)
-external get_Autoplay : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Autoplay|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Autoplay|"
+external autoplay : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Autoplay|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Autoplay|"
 (* inline *)
-external get_Seeking : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Seeking|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Seeking|"
+external seeking : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Seeking|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Seeking|"
 (* inline *)
-external get_ReadyState : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_ReadyState|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_ReadyState|"
+external readyState : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_ReadyState|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_ReadyState|"
 (* inline *)
-external get_HAVE_ENOUGH_DATA : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_HAVE_ENOUGH_DATA|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_HAVE_ENOUGH_DATA|"
+external hAVE_ENOUGH_DATA : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_HAVE_ENOUGH_DATA|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_HAVE_ENOUGH_DATA|"
 (* inline *)
-external get_HAVE_FUTURE_DATA : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_HAVE_FUTURE_DATA|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_HAVE_FUTURE_DATA|"
+external hAVE_FUTURE_DATA : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_HAVE_FUTURE_DATA|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_HAVE_FUTURE_DATA|"
 (* inline *)
-external get_HAVE_CURRENT_DATA : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_HAVE_CURRENT_DATA|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_HAVE_CURRENT_DATA|"
+external hAVE_CURRENT_DATA : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_HAVE_CURRENT_DATA|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_HAVE_CURRENT_DATA|"
 (* inline *)
-external get_HAVE_METADATA : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_HAVE_METADATA|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_HAVE_METADATA|"
+external hAVE_METADATA : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_HAVE_METADATA|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_HAVE_METADATA|"
 (* inline *)
-external get_HAVE_NOTHING : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_HAVE_NOTHING|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_HAVE_NOTHING|"
+external hAVE_NOTHING : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_HAVE_NOTHING|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_HAVE_NOTHING|"
 (* inline *)
-external get_Buffered : t -> TimeRanges.t = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Buffered|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Buffered|"
+external buffered : t -> TimeRanges.t = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Buffered|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Buffered|"
 (* inline *)
-external get_NetworkState : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_NetworkState|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_NetworkState|"
+external networkState : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_NetworkState|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_NetworkState|"
 (* inline *)
-external get_NETWORK_NO_SOURCE : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_NETWORK_NO_SOURCE|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_NETWORK_NO_SOURCE|"
+external nETWORK_NO_SOURCE : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_NETWORK_NO_SOURCE|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_NETWORK_NO_SOURCE|"
 (* inline *)
-external get_NETWORK_LOADING : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_NETWORK_LOADING|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_NETWORK_LOADING|"
+external nETWORK_LOADING : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_NETWORK_LOADING|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_NETWORK_LOADING|"
 (* inline *)
-external get_NETWORK_IDLE : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_NETWORK_IDLE|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_NETWORK_IDLE|"
+external nETWORK_IDLE : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_NETWORK_IDLE|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_NETWORK_IDLE|"
 (* inline *)
-external get_NETWORK_EMPTY : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_NETWORK_EMPTY|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_NETWORK_EMPTY|"
+external nETWORK_EMPTY : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_NETWORK_EMPTY|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_NETWORK_EMPTY|"
 (* inline *)
-external get_CurrentSrc : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_CurrentSrc|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_CurrentSrc|"
+external currentSrc : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_CurrentSrc|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_CurrentSrc|"
 (* inline *)
-external get_Src : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Src|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Src|"
+external src : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Src|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Src|"
 (* inline *)
-external get_Error : t -> MediaError.t = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Error|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Error|"
+external error : t -> MediaError.t = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Error|" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#get_Error|"
 (* inline *)
 external canPlayType : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#CanPlayType|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#CanPlayType|System.String"
 (* inline *)
-external set_Muted : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_Muted|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_Muted|System.Boolean"
+external set_muted : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_Muted|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_Muted|System.Boolean"
 (* inline *)
-external set_Volume : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_Volume|System.Double" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_Volume|System.Double"
+external set_volume : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_Volume|System.Double" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_Volume|System.Double"
 (* inline *)
-external set_Controls : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_Controls|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_Controls|System.Boolean"
+external set_controls : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_Controls|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_Controls|System.Boolean"
 (* inline *)
-external set_Preload : t -> Preload.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_Preload|WebSharper.JavaScript.Preload" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_Preload|WebSharper.JavaScript.Preload"
+external set_preload : t -> Preload.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_Preload|WebSharper.JavaScript.Preload" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_Preload|WebSharper.JavaScript.Preload"
 (* inline *)
-external set_MediaGroup : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_MediaGroup|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_MediaGroup|System.String"
+external set_mediaGroup : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_MediaGroup|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_MediaGroup|System.String"
 (* inline *)
-external set_DisableRemotePlayback : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_DisableRemotePlayback|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_DisableRemotePlayback|System.Boolean"
+external set_disableRemotePlayback : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_DisableRemotePlayback|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_DisableRemotePlayback|System.Boolean"
 (* inline *)
-external set_DefaultMuted : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_DefaultMuted|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_DefaultMuted|System.Boolean"
+external set_defaultMuted : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_DefaultMuted|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_DefaultMuted|System.Boolean"
 (* inline *)
-external set_CrossOrigin : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_CrossOrigin|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_CrossOrigin|System.String"
+external set_crossOrigin : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_CrossOrigin|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_CrossOrigin|System.String"
 (* inline *)
-external set_PlaybackRate : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_PlaybackRate|System.Double" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_PlaybackRate|System.Double"
+external set_playbackRate : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_PlaybackRate|System.Double" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_PlaybackRate|System.Double"
 (* inline *)
-external set_DefaultPlaybackRate : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_DefaultPlaybackRate|System.Double" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_DefaultPlaybackRate|System.Double"
+external set_defaultPlaybackRate : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_DefaultPlaybackRate|System.Double" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_DefaultPlaybackRate|System.Double"
 (* inline *)
-external set_CurrentTime : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_CurrentTime|System.Double" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_CurrentTime|System.Double"
+external set_currentTime : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_CurrentTime|System.Double" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_CurrentTime|System.Double"
 (* inline *)
-external set_Loop : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_Loop|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_Loop|System.Boolean"
+external set_loop : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_Loop|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_Loop|System.Boolean"
 (* inline *)
-external set_Autoplay : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_Autoplay|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_Autoplay|System.Boolean"
+external set_autoplay : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_Autoplay|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_Autoplay|System.Boolean"
 (* inline *)
-external set_Src : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_Src|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_Src|System.String"
+external set_src : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_Src|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#set_Src|System.String"
 (* inline *)
 external addTrack : t -> string -> TrackType.t -> string -> TimedTrack.t = "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#AddTrack|System.String|WebSharper.JavaScript.TrackType|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLMediaElement#AddTrack|System.String|WebSharper.JavaScript.TrackType|System.String"

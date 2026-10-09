@@ -9,25 +9,25 @@ external getAudioTracks : t -> (EventTarget.t) array = "ws:WebSharper.JavaScript
 (* inline *)
 external clone : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.MediaStream#Clone|" "ws:WebSharper.JavaScript!globalThis.MediaStream#Clone|"
 (* inline *)
-external get_OnInactive : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaStream#get_OnInactive|" "ws:WebSharper.JavaScript!globalThis.MediaStream#get_OnInactive|"
+external onInactive : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaStream#get_OnInactive|" "ws:WebSharper.JavaScript!globalThis.MediaStream#get_OnInactive|"
 (* inline *)
-external get_Oninactive : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaStream#get_Oninactive|" "ws:WebSharper.JavaScript!globalThis.MediaStream#get_Oninactive|"
+external oninactive : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaStream#get_Oninactive|" "ws:WebSharper.JavaScript!globalThis.MediaStream#get_Oninactive|"
 (* inline *)
-external get_OnActive : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaStream#get_OnActive|" "ws:WebSharper.JavaScript!globalThis.MediaStream#get_OnActive|"
+external onActive : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaStream#get_OnActive|" "ws:WebSharper.JavaScript!globalThis.MediaStream#get_OnActive|"
 (* inline *)
-external get_Onactive : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaStream#get_Onactive|" "ws:WebSharper.JavaScript!globalThis.MediaStream#get_Onactive|"
+external onactive : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaStream#get_Onactive|" "ws:WebSharper.JavaScript!globalThis.MediaStream#get_Onactive|"
 (* inline *)
-external get_OnRemoveTrack : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaStream#get_OnRemoveTrack|" "ws:WebSharper.JavaScript!globalThis.MediaStream#get_OnRemoveTrack|"
+external onRemoveTrack : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaStream#get_OnRemoveTrack|" "ws:WebSharper.JavaScript!globalThis.MediaStream#get_OnRemoveTrack|"
 (* inline *)
-external get_Onremovetrack : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaStream#get_Onremovetrack|" "ws:WebSharper.JavaScript!globalThis.MediaStream#get_Onremovetrack|"
+external onremovetrack : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaStream#get_Onremovetrack|" "ws:WebSharper.JavaScript!globalThis.MediaStream#get_Onremovetrack|"
 (* inline *)
-external get_OnAddTrack : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaStream#get_OnAddTrack|" "ws:WebSharper.JavaScript!globalThis.MediaStream#get_OnAddTrack|"
+external onAddTrack : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaStream#get_OnAddTrack|" "ws:WebSharper.JavaScript!globalThis.MediaStream#get_OnAddTrack|"
 (* inline *)
-external get_Onaddtrack : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaStream#get_Onaddtrack|" "ws:WebSharper.JavaScript!globalThis.MediaStream#get_Onaddtrack|"
+external onaddtrack : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.MediaStream#get_Onaddtrack|" "ws:WebSharper.JavaScript!globalThis.MediaStream#get_Onaddtrack|"
 (* inline *)
-external get_Id : t -> string = "ws:WebSharper.JavaScript!globalThis.MediaStream#get_Id|" "ws:WebSharper.JavaScript!globalThis.MediaStream#get_Id|"
+external id : t -> string = "ws:WebSharper.JavaScript!globalThis.MediaStream#get_Id|" "ws:WebSharper.JavaScript!globalThis.MediaStream#get_Id|"
 (* inline *)
-external get_Active : t -> bool = "ws:WebSharper.JavaScript!globalThis.MediaStream#get_Active|" "ws:WebSharper.JavaScript!globalThis.MediaStream#get_Active|"
+external active : t -> bool = "ws:WebSharper.JavaScript!globalThis.MediaStream#get_Active|" "ws:WebSharper.JavaScript!globalThis.MediaStream#get_Active|"
 (* inline *)
 external removeTrack : t -> EventTarget.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStream#RemoveTrack|WebSharper.JavaScript.MediaStreamTrackClass" "ws:WebSharper.JavaScript!globalThis.MediaStream#RemoveTrack|WebSharper.JavaScript.MediaStreamTrackClass"
 (* inline *)
@@ -35,21 +35,21 @@ external getTrackById : t -> string -> Js.t = "ws:WebSharper.JavaScript!globalTh
 (* inline *)
 external addTrack : t -> EventTarget.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStream#AddTrack|WebSharper.JavaScript.MediaStreamTrackClass" "ws:WebSharper.JavaScript!globalThis.MediaStream#AddTrack|WebSharper.JavaScript.MediaStreamTrackClass"
 (* inline *)
-external set_OnInactive : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStream#set_OnInactive|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>" "ws:WebSharper.JavaScript!globalThis.MediaStream#set_OnInactive|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>"
+external set_onInactive : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStream#set_OnInactive|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>" "ws:WebSharper.JavaScript!globalThis.MediaStream#set_OnInactive|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>"
 (* inline *)
-external set_Oninactive : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStream#set_Oninactive|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>" "ws:WebSharper.JavaScript!globalThis.MediaStream#set_Oninactive|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>"
+external set_oninactive : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStream#set_Oninactive|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>" "ws:WebSharper.JavaScript!globalThis.MediaStream#set_Oninactive|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>"
 (* inline *)
-external set_OnActive : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStream#set_OnActive|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>" "ws:WebSharper.JavaScript!globalThis.MediaStream#set_OnActive|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>"
+external set_onActive : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStream#set_OnActive|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>" "ws:WebSharper.JavaScript!globalThis.MediaStream#set_OnActive|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>"
 (* inline *)
-external set_Onactive : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStream#set_Onactive|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>" "ws:WebSharper.JavaScript!globalThis.MediaStream#set_Onactive|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>"
+external set_onactive : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStream#set_Onactive|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>" "ws:WebSharper.JavaScript!globalThis.MediaStream#set_Onactive|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>"
 (* inline *)
-external set_OnRemoveTrack : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStream#set_OnRemoveTrack|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>" "ws:WebSharper.JavaScript!globalThis.MediaStream#set_OnRemoveTrack|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>"
+external set_onRemoveTrack : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStream#set_OnRemoveTrack|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>" "ws:WebSharper.JavaScript!globalThis.MediaStream#set_OnRemoveTrack|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>"
 (* inline *)
-external set_Onremovetrack : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStream#set_Onremovetrack|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>" "ws:WebSharper.JavaScript!globalThis.MediaStream#set_Onremovetrack|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>"
+external set_onremovetrack : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStream#set_Onremovetrack|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>" "ws:WebSharper.JavaScript!globalThis.MediaStream#set_Onremovetrack|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>"
 (* inline *)
-external set_OnAddTrack : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStream#set_OnAddTrack|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>" "ws:WebSharper.JavaScript!globalThis.MediaStream#set_OnAddTrack|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>"
+external set_onAddTrack : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStream#set_OnAddTrack|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>" "ws:WebSharper.JavaScript!globalThis.MediaStream#set_OnAddTrack|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>"
 (* inline *)
-external set_Onaddtrack : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStream#set_Onaddtrack|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>" "ws:WebSharper.JavaScript!globalThis.MediaStream#set_Onaddtrack|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>"
+external set_onaddtrack : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.MediaStream#set_Onaddtrack|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>" "ws:WebSharper.JavaScript!globalThis.MediaStream#set_Onaddtrack|System.Action`1<WebSharper.JavaScript.MediaStreamTrackEvent>"
 (* inline *)
 external create : (EventTarget.t) array -> t = "wsnew:WebSharper.JavaScript!globalThis.MediaStream" "wsnew:WebSharper.JavaScript!globalThis.MediaStream"
 (* inline *)

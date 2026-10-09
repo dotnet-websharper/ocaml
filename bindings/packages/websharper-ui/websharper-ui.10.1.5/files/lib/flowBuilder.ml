@@ -5,6 +5,6 @@ external return : t -> 'a -> ('a) Flow.t = "ws:WebSharper.UI!WebSharper.UI/WebSh
 (* inline *)
 external returnFrom : t -> ('a) Flow.t -> ('a) Flow.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowBuilder::default#ReturnFrom|WebSharper.UI.Flow`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowBuilder::default#ReturnFrom|WebSharper.UI.Flow`1<'0>"
 (* inline *)
-external bind : t -> ('a) Flow.t -> Js.t -> ('b) Flow.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowBuilder::default#Bind|WebSharper.UI.Flow`1<'0>|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowBuilder::default#Bind|WebSharper.UI.Flow`1<'0>|fn"
+external bind : t -> ('a) Flow.t -> ('a -> ('b) Flow.t) -> ('b) Flow.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowBuilder::default#Bind|WebSharper.UI.Flow`1<'0>|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowBuilder::default#Bind|WebSharper.UI.Flow`1<'0>|fn"
 (* new *)
 external create : unit -> t = "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowBuilder::default" "wsnew:WebSharper.UI!WebSharper.UI/WebSharper.UI.FlowBuilder::default"

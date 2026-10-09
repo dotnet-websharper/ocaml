@@ -5,7 +5,7 @@ external getReader : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.ReadableSt
 (* inline *)
 external cancel : t -> (unit) Promise.t = "ws:WebSharper.JavaScript!globalThis.ReadableStream#Cancel|" "ws:WebSharper.JavaScript!globalThis.ReadableStream#Cancel|"
 (* inline *)
-external get_Locked : t -> bool = "ws:WebSharper.JavaScript!globalThis.ReadableStream#get_Locked|" "ws:WebSharper.JavaScript!globalThis.ReadableStream#get_Locked|"
+external locked : t -> bool = "ws:WebSharper.JavaScript!globalThis.ReadableStream#get_Locked|" "ws:WebSharper.JavaScript!globalThis.ReadableStream#get_Locked|"
 (* inline *)
 external pipeTo : t -> WritableStream.t -> (unit) Promise.t = "ws:WebSharper.JavaScript!globalThis.ReadableStream#PipeTo|WebSharper.JavaScript.WritableStream" "ws:WebSharper.JavaScript!globalThis.ReadableStream#PipeTo|WebSharper.JavaScript.WritableStream"
 (* inline *)

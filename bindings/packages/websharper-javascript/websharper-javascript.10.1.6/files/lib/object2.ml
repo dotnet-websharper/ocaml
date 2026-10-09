@@ -5,11 +5,11 @@ external valueOf : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Object#Value
 (* inline *)
 external toLocaleString : t -> string = "ws:WebSharper.JavaScript!globalThis.Object#ToLocaleString|" "ws:WebSharper.JavaScript!globalThis.Object#ToLocaleString|"
 (* inline *)
-external get_Prototype : unit -> t = "ws:WebSharper.JavaScript!globalThis.Object#get_Prototype|" "ws:WebSharper.JavaScript!globalThis.Object#get_Prototype|"
+external prototype : unit -> t = "ws:WebSharper.JavaScript!globalThis.Object#get_Prototype|" "ws:WebSharper.JavaScript!globalThis.Object#get_Prototype|"
 (* inline *)
-external get_Self : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Object#get_Self|" "ws:WebSharper.JavaScript!globalThis.Object#get_Self|"
+external self : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Object#get_Self|" "ws:WebSharper.JavaScript!globalThis.Object#get_Self|"
 (* inline *)
-external get_Constructor : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Object#get_Constructor|" "ws:WebSharper.JavaScript!globalThis.Object#get_Constructor|"
+external constructor : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Object#get_Constructor|" "ws:WebSharper.JavaScript!globalThis.Object#get_Constructor|"
 (* inline *)
 external keys : Js.t -> (string) array = "ws:WebSharper.JavaScript!globalThis.Object#Keys|System.Object" "ws:WebSharper.JavaScript!globalThis.Object#Keys|System.Object"
 (* inline *)

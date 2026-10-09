@@ -5,25 +5,25 @@ external toExponential : t -> string = "ws:WebSharper.JavaScript!globalThis.Numb
 (* inline *)
 external toFixed : t -> string = "ws:WebSharper.JavaScript!globalThis.Number#ToFixed|" "ws:WebSharper.JavaScript!globalThis.Number#ToFixed|"
 (* inline *)
-external get_Prototype : unit -> Object2.t = "ws:WebSharper.JavaScript!globalThis.Number#get_Prototype|" "ws:WebSharper.JavaScript!globalThis.Number#get_Prototype|"
+external prototype : unit -> Object2.t = "ws:WebSharper.JavaScript!globalThis.Number#get_Prototype|" "ws:WebSharper.JavaScript!globalThis.Number#get_Prototype|"
 (* inline *)
-external get_MIN_SAFE_INTEGER : unit -> float = "ws:WebSharper.JavaScript!globalThis.Number#get_MIN_SAFE_INTEGER|" "ws:WebSharper.JavaScript!globalThis.Number#get_MIN_SAFE_INTEGER|"
+external mIN_SAFE_INTEGER : unit -> float = "ws:WebSharper.JavaScript!globalThis.Number#get_MIN_SAFE_INTEGER|" "ws:WebSharper.JavaScript!globalThis.Number#get_MIN_SAFE_INTEGER|"
 (* inline *)
-external get_MAX_SAFE_INTEGER : unit -> float = "ws:WebSharper.JavaScript!globalThis.Number#get_MAX_SAFE_INTEGER|" "ws:WebSharper.JavaScript!globalThis.Number#get_MAX_SAFE_INTEGER|"
+external mAX_SAFE_INTEGER : unit -> float = "ws:WebSharper.JavaScript!globalThis.Number#get_MAX_SAFE_INTEGER|" "ws:WebSharper.JavaScript!globalThis.Number#get_MAX_SAFE_INTEGER|"
 (* inline *)
-external get_EPSILON : unit -> float = "ws:WebSharper.JavaScript!globalThis.Number#get_EPSILON|" "ws:WebSharper.JavaScript!globalThis.Number#get_EPSILON|"
+external ePSILON : unit -> float = "ws:WebSharper.JavaScript!globalThis.Number#get_EPSILON|" "ws:WebSharper.JavaScript!globalThis.Number#get_EPSILON|"
 (* inline *)
-external get_POSITIVE_INFINITY : unit -> float = "ws:WebSharper.JavaScript!globalThis.Number#get_POSITIVE_INFINITY|" "ws:WebSharper.JavaScript!globalThis.Number#get_POSITIVE_INFINITY|"
+external pOSITIVE_INFINITY : unit -> float = "ws:WebSharper.JavaScript!globalThis.Number#get_POSITIVE_INFINITY|" "ws:WebSharper.JavaScript!globalThis.Number#get_POSITIVE_INFINITY|"
 (* inline *)
-external get_NEGATIVE_INFINITY : unit -> float = "ws:WebSharper.JavaScript!globalThis.Number#get_NEGATIVE_INFINITY|" "ws:WebSharper.JavaScript!globalThis.Number#get_NEGATIVE_INFINITY|"
+external nEGATIVE_INFINITY : unit -> float = "ws:WebSharper.JavaScript!globalThis.Number#get_NEGATIVE_INFINITY|" "ws:WebSharper.JavaScript!globalThis.Number#get_NEGATIVE_INFINITY|"
 (* inline *)
-external get_NaN : unit -> float = "ws:WebSharper.JavaScript!globalThis.Number#get_NaN|" "ws:WebSharper.JavaScript!globalThis.Number#get_NaN|"
+external naN : unit -> float = "ws:WebSharper.JavaScript!globalThis.Number#get_NaN|" "ws:WebSharper.JavaScript!globalThis.Number#get_NaN|"
 (* inline *)
-external get_MIN_VALUE : unit -> float = "ws:WebSharper.JavaScript!globalThis.Number#get_MIN_VALUE|" "ws:WebSharper.JavaScript!globalThis.Number#get_MIN_VALUE|"
+external mIN_VALUE : unit -> float = "ws:WebSharper.JavaScript!globalThis.Number#get_MIN_VALUE|" "ws:WebSharper.JavaScript!globalThis.Number#get_MIN_VALUE|"
 (* inline *)
-external get_MAX_VALUE : unit -> float = "ws:WebSharper.JavaScript!globalThis.Number#get_MAX_VALUE|" "ws:WebSharper.JavaScript!globalThis.Number#get_MAX_VALUE|"
+external mAX_VALUE : unit -> float = "ws:WebSharper.JavaScript!globalThis.Number#get_MAX_VALUE|" "ws:WebSharper.JavaScript!globalThis.Number#get_MAX_VALUE|"
 (* inline *)
-external get_Self : t -> float = "ws:WebSharper.JavaScript!globalThis.Number#get_Self|" "ws:WebSharper.JavaScript!globalThis.Number#get_Self|"
+external self : t -> float = "ws:WebSharper.JavaScript!globalThis.Number#get_Self|" "ws:WebSharper.JavaScript!globalThis.Number#get_Self|"
 (* inline *)
 external parseInt : string -> int = "ws:WebSharper.JavaScript!globalThis.Number#ParseInt|System.String" "ws:WebSharper.JavaScript!globalThis.Number#ParseInt|System.String"
 (* inline *)

@@ -5,54 +5,54 @@ external reportValidity : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLB
 (* inline *)
 external checkValidity : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#CheckValidity|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#CheckValidity|"
 (* inline *)
-external get_Labels : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Labels|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Labels|"
+external labels : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Labels|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Labels|"
 (* inline *)
-external get_ValidationMessage : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_ValidationMessage|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_ValidationMessage|"
+external validationMessage : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_ValidationMessage|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_ValidationMessage|"
 (* inline *)
-external get_Validity : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Validity|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Validity|"
+external validity : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Validity|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Validity|"
 (* inline *)
-external get_WillValidate : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_WillValidate|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_WillValidate|"
+external willValidate : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_WillValidate|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_WillValidate|"
 (* inline *)
-external get_Menu : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Menu|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Menu|"
+external menu : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Menu|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Menu|"
 (* inline *)
-external get_Value : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Value|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Value|"
+external value : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Value|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Value|"
 (* inline *)
-external get_Type : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Type|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Type|"
+external type_ : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Type|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Type|"
 (* inline *)
-external get_Name : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Name|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Name|"
+external name : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Name|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Name|"
 (* inline *)
-external get_FormTarget : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_FormTarget|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_FormTarget|"
+external formTarget : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_FormTarget|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_FormTarget|"
 (* inline *)
-external get_FormMethod : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_FormMethod|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_FormMethod|"
+external formMethod : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_FormMethod|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_FormMethod|"
 (* inline *)
-external get_FormEnctype : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_FormEnctype|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_FormEnctype|"
+external formEnctype : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_FormEnctype|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_FormEnctype|"
 (* inline *)
-external get_FormAction : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_FormAction|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_FormAction|"
+external formAction : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_FormAction|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_FormAction|"
 (* inline *)
-external get_Form : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Form|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Form|"
+external form : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Form|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Form|"
 (* inline *)
-external get_Disabled : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Disabled|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Disabled|"
+external disabled : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Disabled|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Disabled|"
 (* inline *)
-external get_Autofocus : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Autofocus|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Autofocus|"
+external autofocus : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Autofocus|" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#get_Autofocus|"
 (* inline *)
 external setCustomValidity : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#SetCustomValidity|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#SetCustomValidity|System.String"
 (* inline *)
-external set_Menu : t -> EventTarget.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_Menu|WebSharper.JavaScript.HTMLMenuElement" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_Menu|WebSharper.JavaScript.HTMLMenuElement"
+external set_menu : t -> EventTarget.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_Menu|WebSharper.JavaScript.HTMLMenuElement" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_Menu|WebSharper.JavaScript.HTMLMenuElement"
 (* inline *)
-external set_Value : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_Value|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_Value|System.String"
+external set_value : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_Value|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_Value|System.String"
 (* inline *)
-external set_Type : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_Type|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_Type|System.String"
+external set_type : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_Type|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_Type|System.String"
 (* inline *)
-external set_Name : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_Name|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_Name|System.String"
+external set_name : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_Name|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_Name|System.String"
 (* inline *)
-external set_FormTarget : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_FormTarget|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_FormTarget|System.String"
+external set_formTarget : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_FormTarget|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_FormTarget|System.String"
 (* inline *)
-external set_FormMethod : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_FormMethod|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_FormMethod|System.String"
+external set_formMethod : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_FormMethod|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_FormMethod|System.String"
 (* inline *)
-external set_FormEnctype : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_FormEnctype|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_FormEnctype|System.String"
+external set_formEnctype : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_FormEnctype|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_FormEnctype|System.String"
 (* inline *)
-external set_FormAction : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_FormAction|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_FormAction|System.String"
+external set_formAction : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_FormAction|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_FormAction|System.String"
 (* inline *)
-external set_Disabled : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_Disabled|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_Disabled|System.Boolean"
+external set_disabled : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_Disabled|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_Disabled|System.Boolean"
 (* inline *)
-external set_Autofocus : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_Autofocus|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_Autofocus|System.Boolean"
+external set_autofocus : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_Autofocus|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLButtonElement#set_Autofocus|System.Boolean"

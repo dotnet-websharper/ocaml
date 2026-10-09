@@ -31,6 +31,6 @@ external any : (('a) t) array -> ('a) t = "ws:WebSharper.JavaScript!globalThis.P
 (* inline *)
 external all : (('a) t) array -> (('a) array) t = "ws:WebSharper.JavaScript!globalThis.Promise#All|WebSharper.JavaScript.Promise`1<'0>[]" "ws:WebSharper.JavaScript!globalThis.Promise#All|WebSharper.JavaScript.Promise`1<'0>[]"
 (* inline *)
-external create : Js.t -> ('a) t = "wsnew:WebSharper.JavaScript!globalThis.Promise" "wsnew:WebSharper.JavaScript!globalThis.Promise"
+external create : (('a -> unit) * (Js.t -> unit) -> unit) -> ('a) t = "wsnew:WebSharper.JavaScript!globalThis.Promise" "wsnew:WebSharper.JavaScript!globalThis.Promise"
 (* inline *)
 external create_2 : Js.t -> ('a) t = "wsnew:WebSharper.JavaScript!globalThis.Promise" "wsnew:WebSharper.JavaScript!globalThis.Promise"

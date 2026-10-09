@@ -9,11 +9,11 @@ external before : t -> unit = "ws:WebSharper.JavaScript!globalThis.DocumentType#
 (* inline *)
 external after : t -> unit = "ws:WebSharper.JavaScript!globalThis.DocumentType#After|" "ws:WebSharper.JavaScript!globalThis.DocumentType#After|"
 (* inline *)
-external get_SystemId : t -> string = "ws:WebSharper.JavaScript!globalThis.DocumentType#get_SystemId|" "ws:WebSharper.JavaScript!globalThis.DocumentType#get_SystemId|"
+external systemId : t -> string = "ws:WebSharper.JavaScript!globalThis.DocumentType#get_SystemId|" "ws:WebSharper.JavaScript!globalThis.DocumentType#get_SystemId|"
 (* inline *)
-external get_PublicId : t -> string = "ws:WebSharper.JavaScript!globalThis.DocumentType#get_PublicId|" "ws:WebSharper.JavaScript!globalThis.DocumentType#get_PublicId|"
+external publicId : t -> string = "ws:WebSharper.JavaScript!globalThis.DocumentType#get_PublicId|" "ws:WebSharper.JavaScript!globalThis.DocumentType#get_PublicId|"
 (* inline *)
-external get_Name : t -> string = "ws:WebSharper.JavaScript!globalThis.DocumentType#get_Name|" "ws:WebSharper.JavaScript!globalThis.DocumentType#get_Name|"
+external name : t -> string = "ws:WebSharper.JavaScript!globalThis.DocumentType#get_Name|" "ws:WebSharper.JavaScript!globalThis.DocumentType#get_Name|"
 (* inline *)
 external replaceWith_2 : t -> (string) array -> unit = "ws:WebSharper.JavaScript!globalThis.DocumentType#ReplaceWith|System.String[]" "ws:WebSharper.JavaScript!globalThis.DocumentType#ReplaceWith|System.String[]"
 (* inline *)

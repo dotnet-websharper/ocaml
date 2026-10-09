@@ -9,7 +9,7 @@ external get : t -> string -> Js.t = "ws:WebSharper.JavaScript!globalThis.FormDa
 (* inline *)
 external delete : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.FormData#Delete|System.String" "ws:WebSharper.JavaScript!globalThis.FormData#Delete|System.String"
 (* inline *)
-external get_Item : t -> string -> Js.t = "ws:WebSharper.JavaScript!globalThis.FormData#get_Item|System.String" "ws:WebSharper.JavaScript!globalThis.FormData#get_Item|System.String"
+external item : t -> string -> Js.t = "ws:WebSharper.JavaScript!globalThis.FormData#get_Item|System.String" "ws:WebSharper.JavaScript!globalThis.FormData#get_Item|System.String"
 (* inline *)
 external set : t -> string -> Blob.t -> unit = "ws:WebSharper.JavaScript!globalThis.FormData#Set|System.String|WebSharper.JavaScript.Blob" "ws:WebSharper.JavaScript!globalThis.FormData#Set|System.String|WebSharper.JavaScript.Blob"
 (* inline *)
@@ -19,7 +19,7 @@ external append : t -> string -> Blob.t -> unit = "ws:WebSharper.JavaScript!glob
 (* inline *)
 external append_2 : t -> string -> string -> unit = "ws:WebSharper.JavaScript!globalThis.FormData#Append|System.String|System.String" "ws:WebSharper.JavaScript!globalThis.FormData#Append|System.String|System.String"
 (* inline *)
-external set_Item : t -> string -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.FormData#set_Item|System.String|WebSharper.JavaScript.Union`2<WebSharper.JavaScript.File,System.String>" "ws:WebSharper.JavaScript!globalThis.FormData#set_Item|System.String|WebSharper.JavaScript.Union`2<WebSharper.JavaScript.File,System.String>"
+external set_item : t -> string -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.FormData#set_Item|System.String|WebSharper.JavaScript.Union`2<WebSharper.JavaScript.File,System.String>" "ws:WebSharper.JavaScript!globalThis.FormData#set_Item|System.String|WebSharper.JavaScript.Union`2<WebSharper.JavaScript.File,System.String>"
 (* inline *)
 external set_3 : t -> string -> Blob.t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.FormData#Set|System.String|WebSharper.JavaScript.Blob|System.String" "ws:WebSharper.JavaScript!globalThis.FormData#Set|System.String|WebSharper.JavaScript.Blob|System.String"
 (* inline *)

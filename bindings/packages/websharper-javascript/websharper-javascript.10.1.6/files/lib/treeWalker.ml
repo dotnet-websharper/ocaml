@@ -15,12 +15,12 @@ external firstChild : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.
 (* inline *)
 external parentNode : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.TreeWalker#ParentNode|" "ws:WebSharper.JavaScript!globalThis.TreeWalker#ParentNode|"
 (* inline *)
-external get_CurrentNode : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.TreeWalker#get_CurrentNode|" "ws:WebSharper.JavaScript!globalThis.TreeWalker#get_CurrentNode|"
+external currentNode : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.TreeWalker#get_CurrentNode|" "ws:WebSharper.JavaScript!globalThis.TreeWalker#get_CurrentNode|"
 (* inline *)
-external get_Filter : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.TreeWalker#get_Filter|" "ws:WebSharper.JavaScript!globalThis.TreeWalker#get_Filter|"
+external filter : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.TreeWalker#get_Filter|" "ws:WebSharper.JavaScript!globalThis.TreeWalker#get_Filter|"
 (* inline *)
-external get_WhatToShow : t -> int = "ws:WebSharper.JavaScript!globalThis.TreeWalker#get_WhatToShow|" "ws:WebSharper.JavaScript!globalThis.TreeWalker#get_WhatToShow|"
+external whatToShow : t -> int = "ws:WebSharper.JavaScript!globalThis.TreeWalker#get_WhatToShow|" "ws:WebSharper.JavaScript!globalThis.TreeWalker#get_WhatToShow|"
 (* inline *)
-external get_Root : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.TreeWalker#get_Root|" "ws:WebSharper.JavaScript!globalThis.TreeWalker#get_Root|"
+external root : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.TreeWalker#get_Root|" "ws:WebSharper.JavaScript!globalThis.TreeWalker#get_Root|"
 (* inline *)
-external set_CurrentNode : t -> EventTarget.t -> unit = "ws:WebSharper.JavaScript!globalThis.TreeWalker#set_CurrentNode|WebSharper.JavaScript.Dom.Node" "ws:WebSharper.JavaScript!globalThis.TreeWalker#set_CurrentNode|WebSharper.JavaScript.Dom.Node"
+external set_currentNode : t -> EventTarget.t -> unit = "ws:WebSharper.JavaScript!globalThis.TreeWalker#set_CurrentNode|WebSharper.JavaScript.Dom.Node" "ws:WebSharper.JavaScript!globalThis.TreeWalker#set_CurrentNode|WebSharper.JavaScript.Dom.Node"

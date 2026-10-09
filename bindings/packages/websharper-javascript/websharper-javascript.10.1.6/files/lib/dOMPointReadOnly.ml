@@ -5,13 +5,13 @@ external matrixTransform : t -> t = "ws:WebSharper.JavaScript!globalThis.DOMPoin
 (* inline *)
 external fromPoint : unit -> t = "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#FromPoint|" "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#FromPoint|"
 (* inline *)
-external get_W : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#get_W|" "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#get_W|"
+external w : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#get_W|" "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#get_W|"
 (* inline *)
-external get_Z : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#get_Z|" "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#get_Z|"
+external z : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#get_Z|" "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#get_Z|"
 (* inline *)
-external get_Y : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#get_Y|" "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#get_Y|"
+external y : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#get_Y|" "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#get_Y|"
 (* inline *)
-external get_X : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#get_X|" "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#get_X|"
+external x : t -> float = "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#get_X|" "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#get_X|"
 (* inline *)
 external matrixTransform_2 : t -> DOMMatrix2DInit.t -> t = "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#MatrixTransform|WebSharper.JavaScript.DOMMatrixInit" "ws:WebSharper.JavaScript!globalThis.DOMPointReadOnly#MatrixTransform|WebSharper.JavaScript.DOMMatrixInit"
 (* inline *)

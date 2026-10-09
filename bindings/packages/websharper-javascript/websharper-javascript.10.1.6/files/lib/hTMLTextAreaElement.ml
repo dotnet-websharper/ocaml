@@ -7,107 +7,107 @@ external reportValidity : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLT
 (* inline *)
 external checkValidity : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#CheckValidity|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#CheckValidity|"
 (* inline *)
-external get_SelectionDirection : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_SelectionDirection|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_SelectionDirection|"
+external selectionDirection : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_SelectionDirection|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_SelectionDirection|"
 (* inline *)
-external get_SelectionEnd : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_SelectionEnd|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_SelectionEnd|"
+external selectionEnd : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_SelectionEnd|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_SelectionEnd|"
 (* inline *)
-external get_SelectionStart : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_SelectionStart|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_SelectionStart|"
+external selectionStart : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_SelectionStart|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_SelectionStart|"
 (* inline *)
-external get_Labels : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Labels|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Labels|"
+external labels : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Labels|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Labels|"
 (* inline *)
-external get_ValidationMessage : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_ValidationMessage|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_ValidationMessage|"
+external validationMessage : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_ValidationMessage|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_ValidationMessage|"
 (* inline *)
-external get_Validity : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Validity|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Validity|"
+external validity : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Validity|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Validity|"
 (* inline *)
-external get_WillValidate : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_WillValidate|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_WillValidate|"
+external willValidate : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_WillValidate|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_WillValidate|"
 (* inline *)
-external get_DefaultValue : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_DefaultValue|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_DefaultValue|"
+external defaultValue : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_DefaultValue|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_DefaultValue|"
 (* inline *)
-external get_TextLength : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_TextLength|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_TextLength|"
+external textLength : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_TextLength|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_TextLength|"
 (* inline *)
-external get_Value : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Value|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Value|"
+external value : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Value|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Value|"
 (* inline *)
-external get_Type : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Type|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Type|"
+external type_ : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Type|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Type|"
 (* inline *)
-external get_Wrap : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Wrap|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Wrap|"
+external wrap : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Wrap|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Wrap|"
 (* inline *)
-external get_Rows : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Rows|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Rows|"
+external rows : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Rows|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Rows|"
 (* inline *)
-external get_Required : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Required|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Required|"
+external required : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Required|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Required|"
 (* inline *)
-external get_ReadOnly : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_ReadOnly|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_ReadOnly|"
+external readOnly : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_ReadOnly|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_ReadOnly|"
 (* inline *)
-external get_Placeholder : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Placeholder|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Placeholder|"
+external placeholder : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Placeholder|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Placeholder|"
 (* inline *)
-external get_Name : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Name|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Name|"
+external name : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Name|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Name|"
 (* inline *)
-external get_MinLength : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_MinLength|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_MinLength|"
+external minLength : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_MinLength|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_MinLength|"
 (* inline *)
-external get_MaxLength : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_MaxLength|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_MaxLength|"
+external maxLength : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_MaxLength|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_MaxLength|"
 (* inline *)
-external get_InputMode : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_InputMode|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_InputMode|"
+external inputMode : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_InputMode|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_InputMode|"
 (* inline *)
-external get_Form : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Form|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Form|"
+external form : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Form|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Form|"
 (* inline *)
-external get_Disabled : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Disabled|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Disabled|"
+external disabled : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Disabled|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Disabled|"
 (* inline *)
-external get_DirName : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_DirName|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_DirName|"
+external dirName : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_DirName|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_DirName|"
 (* inline *)
-external get_Checked : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Checked|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Checked|"
+external checked : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Checked|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Checked|"
 (* inline *)
-external get_Cols : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Cols|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Cols|"
+external cols : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Cols|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Cols|"
 (* inline *)
-external get_Autofocus : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Autofocus|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Autofocus|"
+external autofocus : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Autofocus|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Autofocus|"
 (* inline *)
-external get_Autocomplete : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Autocomplete|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Autocomplete|"
+external autocomplete : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Autocomplete|" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#get_Autocomplete|"
 (* inline *)
 external setRangeText : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#SetRangeText|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#SetRangeText|System.String"
 (* inline *)
 external setCustomValidity : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#SetCustomValidity|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#SetCustomValidity|System.String"
 (* inline *)
-external set_SelectionDirection : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_SelectionDirection|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_SelectionDirection|System.String"
+external set_selectionDirection : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_SelectionDirection|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_SelectionDirection|System.String"
 (* inline *)
-external set_SelectionEnd : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_SelectionEnd|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_SelectionEnd|System.Int32"
+external set_selectionEnd : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_SelectionEnd|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_SelectionEnd|System.Int32"
 (* inline *)
-external set_SelectionStart : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_SelectionStart|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_SelectionStart|System.Int32"
+external set_selectionStart : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_SelectionStart|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_SelectionStart|System.Int32"
 (* inline *)
-external set_DefaultValue : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_DefaultValue|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_DefaultValue|System.String"
+external set_defaultValue : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_DefaultValue|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_DefaultValue|System.String"
 (* inline *)
-external set_TextLength : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_TextLength|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_TextLength|System.Int32"
+external set_textLength : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_TextLength|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_TextLength|System.Int32"
 (* inline *)
-external set_Value : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Value|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Value|System.String"
+external set_value : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Value|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Value|System.String"
 (* inline *)
-external set_Type : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Type|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Type|System.String"
+external set_type : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Type|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Type|System.String"
 (* inline *)
-external set_Wrap : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Wrap|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Wrap|System.String"
+external set_wrap : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Wrap|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Wrap|System.String"
 (* inline *)
-external set_Rows : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Rows|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Rows|System.Int32"
+external set_rows : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Rows|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Rows|System.Int32"
 (* inline *)
-external set_Required : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Required|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Required|System.Boolean"
+external set_required : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Required|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Required|System.Boolean"
 (* inline *)
-external set_ReadOnly : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_ReadOnly|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_ReadOnly|System.Boolean"
+external set_readOnly : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_ReadOnly|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_ReadOnly|System.Boolean"
 (* inline *)
-external set_Placeholder : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Placeholder|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Placeholder|System.String"
+external set_placeholder : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Placeholder|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Placeholder|System.String"
 (* inline *)
-external set_Name : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Name|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Name|System.String"
+external set_name : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Name|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Name|System.String"
 (* inline *)
-external set_MinLength : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_MinLength|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_MinLength|System.Int32"
+external set_minLength : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_MinLength|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_MinLength|System.Int32"
 (* inline *)
-external set_MaxLength : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_MaxLength|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_MaxLength|System.Int32"
+external set_maxLength : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_MaxLength|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_MaxLength|System.Int32"
 (* inline *)
-external set_InputMode : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_InputMode|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_InputMode|System.String"
+external set_inputMode : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_InputMode|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_InputMode|System.String"
 (* inline *)
-external set_Disabled : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Disabled|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Disabled|System.Boolean"
+external set_disabled : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Disabled|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Disabled|System.Boolean"
 (* inline *)
-external set_DirName : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_DirName|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_DirName|System.String"
+external set_dirName : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_DirName|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_DirName|System.String"
 (* inline *)
-external set_Checked : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Checked|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Checked|System.Boolean"
+external set_checked : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Checked|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Checked|System.Boolean"
 (* inline *)
-external set_Cols : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Cols|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Cols|System.Int32"
+external set_cols : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Cols|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Cols|System.Int32"
 (* inline *)
-external set_Autofocus : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Autofocus|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Autofocus|System.Boolean"
+external set_autofocus : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Autofocus|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Autofocus|System.Boolean"
 (* inline *)
-external set_Autocomplete : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Autocomplete|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Autocomplete|System.String"
+external set_autocomplete : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Autocomplete|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#set_Autocomplete|System.String"
 (* inline *)
 external setSelectionRange : t -> int -> int -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#SetSelectionRange|System.Int32|System.Int32|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLTextAreaElement#SetSelectionRange|System.Int32|System.Int32|System.String"
 (* inline *)

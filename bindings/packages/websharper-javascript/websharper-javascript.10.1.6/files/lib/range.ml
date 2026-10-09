@@ -13,25 +13,25 @@ external deleteContents : t -> unit = "ws:WebSharper.JavaScript!globalThis.Range
 (* inline *)
 external collapse : t -> unit = "ws:WebSharper.JavaScript!globalThis.Range#Collapse|" "ws:WebSharper.JavaScript!globalThis.Range#Collapse|"
 (* inline *)
-external get_CommonAncestorContainer : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Range#get_CommonAncestorContainer|" "ws:WebSharper.JavaScript!globalThis.Range#get_CommonAncestorContainer|"
+external commonAncestorContainer : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Range#get_CommonAncestorContainer|" "ws:WebSharper.JavaScript!globalThis.Range#get_CommonAncestorContainer|"
 (* inline *)
-external get_Collapsed : t -> bool = "ws:WebSharper.JavaScript!globalThis.Range#get_Collapsed|" "ws:WebSharper.JavaScript!globalThis.Range#get_Collapsed|"
+external collapsed : t -> bool = "ws:WebSharper.JavaScript!globalThis.Range#get_Collapsed|" "ws:WebSharper.JavaScript!globalThis.Range#get_Collapsed|"
 (* inline *)
-external get_EndOffset : t -> int = "ws:WebSharper.JavaScript!globalThis.Range#get_EndOffset|" "ws:WebSharper.JavaScript!globalThis.Range#get_EndOffset|"
+external endOffset : t -> int = "ws:WebSharper.JavaScript!globalThis.Range#get_EndOffset|" "ws:WebSharper.JavaScript!globalThis.Range#get_EndOffset|"
 (* inline *)
-external get_EndContainer : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Range#get_EndContainer|" "ws:WebSharper.JavaScript!globalThis.Range#get_EndContainer|"
+external endContainer : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Range#get_EndContainer|" "ws:WebSharper.JavaScript!globalThis.Range#get_EndContainer|"
 (* inline *)
-external get_StartOffset : t -> int = "ws:WebSharper.JavaScript!globalThis.Range#get_StartOffset|" "ws:WebSharper.JavaScript!globalThis.Range#get_StartOffset|"
+external startOffset : t -> int = "ws:WebSharper.JavaScript!globalThis.Range#get_StartOffset|" "ws:WebSharper.JavaScript!globalThis.Range#get_StartOffset|"
 (* inline *)
-external get_StartContainer : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Range#get_StartContainer|" "ws:WebSharper.JavaScript!globalThis.Range#get_StartContainer|"
+external startContainer : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Range#get_StartContainer|" "ws:WebSharper.JavaScript!globalThis.Range#get_StartContainer|"
 (* inline *)
-external get_END_TO_START : unit -> int = "ws:WebSharper.JavaScript!globalThis.Range#get_END_TO_START|" "ws:WebSharper.JavaScript!globalThis.Range#get_END_TO_START|"
+external eND_TO_START : unit -> int = "ws:WebSharper.JavaScript!globalThis.Range#get_END_TO_START|" "ws:WebSharper.JavaScript!globalThis.Range#get_END_TO_START|"
 (* inline *)
-external get_END_TO_END : unit -> int = "ws:WebSharper.JavaScript!globalThis.Range#get_END_TO_END|" "ws:WebSharper.JavaScript!globalThis.Range#get_END_TO_END|"
+external eND_TO_END : unit -> int = "ws:WebSharper.JavaScript!globalThis.Range#get_END_TO_END|" "ws:WebSharper.JavaScript!globalThis.Range#get_END_TO_END|"
 (* inline *)
-external get_START_TO_END : unit -> int = "ws:WebSharper.JavaScript!globalThis.Range#get_START_TO_END|" "ws:WebSharper.JavaScript!globalThis.Range#get_START_TO_END|"
+external sTART_TO_END : unit -> int = "ws:WebSharper.JavaScript!globalThis.Range#get_START_TO_END|" "ws:WebSharper.JavaScript!globalThis.Range#get_START_TO_END|"
 (* inline *)
-external get_START_TO_START : unit -> int = "ws:WebSharper.JavaScript!globalThis.Range#get_START_TO_START|" "ws:WebSharper.JavaScript!globalThis.Range#get_START_TO_START|"
+external sTART_TO_START : unit -> int = "ws:WebSharper.JavaScript!globalThis.Range#get_START_TO_START|" "ws:WebSharper.JavaScript!globalThis.Range#get_START_TO_START|"
 (* inline *)
 external intersectsNode : t -> EventTarget.t -> bool = "ws:WebSharper.JavaScript!globalThis.Range#IntersectsNode|WebSharper.JavaScript.Dom.Node" "ws:WebSharper.JavaScript!globalThis.Range#IntersectsNode|WebSharper.JavaScript.Dom.Node"
 (* inline *)

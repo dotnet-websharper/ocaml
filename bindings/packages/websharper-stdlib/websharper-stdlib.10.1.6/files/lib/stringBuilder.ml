@@ -3,7 +3,7 @@ type t = Object.t
 (* instance *)
 external toString : t -> string = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#ToString|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#ToString|"
 (* instance *)
-external get_Length : t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#get_Length|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#get_Length|"
+external length : t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#get_Length|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#get_Length|"
 (* instance *)
 external clear : t -> Object.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#Clear|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#Clear|"
 (* inline *)
@@ -33,7 +33,7 @@ external append_12 : t -> bool -> Object.t = "ws:WebSharper.StdLib!WebSharper.St
 (* inline *)
 external append_13 : t -> char -> Object.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#Append|System.Char" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#Append|System.Char"
 (* instance *)
-external get_Chars : t -> int -> char = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#get_Chars|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#get_Chars|System.Int32"
+external chars : t -> int -> char = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#get_Chars|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#get_Chars|System.Int32"
 (* instance *)
 external appendLine : t -> string -> Object.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#AppendLine|System.String" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#AppendLine|System.String"
 (* instance *)
@@ -73,7 +73,7 @@ external remove : t -> int -> int -> Object.t = "ws:WebSharper.StdLib!WebSharper
 (* instance *)
 external insert_14 : t -> int -> string -> Object.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#Insert|System.Int32|System.String" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#Insert|System.Int32|System.String"
 (* instance *)
-external set_Chars : t -> int -> char -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#set_Chars|System.Int32|System.Char" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#set_Chars|System.Int32|System.Char"
+external set_chars : t -> int -> char -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#set_Chars|System.Int32|System.Char" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#set_Chars|System.Int32|System.Char"
 (* inline *)
 external replace_3 : t -> char -> char -> int -> int -> Object.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#Replace|System.Char|System.Char|System.Int32|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Text.StringBuilder::default#Replace|System.Char|System.Char|System.Int32|System.Int32"
 (* instance *)

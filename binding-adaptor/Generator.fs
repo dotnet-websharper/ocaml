@@ -26,7 +26,7 @@ let private keywords =
           "match"; "method"; "module"; "mutable"; "new"; "object"; "of"; "open"; "or"
           "private"; "rec"; "sig"; "struct"; "then"; "to"; "true"; "try"; "type"
           "val"; "virtual"; "when"; "while"; "with"; "nonrec"; "land"; "lor"; "lxor"
-          "lsl"; "lsr"; "asr"; "mod" ]
+          "lsl"; "lsr"; "asr"; "mod"; "effect" ]
 
 let lowerFirst (s: string) =
     if String.IsNullOrEmpty s then s
@@ -36,12 +36,27 @@ let upperFirst (s: string) =
     if String.IsNullOrEmpty s then s
     else string (Char.ToUpper s.[0]) + s.Substring(1)
 
+// WebSharper encodes properties as `get_X`/`set_X` accessor methods; collapse
+// them to the property name (`get_Empty` -> `empty`, `set_Value` -> `set_value`).
+// Only when the part after the prefix starts uppercase, so real methods named
+// e.g. `get_value` are left alone.
+let memberName (ws: string) =
+    let accessor (prefix: string) =
+        ws.StartsWith prefix
+        && ws.Length > prefix.Length
+        && Char.IsUpper ws.[prefix.Length]
+    if accessor "get_" then lowerFirst (ws.Substring 4)
+    elif accessor "set_" then "set_" + lowerFirst (ws.Substring 4)
+    else lowerFirst ws
+
 let sanitize (s: string) =
     let sb = StringBuilder()
     for c in s do
         if Char.IsLetterOrDigit c || c = '_' || c = '\'' then sb.Append c |> ignore
     let r = sb.ToString()
     let r = if r = "" then "x" else r
+    // Value names must start with a lowercase letter or underscore.
+    let r = lowerFirst r
     let r = if Char.IsDigit r.[0] then "_" + r else r
     if keywords.Contains r then r + "_" else r
 
@@ -77,7 +92,11 @@ type TypeEnv =
       RepOf: string -> string option
       ExternalByFull: Map<string, string * int * string>
       ExternalSimple: Map<string, string * int * string>
-      Deps: System.Collections.Generic.HashSet<string> }
+      Deps: System.Collections.Generic.HashSet<string>
+      // Types that a [<Proxy>] provides the JS representation for: their
+      // proxy-injected representation members must not surface as API.
+      ProxiedTargets: Set<string>
+      CustomOf: string -> CustomTypeInfo }
 
 let rec mapType (ctx: TypeCtx) (t: Type) : string =
     match t with
@@ -106,7 +125,7 @@ let rec mapType (ctx: TypeCtx) (t: Type) : string =
     | Type.TypeParameter i -> typeParamName i
     | Type.ArrayType(e, _) -> "(" + mapType ctx e + ") array"
     | Type.TupleType(ts, _) -> String.concat " * " (ts |> List.map (mapType ctx))
-    | Type.FSharpFuncType _ -> "Js.t"
+    | Type.FSharpFuncType(a, b) -> "(" + mapType ctx a + " -> " + mapType ctx b + ")"
     | Type.ByRefType u -> mapType ctx u
     | _ -> "Js.t"
 
@@ -124,6 +143,15 @@ let rec typeDisplay (t: Type) : string =
     | Type.FSharpFuncType _ -> "fn"
     | Type.ByRefType u -> typeDisplay u
     | _ -> "?"
+
+// A quotation-typed parameter (`Expr<...>`) can never be supplied from OCaml.
+let rec isQuotationType (t: Type) =
+    match t with
+    | Type.ConcreteType c -> c.Entity.Value.FullName.StartsWith "Microsoft.FSharp.Quotations.FSharpExpr"
+    | Type.FSharpFuncType(a, b) -> isQuotationType a || isQuotationType b
+    | Type.ArrayType(e, _) -> isQuotationType e
+    | Type.ByRefType u -> isQuotationType u
+    | _ -> false
 
 let methodKinds (m: CompiledMember) =
     [ if m.IsStatic then "static"
@@ -340,6 +368,15 @@ let generateClass
             used.[baseName] <- 1
             baseName
 
+    // A [<Proxy>] type supplies the JS representation for its target; the
+    // proxy's union cases therefore show up on the target as `New<Case>`
+    // constructors. They are internal representation, not API.
+    let isProxyReprMember (mi: MethodInfo) =
+        env.ProxiedTargets.Contains td.FullName
+        && (match env.CustomOf td.FullName with
+            | FSharpUnionInfo u -> u.Cases |> List.exists (fun c -> mi.MethodName = "New" + c.Name)
+            | _ -> false)
+
     let methods =
         ci.Methods
         // Order overloads so the primary (no params-array, richer signature)
@@ -354,7 +391,9 @@ let generateClass
                     sig_ = p || string mi.Parameters.Length = p
                 | None -> false
             (if isPrimary then 0 else 1), (if hasArray then 1 else 0), mi.Parameters.Length)
-        |> Seq.filter (fun kv -> not (isSkipped kv.Key.Value.MethodName))
+        |> Seq.filter (fun kv ->
+            let mi = kv.Key.Value
+            not (isSkipped mi.MethodName) && not (isProxyReprMember mi))
         |> Seq.map (fun kv ->
             let mi = kv.Key.Value
             let cmi = kv.Value
@@ -370,7 +409,7 @@ let generateClass
             let ret = mapType ctx mi.ReturnType
             let name =
                 unique (renameOf mi.MethodName |> Option.map sanitize
-                        |> Option.defaultWith (fun () -> sanitize (lowerFirst mi.MethodName)))
+                        |> Option.defaultWith (fun () -> sanitize (memberName mi.MethodName)))
             let tag =
                 let ps = mi.Parameters |> List.map typeDisplay
                 sprintf "ws:%s#%s|%s" qual mi.MethodName (String.concat "|" ps)

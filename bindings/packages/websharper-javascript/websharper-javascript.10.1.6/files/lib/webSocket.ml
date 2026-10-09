@@ -3,31 +3,31 @@ type t
 (* inline *)
 external close : t -> unit = "ws:WebSharper.JavaScript!globalThis.WebSocket#Close|" "ws:WebSharper.JavaScript!globalThis.WebSocket#Close|"
 (* inline *)
-external get_BinaryType : t -> string = "ws:WebSharper.JavaScript!globalThis.WebSocket#get_BinaryType|" "ws:WebSharper.JavaScript!globalThis.WebSocket#get_BinaryType|"
+external binaryType : t -> string = "ws:WebSharper.JavaScript!globalThis.WebSocket#get_BinaryType|" "ws:WebSharper.JavaScript!globalThis.WebSocket#get_BinaryType|"
 (* inline *)
-external get_OnMessage : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.WebSocket#get_OnMessage|" "ws:WebSharper.JavaScript!globalThis.WebSocket#get_OnMessage|"
+external onMessage : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.WebSocket#get_OnMessage|" "ws:WebSharper.JavaScript!globalThis.WebSocket#get_OnMessage|"
 (* inline *)
-external get_Onmessage : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.WebSocket#get_Onmessage|" "ws:WebSharper.JavaScript!globalThis.WebSocket#get_Onmessage|"
+external onmessage : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.WebSocket#get_Onmessage|" "ws:WebSharper.JavaScript!globalThis.WebSocket#get_Onmessage|"
 (* inline *)
-external get_Protocol : t -> string = "ws:WebSharper.JavaScript!globalThis.WebSocket#get_Protocol|" "ws:WebSharper.JavaScript!globalThis.WebSocket#get_Protocol|"
+external protocol : t -> string = "ws:WebSharper.JavaScript!globalThis.WebSocket#get_Protocol|" "ws:WebSharper.JavaScript!globalThis.WebSocket#get_Protocol|"
 (* inline *)
-external get_Extensions : t -> string = "ws:WebSharper.JavaScript!globalThis.WebSocket#get_Extensions|" "ws:WebSharper.JavaScript!globalThis.WebSocket#get_Extensions|"
+external extensions : t -> string = "ws:WebSharper.JavaScript!globalThis.WebSocket#get_Extensions|" "ws:WebSharper.JavaScript!globalThis.WebSocket#get_Extensions|"
 (* inline *)
-external get_OnError : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.WebSocket#get_OnError|" "ws:WebSharper.JavaScript!globalThis.WebSocket#get_OnError|"
+external onError : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.WebSocket#get_OnError|" "ws:WebSharper.JavaScript!globalThis.WebSocket#get_OnError|"
 (* inline *)
-external get_Onerror : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.WebSocket#get_Onerror|" "ws:WebSharper.JavaScript!globalThis.WebSocket#get_Onerror|"
+external onerror : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.WebSocket#get_Onerror|" "ws:WebSharper.JavaScript!globalThis.WebSocket#get_Onerror|"
 (* inline *)
-external get_OnClose : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.WebSocket#get_OnClose|" "ws:WebSharper.JavaScript!globalThis.WebSocket#get_OnClose|"
+external onClose : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.WebSocket#get_OnClose|" "ws:WebSharper.JavaScript!globalThis.WebSocket#get_OnClose|"
 (* inline *)
-external get_Onclose : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.WebSocket#get_Onclose|" "ws:WebSharper.JavaScript!globalThis.WebSocket#get_Onclose|"
+external onclose : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.WebSocket#get_Onclose|" "ws:WebSharper.JavaScript!globalThis.WebSocket#get_Onclose|"
 (* inline *)
-external get_OnOpen : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.WebSocket#get_OnOpen|" "ws:WebSharper.JavaScript!globalThis.WebSocket#get_OnOpen|"
+external onOpen : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.WebSocket#get_OnOpen|" "ws:WebSharper.JavaScript!globalThis.WebSocket#get_OnOpen|"
 (* inline *)
-external get_Onopen : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.WebSocket#get_Onopen|" "ws:WebSharper.JavaScript!globalThis.WebSocket#get_Onopen|"
+external onopen : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.WebSocket#get_Onopen|" "ws:WebSharper.JavaScript!globalThis.WebSocket#get_Onopen|"
 (* inline *)
-external get_BufferedAmount : t -> int = "ws:WebSharper.JavaScript!globalThis.WebSocket#get_BufferedAmount|" "ws:WebSharper.JavaScript!globalThis.WebSocket#get_BufferedAmount|"
+external bufferedAmount : t -> int = "ws:WebSharper.JavaScript!globalThis.WebSocket#get_BufferedAmount|" "ws:WebSharper.JavaScript!globalThis.WebSocket#get_BufferedAmount|"
 (* inline *)
-external get_ReadyState : t -> WebSocketReadyState.t = "ws:WebSharper.JavaScript!globalThis.WebSocket#get_ReadyState|" "ws:WebSharper.JavaScript!globalThis.WebSocket#get_ReadyState|"
+external readyState : t -> WebSocketReadyState.t = "ws:WebSharper.JavaScript!globalThis.WebSocket#get_ReadyState|" "ws:WebSharper.JavaScript!globalThis.WebSocket#get_ReadyState|"
 (* inline *)
 external send : t -> Blob.t -> unit = "ws:WebSharper.JavaScript!globalThis.WebSocket#Send|WebSharper.JavaScript.Blob" "ws:WebSharper.JavaScript!globalThis.WebSocket#Send|WebSharper.JavaScript.Blob"
 (* inline *)
@@ -37,23 +37,23 @@ external send_3 : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Web
 (* inline *)
 external close_2 : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.WebSocket#Close|System.Int32" "ws:WebSharper.JavaScript!globalThis.WebSocket#Close|System.Int32"
 (* inline *)
-external set_BinaryType : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.WebSocket#set_BinaryType|System.String" "ws:WebSharper.JavaScript!globalThis.WebSocket#set_BinaryType|System.String"
+external set_binaryType : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.WebSocket#set_BinaryType|System.String" "ws:WebSharper.JavaScript!globalThis.WebSocket#set_BinaryType|System.String"
 (* inline *)
-external set_OnMessage : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.WebSocket#set_OnMessage|System.Action`1<WebSharper.JavaScript.MessageEvent>" "ws:WebSharper.JavaScript!globalThis.WebSocket#set_OnMessage|System.Action`1<WebSharper.JavaScript.MessageEvent>"
+external set_onMessage : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.WebSocket#set_OnMessage|System.Action`1<WebSharper.JavaScript.MessageEvent>" "ws:WebSharper.JavaScript!globalThis.WebSocket#set_OnMessage|System.Action`1<WebSharper.JavaScript.MessageEvent>"
 (* inline *)
-external set_Onmessage : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.WebSocket#set_Onmessage|System.Action`1<WebSharper.JavaScript.MessageEvent>" "ws:WebSharper.JavaScript!globalThis.WebSocket#set_Onmessage|System.Action`1<WebSharper.JavaScript.MessageEvent>"
+external set_onmessage : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.WebSocket#set_Onmessage|System.Action`1<WebSharper.JavaScript.MessageEvent>" "ws:WebSharper.JavaScript!globalThis.WebSocket#set_Onmessage|System.Action`1<WebSharper.JavaScript.MessageEvent>"
 (* inline *)
-external set_OnError : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.WebSocket#set_OnError|System.Action" "ws:WebSharper.JavaScript!globalThis.WebSocket#set_OnError|System.Action"
+external set_onError : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.WebSocket#set_OnError|System.Action" "ws:WebSharper.JavaScript!globalThis.WebSocket#set_OnError|System.Action"
 (* inline *)
-external set_Onerror : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.WebSocket#set_Onerror|System.Action" "ws:WebSharper.JavaScript!globalThis.WebSocket#set_Onerror|System.Action"
+external set_onerror : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.WebSocket#set_Onerror|System.Action" "ws:WebSharper.JavaScript!globalThis.WebSocket#set_Onerror|System.Action"
 (* inline *)
-external set_OnClose : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.WebSocket#set_OnClose|System.Action" "ws:WebSharper.JavaScript!globalThis.WebSocket#set_OnClose|System.Action"
+external set_onClose : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.WebSocket#set_OnClose|System.Action" "ws:WebSharper.JavaScript!globalThis.WebSocket#set_OnClose|System.Action"
 (* inline *)
-external set_Onclose : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.WebSocket#set_Onclose|System.Action" "ws:WebSharper.JavaScript!globalThis.WebSocket#set_Onclose|System.Action"
+external set_onclose : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.WebSocket#set_Onclose|System.Action" "ws:WebSharper.JavaScript!globalThis.WebSocket#set_Onclose|System.Action"
 (* inline *)
-external set_OnOpen : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.WebSocket#set_OnOpen|System.Action" "ws:WebSharper.JavaScript!globalThis.WebSocket#set_OnOpen|System.Action"
+external set_onOpen : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.WebSocket#set_OnOpen|System.Action" "ws:WebSharper.JavaScript!globalThis.WebSocket#set_OnOpen|System.Action"
 (* inline *)
-external set_Onopen : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.WebSocket#set_Onopen|System.Action" "ws:WebSharper.JavaScript!globalThis.WebSocket#set_Onopen|System.Action"
+external set_onopen : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.WebSocket#set_Onopen|System.Action" "ws:WebSharper.JavaScript!globalThis.WebSocket#set_Onopen|System.Action"
 (* inline *)
 external close_3 : t -> int -> string -> unit = "ws:WebSharper.JavaScript!globalThis.WebSocket#Close|System.Int32|System.String" "ws:WebSharper.JavaScript!globalThis.WebSocket#Close|System.Int32|System.String"
 (* inline *)

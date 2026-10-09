@@ -9,11 +9,11 @@ external close : t -> (unit) Promise.t = "ws:WebSharper.JavaScript!globalThis.Wr
 (* inline *)
 external abort : t -> (unit) Promise.t = "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#Abort|" "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#Abort|"
 (* inline *)
-external get_Ready : t -> (unit) Promise.t = "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#get_Ready|" "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#get_Ready|"
+external ready : t -> (unit) Promise.t = "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#get_Ready|" "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#get_Ready|"
 (* inline *)
-external get_DesiredSize : t -> float = "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#get_DesiredSize|" "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#get_DesiredSize|"
+external desiredSize : t -> float = "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#get_DesiredSize|" "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#get_DesiredSize|"
 (* inline *)
-external get_Closed : t -> (unit) Promise.t = "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#get_Closed|" "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#get_Closed|"
+external closed : t -> (unit) Promise.t = "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#get_Closed|" "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#get_Closed|"
 (* inline *)
 external write_2 : t -> Js.t -> (unit) Promise.t = "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#Write|System.Object" "ws:WebSharper.JavaScript!globalThis.WritableStreamDefaultWriter#Write|System.Object"
 (* inline *)

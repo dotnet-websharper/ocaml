@@ -35,111 +35,111 @@ external append : t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#Appe
 (* inline *)
 external prepend : t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#Prepend|" "ws:WebSharper.JavaScript!globalThis.Document#Prepend|"
 (* inline *)
-external get_Current : unit -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Current|" "ws:WebSharper.JavaScript!globalThis.Document#get_Current|"
+external current : unit -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Current|" "ws:WebSharper.JavaScript!globalThis.Document#get_Current|"
 (* inline *)
-external get_OnReadyStateChange : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Document#get_OnReadyStateChange|" "ws:WebSharper.JavaScript!globalThis.Document#get_OnReadyStateChange|"
+external onReadyStateChange : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Document#get_OnReadyStateChange|" "ws:WebSharper.JavaScript!globalThis.Document#get_OnReadyStateChange|"
 (* inline *)
-external get_OnVisibilityChange : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Document#get_OnVisibilityChange|" "ws:WebSharper.JavaScript!globalThis.Document#get_OnVisibilityChange|"
+external onVisibilityChange : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Document#get_OnVisibilityChange|" "ws:WebSharper.JavaScript!globalThis.Document#get_OnVisibilityChange|"
 (* inline *)
-external get_XmlVersion : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_XmlVersion|" "ws:WebSharper.JavaScript!globalThis.Document#get_XmlVersion|"
+external xmlVersion : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_XmlVersion|" "ws:WebSharper.JavaScript!globalThis.Document#get_XmlVersion|"
 (* inline *)
-external get_XmlStandalone : t -> bool = "ws:WebSharper.JavaScript!globalThis.Document#get_XmlStandalone|" "ws:WebSharper.JavaScript!globalThis.Document#get_XmlStandalone|"
+external xmlStandalone : t -> bool = "ws:WebSharper.JavaScript!globalThis.Document#get_XmlStandalone|" "ws:WebSharper.JavaScript!globalThis.Document#get_XmlStandalone|"
 (* inline *)
-external get_XmlEncoding : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_XmlEncoding|" "ws:WebSharper.JavaScript!globalThis.Document#get_XmlEncoding|"
+external xmlEncoding : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_XmlEncoding|" "ws:WebSharper.JavaScript!globalThis.Document#get_XmlEncoding|"
 (* inline *)
-external get_VisibilityState : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_VisibilityState|" "ws:WebSharper.JavaScript!globalThis.Document#get_VisibilityState|"
+external visibilityState : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_VisibilityState|" "ws:WebSharper.JavaScript!globalThis.Document#get_VisibilityState|"
 (* inline *)
-external get_URL : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_URL|" "ws:WebSharper.JavaScript!globalThis.Document#get_URL|"
+external uRL : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_URL|" "ws:WebSharper.JavaScript!globalThis.Document#get_URL|"
 (* inline *)
-external get_Title : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_Title|" "ws:WebSharper.JavaScript!globalThis.Document#get_Title|"
+external title : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_Title|" "ws:WebSharper.JavaScript!globalThis.Document#get_Title|"
 (* inline *)
-external get_Timeline : t -> AnimationTimeLine.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Timeline|" "ws:WebSharper.JavaScript!globalThis.Document#get_Timeline|"
+external timeline : t -> AnimationTimeLine.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Timeline|" "ws:WebSharper.JavaScript!globalThis.Document#get_Timeline|"
 (* inline *)
-external get_StyleSheetSets : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Document#get_StyleSheetSets|" "ws:WebSharper.JavaScript!globalThis.Document#get_StyleSheetSets|"
+external styleSheetSets : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Document#get_StyleSheetSets|" "ws:WebSharper.JavaScript!globalThis.Document#get_StyleSheetSets|"
 (* inline *)
-external get_StyleSheets : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Document#get_StyleSheets|" "ws:WebSharper.JavaScript!globalThis.Document#get_StyleSheets|"
+external styleSheets : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Document#get_StyleSheets|" "ws:WebSharper.JavaScript!globalThis.Document#get_StyleSheets|"
 (* inline *)
-external get_StrictErrorChecking : t -> bool = "ws:WebSharper.JavaScript!globalThis.Document#get_StrictErrorChecking|" "ws:WebSharper.JavaScript!globalThis.Document#get_StrictErrorChecking|"
+external strictErrorChecking : t -> bool = "ws:WebSharper.JavaScript!globalThis.Document#get_StrictErrorChecking|" "ws:WebSharper.JavaScript!globalThis.Document#get_StrictErrorChecking|"
 (* inline *)
-external get_SelectedStyleSheetSet : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_SelectedStyleSheetSet|" "ws:WebSharper.JavaScript!globalThis.Document#get_SelectedStyleSheetSet|"
+external selectedStyleSheetSet : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_SelectedStyleSheetSet|" "ws:WebSharper.JavaScript!globalThis.Document#get_SelectedStyleSheetSet|"
 (* inline *)
-external get_Scripts : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Scripts|" "ws:WebSharper.JavaScript!globalThis.Document#get_Scripts|"
+external scripts : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Scripts|" "ws:WebSharper.JavaScript!globalThis.Document#get_Scripts|"
 (* inline *)
-external get_Referrer : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_Referrer|" "ws:WebSharper.JavaScript!globalThis.Document#get_Referrer|"
+external referrer : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_Referrer|" "ws:WebSharper.JavaScript!globalThis.Document#get_Referrer|"
 (* inline *)
-external get_ReadyState : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_ReadyState|" "ws:WebSharper.JavaScript!globalThis.Document#get_ReadyState|"
+external readyState : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_ReadyState|" "ws:WebSharper.JavaScript!globalThis.Document#get_ReadyState|"
 (* inline *)
-external get_PreferredStyleSheetSet : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_PreferredStyleSheetSet|" "ws:WebSharper.JavaScript!globalThis.Document#get_PreferredStyleSheetSet|"
+external preferredStyleSheetSet : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_PreferredStyleSheetSet|" "ws:WebSharper.JavaScript!globalThis.Document#get_PreferredStyleSheetSet|"
 (* inline *)
-external get_Plugins : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Plugins|" "ws:WebSharper.JavaScript!globalThis.Document#get_Plugins|"
+external plugins : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Plugins|" "ws:WebSharper.JavaScript!globalThis.Document#get_Plugins|"
 (* inline *)
-external get_ScrollingElement : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Document#get_ScrollingElement|" "ws:WebSharper.JavaScript!globalThis.Document#get_ScrollingElement|"
+external scrollingElement : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Document#get_ScrollingElement|" "ws:WebSharper.JavaScript!globalThis.Document#get_ScrollingElement|"
 (* inline *)
-external get_PointerLockElement : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Document#get_PointerLockElement|" "ws:WebSharper.JavaScript!globalThis.Document#get_PointerLockElement|"
+external pointerLockElement : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Document#get_PointerLockElement|" "ws:WebSharper.JavaScript!globalThis.Document#get_PointerLockElement|"
 (* inline *)
-external get_PictureInPictureEnabled : t -> bool = "ws:WebSharper.JavaScript!globalThis.Document#get_PictureInPictureEnabled|" "ws:WebSharper.JavaScript!globalThis.Document#get_PictureInPictureEnabled|"
+external pictureInPictureEnabled : t -> bool = "ws:WebSharper.JavaScript!globalThis.Document#get_PictureInPictureEnabled|" "ws:WebSharper.JavaScript!globalThis.Document#get_PictureInPictureEnabled|"
 (* inline *)
-external get_PictureInPictureElement : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Document#get_PictureInPictureElement|" "ws:WebSharper.JavaScript!globalThis.Document#get_PictureInPictureElement|"
+external pictureInPictureElement : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Document#get_PictureInPictureElement|" "ws:WebSharper.JavaScript!globalThis.Document#get_PictureInPictureElement|"
 (* inline *)
-external get_LastStyleSheetSet : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_LastStyleSheetSet|" "ws:WebSharper.JavaScript!globalThis.Document#get_LastStyleSheetSet|"
+external lastStyleSheetSet : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_LastStyleSheetSet|" "ws:WebSharper.JavaScript!globalThis.Document#get_LastStyleSheetSet|"
 (* inline *)
-external get_Location : t -> Location.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Location|" "ws:WebSharper.JavaScript!globalThis.Document#get_Location|"
+external location : t -> Location.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Location|" "ws:WebSharper.JavaScript!globalThis.Document#get_Location|"
 (* inline *)
-external get_Links : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Links|" "ws:WebSharper.JavaScript!globalThis.Document#get_Links|"
+external links : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Links|" "ws:WebSharper.JavaScript!globalThis.Document#get_Links|"
 (* inline *)
-external get_LastModified : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_LastModified|" "ws:WebSharper.JavaScript!globalThis.Document#get_LastModified|"
+external lastModified : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_LastModified|" "ws:WebSharper.JavaScript!globalThis.Document#get_LastModified|"
 (* inline *)
-external get_InputEncoding : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_InputEncoding|" "ws:WebSharper.JavaScript!globalThis.Document#get_InputEncoding|"
+external inputEncoding : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_InputEncoding|" "ws:WebSharper.JavaScript!globalThis.Document#get_InputEncoding|"
 (* inline *)
-external get_Implementation : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Implementation|" "ws:WebSharper.JavaScript!globalThis.Document#get_Implementation|"
+external implementation : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Implementation|" "ws:WebSharper.JavaScript!globalThis.Document#get_Implementation|"
 (* inline *)
-external get_Images : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Images|" "ws:WebSharper.JavaScript!globalThis.Document#get_Images|"
+external images : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Images|" "ws:WebSharper.JavaScript!globalThis.Document#get_Images|"
 (* inline *)
-external get_Hidden : t -> bool = "ws:WebSharper.JavaScript!globalThis.Document#get_Hidden|" "ws:WebSharper.JavaScript!globalThis.Document#get_Hidden|"
+external hidden : t -> bool = "ws:WebSharper.JavaScript!globalThis.Document#get_Hidden|" "ws:WebSharper.JavaScript!globalThis.Document#get_Hidden|"
 (* inline *)
-external get_Head : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Head|" "ws:WebSharper.JavaScript!globalThis.Document#get_Head|"
+external head : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Head|" "ws:WebSharper.JavaScript!globalThis.Document#get_Head|"
 (* inline *)
-external get_Forms : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Forms|" "ws:WebSharper.JavaScript!globalThis.Document#get_Forms|"
+external forms : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Forms|" "ws:WebSharper.JavaScript!globalThis.Document#get_Forms|"
 (* inline *)
-external get_FullscreenElement : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Document#get_FullscreenElement|" "ws:WebSharper.JavaScript!globalThis.Document#get_FullscreenElement|"
+external fullscreenElement : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Document#get_FullscreenElement|" "ws:WebSharper.JavaScript!globalThis.Document#get_FullscreenElement|"
 (* inline *)
-external get_Fonts : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Fonts|" "ws:WebSharper.JavaScript!globalThis.Document#get_Fonts|"
+external fonts : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Fonts|" "ws:WebSharper.JavaScript!globalThis.Document#get_Fonts|"
 (* inline *)
-external get_Embeds : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Embeds|" "ws:WebSharper.JavaScript!globalThis.Document#get_Embeds|"
+external embeds : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Embeds|" "ws:WebSharper.JavaScript!globalThis.Document#get_Embeds|"
 (* inline *)
-external get_Domain : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_Domain|" "ws:WebSharper.JavaScript!globalThis.Document#get_Domain|"
+external domain : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_Domain|" "ws:WebSharper.JavaScript!globalThis.Document#get_Domain|"
 (* inline *)
-external get_DocumentURI : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_DocumentURI|" "ws:WebSharper.JavaScript!globalThis.Document#get_DocumentURI|"
+external documentURI : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_DocumentURI|" "ws:WebSharper.JavaScript!globalThis.Document#get_DocumentURI|"
 (* inline *)
-external get_DocumentElement : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_DocumentElement|" "ws:WebSharper.JavaScript!globalThis.Document#get_DocumentElement|"
+external documentElement : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_DocumentElement|" "ws:WebSharper.JavaScript!globalThis.Document#get_DocumentElement|"
 (* inline *)
-external get_Doctype : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Doctype|" "ws:WebSharper.JavaScript!globalThis.Document#get_Doctype|"
+external doctype : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Doctype|" "ws:WebSharper.JavaScript!globalThis.Document#get_Doctype|"
 (* inline *)
-external get_Dir : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_Dir|" "ws:WebSharper.JavaScript!globalThis.Document#get_Dir|"
+external dir : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_Dir|" "ws:WebSharper.JavaScript!globalThis.Document#get_Dir|"
 (* inline *)
-external get_DesignMode : t -> DesignMode.t = "ws:WebSharper.JavaScript!globalThis.Document#get_DesignMode|" "ws:WebSharper.JavaScript!globalThis.Document#get_DesignMode|"
+external designMode : t -> DesignMode.t = "ws:WebSharper.JavaScript!globalThis.Document#get_DesignMode|" "ws:WebSharper.JavaScript!globalThis.Document#get_DesignMode|"
 (* inline *)
-external get_DefaultView : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_DefaultView|" "ws:WebSharper.JavaScript!globalThis.Document#get_DefaultView|"
+external defaultView : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_DefaultView|" "ws:WebSharper.JavaScript!globalThis.Document#get_DefaultView|"
 (* inline *)
-external get_Body : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Body|" "ws:WebSharper.JavaScript!globalThis.Document#get_Body|"
+external body : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Body|" "ws:WebSharper.JavaScript!globalThis.Document#get_Body|"
 (* inline *)
-external get_Cookie : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_Cookie|" "ws:WebSharper.JavaScript!globalThis.Document#get_Cookie|"
+external cookie : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_Cookie|" "ws:WebSharper.JavaScript!globalThis.Document#get_Cookie|"
 (* inline *)
-external get_ContentType : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_ContentType|" "ws:WebSharper.JavaScript!globalThis.Document#get_ContentType|"
+external contentType : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_ContentType|" "ws:WebSharper.JavaScript!globalThis.Document#get_ContentType|"
 (* inline *)
-external get_CompatMode : t -> CompatMode.t = "ws:WebSharper.JavaScript!globalThis.Document#get_CompatMode|" "ws:WebSharper.JavaScript!globalThis.Document#get_CompatMode|"
+external compatMode : t -> CompatMode.t = "ws:WebSharper.JavaScript!globalThis.Document#get_CompatMode|" "ws:WebSharper.JavaScript!globalThis.Document#get_CompatMode|"
 (* inline *)
-external get_CharacterSet : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_CharacterSet|" "ws:WebSharper.JavaScript!globalThis.Document#get_CharacterSet|"
+external characterSet : t -> string = "ws:WebSharper.JavaScript!globalThis.Document#get_CharacterSet|" "ws:WebSharper.JavaScript!globalThis.Document#get_CharacterSet|"
 (* inline *)
-external get_ActiveElement : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_ActiveElement|" "ws:WebSharper.JavaScript!globalThis.Document#get_ActiveElement|"
+external activeElement : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_ActiveElement|" "ws:WebSharper.JavaScript!globalThis.Document#get_ActiveElement|"
 (* inline *)
-external get_Children : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Children|" "ws:WebSharper.JavaScript!globalThis.Document#get_Children|"
+external children : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#get_Children|" "ws:WebSharper.JavaScript!globalThis.Document#get_Children|"
 (* inline *)
-external get_LastElementChild : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Document#get_LastElementChild|" "ws:WebSharper.JavaScript!globalThis.Document#get_LastElementChild|"
+external lastElementChild : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Document#get_LastElementChild|" "ws:WebSharper.JavaScript!globalThis.Document#get_LastElementChild|"
 (* inline *)
-external get_FirstElementChild : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Document#get_FirstElementChild|" "ws:WebSharper.JavaScript!globalThis.Document#get_FirstElementChild|"
+external firstElementChild : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Document#get_FirstElementChild|" "ws:WebSharper.JavaScript!globalThis.Document#get_FirstElementChild|"
 (* inline *)
-external get_ChildElementCount : t -> int = "ws:WebSharper.JavaScript!globalThis.Document#get_ChildElementCount|" "ws:WebSharper.JavaScript!globalThis.Document#get_ChildElementCount|"
+external childElementCount : t -> int = "ws:WebSharper.JavaScript!globalThis.Document#get_ChildElementCount|" "ws:WebSharper.JavaScript!globalThis.Document#get_ChildElementCount|"
 (* inline *)
 external createEvent : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateEvent|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateEvent|System.String"
 (* inline *)
@@ -167,13 +167,13 @@ external enableStyleSheetForSet : t -> string -> unit = "ws:WebSharper.JavaScrip
 (* inline *)
 external createTextNode : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateTextNode|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateTextNode|System.String"
 (* inline *)
-external createEntityReference : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateEntityReference|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateEntityReference|System.String"
+external createEntityReference : t -> string -> Js.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateEntityReference|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateEntityReference|System.String"
 (* inline *)
 external createElement : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateElement|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateElement|System.String"
 (* inline *)
-external createComment : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateComment|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateComment|System.String"
+external createComment : t -> string -> Js.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateComment|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateComment|System.String"
 (* inline *)
-external createCDATASection : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateCDATASection|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateCDATASection|System.String"
+external createCDATASection : t -> string -> Js.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateCDATASection|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateCDATASection|System.String"
 (* inline *)
 external createAttribute : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#CreateAttribute|System.String" "ws:WebSharper.JavaScript!globalThis.Document#CreateAttribute|System.String"
 (* inline *)
@@ -183,35 +183,35 @@ external querySelectorAll : t -> string -> EventTarget.t = "ws:WebSharper.JavaSc
 (* inline *)
 external querySelector : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Document#QuerySelector|System.String" "ws:WebSharper.JavaScript!globalThis.Document#QuerySelector|System.String"
 (* inline *)
-external set_OnReadyStateChange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_OnReadyStateChange|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>" "ws:WebSharper.JavaScript!globalThis.Document#set_OnReadyStateChange|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>"
+external set_onReadyStateChange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_OnReadyStateChange|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>" "ws:WebSharper.JavaScript!globalThis.Document#set_OnReadyStateChange|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>"
 (* inline *)
-external set_OnVisibilityChange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_OnVisibilityChange|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>" "ws:WebSharper.JavaScript!globalThis.Document#set_OnVisibilityChange|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>"
+external set_onVisibilityChange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_OnVisibilityChange|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>" "ws:WebSharper.JavaScript!globalThis.Document#set_OnVisibilityChange|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>"
 (* inline *)
-external set_XmlVersion : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_XmlVersion|System.String" "ws:WebSharper.JavaScript!globalThis.Document#set_XmlVersion|System.String"
+external set_xmlVersion : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_XmlVersion|System.String" "ws:WebSharper.JavaScript!globalThis.Document#set_XmlVersion|System.String"
 (* inline *)
-external set_XmlStandalone : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_XmlStandalone|System.Boolean" "ws:WebSharper.JavaScript!globalThis.Document#set_XmlStandalone|System.Boolean"
+external set_xmlStandalone : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_XmlStandalone|System.Boolean" "ws:WebSharper.JavaScript!globalThis.Document#set_XmlStandalone|System.Boolean"
 (* inline *)
-external set_XmlEncoding : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_XmlEncoding|System.String" "ws:WebSharper.JavaScript!globalThis.Document#set_XmlEncoding|System.String"
+external set_xmlEncoding : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_XmlEncoding|System.String" "ws:WebSharper.JavaScript!globalThis.Document#set_XmlEncoding|System.String"
 (* inline *)
-external set_Title : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_Title|System.String" "ws:WebSharper.JavaScript!globalThis.Document#set_Title|System.String"
+external set_title : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_Title|System.String" "ws:WebSharper.JavaScript!globalThis.Document#set_Title|System.String"
 (* inline *)
-external set_StrictErrorChecking : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_StrictErrorChecking|System.Boolean" "ws:WebSharper.JavaScript!globalThis.Document#set_StrictErrorChecking|System.Boolean"
+external set_strictErrorChecking : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_StrictErrorChecking|System.Boolean" "ws:WebSharper.JavaScript!globalThis.Document#set_StrictErrorChecking|System.Boolean"
 (* inline *)
-external set_SelectedStyleSheetSet : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_SelectedStyleSheetSet|System.String" "ws:WebSharper.JavaScript!globalThis.Document#set_SelectedStyleSheetSet|System.String"
+external set_selectedStyleSheetSet : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_SelectedStyleSheetSet|System.String" "ws:WebSharper.JavaScript!globalThis.Document#set_SelectedStyleSheetSet|System.String"
 (* inline *)
-external set_Location : t -> Location.t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_Location|WebSharper.JavaScript.Location" "ws:WebSharper.JavaScript!globalThis.Document#set_Location|WebSharper.JavaScript.Location"
+external set_location : t -> Location.t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_Location|WebSharper.JavaScript.Location" "ws:WebSharper.JavaScript!globalThis.Document#set_Location|WebSharper.JavaScript.Location"
 (* inline *)
-external set_Implementation : t -> EventTarget.t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_Implementation|WebSharper.JavaScript.Dom.Implementation" "ws:WebSharper.JavaScript!globalThis.Document#set_Implementation|WebSharper.JavaScript.Dom.Implementation"
+external set_implementation : t -> EventTarget.t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_Implementation|WebSharper.JavaScript.Dom.Implementation" "ws:WebSharper.JavaScript!globalThis.Document#set_Implementation|WebSharper.JavaScript.Dom.Implementation"
 (* inline *)
-external set_Domain : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_Domain|System.String" "ws:WebSharper.JavaScript!globalThis.Document#set_Domain|System.String"
+external set_domain : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_Domain|System.String" "ws:WebSharper.JavaScript!globalThis.Document#set_Domain|System.String"
 (* inline *)
-external set_Dir : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_Dir|System.String" "ws:WebSharper.JavaScript!globalThis.Document#set_Dir|System.String"
+external set_dir : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_Dir|System.String" "ws:WebSharper.JavaScript!globalThis.Document#set_Dir|System.String"
 (* inline *)
-external set_DesignMode : t -> DesignMode.t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_DesignMode|WebSharper.JavaScript.Dom.DesignMode" "ws:WebSharper.JavaScript!globalThis.Document#set_DesignMode|WebSharper.JavaScript.Dom.DesignMode"
+external set_designMode : t -> DesignMode.t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_DesignMode|WebSharper.JavaScript.Dom.DesignMode" "ws:WebSharper.JavaScript!globalThis.Document#set_DesignMode|WebSharper.JavaScript.Dom.DesignMode"
 (* inline *)
-external set_Body : t -> EventTarget.t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_Body|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.JavaScript!globalThis.Document#set_Body|WebSharper.JavaScript.Dom.Element"
+external set_body : t -> EventTarget.t -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_Body|WebSharper.JavaScript.Dom.Element" "ws:WebSharper.JavaScript!globalThis.Document#set_Body|WebSharper.JavaScript.Dom.Element"
 (* inline *)
-external set_Cookie : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_Cookie|System.String" "ws:WebSharper.JavaScript!globalThis.Document#set_Cookie|System.String"
+external set_cookie : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Document#set_Cookie|System.String" "ws:WebSharper.JavaScript!globalThis.Document#set_Cookie|System.String"
 (* inline *)
 external elementsFromPoint : t -> int -> int -> (EventTarget.t) array = "ws:WebSharper.JavaScript!globalThis.Document#ElementsFromPoint|System.Int32|System.Int32" "ws:WebSharper.JavaScript!globalThis.Document#ElementsFromPoint|System.Int32|System.Int32"
 (* inline *)

@@ -9,33 +9,33 @@ external onLoad : t -> unit = "ws:WebSharper.JavaScript!globalThis.TimedTrack#On
 (* inline *)
 external onload : t -> unit = "ws:WebSharper.JavaScript!globalThis.TimedTrack#Onload|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#Onload|"
 (* inline *)
-external get_ActiveCues : t -> t = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_ActiveCues|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_ActiveCues|"
+external activeCues : t -> t = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_ActiveCues|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_ActiveCues|"
 (* inline *)
-external get_Cues : t -> t = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_Cues|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_Cues|"
+external cues : t -> t = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_Cues|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_Cues|"
 (* inline *)
-external get_Mode : t -> int = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_Mode|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_Mode|"
+external mode : t -> int = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_Mode|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_Mode|"
 (* inline *)
-external get_SHOWING : t -> int = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_SHOWING|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_SHOWING|"
+external sHOWING : t -> int = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_SHOWING|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_SHOWING|"
 (* inline *)
-external get_HIDDEN : t -> int = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_HIDDEN|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_HIDDEN|"
+external hIDDEN : t -> int = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_HIDDEN|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_HIDDEN|"
 (* inline *)
-external get_OFF : t -> int = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_OFF|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_OFF|"
+external oFF : t -> int = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_OFF|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_OFF|"
 (* inline *)
-external get_ReadyState : t -> int = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_ReadyState|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_ReadyState|"
+external readyState : t -> int = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_ReadyState|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_ReadyState|"
 (* inline *)
-external get_ERROR : t -> int = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_ERROR|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_ERROR|"
+external eRROR : t -> int = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_ERROR|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_ERROR|"
 (* inline *)
-external get_LOADED : t -> int = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_LOADED|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_LOADED|"
+external lOADED : t -> int = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_LOADED|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_LOADED|"
 (* inline *)
-external get_LOADING : t -> int = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_LOADING|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_LOADING|"
+external lOADING : t -> int = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_LOADING|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_LOADING|"
 (* inline *)
-external get_NONE : t -> int = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_NONE|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_NONE|"
+external nONE : t -> int = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_NONE|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_NONE|"
 (* inline *)
-external get_Language : t -> string = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_Language|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_Language|"
+external language : t -> string = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_Language|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_Language|"
 (* inline *)
-external get_Label : t -> string = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_Label|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_Label|"
+external label : t -> string = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_Label|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_Label|"
 (* inline *)
-external get_Kind : t -> TrackType.t = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_Kind|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_Kind|"
+external kind : t -> TrackType.t = "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_Kind|" "ws:WebSharper.JavaScript!globalThis.TimedTrack#get_Kind|"
 (* inline *)
 external onCueChange : t -> int -> int = "ws:WebSharper.JavaScript!globalThis.TimedTrack#OnCueChange|System.Int32" "ws:WebSharper.JavaScript!globalThis.TimedTrack#OnCueChange|System.Int32"
 (* inline *)

@@ -9,42 +9,42 @@ external reset : t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLFormElemen
 (* inline *)
 external submit : t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#Submit|" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#Submit|"
 (* inline *)
-external get_Length : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Length|" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Length|"
+external length : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Length|" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Length|"
 (* inline *)
-external get_Elements : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Elements|" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Elements|"
+external elements : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Elements|" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Elements|"
 (* inline *)
-external get_Target : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Target|" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Target|"
+external target : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Target|" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Target|"
 (* inline *)
-external get_NoValidate : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_NoValidate|" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_NoValidate|"
+external noValidate : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_NoValidate|" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_NoValidate|"
 (* inline *)
-external get_Name : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Name|" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Name|"
+external name : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Name|" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Name|"
 (* inline *)
-external get_Method : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Method|" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Method|"
+external method_ : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Method|" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Method|"
 (* inline *)
-external get_Encoding : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Encoding|" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Encoding|"
+external encoding : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Encoding|" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Encoding|"
 (* inline *)
-external get_Enctype : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Enctype|" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Enctype|"
+external enctype : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Enctype|" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Enctype|"
 (* inline *)
-external get_Autocomplete : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Autocomplete|" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Autocomplete|"
+external autocomplete : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Autocomplete|" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Autocomplete|"
 (* inline *)
-external get_Action : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Action|" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Action|"
+external action : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Action|" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_Action|"
 (* inline *)
-external get_AcceptCharset : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_AcceptCharset|" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_AcceptCharset|"
+external acceptCharset : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_AcceptCharset|" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#get_AcceptCharset|"
 (* inline *)
-external set_Target : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_Target|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_Target|System.String"
+external set_target : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_Target|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_Target|System.String"
 (* inline *)
-external set_NoValidate : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_NoValidate|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_NoValidate|System.Boolean"
+external set_noValidate : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_NoValidate|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_NoValidate|System.Boolean"
 (* inline *)
-external set_Name : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_Name|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_Name|System.String"
+external set_name : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_Name|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_Name|System.String"
 (* inline *)
-external set_Method : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_Method|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_Method|System.String"
+external set_method : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_Method|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_Method|System.String"
 (* inline *)
-external set_Encoding : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_Encoding|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_Encoding|System.String"
+external set_encoding : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_Encoding|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_Encoding|System.String"
 (* inline *)
-external set_Enctype : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_Enctype|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_Enctype|System.String"
+external set_enctype : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_Enctype|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_Enctype|System.String"
 (* inline *)
-external set_Autocomplete : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_Autocomplete|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_Autocomplete|System.String"
+external set_autocomplete : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_Autocomplete|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_Autocomplete|System.String"
 (* inline *)
-external set_Action : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_Action|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_Action|System.String"
+external set_action : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_Action|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_Action|System.String"
 (* inline *)
-external set_AcceptCharset : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_AcceptCharset|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_AcceptCharset|System.String"
+external set_acceptCharset : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_AcceptCharset|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLFormElement#set_AcceptCharset|System.String"

@@ -3,7 +3,7 @@ type t = Object.t
 (* instance *)
 external writeLine : t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Console.ErrorTextWriter::default#WriteLine|" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Console.ErrorTextWriter::default#WriteLine|"
 (* instance *)
-external get_Encoding : t -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Console.ErrorTextWriter::default#get_Encoding|" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Console.ErrorTextWriter::default#get_Encoding|"
+external encoding : t -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Console.ErrorTextWriter::default#get_Encoding|" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Console.ErrorTextWriter::default#get_Encoding|"
 (* instance *)
 external writeLine_2 : t -> int64 -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Console.ErrorTextWriter::default#WriteLine|System.UInt64" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Console.ErrorTextWriter::default#WriteLine|System.UInt64"
 (* instance *)

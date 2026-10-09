@@ -7,41 +7,41 @@ external abort : t -> unit = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest
 (* inline *)
 external send : t -> unit = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#Send|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#Send|"
 (* inline *)
-external get_ResponseXML : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_ResponseXML|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_ResponseXML|"
+external responseXML : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_ResponseXML|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_ResponseXML|"
 (* inline *)
-external get_ResponseText : t -> string = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_ResponseText|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_ResponseText|"
+external responseText : t -> string = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_ResponseText|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_ResponseText|"
 (* inline *)
-external get_Response : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_Response|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_Response|"
+external response : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_Response|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_Response|"
 (* inline *)
-external get_ResponseType : t -> XMLHttpRequestResponseType.t = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_ResponseType|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_ResponseType|"
+external responseType : t -> XMLHttpRequestResponseType.t = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_ResponseType|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_ResponseType|"
 (* inline *)
-external get_StatusText : t -> string = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_StatusText|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_StatusText|"
+external statusText : t -> string = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_StatusText|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_StatusText|"
 (* inline *)
-external get_Status : t -> int = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_Status|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_Status|"
+external status : t -> int = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_Status|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_Status|"
 (* inline *)
-external get_ResponseURL : t -> string = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_ResponseURL|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_ResponseURL|"
+external responseURL : t -> string = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_ResponseURL|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_ResponseURL|"
 (* inline *)
-external get_Upload : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_Upload|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_Upload|"
+external upload : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_Upload|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_Upload|"
 (* inline *)
-external get_WithCredentials : t -> bool = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_WithCredentials|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_WithCredentials|"
+external withCredentials : t -> bool = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_WithCredentials|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_WithCredentials|"
 (* inline *)
-external get_Timeout : t -> int = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_Timeout|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_Timeout|"
+external timeout : t -> int = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_Timeout|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_Timeout|"
 (* inline *)
-external get_ReadyState : t -> int = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_ReadyState|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_ReadyState|"
+external readyState : t -> int = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_ReadyState|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_ReadyState|"
 (* inline *)
-external get_OnReadyStateChange : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_OnReadyStateChange|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_OnReadyStateChange|"
+external onReadyStateChange : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_OnReadyStateChange|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_OnReadyStateChange|"
 (* inline *)
-external get_Onreadystatechange : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_Onreadystatechange|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_Onreadystatechange|"
+external onreadystatechange : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_Onreadystatechange|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_Onreadystatechange|"
 (* inline *)
-external get_DONE : unit -> int = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_DONE|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_DONE|"
+external dONE : unit -> int = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_DONE|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_DONE|"
 (* inline *)
-external get_LOADING : unit -> int = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_LOADING|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_LOADING|"
+external lOADING : unit -> int = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_LOADING|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_LOADING|"
 (* inline *)
-external get_HEADERS_RECEIVED : unit -> int = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_HEADERS_RECEIVED|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_HEADERS_RECEIVED|"
+external hEADERS_RECEIVED : unit -> int = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_HEADERS_RECEIVED|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_HEADERS_RECEIVED|"
 (* inline *)
-external get_OPENED : unit -> int = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_OPENED|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_OPENED|"
+external oPENED : unit -> int = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_OPENED|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_OPENED|"
 (* inline *)
-external get_UNSENT : unit -> int = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_UNSENT|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_UNSENT|"
+external uNSENT : unit -> int = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_UNSENT|" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#get_UNSENT|"
 (* inline *)
 external overrideMimeType : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#OverrideMimeType|System.String" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#OverrideMimeType|System.String"
 (* inline *)
@@ -59,15 +59,15 @@ external send_6 : t -> Blob.t -> unit = "ws:WebSharper.JavaScript!globalThis.XML
 (* inline *)
 external send_7 : t -> ArrayBuffer.t -> unit = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#Send|WebSharper.JavaScript.ArrayBuffer" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#Send|WebSharper.JavaScript.ArrayBuffer"
 (* inline *)
-external set_ResponseType : t -> XMLHttpRequestResponseType.t -> unit = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#set_ResponseType|WebSharper.JavaScript.XMLHttpRequestResponseType" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#set_ResponseType|WebSharper.JavaScript.XMLHttpRequestResponseType"
+external set_responseType : t -> XMLHttpRequestResponseType.t -> unit = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#set_ResponseType|WebSharper.JavaScript.XMLHttpRequestResponseType" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#set_ResponseType|WebSharper.JavaScript.XMLHttpRequestResponseType"
 (* inline *)
-external set_WithCredentials : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#set_WithCredentials|System.Boolean" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#set_WithCredentials|System.Boolean"
+external set_withCredentials : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#set_WithCredentials|System.Boolean" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#set_WithCredentials|System.Boolean"
 (* inline *)
-external set_Timeout : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#set_Timeout|System.Int32" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#set_Timeout|System.Int32"
+external set_timeout : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#set_Timeout|System.Int32" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#set_Timeout|System.Int32"
 (* inline *)
-external set_OnReadyStateChange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#set_OnReadyStateChange|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#set_OnReadyStateChange|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+external set_onReadyStateChange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#set_OnReadyStateChange|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#set_OnReadyStateChange|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
-external set_Onreadystatechange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#set_Onreadystatechange|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#set_Onreadystatechange|System.Action`1<WebSharper.JavaScript.Dom.Event>"
+external set_onreadystatechange : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#set_Onreadystatechange|System.Action`1<WebSharper.JavaScript.Dom.Event>" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#set_Onreadystatechange|System.Action`1<WebSharper.JavaScript.Dom.Event>"
 (* inline *)
 external setRequestHeader : t -> string -> string -> unit = "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#SetRequestHeader|System.String|System.String" "ws:WebSharper.JavaScript!globalThis.XMLHttpRequest#SetRequestHeader|System.String|System.String"
 (* inline *)

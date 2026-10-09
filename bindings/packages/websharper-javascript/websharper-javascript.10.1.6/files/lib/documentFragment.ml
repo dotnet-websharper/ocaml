@@ -7,13 +7,13 @@ external append : t -> unit = "ws:WebSharper.JavaScript!globalThis.DocumentFragm
 (* inline *)
 external prepend : t -> unit = "ws:WebSharper.JavaScript!globalThis.DocumentFragment#Prepend|" "ws:WebSharper.JavaScript!globalThis.DocumentFragment#Prepend|"
 (* inline *)
-external get_Children : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.DocumentFragment#get_Children|" "ws:WebSharper.JavaScript!globalThis.DocumentFragment#get_Children|"
+external children : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.DocumentFragment#get_Children|" "ws:WebSharper.JavaScript!globalThis.DocumentFragment#get_Children|"
 (* inline *)
-external get_LastElementChild : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.DocumentFragment#get_LastElementChild|" "ws:WebSharper.JavaScript!globalThis.DocumentFragment#get_LastElementChild|"
+external lastElementChild : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.DocumentFragment#get_LastElementChild|" "ws:WebSharper.JavaScript!globalThis.DocumentFragment#get_LastElementChild|"
 (* inline *)
-external get_FirstElementChild : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.DocumentFragment#get_FirstElementChild|" "ws:WebSharper.JavaScript!globalThis.DocumentFragment#get_FirstElementChild|"
+external firstElementChild : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.DocumentFragment#get_FirstElementChild|" "ws:WebSharper.JavaScript!globalThis.DocumentFragment#get_FirstElementChild|"
 (* inline *)
-external get_ChildElementCount : t -> int = "ws:WebSharper.JavaScript!globalThis.DocumentFragment#get_ChildElementCount|" "ws:WebSharper.JavaScript!globalThis.DocumentFragment#get_ChildElementCount|"
+external childElementCount : t -> int = "ws:WebSharper.JavaScript!globalThis.DocumentFragment#get_ChildElementCount|" "ws:WebSharper.JavaScript!globalThis.DocumentFragment#get_ChildElementCount|"
 (* inline *)
 external querySelectorAll : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.DocumentFragment#QuerySelectorAll|System.String" "ws:WebSharper.JavaScript!globalThis.DocumentFragment#QuerySelectorAll|System.String"
 (* inline *)

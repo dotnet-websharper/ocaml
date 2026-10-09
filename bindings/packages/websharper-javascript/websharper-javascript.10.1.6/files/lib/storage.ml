@@ -3,7 +3,7 @@ type t
 (* inline *)
 external clear : t -> unit = "ws:WebSharper.JavaScript!globalThis.Storage#Clear|" "ws:WebSharper.JavaScript!globalThis.Storage#Clear|"
 (* inline *)
-external get_Length : t -> int = "ws:WebSharper.JavaScript!globalThis.Storage#get_Length|" "ws:WebSharper.JavaScript!globalThis.Storage#get_Length|"
+external length : t -> int = "ws:WebSharper.JavaScript!globalThis.Storage#get_Length|" "ws:WebSharper.JavaScript!globalThis.Storage#get_Length|"
 (* inline *)
 external removeItem : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Storage#RemoveItem|System.String" "ws:WebSharper.JavaScript!globalThis.Storage#RemoveItem|System.String"
 (* inline *)

@@ -15,64 +15,64 @@ external commitStyles : t -> unit = "ws:WebSharper.JavaScript!globalThis.Animati
 (* inline *)
 external cancel : t -> unit = "ws:WebSharper.JavaScript!globalThis.Animation#Cancel|" "ws:WebSharper.JavaScript!globalThis.Animation#Cancel|"
 (* inline *)
-external get_Timeline : t -> AnimationTimeLine.t = "ws:WebSharper.JavaScript!globalThis.Animation#get_Timeline|" "ws:WebSharper.JavaScript!globalThis.Animation#get_Timeline|"
+external timeline : t -> AnimationTimeLine.t = "ws:WebSharper.JavaScript!globalThis.Animation#get_Timeline|" "ws:WebSharper.JavaScript!globalThis.Animation#get_Timeline|"
 (* inline *)
-external get_StartTime : t -> float = "ws:WebSharper.JavaScript!globalThis.Animation#get_StartTime|" "ws:WebSharper.JavaScript!globalThis.Animation#get_StartTime|"
+external startTime : t -> float = "ws:WebSharper.JavaScript!globalThis.Animation#get_StartTime|" "ws:WebSharper.JavaScript!globalThis.Animation#get_StartTime|"
 (* inline *)
-external get_ReplaceState : t -> AnimationReplaceState.t = "ws:WebSharper.JavaScript!globalThis.Animation#get_ReplaceState|" "ws:WebSharper.JavaScript!globalThis.Animation#get_ReplaceState|"
+external replaceState : t -> AnimationReplaceState.t = "ws:WebSharper.JavaScript!globalThis.Animation#get_ReplaceState|" "ws:WebSharper.JavaScript!globalThis.Animation#get_ReplaceState|"
 (* inline *)
-external get_Ready : t -> (unit) Promise.t = "ws:WebSharper.JavaScript!globalThis.Animation#get_Ready|" "ws:WebSharper.JavaScript!globalThis.Animation#get_Ready|"
+external ready : t -> (unit) Promise.t = "ws:WebSharper.JavaScript!globalThis.Animation#get_Ready|" "ws:WebSharper.JavaScript!globalThis.Animation#get_Ready|"
 (* inline *)
-external get_PlayState : t -> AnimationPlayState.t = "ws:WebSharper.JavaScript!globalThis.Animation#get_PlayState|" "ws:WebSharper.JavaScript!globalThis.Animation#get_PlayState|"
+external playState : t -> AnimationPlayState.t = "ws:WebSharper.JavaScript!globalThis.Animation#get_PlayState|" "ws:WebSharper.JavaScript!globalThis.Animation#get_PlayState|"
 (* inline *)
-external get_PlaybackRate : t -> float = "ws:WebSharper.JavaScript!globalThis.Animation#get_PlaybackRate|" "ws:WebSharper.JavaScript!globalThis.Animation#get_PlaybackRate|"
+external playbackRate : t -> float = "ws:WebSharper.JavaScript!globalThis.Animation#get_PlaybackRate|" "ws:WebSharper.JavaScript!globalThis.Animation#get_PlaybackRate|"
 (* inline *)
-external get_Pending : t -> bool = "ws:WebSharper.JavaScript!globalThis.Animation#get_Pending|" "ws:WebSharper.JavaScript!globalThis.Animation#get_Pending|"
+external pending : t -> bool = "ws:WebSharper.JavaScript!globalThis.Animation#get_Pending|" "ws:WebSharper.JavaScript!globalThis.Animation#get_Pending|"
 (* inline *)
-external get_OnRemove : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Animation#get_OnRemove|" "ws:WebSharper.JavaScript!globalThis.Animation#get_OnRemove|"
+external onRemove : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Animation#get_OnRemove|" "ws:WebSharper.JavaScript!globalThis.Animation#get_OnRemove|"
 (* inline *)
-external get_Onremove : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Animation#get_Onremove|" "ws:WebSharper.JavaScript!globalThis.Animation#get_Onremove|"
+external onremove : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Animation#get_Onremove|" "ws:WebSharper.JavaScript!globalThis.Animation#get_Onremove|"
 (* inline *)
-external get_OnFinish : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Animation#get_OnFinish|" "ws:WebSharper.JavaScript!globalThis.Animation#get_OnFinish|"
+external onFinish : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Animation#get_OnFinish|" "ws:WebSharper.JavaScript!globalThis.Animation#get_OnFinish|"
 (* inline *)
-external get_Onfinish : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Animation#get_Onfinish|" "ws:WebSharper.JavaScript!globalThis.Animation#get_Onfinish|"
+external onfinish : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Animation#get_Onfinish|" "ws:WebSharper.JavaScript!globalThis.Animation#get_Onfinish|"
 (* inline *)
-external get_OnCancel : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Animation#get_OnCancel|" "ws:WebSharper.JavaScript!globalThis.Animation#get_OnCancel|"
+external onCancel : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Animation#get_OnCancel|" "ws:WebSharper.JavaScript!globalThis.Animation#get_OnCancel|"
 (* inline *)
-external get_Oncancel : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Animation#get_Oncancel|" "ws:WebSharper.JavaScript!globalThis.Animation#get_Oncancel|"
+external oncancel : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Animation#get_Oncancel|" "ws:WebSharper.JavaScript!globalThis.Animation#get_Oncancel|"
 (* inline *)
-external get_Id : t -> string = "ws:WebSharper.JavaScript!globalThis.Animation#get_Id|" "ws:WebSharper.JavaScript!globalThis.Animation#get_Id|"
+external id : t -> string = "ws:WebSharper.JavaScript!globalThis.Animation#get_Id|" "ws:WebSharper.JavaScript!globalThis.Animation#get_Id|"
 (* inline *)
-external get_Finished : t -> (unit) Promise.t = "ws:WebSharper.JavaScript!globalThis.Animation#get_Finished|" "ws:WebSharper.JavaScript!globalThis.Animation#get_Finished|"
+external finished : t -> (unit) Promise.t = "ws:WebSharper.JavaScript!globalThis.Animation#get_Finished|" "ws:WebSharper.JavaScript!globalThis.Animation#get_Finished|"
 (* inline *)
-external get_Effect : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Animation#get_Effect|" "ws:WebSharper.JavaScript!globalThis.Animation#get_Effect|"
+external effect_ : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Animation#get_Effect|" "ws:WebSharper.JavaScript!globalThis.Animation#get_Effect|"
 (* inline *)
-external get_CurrentTime : t -> float = "ws:WebSharper.JavaScript!globalThis.Animation#get_CurrentTime|" "ws:WebSharper.JavaScript!globalThis.Animation#get_CurrentTime|"
+external currentTime : t -> float = "ws:WebSharper.JavaScript!globalThis.Animation#get_CurrentTime|" "ws:WebSharper.JavaScript!globalThis.Animation#get_CurrentTime|"
 (* inline *)
 external updatePlaybackRate : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.Animation#UpdatePlaybackRate|System.Double" "ws:WebSharper.JavaScript!globalThis.Animation#UpdatePlaybackRate|System.Double"
 (* inline *)
-external set_Timeline : t -> AnimationTimeLine.t -> unit = "ws:WebSharper.JavaScript!globalThis.Animation#set_Timeline|WebSharper.JavaScript.Dom.AnimationTimeLine" "ws:WebSharper.JavaScript!globalThis.Animation#set_Timeline|WebSharper.JavaScript.Dom.AnimationTimeLine"
+external set_timeline : t -> AnimationTimeLine.t -> unit = "ws:WebSharper.JavaScript!globalThis.Animation#set_Timeline|WebSharper.JavaScript.Dom.AnimationTimeLine" "ws:WebSharper.JavaScript!globalThis.Animation#set_Timeline|WebSharper.JavaScript.Dom.AnimationTimeLine"
 (* inline *)
-external set_StartTime : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.Animation#set_StartTime|System.Double" "ws:WebSharper.JavaScript!globalThis.Animation#set_StartTime|System.Double"
+external set_startTime : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.Animation#set_StartTime|System.Double" "ws:WebSharper.JavaScript!globalThis.Animation#set_StartTime|System.Double"
 (* inline *)
-external set_PlaybackRate : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.Animation#set_PlaybackRate|System.Double" "ws:WebSharper.JavaScript!globalThis.Animation#set_PlaybackRate|System.Double"
+external set_playbackRate : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.Animation#set_PlaybackRate|System.Double" "ws:WebSharper.JavaScript!globalThis.Animation#set_PlaybackRate|System.Double"
 (* inline *)
-external set_OnRemove : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Animation#set_OnRemove|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>" "ws:WebSharper.JavaScript!globalThis.Animation#set_OnRemove|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>"
+external set_onRemove : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Animation#set_OnRemove|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>" "ws:WebSharper.JavaScript!globalThis.Animation#set_OnRemove|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>"
 (* inline *)
-external set_Onremove : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Animation#set_Onremove|System.Action" "ws:WebSharper.JavaScript!globalThis.Animation#set_Onremove|System.Action"
+external set_onremove : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Animation#set_Onremove|System.Action" "ws:WebSharper.JavaScript!globalThis.Animation#set_Onremove|System.Action"
 (* inline *)
-external set_OnFinish : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Animation#set_OnFinish|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>" "ws:WebSharper.JavaScript!globalThis.Animation#set_OnFinish|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>"
+external set_onFinish : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Animation#set_OnFinish|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>" "ws:WebSharper.JavaScript!globalThis.Animation#set_OnFinish|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>"
 (* inline *)
-external set_Onfinish : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Animation#set_Onfinish|System.Action" "ws:WebSharper.JavaScript!globalThis.Animation#set_Onfinish|System.Action"
+external set_onfinish : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Animation#set_Onfinish|System.Action" "ws:WebSharper.JavaScript!globalThis.Animation#set_Onfinish|System.Action"
 (* inline *)
-external set_OnCancel : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Animation#set_OnCancel|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>" "ws:WebSharper.JavaScript!globalThis.Animation#set_OnCancel|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>"
+external set_onCancel : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Animation#set_OnCancel|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>" "ws:WebSharper.JavaScript!globalThis.Animation#set_OnCancel|WebSharper.JavaScript.Optional`1<System.Action`1<WebSharper.JavaScript.Dom.Event>>"
 (* inline *)
-external set_Oncancel : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Animation#set_Oncancel|System.Action" "ws:WebSharper.JavaScript!globalThis.Animation#set_Oncancel|System.Action"
+external set_oncancel : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Animation#set_Oncancel|System.Action" "ws:WebSharper.JavaScript!globalThis.Animation#set_Oncancel|System.Action"
 (* inline *)
-external set_Id : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Animation#set_Id|System.String" "ws:WebSharper.JavaScript!globalThis.Animation#set_Id|System.String"
+external set_id : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Animation#set_Id|System.String" "ws:WebSharper.JavaScript!globalThis.Animation#set_Id|System.String"
 (* inline *)
-external set_Effect : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Animation#set_Effect|System.Object" "ws:WebSharper.JavaScript!globalThis.Animation#set_Effect|System.Object"
+external set_effect : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.Animation#set_Effect|System.Object" "ws:WebSharper.JavaScript!globalThis.Animation#set_Effect|System.Object"
 (* inline *)
-external set_CurrentTime : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.Animation#set_CurrentTime|System.Double" "ws:WebSharper.JavaScript!globalThis.Animation#set_CurrentTime|System.Double"
+external set_currentTime : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.Animation#set_CurrentTime|System.Double" "ws:WebSharper.JavaScript!globalThis.Animation#set_CurrentTime|System.Double"
 (* inline *)
 external create : unit -> t = "wsnew:WebSharper.JavaScript!globalThis.Animation" "wsnew:WebSharper.JavaScript!globalThis.Animation"

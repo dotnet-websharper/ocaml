@@ -11,89 +11,89 @@ external stepDown : t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputEl
 (* inline *)
 external stepUp : t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#StepUp|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#StepUp|"
 (* inline *)
-external get_SelectionDirection : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_SelectionDirection|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_SelectionDirection|"
+external selectionDirection : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_SelectionDirection|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_SelectionDirection|"
 (* inline *)
-external get_SelectionEnd : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_SelectionEnd|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_SelectionEnd|"
+external selectionEnd : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_SelectionEnd|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_SelectionEnd|"
 (* inline *)
-external get_SelectionStart : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_SelectionStart|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_SelectionStart|"
+external selectionStart : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_SelectionStart|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_SelectionStart|"
 (* inline *)
-external get_Labels : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Labels|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Labels|"
+external labels : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Labels|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Labels|"
 (* inline *)
-external get_ValidationMessage : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_ValidationMessage|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_ValidationMessage|"
+external validationMessage : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_ValidationMessage|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_ValidationMessage|"
 (* inline *)
-external get_Validity : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Validity|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Validity|"
+external validity : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Validity|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Validity|"
 (* inline *)
-external get_WillValidate : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_WillValidate|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_WillValidate|"
+external willValidate : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_WillValidate|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_WillValidate|"
 (* inline *)
-external get_Width : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Width|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Width|"
+external width : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Width|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Width|"
 (* inline *)
-external get_ValueAsNumber : t -> float = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_ValueAsNumber|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_ValueAsNumber|"
+external valueAsNumber : t -> float = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_ValueAsNumber|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_ValueAsNumber|"
 (* inline *)
-external get_ValueAsDate : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_ValueAsDate|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_ValueAsDate|"
+external valueAsDate : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_ValueAsDate|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_ValueAsDate|"
 (* inline *)
-external get_Value : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Value|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Value|"
+external value : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Value|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Value|"
 (* inline *)
-external get_Type : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Type|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Type|"
+external type_ : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Type|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Type|"
 (* inline *)
-external get_Step : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Step|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Step|"
+external step : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Step|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Step|"
 (* inline *)
-external get_Src : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Src|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Src|"
+external src : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Src|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Src|"
 (* inline *)
-external get_Size : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Size|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Size|"
+external size : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Size|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Size|"
 (* inline *)
-external get_Required : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Required|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Required|"
+external required : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Required|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Required|"
 (* inline *)
-external get_ReadOnly : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_ReadOnly|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_ReadOnly|"
+external readOnly : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_ReadOnly|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_ReadOnly|"
 (* inline *)
-external get_Placeholder : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Placeholder|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Placeholder|"
+external placeholder : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Placeholder|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Placeholder|"
 (* inline *)
-external get_Pattern : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Pattern|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Pattern|"
+external pattern : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Pattern|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Pattern|"
 (* inline *)
-external get_Name : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Name|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Name|"
+external name : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Name|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Name|"
 (* inline *)
-external get_Multiple : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Multiple|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Multiple|"
+external multiple : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Multiple|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Multiple|"
 (* inline *)
-external get_MinLength : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_MinLength|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_MinLength|"
+external minLength : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_MinLength|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_MinLength|"
 (* inline *)
-external get_Min : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Min|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Min|"
+external min : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Min|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Min|"
 (* inline *)
-external get_MaxLength : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_MaxLength|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_MaxLength|"
+external maxLength : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_MaxLength|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_MaxLength|"
 (* inline *)
-external get_Max : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Max|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Max|"
+external max : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Max|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Max|"
 (* inline *)
-external get_List : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_List|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_List|"
+external list : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_List|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_List|"
 (* inline *)
-external get_InputMode : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_InputMode|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_InputMode|"
+external inputMode : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_InputMode|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_InputMode|"
 (* inline *)
-external get_Indeterminate : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Indeterminate|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Indeterminate|"
+external indeterminate : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Indeterminate|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Indeterminate|"
 (* inline *)
-external get_Height : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Height|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Height|"
+external height : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Height|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Height|"
 (* inline *)
-external get_FormTarget : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_FormTarget|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_FormTarget|"
+external formTarget : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_FormTarget|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_FormTarget|"
 (* inline *)
-external get_FormMethod : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_FormMethod|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_FormMethod|"
+external formMethod : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_FormMethod|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_FormMethod|"
 (* inline *)
-external get_FormEnctype : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_FormEnctype|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_FormEnctype|"
+external formEnctype : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_FormEnctype|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_FormEnctype|"
 (* inline *)
-external get_FormAction : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_FormAction|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_FormAction|"
+external formAction : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_FormAction|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_FormAction|"
 (* inline *)
-external get_Files : t -> FileList.t = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Files|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Files|"
+external files : t -> FileList.t = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Files|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Files|"
 (* inline *)
-external get_Form : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Form|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Form|"
+external form : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Form|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Form|"
 (* inline *)
-external get_DirName : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_DirName|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_DirName|"
+external dirName : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_DirName|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_DirName|"
 (* inline *)
-external get_Checked : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Checked|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Checked|"
+external checked : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Checked|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Checked|"
 (* inline *)
-external get_DefaultChecked : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_DefaultChecked|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_DefaultChecked|"
+external defaultChecked : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_DefaultChecked|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_DefaultChecked|"
 (* inline *)
-external get_Autofocus : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Autofocus|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Autofocus|"
+external autofocus : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Autofocus|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Autofocus|"
 (* inline *)
-external get_Autocomplete : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Autocomplete|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Autocomplete|"
+external autocomplete : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Autocomplete|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Autocomplete|"
 (* inline *)
-external get_Alt : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Alt|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Alt|"
+external alt : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Alt|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Alt|"
 (* inline *)
-external get_Accept : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Accept|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Accept|"
+external accept : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Accept|" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#get_Accept|"
 (* inline *)
 external setRangeText : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#SetRangeText|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#SetRangeText|System.String"
 (* inline *)
@@ -103,75 +103,75 @@ external stepDown_2 : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HT
 (* inline *)
 external stepUp_2 : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#StepUp|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#StepUp|System.Int32"
 (* inline *)
-external set_SelectionDirection : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_SelectionDirection|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_SelectionDirection|System.String"
+external set_selectionDirection : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_SelectionDirection|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_SelectionDirection|System.String"
 (* inline *)
-external set_SelectionEnd : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_SelectionEnd|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_SelectionEnd|System.Int32"
+external set_selectionEnd : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_SelectionEnd|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_SelectionEnd|System.Int32"
 (* inline *)
-external set_SelectionStart : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_SelectionStart|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_SelectionStart|System.Int32"
+external set_selectionStart : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_SelectionStart|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_SelectionStart|System.Int32"
 (* inline *)
-external set_Width : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Width|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Width|System.Int32"
+external set_width : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Width|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Width|System.Int32"
 (* inline *)
-external set_ValueAsNumber : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_ValueAsNumber|System.Double" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_ValueAsNumber|System.Double"
+external set_valueAsNumber : t -> float -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_ValueAsNumber|System.Double" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_ValueAsNumber|System.Double"
 (* inline *)
-external set_ValueAsDate : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_ValueAsDate|System.Object" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_ValueAsDate|System.Object"
+external set_valueAsDate : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_ValueAsDate|System.Object" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_ValueAsDate|System.Object"
 (* inline *)
-external set_Value : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Value|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Value|System.String"
+external set_value : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Value|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Value|System.String"
 (* inline *)
-external set_Type : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Type|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Type|System.String"
+external set_type : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Type|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Type|System.String"
 (* inline *)
-external set_Step : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Step|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Step|System.String"
+external set_step : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Step|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Step|System.String"
 (* inline *)
-external set_Src : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Src|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Src|System.String"
+external set_src : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Src|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Src|System.String"
 (* inline *)
-external set_Size : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Size|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Size|System.Int32"
+external set_size : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Size|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Size|System.Int32"
 (* inline *)
-external set_Required : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Required|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Required|System.Boolean"
+external set_required : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Required|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Required|System.Boolean"
 (* inline *)
-external set_ReadOnly : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_ReadOnly|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_ReadOnly|System.Boolean"
+external set_readOnly : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_ReadOnly|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_ReadOnly|System.Boolean"
 (* inline *)
-external set_Placeholder : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Placeholder|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Placeholder|System.String"
+external set_placeholder : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Placeholder|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Placeholder|System.String"
 (* inline *)
-external set_Pattern : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Pattern|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Pattern|System.String"
+external set_pattern : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Pattern|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Pattern|System.String"
 (* inline *)
-external set_Name : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Name|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Name|System.String"
+external set_name : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Name|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Name|System.String"
 (* inline *)
-external set_Multiple : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Multiple|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Multiple|System.Boolean"
+external set_multiple : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Multiple|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Multiple|System.Boolean"
 (* inline *)
-external set_MinLength : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_MinLength|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_MinLength|System.Int32"
+external set_minLength : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_MinLength|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_MinLength|System.Int32"
 (* inline *)
-external set_Min : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Min|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Min|System.String"
+external set_min : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Min|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Min|System.String"
 (* inline *)
-external set_MaxLength : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_MaxLength|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_MaxLength|System.Int32"
+external set_maxLength : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_MaxLength|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_MaxLength|System.Int32"
 (* inline *)
-external set_Max : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Max|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Max|System.String"
+external set_max : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Max|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Max|System.String"
 (* inline *)
-external set_InputMode : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_InputMode|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_InputMode|System.String"
+external set_inputMode : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_InputMode|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_InputMode|System.String"
 (* inline *)
-external set_Indeterminate : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Indeterminate|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Indeterminate|System.Boolean"
+external set_indeterminate : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Indeterminate|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Indeterminate|System.Boolean"
 (* inline *)
-external set_Height : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Height|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Height|System.Int32"
+external set_height : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Height|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Height|System.Int32"
 (* inline *)
-external set_FormTarget : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_FormTarget|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_FormTarget|System.String"
+external set_formTarget : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_FormTarget|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_FormTarget|System.String"
 (* inline *)
-external set_FormMethod : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_FormMethod|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_FormMethod|System.String"
+external set_formMethod : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_FormMethod|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_FormMethod|System.String"
 (* inline *)
-external set_FormEnctype : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_FormEnctype|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_FormEnctype|System.String"
+external set_formEnctype : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_FormEnctype|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_FormEnctype|System.String"
 (* inline *)
-external set_FormAction : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_FormAction|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_FormAction|System.String"
+external set_formAction : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_FormAction|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_FormAction|System.String"
 (* inline *)
-external set_DirName : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_DirName|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_DirName|System.String"
+external set_dirName : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_DirName|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_DirName|System.String"
 (* inline *)
-external set_Checked : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Checked|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Checked|System.Boolean"
+external set_checked : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Checked|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Checked|System.Boolean"
 (* inline *)
-external set_DefaultChecked : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_DefaultChecked|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_DefaultChecked|System.Boolean"
+external set_defaultChecked : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_DefaultChecked|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_DefaultChecked|System.Boolean"
 (* inline *)
-external set_Autofocus : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Autofocus|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Autofocus|System.Boolean"
+external set_autofocus : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Autofocus|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Autofocus|System.Boolean"
 (* inline *)
-external set_Autocomplete : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Autocomplete|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Autocomplete|System.String"
+external set_autocomplete : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Autocomplete|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Autocomplete|System.String"
 (* inline *)
-external set_Alt : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Alt|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Alt|System.String"
+external set_alt : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Alt|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Alt|System.String"
 (* inline *)
-external set_Accept : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Accept|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Accept|System.String"
+external set_accept : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Accept|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#set_Accept|System.String"
 (* inline *)
 external setSelectionRange : t -> int -> int -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#SetSelectionRange|System.Int32|System.Int32|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLInputElement#SetSelectionRange|System.Int32|System.Int32|System.String"
 (* inline *)

@@ -7,7 +7,7 @@ external enqueue : t -> unit = "ws:WebSharper.JavaScript!globalThis.ReadableStre
 (* inline *)
 external close : t -> unit = "ws:WebSharper.JavaScript!globalThis.ReadableStreamDefaultController#Close|" "ws:WebSharper.JavaScript!globalThis.ReadableStreamDefaultController#Close|"
 (* inline *)
-external get_DesiredSize : t -> float = "ws:WebSharper.JavaScript!globalThis.ReadableStreamDefaultController#get_DesiredSize|" "ws:WebSharper.JavaScript!globalThis.ReadableStreamDefaultController#get_DesiredSize|"
+external desiredSize : t -> float = "ws:WebSharper.JavaScript!globalThis.ReadableStreamDefaultController#get_DesiredSize|" "ws:WebSharper.JavaScript!globalThis.ReadableStreamDefaultController#get_DesiredSize|"
 (* inline *)
 external error_2 : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.ReadableStreamDefaultController#Error|System.Object" "ws:WebSharper.JavaScript!globalThis.ReadableStreamDefaultController#Error|System.Object"
 (* inline *)

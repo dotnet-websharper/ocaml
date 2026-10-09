@@ -3,9 +3,9 @@ type t = Object.t
 (* instance *)
 external tick : t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency.Scheduler::default#tick|" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency.Scheduler::default#tick|"
 (* instance *)
-external fork : t -> Js.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency.Scheduler::default#Fork|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency.Scheduler::default#Fork|fn"
+external fork : t -> (unit -> unit) -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency.Scheduler::default#Fork|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency.Scheduler::default#Fork|fn"
 (* instance *)
-external get_robin : t -> Js.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency.Scheduler::default#robin" "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency.Scheduler::default#robin"
+external get_robin : t -> ((unit -> unit)) Queue.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency.Scheduler::default#robin" "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency.Scheduler::default#robin"
 (* instance *)
 external get_idle : t -> bool = "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency.Scheduler::default#idle" "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency.Scheduler::default#idle"
 (* instance *)

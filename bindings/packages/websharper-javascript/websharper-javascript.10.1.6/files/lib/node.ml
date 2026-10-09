@@ -11,69 +11,69 @@ external getRootNode : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis
 (* inline *)
 external cloneNode : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Node#CloneNode|" "ws:WebSharper.JavaScript!globalThis.Node#CloneNode|"
 (* inline *)
-external get_TextContent : t -> string = "ws:WebSharper.JavaScript!globalThis.Node#get_TextContent|" "ws:WebSharper.JavaScript!globalThis.Node#get_TextContent|"
+external textContent : t -> string = "ws:WebSharper.JavaScript!globalThis.Node#get_TextContent|" "ws:WebSharper.JavaScript!globalThis.Node#get_TextContent|"
 (* inline *)
-external get_PreviousSibling : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Node#get_PreviousSibling|" "ws:WebSharper.JavaScript!globalThis.Node#get_PreviousSibling|"
+external previousSibling : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Node#get_PreviousSibling|" "ws:WebSharper.JavaScript!globalThis.Node#get_PreviousSibling|"
 (* inline *)
-external get_ParentElement : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Node#get_ParentElement|" "ws:WebSharper.JavaScript!globalThis.Node#get_ParentElement|"
+external parentElement : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Node#get_ParentElement|" "ws:WebSharper.JavaScript!globalThis.Node#get_ParentElement|"
 (* inline *)
-external get_ParentNode : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Node#get_ParentNode|" "ws:WebSharper.JavaScript!globalThis.Node#get_ParentNode|"
+external parentNode : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Node#get_ParentNode|" "ws:WebSharper.JavaScript!globalThis.Node#get_ParentNode|"
 (* inline *)
-external get_OwnerDocument : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Node#get_OwnerDocument|" "ws:WebSharper.JavaScript!globalThis.Node#get_OwnerDocument|"
+external ownerDocument : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Node#get_OwnerDocument|" "ws:WebSharper.JavaScript!globalThis.Node#get_OwnerDocument|"
 (* inline *)
-external get_NodeValue : t -> string = "ws:WebSharper.JavaScript!globalThis.Node#get_NodeValue|" "ws:WebSharper.JavaScript!globalThis.Node#get_NodeValue|"
+external nodeValue : t -> string = "ws:WebSharper.JavaScript!globalThis.Node#get_NodeValue|" "ws:WebSharper.JavaScript!globalThis.Node#get_NodeValue|"
 (* inline *)
-external get_NodeType : t -> NodeType.t = "ws:WebSharper.JavaScript!globalThis.Node#get_NodeType|" "ws:WebSharper.JavaScript!globalThis.Node#get_NodeType|"
+external nodeType : t -> NodeType.t = "ws:WebSharper.JavaScript!globalThis.Node#get_NodeType|" "ws:WebSharper.JavaScript!globalThis.Node#get_NodeType|"
 (* inline *)
-external get_NodeName : t -> string = "ws:WebSharper.JavaScript!globalThis.Node#get_NodeName|" "ws:WebSharper.JavaScript!globalThis.Node#get_NodeName|"
+external nodeName : t -> string = "ws:WebSharper.JavaScript!globalThis.Node#get_NodeName|" "ws:WebSharper.JavaScript!globalThis.Node#get_NodeName|"
 (* inline *)
-external get_NextSibling : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Node#get_NextSibling|" "ws:WebSharper.JavaScript!globalThis.Node#get_NextSibling|"
+external nextSibling : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Node#get_NextSibling|" "ws:WebSharper.JavaScript!globalThis.Node#get_NextSibling|"
 (* inline *)
-external get_LastChild : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Node#get_LastChild|" "ws:WebSharper.JavaScript!globalThis.Node#get_LastChild|"
+external lastChild : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Node#get_LastChild|" "ws:WebSharper.JavaScript!globalThis.Node#get_LastChild|"
 (* inline *)
-external get_IsConnected : t -> bool = "ws:WebSharper.JavaScript!globalThis.Node#get_IsConnected|" "ws:WebSharper.JavaScript!globalThis.Node#get_IsConnected|"
+external isConnected : t -> bool = "ws:WebSharper.JavaScript!globalThis.Node#get_IsConnected|" "ws:WebSharper.JavaScript!globalThis.Node#get_IsConnected|"
 (* inline *)
-external get_FirstChild : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Node#get_FirstChild|" "ws:WebSharper.JavaScript!globalThis.Node#get_FirstChild|"
+external firstChild : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Node#get_FirstChild|" "ws:WebSharper.JavaScript!globalThis.Node#get_FirstChild|"
 (* inline *)
-external get_ChildNodes : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Node#get_ChildNodes|" "ws:WebSharper.JavaScript!globalThis.Node#get_ChildNodes|"
+external childNodes : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Node#get_ChildNodes|" "ws:WebSharper.JavaScript!globalThis.Node#get_ChildNodes|"
 (* inline *)
-external get_BaseURI : t -> string = "ws:WebSharper.JavaScript!globalThis.Node#get_BaseURI|" "ws:WebSharper.JavaScript!globalThis.Node#get_BaseURI|"
+external baseURI : t -> string = "ws:WebSharper.JavaScript!globalThis.Node#get_BaseURI|" "ws:WebSharper.JavaScript!globalThis.Node#get_BaseURI|"
 (* inline *)
-external get_DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC|" "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC|"
+external dOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC|" "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC|"
 (* inline *)
-external get_DOCUMENT_POSITION_CONTAINED_BY : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_POSITION_CONTAINED_BY|" "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_POSITION_CONTAINED_BY|"
+external dOCUMENT_POSITION_CONTAINED_BY : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_POSITION_CONTAINED_BY|" "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_POSITION_CONTAINED_BY|"
 (* inline *)
-external get_DOCUMENT_POSITION_CONTAINS : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_POSITION_CONTAINS|" "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_POSITION_CONTAINS|"
+external dOCUMENT_POSITION_CONTAINS : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_POSITION_CONTAINS|" "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_POSITION_CONTAINS|"
 (* inline *)
-external get_DOCUMENT_POSITION_FOLLOWING : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_POSITION_FOLLOWING|" "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_POSITION_FOLLOWING|"
+external dOCUMENT_POSITION_FOLLOWING : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_POSITION_FOLLOWING|" "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_POSITION_FOLLOWING|"
 (* inline *)
-external get_DOCUMENT_POSITION_PRECEDING : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_POSITION_PRECEDING|" "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_POSITION_PRECEDING|"
+external dOCUMENT_POSITION_PRECEDING : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_POSITION_PRECEDING|" "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_POSITION_PRECEDING|"
 (* inline *)
-external get_DOCUMENT_POSITION_DISCONNECTED : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_POSITION_DISCONNECTED|" "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_POSITION_DISCONNECTED|"
+external dOCUMENT_POSITION_DISCONNECTED : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_POSITION_DISCONNECTED|" "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_POSITION_DISCONNECTED|"
 (* inline *)
-external get_NOTATION_NODE : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_NOTATION_NODE|" "ws:WebSharper.JavaScript!globalThis.Node#get_NOTATION_NODE|"
+external nOTATION_NODE : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_NOTATION_NODE|" "ws:WebSharper.JavaScript!globalThis.Node#get_NOTATION_NODE|"
 (* inline *)
-external get_DOCUMENT_FRAGMENT_NODE : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_FRAGMENT_NODE|" "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_FRAGMENT_NODE|"
+external dOCUMENT_FRAGMENT_NODE : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_FRAGMENT_NODE|" "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_FRAGMENT_NODE|"
 (* inline *)
-external get_DOCUMENT_TYPE_NODE : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_TYPE_NODE|" "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_TYPE_NODE|"
+external dOCUMENT_TYPE_NODE : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_TYPE_NODE|" "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_TYPE_NODE|"
 (* inline *)
-external get_DOCUMENT_NODE : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_NODE|" "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_NODE|"
+external dOCUMENT_NODE : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_NODE|" "ws:WebSharper.JavaScript!globalThis.Node#get_DOCUMENT_NODE|"
 (* inline *)
-external get_COMMENT_NODE : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_COMMENT_NODE|" "ws:WebSharper.JavaScript!globalThis.Node#get_COMMENT_NODE|"
+external cOMMENT_NODE : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_COMMENT_NODE|" "ws:WebSharper.JavaScript!globalThis.Node#get_COMMENT_NODE|"
 (* inline *)
-external get_PROCESSING_INSTRUCTION_NODE : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_PROCESSING_INSTRUCTION_NODE|" "ws:WebSharper.JavaScript!globalThis.Node#get_PROCESSING_INSTRUCTION_NODE|"
+external pROCESSING_INSTRUCTION_NODE : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_PROCESSING_INSTRUCTION_NODE|" "ws:WebSharper.JavaScript!globalThis.Node#get_PROCESSING_INSTRUCTION_NODE|"
 (* inline *)
-external get_ENTITY_NODE : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_ENTITY_NODE|" "ws:WebSharper.JavaScript!globalThis.Node#get_ENTITY_NODE|"
+external eNTITY_NODE : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_ENTITY_NODE|" "ws:WebSharper.JavaScript!globalThis.Node#get_ENTITY_NODE|"
 (* inline *)
-external get_ENTITY_REFERENCE_NODE : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_ENTITY_REFERENCE_NODE|" "ws:WebSharper.JavaScript!globalThis.Node#get_ENTITY_REFERENCE_NODE|"
+external eNTITY_REFERENCE_NODE : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_ENTITY_REFERENCE_NODE|" "ws:WebSharper.JavaScript!globalThis.Node#get_ENTITY_REFERENCE_NODE|"
 (* inline *)
-external get_CDATA_SECTION_NODE : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_CDATA_SECTION_NODE|" "ws:WebSharper.JavaScript!globalThis.Node#get_CDATA_SECTION_NODE|"
+external cDATA_SECTION_NODE : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_CDATA_SECTION_NODE|" "ws:WebSharper.JavaScript!globalThis.Node#get_CDATA_SECTION_NODE|"
 (* inline *)
-external get_TEXT_NODE : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_TEXT_NODE|" "ws:WebSharper.JavaScript!globalThis.Node#get_TEXT_NODE|"
+external tEXT_NODE : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_TEXT_NODE|" "ws:WebSharper.JavaScript!globalThis.Node#get_TEXT_NODE|"
 (* inline *)
-external get_ATTRIBUTE_NODE : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_ATTRIBUTE_NODE|" "ws:WebSharper.JavaScript!globalThis.Node#get_ATTRIBUTE_NODE|"
+external aTTRIBUTE_NODE : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_ATTRIBUTE_NODE|" "ws:WebSharper.JavaScript!globalThis.Node#get_ATTRIBUTE_NODE|"
 (* inline *)
-external get_ELEMENT_NODE : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_ELEMENT_NODE|" "ws:WebSharper.JavaScript!globalThis.Node#get_ELEMENT_NODE|"
+external eLEMENT_NODE : unit -> int = "ws:WebSharper.JavaScript!globalThis.Node#get_ELEMENT_NODE|" "ws:WebSharper.JavaScript!globalThis.Node#get_ELEMENT_NODE|"
 (* inline *)
 external removeChild : t -> EventTarget.t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Node#RemoveChild|WebSharper.JavaScript.Dom.Node" "ws:WebSharper.JavaScript!globalThis.Node#RemoveChild|WebSharper.JavaScript.Dom.Node"
 (* inline *)
@@ -97,9 +97,9 @@ external cloneNode_2 : t -> bool -> EventTarget.t = "ws:WebSharper.JavaScript!gl
 (* inline *)
 external appendChild : t -> EventTarget.t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Node#AppendChild|WebSharper.JavaScript.Dom.Node" "ws:WebSharper.JavaScript!globalThis.Node#AppendChild|WebSharper.JavaScript.Dom.Node"
 (* inline *)
-external set_TextContent : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Node#set_TextContent|System.String" "ws:WebSharper.JavaScript!globalThis.Node#set_TextContent|System.String"
+external set_textContent : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Node#set_TextContent|System.String" "ws:WebSharper.JavaScript!globalThis.Node#set_TextContent|System.String"
 (* inline *)
-external set_NodeValue : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Node#set_NodeValue|System.String" "ws:WebSharper.JavaScript!globalThis.Node#set_NodeValue|System.String"
+external set_nodeValue : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Node#set_NodeValue|System.String" "ws:WebSharper.JavaScript!globalThis.Node#set_NodeValue|System.String"
 (* inline *)
 external replaceChild : t -> EventTarget.t -> EventTarget.t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Node#ReplaceChild|WebSharper.JavaScript.Dom.Node|WebSharper.JavaScript.Dom.Node" "ws:WebSharper.JavaScript!globalThis.Node#ReplaceChild|WebSharper.JavaScript.Dom.Node|WebSharper.JavaScript.Dom.Node"
 (* inline *)

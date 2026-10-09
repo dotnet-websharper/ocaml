@@ -7,12 +7,12 @@ external previousNode : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThi
 (* inline *)
 external nextNode : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.NodeIterator#NextNode|" "ws:WebSharper.JavaScript!globalThis.NodeIterator#NextNode|"
 (* inline *)
-external get_Filter : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.NodeIterator#get_Filter|" "ws:WebSharper.JavaScript!globalThis.NodeIterator#get_Filter|"
+external filter : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.NodeIterator#get_Filter|" "ws:WebSharper.JavaScript!globalThis.NodeIterator#get_Filter|"
 (* inline *)
-external get_WhatToShow : t -> int = "ws:WebSharper.JavaScript!globalThis.NodeIterator#get_WhatToShow|" "ws:WebSharper.JavaScript!globalThis.NodeIterator#get_WhatToShow|"
+external whatToShow : t -> int = "ws:WebSharper.JavaScript!globalThis.NodeIterator#get_WhatToShow|" "ws:WebSharper.JavaScript!globalThis.NodeIterator#get_WhatToShow|"
 (* inline *)
-external get_PointerBeforeReferenceNode : t -> bool = "ws:WebSharper.JavaScript!globalThis.NodeIterator#get_PointerBeforeReferenceNode|" "ws:WebSharper.JavaScript!globalThis.NodeIterator#get_PointerBeforeReferenceNode|"
+external pointerBeforeReferenceNode : t -> bool = "ws:WebSharper.JavaScript!globalThis.NodeIterator#get_PointerBeforeReferenceNode|" "ws:WebSharper.JavaScript!globalThis.NodeIterator#get_PointerBeforeReferenceNode|"
 (* inline *)
-external get_ReferenceNode : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.NodeIterator#get_ReferenceNode|" "ws:WebSharper.JavaScript!globalThis.NodeIterator#get_ReferenceNode|"
+external referenceNode : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.NodeIterator#get_ReferenceNode|" "ws:WebSharper.JavaScript!globalThis.NodeIterator#get_ReferenceNode|"
 (* inline *)
-external get_Root : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.NodeIterator#get_Root|" "ws:WebSharper.JavaScript!globalThis.NodeIterator#get_Root|"
+external root : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.NodeIterator#get_Root|" "ws:WebSharper.JavaScript!globalThis.NodeIterator#get_Root|"

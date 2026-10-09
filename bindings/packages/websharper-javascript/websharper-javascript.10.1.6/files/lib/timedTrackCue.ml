@@ -13,24 +13,24 @@ external getCueAsHTML : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.TimedTr
 (* inline *)
 external getCueAsSource : t -> string = "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#GetCueAsSource|" "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#GetCueAsSource|"
 (* inline *)
-external get_Voice : t -> string = "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_Voice|" "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_Voice|"
+external voice : t -> string = "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_Voice|" "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_Voice|"
 (* inline *)
-external get_Alignment : t -> string = "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_Alignment|" "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_Alignment|"
+external alignment : t -> string = "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_Alignment|" "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_Alignment|"
 (* inline *)
-external get_Size : t -> int = "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_Size|" "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_Size|"
+external size : t -> int = "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_Size|" "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_Size|"
 (* inline *)
-external get_TextPosition : t -> int = "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_TextPosition|" "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_TextPosition|"
+external textPosition : t -> int = "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_TextPosition|" "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_TextPosition|"
 (* inline *)
-external get_LinePosition : t -> int = "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_LinePosition|" "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_LinePosition|"
+external linePosition : t -> int = "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_LinePosition|" "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_LinePosition|"
 (* inline *)
-external get_SnapToLines : t -> bool = "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_SnapToLines|" "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_SnapToLines|"
+external snapToLines : t -> bool = "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_SnapToLines|" "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_SnapToLines|"
 (* inline *)
-external get_Direction : t -> string = "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_Direction|" "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_Direction|"
+external direction : t -> string = "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_Direction|" "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_Direction|"
 (* inline *)
-external get_PauseOnExit : t -> bool = "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_PauseOnExit|" "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_PauseOnExit|"
+external pauseOnExit : t -> bool = "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_PauseOnExit|" "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_PauseOnExit|"
 (* inline *)
-external get_EndTime : t -> float = "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_EndTime|" "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_EndTime|"
+external endTime : t -> float = "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_EndTime|" "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_EndTime|"
 (* inline *)
-external get_StartTime : t -> float = "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_StartTime|" "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_StartTime|"
+external startTime : t -> float = "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_StartTime|" "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_StartTime|"
 (* inline *)
-external get_Track : t -> TimedTrack.t = "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_Track|" "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_Track|"
+external track : t -> TimedTrack.t = "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_Track|" "ws:WebSharper.JavaScript!globalThis.TimedTrackCue#get_Track|"

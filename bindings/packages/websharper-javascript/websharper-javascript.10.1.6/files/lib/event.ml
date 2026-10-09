@@ -9,29 +9,29 @@ external stopImmediatePropagation : t -> unit = "ws:WebSharper.JavaScript!global
 (* inline *)
 external preventDefault : t -> unit = "ws:WebSharper.JavaScript!globalThis.Event#PreventDefault|" "ws:WebSharper.JavaScript!globalThis.Event#PreventDefault|"
 (* inline *)
-external get_IsTrusted : t -> bool = "ws:WebSharper.JavaScript!globalThis.Event#get_IsTrusted|" "ws:WebSharper.JavaScript!globalThis.Event#get_IsTrusted|"
+external isTrusted : t -> bool = "ws:WebSharper.JavaScript!globalThis.Event#get_IsTrusted|" "ws:WebSharper.JavaScript!globalThis.Event#get_IsTrusted|"
 (* inline *)
-external get_Type : t -> string = "ws:WebSharper.JavaScript!globalThis.Event#get_Type|" "ws:WebSharper.JavaScript!globalThis.Event#get_Type|"
+external type_ : t -> string = "ws:WebSharper.JavaScript!globalThis.Event#get_Type|" "ws:WebSharper.JavaScript!globalThis.Event#get_Type|"
 (* inline *)
-external get_TimeStamp : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Event#get_TimeStamp|" "ws:WebSharper.JavaScript!globalThis.Event#get_TimeStamp|"
+external timeStamp : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Event#get_TimeStamp|" "ws:WebSharper.JavaScript!globalThis.Event#get_TimeStamp|"
 (* inline *)
-external get_Target : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Event#get_Target|" "ws:WebSharper.JavaScript!globalThis.Event#get_Target|"
+external target : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Event#get_Target|" "ws:WebSharper.JavaScript!globalThis.Event#get_Target|"
 (* inline *)
-external get_NamespaceURI : t -> string = "ws:WebSharper.JavaScript!globalThis.Event#get_NamespaceURI|" "ws:WebSharper.JavaScript!globalThis.Event#get_NamespaceURI|"
+external namespaceURI : t -> string = "ws:WebSharper.JavaScript!globalThis.Event#get_NamespaceURI|" "ws:WebSharper.JavaScript!globalThis.Event#get_NamespaceURI|"
 (* inline *)
-external get_EventPhase : t -> PhaseType.t = "ws:WebSharper.JavaScript!globalThis.Event#get_EventPhase|" "ws:WebSharper.JavaScript!globalThis.Event#get_EventPhase|"
+external eventPhase : t -> PhaseType.t = "ws:WebSharper.JavaScript!globalThis.Event#get_EventPhase|" "ws:WebSharper.JavaScript!globalThis.Event#get_EventPhase|"
 (* inline *)
-external get_DefaultPrevented : t -> bool = "ws:WebSharper.JavaScript!globalThis.Event#get_DefaultPrevented|" "ws:WebSharper.JavaScript!globalThis.Event#get_DefaultPrevented|"
+external defaultPrevented : t -> bool = "ws:WebSharper.JavaScript!globalThis.Event#get_DefaultPrevented|" "ws:WebSharper.JavaScript!globalThis.Event#get_DefaultPrevented|"
 (* inline *)
-external get_CurrentTarget : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Event#get_CurrentTarget|" "ws:WebSharper.JavaScript!globalThis.Event#get_CurrentTarget|"
+external currentTarget : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.Event#get_CurrentTarget|" "ws:WebSharper.JavaScript!globalThis.Event#get_CurrentTarget|"
 (* inline *)
-external get_Composed : t -> bool = "ws:WebSharper.JavaScript!globalThis.Event#get_Composed|" "ws:WebSharper.JavaScript!globalThis.Event#get_Composed|"
+external composed : t -> bool = "ws:WebSharper.JavaScript!globalThis.Event#get_Composed|" "ws:WebSharper.JavaScript!globalThis.Event#get_Composed|"
 (* inline *)
-external get_Cancelable : t -> bool = "ws:WebSharper.JavaScript!globalThis.Event#get_Cancelable|" "ws:WebSharper.JavaScript!globalThis.Event#get_Cancelable|"
+external cancelable : t -> bool = "ws:WebSharper.JavaScript!globalThis.Event#get_Cancelable|" "ws:WebSharper.JavaScript!globalThis.Event#get_Cancelable|"
 (* inline *)
-external get_Bubbles : t -> bool = "ws:WebSharper.JavaScript!globalThis.Event#get_Bubbles|" "ws:WebSharper.JavaScript!globalThis.Event#get_Bubbles|"
+external bubbles : t -> bool = "ws:WebSharper.JavaScript!globalThis.Event#get_Bubbles|" "ws:WebSharper.JavaScript!globalThis.Event#get_Bubbles|"
 (* inline *)
-external set_NamespaceURI : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Event#set_NamespaceURI|System.String" "ws:WebSharper.JavaScript!globalThis.Event#set_NamespaceURI|System.String"
+external set_namespaceURI : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.Event#set_NamespaceURI|System.String" "ws:WebSharper.JavaScript!globalThis.Event#set_NamespaceURI|System.String"
 (* inline *)
 external initEvent : t -> string -> bool -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.Event#InitEvent|System.String|System.Boolean|System.Boolean" "ws:WebSharper.JavaScript!globalThis.Event#InitEvent|System.String|System.Boolean|System.Boolean"
 (* inline *)

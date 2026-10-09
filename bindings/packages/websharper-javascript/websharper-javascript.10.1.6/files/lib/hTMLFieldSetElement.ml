@@ -5,24 +5,24 @@ external reportValidity : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLF
 (* inline *)
 external checkValidity : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#CheckValidity|" "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#CheckValidity|"
 (* inline *)
-external get_ValidationMessage : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_ValidationMessage|" "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_ValidationMessage|"
+external validationMessage : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_ValidationMessage|" "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_ValidationMessage|"
 (* inline *)
-external get_Validity : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_Validity|" "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_Validity|"
+external validity : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_Validity|" "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_Validity|"
 (* inline *)
-external get_WillValidate : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_WillValidate|" "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_WillValidate|"
+external willValidate : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_WillValidate|" "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_WillValidate|"
 (* inline *)
-external get_Elements : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_Elements|" "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_Elements|"
+external elements : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_Elements|" "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_Elements|"
 (* inline *)
-external get_Type : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_Type|" "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_Type|"
+external type_ : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_Type|" "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_Type|"
 (* inline *)
-external get_Name : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_Name|" "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_Name|"
+external name : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_Name|" "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_Name|"
 (* inline *)
-external get_Form : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_Form|" "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_Form|"
+external form : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_Form|" "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_Form|"
 (* inline *)
-external get_Disabled : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_Disabled|" "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_Disabled|"
+external disabled : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_Disabled|" "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#get_Disabled|"
 (* inline *)
 external setCustomValidity : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#SetCustomValidity|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#SetCustomValidity|System.String"
 (* inline *)
-external set_Name : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#set_Name|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#set_Name|System.String"
+external set_name : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#set_Name|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#set_Name|System.String"
 (* inline *)
-external set_Disabled : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#set_Disabled|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#set_Disabled|System.Boolean"
+external set_disabled : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#set_Disabled|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLFieldSetElement#set_Disabled|System.Boolean"

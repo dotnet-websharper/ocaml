@@ -5,22 +5,22 @@ external postMessage : t -> unit = "ws:WebSharper.JavaScript!globalThis.Dedicate
 (* inline *)
 external close : t -> unit = "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#Close|" "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#Close|"
 (* inline *)
-external get_OnMessageError : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#get_OnMessageError|" "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#get_OnMessageError|"
+external onMessageError : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#get_OnMessageError|" "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#get_OnMessageError|"
 (* inline *)
-external get_Onmessageerror : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#get_Onmessageerror|" "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#get_Onmessageerror|"
+external onmessageerror : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#get_Onmessageerror|" "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#get_Onmessageerror|"
 (* inline *)
-external get_OnMessage : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#get_OnMessage|" "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#get_OnMessage|"
+external onMessage : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#get_OnMessage|" "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#get_OnMessage|"
 (* inline *)
-external get_Onmessage : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#get_Onmessage|" "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#get_Onmessage|"
+external onmessage : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#get_Onmessage|" "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#get_Onmessage|"
 (* inline *)
 external postMessage_2 : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#PostMessage|System.Object" "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#PostMessage|System.Object"
 (* inline *)
-external set_OnMessageError : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#set_OnMessageError|System.Action`1<WebSharper.JavaScript.MessageEvent>" "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#set_OnMessageError|System.Action`1<WebSharper.JavaScript.MessageEvent>"
+external set_onMessageError : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#set_OnMessageError|System.Action`1<WebSharper.JavaScript.MessageEvent>" "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#set_OnMessageError|System.Action`1<WebSharper.JavaScript.MessageEvent>"
 (* inline *)
-external set_Onmessageerror : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#set_Onmessageerror|System.Action`1<WebSharper.JavaScript.MessageEvent>" "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#set_Onmessageerror|System.Action`1<WebSharper.JavaScript.MessageEvent>"
+external set_onmessageerror : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#set_Onmessageerror|System.Action`1<WebSharper.JavaScript.MessageEvent>" "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#set_Onmessageerror|System.Action`1<WebSharper.JavaScript.MessageEvent>"
 (* inline *)
-external set_OnMessage : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#set_OnMessage|System.Action`1<WebSharper.JavaScript.MessageEvent>" "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#set_OnMessage|System.Action`1<WebSharper.JavaScript.MessageEvent>"
+external set_onMessage : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#set_OnMessage|System.Action`1<WebSharper.JavaScript.MessageEvent>" "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#set_OnMessage|System.Action`1<WebSharper.JavaScript.MessageEvent>"
 (* inline *)
-external set_Onmessage : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#set_Onmessage|System.Action`1<WebSharper.JavaScript.MessageEvent>" "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#set_Onmessage|System.Action`1<WebSharper.JavaScript.MessageEvent>"
+external set_onmessage : t -> Js.t -> unit = "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#set_Onmessage|System.Action`1<WebSharper.JavaScript.MessageEvent>" "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#set_Onmessage|System.Action`1<WebSharper.JavaScript.MessageEvent>"
 (* inline *)
 external postMessage_3 : t -> Js.t -> (Js.t) array -> unit = "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#PostMessage|System.Object|System.Object[]" "ws:WebSharper.JavaScript!globalThis.DedicatedWorkerGlobalScope#PostMessage|System.Object|System.Object[]"

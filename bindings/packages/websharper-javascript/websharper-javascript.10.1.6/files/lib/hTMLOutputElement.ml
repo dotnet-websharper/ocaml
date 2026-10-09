@@ -5,30 +5,30 @@ external reportValidity : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLO
 (* inline *)
 external checkValidity : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#CheckValidity|" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#CheckValidity|"
 (* inline *)
-external get_Labels : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_Labels|" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_Labels|"
+external labels : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_Labels|" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_Labels|"
 (* inline *)
-external get_ValidationMessage : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_ValidationMessage|" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_ValidationMessage|"
+external validationMessage : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_ValidationMessage|" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_ValidationMessage|"
 (* inline *)
-external get_Validity : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_Validity|" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_Validity|"
+external validity : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_Validity|" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_Validity|"
 (* inline *)
-external get_WillValidate : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_WillValidate|" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_WillValidate|"
+external willValidate : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_WillValidate|" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_WillValidate|"
 (* inline *)
-external get_Value : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_Value|" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_Value|"
+external value : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_Value|" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_Value|"
 (* inline *)
-external get_DefaultValue : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_DefaultValue|" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_DefaultValue|"
+external defaultValue : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_DefaultValue|" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_DefaultValue|"
 (* inline *)
-external get_Type : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_Type|" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_Type|"
+external type_ : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_Type|" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_Type|"
 (* inline *)
-external get_Name : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_Name|" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_Name|"
+external name : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_Name|" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_Name|"
 (* inline *)
-external get_Form : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_Form|" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_Form|"
+external form : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_Form|" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_Form|"
 (* inline *)
-external get_HtmlFor : t -> DOMTokenList.t = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_HtmlFor|" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_HtmlFor|"
+external htmlFor : t -> DOMTokenList.t = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_HtmlFor|" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#get_HtmlFor|"
 (* inline *)
 external setCustomValidity : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#SetCustomValidity|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#SetCustomValidity|System.String"
 (* inline *)
-external set_Value : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#set_Value|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#set_Value|System.String"
+external set_value : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#set_Value|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#set_Value|System.String"
 (* inline *)
-external set_DefaultValue : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#set_DefaultValue|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#set_DefaultValue|System.String"
+external set_defaultValue : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#set_DefaultValue|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#set_DefaultValue|System.String"
 (* inline *)
-external set_Name : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#set_Name|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#set_Name|System.String"
+external set_name : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#set_Name|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLOutputElement#set_Name|System.String"

@@ -57,9 +57,9 @@ external toTimeString : t -> string = "ws:WebSharper.JavaScript!globalThis.Date#
 (* inline *)
 external toDateString : t -> string = "ws:WebSharper.JavaScript!globalThis.Date#ToDateString|" "ws:WebSharper.JavaScript!globalThis.Date#ToDateString|"
 (* inline *)
-external get_Prototype : unit -> t = "ws:WebSharper.JavaScript!globalThis.Date#get_Prototype|" "ws:WebSharper.JavaScript!globalThis.Date#get_Prototype|"
+external prototype : unit -> t = "ws:WebSharper.JavaScript!globalThis.Date#get_Prototype|" "ws:WebSharper.JavaScript!globalThis.Date#get_Prototype|"
 (* inline *)
-external get_Self : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Date#get_Self|" "ws:WebSharper.JavaScript!globalThis.Date#get_Self|"
+external self : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.Date#get_Self|" "ws:WebSharper.JavaScript!globalThis.Date#get_Self|"
 (* inline *)
 external parse : string -> int = "ws:WebSharper.JavaScript!globalThis.Date#Parse|System.String" "ws:WebSharper.JavaScript!globalThis.Date#Parse|System.String"
 (* inline *)

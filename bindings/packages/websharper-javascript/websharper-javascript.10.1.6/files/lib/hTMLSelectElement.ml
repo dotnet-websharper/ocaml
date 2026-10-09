@@ -7,33 +7,33 @@ external checkValidity : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLSe
 (* inline *)
 external remove : t -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#Remove|" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#Remove|"
 (* inline *)
-external get_Labels : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Labels|" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Labels|"
+external labels : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Labels|" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Labels|"
 (* inline *)
-external get_ValidationMessage : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_ValidationMessage|" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_ValidationMessage|"
+external validationMessage : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_ValidationMessage|" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_ValidationMessage|"
 (* inline *)
-external get_Validity : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Validity|" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Validity|"
+external validity : t -> Js.t = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Validity|" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Validity|"
 (* inline *)
-external get_WillValidate : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_WillValidate|" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_WillValidate|"
+external willValidate : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_WillValidate|" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_WillValidate|"
 (* inline *)
-external get_Length : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Length|" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Length|"
+external length : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Length|" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Length|"
 (* inline *)
-external get_Type : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Type|" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Type|"
+external type_ : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Type|" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Type|"
 (* inline *)
-external get_Size : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Size|" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Size|"
+external size : t -> int = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Size|" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Size|"
 (* inline *)
-external get_Required : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Required|" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Required|"
+external required : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Required|" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Required|"
 (* inline *)
-external get_Name : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Name|" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Name|"
+external name : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Name|" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Name|"
 (* inline *)
-external get_Multiple : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Multiple|" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Multiple|"
+external multiple : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Multiple|" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Multiple|"
 (* inline *)
-external get_Form : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Form|" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Form|"
+external form : t -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Form|" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Form|"
 (* inline *)
-external get_Disabled : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Disabled|" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Disabled|"
+external disabled : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Disabled|" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Disabled|"
 (* inline *)
-external get_Autofocus : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Autofocus|" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Autofocus|"
+external autofocus : t -> bool = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Autofocus|" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Autofocus|"
 (* inline *)
-external get_Autocomplete : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Autocomplete|" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Autocomplete|"
+external autocomplete : t -> string = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Autocomplete|" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#get_Autocomplete|"
 (* inline *)
 external setCustomValidity : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#SetCustomValidity|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#SetCustomValidity|System.String"
 (* inline *)
@@ -47,19 +47,19 @@ external namedItem : t -> string -> EventTarget.t = "ws:WebSharper.JavaScript!gl
 (* inline *)
 external item : t -> int -> EventTarget.t = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#Item|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#Item|System.Int32"
 (* inline *)
-external set_Size : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#set_Size|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#set_Size|System.Int32"
+external set_size : t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#set_Size|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#set_Size|System.Int32"
 (* inline *)
-external set_Required : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#set_Required|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#set_Required|System.Boolean"
+external set_required : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#set_Required|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#set_Required|System.Boolean"
 (* inline *)
-external set_Name : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#set_Name|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#set_Name|System.String"
+external set_name : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#set_Name|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#set_Name|System.String"
 (* inline *)
-external set_Multiple : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#set_Multiple|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#set_Multiple|System.Boolean"
+external set_multiple : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#set_Multiple|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#set_Multiple|System.Boolean"
 (* inline *)
-external set_Disabled : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#set_Disabled|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#set_Disabled|System.Boolean"
+external set_disabled : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#set_Disabled|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#set_Disabled|System.Boolean"
 (* inline *)
-external set_Autofocus : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#set_Autofocus|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#set_Autofocus|System.Boolean"
+external set_autofocus : t -> bool -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#set_Autofocus|System.Boolean" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#set_Autofocus|System.Boolean"
 (* inline *)
-external set_Autocomplete : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#set_Autocomplete|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#set_Autocomplete|System.String"
+external set_autocomplete : t -> string -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#set_Autocomplete|System.String" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#set_Autocomplete|System.String"
 (* inline *)
 external add_3 : t -> EventTarget.t -> int -> unit = "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#Add|WebSharper.JavaScript.HTMLOptionElement|System.Int32" "ws:WebSharper.JavaScript!globalThis.HTMLSelectElement#Add|WebSharper.JavaScript.HTMLOptionElement|System.Int32"
 (* inline *)
