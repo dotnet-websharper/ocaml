@@ -112,3 +112,13 @@ OCaml units and need no bindings.
 
 The harness covers IR fixtures plus apps: legacy bindings (`apps/`) and generated
 WebSharper bindings (`apps-ws/`, via `scripts/build-ws-app.sh`).
+
+The full suite is slow, so for incremental work use the kitchen-sink inner loop
+and run the full suite only before wrapping up:
+
+    bash scripts/test-quick.sh   # build + run backend/tests/apps-ui/kitchensink
+
+`kitchensink.ml` is a single program that exercises the major features (OCaml/
+StdLib, WebSharper macros, HTML combinators, event handling, Var/View reactivity,
+and the list/fn interop bridges).
+
