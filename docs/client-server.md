@@ -45,20 +45,35 @@ facade), providing a module users `open`:
 ```ocaml
 open WebSharper_ClientServer
 
-(* a client-only handler, used exactly where its function type is expected *)
+(* a client-only value; `run` applies it *)
 let bump = client (fun (el : Element.t) (ev : Event.t) -> count := !count + 1)
 
 (* server-only, runs during render *)
-let greeting () = server (fun () -> read_from_db ())
+let greeting = server (fun () -> read_from_db ())
 ```
 
-`client : ('a -> 'b) -> ('a -> 'b)` returns the **underlying function type**, so
-it composes with the existing APIs (no implicit `Client<'T> -> 'T` coercion
-needed, since OCaml has none). The marker is recognized by the frontend/backend
-by its fully-qualified name.
+An OCaml `external` whose result is a function type is **uncurried** by OCaml
+(the arity counts every arrow up to a non-function result), so
+`('a -> 'b) -> ('a -> 'b)` would be compiled as a 2-argument primitive and the
+closure would arrive as a variable, not a literal. M1 therefore uses an opaque
+wrapper plus an explicit application:
 
-`server` is `server : ('a -> 'b) -> ('a -> 'b)` — the body executes at render
-time; the result is embedded as data.
+```ocaml
+type ('a, 'b) fn
+external client : ('a -> 'b) -> ('a, 'b) fn   = "wsclient:client" "wsclient:client"
+external server : ('a -> 'b) -> ('a, 'b) fn   = "wsclient:server" "wsclient:server"
+external run    : ('a, 'b) fn -> 'a -> 'b      = "wsclient:run"    "wsclient:run"
+
+let f = client (fun x -> x + 1) in run f 41
+```
+
+`run` is applied by the marker's own lowerer; `f` is the opaque handle returned
+by `client`. (A future revision may expose a coercion or inlined facade so call
+sites read `f 41`.)
+
+The markers are `external`s recognized by the backend by primitive name; no
+frontend change is needed (the frontend already lowers `external` calls to
+`ccall` with the primitive name).
 
 ## 3. Compilation pipeline
 
