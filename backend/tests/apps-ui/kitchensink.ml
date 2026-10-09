@@ -1,3 +1,4 @@
+open WebSharper_JavaScript
 open WebSharper_UI
 open WebSharper_UI.Html
 
@@ -8,7 +9,7 @@ let () =
   (* OCaml stdlib + higher-order functions. *)
   let squares = List.map (fun x -> x * x) [ 1; 2; 3; 4 ] in
   let sum = List.fold_left ( + ) 0 squares in
-  WebSharper_JavaScript.Console.log (Printf.sprintf "sum=%d len=%d" sum (List.length squares));
+  Console.log (Printf.sprintf "sum=%d len=%d" sum (List.length squares));
 
   (* WebSharper macro. *)
   let _hole = TemplateHole.makeText "a" "b" in
