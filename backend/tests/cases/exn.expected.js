@@ -104,6 +104,22 @@ if (!globalThis.OCamlRuntime) {
     return caml_trampoline(caml_apply_core(f, args));
   }
 
+  // Adapter for passing an OCaml closure to a JS/WebSharper `fn` parameter,
+  // which is invoked curried (f(a)(b)) by handwritten libraries.
+  function caml_to_js(f) {
+    if (typeof f !== "function" || f.arity === undefined) return f;
+    var arity = f.arity;
+    function curried() {
+      var args = Array.prototype.slice.call(arguments);
+      if (args.length >= arity) return caml_apply_core(f, args);
+      return function () {
+        return curried.apply(null, args.concat(Array.prototype.slice.call(arguments)));
+      };
+    }
+    curried.arity = arity;
+    return curried;
+  }
+
   function caml_trampoline_return(f, args) {
     return { tramp: f, args: args };
   }
@@ -140,6 +156,7 @@ if (!globalThis.OCamlRuntime) {
       return ++ooId;
     },
     caml_closure: caml_closure,
+    caml_to_js: caml_to_js,
     caml_apply: caml_apply,
     caml_trampoline: caml_trampoline,
     caml_trampoline_return: caml_trampoline_return,

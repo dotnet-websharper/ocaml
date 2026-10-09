@@ -41,6 +41,14 @@ let private loadInfo (path: string) : Info =
 let private packageReferences (refs: string list) (output: string) (pref: Preferences) =
     let infos = refs |> List.map (fun p -> Path.GetFileNameWithoutExtension p, loadInfo p)
 
+    // Prebuilt assemblies carry Ids allocated in a different process, in the same
+    // low numeric range that packaging reuses for freshly created Ids. Since
+    // `Id` equality/`GetHashCode` are numeric-only, the writer's symbol table
+    // then confuses locals with import/module Ids. Advance the allocator well
+    // past any serialized Id so packaging only mints disjoint Ids.
+    for _ in 1 .. 1_000_000 do
+        WebSharper.Core.AST.Id.New() |> ignore
+
     for (asmName, info) in infos do
         let dir = Path.Combine(output, asmName)
         Directory.CreateDirectory dir |> ignore

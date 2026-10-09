@@ -257,6 +257,19 @@ module Lowering =
     and prim c p xs =
         let es = List.map (expr c) xs
 
+        // An OCaml closure passed where JS/WebSharper expects a curried `fn`
+        // must be adapted so it can be called as f(a)(b) from JS.
+        let wrapFnArgs (parameters: Type list) (args: Expression list) =
+            let n = parameters.Length
+            let extra = args.Length - n
+            args
+            |> List.mapi (fun i e ->
+                if i < extra then e
+                else
+                    match parameters.[i - extra] with
+                    | Type.FSharpFuncType _ -> rt c "caml_to_js" [ e ]
+                    | _ -> e)
+
         match p.Tag, es with
         | "ignore", [ x ] ->
             Sequential[x
@@ -489,6 +502,7 @@ module Lowering =
                 | Some e ->
                     match WebSharper.OCaml.Bindings.findMethod e.Class mn ps with
                     | Some(hkey, mi, cmi) ->
+                        let es = wrapFnArgs mi.Parameters es
                         if c.Ws then
                             let td = WebSharper.OCaml.Bindings.concrete e.TypeKey
                             let m = WebSharper.OCaml.Bindings.concreteM hkey

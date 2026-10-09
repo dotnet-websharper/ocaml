@@ -16,6 +16,7 @@ q() { ocamlfind query "$1" 2>/dev/null || opam exec -- ocamlfind query "$1" 2>/d
 ui_lib="$(q websharper-ui)"
 js_lib="$(q websharper-javascript)"
 rt_lib="$(q websharper-runtime)"
+sl_lib="$(q websharper-stdlib)"
 
 newest() { ls "$@" 2>/dev/null | sort | tail -1; }
 js_dll="$(newest "$HOME"/.nuget/packages/websharper/*/lib/netstandard2.0/WebSharper.JavaScript.dll)"
@@ -24,6 +25,7 @@ ui_dll="$(newest "$HOME"/.nuget/packages/websharper.ui/*/lib/netstandard2.0/WebS
 
 inc=(-I "$ui_lib" -I "$js_lib" -I "$s")
 [ -n "$rt_lib" ] && inc+=(-I "$rt_lib")
+[ -n "$sl_lib" ] && inc+=(-I "$sl_lib")
 refs=(--reference "$ui_dll" --reference "$sl_dll" --reference "$js_dll")
 
 srcdir="$(cd "$(dirname "$entry")" && pwd)"
