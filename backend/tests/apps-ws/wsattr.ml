@@ -1,3 +1,5 @@
+open WebSharper_JavaScript
+
 (* Boundary: [@javascript] marks JS-targeted code, [@rpc] a server value the
    client may call through the (asynchronous) proxy; anything else is
    server-only. *)

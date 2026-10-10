@@ -1,3 +1,5 @@
+open WebSharper_JavaScript
+
 (* Split: `secret` is server-only; it must be excluded from the client bundle
    (present only in the server bundle), while the client keeps `f` and the
    `g` rpc proxy. `[@rpc]` handlers return `'a Async.t`. *)

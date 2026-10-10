@@ -4,23 +4,25 @@
 set -euo pipefail
 root="$(cd "$(dirname "$0")/.." && pwd)"
 out="${1:-$root/out/rpc-demo}"
-entry="$root/backend/tests/apps/wssplit.ml"
+entry="$root/backend/tests/apps-ws/wssplit.ml"
 mkdir -p "$out"
 eval "$(opam env)"
+jslib="$(ocamlfind query websharper-javascript)"
+rtlib="$(ocamlfind query websharper-runtime)"
 
-# 1. Client bundle (OCaml -> JS).
-bash "$root/scripts/build-js-app.sh" "$entry" "$out/client" >/dev/null
+# 1. Client bundle (OCaml -> JS) against the generated bindings.
+bash "$root/scripts/build-ws-app.sh" "$jslib" "$entry" "$out/client" >/dev/null
 
 # 2. Native server source, generated from the same file (server-only + [@rpc]).
-#    Type-checked against the native `Async` (the server-side implementation).
-cp "$root/runtimes/ocaml/async.ml" "$out/"
-(cd "$out" && ocamlc -c -I "$(ocamlc -where)" async.ml)
+#    Type-checked against the generated bindings; the emitted program links our
+#    native runtime (`wsrpc.ml`) and native `Async` (`async.ml`).
 "$root/frontend/_build/default/bin/main.exe" \
   --input "$entry" --emit-server "$out/server.ml" \
-  -I "$out" -I "$root/bindings-legacy" -I "$(ocamlc -where)"
+  -I "$jslib" -I "$rtlib" -I "$(ocamlc -where)"
 
-# 3. Compile the native server (with the RPC runtime and native Async).
+# 3. Compile the native server.
 cp "$root/runtimes/ocaml/wsrpc.ml" "$out/"
+cp "$root/runtimes/ocaml/async.ml" "$out/"
 (cd "$out" && ocamlfind ocamlopt -package unix,yojson -linkpkg wsrpc.ml async.ml server.ml -o rpc_server)
 
 # 4. Start the server, drive the client's RPC over HTTP, stop the server.

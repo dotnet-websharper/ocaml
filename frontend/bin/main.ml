@@ -463,10 +463,24 @@ let stripMarkers (attrs: Parsetree.attributes) =
     (fun (a: Parsetree.attribute) -> a.attr_name.txt <> "javascript" && a.attr_name.txt <> "rpc")
     attrs
 
+let openName (od: Parsetree.open_declaration) =
+  match od.popen_expr.pmod_desc with
+  | Parsetree.Pmod_ident { txt = lid; _ } ->
+      (match List.rev (Longident.flatten lid) with
+       | n :: _ -> Some n
+       | [] -> None)
+  | _ -> None
+
 let serverItems (ast: Parsetree.structure) (js: string list) : Parsetree.structure =
   List.filter_map
     (fun (item: Parsetree.structure_item) ->
       match item.pstr_desc with
+      (* Drop generated-binding opens (e.g. `open WebSharper_JavaScript`): the
+         native server links our own `Async`, not the JS binding package. *)
+      | Parsetree.Pstr_open od ->
+          (match openName od with
+           | Some n when String.length n >= 11 && String.sub n 0 11 = "WebSharper_" -> None
+           | _ -> Some item)
       | Parsetree.Pstr_value (rf, vbs) ->
           let kept =
             vbs

@@ -18,7 +18,7 @@ Lambda into `wsocaml-ir-4`, and the backend lowers it to WebSharper AST and emit
 | `backend/` | F#/.NET backend: `.wsir.json` → `.js` (also handles WebSharper bindings) |
 | `binding-adaptor/` | F# tool: WebSharper binding assembly → OCaml opam package |
 | `bindings/` | local opam repository of generated bindings (`websharper-xxx`) |
-| `bindings-legacy/` | earlier hand-authored bindings (used by the app tests) |
+| `bindings-legacy/` | raw-FFI test fixture (`gen-bindings.py`), used by the `jsbind`/`dom` emit tests |
 | `examples/` | dune projects built on the generated bindings |
 | `scripts/` | build/test helpers |
 | `backend/tests/` | test harness (IR fixtures + apps) |
@@ -110,8 +110,9 @@ OCaml units and need no bindings.
     bash backend/tests/run-tests.sh --no-build # skip the backend build
     bash backend/tests/run-tests.sh --update   # refresh goldens
 
-The harness covers IR fixtures plus apps: legacy bindings (`apps/`) and generated
-WebSharper bindings (`apps-ws/`, via `scripts/build-ws-app.sh`).
+The harness covers IR fixtures plus apps: the raw-FFI fixture (`apps/`, via
+`scripts/build-js-app.sh`) and generated WebSharper bindings (`apps-ws/`, via
+`scripts/build-ws-app.sh`).
 
 The full suite is slow, so for incremental work use the kitchen-sink inner loop
 and run the full suite only before wrapping up:

@@ -1,6 +1,6 @@
-(* Native Async for the generated RPC server (the client uses the
-   promise-backed bindings-legacy/async.ml). Computations are CPS and run
-   synchronously in the server's request handler. *)
+(* Native Async for the generated RPC server (the client uses the generated
+   WebSharper_JavaScript.Async, which is promise-backed). Computations are CPS
+   and run synchronously in the server's request handler. *)
 type 'a t = ('a -> unit) -> unit
 
 let return v k = k v

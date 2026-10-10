@@ -1,3 +1,5 @@
+open WebSharper_JavaScript
+
 (* B2: RPC. `f` is JS-targeted (client); `g` is a server value the client
    reaches through an asynchronous `rpcCall` proxy. `[@rpc]` handlers return
    `'a Async.t`, so client code can sequence calls with `Async.bind`/`Async.map`
