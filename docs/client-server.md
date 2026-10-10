@@ -297,3 +297,31 @@ let[@website] site = Sitelet.Infer render
 - Deferred: node-identity reconciliation (`ws-hole`/`ws-attr-holes`), most
   sitelet combinators (`Sum`/`Shift`/`Protect`), query-string field binding,
   `Content.Json` codecs, sessions/cookies.
+
+### 7.1 Source conventions
+
+- `open WebSharper_ClientServer` and use unqualified `hydrate`/`client`.
+- Use `text`/`textView` from `open WebSharper_UI.Html` (no `Doc.` prefix).
+- Event handlers are `on.<event>` (lowercase, e.g. `on.click`); the compiler
+  rewrites them to `On.<event>`.
+- A DU sitelet is a single `let[@website] main = Sitelet.infer (fun _ ep -> …)`
+  (lowercase `Sitelet.infer`); `render` is inlined rather than a separate value.
+- HTML combinators use F#-style layout: list/`()` brackets on their own lines,
+  elements separated by `;`.
+
+```ocaml
+let[@website] main =
+  Sitelet.infer (fun (_ : endpoint context) ep ->
+    match ep with
+    | Home ->
+        Content.page
+          ~title:"Hello, world!"
+          [
+            h1 [] [ text "Hello, world!" ];
+
+            div
+              [ on.click (fun _ _ -> Var.set v "after") ]
+              [ textView (Var.view v) ]
+          ]
+  )
+```
