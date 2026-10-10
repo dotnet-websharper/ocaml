@@ -131,16 +131,31 @@ if (!globalThis.OCamlRuntime) {
     return a;
   }
 
-  // RPC: the server bundle registers handlers by name; client-side proxies call
-  // them (here synchronously, standing in for an HTTP round-trip).
+  // RPC: the server bundle registers handlers by name. The client proxy calls
+  // `rpcCall`, which serializes its arguments, transports them asynchronously to
+  // the server, and resolves with the deserialized result.
   function registerRpc(name, fn) {
     var store = globalThis.OCamlRuntime.__serverRpc || (globalThis.OCamlRuntime.__serverRpc = {});
     store[name] = fn;
   }
 
+  // Returns a Promise<result>. Arguments and result are JSON-round-tripped.
   function rpcCall(name, args) {
-    var store = globalThis.OCamlRuntime.__serverRpc || {};
-    return store[name].apply(null, args);
+    var payload = JSON.stringify({ name: name, args: args });
+    return globalThis.OCamlRuntime.rpcTransport(payload).then(function (response) {
+      return JSON.parse(response).result;
+    });
+  }
+
+  // Default transport: in-process, asynchronous (a microtask), standing in for
+  // an HTTP round-trip.
+  function rpcTransport(payload) {
+    return Promise.resolve().then(function () {
+      var p = JSON.parse(payload);
+      var handler = (globalThis.OCamlRuntime.__serverRpc || {})[p.name];
+      var result = handler.apply(null, p.args);
+      return JSON.stringify({ result: result });
+    });
   }
 
   function caml_trampoline_return(f, args) {
@@ -183,6 +198,7 @@ if (!globalThis.OCamlRuntime) {
     caml_list_to_array: caml_list_to_array,
     registerRpc: registerRpc,
     rpcCall: rpcCall,
+    rpcTransport: rpcTransport,
     caml_apply: caml_apply,
     caml_trampoline: caml_trampoline,
     caml_trampoline_return: caml_trampoline_return,

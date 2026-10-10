@@ -8,6 +8,7 @@ const server = readFileSync(resolve(dir, 'Main.server.js'), 'utf8');
 console.log('client-has-secret:', client.includes('777777'));
 console.log('server-has-secret:', server.includes('777777'));
 
-// Server registers the rpc handlers, then the client runs and calls `g`.
 await import(pathToFileURL(resolve(dir, 'Main.server.js')).href);
 await import(pathToFileURL(resolve(dir, 'Main.js')).href);
+const result = await globalThis.OCamlRuntime.rpcCall('g', [21]);
+console.log('rpc g(21) =', result);

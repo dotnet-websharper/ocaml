@@ -149,7 +149,7 @@ module Lowering =
                 | LExpr.Fun(ps, _) ->
                     if c.Server then
                         // Server build: keep the body and register the handler.
-                        let register = rt c "registerRpc" [ Value(String n.Name); Var x ]
+                        let register = rt c "registerRpc" [ Value(String n.Name); rt c "caml_to_js" [ Var x ] ]
                         Let(x, expr c v, Sequential [ StatementExpr(ExprStatement register, None); expr cc b ])
                     else
                         // Client build: bind a proxy that calls back by name.

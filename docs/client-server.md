@@ -100,10 +100,14 @@ the same runtime from OCaml-compiled code.
   emitted in the IR; the frontend rejects a client→server direct reference.
 - **B2 — RPC (done).** A top-level `[@rpc]` value's client binding is an
   `OCamlRuntime.rpcCall` proxy; its body is emitted to `<out>/<unit>.server.js`
-  and registered with `OCamlRuntime.registerRpc`. The runtime call is
-  synchronous (standing in for an HTTP round-trip). The client bundle now
-  excludes server-only + `[@rpc]` bodies (compiled into the server bundle).
-  Remaining: a real async transport and argument/result serialization.
+  and registered with `OCamlRuntime.registerRpc`. The runtime call is now
+  **asynchronous and serialized**: `rpcCall` JSON-round-trips
+  the arguments and result and returns a `Promise`, over a pluggable
+  `rpcTransport` (default: an in-process microtask standing in for HTTP). The
+  server handlers are wrapped with `caml_to_js` so JS can call them. The OCaml
+  client proxy therefore returns a promise; a future revision should introduce
+  an OCaml async type for `[@rpc]` call sites. The client bundle excludes
+  server-only + `[@rpc]` bodies (compiled into the server bundle).
 - **M3 — first-class client code.** Stable keys by `(assembly, unit, position)`;
   multiple client units; import wiring; `scripts/test-quick.sh` coverage.
 - **M4 — UI integration + hydration.** Marked client code as `On.*`/`Attr`
