@@ -1,6 +1,10 @@
 has-title: true
 has-ssr: true
+has-hydrate: true
 has-scripts: true
 user-ssr: true
+hydrated: true
+before: before
+after: after
 rpc add(20,22): 42
 static: 200 text/javascript

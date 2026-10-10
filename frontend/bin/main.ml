@@ -1222,6 +1222,101 @@ let transformInfer (ast: Parsetree.structure) : Parsetree.structure =
       in
       mapper.structure mapper ast
 
+
+(* --- WebSharper_ClientServer.client / hydrate -------------------------------
+   `client (fun () -> view)` / `hydrate (fun () -> view)`: the argument is lifted
+   into a top-level [@client] binding under a stable opaque id, and the call is
+   replaced by a marker (`__client`/`__hydrate <id>`) embedded in the page. The
+   server renders the marker (hydrate also server-renders the view); the client
+   runs the binding into the `data-ws-key` region. Fragments must be closed. *)
+
+let transformClientServer (ast: Parsetree.structure) : Parsetree.structure =
+  let frags = ref [] in
+  let csCall (f: Parsetree.expression) =
+    match f.pexp_desc with
+    | Parsetree.Pexp_ident { txt = lid; _ } -> (
+        match Longident.flatten lid with
+        | [ "WebSharper_ClientServer"; "client" ] -> Some false
+        | [ "WebSharper_ClientServer"; "hydrate" ] -> Some true
+        | _ -> None)
+    | _ -> None
+  in
+  let id_of (e: Parsetree.expression) =
+    let buf = Buffer.create 64 in
+    let fmt = Format.formatter_of_buffer buf in
+    Pprintast.expression fmt e;
+    Format.pp_print_flush fmt ();
+    let h = Hashtbl.hash (Buffer.contents buf) in
+    "ws" ^ string_of_int (if h < 0 then -h else h)
+  in
+  let subst (arg: Parsetree.expression) (e: Parsetree.expression) =
+    let m =
+      { Ast_mapper.default_mapper with
+        expr =
+          (fun self (x: Parsetree.expression) ->
+            match x.pexp_desc with
+            | Parsetree.Pexp_ident { txt = Longident.Lident "zzz_arg"; _ } -> arg
+            | _ -> Ast_mapper.default_mapper.expr self x);
+      }
+    in
+    m.expr m e
+  in
+  (* Server marker: `__client id` (placeholder) or `__hydrate id (fun () -> view)`. *)
+  let marker mode id (arg: Parsetree.expression) =
+    let s =
+      if mode then Printf.sprintf "WebSharper_ClientServer.__hydrate %S (zzz_arg)" id
+      else Printf.sprintf "WebSharper_ClientServer.__client %S" id
+    in
+    let e = Parse.expression (Lexing.from_string s) in
+    if mode then subst arg e else e
+  in
+  (* Client binding: `fun () -> WebSharper_UI.Doc.runById id (view)`. *)
+  let binding_value id (arg: Parsetree.expression) =
+    let s = Printf.sprintf "fun () -> WebSharper_UI.Doc.runById %S (zzz_arg ())" id in
+    subst arg (Parse.expression (Lexing.from_string s))
+  in
+  let mapper =
+    { Ast_mapper.default_mapper with
+      expr =
+        (fun self (e: Parsetree.expression) ->
+          match e.pexp_desc with
+          | Parsetree.Pexp_apply (f, [ (_, arg) ]) when csCall f <> None ->
+              let id = id_of arg in
+              frags := (id, arg) :: !frags;
+              Ast_mapper.default_mapper.expr self (marker (Option.get (csCall f)) id arg)
+          | _ -> Ast_mapper.default_mapper.expr self e);
+    }
+  in
+  let mapped = mapper.structure mapper ast in
+  if !frags = [] then mapped
+  else
+    let bindings =
+      List.rev_map
+        (fun ((id, arg): string * Parsetree.expression) ->
+          let loc = arg.pexp_loc in
+          let pat =
+            { Parsetree.ppat_desc = Parsetree.Ppat_var { txt = id; loc };
+              ppat_loc = loc; ppat_loc_stack = []; ppat_attributes = [] }
+          in
+          let client_attr =
+            { Parsetree.attr_name = { txt = "client"; loc }; attr_payload = Parsetree.PStr []; attr_loc = loc }
+          in
+          let vb =
+            { Parsetree.pvb_pat = pat; pvb_expr = binding_value id arg; pvb_attributes = [ client_attr ]; pvb_loc = loc; pvb_constraint = None }
+          in
+          { Parsetree.pstr_desc = Parsetree.Pstr_value (Asttypes.Nonrecursive, [ vb ]); pstr_loc = loc })
+        !frags
+    in
+    (* Insert after the opens/types, before the first value binding, so the
+       (closed) fragments can use the opened modules but are defined before any
+       use in a page/view value. *)
+    let rec insert acc = function
+      | [] -> List.rev_append acc bindings
+      | (({ Parsetree.pstr_desc = Parsetree.Pstr_value _; _ } :: _) as rest) -> List.rev_append acc (bindings @ rest)
+      | item :: rest -> insert (item :: acc) rest
+    in
+    insert [] mapped
+
 let () =
   let input = ref ""
   and output = ref ""
@@ -1249,7 +1344,7 @@ let () =
     Clflags.include_dirs := List.rev !includes @ !Clflags.include_dirs;
     Compmisc.init_path ();
     let env = Compmisc.initial_env () in
-    let ast = transformInfer (parse !input) in
+    let ast = transformClientServer (transformInfer (parse !input)) in
     checkBoundary ast;
     let js, rpc, srv = clientMarks ast in
     let exp = exportMarks ast in

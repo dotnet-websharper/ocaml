@@ -223,7 +223,19 @@ protocol (template-based) in the shadow; it is future work.
   (client) and the native `Wsui_server` shadow (server); `--emit-server` renders
   it into regions and serves `Ssr.page` (`scripts/ssr-demo.sh`, test `ssr`).
   Remaining: node-identity-preserving reconciliation (WS `ws-hole` protocol).
-- **M5 — server.** Render-time server code, data embedding.
+- **M5 — server (done, first cut).** The server is a first-class entity: a
+  `Sitelet<'T>` (typed endpoints) marked `[@website]`, `Content.Json/Text/Xml/
+  Html/Page`, and `Server.serve`. `Sitelet.Infer` is **compiler-expanded** into
+  `Sitelet.make route link` with a router/URL-builder generated from the endpoint
+  variant + `[@endpoint "GET /path/@arg"]` (each `@arg` is a constructor
+  argument). `Content.Page` renders the view and injects the bundle into the
+  `ws-replace="scripts"` placeholder. `WebSharper_ClientServer.client`/`hydrate`
+  (both `unit -> Doc`) are lifted into `[@client]` bindings under opaque
+  `ws<digits>` ids; the server renders the marker (hydrate also SSR-renders the
+  view) and the client hydrates the `data-ws-key` region. The generated server
+  (`--emit-server`) registers `[@rpc]` handlers and runs
+  `Server.serve ~port ~bundle ~static <sitelet>`. See §7. Node-identity
+  reconciliation (`ws-hole`) still deferred.
 
 ## 6. Open questions
 
@@ -235,3 +247,53 @@ protocol (template-based) in the shadow; it is future work.
 - Cross-.NET-server interop (a non-OCaml server) would need a key +
   serialization contract independent of OCaml source positions.
 - Error surfacing for unsupported captures (functions, mutable refs).
+
+## 7. The server (sitelet)
+
+Same source, both tiers; native server (no templating):
+
+```ocaml
+type endpoint =
+  | Home            [@endpoint "GET /"]
+  | User of int     [@endpoint "GET /user/@id"]
+
+let[@rpc] add a b = Async.return (a + b)
+
+let render (_ : endpoint context) ep =
+  match ep with
+  | Home ->
+      Content.page ~title:"Home"
+        [ h1 [] [ Doc.text "Home" ];
+          WebSharper_ClientServer.hydrate (fun () ->
+            let v = Var.create "before" in
+            div [ On.click (fun _ _ -> Var.set v "after") ] [ Doc.textView (Var.view v) ]) ]
+  | User id -> Content.page ~title:"User" [ Doc.text (Printf.sprintf "User %d" id) ]
+
+let[@website] site = Sitelet.Infer render
+```
+
+- `WebSharper_Server` (`runtimes/ocaml/webSharper_Server.{mli,ml}`): `Request`/
+  `Response`/`context` (`Link`, `Request`); `Content`; `Sitelet<'T>`
+  (`make`/`empty`/`(+)`/`infer`); `Server.serve ?port ?static ?bundle`.
+- The `.mli` is shared: the frontend typechecks against the generated
+  `WebSharper_UI`; the native server links the `WebSharper_UI` shadow
+  (`runtimes/ocaml/webSharper_UI.ml`, same module name) + the impl. So a view
+  compiles unchanged on both tiers.
+- `Content.Page` emits `<!doctype html>…<script ws-replace="scripts"></script>`;
+  `Server.serve ~bundle` replaces that with `<script type="module" src="/<bundle>.js">`.
+- `Sitelet.Infer` is expanded **before typing**: the endpoint variant (its
+  constructors carry `[@endpoint …]`) yields `route : request -> endpoint option`
+  and `link : endpoint -> string`; each `@arg` maps positionally to a constructor
+  argument (int/string/bool/float parsed).
+- `WebSharper_ClientServer.client`/`hydrate (fun () -> view)` are lifted into
+  `let ws<id> () = Doc.runById "<id>" view` `[@client]` bindings (opaque
+  `ws<digits>` id) and replaced by a marker node; the runtime hydrates each
+  `[data-ws-key]` region. Fragments must be closed (no captures).
+- `--emit-server` emits `Wsrpc.register "name" …` per `[@rpc]` and
+  `WebSharper_Server.Server.serve ~port:8123 ~bundle ~static <sitelet>`; `--static`
+  serves the client build dir (`text/javascript`).
+- `scripts/site-demo.sh` (`frontend/test: site`) drives it: SSR pages (`/`,
+  `/user/5`), injected scripts, hydration + click, RPC, static asset.
+- Deferred: node-identity reconciliation (`ws-hole`/`ws-attr-holes`), most
+  sitelet combinators (`Sum`/`Shift`/`Protect`), query-string field binding,
+  `Content.Json` codecs, sessions/cookies.

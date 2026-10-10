@@ -12,8 +12,9 @@ ui="$(q websharper-ui)"; jsl="$(q websharper-javascript)"; rt="$(q websharper-ru
 
 # Client-facing server-API .cmi (typechecked against the generated WebSharper_UI).
 cmi="$out/cmi"; mkdir -p "$cmi"
-cp "$root/runtimes/ocaml/webSharper_Server.mli" "$cmi/"
-(cd "$cmi" && ocamlc -c webSharper_Server.mli -I "$ui" -I "$jsl" -I "$rt" -I "$sl" -I "$(ocamlc -where)")
+cp "$root/runtimes/ocaml/webSharper_Server.mli" "$root/runtimes/ocaml/webSharper_ClientServer.mli" "$cmi/"
+(cd "$cmi" && ocamlc -c webSharper_Server.mli -I "$ui" -I "$jsl" -I "$rt" -I "$sl" -I "$(ocamlc -where)" \
+  && ocamlc -c webSharper_ClientServer.mli -I "$ui" -I "$jsl" -I "$rt" -I "$sl" -I "$(ocamlc -where)")
 
 # Client bundle (the [@client]-ish parts; here just the module) + native server.
 WS_EXTRA_INC="$cmi" bash "$root/scripts/build-ui-app.sh" "$entry" "$out/client" >/dev/null
@@ -23,8 +24,9 @@ WS_EXTRA_INC="$cmi" bash "$root/scripts/build-ui-app.sh" "$entry" "$out/client" 
 
 cp "$root/runtimes/ocaml/ssr.ml" "$root/runtimes/ocaml/webSharper_UI.ml" \
    "$root/runtimes/ocaml/wsrpc.ml" "$root/runtimes/ocaml/webSharper_Server.ml" \
+   "$root/runtimes/ocaml/webSharper_ClientServer.ml" \
    "$root/runtimes/ocaml/async.ml" "$out/"
-(cd "$out" && ocamlfind ocamlopt -package unix,yojson -linkpkg wsrpc.ml ssr.ml async.ml webSharper_UI.ml webSharper_Server.ml server.ml -o server)
+(cd "$out" && ocamlfind ocamlopt -package unix,yojson -linkpkg wsrpc.ml ssr.ml async.ml webSharper_UI.ml webSharper_ClientServer.ml webSharper_Server.ml server.ml -o server)
 
 "$out/server" > "$out/server.log" 2>&1 &
 pid=$!
