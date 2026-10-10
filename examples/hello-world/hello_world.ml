@@ -18,28 +18,15 @@ let[@website] main =
         Content.page
           ~title:"Hello, world!"
           [
-            h1
-              []
-              [
-                text "Hello, world!"
-              ];
-
-            p
-              []
-              [
-                text "Served by websharper-server, hydrated by WebSharper.UI."
-              ];
-
+            h1 [] [text "Hello, world!"];
+            p [] [text "Served by websharper-server, hydrated by WebSharper.UI."];
             hydrate (fun () ->
               let v = Var.create "before" in
-
-              div
-                [
+              div [
                   on.click (fun _ _ -> Var.set v "after")
-                ]
-                [
+              ] [
                   textView (Var.view v)
-                ]
+              ]
             )
           ]
   )

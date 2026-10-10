@@ -306,8 +306,22 @@ let[@website] site = Sitelet.Infer render
   rewrites them to `On.<event>`.
 - A DU sitelet is a single `let[@website] main = Sitelet.infer (fun _ ep -> …)`
   (lowercase `Sitelet.infer`); `render` is inlined rather than a separate value.
-- HTML combinators use F#-style layout: list/`()` brackets on their own lines,
-  elements separated by `;`.
+- HTML combinator layout:
+  - short combinators are one-liners: `h1 [] [text "…"]` (no inner padding);
+  - an **empty or single** attribute list stays on the element's line, and the
+    inner-content list opener follows it (`p [] [ … ]`);
+  - **event handlers** are written as an **expanded** attribute list, with `] [`
+    joining the attribute-list close and the content-list open:
+    ```ocaml
+    div [
+        on.click (fun _ _ -> Var.set v "after")
+    ] [
+        textView (Var.view v)
+    ]
+    ```
+- `fun () ->` / `fun _ _ ->` bodies: kept on the same line when trivial
+  (`on.click (fun _ _ -> Var.set v "after")`), broken onto a new line after `->`
+  when non-trivial (`hydrate (fun () ->` … `)`).
 
 ```ocaml
 let[@website] main =
@@ -317,11 +331,17 @@ let[@website] main =
         Content.page
           ~title:"Hello, world!"
           [
-            h1 [] [ text "Hello, world!" ];
+            h1 [] [text "Hello, world!"];
+            p [] [text "Served by websharper-server, hydrated by WebSharper.UI."];
+            hydrate (fun () ->
+              let v = Var.create "before" in
 
-            div
-              [ on.click (fun _ _ -> Var.set v "after") ]
-              [ textView (Var.view v) ]
+              div [
+                  on.click (fun _ _ -> Var.set v "after")
+              ] [
+                  textView (Var.view v)
+              ]
+            )
           ]
   )
 ```
