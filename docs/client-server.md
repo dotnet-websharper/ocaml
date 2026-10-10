@@ -180,10 +180,19 @@ let[@client] app () =
 </script>
 ```
 
-`backend/tests/apps-ui/wsclient.{ml,mjs}` exercises this in jsdom
-(placeholder -> hydrate -> reactive click). Scope: hydration is
-**client-owned-placeholder** (the placeholder is replaced); DOM-preserving
-reconciliation and server-side `Doc` rendering are future work (§5 M4).
+**Server-side rendering (SSR):** the native server renders HTML with
+`runtimes/ocaml/ssr.ml` (a tiny element builder + renderer) and serves it;
+`Ssr.client_region ~id:"app" "Main.app" [ … ]` emits the region with
+server-rendered initial markup (`<div id="app" data-ws-key="Main.app">…</div>`).
+`Wsrpc.serve ~page` serves that page at `GET /`. The client then hydrates the
+region (`OCamlRuntime.hydrate()`).
+
+`backend/tests/apps-ui/wsclient.{ml,mjs}` exercises hydration in jsdom
+(placeholder -> hydrate -> reactive click); `scripts/ssr-demo.sh`
+(`frontend/test: ssr`) renders the page from a native server, fetches it, and
+hydrates. Scope: the client **replaces** the server-rendered region
+(client-owned); DOM-preserving reconciliation (attach to the existing DOM) is
+future work.
 
 ## 5. Milestones
 
@@ -204,7 +213,10 @@ reconciliation and server-side `Doc` rendering are future work (§5 M4).
 - **M4 — UI integration + hydration (partial, done).** `[@client]` values are
   registered under `<Unit>.<name>`; server placeholders carry `data-ws-key`;
   `OCamlRuntime.hydrate()` runs the registered view into the mount point
-  (`apps-ui/wsclient`). Server-side native `Doc` rendering and DOM-preserving
+  (`apps-ui/wsclient`). **SSR**: the native server renders HTML
+  (`runtimes/ocaml/ssr.ml`, `Wsrpc.serve ~page`) with `Ssr.client_region`
+  offering server-rendered initial markup (`scripts/ssr-demo.sh`, test `ssr`).
+  Native rendering of a compiled `Doc` (same view both tiers) and DOM-preserving
   reconciliation remain.
 - **M5 — server.** Render-time server code, data embedding.
 

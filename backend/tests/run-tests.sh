@@ -388,6 +388,30 @@ else
   echo "SKIP rpc-data (ocamlfind/yojson not available)"
 fi
 
+# Server-side rendering + client hydration (native server renders HTML; the
+# client bundle hydrates the [@client] region in jsdom).
+if command -v ocamlfind > /dev/null 2>&1 && ocamlfind query yojson > /dev/null 2>&1 \
+   && ocamlfind query websharper-ui > /dev/null 2>&1; then
+  if bash "$wsroot/scripts/ssr-demo.sh" "$tmp/ssr" > "$tmp/ssr.actual" 2>&1; then
+    expected="$here/ssr.out"
+    if [ "$update" = 1 ]; then cp "$tmp/ssr.actual" "$expected"; echo "updated ssr.out"; fi
+    if [ -f "$expected" ] && ! diff -u "$expected" "$tmp/ssr.actual" > "$tmp/ssr.diff"; then
+      echo "FAIL ssr (output mismatch)"
+      sed 's/^/    /' "$tmp/ssr.diff"
+      fail=$((fail + 1))
+    else
+      echo "PASS ssr"
+      pass=$((pass + 1))
+    fi
+  else
+    echo "FAIL ssr (build/run)"
+    sed 's/^/    /' "$tmp/ssr.actual"
+    fail=$((fail + 1))
+  fi
+else
+  echo "SKIP ssr (ocamlfind/yojson/websharper-ui not available)"
+fi
+
 echo
 echo "passed: $pass, failed: $fail"
 [ "$fail" = 0 ]
