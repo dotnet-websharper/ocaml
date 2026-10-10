@@ -11,8 +11,18 @@ entry="$1"
 out="${2:-$root/out}"
 mkdir -p "$out"
 
+# Client `Async` comes from the generated WebSharper binding: it is the generic,
+# promise-backed `WebSharper_JavaScript.Promise.t` plus combinators. The generated
+# `promise.ml` is aliased under a local name so it does not clash with the legacy
+# non-generic `Promise` module used by the DOM bindings.
+genlib="$(ls -d "$root"/bindings/packages/websharper-javascript/websharper-javascript.*/files/lib 2>/dev/null | head -1)"
+geninc="$out/gen"
+mkdir -p "$geninc"
+cp "$genlib/promise.ml" "$geninc/corePromise.ml"
+sed 's/Promise\.t/CorePromise.t/g' "$genlib/async.ml" > "$geninc/async.ml"
+
 # dependency order (module names, capitalized)
-order="Js Async Event UiEvent MouseEvent WheelEvent PointerEvent DragEvent TouchEvent
+order="Js Event UiEvent MouseEvent WheelEvent PointerEvent DragEvent TouchEvent
 InputEvent CompositionEvent KeyboardEvent FocusEvent MessageEvent ProgressEvent
 SubmitEvent CustomEvent ErrorEvent PopStateEvent HashChangeEvent StorageEvent
 BeforeUnloadEvent AbortSignal AbortController DomRectReadOnly DomRect DomPoint
@@ -45,16 +55,24 @@ for m in $order; do
   (cd "$bdir" && ocamlc -c -I "$s" "$(basename "$f")")
 done
 
+# Generated `Async` (+ its `Promise`) -> .cmi (type-check only; `Async.js` is
+# emitted in step 2b, the generated `Promise` is a pure type alias here).
+(cd "$geninc" && ocamlc -c -I "$bdir" -I "$s" corePromise.ml async.ml)
+
 # 2) compile bindings -> .js
 for m in $order; do
   f="$bdir/$(base_of "$m").ml"
   [ -f "$f" ] || continue
-  "$fe" --input "$f" --output "$out/$(base_of "$m").wsir.json" --unit "$m" -I "$bdir" -I "$s"
+  "$fe" --input "$f" --output "$out/$(base_of "$m").wsir.json" --unit "$m" -I "$bdir" -I "$geninc" -I "$s"
   dotnet "$be" --ir "$out/$(base_of "$m").wsir.json" --output "$out" --compact
 done
 
+# 2b) compile the generated Client `Async` -> Async.js
+"$fe" --input "$geninc/async.ml" --output "$out/async.wsir.json" --unit Async -I "$bdir" -I "$geninc" -I "$s"
+dotnet "$be" --ir "$out/async.wsir.json" --output "$out" --compact
+
 # 3) compile entry -> .js
-"$fe" --input "$entry" --output "$out/main.wsir.json" --unit Main -I "$bdir" -I "$s"
+"$fe" --input "$entry" --output "$out/main.wsir.json" --unit Main -I "$bdir" -I "$geninc" -I "$s"
 dotnet "$be" --ir "$out/main.wsir.json" --output "$out" --compact
 
 # 4) link stdlib shims + package.json

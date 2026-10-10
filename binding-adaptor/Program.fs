@@ -667,8 +667,33 @@ let gen
             File.WriteAllText(Path.Combine(libDir, lowerFirst tFile + ".ml"), sb.ToString())
             yield lowerFirst tFile ]
 
+    // `Async`: WebSharper's F# `Async<'T>` is not representable as a generic type
+    // in the binding metadata (it is a non-generic class with method-generic
+    // members), so where a `Promise<'T>` is present we expose it as the generic
+    // `Async<'T>` plus the standard combinators. The combinators route through the
+    // runtime so OCaml closures are adapted with `caml_to_js`.
+    let hasPromise =
+        pkgId = "websharper-javascript"
+        && unique |> List.exists (fun (n, _) -> n = "Promise")
+
+    let asyncModules =
+        if not hasPromise then
+            []
+        else
+            let sb = StringBuilder()
+            sb.AppendLine Header |> ignore
+            sb.AppendLine "(* Async<'T> is the generic, promise-backed WebSharper Promise<'T>." |> ignore
+            sb.AppendLine "   See the binding-adaptor README on why F# Async<'T> cannot be projected. *)" |> ignore
+            sb.AppendLine "type ('a) t = ('a) Promise.t" |> ignore
+            sb.AppendLine "external return : 'a -> 'a t = \"js:Promise.resolve\"" |> ignore
+            sb.AppendLine "external bind : 'a t -> ('a -> 'b t) -> 'b t = \"async_bind\"" |> ignore
+            sb.AppendLine "external map : ('a -> 'b) -> 'a t -> 'b t = \"async_map\"" |> ignore
+            sb.AppendLine "external run : ('a -> unit) -> 'a t -> unit = \"async_run\"" |> ignore
+            File.WriteAllText(Path.Combine(libDir, "async.ml"), sb.ToString())
+            [ "async" ]
+
     let allModules =
-        typesModules
+        typesModules @ asyncModules
         @ [ for head, group in generatedByPath |> List.groupBy (fun (p, _) -> p.[0]) do
                 let sb = StringBuilder()
                 sb.AppendLine Header |> ignore

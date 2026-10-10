@@ -122,7 +122,8 @@ the same runtime from OCaml-compiled code.
 - **B2 — RPC (done).** A top-level `[@rpc]` value's client binding is an
   asynchronous, serialized `OCamlRuntime.rpcCall` proxy (JSON arguments/result,
   a `Promise` over a pluggable transport). It returns `'a Async.t`: the client
-  `Async` (`bindings-legacy/async.ml`) is promise-backed, so client code
+  `Async` is the **generated** `WebSharper_JavaScript.Async.t` (an alias of the
+  generic, promise-backed `WebSharper_JavaScript.Promise.t`), so client code
   sequences calls with `Async.bind`/`Async.map`/`Async.run`. The client bundle
   excludes server-only + `[@rpc]` bodies. The server tier is now **native
   OCaml** (§3.1): `--emit-server` generates it from the same source, unwrapping

@@ -12,13 +12,15 @@ eval "$(opam env)"
 bash "$root/scripts/build-js-app.sh" "$entry" "$out/client" >/dev/null
 
 # 2. Native server source, generated from the same file (server-only + [@rpc]).
+#    Type-checked against the native `Async` (the server-side implementation).
+cp "$root/runtimes/ocaml/async.ml" "$out/"
+(cd "$out" && ocamlc -c -I "$(ocamlc -where)" async.ml)
 "$root/frontend/_build/default/bin/main.exe" \
   --input "$entry" --emit-server "$out/server.ml" \
-  -I "$root/bindings-legacy" -I "$(ocamlc -where)"
+  -I "$out" -I "$root/bindings-legacy" -I "$(ocamlc -where)"
 
 # 3. Compile the native server (with the RPC runtime and native Async).
 cp "$root/runtimes/ocaml/wsrpc.ml" "$out/"
-cp "$root/runtimes/ocaml/async.ml" "$out/"
 (cd "$out" && ocamlfind ocamlopt -package unix,yojson -linkpkg wsrpc.ml async.ml server.ml -o rpc_server)
 
 # 4. Start the server, drive the client's RPC over HTTP, stop the server.

@@ -326,6 +326,28 @@ external get_Empty : unit -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.A
 external newA2 : t -> t -> t = "ws:WebSharper.UI!…WebSharper.UI.Attr::default#NewA2|WebSharper.UI.Attr|WebSharper.UI.Attr" "…"
 ```
 
+### The synthetic `Async` module
+
+WebSharper's F# `Async<'T>` is **not** projectable as a generic type: its metadata
+is a single non-generic class (`Microsoft.FSharp.Control.FSharpAsync`) whose
+methods are *method*-generic, so every `Async<'0>` usage collapses to the module's
+non-generic `t`. The generic, promise-backed `WebSharper.JavaScript.Promise<'T>`
+*is* projectable, so the adaptor emits a synthetic `Async` module beside it (only
+in `websharper-javascript`):
+
+```ocaml
+type ('a) t = ('a) Promise.t
+external return : 'a -> 'a t = "js:Promise.resolve"
+external bind : 'a t -> ('a -> 'b t) -> 'b t = "async_bind"
+external map  : ('a -> 'b) -> 'a t -> 'b t = "async_map"
+external run  : ('a -> unit) -> 'a t -> unit = "async_run"
+```
+
+The combinators route through the runtime (`async_bind`/`async_map`/`async_run`)
+so OCaml closures passed to them are adapted with `caml_to_js`. `Async<'T>` is the
+type used for `[@rpc]` call sites (see `docs/client-server.md`); the native server
+tier has a matching implementation in `runtimes/ocaml/async.ml`.
+
 Each `external` repeats the tag (the backend reads one of the two annotations).
 
 ---
