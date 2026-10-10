@@ -161,10 +161,12 @@ Server rendering emits HTML plus placeholders, mirroring WebSharper's
   stable key `<Unit>.<name>`;
 - the server emits a **placeholder** node
   `<(div) id="..." data-ws-key="<Unit>.<name>">`;
-- the client runtime runs on load: `OCamlRuntime.hydrate()` collects
-  `[data-ws-key]` placeholders, looks up the registered client code, clears the
-  placeholder (the client owns the region) and runs it, reusing the same
-  `Doc`/`Elt` runtime.
+- the client runtime runs on load: the served page includes
+  `<script type="module">globalThis.OCamlRuntime.hydrate()</script>` **after** the
+  bundle script, so the bundle registers the client code first; `hydrate()`
+  collects `[data-ws-key]` placeholders, looks up the registered client code,
+  clears the placeholder (the client owns the region) and runs it, reusing the
+  same `Doc`/`Elt` runtime.
 
 Example:
 

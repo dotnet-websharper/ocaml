@@ -2,6 +2,7 @@ has-title: true
 has-ssr: true
 has-hydrate: true
 has-scripts: true
+has-bootstrap: true
 user-ssr: true
 hydrated: true
 before: before

@@ -13,6 +13,7 @@ console.log('has-title:', page.includes('<title>Site</title>'));
 console.log('has-ssr:', page.includes('server-rendered'));
 console.log('has-hydrate:', page.includes('data-ws-key=') && page.includes('>before<'));
 console.log('has-scripts:', page.includes('<script type="module" src="/Main.js"></script>'));
+console.log('has-bootstrap:', page.includes('OCamlRuntime.hydrate()'));
 const user = await (await fetch(base + '/user/5')).text();
 console.log('user-ssr:', user.includes('User 5'));
 

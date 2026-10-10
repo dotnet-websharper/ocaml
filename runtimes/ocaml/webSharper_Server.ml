@@ -89,7 +89,13 @@ let replace_scripts bundle body =
   let pat = "<script ws-replace=\"scripts\"></script>" in
   let tag =
     match bundle with
-    | Some b -> Printf.sprintf "<script type=\"module\" src=\"/%s.js\"></script>" b
+    | Some b ->
+        (* Load the client bundle, then hydrate the SSR regions. Both are module
+           scripts (deferred, document order): the bundle registers client code
+           before `hydrate()` runs. *)
+        Printf.sprintf
+          "<script type=\"module\" src=\"/%s.js\"></script>\n<script type=\"module\">globalThis.OCamlRuntime.hydrate();</script>"
+          b
     | None -> ""
   in
   let bl = String.length body and pl = String.length pat in

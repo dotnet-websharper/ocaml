@@ -11,6 +11,7 @@ const page = await (await fetch(base + '/')).text();
 console.log('has-title:', page.includes('<title>Hello, world!</title>'));
 console.log('has-hydrate:', page.includes('data-ws-key=') && page.includes('>before<'));
 console.log('has-scripts:', page.includes('<script type="module" src="/Main.js"></script>'));
+console.log('has-bootstrap:', page.includes('OCamlRuntime.hydrate()'));
 
 const dom = new JSDOM(page, { url: 'http://localhost/', pretendToBeVisual: true });
 globalThis.window = dom.window;
