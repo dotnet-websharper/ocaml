@@ -140,28 +140,13 @@ let main argv =
             | Block ss -> Block(ss |> List.map normalize)
             | _ -> stripper.TransformStatement (Breaker.BreakStatement (Breaker.optimizer.TransformStatement s))
 
-        // Closures marked `ClientServer.client` are emitted as standalone client
-        // units under <out>/clientserver/<key>.js, each exporting the function.
-        let writeClientUnits (units: (string * Expression) list) =
-            if not (List.isEmpty units) then
-                let dir = Path.Combine(output, "clientserver")
-                Directory.CreateDirectory dir |> ignore
-
-                for (key, body) in units do
-                    let v = Id.New(key, false)
-                    let stmts =
-                        [ VarDeclaration(v, body); ExportDecl(true, ExprStatement(Var v)) ]
-                        |> List.map normalize
-                    let jsAst, _ = JavaScriptWriter.transformProgram Output.JavaScript pref stmts
-                    File.WriteAllText(Path.Combine(dir, key + ".js"), runtimePrelude () + Writer.ProgramToString pref jsAst)
-
         if references.Count > 0 && wsCompile then
             // A'' path: lower member calls to WebSharper nodes and let
             // CompileFull + JavaScriptPackager resolve and package the program
             // (imports, module object and entry) against the referenced metadata.
             let ctx = (bindings references).Value
             ctx.Comp.AssemblyName <- "."
-            let stmt, usesRuntime, clientUnits = compileEntry (Some ctx) ir
+            let stmt, usesRuntime = compileEntry (Some ctx) ir
             let comp = ctx.Comp
             comp.SetEntryPoint stmt
             Translator.DotNetToJavaScript.CompileFull comp
@@ -189,24 +174,21 @@ let main argv =
                 let target = if name = "$EntryPoint" then ir.Unit + ".js" else name + ".js"
                 File.WriteAllText(Path.Combine(output, target), js)
 
-            writeClientUnits clientUnits
             packageReferences (List.ofSeq references) output pref
         else if references.Count = 0 then
-            let stmts, usesRuntime, clientUnits = compile false None ir
+            let stmts, usesRuntime = compile false None ir
             let ast = stmts |> List.map normalize
             let jsAst, _ = JavaScriptWriter.transformProgram Output.JavaScript pref ast
             let js = Writer.ProgramToString pref jsAst
             let code = if usesRuntime then runtimePrelude () + js else js
             File.WriteAllText(Path.Combine(output, ir.Unit + ".js"), code)
-            writeClientUnits clientUnits
         else
-            let stmts, usesRuntime, clientUnits = compile false (bindings references) ir
+            let stmts, usesRuntime = compile false (bindings references) ir
             let ast = stmts |> List.map normalize
             let jsAst, _ = JavaScriptWriter.transformProgram Output.JavaScript pref ast
             let js = Writer.ProgramToString pref jsAst
             let code = if usesRuntime then runtimePrelude () + js else js
             File.WriteAllText(Path.Combine(output, ir.Unit + ".js"), code)
-            writeClientUnits clientUnits
 
         ignore packageRefs
 

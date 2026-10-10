@@ -303,6 +303,95 @@ let parse file =
   Location.init lb file;
   Parse.implementation lb
 
+(* Client/server boundary.
+   [@javascript] marks a JS-targeted (client) value; [@rpc] marks a server
+   value callable from the client; every other top-level value is server-only
+   and must not be referenced by client-side code. *)
+let clientMarks (ast: Parsetree.structure) =
+  let js = ref [] and rpc = ref [] and top = Hashtbl.create 16 in
+  let attrNames (attrs: Parsetree.attributes) =
+    List.map (fun (a: Parsetree.attribute) -> a.attr_name.txt) attrs
+  in
+  List.iter
+    (fun (item: Parsetree.structure_item) ->
+      match item.pstr_desc with
+      | Parsetree.Pstr_value (_, vbs) ->
+          List.iter
+            (fun (vb: Parsetree.value_binding) ->
+              match vb.pvb_pat.ppat_desc with
+              | Parsetree.Ppat_var { txt = n; _ } ->
+                  Hashtbl.replace top n ();
+                  let a = attrNames vb.pvb_attributes in
+                  if List.mem "javascript" a then js := n :: !js
+                  else if List.mem "rpc" a then rpc := n :: !rpc
+              | _ -> ())
+            vbs
+      | _ -> ())
+    ast;
+  (List.rev !js, List.rev !rpc, top)
+
+let referencedNames (e: Parsetree.expression) =
+  let acc = ref [] in
+  let it =
+    {
+      Ast_iterator.default_iterator with
+      expr =
+        (fun self (e: Parsetree.expression) ->
+          (match e.pexp_desc with
+          | Parsetree.Pexp_ident { txt = Longident.Lident n; _ } -> acc := n :: !acc
+          | _ -> ());
+          Ast_iterator.default_iterator.expr self e);
+    }
+  in
+  it.expr it e;
+  !acc
+
+let attrNames (attrs: Parsetree.attributes) =
+  List.map (fun (a: Parsetree.attribute) -> a.attr_name.txt) attrs
+
+let checkBoundary (ast: Parsetree.structure) =
+  let role = Hashtbl.create 16 in
+  List.iter
+    (fun (item: Parsetree.structure_item) ->
+      match item.pstr_desc with
+      | Parsetree.Pstr_value (_, vbs) ->
+          List.iter
+            (fun (vb: Parsetree.value_binding) ->
+              match vb.pvb_pat.ppat_desc with
+              | Parsetree.Ppat_var { txt = n; _ } ->
+                  let a = attrNames vb.pvb_attributes in
+                  let r =
+                    if List.mem "javascript" a then "js"
+                    else if List.mem "rpc" a then "rpc"
+                    else "server"
+                  in
+                  Hashtbl.replace role n r
+              | _ -> ())
+            vbs
+      | _ -> ())
+    ast;
+  List.iter
+    (fun (item: Parsetree.structure_item) ->
+      match item.pstr_desc with
+      | Parsetree.Pstr_value (_, vbs) ->
+          List.iter
+            (fun (vb: Parsetree.value_binding) ->
+              match vb.pvb_pat.ppat_desc with
+              | Parsetree.Ppat_var { txt = n; _ } when (try Hashtbl.find role n = "js" with Not_found -> false) ->
+                  referencedNames vb.pvb_expr
+                  |> List.iter (fun r ->
+                         match (try Some (Hashtbl.find role r) with Not_found -> None) with
+                         | Some "server" ->
+                             failwith (
+                               Printf.sprintf
+                                 "client-side '%s' references server-only '%s'; mark it [@javascript] or [@rpc]"
+                                 n r)
+                         | _ -> ())
+              | _ -> ())
+            vbs
+      | _ -> ())
+    ast
+
 let () =
   let input = ref ""
   and output = ref ""
@@ -325,6 +414,8 @@ let () =
     Compmisc.init_path ();
     let env = Compmisc.initial_env () in
     let ast = parse !input in
+    checkBoundary ast;
+    let js, rpc, _ = clientMarks ast in
     let typed, _, _, _, _ = Typemod.type_structure env ast in
     let u =
       if !unit_name <> "" then !unit_name
@@ -340,6 +431,8 @@ let () =
           ("unit", `String u);
           ("moduleIdent", `String (Ident.name program.module_ident));
           ("mainModuleBlockSize", `Int program.main_module_block_size);
+          ("javascript", `List (List.map (fun n -> `String n) js));
+          ("rpc", `List (List.map (fun n -> `String n) rpc));
           ( "requiredGlobals",
             `List
               (Ident.Set.elements program.required_globals

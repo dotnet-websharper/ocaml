@@ -1,9 +1,8 @@
 # OCaml client/server + hydration — design
 
-Goal: let a single OCaml program be tier-split like WebSharper's
-`Client`/`Server`, so client-only code runs in the browser and the server emits
-HTML + client instructions that a small runtime *hydrates* on page load — with
-no F# quotations.
+Goal: let a single OCaml program be tier-split like WebSharper, so client code
+runs in the browser and the server renders HTML + client instructions that a
+small runtime *hydrates* on page load — with no F# quotations.
 
 This documents the mechanism and an incremental plan. It builds on what already
 exists:
@@ -16,113 +15,73 @@ exists:
   `ClientCode` instructions plus `IUniqueIdSource` for per-element ids and
   `IRequiresResources.Requires` to emit them.
 
-## 1. Model
+## 1. Boundary (WebSharper model)
 
-A source unit is compiled into **server** output and zero or more **client**
-units. Marked closures decide placement:
+The client/server boundary follows WebSharper: **mark what is JS-targeted and
+what is a server RPC; everything else stays on the server and is unreachable
+from client code.**
 
-- `client (fun args -> body)` — `body` is compiled into a client unit; at the
-  use site it becomes a value that, when the server renders, emits a *client
-  reference* (an id + serialized captured environment + a client instruction),
-  and on the client is replaced by the real function.
-- `server (fun args -> body)` — `body` runs at render time; never shipped.
+- `let[@javascript] f x = …` — a **JS-targeted** (client) value; compiled to the
+  client bundle.
+- `let[@rpc] f x = …` — a **server** value the client may call; the client gets a
+  proxy stub, the server runs the body.
+- every other top-level value is **server-only**.
 
-Both tiers are OCaml, so `client`/`server` bodies are ordinary OCaml and can call
-the generated bindings (`Elt`/`Doc`/`Var`/`On`/…).
+Client code (the `[@javascript]` values) must not reference a server-only value
+directly; an `Rpc` call is the only client→server path. A direct reference is a
+compile error (enforced by the frontend).
 
-### Keys
+This mirrors WS `[<JavaScript>]` / `[<Rpc>]`: marking JS-targeted functions and
+RPCs, with a server-side default.
 
-Each marked closure gets a stable key derived from
-`(assembly, unit/module ident, source position, ordinal)`. The server embed and
-the client unit compute the same key, so hydration can match them. Content hash
-is the fallback when positions are unavailable.
+## 2. Surface
 
-## 2. Surface API
-
-New binding package `websharper-clientserver` (hand-written, like a small
-facade), providing a module users `open`:
+Attributes on structure items (OCaml attributes live on the value binding):
 
 ```ocaml
-open WebSharper_ClientServer
-
-(* a client-only value; `run` applies it *)
-let bump = client (fun (el : Element.t) (ev : Event.t) -> count := !count + 1)
-
-(* server-only, runs during render *)
-let greeting = server (fun () -> read_from_db ())
+let[@javascript] view = …      (* client *)
+let[@rpc] save data = …        (* server, callable from the client *)
+let helper x = …               (* server-only; unreachable from client code *)
 ```
 
-An OCaml `external` whose result is a function type is **uncurried** by OCaml
-(the arity counts every arrow up to a non-function result), so
-`('a -> 'b) -> ('a -> 'b)` would be compiled as a 2-argument primitive and the
-closure would arrive as a variable, not a literal. M1 therefore uses an opaque
-wrapper plus an explicit application:
-
-```ocaml
-type ('a, 'b) fn
-external client : ('a -> 'b) -> ('a, 'b) fn   = "wsclient:client" "wsclient:client"
-external server : ('a -> 'b) -> ('a, 'b) fn   = "wsclient:server" "wsclient:server"
-external run    : ('a, 'b) fn -> 'a -> 'b      = "wsclient:run"    "wsclient:run"
-
-let f = client (fun x -> x + 1) in run f 41
-```
-
-`run` is applied by the marker's own lowerer; `f` is the opaque handle returned
-by `client`. (A future revision may expose a coercion or inlined facade so call
-sites read `f 41`.)
-
-The markers are `external`s recognized by the backend by primitive name; no
-frontend change is needed (the frontend already lowers `external` calls to
-`ccall` with the primitive name).
+The frontend reads them from the parsetree and emits the marked names in the IR
+(`javascript` / `rpc`); the backend consumes them for the client/server split
+(RPC proxies, server bundle).
 
 ## 3. Compilation pipeline
 
 ### Frontend (`frontend/`)
 
-Recognize calls to the marker functions (`WebSharper_ClientServer.client` /
-`server`):
-
-- **`client f`**: emit an IR node `ClientClosure(key, params, bodyIR, captures)`.
-  The `bodyIR` is also written to a **client unit** file that is compiled
-  separately (same as the entry, but marked client-only).
-- **`server f`**: emit `ServerClosure(key, params, bodyIR)` evaluated at render.
-
-IR additions (schema `wsocaml-ir-4` → add fields, back-compatible):
-
-```
-{ "tag": "client", "key": "...", "params": [...], "body": <ir>, "captures": [...] }
-{ "tag": "server", "key": "...", "params": [...], "body": <ir> }
-```
+- Before typechecking (`main.ml`), scan the parsetree for `[@javascript]` /
+  `[@rpc]` on top-level value bindings; emit `javascript` / `rpc` name lists in
+  the IR.
+- **Enforce the boundary**: a `[@javascript]` binding that references a
+  top-level value which is neither `[@javascript]` nor `[@rpc]` is an error
+  (`checkBoundary`).
 
 ### Backend (`backend/`)
 
-- Lower `ClientClosure`/`ServerClosure` to WebSharper AST.
-- For a `client` closure used in a rendering position, emit a
-  `ClientCode`-style instruction bundle (see §4) rather than a direct call.
-- Package the client unit(s) as ESM modules (as `packageReferences` already
-  does) and load them from the runtime.
-- Captured environment: each free variable of the closure becomes a JSON value
-  (`ClientJsonData`) restored on the client into the closure's scope.
-
-### Client units
-
-A client unit is compiled by the same pipeline with `--client`, producing
-`<Key>.js` exporting the closure (and its imports). The runtime imports it by
-key.
+- Parse the `javascript` / `rpc` marks into the IR.
+- Include only JS-targeted code in the client bundle; emit a separate server
+  bundle for `[@rpc]` bodies and server-only code.
+- Lower `Rpc` references from client code to a proxy stub (the server handler
+  is registered in the server bundle).
+- For client code embedded in a rendered view, emit `ClientCode`-style
+  instructions (see §4).
 
 ## 4. Server embed + client runtime
 
-Server rendering of a marked value emits HTML plus instructions, mirroring
-WebSharper's `ClientCode`:
+Server rendering emits HTML plus instructions, mirroring WebSharper's
+`ClientCode`:
 
-- a **placeholder** node carrying `data-ws-key="<Key>"` (and any needed
-  `<Key>`-indexed data in a `<script type="application/json">` blob), or a
-  `ws-<id>` attribute for event handlers (as UI already does);
+- a **placeholder** node carrying `data-ws-key` (and any needed key-indexed data
+  in a `<script type="application/json">` blob), or a `ws-<id>` attribute for
+  event handlers (as UI already does);
 - the client runtime (`ClientRuntime.js`) runs on load:
   1. collect placeholders by key;
-  2. import the client unit `<Key>.js`;
-  3. restore captured JSON into the closure;
-  4. run the closure (attach listeners, replace nodes, start views), reusing the
+  2. import/run the corresponding client code;
+  3. restore captured JSON into the scope;
+  4. run the code (attach listeners, replace nodes, start views), reusing the
      same `Doc`/`Elt` runtime so hydration is "run the same code again, but
      attach to existing DOM".
 
@@ -132,39 +91,24 @@ the same runtime from OCaml-compiled code.
 
 ## 5. Milestones
 
-- **M1 — plumbing.** `client`/`server` markers recognized frontend→IR→backend;
-  a closure compiles as a client unit; a bare call round-trips: server emits a
-  call node, client runs it and returns a value observable in a test. No DOM.
-- **M2 — capture.** Serialize/restore the closure's free variables as JSON;
-  verify a captured OCaml value is visible client-side.
-- **M3 — first-class units.** Stable keys by `(assembly, unit, position)`;
+- **B1 — boundary (done).** `[@javascript]`/`[@rpc]` read from the parsetree,
+  emitted in the IR; the frontend rejects a client→server direct reference.
+- **B2 — RPC.** Lower `[@rpc]` calls from client code to a proxy; a server
+  bundle runs the bodies; a minimal remoting runtime.
+- **M3 — first-class client code.** Stable keys by `(assembly, unit, position)`;
   multiple client units; import wiring; `scripts/test-quick.sh` coverage.
-- **M4 — UI integration + hydration.** `client` closures as `On.*`/`Attr`
+- **M4 — UI integration + hydration.** Marked client code as `On.*`/`Attr`
   handlers; server placeholders; `ClientRuntime.js` hydrates a server-rendered
   `Doc` by re-running the OCaml view client-side.
-- **M5 — `server`.** Render-time `server` closures, data embedding.
+- **M5 — server.** Render-time server code, data embedding.
 
 ## 6. Open questions
 
-- Marker recognition: by FQ name in the frontend vs. a special `external` tag the
-  backend lowers — the latter keeps the frontend generic but needs the frontend
-  to pass the closure body through.
+- How the client "entry" is designated (a `[@javascript]` `main`, or the unit
+  itself) — for now the check covers `[@javascript]` bindings only.
 - How much of WebSharper's `ClientCode`/`IRequiresResources` pipeline to reuse
   vs. reimplement in OCaml-friendly form.
 - Streaming vs. whole-page hydration; partial hydration granularity.
 - Cross-.NET-server interop (a non-OCaml server) would need a key +
   serialization contract independent of OCaml source positions.
-- Error surfacing for closures capturing non-serializable names (functions,
-  mutable refs) — start by rejecting unsupported captures with a clear message.
-
-## Status
-
-- **M1 done**: markers recognized by the backend (`wsclient:client`/`server`/`run`); a
-  `client` closure compiles to a standalone unit `<out>/clientserver/<key>.js`.
-- **M2 done**: the closure's free variables are rewritten to reads from an
-  environment object and the unit is emitted as a factory `(env) => closure`;
-  the entry registers the captured values as JSON (`OCamlRuntime.registerClient`).
-- Next: **M3** (stable keys, multiple/units import wiring) and **M4** (UI
-  integration + hydration).
-
-Start with **M3**.
+- Error surfacing for unsupported captures (functions, mutable refs).

@@ -64,6 +64,8 @@ type UnitIR =
         ModuleIdent: string
         MainModuleBlockSize: int
         RequiredGlobals: string list
+        JavaScript: string list
+        Rpc: string list
         Code: LExpr
     }
 
@@ -168,5 +170,13 @@ module Json =
             ModuleIdent = s "moduleIdent" r
             MainModuleBlockSize = (p "mainModuleBlockSize" r).GetInt32()
             RequiredGlobals = a "requiredGlobals" r |> List.map (fun x -> x.GetString())
+            JavaScript =
+                match r.TryGetProperty "javascript" with
+                | true, v -> [ for i in v.EnumerateArray() -> i.GetString() ]
+                | _ -> []
+            Rpc =
+                match r.TryGetProperty "rpc" with
+                | true, v -> [ for i in v.EnumerateArray() -> i.GetString() ]
+                | _ -> []
             Code = expr (p "code" r)
         }

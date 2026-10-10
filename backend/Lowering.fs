@@ -22,43 +22,7 @@ module Lowering =
             Runtime: bool ref
             Bindings: WebSharper.OCaml.Bindings.Context option
             Ws: bool
-            // Closures marked `ClientServer.client`, compiled as client units.
-            ClientUnits: ResizeArray<string * Expression>
         }
-
-    // Rewrites the free variables of a client closure to reads from an
-    // environment object (`env["name"]`) and records them.
-    type private FreeVarRewrite(envId: Id) =
-        inherit Transformer()
-
-        let bound = HashSet<Id>()
-        let free = List<Id>()
-
-        member _.Free = free
-
-        override this.TransformVar v =
-            if bound.Contains v then Var v
-            else
-                if not (free.Contains v) then free.Add v
-                ItemGet(Var envId, Value(String(defaultArg v.Name "x")), Purity.Pure)
-
-        override this.TransformFunction(ps, tv, r, body) =
-            let added = (ps @ Option.toList tv) |> List.filter bound.Add
-            let res = base.TransformFunction(ps, tv, r, body)
-            for i in added do bound.Remove i |> ignore
-            res
-
-        override this.TransformLet(id, v, b) =
-            let added = if bound.Add id then [ id ] else []
-            let res = base.TransformLet(id, v, b)
-            for i in added do bound.Remove i |> ignore
-            res
-
-        override this.TransformLetRec(bs, b) =
-            let added = (bs |> List.map fst) |> List.filter bound.Add
-            let res = base.TransformLetRec(bs, b)
-            for i in added do bound.Remove i |> ignore
-            res
 
     let id n = Id.New(n, false)
     let mutableId n = Id.New(n, true)
@@ -407,26 +371,6 @@ module Lowering =
         | "opaque", [ a ] -> a
         | "poll", [] -> Undefined
         | "raise", [ x ] -> StatementExpr(Throw x, None)
-        | "ccall", _ when p.Name.Value.StartsWith "wsclient:" ->
-            match es with
-            | f :: rest ->
-                let apply () = rt c "caml_apply" [ f; NewTuple(rest, []) ]
-                match p.Name.Value with
-                | "wsclient:client" ->
-                    let key = sprintf "client%d" c.ClientUnits.Count
-                    let envId = id ("env_" + key)
-                    let rw = FreeVarRewrite(envId)
-                    let rewritten = rw.TransformExpression f
-                    c.ClientUnits.Add(key, Function([ envId ], None, None, Return rewritten))
-                    let envObj =
-                        Object [ for v in rw.Free -> (defaultArg v.Name "x", MemberKind.Simple, Var v) ]
-                    let register = rt c "registerClient" [ Value(String key); envObj ]
-                    let value = if List.isEmpty rest then f else apply ()
-                    Sequential [ StatementExpr(ExprStatement register, None); value ]
-                | "wsclient:run"
-                | "wsclient:server" -> if List.isEmpty rest then f else apply ()
-                | other -> failwithf "wsclient: unknown marker %s" other
-            | [] -> failwith "wsclient: expected a function argument"
         | "ccall", _ ->
             let name = p.Name.Value
             let parts () = (name.Substring(name.IndexOf(':') + 1)).Split '.' |> Array.toList
@@ -655,7 +599,6 @@ module Lowering =
                 Runtime = runtime
                 Bindings = bindings
                 Ws = ws
-                ClientUnits = ResizeArray()
             }
 
         let imports =
@@ -671,7 +614,7 @@ module Lowering =
         let init = VarDeclaration(me, Object [])
         let body = ExprStatement(expr c ir.Code)
         let export = ExportDecl(true, ExprStatement(Var me))
-        imports @ [ init; body; export ], runtime.Value, List.ofSeq c.ClientUnits
+        imports @ [ init; body; export ], runtime.Value
 
     // Lower just the module body to a single statement suitable as a
     // WebSharper entry point (used by the compilation/packager pipeline).
@@ -688,7 +631,6 @@ module Lowering =
                 Runtime = runtime
                 Bindings = bindings
                 Ws = true
-                ClientUnits = ResizeArray()
             }
 
         // Required OCaml units become WebSharper JS imports so the packager
@@ -706,5 +648,4 @@ module Lowering =
             [ VarDeclaration(me, Object [])
               ExprStatement(expr c ir.Code)
               ExportDecl(true, ExprStatement(Var me)) ],
-        runtime.Value,
-        List.ofSeq c.ClientUnits
+        runtime.Value
