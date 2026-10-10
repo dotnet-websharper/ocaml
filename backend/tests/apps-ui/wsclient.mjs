@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 const appDir = process.argv[2];
 // A "server-rendered" page with a placeholder for the client region.
 const dom = new JSDOM(
-  '<!DOCTYPE html><html><body><div id="app" data-ws-key="Main.app">loading…</div></body></html>',
+  '<!DOCTYPE html><html><body><div id="app" data-ws-key="app">loading…</div></body></html>',
   { url: 'http://localhost/', pretendToBeVisual: true }
 );
 globalThis.window = dom.window;

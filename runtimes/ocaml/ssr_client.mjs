@@ -4,8 +4,8 @@ import { resolve } from 'node:path';
 
 const clientDir = process.argv[2];
 const page = await (await fetch('http://127.0.0.1:8123/')).text();
-console.log('has-ssr-region:', page.includes('data-ws-key="Main.app"'));
-console.log('has-ssr-content:', page.includes('server-rendered'));
+console.log('has-ssr-region:', page.includes('data-ws-key="app"'));
+console.log('has-ssr-content:', page.includes('>before<'));
 
 const dom = new JSDOM(page, { url: 'http://localhost/', pretendToBeVisual: true });
 globalThis.window = dom.window;

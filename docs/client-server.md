@@ -180,19 +180,26 @@ let[@client] app () =
 </script>
 ```
 
-**Server-side rendering (SSR):** the native server renders HTML with
-`runtimes/ocaml/ssr.ml` (a tiny element builder + renderer) and serves it;
-`Ssr.client_region ~id:"app" "Main.app" [ … ]` emits the region with
-server-rendered initial markup (`<div id="app" data-ws-key="Main.app">…</div>`).
-`Wsrpc.serve ~page` serves that page at `GET /`. The client then hydrates the
-region (`OCamlRuntime.hydrate()`).
+**Server-side rendering (SSR) of the compiled view:** a `[@client]` value
+(`unit -> unit`, e.g. `Doc.runById "app" (view ())`) is compiled for **both
+tiers** — the client against the generated `WebSharper_UI` binding, the server
+against the native shadow `runtimes/ocaml/wsui_server.ml` (a subset:
+`Doc`/`Var`/`View`/`Attr`/`On` + the HTML combinators). `--emit-server` rewrites
+`open WebSharper_UI*` to the shadow, keeps `[@client]` values, runs them at
+startup (their `Doc.runById` renders into regions via `runtimes/ocaml/ssr.ml`),
+and serves `Ssr.page` (each region as
+`<div id="…" data-ws-key="…">server markup</div>`) through `Wsrpc.serve ~page`.
+The client then hydrates each region with `OCamlRuntime.hydrate()`.
 
-`backend/tests/apps-ui/wsclient.{ml,mjs}` exercises hydration in jsdom
-(placeholder -> hydrate -> reactive click); `scripts/ssr-demo.sh`
-(`frontend/test: ssr`) renders the page from a native server, fetches it, and
-hydrates. Scope: the client **replaces** the server-rendered region
-(client-owned); DOM-preserving reconciliation (attach to the existing DOM) is
-future work.
+`scripts/ssr-demo.sh` (`frontend/test: ssr`) builds the client bundle and the
+native server from the *same* `apps-ui/wsclient.ml`, fetches the served page,
+hydrates in jsdom, and clicks (SSR `before` -> hydrate -> `after`).
+
+Scope: hydration is **client-owned** — the client re-renders the region (with
+identical initial markup, so it is seamless). Node-identity-preserving
+reconciliation (reusing the server DOM tree, preserving focus/scroll/input)
+requires implementing WebSharper's `ws-hole`/`ws-attr-holes` server-render
+protocol (template-based) in the shadow; it is future work.
 
 ## 5. Milestones
 
@@ -210,14 +217,12 @@ future work.
   reaches it over HTTP.
 - **M3 — first-class client code.** Stable keys by `(assembly, unit, position)`;
   multiple client units; import wiring; `scripts/test-quick.sh` coverage.
-- **M4 — UI integration + hydration (partial, done).** `[@client]` values are
-  registered under `<Unit>.<name>`; server placeholders carry `data-ws-key`;
-  `OCamlRuntime.hydrate()` runs the registered view into the mount point
-  (`apps-ui/wsclient`). **SSR**: the native server renders HTML
-  (`runtimes/ocaml/ssr.ml`, `Wsrpc.serve ~page`) with `Ssr.client_region`
-  offering server-rendered initial markup (`scripts/ssr-demo.sh`, test `ssr`).
-  Native rendering of a compiled `Doc` (same view both tiers) and DOM-preserving
-  reconciliation remain.
+- **M4 — UI integration + hydration (done).** `[@client]` values are registered
+  under `data-ws-key` (name) and hydrated by `OCamlRuntime.hydrate()`. **SSR of
+  the compiled view**: the same view source compiles against `WebSharper_UI`
+  (client) and the native `Wsui_server` shadow (server); `--emit-server` renders
+  it into regions and serves `Ssr.page` (`scripts/ssr-demo.sh`, test `ssr`).
+  Remaining: node-identity-preserving reconciliation (WS `ws-hole` protocol).
 - **M5 — server.** Render-time server code, data embedding.
 
 ## 6. Open questions

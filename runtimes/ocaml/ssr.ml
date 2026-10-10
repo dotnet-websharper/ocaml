@@ -52,3 +52,22 @@ let render ?(title = "") ?(scripts = []) (body : node list) =
 let client_region ?id key (content : node list) =
   let id = match id with Some i -> i | None -> key in
   El ("div", [ "id", id; "data-ws-key", key ], content)
+
+(* Rendered `[@client]` regions, populated by `Doc.runById` on the server. *)
+let regions : (string, string) Hashtbl.t = Hashtbl.create 16
+let order : string list ref = ref []
+
+let regions_reset () =
+  Hashtbl.reset regions;
+  order := []
+
+let regions_replace id html =
+  if not (Hashtbl.mem regions id) then order := id :: !order;
+  Hashtbl.replace regions id html
+
+(* A full page assembled from the rendered regions (in insertion order). *)
+let page ?(title = "") ?(scripts = []) () =
+  let body =
+    List.rev_map (fun id -> client_region ~id id [ raw (Hashtbl.find regions id) ]) !order
+  in
+  render ~title ~scripts body

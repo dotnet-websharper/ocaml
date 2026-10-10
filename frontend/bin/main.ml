@@ -914,7 +914,7 @@ let stripMarkers (attrs: Parsetree.attributes) =
 let openName (od: Parsetree.open_declaration) =
   match od.popen_expr.pmod_desc with
   | Parsetree.Pmod_ident { txt = lid; _ } ->
-      (match List.rev (Longident.flatten lid) with
+      (match Longident.flatten lid with
        | n :: _ -> Some n
        | [] -> None)
   | _ -> None
@@ -923,10 +923,18 @@ let serverItems (ast: Parsetree.structure) (js: string list) : Parsetree.structu
   List.filter_map
     (fun (item: Parsetree.structure_item) ->
       match item.pstr_desc with
-      (* Drop generated-binding opens (e.g. `open WebSharper_JavaScript`): the
-         native server links our own `Async`, not the JS binding package. *)
+      (* Rewrite WebSharper.UI opens to the native server shadow (Wsui_server);
+         drop other generated-binding opens (e.g. `open WebSharper_JavaScript`):
+         the native server links our own `Async`, not the JS binding package. *)
       | Parsetree.Pstr_open od ->
           (match openName od with
+           | Some n when String.length n >= 13 && String.sub n 0 13 = "WebSharper_UI" ->
+               let me : Parsetree.module_expr =
+                 { pmod_desc = Parsetree.Pmod_ident { txt = Longident.Lident "Wsui_server"; loc = od.popen_loc };
+                   pmod_loc = od.popen_loc;
+                   pmod_attributes = [] }
+               in
+               Some { item with pstr_desc = Parsetree.Pstr_open { od with popen_expr = me } }
            | Some n when String.length n >= 11 && String.sub n 0 11 = "WebSharper_" -> None
            | _ -> Some item)
       | Parsetree.Pstr_value (rf, vbs) ->
@@ -952,7 +960,7 @@ let prettyStructure (items: Parsetree.structure) : string =
   Buffer.contents buf
 
 let emitServer (path: string) (ast: Parsetree.structure) (typed: Typedtree.structure) (env: Env.t)
-    (js: string list) (rpcs: string list) =
+    (js: string list) (rpcs: string list) (clients: string list) =
   let files = typedTypes typed in
   let sigs =
     rpcs |> List.map (fun name ->
@@ -964,7 +972,7 @@ let emitServer (path: string) (ast: Parsetree.structure) (typed: Typedtree.struc
   let recSet = recursiveKeys collected in
   let sb = Buffer.create 2048 in
   Buffer.add_string sb "(* Generated native RPC server. Do not edit. *)\n";
-  Buffer.add_string sb (prettyStructure (serverItems ast js));
+  Buffer.add_string sb (prettyStructure (serverItems ast (List.filter (fun n -> not (List.mem n clients)) js)));
   Buffer.add_string sb "\n";
   Buffer.add_string sb (helperDefs env recSet collected);
   Buffer.add_string sb "let () =\n  let handlers = Hashtbl.create 16 in\n";
@@ -986,7 +994,12 @@ let emitServer (path: string) (ast: Parsetree.structure) (typed: Typedtree.struc
            "  Hashtbl.add handlers %S (fun (args : Yojson.Safe.t list) ->\n    match args with\n    | [ %s ] -> (%s) (%s)\n    | _ -> failwith \"rpc %s: wrong arity\");\n"
            name pattern (toJson env recSet ret) base name))
     sigs;
-  Buffer.add_string sb "  Wsrpc.serve ~port:8123 handlers\n";
+  if clients = [] then Buffer.add_string sb "  Wsrpc.serve ~port:8123 handlers\n"
+  else (
+    Buffer.add_string sb "  Ssr.regions_reset ();\n";
+    List.iter (fun n -> Buffer.add_string sb (Printf.sprintf "  %s ();\n" n)) clients;
+    Buffer.add_string sb
+      "  Wsrpc.serve ~port:8123 ~page:(fun () -> Ssr.page ~title:\"wsocaml\" ~scripts:[ \"/Main.js\" ] ()) handlers\n");
   let ch = open_out path in
   output_string ch (Buffer.contents sb);
   close_out ch
@@ -1024,7 +1037,7 @@ let () =
     let typed, _, _, _, typedEnv = Typemod.type_structure env ast in
     (match !emit_server with
     | Some p ->
-        emitServer p ast typed typedEnv js rpc;
+        emitServer p ast typed typedEnv js rpc cli;
         exit 0
     | None -> ());
     let u =
@@ -1109,7 +1122,7 @@ let () =
               |> List.map (fun name ->
                      let index = try List.assoc name topIndex with Not_found -> -1 in
                      `Assoc
-                       [ ("name", `String name); ("key", `String (u ^ "." ^ name)); ("index", `Int index) ])) );
+                       [ ("name", `String name); ("key", `String name); ("index", `Int index) ])) );
           ( "requiredGlobals",
             `List
               (Ident.Set.elements program.required_globals
