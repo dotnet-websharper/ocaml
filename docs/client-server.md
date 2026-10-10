@@ -153,23 +153,37 @@ OCaml server, starts the server, and drives the client RPC over HTTP
 
 ## 4. Server embed + client runtime
 
-Server rendering emits HTML plus instructions, mirroring WebSharper's
+Server rendering emits HTML plus placeholders, mirroring WebSharper's
 `ClientCode`:
 
-- a **placeholder** node carrying `data-ws-key` (and any needed key-indexed data
-  in a `<script type="application/json">` blob), or a `ws-<id>` attribute for
-  event handlers (as UI already does);
-- the client runtime (`ClientRuntime.js`) runs on load:
-  1. collect placeholders by key;
-  2. import/run the corresponding client code;
-  3. restore captured JSON into the scope;
-  4. run the code (attach listeners, replace nodes, start views), reusing the
-     same `Doc`/`Elt` runtime so hydration is "run the same code again, but
-     attach to existing DOM".
+- a `[@client]` top-level value (`unit -> unit`, typically rendering a view into
+  a mount point via `Doc.runById`) is registered in the client bundle under the
+  stable key `<Unit>.<name>`;
+- the server emits a **placeholder** node
+  `<(div) id="..." data-ws-key="<Unit>.<name>">`;
+- the client runtime runs on load: `OCamlRuntime.hydrate()` collects
+  `[data-ws-key]` placeholders, looks up the registered client code, clears the
+  placeholder (the client owns the region) and runs it, reusing the same
+  `Doc`/`Elt` runtime.
 
-Hydration reuses the existing reconciliation in `WebSharper.UI` (the server
-marks holes with `ws-<id>`; the client `Doc.Run` finds them). Our job is to feed
-the same runtime from OCaml-compiled code.
+Example:
+
+```ocaml
+let[@client] app () =
+  Doc.runById "app" (div [] [ Doc.text "hello" ])
+```
+
+```html
+<div id="app" data-ws-key="Main.app">loading…</div>
+<script type="module">
+  import './Main.js'; OCamlRuntime.hydrate();
+</script>
+```
+
+`backend/tests/apps-ui/wsclient.{ml,mjs}` exercises this in jsdom
+(placeholder -> hydrate -> reactive click). Scope: hydration is
+**client-owned-placeholder** (the placeholder is replaced); DOM-preserving
+reconciliation and server-side `Doc` rendering are future work (§5 M4).
 
 ## 5. Milestones
 
@@ -187,9 +201,11 @@ the same runtime from OCaml-compiled code.
   reaches it over HTTP.
 - **M3 — first-class client code.** Stable keys by `(assembly, unit, position)`;
   multiple client units; import wiring; `scripts/test-quick.sh` coverage.
-- **M4 — UI integration + hydration.** Marked client code as `On.*`/`Attr`
-  handlers; server placeholders; `ClientRuntime.js` hydrates a server-rendered
-  `Doc` by re-running the OCaml view client-side.
+- **M4 — UI integration + hydration (partial, done).** `[@client]` values are
+  registered under `<Unit>.<name>`; server placeholders carry `data-ws-key`;
+  `OCamlRuntime.hydrate()` runs the registered view into the mount point
+  (`apps-ui/wsclient`). Server-side native `Doc` rendering and DOM-preserving
+  reconciliation remain.
 - **M5 — server.** Render-time server code, data embedding.
 
 ## 6. Open questions

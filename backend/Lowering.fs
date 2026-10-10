@@ -28,6 +28,7 @@ module Lowering =
             RpcNames: Set<string>
             RpcMeta: Map<string, string>
             Exports: (string * int * int * string) list
+            Clients: (string * int) list
             ServerOnly: Set<string>
             Server: bool
             // True while lowering the module's top-level let chain (vs. nested
@@ -654,6 +655,12 @@ module Lowering =
 
             ExportDecl(false, VarDeclaration(fid, body)))
 
+    // Register [@client] values for hydration: `OCamlRuntime.registerClient(key, me[idx])`.
+    let clientRegs (c: Ctx) (me: Id) =
+        c.Clients
+        |> List.map (fun (key, idx) ->
+            ExprStatement(rt c "registerClient" [ Value(String key); ItemGet(Var me, Value(Int idx), Purity.Pure) ]))
+
     let compile (ws: bool) (server: bool) (bindings: WebSharper.OCaml.Bindings.Context option) (ir: UnitIR) =
         let gs = Dictionary<string, Id>()
         let runtime = ref false
@@ -671,6 +678,7 @@ module Lowering =
                 RpcNames = Set.ofList ir.Rpc
                 RpcMeta = Map.ofList ir.Rpcs
                 Exports = ir.Exports
+                Clients = ir.Clients
                 ServerOnly = Set.ofList ir.Server
                 Server = server
                 TopLevel = true
@@ -689,7 +697,7 @@ module Lowering =
         let init = VarDeclaration(me, Object [])
         let body = ExprStatement(expr c ir.Code)
         let export = ExportDecl(true, ExprStatement(Var me))
-        imports @ [ init; body; export ] @ exportDecls c me, runtime.Value
+        imports @ [ init; body; export ] @ clientRegs c me @ exportDecls c me, runtime.Value
 
     // Lower just the module body to a single statement suitable as a
     // WebSharper entry point (used by the compilation/packager pipeline).
@@ -710,6 +718,7 @@ module Lowering =
                 RpcNames = Set.ofList ir.Rpc
                 RpcMeta = Map.ofList ir.Rpcs
                 Exports = ir.Exports
+                Clients = ir.Clients
                 ServerOnly = Set.ofList ir.Server
                 Server = server
                 TopLevel = true
@@ -730,6 +739,6 @@ module Lowering =
             [ VarDeclaration(me, Object [])
               ExprStatement(expr c ir.Code)
               ExportDecl(true, ExprStatement(Var me)) ]
-            @ exportDecls c me
+            @ clientRegs c me @ exportDecls c me
         ),
         runtime.Value

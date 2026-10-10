@@ -282,6 +282,31 @@ if (!globalThis.OCamlRuntime) {
     return marshalOut(meta.types, meta.result, res);
   }
 
+  // [@client] hydration: server-rendered pages carry `[data-ws-key]` placeholders;
+  // `hydrate` runs the registered client code for each.
+  function registerClient(key, fn) {
+    var store = globalThis.OCamlRuntime.clientCode || (globalThis.OCamlRuntime.clientCode = {});
+    store[key] = fn;
+  }
+
+  function hydrate() {
+    var doc = globalThis.document;
+    if (!doc) return 0;
+    var store = globalThis.OCamlRuntime.clientCode || {};
+    var nodes = doc.querySelectorAll("[data-ws-key]");
+    var n = 0;
+    for (var i = 0; i < nodes.length; i++) {
+      var fn = store[nodes[i].getAttribute("data-ws-key")];
+      if (fn) {
+        // The client owns the region: clear the server placeholder, then render.
+        nodes[i].textContent = "";
+        caml_apply(fn, [0]);
+        n++;
+      }
+    }
+    return n;
+  }
+
   function registerRpc(name, metaJson, fn) {
     var store = globalThis.OCamlRuntime.__serverRpc || (globalThis.OCamlRuntime.__serverRpc = {});
     store[name] = { fn: fn, meta: rpcMeta(name, metaJson) };
@@ -395,6 +420,8 @@ if (!globalThis.OCamlRuntime) {
     async_map: async_map,
     async_run: async_run,
     exported: exported,
+    registerClient: registerClient,
+    hydrate: hydrate,
     caml_apply: caml_apply,
     caml_trampoline: caml_trampoline,
     caml_trampoline_return: caml_trampoline_return,
