@@ -3,3 +3,9 @@ bindings-legacy/*.cmi
 bindings-legacy/*.cmo
 out/
 _build/
+runtimes/ocaml/*.cmi
+runtimes/ocaml/*.cmo
+runtimes/ocaml/*.cmx
+runtimes/ocaml/*.cmt
+runtimes/ocaml/*.o
+runtimes/ocaml/demo_server
