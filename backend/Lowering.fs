@@ -26,6 +26,7 @@ module Lowering =
             // whether this is the server build (server code kept, client stubbed).
             JavaScript: Set<string>
             RpcNames: Set<string>
+            RpcMeta: Map<string, string>
             ServerOnly: Set<string>
             Server: bool
             // True while lowering the module's top-level let chain (vs. nested
@@ -145,16 +146,24 @@ module Lowering =
             let keep () = Let(x, expr c v, expr cc b)
 
             if top && c.RpcNames.Contains n.Name then
+                let meta =
+                    match c.RpcMeta.TryFind n.Name with
+                    | Some m -> m
+                    | None -> "null"
+
                 match v with
                 | LExpr.Fun(ps, _) ->
                     if c.Server then
                         // Server build: keep the body and register the handler.
-                        let register = rt c "registerRpc" [ Value(String n.Name); rt c "caml_to_js" [ Var x ] ]
+                        let register =
+                            rt c "registerRpc" [ Value(String n.Name); Value(String meta); rt c "caml_to_js" [ Var x ] ]
                         Let(x, expr c v, Sequential [ StatementExpr(ExprStatement register, None); expr cc b ])
                     else
-                        // Client build: bind a proxy that calls back by name.
+                        // Client build: bind a proxy that marshals args, calls back
+                        // by name, and unmarshals the result.
                         let ids = ps |> List.map vid
-                        let call = rt c "rpcCall" [ Value(String n.Name); NewTuple(List.map Var ids, []) ]
+                        let call =
+                            rt c "rpcCall" [ Value(String n.Name); Value(String meta); NewTuple(List.map Var ids, []) ]
                         Let(x, Function(ids, None, None, Return call), expr cc b)
                 | _ -> if c.Server then keep () else stub ()
             elif top && c.JavaScript.Contains n.Name then
@@ -636,6 +645,7 @@ module Lowering =
                 Ws = ws
                 JavaScript = Set.ofList ir.JavaScript
                 RpcNames = Set.ofList ir.Rpc
+                RpcMeta = Map.ofList ir.Rpcs
                 ServerOnly = Set.ofList ir.Server
                 Server = server
                 TopLevel = true
@@ -673,6 +683,7 @@ module Lowering =
                 Ws = true
                 JavaScript = Set.ofList ir.JavaScript
                 RpcNames = Set.ofList ir.Rpc
+                RpcMeta = Map.ofList ir.Rpcs
                 ServerOnly = Set.ofList ir.Server
                 Server = server
                 TopLevel = true

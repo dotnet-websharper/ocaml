@@ -6,5 +6,5 @@ await import(pathToFileURL(resolve(dir, 'Main.js')).href);
 
 // Point the RPC transport at the native OCaml server and call over HTTP.
 globalThis.OCamlRuntime.rpcEndpoint = 'http://127.0.0.1:8123/rpc';
-const result = await globalThis.OCamlRuntime.rpcCall('g', [21]);
+const result = await globalThis.OCamlRuntime.rpcCall('g', JSON.stringify({ types: [], args: [{ k: 'int' }], result: { k: 'int' } }), [21]);
 console.log('rpc g(21) =', result);

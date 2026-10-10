@@ -10,5 +10,5 @@ console.log('server-has-secret:', server.includes('777777'));
 
 await import(pathToFileURL(resolve(dir, 'Main.server.js')).href);
 await import(pathToFileURL(resolve(dir, 'Main.js')).href);
-const result = await globalThis.OCamlRuntime.rpcCall('g', [21]);
+const result = await globalThis.OCamlRuntime.rpcCall('g', JSON.stringify({ types: [], args: [{ k: 'int' }], result: { k: 'int' } }), [21]);
 console.log('rpc g(21) =', result);

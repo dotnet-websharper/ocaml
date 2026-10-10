@@ -393,13 +393,14 @@ let checkBoundary (ast: Parsetree.structure) =
    Emit an OCaml program that re-runs the server-only + [@rpc] definitions and
    serves them over JSON-RPC, with type-directed codecs for supported types. *)
 
-(* [@rpc] codecs. Values travel in their OCaml runtime representation, so the
-   client — which hands raw OCaml values to `rpcCall` — needs no codec: a block
-   is `{"$tag": t, "0": f0, ...}`, a list is a cons chain (`[]` is `0`), and
-   immediates (int/bool/char/unit) are JSON numbers. Arrays are JS arrays.
-   Only the native server converts between real OCaml values and this
-   representation. Recursive record/variant types get named helper codecs
-   (`toJson_<name>`/`ofJson_<name>`) emitted in a `let rec` group. *)
+(* [@rpc]/[@export] codecs. Values cross the boundary in a JS-idiomatic
+   representation: records -> objects keyed by field name, variants ->
+   {"$":"Case","$0":...,"$1":...}, lists/arrays -> JSON arrays, options ->
+   null/value, tuples -> arrays; ints/floats/bools/strings are JSON scalars and
+   chars are 1-char strings. The internal OCaml runtime representation is
+   unchanged. Codecs are generated from the inferred types; recursive
+   record/variant types get named helper codecs, specialized per concrete
+   instantiation. *)
 
 let rec subst (sub: (string * Types.type_expr) list) (t: Types.type_expr) : Types.type_expr =
   match Types.get_desc t with
@@ -456,217 +457,231 @@ let typeName (p: Path.t) =
     s;
   Buffer.contents b
 
-(* A tagged block: `{"$tag": tag, "0": f0, "1": f1, ...}`. *)
-let block tag (fields: string list) =
-  let parts =
-    Printf.sprintf "(\"$tag\", `Int %d)" tag
-    :: List.mapi (fun i e -> Printf.sprintf "(%S, %s)" (string_of_int i) e) fields
-  in
-  "`Assoc [" ^ String.concat "; " parts ^ "]"
+(* A key for a concrete instantiation, e.g. `int tree` -> "tree_int". *)
+let rec instKey (t: Types.type_expr) : string =
+  match Types.get_desc t with
+  | Types.Tconstr (p, [], _) -> typeName p
+  | Types.Tconstr (p, args, _) -> typeName p ^ "_" ^ String.concat "_" (List.map instKey args)
+  | Types.Ttuple ts -> "tup_" ^ String.concat "_" (List.map (fun (_, x) -> instKey x) ts)
+  | Types.Tvar (Some n) -> failwith ("unresolved type variable '" ^ n ^ "' in [@rpc] signature")
+  | Types.Tvar None -> failwith "unresolved type variable in [@rpc] signature"
+  | _ -> failwith "unresolved type in [@rpc] signature"
+
+let obj (fields: (string * string) list) =
+  "`Assoc [" ^ String.concat "; " (List.map (fun (k, v) -> Printf.sprintf "(%S, %s)" k v) fields) ^ "]"
 
 let rec enc env recSet seen (t: Types.type_expr) : string =
   match Types.get_desc t with
   | Types.Tconstr (p, _, _) when Path.same p Predef.path_int -> "(fun x -> `Int x)"
-  | Types.Tconstr (p, _, _) when Path.same p Predef.path_bool -> "(fun x -> `Int (if x then 1 else 0))"
+  | Types.Tconstr (p, _, _) when Path.same p Predef.path_bool -> "(fun x -> `Bool x)"
   | Types.Tconstr (p, _, _) when Path.same p Predef.path_string -> "(fun x -> `String x)"
   | Types.Tconstr (p, _, _) when Path.same p Predef.path_float -> "(fun x -> `Float x)"
-  | Types.Tconstr (p, _, _) when Path.same p Predef.path_char -> "(fun x -> `Int (Char.code x))"
-  | Types.Tconstr (p, _, _) when Path.same p Predef.path_unit -> "(fun _ -> `Int 0)"
+  | Types.Tconstr (p, _, _) when Path.same p Predef.path_char -> "(fun x -> `String (String.make 1 x))"
+  | Types.Tconstr (p, _, _) when Path.same p Predef.path_unit -> "(fun () -> `Null)"
   | Types.Tconstr (p, [ a ], _) when Path.same p Predef.path_list ->
-      "(fun xs -> let rec go = function [] -> `Int 0 | y :: ys -> "
-      ^ block 0 [ "(" ^ enc env recSet seen a ^ ") y"; "go ys" ] ^ " in go xs)"
+      "(fun xs -> `List (List.map (" ^ enc env recSet seen a ^ ") xs))"
   | Types.Tconstr (p, [ a ], _) when Path.same p Predef.path_option ->
-      "(fun v -> match v with None -> `Int 0 | Some x -> "
-      ^ block 0 [ "(" ^ enc env recSet seen a ^ ") x" ] ^ ")"
+      "(fun v -> match v with None -> `Null | Some x -> (" ^ enc env recSet seen a ^ ") x)"
   | Types.Tconstr (p, [ a ], _) when Path.same p Predef.path_array ->
       "(fun xs -> `List (Array.to_list (Array.map (" ^ enc env recSet seen a ^ ") xs)))"
   | Types.Tconstr (p, args, _) ->
-      let n = typeName p in
-      if List.mem n recSet then "toJson_" ^ n else encNamed env recSet seen n (Env.find_type p env) args
+      let k = instKey t in
+      if List.mem k recSet then "toJson_" ^ k else encNamed env recSet seen k (Env.find_type p env) args
   | Types.Ttuple ts ->
       let ts = List.map snd ts in
       let vars = List.mapi (fun i _ -> Printf.sprintf "a%d" i) ts in
-      let fields = List.map2 (fun v t -> "(" ^ enc env recSet seen t ^ ") " ^ v) vars ts in
-      "(fun (" ^ String.concat ", " vars ^ ") -> " ^ block 0 fields ^ ")"
+      let items = List.map2 (fun v t -> "(" ^ enc env recSet seen t ^ ") " ^ v) vars ts in
+      "(fun (" ^ String.concat ", " vars ^ ") -> `List [" ^ String.concat "; " items ^ "])"
   | _ -> failwith "unsupported [@rpc] type (encoder)"
 
-and encNamed env recSet seen name (d: Types.type_declaration) args =
-  if List.mem name seen then failwith ("recursive [@rpc] type: " ^ name);
+and encNamed env recSet seen key (d: Types.type_declaration) args =
+  if List.mem key seen then failwith ("recursive [@rpc] type: " ^ key);
   let sub = withSub d args in
   match d.type_kind with
   | Types.Type_abstract _ ->
       (match d.type_manifest with
        | Some m -> enc env recSet seen (subst sub m)
-       | None -> failwith ("unsupported abstract [@rpc] type: " ^ name))
+       | None -> failwith ("unsupported abstract [@rpc] type: " ^ key))
   | Types.Type_record (labels, _) ->
       let fields =
         List.map
           (fun (l: Types.label_declaration) ->
-            "(" ^ enc env recSet (name :: seen) (subst sub l.ld_type) ^ ") x." ^ Ident.name l.ld_id)
+            let fn = Ident.name l.ld_id in
+            (fn, "(" ^ enc env recSet (key :: seen) (subst sub l.ld_type) ^ ") x." ^ fn))
           labels
       in
-      "(fun x -> " ^ block 0 fields ^ ")"
+      "(fun x -> " ^ obj fields ^ ")"
   | Types.Type_variant (ctors, _) ->
-      let consts = List.filter isConstCtor ctors in
-      let nonconsts = List.filter (fun c -> not (isConstCtor c)) ctors in
-      let nc = List.length consts in
       let cases =
         ctors
         |> List.map (fun (c: Types.constructor_declaration) ->
                let cname = Ident.name c.cd_id in
-               if isConstCtor c then Printf.sprintf "%s -> `Int %d" cname (indexOf c consts)
+               if isConstCtor c then
+                 Printf.sprintf "%s -> %s" cname (obj [ ("$", Printf.sprintf "`String %S" cname) ])
                else
                  let ts = List.map (subst sub) (Option.get (ctorArgs c)) in
                  let vars = List.mapi (fun i _ -> Printf.sprintf "v%d" i) ts in
                  let fields =
-                   List.map2 (fun v t -> "(" ^ enc env recSet (name :: seen) t ^ ") " ^ v) vars ts
+                   ("$", Printf.sprintf "`String %S" cname)
+                   :: List.mapi
+                        (fun i t ->
+                          ( "$" ^ string_of_int i,
+                            "(" ^ enc env recSet (key :: seen) t ^ ") v" ^ string_of_int i ))
+                        ts
                  in
                  let pat = match vars with [ v ] -> v | vs -> "(" ^ String.concat ", " vs ^ ")" in
-                 Printf.sprintf "%s %s -> %s" cname pat (block (nc + indexOf c nonconsts) fields))
+                 Printf.sprintf "%s %s -> %s" cname pat (obj fields))
       in
       "(fun x -> match x with " ^ String.concat " | " cases ^ ")"
-  | _ -> failwith ("unsupported [@rpc] type: " ^ name)
+  | _ -> failwith ("unsupported [@rpc] type: " ^ key)
 
 let rec dec env recSet seen (t: Types.type_expr) : string =
   match Types.get_desc t with
   | Types.Tconstr (p, _, _) when Path.same p Predef.path_int -> "Yojson.Safe.Util.to_int"
-  | Types.Tconstr (p, _, _) when Path.same p Predef.path_bool -> "(fun j -> Yojson.Safe.Util.to_int j <> 0)"
-  | Types.Tconstr (p, _, _) when Path.same p Predef.path_string -> "Yojson.Safe.Util.to_string"
+  | Types.Tconstr (p, _, _) when Path.same p Predef.path_bool -> "Yojson.Safe.Util.to_bool"
   | Types.Tconstr (p, _, _) when Path.same p Predef.path_float -> "Yojson.Safe.Util.to_float"
-  | Types.Tconstr (p, _, _) when Path.same p Predef.path_char -> "(fun j -> Char.chr (Yojson.Safe.Util.to_int j))"
+  | Types.Tconstr (p, _, _) when Path.same p Predef.path_string -> "Yojson.Safe.Util.to_string"
+  | Types.Tconstr (p, _, _) when Path.same p Predef.path_char -> "(fun j -> (Yojson.Safe.Util.to_string j).[0])"
   | Types.Tconstr (p, _, _) when Path.same p Predef.path_unit -> "(fun _ -> ())"
   | Types.Tconstr (p, [ a ], _) when Path.same p Predef.path_list ->
-      "(fun j -> let rec go j = match j with `Assoc o -> (" ^ dec env recSet seen a
-      ^ ") (List.assoc \"0\" o) :: go (List.assoc \"1\" o) | _ -> [] in go j)"
+      "(fun j -> List.map (" ^ dec env recSet seen a ^ ") (Yojson.Safe.Util.to_list j))"
   | Types.Tconstr (p, [ a ], _) when Path.same p Predef.path_option ->
-      "(fun j -> match j with `Assoc o -> Some ((" ^ dec env recSet seen a ^ ") (List.assoc \"0\" o)) | _ -> None)"
+      "(fun j -> match j with `Null -> None | _ -> Some ((" ^ dec env recSet seen a ^ ") j))"
   | Types.Tconstr (p, [ a ], _) when Path.same p Predef.path_array ->
       "(fun j -> Array.of_list (List.map (" ^ dec env recSet seen a ^ ") (Yojson.Safe.Util.to_list j)))"
   | Types.Tconstr (p, args, _) ->
-      let n = typeName p in
-      if List.mem n recSet then "ofJson_" ^ n else decNamed env recSet seen n (Env.find_type p env) args
+      let k = instKey t in
+      if List.mem k recSet then "ofJson_" ^ k else decNamed env recSet seen k (Env.find_type p env) args
   | Types.Ttuple ts ->
       let ts = List.map snd ts in
-      let fields =
-        List.mapi (fun i t -> Printf.sprintf "(%s) (List.assoc %S o)" (dec env recSet seen t) (string_of_int i)) ts
-      in
-      "(fun j -> let o = Yojson.Safe.Util.to_assoc j in (" ^ String.concat ", " fields ^ "))"
+      let pat = String.concat "; " (List.mapi (fun i _ -> Printf.sprintf "v%d" i) ts) in
+      let items = List.mapi (fun i t -> "(" ^ dec env recSet seen t ^ ") v" ^ string_of_int i) ts in
+      "(fun j -> match Yojson.Safe.Util.to_list j with [ " ^ pat ^ " ] -> (" ^ String.concat ", " items
+      ^ ") | _ -> failwith \"bad tuple\")"
   | _ -> failwith "unsupported [@rpc] type (decoder)"
 
-and decNamed env recSet seen name (d: Types.type_declaration) args =
-  if List.mem name seen then failwith ("recursive [@rpc] type: " ^ name);
+and decNamed env recSet seen key (d: Types.type_declaration) args =
+  if List.mem key seen then failwith ("recursive [@rpc] type: " ^ key);
   let sub = withSub d args in
   match d.type_kind with
   | Types.Type_abstract _ ->
       (match d.type_manifest with
        | Some m -> dec env recSet seen (subst sub m)
-       | None -> failwith ("unsupported abstract [@rpc] type: " ^ name))
+       | None -> failwith ("unsupported abstract [@rpc] type: " ^ key))
   | Types.Type_record (labels, _) ->
       let fields =
-        List.mapi
-          (fun i (l: Types.label_declaration) ->
-            Printf.sprintf "%s = (%s) (List.assoc %S o)" (Ident.name l.ld_id)
-              (dec env recSet (name :: seen) (subst sub l.ld_type)) (string_of_int i))
+        List.map
+          (fun (l: Types.label_declaration) ->
+            let fn = Ident.name l.ld_id in
+            Printf.sprintf "%s = (%s) (List.assoc %S o)" fn
+              (dec env recSet (key :: seen) (subst sub l.ld_type)) fn)
           labels
       in
       "(fun j -> let o = Yojson.Safe.Util.to_assoc j in { " ^ String.concat "; " fields ^ " })"
   | Types.Type_variant (ctors, _) ->
-      let consts = List.filter isConstCtor ctors in
-      let nonconsts = List.filter (fun c -> not (isConstCtor c)) ctors in
-      let nc = List.length consts in
-      let constCases =
-        consts |> List.mapi (fun i (c: Types.constructor_declaration) -> Printf.sprintf "%d -> %s" i (Ident.name c.cd_id))
+      let cases =
+        ctors
+        |> List.map (fun (c: Types.constructor_declaration) ->
+               let cname = Ident.name c.cd_id in
+               if isConstCtor c then Printf.sprintf "%S -> %s" cname cname
+               else
+                 let ts = List.map (subst sub) (Option.get (ctorArgs c)) in
+                 let args =
+                   List.mapi
+                     (fun i t ->
+                       Printf.sprintf "((%s) (List.assoc %S o))" (dec env recSet (key :: seen) t)
+                         ("$" ^ string_of_int i))
+                     ts
+                 in
+                 let arg = match args with [ a ] -> a | _ -> "(" ^ String.concat ", " args ^ ")" in
+                 Printf.sprintf "%S -> %s %s" cname cname arg)
       in
-      let nonconstCases =
-        nonconsts
-        |> List.mapi (fun i (c: Types.constructor_declaration) ->
-               let ts = List.map (subst sub) (Option.get (ctorArgs c)) in
-               let args =
-                 List.mapi
-                   (fun j t ->
-                     Printf.sprintf "((%s) (List.assoc %S o))" (dec env recSet (name :: seen) t) (string_of_int j))
-                   ts
-               in
-               let arg = match args with [ a ] -> a | _ -> "(" ^ String.concat ", " args ^ ")" in
-               Printf.sprintf "%d -> %s %s" (nc + i) (Ident.name c.cd_id) arg)
-      in
-      "(fun j -> match j with `Int n -> (match n with " ^ String.concat " | " constCases
-      ^ " | _ -> failwith \"bad variant\") | `Assoc o -> (match Yojson.Safe.Util.to_int (List.assoc \"$tag\" o) with "
-      ^ String.concat " | " nonconstCases ^ " | _ -> failwith \"bad variant\") | _ -> failwith \"bad variant\")"
-  | _ -> failwith ("unsupported [@rpc] type: " ^ name)
+      "(fun j -> let o = Yojson.Safe.Util.to_assoc j in match Yojson.Safe.Util.to_string (List.assoc \"$\" o) with "
+      ^ String.concat " | " cases ^ " | _ -> failwith \"bad variant\")"
+  | _ -> failwith ("unsupported [@rpc] type: " ^ key)
 
-(* Collect the named record/variant types reachable from a set of types. *)
-let collectTypes env (ts: Types.type_expr list) : (string * Types.type_declaration) list =
-  let acc = Hashtbl.create 32 in
+type inst =
+    { key : string;
+      decl : Types.type_declaration;
+      args : Types.type_expr list }
+
+(* Collect the concrete record/variant instantiations reachable from a set of
+   types, substituting type arguments as we descend. *)
+let collectTypes env (ts: Types.type_expr list) : inst list =
+  let seen = Hashtbl.create 32 in
   let order = ref [] in
   let rec go t =
+    if Hashtbl.length seen > 1000 then failwith "too many [@rpc] type instantiations (polymorphic recursion?)";
     match Types.get_desc t with
     | Types.Tconstr (p, args, _) ->
         List.iter go args;
         if unsupportedBoxed p then failwith ("unsupported [@rpc] type (boxed integer): " ^ Path.name p);
         if not (builtinPath p) then (
-          let n = typeName p in
-          if not (Hashtbl.mem acc n) then (
+          let k = instKey t in
+          if not (Hashtbl.mem seen k) then (
+            Hashtbl.add seen k ();
             let d = Env.find_type p env in
-            Hashtbl.add acc n d;
-            order := (n, d) :: !order;
+            order := { key = k; decl = d; args } :: !order;
+            let sub = withSub d args in
             match d.type_kind with
-            | Types.Type_record (ls, _) -> List.iter (fun (l: Types.label_declaration) -> go l.ld_type) ls
+            | Types.Type_record (ls, _) -> List.iter (fun (l: Types.label_declaration) -> go (subst sub l.ld_type)) ls
             | Types.Type_variant (cs, _) ->
                 List.iter
                   (fun (c: Types.constructor_declaration) ->
-                    match ctorArgs c with Some ts -> List.iter go ts | None -> ())
+                    match ctorArgs c with Some ts -> List.iter (fun x -> go (subst sub x)) ts | None -> ())
                   cs
-            | Types.Type_abstract _ -> (match d.type_manifest with Some m -> go m | None -> ())
+            | Types.Type_abstract _ -> (match d.type_manifest with Some m -> go (subst sub m) | None -> ())
             | _ -> ()))
-    | Types.Ttuple ts -> List.iter (fun (_, t) -> go t) ts
+    | Types.Ttuple ts -> List.iter (fun (_, x) -> go x) ts
     | Types.Tarrow (_, a, b, _) -> go a; go b
     | _ -> ()
   in
   List.iter go ts;
   List.rev !order
 
-let directRefNames (d: Types.type_declaration) : string list =
+let directRefKeys (i: inst) : string list =
+  let sub = withSub i.decl i.args in
   let acc = ref [] in
   let rec go t =
     match Types.get_desc t with
-    | Types.Tconstr (p, args, _) -> if builtinPath p then List.iter go args else acc := typeName p :: !acc
-    | Types.Ttuple ts -> List.iter (fun (_, t) -> go t) ts
+    | Types.Tconstr (p, args, _) -> if builtinPath p then List.iter go args else acc := instKey t :: !acc
+    | Types.Ttuple ts -> List.iter (fun (_, x) -> go x) ts
     | Types.Tarrow (_, a, b, _) -> go a; go b
     | _ -> ()
   in
-  (match d.type_kind with
-   | Types.Type_record (ls, _) -> List.iter (fun (l: Types.label_declaration) -> go l.ld_type) ls
+  (match i.decl.type_kind with
+   | Types.Type_record (ls, _) -> List.iter (fun (l: Types.label_declaration) -> go (subst sub l.ld_type)) ls
    | Types.Type_variant (cs, _) ->
-       List.iter (fun (c: Types.constructor_declaration) -> match ctorArgs c with Some ts -> List.iter go ts | None -> ()) cs
-   | Types.Type_abstract _ -> (match d.type_manifest with Some m -> go m | None -> ())
+       List.iter
+         (fun (c: Types.constructor_declaration) ->
+           match ctorArgs c with Some ts -> List.iter (fun x -> go (subst sub x)) ts | None -> ())
+         cs
+   | Types.Type_abstract _ -> (match i.decl.type_manifest with Some m -> go (subst sub m) | None -> ())
    | _ -> ());
   !acc
 
-(* Names of types that are part of a reference cycle. *)
-let recursiveNames (collected: (string * Types.type_declaration) list) =
-  let refs = collected |> List.map (fun (n, d) -> n, directRefNames d) in
-  let lookup n = try List.assoc n refs with Not_found -> [] in
+(* Keys of instantiations that are part of a reference cycle. *)
+let recursiveKeys (collected: inst list) =
+  let refs = collected |> List.map (fun i -> i.key, directRefKeys i) in
+  let lookup k = try List.assoc k refs with Not_found -> [] in
   let reaches start =
     let seen = Hashtbl.create 16 in
-    let rec go n =
-      if n = start then true
-      else if Hashtbl.mem seen n then false
-      else (Hashtbl.add seen n (); List.exists go (lookup n))
+    let rec go k =
+      if k = start then true
+      else if Hashtbl.mem seen k then false
+      else (Hashtbl.add seen k (); List.exists go (lookup k))
     in
     List.exists go (lookup start)
   in
-  collected |> List.filter (fun (n, _) -> reaches n) |> List.map fst
+  collected |> List.filter (fun i -> reaches i.key) |> List.map (fun i -> i.key)
 
-(* `let rec` helper codecs for the recursive types. *)
-let helperDefs env recSet (collected: (string * Types.type_declaration) list) : string =
-  let ds = collected |> List.filter (fun (n, _) -> List.mem n recSet) in
+let helperDefs env recSet (collected: inst list) : string =
+  let ds = collected |> List.filter (fun i -> List.mem i.key recSet) in
   let defs =
     ds
-    |> List.concat_map (fun ((n, d): string * Types.type_declaration) ->
-           if d.type_params <> [] then failwith ("recursive generic [@rpc] type: " ^ n);
-           [ "toJson_" ^ n ^ " = " ^ encNamed env recSet [] n d [];
-             "ofJson_" ^ n ^ " = " ^ decNamed env recSet [] n d [] ])
+    |> List.concat_map (fun i ->
+           [ "toJson_" ^ i.key ^ " = " ^ encNamed env recSet [] i.key i.decl i.args;
+             "ofJson_" ^ i.key ^ " = " ^ decNamed env recSet [] i.key i.decl i.args ])
   in
   match defs with
   | [] -> ""
@@ -674,6 +689,71 @@ let helperDefs env recSet (collected: (string * Types.type_declaration) list) : 
 
 let ofJson env recSet (t: Types.type_expr) = dec env recSet [] t
 let toJson env recSet (t: Types.type_expr) = enc env recSet [] t
+
+(* --- Type descriptors (JS-side marshalling) ---
+   A compact, recursion-aware description of a type in the external
+   representation, consumed by the runtime to marshal OCaml values to/from JS.
+   Named record/variant types live in a shared table and are referenced by key. *)
+
+let rec descr env (defs: (string, Yojson.Safe.t) Hashtbl.t) (t: Types.type_expr) : Yojson.Safe.t =
+  match Types.get_desc t with
+  | Types.Tconstr (p, _, _) when Path.same p Predef.path_int -> `Assoc [ ("k", `String "int") ]
+  | Types.Tconstr (p, _, _) when Path.same p Predef.path_bool -> `Assoc [ ("k", `String "bool") ]
+  | Types.Tconstr (p, _, _) when Path.same p Predef.path_float -> `Assoc [ ("k", `String "float") ]
+  | Types.Tconstr (p, _, _) when Path.same p Predef.path_string -> `Assoc [ ("k", `String "string") ]
+  | Types.Tconstr (p, _, _) when Path.same p Predef.path_char -> `Assoc [ ("k", `String "char") ]
+  | Types.Tconstr (p, _, _) when Path.same p Predef.path_unit -> `Assoc [ ("k", `String "unit") ]
+  | Types.Tconstr (p, [ a ], _) when Path.same p Predef.path_list ->
+      `Assoc [ ("k", `String "list"); ("e", descr env defs a) ]
+  | Types.Tconstr (p, [ a ], _) when Path.same p Predef.path_option ->
+      `Assoc [ ("k", `String "option"); ("e", descr env defs a) ]
+  | Types.Tconstr (p, [ a ], _) when Path.same p Predef.path_array ->
+      `Assoc [ ("k", `String "array"); ("e", descr env defs a) ]
+  | Types.Tconstr (p, args, _) ->
+      let d = Env.find_type p env in
+      (match d.type_kind with
+       | Types.Type_abstract _ ->
+           (match d.type_manifest with
+            | Some m -> descr env defs (subst (withSub d args) m)
+            | None -> failwith ("unsupported [@rpc] type: " ^ instKey t))
+       | _ ->
+      let k = instKey t in
+      if not (Hashtbl.mem defs k) then (
+        Hashtbl.add defs k (`Assoc [ ("k", `String "pending") ]);
+        let sub = withSub d args in
+        let def =
+          match d.type_kind with
+          | Types.Type_record (ls, _) ->
+              `Assoc
+                [ ("key", `String k); ("kind", `String "record");
+                  ( "fields",
+                    `List
+                      (List.map
+                         (fun (l: Types.label_declaration) ->
+                           `List [ `String (Ident.name l.ld_id); descr env defs (subst sub l.ld_type) ])
+                         ls) ) ]
+          | Types.Type_variant (cs, _) ->
+              let consts = List.filter isConstCtor cs in
+              let nonc = List.filter (fun c -> not (isConstCtor c)) cs in
+              let nc = List.length consts in
+              let cases =
+                cs
+                |> List.map (fun (c: Types.constructor_declaration) ->
+                       let nm = Ident.name c.cd_id in
+                       if isConstCtor c then `List [ `String nm; `Int (indexOf c consts); `List [] ]
+                       else
+                         let ts = List.map (subst sub) (Option.get (ctorArgs c)) in
+                         `List [ `String nm; `Int (nc + indexOf c nonc); `List (List.map (descr env defs) ts) ])
+              in
+              `Assoc [ ("key", `String k); ("kind", `String "variant"); ("cases", `List cases) ]
+          | _ -> failwith ("unsupported [@rpc] type: " ^ k)
+        in
+        Hashtbl.replace defs k def);
+      `Assoc [ ("k", `String "named"); ("key", `String k) ])
+  | Types.Ttuple ts ->
+      `Assoc [ ("k", `String "tuple"); ("e", `List (List.map (fun (_, x) -> descr env defs x) ts)) ]
+  | _ -> failwith "unsupported [@rpc] type (descriptor)"
+
 
 let rec arrows (t: Types.type_expr) : Types.type_expr list * Types.type_expr =
   match Types.get_desc t with
@@ -765,7 +845,7 @@ let emitServer (path: string) (ast: Parsetree.structure) (typed: Typedtree.struc
       (name, ps, ret))
   in
   let collected = collectTypes env (List.concat_map (fun (_, ps, ret) -> ps @ [ ret ]) sigs) in
-  let recSet = recursiveNames collected in
+  let recSet = recursiveKeys collected in
   let sb = Buffer.create 2048 in
   Buffer.add_string sb "(* Generated native RPC server. Do not edit. *)\n";
   Buffer.add_string sb (prettyStructure (serverItems ast js));
@@ -834,16 +914,31 @@ let () =
           (Filename.remove_extension (Filename.basename !input))
     in
     let program = Translmod.transl_implementation u (typed, Tcoerce_none) in
+    let files = typedTypes typed in
+    let rpcMeta =
+      rpc
+      |> List.map (fun name ->
+             let ty = Hashtbl.find files name in
+             let ps, ret = arrows ty in
+             let ret = match asyncElem ret with Some i -> i | None -> ret in
+             let defs = Hashtbl.create 16 in
+             let args = List.map (descr typedEnv defs) ps in
+             let result = descr typedEnv defs ret in
+             let types = `List (Hashtbl.fold (fun _ v acc -> v :: acc) defs []) in
+             let meta = Yojson.Safe.to_string (`Assoc [ ("types", types); ("args", `List args); ("result", result) ]) in
+             `Assoc [ ("name", `String name); ("meta", `String meta) ])
+    in
     let json =
       `Assoc
         [
-          ("schema", `String "wsocaml-ir-4");
+          ("schema", `String "wsocaml-ir-5");
           ("unit", `String u);
           ("moduleIdent", `String (Ident.name program.module_ident));
           ("mainModuleBlockSize", `Int program.main_module_block_size);
           ("javascript", `List (List.map (fun n -> `String n) js));
           ("rpc", `List (List.map (fun n -> `String n) rpc));
           ("server", `List (List.map (fun n -> `String n) srv));
+          ("rpcs", `List rpcMeta);
           ( "requiredGlobals",
             `List
               (Ident.Set.elements program.required_globals

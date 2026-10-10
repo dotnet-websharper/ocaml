@@ -67,6 +67,7 @@ type UnitIR =
         JavaScript: string list
         Rpc: string list
         Server: string list
+        Rpcs: (string * string) list
         Code: LExpr
     }
 
@@ -182,6 +183,10 @@ module Json =
             Server =
                 match r.TryGetProperty "server" with
                 | true, v -> [ for i in v.EnumerateArray() -> i.GetString() ]
+                | _ -> []
+            Rpcs =
+                match r.TryGetProperty "rpcs" with
+                | true, v -> [ for i in v.EnumerateArray() -> (s "name" i, s "meta" i) ]
                 | _ -> []
             Code = expr (p "code" r)
         }

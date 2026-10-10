@@ -131,19 +131,154 @@ if (!globalThis.OCamlRuntime) {
     return a;
   }
 
-  // RPC: the server bundle registers handlers by name. The client proxy calls
-  // `rpcCall`, which serializes its arguments, transports them asynchronously to
-  // the server, and resolves with the deserialized result.
-  function registerRpc(name, fn) {
-    var store = globalThis.OCamlRuntime.__serverRpc || (globalThis.OCamlRuntime.__serverRpc = {});
-    store[name] = fn;
+  // RPC: values cross the boundary in a JS-idiomatic representation (records ->
+  // objects, variants -> {"$":...,"$0":...}, lists/arrays -> arrays, options ->
+  // value/null, tuples -> arrays). A compact type descriptor ("meta") drives
+  // marshalling between the OCaml runtime representation and that form.
+
+  function rpcMeta(name, metaJson) {
+    var cache = globalThis.OCamlRuntime.__rpcMetaCache || (globalThis.OCamlRuntime.__rpcMetaCache = {});
+    var m = cache[name];
+    if (!m) {
+      m = cache[name] = JSON.parse(metaJson);
+    }
+    return m;
   }
 
-  // Returns a Promise<result>. Arguments and result are JSON-round-tripped.
-  function rpcCall(name, args) {
-    var payload = JSON.stringify({ name: name, args: args });
+  function resolveType(types, key) {
+    for (var i = 0; i < types.length; i++) if (types[i].key === key) return types[i];
+    throw new globalThis.Error("unknown rpc type " + key);
+  }
+
+  function marshalOut(types, c, v) {
+    switch (c.k) {
+      case "int":
+      case "float":
+      case "string":
+        return v;
+      case "bool":
+        return v !== 0;
+      case "char":
+        return String.fromCharCode(v);
+      case "unit":
+        return null;
+      case "list": {
+        var a = [];
+        while (typeof v === "object" && v !== null) {
+          a.push(marshalOut(types, c.e, v["0"]));
+          v = v["1"];
+        }
+        return a;
+      }
+      case "option":
+        return v === 0 ? null : marshalOut(types, c.e, v["0"]);
+      case "array": {
+        var r = [];
+        for (var i = 0; i < v.length; i++) r.push(marshalOut(types, c.e, v[i]));
+        return r;
+      }
+      case "tuple": {
+        var r = [];
+        for (var i = 0; i < c.e.length; i++) r.push(marshalOut(types, c.e[i], v[String(i)]));
+        return r;
+      }
+      case "named": {
+        var d = resolveType(types, c.key);
+        if (d.kind === "record") {
+          var o = {};
+          for (var i = 0; i < d.fields.length; i++)
+            o[d.fields[i][0]] = marshalOut(types, d.fields[i][1], v[String(i)]);
+          return o;
+        }
+        var cases = d.cases;
+        if (typeof v !== "object" || v === null) {
+          for (var i = 0; i < cases.length; i++) if (cases[i][1] === v) return { $: cases[i][0] };
+          throw new globalThis.Error("bad variant tag " + v);
+        }
+        for (var i = 0; i < cases.length; i++)
+          if (cases[i][1] === v.$tag) {
+            var o = { $: cases[i][0] };
+            var args = cases[i][2];
+            for (var j = 0; j < args.length; j++)
+              o["$" + j] = marshalOut(types, args[j], v[String(j)]);
+            return o;
+          }
+        throw new globalThis.Error("bad variant tag " + v.$tag);
+      }
+    }
+    throw new globalThis.Error("marshalOut: " + c.k);
+  }
+
+  function marshalIn(types, c, v) {
+    switch (c.k) {
+      case "int":
+      case "float":
+      case "string":
+        return v;
+      case "bool":
+        return v ? 1 : 0;
+      case "char":
+        return v.charCodeAt(0);
+      case "unit":
+        return 0;
+      case "list": {
+        var r = 0;
+        for (var i = v.length - 1; i >= 0; i--)
+          r = { $tag: 0, "0": marshalIn(types, c.e, v[i]), "1": r };
+        return r;
+      }
+      case "option":
+        return v === null || v === undefined ? 0 : { $tag: 0, "0": marshalIn(types, c.e, v) };
+      case "array": {
+        var r = [];
+        for (var i = 0; i < v.length; i++) r.push(marshalIn(types, c.e, v[i]));
+        return r;
+      }
+      case "tuple": {
+        var o = { $tag: 0 };
+        for (var i = 0; i < c.e.length; i++) o[String(i)] = marshalIn(types, c.e[i], v[i]);
+        return o;
+      }
+      case "named": {
+        var d = resolveType(types, c.key);
+        if (d.kind === "record") {
+          var o = { $tag: 0 };
+          for (var i = 0; i < d.fields.length; i++)
+            o[String(i)] = marshalIn(types, d.fields[i][1], v[d.fields[i][0]]);
+          return o;
+        }
+        var cases = d.cases;
+        for (var i = 0; i < cases.length; i++)
+          if (cases[i][0] === v.$) {
+            var tag = cases[i][1];
+            var args = cases[i][2];
+            if (args.length === 0) return tag;
+            var o = { $tag: tag };
+            for (var j = 0; j < args.length; j++)
+              o[String(j)] = marshalIn(types, args[j], v["$" + j]);
+            return o;
+          }
+        throw new globalThis.Error("bad variant case " + v.$);
+      }
+    }
+    throw new globalThis.Error("marshalIn: " + c.k);
+  }
+
+  function registerRpc(name, metaJson, fn) {
+    var store = globalThis.OCamlRuntime.__serverRpc || (globalThis.OCamlRuntime.__serverRpc = {});
+    store[name] = { fn: fn, meta: rpcMeta(name, metaJson) };
+  }
+
+  // Returns a Promise<result>. Arguments and result are marshalled to/from the
+  // external representation and JSON-round-tripped.
+  function rpcCall(name, metaJson, args) {
+    var meta = rpcMeta(name, metaJson);
+    var extArgs = args.map(function (a, i) {
+      return marshalOut(meta.types, meta.args[i], a);
+    });
+    var payload = JSON.stringify({ name: name, args: extArgs });
     return globalThis.OCamlRuntime.rpcTransport(payload).then(function (response) {
-      return JSON.parse(response).result;
+      return marshalIn(meta.types, meta.result, JSON.parse(response).result);
     });
   }
 
@@ -163,13 +298,18 @@ if (!globalThis.OCamlRuntime) {
     }
     return Promise.resolve().then(function () {
       var p = JSON.parse(payload);
-      var handler = (globalThis.OCamlRuntime.__serverRpc || {})[p.name];
+      var entry = (globalThis.OCamlRuntime.__serverRpc || {})[p.name];
+      var meta = entry.meta;
+      var ocamlArgs = p.args.map(function (a, i) {
+        return marshalIn(meta.types, meta.args[i], a);
+      });
       // Handlers may be synchronous or return an `Async.t` (a promise).
-      return Promise.resolve(handler.apply(null, p.args)).then(function (result) {
-        return JSON.stringify({ result: result });
+      return Promise.resolve(entry.fn.apply(null, ocamlArgs)).then(function (result) {
+        return JSON.stringify({ result: marshalOut(meta.types, meta.result, result) });
       });
     });
   }
+
 
   // Async: on the client `Async.t` is a JS promise (see the rpc proxy). These
   // helpers adapt OCaml `Async.bind`/`map`/`run` closures to promise `.then`.

@@ -10,7 +10,7 @@ console.log('client-has-proxy:', client.includes('rpcCall("g"'));
 // raw runtime call and OCaml-side `Async.bind` (via the module's `bump`).
 await import(pathToFileURL(resolve(dir, 'Main.server.js')).href);
 const Main = (await import(pathToFileURL(resolve(dir, 'Main.js')).href)).default;
-const result = await globalThis.OCamlRuntime.rpcCall('g', [21]);
+const result = await globalThis.OCamlRuntime.rpcCall('g', JSON.stringify({ types: [], args: [{ k: 'int' }], result: { k: 'int' } }), [21]);
 console.log('rpc g(21) =', result);
 const bump = Main[2];
 console.log('Async.bind g(20)+1 =', await bump(20));
