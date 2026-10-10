@@ -389,16 +389,132 @@ let checkBoundary (ast: Parsetree.structure) =
       | _ -> ())
     ast
 
+(* --- Native server generation ---
+   Emit an OCaml program that re-runs the server-only + [@rpc] definitions and
+   serves them over JSON-RPC, with type-directed codecs for supported types. *)
+
+let rec ofJson (t: Types.type_expr) : string =
+  match Types.get_desc t with
+  | Types.Tconstr (p, _, _) when Path.same p Predef.path_int -> "Yojson.Safe.Util.to_int"
+  | Types.Tconstr (p, _, _) when Path.same p Predef.path_string -> "Yojson.Safe.Util.to_string"
+  | Types.Tconstr (p, _, _) when Path.same p Predef.path_bool -> "Yojson.Safe.Util.to_bool"
+  | Types.Tconstr (p, _, _) when Path.same p Predef.path_float -> "Yojson.Safe.Util.to_float"
+  | Types.Tconstr (p, _, _) when Path.same p Predef.path_unit -> "(fun _ -> ())"
+  | Types.Tconstr (p, [ a ], _) when Path.same p Predef.path_list ->
+      "(fun j -> List.map (" ^ ofJson a ^ ") (Yojson.Safe.Util.to_list j))"
+  | Types.Tconstr (p, [ a ], _) when Path.same p Predef.path_option ->
+      "(fun j -> match j with `Null -> None | _ -> Some ((" ^ ofJson a ^ ") j))"
+  | Types.Tconstr (p, [ a ], _) when Path.same p Predef.path_array ->
+      "(fun j -> Array.of_list (List.map (" ^ ofJson a ^ ") (Yojson.Safe.Util.to_list j)))"
+  | _ -> failwith "unsupported [@rpc] parameter type"
+
+let rec toJson (t: Types.type_expr) : string =
+  match Types.get_desc t with
+  | Types.Tconstr (p, _, _) when Path.same p Predef.path_int -> "(fun x -> `Int x)"
+  | Types.Tconstr (p, _, _) when Path.same p Predef.path_string -> "(fun x -> `String x)"
+  | Types.Tconstr (p, _, _) when Path.same p Predef.path_bool -> "(fun x -> `Bool x)"
+  | Types.Tconstr (p, _, _) when Path.same p Predef.path_float -> "(fun x -> `Float x)"
+  | Types.Tconstr (p, _, _) when Path.same p Predef.path_unit -> "(fun () -> `Null)"
+  | Types.Tconstr (p, [ a ], _) when Path.same p Predef.path_list ->
+      "(fun xs -> `List (List.map (" ^ toJson a ^ ") xs))"
+  | Types.Tconstr (p, [ a ], _) when Path.same p Predef.path_option ->
+      "(fun v -> match v with None -> `Null | Some x -> (" ^ toJson a ^ ") x)"
+  | Types.Tconstr (p, [ a ], _) when Path.same p Predef.path_array ->
+      "(fun xs -> `List (List.map (" ^ toJson a ^ ") (Array.to_list xs)))"
+  | _ -> failwith "unsupported [@rpc] result type"
+
+let rec arrows (t: Types.type_expr) : Types.type_expr list * Types.type_expr =
+  match Types.get_desc t with
+  | Types.Tarrow (_, a, b, _) ->
+      let ps, r = arrows b in
+      (a :: ps, r)
+  | _ -> ([], t)
+
+let typedTypes (typed: Typedtree.structure) : (string, Types.type_expr) Hashtbl.t =
+  let tbl = Hashtbl.create 16 in
+  List.iter
+    (fun (item: Typedtree.structure_item) ->
+      match item.str_desc with
+      | Typedtree.Tstr_value (_, vbs) ->
+          List.iter
+            (fun (vb: Typedtree.value_binding) ->
+              match vb.vb_pat.pat_desc with
+              | Typedtree.Tpat_var (id, _, _) -> Hashtbl.replace tbl (Ident.name id) vb.vb_expr.exp_type
+              | _ -> ())
+            vbs
+      | _ -> ())
+    typed.str_items;
+  tbl
+
+let stripMarkers (attrs: Parsetree.attributes) =
+  List.filter
+    (fun (a: Parsetree.attribute) -> a.attr_name.txt <> "javascript" && a.attr_name.txt <> "rpc")
+    attrs
+
+let serverItems (ast: Parsetree.structure) (js: string list) : Parsetree.structure =
+  List.filter_map
+    (fun (item: Parsetree.structure_item) ->
+      match item.pstr_desc with
+      | Parsetree.Pstr_value (rf, vbs) ->
+          let kept =
+            vbs
+            |> List.filter (fun (vb: Parsetree.value_binding) ->
+                   match vb.pvb_pat.ppat_desc with
+                   | Parsetree.Ppat_var { txt = n; _ } -> not (List.mem n js)
+                   | _ -> false)
+            |> List.map (fun (vb: Parsetree.value_binding) ->
+                   { vb with pvb_attributes = stripMarkers vb.pvb_attributes })
+          in
+          if kept = [] then None
+          else Some { item with pstr_desc = Parsetree.Pstr_value (rf, kept) }
+      | _ -> Some item)
+    ast
+
+let prettyStructure (items: Parsetree.structure) : string =
+  let buf = Buffer.create 512 in
+  let fmt = Format.formatter_of_buffer buf in
+  Pprintast.structure fmt items;
+  Format.pp_print_flush fmt ();
+  Buffer.contents buf
+
+let emitServer (path: string) (ast: Parsetree.structure) (typed: Typedtree.structure) (js: string list)
+    (rpcs: string list) =
+  let files = typedTypes typed in
+  let sb = Buffer.create 2048 in
+  Buffer.add_string sb "(* Generated native RPC server. Do not edit. *)\n";
+  Buffer.add_string sb (prettyStructure (serverItems ast js));
+  Buffer.add_string sb "\nlet () =\n  let handlers = Hashtbl.create 16 in\n";
+  List.iter
+    (fun name ->
+      let ty = Hashtbl.find files name in
+      let ps, ret = arrows ty in
+      let vars = List.mapi (fun i p -> Printf.sprintf "a%d" i, ofJson p) ps in
+      let applied =
+        String.concat " " (name :: List.map (fun (v, c) -> Printf.sprintf "((%s) %s)" c v) vars)
+      in
+      let pattern = List.map fst vars |> String.concat "; " in
+      Buffer.add_string sb
+        (Printf.sprintf
+           "  Hashtbl.add handlers %S (fun (args : Yojson.Safe.t list) ->\n    match args with\n    | [ %s ] -> (%s) (%s)\n    | _ -> failwith \"rpc %s: wrong arity\");\n"
+           name pattern (toJson ret) applied name))
+    rpcs;
+  Buffer.add_string sb "  Wsrpc.serve ~port:8123 handlers\n";
+  let ch = open_out path in
+  output_string ch (Buffer.contents sb);
+  close_out ch
+
 let () =
   let input = ref ""
   and output = ref ""
   and unit_name = ref ""
-  and includes = ref [] in
+  and includes = ref []
+  and emit_server = ref None in
   Arg.parse
     [
       ("--input", Arg.Set_string input, ".ml input");
       ("--output", Arg.Set_string output, "IR output");
       ("--unit", Arg.Set_string unit_name, "unit name");
+      ("--emit-server", Arg.String (fun x -> emit_server := Some x), "emit a native RPC server .ml");
       ("-I", Arg.String (fun x -> includes := x :: !includes), "include dir");
     ]
     (fun _ -> ())
@@ -414,6 +530,11 @@ let () =
     checkBoundary ast;
     let js, rpc, srv = clientMarks ast in
     let typed, _, _, _, _ = Typemod.type_structure env ast in
+    (match !emit_server with
+    | Some p ->
+        emitServer p ast typed js rpc;
+        exit 0
+    | None -> ());
     let u =
       if !unit_name <> "" then !unit_name
       else
