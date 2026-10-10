@@ -22,6 +22,10 @@ module Lowering =
             Runtime: bool ref
             Bindings: WebSharper.OCaml.Bindings.Context option
             Ws: bool
+            // Top-level `[@rpc]` values: client sees an `rpcCall` proxy, the
+            // real bodies go to the server bundle.
+            RpcNames: Set<string>
+            ServerFns: ResizeArray<string * Expression>
         }
 
     let id n = Id.New(n, false)
@@ -130,7 +134,16 @@ module Lowering =
             let cc = clone c in
             let x = vid n in
             cc.Vars[n.Id] <- x
-            Let(x, expr c v, expr cc b)
+
+            match v with
+            | LExpr.Fun(ps, _) when c.RpcNames.Contains n.Name ->
+                // Server body into the server bundle; client binds a proxy.
+                c.ServerFns.Add(n.Name, expr c v)
+                let ids = ps |> List.map vid
+                let call =
+                    rt c "rpcCall" [ Value(String n.Name); NewTuple(List.map Var ids, []) ]
+                Let(x, Function(ids, None, None, Return call), expr cc b)
+            | _ -> Let(x, expr c v, expr cc b)
         | LExpr.LetRec(bs, b) ->
             let cc = clone c in
 
@@ -599,6 +612,8 @@ module Lowering =
                 Runtime = runtime
                 Bindings = bindings
                 Ws = ws
+                RpcNames = Set.ofList ir.Rpc
+                ServerFns = ResizeArray()
             }
 
         let imports =
@@ -614,7 +629,7 @@ module Lowering =
         let init = VarDeclaration(me, Object [])
         let body = ExprStatement(expr c ir.Code)
         let export = ExportDecl(true, ExprStatement(Var me))
-        imports @ [ init; body; export ], runtime.Value
+        imports @ [ init; body; export ], runtime.Value, List.ofSeq c.ServerFns
 
     // Lower just the module body to a single statement suitable as a
     // WebSharper entry point (used by the compilation/packager pipeline).
@@ -631,6 +646,8 @@ module Lowering =
                 Runtime = runtime
                 Bindings = bindings
                 Ws = true
+                RpcNames = Set.ofList ir.Rpc
+                ServerFns = ResizeArray()
             }
 
         // Required OCaml units become WebSharper JS imports so the packager
@@ -648,4 +665,5 @@ module Lowering =
             [ VarDeclaration(me, Object [])
               ExprStatement(expr c ir.Code)
               ExportDecl(true, ExprStatement(Var me)) ],
-        runtime.Value
+        runtime.Value,
+        List.ofSeq c.ServerFns

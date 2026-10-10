@@ -131,6 +131,18 @@ if (!globalThis.OCamlRuntime) {
     return a;
   }
 
+  // RPC: the server bundle registers handlers by name; client-side proxies call
+  // them (here synchronously, standing in for an HTTP round-trip).
+  function registerRpc(name, fn) {
+    var store = globalThis.OCamlRuntime.__serverRpc || (globalThis.OCamlRuntime.__serverRpc = {});
+    store[name] = fn;
+  }
+
+  function rpcCall(name, args) {
+    var store = globalThis.OCamlRuntime.__serverRpc || {};
+    return store[name].apply(null, args);
+  }
+
   function caml_trampoline_return(f, args) {
     return { tramp: f, args: args };
   }
@@ -169,6 +181,8 @@ if (!globalThis.OCamlRuntime) {
     caml_closure: caml_closure,
     caml_to_js: caml_to_js,
     caml_list_to_array: caml_list_to_array,
+    registerRpc: registerRpc,
+    rpcCall: rpcCall,
     caml_apply: caml_apply,
     caml_trampoline: caml_trampoline,
     caml_trampoline_return: caml_trampoline_return,

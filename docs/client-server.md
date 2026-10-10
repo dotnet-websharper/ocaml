@@ -62,10 +62,12 @@ The frontend reads them from the parsetree and emits the marked names in the IR
 ### Backend (`backend/`)
 
 - Parse the `javascript` / `rpc` marks into the IR.
-- Include only JS-targeted code in the client bundle; emit a separate server
-  bundle for `[@rpc]` bodies and server-only code.
-- Lower `Rpc` references from client code to a proxy stub (the server handler
-  is registered in the server bundle).
+- On a top-level `let[@rpc] g = fun …`, the client binds `g` to a proxy that
+  calls `OCamlRuntime.rpcCall("g", args)`; the real body is collected into a
+  **server bundle** `<out>/server/<unit>.js` that registers it via
+  `OCamlRuntime.registerRpc`. (The runtime stands in for an HTTP round-trip.)
+- Include only JS-targeted code in the client bundle; emit the server bundle for
+  `[@rpc]` bodies and server-only code (split pending).
 - For client code embedded in a rendered view, emit `ClientCode`-style
   instructions (see §4).
 
@@ -93,8 +95,12 @@ the same runtime from OCaml-compiled code.
 
 - **B1 — boundary (done).** `[@javascript]`/`[@rpc]` read from the parsetree,
   emitted in the IR; the frontend rejects a client→server direct reference.
-- **B2 — RPC.** Lower `[@rpc]` calls from client code to a proxy; a server
-  bundle runs the bodies; a minimal remoting runtime.
+- **B2 — RPC (done).** A top-level `[@rpc]` value's client binding is an
+  `OCamlRuntime.rpcCall` proxy; its body is emitted to `<out>/server/<unit>.js`
+  and registered with `OCamlRuntime.registerRpc`. The runtime call is
+  synchronous (standing in for an HTTP round-trip). Remaining: a real async
+  transport, serialization of arguments/results, and excluding server code from
+  the client bundle.
 - **M3 — first-class client code.** Stable keys by `(assembly, unit, position)`;
   multiple client units; import wiring; `scripts/test-quick.sh` coverage.
 - **M4 — UI integration + hydration.** Marked client code as `On.*`/`Attr`

@@ -1,1 +1,15 @@
-f=42 g=42
+file:///private/var/folders/s9/18nv01kn3mjfmcn_vrdqndww0000gn/T/tmp.pMm515iUnY/app_wsattr/Main.js:143
+    return store[name].apply(null, args);
+                       ^
+
+TypeError: Cannot read properties of undefined (reading 'apply')
+    at Object.rpcCall (file:///private/var/folders/s9/18nv01kn3mjfmcn_vrdqndww0000gn/T/tmp.pMm515iUnY/app_wsattr/Main.js:143:24)
+    at c (file:///private/var/folders/s9/18nv01kn3mjfmcn_vrdqndww0000gn/T/tmp.pMm515iUnY/app_wsattr/Main.js:670:40)
+    at caml_apply_core (file:///private/var/folders/s9/18nv01kn3mjfmcn_vrdqndww0000gn/T/tmp.pMm515iUnY/app_wsattr/Main.js:86:39)
+    at Object.caml_apply (file:///private/var/folders/s9/18nv01kn3mjfmcn_vrdqndww0000gn/T/tmp.pMm515iUnY/app_wsattr/Main.js:104:28)
+    at file:///private/var/folders/s9/18nv01kn3mjfmcn_vrdqndww0000gn/T/tmp.pMm515iUnY/app_wsattr/Main.js:671:293
+    at ModuleJob.run (node:internal/modules/esm/module_job:447:25)
+    at async node:internal/modules/esm/loader:646:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v26.4.0
