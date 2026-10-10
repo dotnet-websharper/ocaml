@@ -26,8 +26,16 @@ cp "$root/runtimes/ocaml/ssr.ml" "$root/runtimes/ui-server/webSharper_UI.ml" "$r
 (cd "$out" && ocamlfind ocamlopt -package unix,yojson -linkpkg ssr.ml webSharper_UI.ml wsrpc.ml server.ml -o server)
 
 # 4. Serve, then drive: fetch the page, hydrate in jsdom, click.
+# Fail fast if the port is already taken (avoids silent cross-talk with a
+# leftover server).
+if command -v lsof >/dev/null 2>&1 && lsof -nP -iTCP:8123 -sTCP:LISTEN >/dev/null 2>&1; then
+  echo "port 8123 is already in use; stop the listener and retry" >&2
+  exit 1
+fi
+
 "$out/server" > "$out/server.log" 2>&1 &
 pid=$!
-trap 'kill $pid 2>/dev/null || true' EXIT
+cleanup() { kill "$pid" 2>/dev/null || true; wait "$pid" 2>/dev/null || true; }
+trap cleanup EXIT INT TERM
 sleep 1
 node "$root/runtimes/ocaml/ssr_client.mjs" "$out/client"

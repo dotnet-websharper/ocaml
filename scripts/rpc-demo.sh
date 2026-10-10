@@ -26,8 +26,16 @@ cp "$root/runtimes/ocaml/async.ml" "$out/"
 (cd "$out" && ocamlfind ocamlopt -package unix,yojson -linkpkg wsrpc.ml async.ml server.ml -o rpc_server)
 
 # 4. Start the server, drive the client's RPC over HTTP, stop the server.
+# Fail fast if the port is already taken (avoids silent cross-talk with a
+# leftover server).
+if command -v lsof >/dev/null 2>&1 && lsof -nP -iTCP:8123 -sTCP:LISTEN >/dev/null 2>&1; then
+  echo "port 8123 is already in use; stop the listener and retry" >&2
+  exit 1
+fi
+
 "$out/rpc_server" > "$out/server.log" 2>&1 &
 pid=$!
-trap 'kill $pid 2>/dev/null || true' EXIT
+cleanup() { kill "$pid" 2>/dev/null || true; wait "$pid" 2>/dev/null || true; }
+trap cleanup EXIT INT TERM
 sleep 1
 node "$root/runtimes/ocaml/client_http.mjs" "$out/client"

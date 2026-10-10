@@ -28,8 +28,16 @@ cp "$root/runtimes/ocaml/ssr.ml" \
    "$root/runtimes/ocaml/async.ml" "$root/runtimes/ui-server/webSharper_UI.ml" "$out/"
 (cd "$out" && ocamlfind ocamlopt -package unix,yojson -linkpkg wsrpc.ml ssr.ml async.ml webSharper_UI.ml webSharper_ClientServer.ml webSharper_Server.ml server.ml -o server)
 
+# Fail fast if the port is already taken (avoids silent cross-talk with a
+# leftover server).
+if command -v lsof >/dev/null 2>&1 && lsof -nP -iTCP:8123 -sTCP:LISTEN >/dev/null 2>&1; then
+  echo "port 8123 is already in use; stop the listener and retry" >&2
+  exit 1
+fi
+
 "$out/server" > "$out/server.log" 2>&1 &
 pid=$!
-trap 'kill $pid 2>/dev/null || true' EXIT
+cleanup() { kill "$pid" 2>/dev/null || true; wait "$pid" 2>/dev/null || true; }
+trap cleanup EXIT INT TERM
 sleep 1
 node "$root/runtimes/ocaml/site_client.mjs" "$out/client"
