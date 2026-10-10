@@ -349,6 +349,24 @@ let clientNames (ast: Parsetree.structure) =
     ast;
   List.rev !acc
 
+(* Name of the top-level [@website] value (the served sitelet). *)
+let websiteMarks (ast: Parsetree.structure) =
+  let acc = ref [] in
+  List.iter
+    (fun (item: Parsetree.structure_item) ->
+      match item.pstr_desc with
+      | Parsetree.Pstr_value (_, vbs) ->
+          List.iter
+            (fun (vb: Parsetree.value_binding) ->
+              match vb.pvb_pat.ppat_desc with
+              | Parsetree.Ppat_var { txt = n; _ } ->
+                  if List.mem "website" (attrNames vb.pvb_attributes) then acc := n :: !acc
+              | _ -> ())
+            vbs
+      | _ -> ())
+    ast;
+  List.rev !acc
+
 (* Names of top-level values marked [@export] (part of the JS API). *)
 let exportMarks (ast: Parsetree.structure) =
   let acc = ref [] in
@@ -908,7 +926,7 @@ let stripMarkers (attrs: Parsetree.attributes) =
   List.filter
     (fun (a: Parsetree.attribute) ->
       a.attr_name.txt <> "javascript" && a.attr_name.txt <> "rpc"
-      && a.attr_name.txt <> "export" && a.attr_name.txt <> "client")
+      && a.attr_name.txt <> "export" && a.attr_name.txt <> "client" && a.attr_name.txt <> "website")
     attrs
 
 let openName (od: Parsetree.open_declaration) =
@@ -923,18 +941,19 @@ let serverItems (ast: Parsetree.structure) (js: string list) : Parsetree.structu
   List.filter_map
     (fun (item: Parsetree.structure_item) ->
       match item.pstr_desc with
-      (* Rewrite WebSharper.UI opens to the native server shadow (Wsui_server);
-         drop other generated-binding opens (e.g. `open WebSharper_JavaScript`):
-         the native server links our own `Async`, not the JS binding package. *)
+      (* Keep WebSharper_UI opens: on the server `WebSharper_UI` is the native
+         shadow (runtimes/ocaml/webSharper_UI.ml), the same module name as the
+         client binding, so the source typechecks on both tiers. Drop other
+         generated-binding opens (e.g. `open WebSharper_JavaScript`). *)
       | Parsetree.Pstr_open od ->
+          let keep n =
+            let has (pre : string) (n : string) =
+              String.length n >= String.length pre && String.sub n 0 (String.length pre) = pre
+            in
+            has "WebSharper_UI" n || has "WebSharper_Server" n || has "WebSharper_ClientServer" n
+          in
           (match openName od with
-           | Some n when String.length n >= 13 && String.sub n 0 13 = "WebSharper_UI" ->
-               let me : Parsetree.module_expr =
-                 { pmod_desc = Parsetree.Pmod_ident { txt = Longident.Lident "Wsui_server"; loc = od.popen_loc };
-                   pmod_loc = od.popen_loc;
-                   pmod_attributes = [] }
-               in
-               Some { item with pstr_desc = Parsetree.Pstr_open { od with popen_expr = me } }
+           | Some n when keep n -> Some item
            | Some n when String.length n >= 11 && String.sub n 0 11 = "WebSharper_" -> None
            | _ -> Some item)
       | Parsetree.Pstr_value (rf, vbs) ->
@@ -960,7 +979,8 @@ let prettyStructure (items: Parsetree.structure) : string =
   Buffer.contents buf
 
 let emitServer (path: string) (ast: Parsetree.structure) (typed: Typedtree.structure) (env: Env.t)
-    (js: string list) (rpcs: string list) (clients: string list) =
+    (js: string list) (rpcs: string list) (clients: string list) (website: string option) (unitName: string)
+    (static_dir: string option) =
   let files = typedTypes typed in
   let sigs =
     rpcs |> List.map (fun name ->
@@ -975,7 +995,7 @@ let emitServer (path: string) (ast: Parsetree.structure) (typed: Typedtree.struc
   Buffer.add_string sb (prettyStructure (serverItems ast (List.filter (fun n -> not (List.mem n clients)) js)));
   Buffer.add_string sb "\n";
   Buffer.add_string sb (helperDefs env recSet collected);
-  Buffer.add_string sb "let () =\n  let handlers = Hashtbl.create 16 in\n";
+  Buffer.add_string sb "let () =\n";
   List.iter
     (fun (name, ps, ret) ->
       let vars = List.mapi (fun i p -> Printf.sprintf "a%d" i, ofJson env recSet p) ps in
@@ -991,15 +1011,23 @@ let emitServer (path: string) (ast: Parsetree.structure) (typed: Typedtree.struc
       let pattern = List.map fst vars |> String.concat "; " in
       Buffer.add_string sb
         (Printf.sprintf
-           "  Hashtbl.add handlers %S (fun (args : Yojson.Safe.t list) ->\n    match args with\n    | [ %s ] -> (%s) (%s)\n    | _ -> failwith \"rpc %s: wrong arity\");\n"
+           "  Wsrpc.register %S (fun (args : Yojson.Safe.t list) ->\n    match args with\n    | [ %s ] -> (%s) (%s)\n    | _ -> failwith \"rpc %s: wrong arity\");\n"
            name pattern (toJson env recSet ret) base name))
     sigs;
-  if clients = [] then Buffer.add_string sb "  Wsrpc.serve ~port:8123 handlers\n"
-  else (
-    Buffer.add_string sb "  Ssr.regions_reset ();\n";
-    List.iter (fun n -> Buffer.add_string sb (Printf.sprintf "  %s ();\n" n)) clients;
-    Buffer.add_string sb
-      "  Wsrpc.serve ~port:8123 ~page:(fun () -> Ssr.page ~title:\"wsocaml\" ~scripts:[ \"/Main.js\" ] ()) handlers\n");
+  (match website with
+   | Some w ->
+       let static_arg = match static_dir with Some d -> Printf.sprintf " ~static:%S" d | None -> "" in
+       Buffer.add_string sb
+         (Printf.sprintf "  WebSharper_Server.Server.serve ~port:8123 ~bundle:%S%s %s\n" unitName static_arg w)
+   | None ->
+       if clients = [] then
+         Buffer.add_string sb
+           "  Wsrpc.serve ~port:8123 (fun _ -> { Wsrpc.status = 404; headers = []; body = \"not found\" })\n"
+       else (
+         Buffer.add_string sb "  Ssr.regions_reset ();\n";
+         List.iter (fun n -> Buffer.add_string sb (Printf.sprintf "  %s ();\n" n)) clients;
+         Buffer.add_string sb
+           "  Wsrpc.serve ~port:8123 (fun _ -> { Wsrpc.status = 200; headers = [ (\"Content-Type\", \"text/html; charset=utf-8\") ]; body = Ssr.page ~title:\"wsocaml\" ~scripts:[ \"/Main.js\" ] () })\n"));
   let ch = open_out path in
   output_string ch (Buffer.contents sb);
   close_out ch
@@ -1010,7 +1038,8 @@ let () =
   and unit_name = ref ""
   and includes = ref []
   and emit_server = ref None
-  and dts = ref None in
+  and dts = ref None
+  and static_dir = ref None in
   Arg.parse
     [
       ("--input", Arg.Set_string input, ".ml input");
@@ -1018,6 +1047,7 @@ let () =
       ("--unit", Arg.Set_string unit_name, "unit name");
       ("--emit-server", Arg.String (fun x -> emit_server := Some x), "emit a native RPC server .ml");
       ("--dts", Arg.String (fun x -> dts := Some x), "emit TypeScript declarations for [@export]");
+      ("--static", Arg.String (fun x -> static_dir := Some x), "static assets directory for the server");
       ("-I", Arg.String (fun x -> includes := x :: !includes), "include dir");
     ]
     (fun _ -> ())
@@ -1034,18 +1064,17 @@ let () =
     let js, rpc, srv = clientMarks ast in
     let exp = exportMarks ast in
     let cli = clientNames ast in
+    let website = match websiteMarks ast with [] -> None | w :: _ -> Some w in
+    let u =
+      if !unit_name <> "" then !unit_name
+      else String.capitalize_ascii (Filename.remove_extension (Filename.basename !input))
+    in
     let typed, _, _, _, typedEnv = Typemod.type_structure env ast in
     (match !emit_server with
     | Some p ->
-        emitServer p ast typed typedEnv js rpc cli;
+        emitServer p ast typed typedEnv js rpc cli website u !static_dir;
         exit 0
     | None -> ());
-    let u =
-      if !unit_name <> "" then !unit_name
-      else
-        String.capitalize_ascii
-          (Filename.remove_extension (Filename.basename !input))
-    in
     let program = Translmod.transl_implementation u (typed, Tcoerce_none) in
     let files = typedTypes typed in
     let rpcMeta =

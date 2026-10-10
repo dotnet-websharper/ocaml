@@ -412,6 +412,22 @@ else
   echo "SKIP ssr (ocamlfind/yojson/websharper-ui not available)"
 fi
 
+# M5: [@website] sitelet -> server-rendered pages (+ injected scripts), RPC, static assets.
+if command -v ocamlfind > /dev/null 2>&1 && ocamlfind query yojson > /dev/null 2>&1 \
+   && ocamlfind query websharper-ui > /dev/null 2>&1; then
+  if bash "$wsroot/scripts/site-demo.sh" "$tmp/site" > "$tmp/site.actual" 2>&1; then
+    expected="$here/site.out"
+    if [ "$update" = 1 ]; then cp "$tmp/site.actual" "$expected"; echo "updated site.out"; fi
+    if [ -f "$expected" ] && ! diff -u "$expected" "$tmp/site.actual" > "$tmp/site.diff"; then
+      echo "FAIL site (output mismatch)"; sed 's/^/    /' "$tmp/site.diff"; fail=$((fail + 1))
+    else echo "PASS site"; pass=$((pass + 1)); fi
+  else
+    echo "FAIL site (build/run)"; sed 's/^/    /' "$tmp/site.actual"; fail=$((fail + 1))
+  fi
+else
+  echo "SKIP site (ocamlfind/yojson/websharper-ui not available)"
+fi
+
 echo
 echo "passed: $pass, failed: $fail"
 [ "$fail" = 0 ]

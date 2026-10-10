@@ -26,6 +26,7 @@ ui_dll="$(newest "$HOME"/.nuget/packages/websharper.ui/*/lib/netstandard2.0/WebS
 inc=(-I "$ui_lib" -I "$js_lib" -I "$s")
 [ -n "$rt_lib" ] && inc+=(-I "$rt_lib")
 [ -n "$sl_lib" ] && inc+=(-I "$sl_lib")
+for e in ${WS_EXTRA_INC:-}; do inc+=(-I "$e"); done
 refs=(--reference "$ui_dll" --reference "$sl_dll" --reference "$js_dll")
 
 srcdir="$(cd "$(dirname "$entry")" && pwd)"

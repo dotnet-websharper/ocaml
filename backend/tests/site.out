@@ -1,0 +1,5 @@
+has-title: true
+has-ssr: true
+has-scripts: true
+rpc add(20,22): 42
+static: 200 text/javascript

@@ -1,16 +1,26 @@
-(* Minimal native OCaml HTTP server for wsocaml client/server apps.
+(* Minimal native OCaml HTTP server for wsocaml.
 
-   Endpoints:
-   - `POST /rpc` with body {"name": <string>, "args": [<json>…]} -> {"result": <json>}
-     (handlers are registered by the server program).
-   - `GET /` (or any other path) -> the rendered page, when a `?page` is given. *)
+   Low-level: `serve ?port handle` reads requests and writes responses. The
+   program supplies `handle` for non-RPC requests. `POST /rpc` is dispatched to
+   the registered JSON-RPC handlers. *)
 
-let read_all ic n =
-  let b = Bytes.create n in
-  really_input ic b 0 n;
-  Bytes.to_string b
+type request = {
+  method_ : string;
+  path : string;
+  headers : (string * string) list;
+  body : string;
+}
 
-let rpc_response (handlers : (string, Yojson.Safe.t list -> Yojson.Safe.t) Hashtbl.t) body =
+type response = {
+  status : int;
+  headers : (string * string) list;
+  body : string;
+}
+
+let handlers : (string, Yojson.Safe.t list -> Yojson.Safe.t) Hashtbl.t = Hashtbl.create 16
+let register name fn = Hashtbl.replace handlers name fn
+
+let rpc_response body =
   try
     let req = Yojson.Safe.from_string body in
     let name = Yojson.Safe.Util.(member "name" req |> to_string) in
@@ -19,7 +29,12 @@ let rpc_response (handlers : (string, Yojson.Safe.t list -> Yojson.Safe.t) Hasht
     Yojson.Safe.to_string (`Assoc [ ("result", result) ])
   with e -> Yojson.Safe.to_string (`Assoc [ ("error", `String (Printexc.to_string e)) ])
 
-let handle_client ?page handlers fd =
+let read_all ic n =
+  let b = Bytes.create n in
+  really_input ic b 0 n;
+  Bytes.to_string b
+
+let handle_client (handle : request -> response) fd =
   let ic = Unix.in_channel_of_descr fd in
   let oc = Unix.out_channel_of_descr fd in
   let req_line = try input_line ic with End_of_file -> "" in
@@ -27,37 +42,40 @@ let handle_client ?page handlers fd =
   let method_ = match parts with m :: _ -> m | [] -> "" in
   let path = match parts with _ :: p :: _ -> p | _ -> "" in
   let content_length = ref 0 in
-  let rec headers () =
+  let headers = ref [] in
+  let rec header_lines () =
     match input_line ic with
     | line ->
         if String.trim line <> "" then (
           (match String.index_opt line ':' with
            | Some i ->
-               let k = String.lowercase_ascii (String.trim (String.sub line 0 i)) in
-               if k = "content-length" then
-                 content_length :=
-                   int_of_string (String.trim (String.sub line (i + 1) (String.length line - i - 1)))
+               let k = String.trim (String.sub line 0 i) in
+               let v = String.trim (String.sub line (i + 1) (String.length line - i - 1)) in
+               headers := (k, v) :: !headers;
+               if String.lowercase_ascii k = "content-length" then content_length := int_of_string v
            | None -> ());
-          headers ())
+          header_lines ())
     | exception End_of_file -> ()
   in
-  headers ();
+  header_lines ();
   let body = if !content_length > 0 then read_all ic !content_length else "" in
-  let is_rpc = String.length path >= 4 && String.sub path 0 4 = "/rpc" in
-  let response_body, content_type =
-    if is_rpc then (rpc_response handlers body, "application/json")
-    else
-      match page with
-      | Some f when method_ = "GET" -> (f (), "text/html; charset=utf-8")
-      | _ -> ("not found", "text/plain")
+  let req = { method_ = method_; path; headers = List.rev !headers; body } in
+  let resp =
+    if String.length path >= 4 && String.sub path 0 4 = "/rpc" then
+      {
+        status = 200;
+        headers = [ ("Content-Type", "application/json"); ("Access-Control-Allow-Origin", "*") ];
+        body = rpc_response body;
+      }
+    else handle req
   in
-  Printf.fprintf oc
-    "HTTP/1.1 200 OK\r\nContent-Type: %s\r\nContent-Length: %d\r\nAccess-Control-Allow-Origin: *\r\nConnection: close\r\n\r\n%s"
-    content_type (String.length response_body) response_body;
+  Printf.fprintf oc "HTTP/1.1 %d \r\n" resp.status;
+  List.iter (fun (k, v) -> Printf.fprintf oc "%s: %s\r\n" k v) resp.headers;
+  Printf.fprintf oc "Content-Length: %d\r\nConnection: close\r\n\r\n%s" (String.length resp.body) resp.body;
   flush oc;
   Unix.close fd
 
-let serve ?(port = 8123) ?page handlers =
+let serve ?(port = 8123) (handle : request -> response) =
   let sock = Unix.socket Unix.PF_INET Unix.SOCK_STREAM 0 in
   Unix.setsockopt sock Unix.SO_REUSEADDR true;
   Unix.bind sock (Unix.ADDR_INET (Unix.inet_addr_loopback, port));
@@ -65,5 +83,5 @@ let serve ?(port = 8123) ?page handlers =
   Printf.printf "wsocaml server on http://127.0.0.1:%d/\n%!" port;
   while true do
     let fd, _ = Unix.accept sock in
-    try handle_client ?page handlers fd with _ -> (try Unix.close fd with _ -> ())
+    try handle_client handle fd with _ -> (try Unix.close fd with _ -> ())
   done

@@ -39,6 +39,7 @@ module Doc = struct
   let text s = [ Ssr.text s ]
   let empty : t = []
   let textView (v : string View.t) = [ Ssr.text (View.get v) ]
+  let render (d : t) = String.concat "" (List.map Ssr.render_node d)
 
   (* On the server, `runById` renders the doc into a region. *)
   let runById id (d : t) =
