@@ -351,6 +351,32 @@ else
   echo "SKIP rpc-server (ocamlfind/yojson not available)"
 fi
 
+# Structured [@rpc] values (records/variants/tuples/lists/options) round-trip
+# through the native server's generated codecs.
+if command -v ocamlfind > /dev/null 2>&1 && ocamlfind query yojson > /dev/null 2>&1; then
+  if bash "$wsroot/scripts/rpc-data.sh" "$tmp/rpc-data" > "$tmp/rpcdata.actual" 2>&1; then
+    expected="$here/rpc_data.out"
+    if [ "$update" = 1 ]; then
+      cp "$tmp/rpcdata.actual" "$expected"
+      echo "updated rpc_data.out"
+    fi
+    if [ -f "$expected" ] && ! diff -u "$expected" "$tmp/rpcdata.actual" > "$tmp/rpcdata.diff"; then
+      echo "FAIL rpc-data (output mismatch)"
+      sed 's/^/    /' "$tmp/rpcdata.diff"
+      fail=$((fail + 1))
+    else
+      echo "PASS rpc-data"
+      pass=$((pass + 1))
+    fi
+  else
+    echo "FAIL rpc-data (build/run)"
+    sed 's/^/    /' "$tmp/rpcdata.actual"
+    fail=$((fail + 1))
+  fi
+else
+  echo "SKIP rpc-data (ocamlfind/yojson not available)"
+fi
+
 echo
 echo "passed: $pass, failed: $fail"
 [ "$fail" = 0 ]

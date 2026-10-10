@@ -1,0 +1,8 @@
+move => {"0":11,"1":2,"$tag":0}
+area => 0
+area => 75
+area => 12
+swap => {"0":"hi","1":7,"$tag":0}
+total => 6
+or_else => 105
+or_else => -1

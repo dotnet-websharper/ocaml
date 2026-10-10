@@ -81,14 +81,38 @@ The server tier is **native OCaml**, not JS:
 - `frontend --emit-server <out.ml>` emits an OCaml program that re-runs the
   server-only + `[@rpc]` definitions (dropping `[@javascript]` code and the
   client entry) and serves them over JSON-RPC, with **type-directed codecs**
-  generated from the inferred types (`int`/`float`/`string`/`bool`/`unit`/`list`/
-  `option`/`array`).
+  generated from the inferred types (see §3.2).
 - `runtimes/ocaml/wsrpc.ml` is a minimal native JSON-RPC server (`unix` sockets).
 - `[@rpc]` handlers return `'a Async.t`; the generated handler runs it
   synchronously (`Async.run_sync`, `runtimes/ocaml/async.ml`) and encodes the
   result.
 - The client's `rpcTransport` POSTs over HTTP (`fetch`) when
   `OCamlRuntime.rpcEndpoint` is set.
+
+### 3.2 RPC wire format
+
+Values travel over JSON in their **OCaml runtime representation**, so the client
+— which hands raw OCaml values to `rpcCall` and gets raw values back — needs no
+codec at all. Only the native server converts between real OCaml values and the
+wire:
+
+| OCaml value | JSON |
+| --- | --- |
+| `int` / `bool` / `char` / `unit` | number (`bool` is `0`/`1`) |
+| `float` | number |
+| `string` | string |
+| list | cons chain `{"$tag":0,"0":head,"1":tail}`; `[]` is `0` |
+| `option` | `Some x` is `{"$tag":0,"0":x}`; `None` is `0` |
+| tuple | block `{"$tag":0,"0":a,"1":b,...}` |
+| record | block `{"$tag":0,"0":f0,...}` (declaration order) |
+| variant | constant → number (tag); non-constant → block `{"$tag":tag,...}` |
+
+The codecs are generated from the inferred types by `--emit-server`
+(`ofJson`/`toJson` in `frontend/bin/main.ml`). Supported: `int`/`float`/`string`/
+`bool`/`char`/`unit`, `list`, `option`, tuples, records, (regular) variants and
+`result`, nested. Recursive types are not yet supported (the generator refuses
+them). `scripts/rpc-data.sh` round-trips a record/variant/tuple/list/option
+workload through a native server (`frontend/test: rpc-data`).
 
 `scripts/rpc-demo.sh` compiles the *same* source to a JS client and to a native
 OCaml server, starts the server, and drives the client RPC over HTTP
