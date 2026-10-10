@@ -78,6 +78,7 @@ let th = el "th"
 
 module Html = struct
   let text = Doc.text
+  let textView = Doc.textView
   let div = div
   let span = span
   let p = p

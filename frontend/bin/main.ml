@@ -1196,8 +1196,14 @@ let transformInfer (ast: Parsetree.structure) : Parsetree.structure =
             (fun self (e: Parsetree.expression) ->
               let isInfer (f: Parsetree.expression) =
                 match f.pexp_desc with
-                | Parsetree.Pexp_ident { txt = lid; _ } -> Longident.flatten lid = [ "Sitelet"; "Infer" ]
-                | Parsetree.Pexp_construct ({ txt = lid; _ }, None) -> Longident.flatten lid = [ "Sitelet"; "Infer" ]
+                | Parsetree.Pexp_ident { txt = lid; _ } ->
+                    (match Longident.flatten lid with
+                     | [ "Sitelet"; ("Infer" | "infer") ] -> true
+                     | _ -> false)
+                | Parsetree.Pexp_construct ({ txt = lid; _ }, None) ->
+                    (match Longident.flatten lid with
+                     | [ "Sitelet"; ("Infer" | "infer") ] -> true
+                     | _ -> false)
                 | _ -> false
               in
               let mk handler =
@@ -1214,7 +1220,7 @@ let transformInfer (ast: Parsetree.structure) : Parsetree.structure =
               in
               match e.pexp_desc with
               | Parsetree.Pexp_construct ({ txt = lid; _ }, Some handler)
-                when Longident.flatten lid = [ "Sitelet"; "Infer" ] ->
+                when (match Longident.flatten lid with [ "Sitelet"; ("Infer" | "infer") ] -> true | _ -> false) ->
                   Ast_mapper.default_mapper.expr self (mk handler)
               | Parsetree.Pexp_apply (f, [ (_, handler) ]) when isInfer f -> Ast_mapper.default_mapper.expr self (mk handler)
               | _ -> Ast_mapper.default_mapper.expr self e);
@@ -1236,8 +1242,8 @@ let transformClientServer (ast: Parsetree.structure) : Parsetree.structure =
     match f.pexp_desc with
     | Parsetree.Pexp_ident { txt = lid; _ } -> (
         match Longident.flatten lid with
-        | [ "WebSharper_ClientServer"; "client" ] -> Some false
-        | [ "WebSharper_ClientServer"; "hydrate" ] -> Some true
+        | [ "WebSharper_ClientServer"; "client" ] | [ "client" ] -> Some false
+        | [ "WebSharper_ClientServer"; "hydrate" ] | [ "hydrate" ] -> Some true
         | _ -> None)
     | _ -> None
   in
@@ -1281,9 +1287,24 @@ let transformClientServer (ast: Parsetree.structure) : Parsetree.structure =
         (fun self (e: Parsetree.expression) ->
           match e.pexp_desc with
           | Parsetree.Pexp_apply (f, [ (_, arg) ]) when csCall f <> None ->
+              (* Map the fragment first so inner rewrites (e.g. `on.x`) are applied
+                 in both the marker and the lifted binding. *)
+              let arg = Ast_mapper.default_mapper.expr self arg in
               let id = id_of arg in
               frags := (id, arg) :: !frags;
               Ast_mapper.default_mapper.expr self (marker (Option.get (csCall f)) id arg)
+          (* `on.x` -> `On.x` (WebSharper.UI's `On` module). *)
+          | Parsetree.Pexp_field
+              ( { Parsetree.pexp_desc = Parsetree.Pexp_ident { txt = Longident.Lident "on"; _ }; _ },
+                { txt = fld; _ } ) ->
+              let fname = match List.rev (Longident.flatten fld) with x :: _ -> x | [] -> "" in
+              let id =
+                { Parsetree.pexp_desc = Parsetree.Pexp_ident { txt = Option.get (Longident.unflatten [ "On"; fname ]); loc = e.pexp_loc };
+                  pexp_loc = e.pexp_loc;
+                  pexp_loc_stack = [];
+                  pexp_attributes = [] }
+              in
+              Ast_mapper.default_mapper.expr self id
           | _ -> Ast_mapper.default_mapper.expr self e);
     }
   in

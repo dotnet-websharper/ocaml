@@ -1,6 +1,7 @@
 open WebSharper_JavaScript
 open WebSharper_UI
 open WebSharper_UI.Html
+open WebSharper_ClientServer
 open WebSharper_Server
 
 (* M5: a [@website] sitelet with an inferred (typed) router, an RPC,
@@ -16,14 +17,14 @@ let render (_ : endpoint context) ep =
   match ep with
   | Home ->
       Content.page ~title:"Site"
-        [ h1 [] [ Doc.text "Site" ];
-          p [] [ Doc.text "server-rendered" ];
-          WebSharper_ClientServer.hydrate (fun () ->
+        [ h1 [] [ text "Site" ];
+          p [] [ text "server-rendered" ];
+          hydrate (fun () ->
               let v = Var.create "before" in
               div
-                [ On.click (fun _ _ -> Var.set v "after") ]
-                [ Doc.textView (Var.view v) ]) ]
+                [ on.click (fun _ _ -> Var.set v "after") ]
+                [ textView (Var.view v) ]) ]
   | User id ->
-      Content.page ~title:"User" [ h1 [] [ Doc.text (Printf.sprintf "User %d" id) ] ]
+      Content.page ~title:"User" [ h1 [] [ text (Printf.sprintf "User %d" id) ] ]
 
-let[@website] site = Sitelet.Infer render
+let[@website] site = Sitelet.infer render
