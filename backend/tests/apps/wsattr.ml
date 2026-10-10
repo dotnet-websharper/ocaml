@@ -1,5 +1,7 @@
 (* Boundary: [@javascript] marks JS-targeted code, [@rpc] a server value the
-   client may call; anything else is server-only. *)
+   client may call through the (asynchronous) proxy; anything else is
+   server-only. *)
 let[@javascript] f x = x + 1
 let[@rpc] g y = y * 2
-let () = Console.log (Printf.sprintf "f=%d g=%d" (f 41) (g 21))
+
+let () = Console.log (Printf.sprintf "f=%d" (f 41))

@@ -1,9 +1,1 @@
-f=42 g=0
-file:///private/var/folders/s9/18nv01kn3mjfmcn_vrdqndww0000gn/T/tmp.mla1jRihH6/app_wsattr/Main.js:156
-      var result = handler.apply(null, p.args);
-                           ^
-
-TypeError: Cannot read properties of undefined (reading 'apply')
-    at file:///private/var/folders/s9/18nv01kn3mjfmcn_vrdqndww0000gn/T/tmp.mla1jRihH6/app_wsattr/Main.js:156:28
-
-Node.js v26.4.0
+f=42

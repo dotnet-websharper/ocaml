@@ -147,9 +147,20 @@ if (!globalThis.OCamlRuntime) {
     });
   }
 
-  // Default transport: in-process, asynchronous (a microtask), standing in for
-  // an HTTP round-trip.
+  // Default transport: if `OCamlRuntime.rpcEndpoint` is set, POST the JSON
+  // payload over HTTP to the native OCaml server; otherwise call the handler
+  // in-process (used by tests without a running server).
   function rpcTransport(payload) {
+    var endpoint = globalThis.OCamlRuntime.rpcEndpoint;
+    if (endpoint) {
+      return fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: payload,
+      }).then(function (response) {
+        return response.text();
+      });
+    }
     return Promise.resolve().then(function () {
       var p = JSON.parse(payload);
       var handler = (globalThis.OCamlRuntime.__serverRpc || {})[p.name];
