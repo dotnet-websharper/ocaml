@@ -74,6 +74,24 @@ The frontend reads them from the parsetree and emits the marked names in the IR
 - For client code embedded in a rendered view, emit `ClientCode`-style
   instructions (see §4).
 
+### 3.1 Native server (real tier)
+
+The server tier is **native OCaml**, not JS:
+
+- `frontend --emit-server <out.ml>` emits an OCaml program that re-runs the
+  server-only + `[@rpc]` definitions (dropping `[@javascript]` code and the
+  client entry) and serves them over JSON-RPC, with **type-directed codecs**
+  generated from the inferred types (`int`/`float`/`string`/`bool`/`unit`/`list`/
+  `option`/`array`).
+- `runtimes/ocaml/wsrpc.ml` is a minimal native JSON-RPC server (`unix` sockets).
+- The client's `rpcTransport` POSTs over HTTP (`fetch`) when
+  `OCamlRuntime.rpcEndpoint` is set.
+
+`scripts/rpc-demo.sh` compiles the *same* source to a JS client and to a native
+OCaml server, starts the server, and drives the client RPC over HTTP
+(`frontend/test: rpc-server`). The older `<unit>.server.js` JS server bundle
+(§3) remains for the in-process test path.
+
 ## 4. Server embed + client runtime
 
 Server rendering emits HTML plus instructions, mirroring WebSharper's
@@ -99,15 +117,12 @@ the same runtime from OCaml-compiled code.
 - **B1 — boundary (done).** `[@javascript]`/`[@rpc]` read from the parsetree,
   emitted in the IR; the frontend rejects a client→server direct reference.
 - **B2 — RPC (done).** A top-level `[@rpc]` value's client binding is an
-  `OCamlRuntime.rpcCall` proxy; its body is emitted to `<out>/<unit>.server.js`
-  and registered with `OCamlRuntime.registerRpc`. The runtime call is now
-  **asynchronous and serialized**: `rpcCall` JSON-round-trips
-  the arguments and result and returns a `Promise`, over a pluggable
-  `rpcTransport` (default: an in-process microtask standing in for HTTP). The
-  server handlers are wrapped with `caml_to_js` so JS can call them. The OCaml
-  client proxy therefore returns a promise; a future revision should introduce
-  an OCaml async type for `[@rpc]` call sites. The client bundle excludes
-  server-only + `[@rpc]` bodies (compiled into the server bundle).
+  asynchronous, serialized `OCamlRuntime.rpcCall` proxy (JSON arguments/result,
+  a `Promise` over a pluggable transport). The client bundle excludes
+  server-only + `[@rpc]` bodies. The server tier is now **native OCaml** (§3.1):
+  `--emit-server` generates it from the same source and the client reaches it
+  over HTTP. A future revision should add an OCaml async type for `[@rpc]` call
+  sites.
 - **M3 — first-class client code.** Stable keys by `(assembly, unit, position)`;
   multiple client units; import wiring; `scripts/test-quick.sh` coverage.
 - **M4 — UI integration + hydration.** Marked client code as `On.*`/`Attr`

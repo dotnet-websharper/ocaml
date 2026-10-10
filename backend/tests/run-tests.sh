@@ -325,6 +325,32 @@ if [ -d "$apps_ui" ] && command -v ocamlfind > /dev/null 2>&1 && ocamlfind query
   done
 fi
 
+# Client/server RPC over HTTP: the same source builds a JS client and a native
+# OCaml server (generated via --emit-server); the client calls it via fetch.
+if command -v ocamlfind > /dev/null 2>&1 && ocamlfind query yojson > /dev/null 2>&1; then
+  if bash "$wsroot/scripts/rpc-demo.sh" "$tmp/rpc-server" > "$tmp/rpc.actual" 2>&1; then
+    expected="$here/rpc_server.out"
+    if [ "$update" = 1 ]; then
+      cp "$tmp/rpc.actual" "$expected"
+      echo "updated rpc_server.out"
+    fi
+    if [ -f "$expected" ] && ! diff -u "$expected" "$tmp/rpc.actual" > "$tmp/rpc.diff"; then
+      echo "FAIL rpc-server (output mismatch)"
+      sed 's/^/    /' "$tmp/rpc.diff"
+      fail=$((fail + 1))
+    else
+      echo "PASS rpc-server"
+      pass=$((pass + 1))
+    fi
+  else
+    echo "FAIL rpc-server (build/run)"
+    sed 's/^/    /' "$tmp/rpc.actual"
+    fail=$((fail + 1))
+  fi
+else
+  echo "SKIP rpc-server (ocamlfind/yojson not available)"
+fi
+
 echo
 echo "passed: $pass, failed: $fail"
 [ "$fail" = 0 ]

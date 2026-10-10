@@ -9,7 +9,7 @@ mkdir -p "$out"
 eval "$(opam env)"
 
 # 1. Client bundle (OCaml -> JS).
-bash "$root/scripts/build-js-app.sh" "$entry" "$out/client"
+bash "$root/scripts/build-js-app.sh" "$entry" "$out/client" >/dev/null
 
 # 2. Native server source, generated from the same file (server-only + [@rpc]).
 "$root/frontend/_build/default/bin/main.exe" \
