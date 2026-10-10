@@ -89,35 +89,62 @@ The server tier is **native OCaml**, not JS:
 - The client's `rpcTransport` POSTs over HTTP (`fetch`) when
   `OCamlRuntime.rpcEndpoint` is set.
 
-### 3.2 RPC wire format
+### 3.2 External representation (RPC wire = JS API)
 
-Values travel over JSON in their **OCaml runtime representation**, so the client
-— which hands raw OCaml values to `rpcCall` and gets raw values back — needs no
-codec at all. Only the native server converts between real OCaml values and the
-wire:
+Values cross the OCaml↔JS boundary in a **JS-idiomatic external representation**
+(shared by RPC and `[@export]`); the internal OCaml runtime representation is
+unchanged:
 
-| OCaml value | JSON |
+| OCaml value | external (JS / JSON) |
 | --- | --- |
-| `int` / `bool` / `char` / `unit` | number (`bool` is `0`/`1`) |
-| `float` | number |
+| `int` / `float` | number |
+| `bool` | boolean |
 | `string` | string |
-| list | cons chain `{"$tag":0,"0":head,"1":tail}`; `[]` is `0` |
-| `option` | `Some x` is `{"$tag":0,"0":x}`; `None` is `0` |
-| tuple | block `{"$tag":0,"0":a,"1":b,...}` |
-| record | block `{"$tag":0,"0":f0,...}` (declaration order) |
-| variant | constant → number (tag); non-constant → block `{"$tag":tag,...}` |
-| array | JSON array `[...]` (JS array) |
+| `char` | 1-char string |
+| `unit` | `null` |
+| `list` / `array` | array |
+| `option` | `None` → `null`, `Some x` → `x` |
+| tuple | array `[a, b]` |
+| record | object `{ x, y }` (field names) |
+| variant | `{"$":"Case","$0":a,...}`; constants `{"$":"Case"}` |
 
-The codecs are generated from the inferred types by `--emit-server`
-(`ofJson`/`toJson` in `frontend/bin/main.ml`). Supported: `int`/`float`/`string`/
-`bool`/`char`/`unit`, `list`, `option`, arrays, tuples, records, (regular)
-variants and `result`, nested. **Recursive** record/variant types are supported:
-the generator emits a `let rec` group of named helper codecs
-(`toJson_<name>`/`ofJson_<name>`) and refers to them for cycles (recursive
-*generic* types are not yet supported). Boxed integers (`int32`/`int64`/
-`nativeint`) are rejected with a clear error. `scripts/rpc-data.sh` round-trips
-a record/variant/recursive-tree/array/tuple/list/option workload through a native
+**Native server** (`--emit-server`): the codecs (`ofJson`/`toJson` in
+`frontend/bin/main.ml`) are generated from the inferred types to/from this
+representation. **JS side** (client `rpcCall` + `[@export]`): the frontend emits
+a compact **type descriptor** per rpc/export into the IR (schema
+`wsocaml-ir-5`); a runtime marshaller (`Runtime.js`) converts between the OCaml
+runtime representation and the external one.
+
+Supported: `int`/`float`/`string`/`bool`/`char`/`unit`, `list`, `option`,
+arrays, tuples, records, (regular) variants and `result`, nested. **Recursive**
+record/variant types are supported, *specialized per concrete instantiation*
+(so a generic `'a tree` works at `int`/`string`/…); polymorphic recursion is
+refused. Boxed integers (`int32`/`int64`/`nativeint`) are rejected with a clear
+error. `scripts/rpc-data.sh` round-trips a
+record/variant/recursive-tree/array/tuple/list/option workload through a native
 server (`frontend/test: rpc-data`).
+
+### 3.3 Interop: `[@export]` and JS consumers
+
+Top-level values marked `[@export]` are part of the unit's **JS API**:
+
+- the backend emits `export const f = …` / `export function f(a, b) { … }` —
+  **uncurried**, marshalling arguments/results via the external representation;
+- identifiers are StrongName'd so the packager does not rename them;
+- the frontend emits a **`.d.ts`** (`frontend --dts <path>`), e.g.
+  ```ts
+  export type shape = { $: "Dot" } | { $: "Circle"; $0: number } | …;
+  export type point = { x: number; y: number };
+  export function move(a0: point): point;
+  export function area(a0: shape): number;
+  ```
+- `[@export]` values are treated as client code for the boundary/split (kept on
+  the client, stubbed on the server).
+
+`scripts/build-ws-app.sh` emits named exports and `Main.d.ts`;
+`backend/tests/apps-ws/wlib.mjs` is a **plain (non-OCaml) JS consumer** that
+imports the compiled library and calls `add`/`move`/`area`/`total`
+(`frontend/test: ws wlib`, with `wlib.dts` as the declaration golden).
 
 `scripts/rpc-demo.sh` compiles the *same* source to a JS client and to a native
 OCaml server, starts the server, and drives the client RPC over HTTP

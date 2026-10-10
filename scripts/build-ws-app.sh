@@ -40,7 +40,7 @@ while IFS= read -r f; do
 done < "$work/order.txt"
 
 # 2) compile the entry to IR to discover required modules
-"$fe" --input "$entry" --output "$out/Main.wsir.json" --unit Main -I "$bindir" -I "$work" "${runtime_inc[@]}" -I "$s"
+"$fe" --input "$entry" --output "$out/Main.wsir.json" --dts "$out/Main.d.ts" --unit Main -I "$bindir" -I "$work" "${runtime_inc[@]}" -I "$s"
 
 globals="$(python3 -c "import json,sys; print(' '.join(json.load(open(sys.argv[1]))['requiredGlobals']))" "$out/Main.wsir.json")"
 

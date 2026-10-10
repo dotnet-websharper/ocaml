@@ -223,6 +223,17 @@ if [ -d "$apps_ws" ]; then
       else
         node "$aout/Main.js" > "$tmp/ws_$aname.actual" 2>&1 || true
       fi
+      # Optional TypeScript-declaration golden for [@export] APIs.
+      dtsGolden="$apps_ws/$aname.dts"
+      if [ -f "$dtsGolden" ] || [ -f "$aout/Main.d.ts" ]; then
+        if [ "$update" = 1 ]; then cp "$aout/Main.d.ts" "$dtsGolden" 2>/dev/null || true; fi
+        if [ -f "$dtsGolden" ] && ! diff -u "$dtsGolden" "$aout/Main.d.ts" > "$tmp/ws_$aname.dts.diff" 2>&1; then
+          echo "FAIL ws $aname (.d.ts mismatch)"
+          sed 's/^/    /' "$tmp/ws_$aname.dts.diff"
+          fail=$((fail + 1))
+          continue
+        fi
+      fi
       expectedOut="$apps_ws/$aname.out"
       if [ "$update" = 1 ]; then
         cp "$tmp/ws_$aname.actual" "$expectedOut"
