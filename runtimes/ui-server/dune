@@ -1,0 +1,6 @@
+(library
+ (name websharper_ui_server)
+ (public_name websharper-ui-server)
+ (wrapped false)
+ (modules WebSharper_UI)
+ (libraries websharper-server))

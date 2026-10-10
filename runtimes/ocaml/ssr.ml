@@ -47,6 +47,9 @@ let render ?(title = "") ?(scripts = []) (body : node list) =
   ^ String.concat "" (List.map render_node body)
   ^ sc ^ "</body></html>"
 
+(* Render a sequence of nodes to an HTML string. *)
+let render_nodes (ns : node list) = String.concat "" (List.map render_node ns)
+
 (* A `[@client]` hydration region: `<div id="…" data-ws-key="…">content</div>`.
    The content is the server-rendered initial markup. *)
 let client_region ?id key (content : node list) =

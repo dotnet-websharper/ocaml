@@ -1,6 +1,6 @@
 opam-version: "2.0"
-synopsis: "Native OCaml server runtime for wsocaml (sitelets)"
-description: "WebSharper-style sitelets, content, SSR and hydration runtime, and a minimal HTTP server for wsocaml servers."
+synopsis: "Native OCaml server runtime for wsocaml (sitelets, SSR, HTTP)"
+description: "Representation-agnostic sitelets, Content, an SSR node tree, a client/hydrate runtime, and a minimal HTTP server for wsocaml servers."
 maintainer: "IntelliFactory"
 authors: "IntelliFactory"
 license: "Apache-2.0"

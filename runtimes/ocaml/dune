@@ -1,6 +1,6 @@
 (library
- (name websharper_sitelets)
- (public_name websharper-sitelets)
+ (name websharper_server)
+ (public_name websharper-server)
  (wrapped false)
- (modules Ssr WebSharper_UI WebSharper_Server WebSharper_ClientServer Wsrpc Async)
+ (modules Ssr Async Wsrpc WebSharper_Server WebSharper_ClientServer)
  (libraries unix yojson))

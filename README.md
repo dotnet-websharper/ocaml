@@ -19,8 +19,9 @@ Lambda into `wsocaml-ir-4`, and the backend lowers it to WebSharper AST and emit
 | `binding-adaptor/` | F# tool: WebSharper binding assembly → OCaml opam package |
 | `bindings/` | local opam repository of generated bindings (`websharper-xxx`) |
 | `bindings-legacy/` | raw-FFI test fixture (`gen-bindings.py`), used by the `jsbind`/`dom` emit tests |
-| `runtimes/ocaml/` | `websharper-sitelets`: native OCaml server runtime (sitelets, SSR/hydration, HTTP) |
-| `examples/` | dune projects built on the generated bindings / `websharper-sitelets` |
+| `runtimes/ocaml/` | `websharper-server`: representation-agnostic sitelets, Content, SSR nodes, HTTP |
+| `runtimes/ui-server/` | `websharper-ui-server`: the native `WebSharper_UI` shadow (converts to `Ssr.node`) |
+| `examples/` | dune projects built on the generated bindings / `websharper-server` |
 | `scripts/` | build/test helpers |
 | `backend/tests/` | test harness (IR fixtures + apps) |
 
@@ -98,10 +99,10 @@ bindings first, then build:
     cd examples/js && dune build && node _build/default/out/Main.js
     cd examples/dom && dune build && node run.mjs _build/default/out
 
-`examples/hello-world` is a native OCaml server using `websharper-sitelets` (a
-`[@website]`-less single-route sitelet):
+`examples/hello-world` is a native OCaml server using `websharper-server` +
+`websharper-ui-server` (a single-route sitelet):
 
-    opam install ./runtimes/ocaml
+    opam install ./runtimes/ocaml ./runtimes/ui-server
     cd examples/hello-world && dune exec hello_world.exe   # serves http://127.0.0.1:8080/
 
 `examples/js` references the binding package directly in its `dune` file

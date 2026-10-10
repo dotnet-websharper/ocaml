@@ -1,0 +1,14 @@
+opam-version: "2.0"
+synopsis: "WebSharper.UI shadow for wsocaml servers"
+description: "A native subset of WebSharper.UI (Doc/Var/View/Attr/On + HTML combinators) for server-side rendering, converting to the websharper-server Ssr node tree."
+maintainer: "IntelliFactory"
+authors: "IntelliFactory"
+license: "Apache-2.0"
+homepage: "https://websharper.com/"
+bug-reports: "https://github.com/dotnet-websharper/issues"
+depends: [
+  "ocaml" {>= "5.0"}
+  "dune" {>= "3.0"}
+  "websharper-server"
+]
+build: [ ["dune" "build" "-p" name "-j" jobs] ]

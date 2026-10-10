@@ -1,6 +1,7 @@
-(* Native implementation of the wsocaml server (sitelet) API. See
-   webSharper_Server.mli. Renders `Content.Page` via the `WebSharper_UI` shadow
-   and serves it through `Wsrpc`. *)
+(* Native implementation of the wsocaml server (sitelet) API. Renders
+   `Content.Page` from the representation-agnostic `Ssr` node tree and serves it
+   through `Wsrpc`. HTML representations (e.g. the WebSharper_UI shadow) live in
+   separate packages and convert to `Ssr.node`. *)
 
 type request = {
   method_ : string;
@@ -43,11 +44,11 @@ module Content = struct
   let xml s = mk ~ct:"application/xml; charset=utf-8" s
   let html s = mk ~ct:"text/html; charset=utf-8" s
 
-  let page ?(title = "") ?(head = "") (docs : WebSharper_UI.Doc.t list) =
+  let page ?(title = "") ?(head = "") (docs : Ssr.node list list) =
     html
       (Printf.sprintf
          "<!doctype html><html><head><meta charset=\"utf-8\"><title>%s</title>%s</head><body>%s<script ws-replace=\"scripts\"></script></body></html>"
-         title head (WebSharper_UI.Doc.render (List.concat docs)))
+         title head (Ssr.render_nodes (List.concat docs)))
 
   let status s c = { c with status = s }
   let header k v c = { c with headers = c.headers @ [ (k, v) ] }
