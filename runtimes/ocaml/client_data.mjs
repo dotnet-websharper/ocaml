@@ -12,6 +12,9 @@ const calls = [
   ['total', [{ $tag: 0, 0: 1, 1: { $tag: 0, 0: 2, 1: { $tag: 0, 0: 3, 1: 0 } } }]],
   ['or_else', [{ $tag: 0, 0: 5 }]],
   ['or_else', [0]],
+  ['sum_tree', [{ $tag: 0, 0: 5 }]],
+  ['sum_tree', [{ $tag: 1, 0: { $tag: 0, 0: 1 }, 1: { $tag: 0, 0: 2 } }]],
+  ['rev', [[1, 2, 3]]],
 ];
 
 for (const [name, args] of calls) {

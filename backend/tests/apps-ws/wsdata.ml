@@ -7,6 +7,7 @@ open WebSharper_JavaScript
 type point = { x : int; y : int }
 type shape = Dot | Circle of int | Rect of point * point
 type pair = int * string
+type tree = Leaf of int | Node of tree * tree
 
 let[@javascript] f x = x + 1
 
@@ -24,5 +25,11 @@ let[@rpc] swap (t : pair) = Async.return (snd t, fst t)
 let[@rpc] total (xs : int list) = Async.return (List.fold_left ( + ) 0 xs)
 
 let[@rpc] or_else (o : int option) = Async.return (match o with Some v -> v + 100 | None -> -1)
+
+let[@rpc] sum_tree (t : tree) =
+  Async.return (let rec go = function Leaf n -> n | Node (a, b) -> go a + go b in go t)
+
+let[@rpc] rev (xs : int array) =
+  Async.return (Stdlib.Array.of_list (List.rev (Stdlib.Array.to_list xs)))
 
 let () = Console.log (Printf.sprintf "f=%d" (f 41))

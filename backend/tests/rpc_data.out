@@ -6,3 +6,6 @@ swap => {"0":"hi","1":7,"$tag":0}
 total => 6
 or_else => 105
 or_else => -1
+sum_tree => 5
+sum_tree => 3
+rev => [3,2,1]

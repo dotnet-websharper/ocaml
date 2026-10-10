@@ -106,13 +106,18 @@ wire:
 | tuple | block `{"$tag":0,"0":a,"1":b,...}` |
 | record | block `{"$tag":0,"0":f0,...}` (declaration order) |
 | variant | constant → number (tag); non-constant → block `{"$tag":tag,...}` |
+| array | JSON array `[...]` (JS array) |
 
 The codecs are generated from the inferred types by `--emit-server`
 (`ofJson`/`toJson` in `frontend/bin/main.ml`). Supported: `int`/`float`/`string`/
-`bool`/`char`/`unit`, `list`, `option`, tuples, records, (regular) variants and
-`result`, nested. Recursive types are not yet supported (the generator refuses
-them). `scripts/rpc-data.sh` round-trips a record/variant/tuple/list/option
-workload through a native server (`frontend/test: rpc-data`).
+`bool`/`char`/`unit`, `list`, `option`, arrays, tuples, records, (regular)
+variants and `result`, nested. **Recursive** record/variant types are supported:
+the generator emits a `let rec` group of named helper codecs
+(`toJson_<name>`/`ofJson_<name>`) and refers to them for cycles (recursive
+*generic* types are not yet supported). Boxed integers (`int32`/`int64`/
+`nativeint`) are rejected with a clear error. `scripts/rpc-data.sh` round-trips
+a record/variant/recursive-tree/array/tuple/list/option workload through a native
+server (`frontend/test: rpc-data`).
 
 `scripts/rpc-demo.sh` compiles the *same* source to a JS client and to a native
 OCaml server, starts the server, and drives the client RPC over HTTP
