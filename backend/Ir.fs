@@ -68,6 +68,7 @@ type UnitIR =
         Rpc: string list
         Server: string list
         Rpcs: (string * string) list
+        Exports: (string * int * int * string) list
         Code: LExpr
     }
 
@@ -187,6 +188,12 @@ module Json =
             Rpcs =
                 match r.TryGetProperty "rpcs" with
                 | true, v -> [ for i in v.EnumerateArray() -> (s "name" i, s "meta" i) ]
+                | _ -> []
+            Exports =
+                match r.TryGetProperty "exports" with
+                | true, v ->
+                    [ for i in v.EnumerateArray() ->
+                          s "name" i, (p "index" i).GetInt32(), (p "arity" i).GetInt32(), s "meta" i ]
                 | _ -> []
             Code = expr (p "code" r)
         }

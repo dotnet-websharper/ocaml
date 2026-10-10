@@ -27,6 +27,7 @@ module Lowering =
             JavaScript: Set<string>
             RpcNames: Set<string>
             RpcMeta: Map<string, string>
+            Exports: (string * int * int * string) list
             ServerOnly: Set<string>
             Server: bool
             // True while lowering the module's top-level let chain (vs. nested
@@ -630,6 +631,29 @@ module Lowering =
 
         List.foldBack (fun (test, b) acc -> Conditional(test, body c b, acc)) cases fallback
 
+    // Named ES exports for [@export] values: an uncurried JS wrapper that
+    // marshals arguments/results via the runtime (`OCamlRuntime.exported`).
+    let exportDecls (c: Ctx) (me: Id) =
+        c.Exports
+        |> List.map (fun (name, idx, arity, meta) ->
+            let fid = Id.New(name, false, true)
+
+            let body =
+                if arity = 0 then
+                    rt c "exported" [ Var me; Value(Int idx); Value(String meta); Value(Bool false); NewTuple([], []) ]
+                else
+                    let ps = [ for i in 1 .. arity -> id (sprintf "a%d" i) ]
+                    Function(
+                        ps, None, None,
+                        Return(
+                            rt c "exported"
+                                [ Var me; Value(Int idx); Value(String meta); Value(Bool true)
+                                  NewTuple(List.map Var ps, []) ]
+                        )
+                    )
+
+            ExportDecl(false, VarDeclaration(fid, body)))
+
     let compile (ws: bool) (server: bool) (bindings: WebSharper.OCaml.Bindings.Context option) (ir: UnitIR) =
         let gs = Dictionary<string, Id>()
         let runtime = ref false
@@ -646,6 +670,7 @@ module Lowering =
                 JavaScript = Set.ofList ir.JavaScript
                 RpcNames = Set.ofList ir.Rpc
                 RpcMeta = Map.ofList ir.Rpcs
+                Exports = ir.Exports
                 ServerOnly = Set.ofList ir.Server
                 Server = server
                 TopLevel = true
@@ -664,7 +689,7 @@ module Lowering =
         let init = VarDeclaration(me, Object [])
         let body = ExprStatement(expr c ir.Code)
         let export = ExportDecl(true, ExprStatement(Var me))
-        imports @ [ init; body; export ], runtime.Value
+        imports @ [ init; body; export ] @ exportDecls c me, runtime.Value
 
     // Lower just the module body to a single statement suitable as a
     // WebSharper entry point (used by the compilation/packager pipeline).
@@ -684,6 +709,7 @@ module Lowering =
                 JavaScript = Set.ofList ir.JavaScript
                 RpcNames = Set.ofList ir.Rpc
                 RpcMeta = Map.ofList ir.Rpcs
+                Exports = ir.Exports
                 ServerOnly = Set.ofList ir.Server
                 Server = server
                 TopLevel = true
@@ -700,8 +726,10 @@ module Lowering =
         let me = mutableId ir.ModuleIdent
         globalExprs[ir.ModuleIdent] <- Var me
 
-        Block
+        Block(
             [ VarDeclaration(me, Object [])
               ExprStatement(expr c ir.Code)
-              ExportDecl(true, ExprStatement(Var me)) ],
+              ExportDecl(true, ExprStatement(Var me)) ]
+            @ exportDecls c me
+        ),
         runtime.Value

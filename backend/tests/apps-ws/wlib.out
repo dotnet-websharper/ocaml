@@ -1,0 +1,8 @@
+wlib loaded
+label: wlib
+add: 5
+move: {"x":11,"y":2}
+area Dot: 0
+area Circle: 75
+area Rect: 12
+total: 6

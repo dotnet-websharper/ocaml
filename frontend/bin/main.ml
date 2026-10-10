@@ -321,7 +321,7 @@ let clientMarks (ast: Parsetree.structure) =
               match vb.pvb_pat.ppat_desc with
               | Parsetree.Ppat_var { txt = n; _ } ->
                   let a = attrNames vb.pvb_attributes in
-                  if List.mem "javascript" a then js := n :: !js
+                  if List.mem "javascript" a || List.mem "export" a then js := n :: !js
                   else if List.mem "rpc" a then rpc := n :: !rpc
                   else srv := n :: !srv
               | _ -> ())
@@ -329,6 +329,24 @@ let clientMarks (ast: Parsetree.structure) =
       | _ -> ())
     ast;
   (List.rev !js, List.rev !rpc, List.rev !srv)
+
+(* Names of top-level values marked [@export] (part of the JS API). *)
+let exportMarks (ast: Parsetree.structure) =
+  let acc = ref [] in
+  List.iter
+    (fun (item: Parsetree.structure_item) ->
+      match item.pstr_desc with
+      | Parsetree.Pstr_value (_, vbs) ->
+          List.iter
+            (fun (vb: Parsetree.value_binding) ->
+              match vb.pvb_pat.ppat_desc with
+              | Parsetree.Ppat_var { txt = n; _ } ->
+                  if List.mem "export" (attrNames vb.pvb_attributes) then acc := n :: !acc
+              | _ -> ())
+            vbs
+      | _ -> ())
+    ast;
+  List.rev !acc
 
 let referencedNames (e: Parsetree.expression) =
   let acc = ref [] in
@@ -358,7 +376,7 @@ let checkBoundary (ast: Parsetree.structure) =
               | Parsetree.Ppat_var { txt = n; _ } ->
                   let a = attrNames vb.pvb_attributes in
                   let r =
-                    if List.mem "javascript" a then "js"
+                    if List.mem "javascript" a || List.mem "export" a then "js"
                     else if List.mem "rpc" a then "rpc"
                     else "server"
                   in
@@ -735,7 +753,6 @@ let rec descr env (defs: (string, Yojson.Safe.t) Hashtbl.t) (t: Types.type_expr)
           | Types.Type_variant (cs, _) ->
               let consts = List.filter isConstCtor cs in
               let nonc = List.filter (fun c -> not (isConstCtor c)) cs in
-              let nc = List.length consts in
               let cases =
                 cs
                 |> List.map (fun (c: Types.constructor_declaration) ->
@@ -743,7 +760,7 @@ let rec descr env (defs: (string, Yojson.Safe.t) Hashtbl.t) (t: Types.type_expr)
                        if isConstCtor c then `List [ `String nm; `Int (indexOf c consts); `List [] ]
                        else
                          let ts = List.map (subst sub) (Option.get (ctorArgs c)) in
-                         `List [ `String nm; `Int (nc + indexOf c nonc); `List (List.map (descr env defs) ts) ])
+                         `List [ `String nm; `Int (indexOf c nonc); `List (List.map (descr env defs) ts) ])
               in
               `Assoc [ ("key", `String k); ("kind", `String "variant"); ("cases", `List cases) ]
           | _ -> failwith ("unsupported [@rpc] type: " ^ k)
@@ -792,7 +809,8 @@ let typedTypes (typed: Typedtree.structure) : (string, Types.type_expr) Hashtbl.
 
 let stripMarkers (attrs: Parsetree.attributes) =
   List.filter
-    (fun (a: Parsetree.attribute) -> a.attr_name.txt <> "javascript" && a.attr_name.txt <> "rpc")
+    (fun (a: Parsetree.attribute) ->
+      a.attr_name.txt <> "javascript" && a.attr_name.txt <> "rpc" && a.attr_name.txt <> "export")
     attrs
 
 let openName (od: Parsetree.open_declaration) =
@@ -901,6 +919,7 @@ let () =
     let ast = parse !input in
     checkBoundary ast;
     let js, rpc, srv = clientMarks ast in
+    let exp = exportMarks ast in
     let typed, _, _, _, typedEnv = Typemod.type_structure env ast in
     (match !emit_server with
     | Some p ->
@@ -928,6 +947,43 @@ let () =
              let meta = Yojson.Safe.to_string (`Assoc [ ("types", types); ("args", `List args); ("result", result) ]) in
              `Assoc [ ("name", `String name); ("meta", `String meta) ])
     in
+    let topIndex =
+      let i = ref 0 and acc = ref [] in
+      List.iter
+        (fun (item: Typedtree.structure_item) ->
+          match item.str_desc with
+          | Typedtree.Tstr_value (_, vbs) ->
+              List.iter
+                (fun (vb: Typedtree.value_binding) ->
+                  match vb.vb_pat.pat_desc with
+                  | Typedtree.Tpat_var (id, _, _) ->
+                      acc := (Ident.name id, !i) :: !acc;
+                      incr i
+                  | _ -> ())
+                vbs
+          | _ -> ())
+        typed.str_items;
+      List.rev !acc
+    in
+    let exports =
+      exp
+      |> List.map (fun name ->
+             let ty = Hashtbl.find files name in
+             let ps, ret = arrows ty in
+             let isFn = ps <> [] in
+             let defs = Hashtbl.create 16 in
+             let args = if isFn then List.map (descr typedEnv defs) ps else [] in
+             let result = descr typedEnv defs (if isFn then ret else ty) in
+             let types = `List (Hashtbl.fold (fun _ v acc -> v :: acc) defs []) in
+             let meta =
+               Yojson.Safe.to_string
+                 (`Assoc [ ("types", types); ("args", `List args); ("result", result) ])
+             in
+             let index = try List.assoc name topIndex with Not_found -> -1 in
+             `Assoc
+               [ ("name", `String name); ("index", `Int index); ("arity", `Int (List.length ps));
+                 ("meta", `String meta) ])
+    in
     let json =
       `Assoc
         [
@@ -939,6 +995,7 @@ let () =
           ("rpc", `List (List.map (fun n -> `String n) rpc));
           ("server", `List (List.map (fun n -> `String n) srv));
           ("rpcs", `List rpcMeta);
+          ("exports", `List exports);
           ( "requiredGlobals",
             `List
               (Ident.Set.elements program.required_globals

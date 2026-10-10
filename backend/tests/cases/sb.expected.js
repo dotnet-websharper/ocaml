@@ -264,6 +264,24 @@ if (!globalThis.OCamlRuntime) {
     throw new globalThis.Error("marshalIn: " + c.k);
   }
 
+  // Exported OCaml values/functions for JS consumers: marshals JS arguments in,
+  // applies the OCaml function (uncurried) or reads the value, marshals the
+  // result out.
+  function exported(block, idx, metaJson, isFn, args) {
+    var cache = globalThis.OCamlRuntime.__rpcMetaCache || (globalThis.OCamlRuntime.__rpcMetaCache = {});
+    var meta = cache[metaJson] || (cache[metaJson] = JSON.parse(metaJson));
+    var v = block[idx];
+    var res;
+    if (isFn) {
+      var ocamlArgs = [];
+      for (var i = 0; i < args.length; i++) ocamlArgs.push(marshalIn(meta.types, meta.args[i], args[i]));
+      res = caml_apply(v, ocamlArgs);
+    } else {
+      res = v;
+    }
+    return marshalOut(meta.types, meta.result, res);
+  }
+
   function registerRpc(name, metaJson, fn) {
     var store = globalThis.OCamlRuntime.__serverRpc || (globalThis.OCamlRuntime.__serverRpc = {});
     store[name] = { fn: fn, meta: rpcMeta(name, metaJson) };
@@ -376,6 +394,7 @@ if (!globalThis.OCamlRuntime) {
     async_bind: async_bind,
     async_map: async_map,
     async_run: async_run,
+    exported: exported,
     caml_apply: caml_apply,
     caml_trampoline: caml_trampoline,
     caml_trampoline_return: caml_trampoline_return,
