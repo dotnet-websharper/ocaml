@@ -430,6 +430,18 @@ let rec arrows (t: Types.type_expr) : Types.type_expr list * Types.type_expr =
       (a :: ps, r)
   | _ -> ([], t)
 
+let endsWith suffix s =
+  let ls = String.length s and lf = String.length suffix in
+  ls >= lf && String.sub s (ls - lf) lf = suffix
+
+(* An [@rpc] function returns `'a Async.t`; the server handler unwraps it. *)
+let asyncElem (t: Types.type_expr) : Types.type_expr option =
+  match Types.get_desc t with
+  | Types.Tconstr (p, [ a ], _) ->
+      let n = Path.name p in
+      if n = "Async.t" || endsWith ".Async.t" n then Some a else None
+  | _ -> None
+
 let typedTypes (typed: Typedtree.structure) : (string, Types.type_expr) Hashtbl.t =
   let tbl = Hashtbl.create 16 in
   List.iter
@@ -489,8 +501,13 @@ let emitServer (path: string) (ast: Parsetree.structure) (typed: Typedtree.struc
       let ty = Hashtbl.find files name in
       let ps, ret = arrows ty in
       let vars = List.mapi (fun i p -> Printf.sprintf "a%d" i, ofJson p) ps in
-      let applied =
+      let base =
         String.concat " " (name :: List.map (fun (v, c) -> Printf.sprintf "((%s) %s)" c v) vars)
+      in
+      let ret, applied =
+        match asyncElem ret with
+        | Some inner -> inner, Printf.sprintf "Async.run_sync (%s)" base
+        | None -> ret, base
       in
       let pattern = List.map fst vars |> String.concat "; " in
       Buffer.add_string sb

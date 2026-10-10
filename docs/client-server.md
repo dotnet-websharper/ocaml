@@ -84,6 +84,9 @@ The server tier is **native OCaml**, not JS:
   generated from the inferred types (`int`/`float`/`string`/`bool`/`unit`/`list`/
   `option`/`array`).
 - `runtimes/ocaml/wsrpc.ml` is a minimal native JSON-RPC server (`unix` sockets).
+- `[@rpc]` handlers return `'a Async.t`; the generated handler runs it
+  synchronously (`Async.run_sync`, `runtimes/ocaml/async.ml`) and encodes the
+  result.
 - The client's `rpcTransport` POSTs over HTTP (`fetch`) when
   `OCamlRuntime.rpcEndpoint` is set.
 
@@ -118,11 +121,13 @@ the same runtime from OCaml-compiled code.
   emitted in the IR; the frontend rejects a client→server direct reference.
 - **B2 — RPC (done).** A top-level `[@rpc]` value's client binding is an
   asynchronous, serialized `OCamlRuntime.rpcCall` proxy (JSON arguments/result,
-  a `Promise` over a pluggable transport). The client bundle excludes
-  server-only + `[@rpc]` bodies. The server tier is now **native OCaml** (§3.1):
-  `--emit-server` generates it from the same source and the client reaches it
-  over HTTP. A future revision should add an OCaml async type for `[@rpc]` call
-  sites.
+  a `Promise` over a pluggable transport). It returns `'a Async.t`: the client
+  `Async` (`bindings-legacy/async.ml`) is promise-backed, so client code
+  sequences calls with `Async.bind`/`Async.map`/`Async.run`. The client bundle
+  excludes server-only + `[@rpc]` bodies. The server tier is now **native
+  OCaml** (§3.1): `--emit-server` generates it from the same source, unwrapping
+  the handler's `'a Async.t` (`Async.run_sync`) before encoding, and the client
+  reaches it over HTTP.
 - **M3 — first-class client code.** Stable keys by `(assembly, unit, position)`;
   multiple client units; import wiring; `scripts/test-quick.sh` coverage.
 - **M4 — UI integration + hydration.** Marked client code as `On.*`/`Attr`

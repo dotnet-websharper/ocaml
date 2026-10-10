@@ -12,7 +12,7 @@ out="${2:-$root/out}"
 mkdir -p "$out"
 
 # dependency order (module names, capitalized)
-order="Js Event UiEvent MouseEvent WheelEvent PointerEvent DragEvent TouchEvent
+order="Js Async Event UiEvent MouseEvent WheelEvent PointerEvent DragEvent TouchEvent
 InputEvent CompositionEvent KeyboardEvent FocusEvent MessageEvent ProgressEvent
 SubmitEvent CustomEvent ErrorEvent PopStateEvent HashChangeEvent StorageEvent
 BeforeUnloadEvent AbortSignal AbortController DomRectReadOnly DomRect DomPoint

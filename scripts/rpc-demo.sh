@@ -16,9 +16,10 @@ bash "$root/scripts/build-js-app.sh" "$entry" "$out/client" >/dev/null
   --input "$entry" --emit-server "$out/server.ml" \
   -I "$root/bindings-legacy" -I "$(ocamlc -where)"
 
-# 3. Compile the native server (with the RPC runtime).
+# 3. Compile the native server (with the RPC runtime and native Async).
 cp "$root/runtimes/ocaml/wsrpc.ml" "$out/"
-(cd "$out" && ocamlfind ocamlopt -package unix,yojson -linkpkg wsrpc.ml server.ml -o rpc_server)
+cp "$root/runtimes/ocaml/async.ml" "$out/"
+(cd "$out" && ocamlfind ocamlopt -package unix,yojson -linkpkg wsrpc.ml async.ml server.ml -o rpc_server)
 
 # 4. Start the server, drive the client's RPC over HTTP, stop the server.
 "$out/rpc_server" > "$out/server.log" 2>&1 &

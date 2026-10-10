@@ -164,9 +164,32 @@ if (!globalThis.OCamlRuntime) {
     return Promise.resolve().then(function () {
       var p = JSON.parse(payload);
       var handler = (globalThis.OCamlRuntime.__serverRpc || {})[p.name];
-      var result = handler.apply(null, p.args);
-      return JSON.stringify({ result: result });
+      // Handlers may be synchronous or return an `Async.t` (a promise).
+      return Promise.resolve(handler.apply(null, p.args)).then(function (result) {
+        return JSON.stringify({ result: result });
+      });
     });
+  }
+
+  // Async: on the client `Async.t` is a JS promise (see the rpc proxy). These
+  // helpers adapt OCaml `Async.bind`/`map`/`run` closures to promise `.then`.
+  function async_bind(p, cb) {
+    return p.then(function (v) {
+      return caml_to_js(cb)(v);
+    });
+  }
+
+  function async_map(f, p) {
+    return p.then(function (v) {
+      return caml_to_js(f)(v);
+    });
+  }
+
+  function async_run(f, p) {
+    p.then(function (v) {
+      caml_to_js(f)(v);
+    });
+    return 0;
   }
 
   function caml_trampoline_return(f, args) {
@@ -210,6 +233,9 @@ if (!globalThis.OCamlRuntime) {
     registerRpc: registerRpc,
     rpcCall: rpcCall,
     rpcTransport: rpcTransport,
+    async_bind: async_bind,
+    async_map: async_map,
+    async_run: async_run,
     caml_apply: caml_apply,
     caml_trampoline: caml_trampoline,
     caml_trampoline_return: caml_trampoline_return,
