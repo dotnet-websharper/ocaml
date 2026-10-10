@@ -1,3 +1,8 @@
-(executable
- (name hello_world)
- (libraries websharper-server websharper-ui-server))
+(rule
+ (target (dir out))
+ (deps hello_world.ml build.sh)
+ (action (run bash build.sh out)))
+
+(alias
+ (name default)
+ (deps out))

@@ -99,11 +99,18 @@ bindings first, then build:
     cd examples/js && dune build && node _build/default/out/Main.js
     cd examples/dom && dune build && node run.mjs _build/default/out
 
-`examples/hello-world` is a native OCaml server using `websharper-server` +
-`websharper-ui-server` (a single-route sitelet):
+`examples/hello-world` is a wsocaml app: a **DU-based sitelet** (`[@endpoint]`
++ `Sitelet.Infer`, expanded by the frontend) whose Home page **embeds a hydrated
+client-side piece** (`WebSharper_ClientServer.hydrate`). `dune build` produces
+both tiers via `--emit-server`:
 
-    opam install ./runtimes/ocaml ./runtimes/ui-server
-    cd examples/hello-world && dune exec hello_world.exe   # serves http://127.0.0.1:8080/
+    opam install ./runtimes/ocaml ./runtimes/ui-server   # websharper-server + websharper-ui-server
+    cd examples/hello-world && dune build
+    ./_build/default/out/server &                        # serves http://127.0.0.1:8123/
+    node verify.mjs _build/default/out                   # SSR + hydration check
+
+(Requires `frontend/` and `backend/` to be built: `cd frontend && dune build`,
+`dotnet build backend`.)
 
 `examples/js` references the binding package directly in its `dune` file
 (`(libraries websharper-javascript)` and
