@@ -5,6 +5,8 @@ const page = await (await fetch(base + '/')).text();
 console.log('has-title:', page.includes('<title>Site</title>'));
 console.log('has-ssr:', page.includes('server-rendered'));
 console.log('has-scripts:', page.includes('<script type="module" src="/Main.js"></script>'));
+const user = await (await fetch(base + '/user/5')).text();
+console.log('user-ssr:', user.includes('User 5'));
 const r = await fetch(base + '/rpc', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },

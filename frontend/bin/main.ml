@@ -1032,6 +1032,196 @@ let emitServer (path: string) (ast: Parsetree.structure) (typed: Typedtree.struc
   output_string ch (Buffer.contents sb);
   close_out ch
 
+
+(* --- [@endpoint] / Sitelet.Infer ------------------------------------------
+   The endpoint is a variant whose constructors carry
+   [@endpoint "METHOD /path/@arg/..."]; each `@` variable is (positionally) an
+   argument of that constructor. `Sitelet.Infer (fun ctx ep -> ...)` is expanded
+   into `Sitelet.make route link (fun ctx ep -> ...)` with a generated router and
+   URL builder. *)
+
+let attrString (attrs: Parsetree.attributes) (name: string) : string option =
+  List.find_map
+    (fun (a: Parsetree.attribute) ->
+      if a.attr_name.txt = name then
+        match a.attr_payload with
+        | Parsetree.PStr
+            [ { pstr_desc = Parsetree.Pstr_eval ({ pexp_desc = Parsetree.Pexp_constant { pconst_desc = Parsetree.Pconst_string (str, _, _); _ }; _ }, _); _ } ] ->
+            Some str
+        | _ -> None
+      else None)
+    attrs
+
+let stripEndpointAttrs (attrs: Parsetree.attributes) =
+  List.filter (fun (a: Parsetree.attribute) -> a.attr_name.txt <> "endpoint") attrs
+
+let coreName (ct: Parsetree.core_type) =
+  match ct.ptyp_desc with
+  | Parsetree.Ptyp_constr ({ txt = Longident.Lident n; _ }, []) -> n
+  | _ -> "?"
+
+let splitMethod (ep: string) =
+  match String.index_opt ep ' ' with
+  | Some i -> String.sub ep 0 i, String.trim (String.sub ep (i + 1) (String.length ep - i - 1))
+  | None -> "GET", ep
+
+let parseArg (ty: string) (v: string) =
+  match ty with
+  | "int" -> Printf.sprintf "int_of_string %s" v
+  | "string" -> v
+  | "bool" -> Printf.sprintf "(%s = \"true\")" v
+  | "float" -> Printf.sprintf "float_of_string %s" v
+  | _ -> Printf.sprintf "(failwith \"unsupported @-arg type %s\")" ty
+
+let fmtArg (ty: string) (v: string) =
+  match ty with
+  | "int" -> Printf.sprintf "string_of_int %s" v
+  | "string" -> v
+  | "bool" -> Printf.sprintf "(if %s then \"true\" else \"false\")" v
+  | "float" -> Printf.sprintf "string_of_float %s" v
+  | _ -> v
+
+let endpointCtorsOf (ast: Parsetree.structure) =
+  List.find_map
+    (fun (item: Parsetree.structure_item) ->
+      match item.pstr_desc with
+      | Parsetree.Pstr_type (_, decls) ->
+          List.find_map
+            (fun (td: Parsetree.type_declaration) ->
+              match td.ptype_kind with
+              | Parsetree.Ptype_variant ctors
+                when List.exists (fun (c: Parsetree.constructor_declaration) -> attrString c.pcd_attributes "endpoint" <> None) ctors ->
+                  Some ctors
+              | _ -> None)
+            decls
+      | _ -> None)
+    ast
+
+let ctorArgsOf (c: Parsetree.constructor_declaration) =
+  match c.pcd_args with
+  | Parsetree.Pcstr_tuple ts -> ts
+  | Parsetree.Pcstr_record ls -> List.map (fun (l: Parsetree.label_declaration) -> l.pld_type) ls
+
+let genRoute (ctors: Parsetree.constructor_declaration list) =
+  let cases =
+    List.map
+      (fun (c: Parsetree.constructor_declaration) ->
+        let cname = c.pcd_name.txt in
+        let ep = Option.get (attrString c.pcd_attributes "endpoint") in
+        let meth, path = splitMethod ep in
+        let segs = List.filter (fun x -> x <> "") (String.split_on_char '/' path) in
+        let args = ctorArgsOf c in
+        let k = ref 0 in
+        let pats =
+          List.map
+            (fun seg ->
+              if String.length seg > 0 && seg.[0] = '@' then (
+                let v = Printf.sprintf "v%d" !k in
+                incr k;
+                v)
+              else Printf.sprintf "%S" seg)
+            segs
+        in
+        let parsed = List.mapi (fun i t -> parseArg (coreName t) (Printf.sprintf "v%d" i)) args in
+        let applied =
+          match parsed with
+          | [] -> cname
+          | [ x ] -> Printf.sprintf "%s (%s)" cname x
+          | xs -> Printf.sprintf "%s (%s)" cname (String.concat ", " xs)
+        in
+        Printf.sprintf "  | %S, [ %s ] -> (try Some (%s) with _ -> None)" meth (String.concat "; " pats) applied)
+      ctors
+  in
+  Printf.sprintf
+    "(fun (req : WebSharper_Server.request) ->\n  let segs = Stdlib.List.filter (fun s -> s <> \"\") (Stdlib.String.split_on_char '/' req.path) in\n  match req.method_, segs with\n%s\n  | _ -> None)"
+    (String.concat "\n" cases)
+
+let genLink (ctors: Parsetree.constructor_declaration list) =
+  let cases =
+    List.map
+      (fun (c: Parsetree.constructor_declaration) ->
+        let cname = c.pcd_name.txt in
+        let ep = Option.get (attrString c.pcd_attributes "endpoint") in
+        let _, path = splitMethod ep in
+        let segs = List.filter (fun x -> x <> "") (String.split_on_char '/' path) in
+        let args = ctorArgsOf c in
+        let vars = List.mapi (fun i _ -> Printf.sprintf "v%d" i) args in
+        let pat =
+          match vars with
+          | [] -> cname
+          | [ v ] -> Printf.sprintf "%s %s" cname v
+          | vs -> Printf.sprintf "%s (%s)" cname (String.concat ", " vs)
+        in
+        let k = ref 0 in
+        let parts =
+          List.map
+            (fun seg ->
+              if String.length seg > 0 && seg.[0] = '@' then (
+                let i = !k in
+                incr k;
+                Printf.sprintf "(%s)" (fmtArg (coreName (List.nth args i)) (Printf.sprintf "v%d" i)))
+              else Printf.sprintf "%S" seg)
+            segs
+        in
+        let expr = match parts with [] -> "\"/\"" | _ -> "\"/\" ^ " ^ String.concat " ^ \"/\" ^ " parts in
+        Printf.sprintf "  | %s -> %s" pat expr)
+      ctors
+  in
+  "(function\n" ^ String.concat "\n" cases ^ ")"
+
+let transformInfer (ast: Parsetree.structure) : Parsetree.structure =
+  match endpointCtorsOf ast with
+  | None -> ast
+  | Some ctors ->
+      let route_e = Parse.expression (Lexing.from_string (genRoute ctors)) in
+      let link_e = Parse.expression (Lexing.from_string (genLink ctors)) in
+      let mapper =
+        { Ast_mapper.default_mapper with
+          structure_item =
+            (fun self (item: Parsetree.structure_item) ->
+              match item.pstr_desc with
+              | Parsetree.Pstr_type (rf, decls) ->
+                  let decls =
+                    List.map
+                      (fun (td: Parsetree.type_declaration) ->
+                        match td.ptype_kind with
+                        | Parsetree.Ptype_variant cs ->
+                            { td with ptype_kind = Parsetree.Ptype_variant (List.map (fun (c: Parsetree.constructor_declaration) -> { c with pcd_attributes = stripEndpointAttrs c.pcd_attributes }) cs) }
+                        | _ -> td)
+                      decls
+                  in
+                  Ast_mapper.default_mapper.structure_item self { item with pstr_desc = Parsetree.Pstr_type (rf, decls) }
+              | _ -> Ast_mapper.default_mapper.structure_item self item);
+          expr =
+            (fun self (e: Parsetree.expression) ->
+              let isInfer (f: Parsetree.expression) =
+                match f.pexp_desc with
+                | Parsetree.Pexp_ident { txt = lid; _ } -> Longident.flatten lid = [ "Sitelet"; "Infer" ]
+                | Parsetree.Pexp_construct ({ txt = lid; _ }, None) -> Longident.flatten lid = [ "Sitelet"; "Infer" ]
+                | _ -> false
+              in
+              let mk handler =
+                let make_e : Parsetree.expression =
+                  { Parsetree.pexp_desc = Parsetree.Pexp_ident { txt = Option.get (Longident.unflatten [ "Sitelet"; "make" ]); loc = e.pexp_loc };
+                    pexp_loc = e.pexp_loc;
+                    pexp_loc_stack = [];
+                    pexp_attributes = [] }
+                in
+                { e with
+                  pexp_desc =
+                    Parsetree.Pexp_apply
+                      (make_e, [ (Asttypes.Nolabel, route_e); (Asttypes.Nolabel, link_e); (Asttypes.Nolabel, handler) ]) }
+              in
+              match e.pexp_desc with
+              | Parsetree.Pexp_construct ({ txt = lid; _ }, Some handler)
+                when Longident.flatten lid = [ "Sitelet"; "Infer" ] ->
+                  Ast_mapper.default_mapper.expr self (mk handler)
+              | Parsetree.Pexp_apply (f, [ (_, handler) ]) when isInfer f -> Ast_mapper.default_mapper.expr self (mk handler)
+              | _ -> Ast_mapper.default_mapper.expr self e);
+        }
+      in
+      mapper.structure mapper ast
+
 let () =
   let input = ref ""
   and output = ref ""
@@ -1059,7 +1249,7 @@ let () =
     Clflags.include_dirs := List.rev !includes @ !Clflags.include_dirs;
     Compmisc.init_path ();
     let env = Compmisc.initial_env () in
-    let ast = parse !input in
+    let ast = transformInfer (parse !input) in
     checkBoundary ast;
     let js, rpc, srv = clientMarks ast in
     let exp = exportMarks ast in
