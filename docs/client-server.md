@@ -253,23 +253,40 @@ protocol (template-based) in the shadow; it is future work.
 Same source, both tiers; native server (no templating):
 
 ```ocaml
+open WebSharper_ClientServer
+open WebSharper_Server
+
 type endpoint =
-  | Home            [@endpoint "GET /"]
-  | User of int     [@endpoint "GET /user/@id"]
+  | Home        [@endpoint "GET /"]
+  | User of int [@endpoint "GET /user/@id"]
 
 let[@rpc] add a b = Async.return (a + b)
 
-let render (_ : endpoint context) ep =
-  match ep with
-  | Home ->
-      Content.page ~title:"Home"
-        [ h1 [] [ Doc.text "Home" ];
-          WebSharper_ClientServer.hydrate (fun () ->
-            let v = Var.create "before" in
-            div [ On.click (fun _ _ -> Var.set v "after") ] [ Doc.textView (Var.view v) ]) ]
-  | User id -> Content.page ~title:"User" [ Doc.text (Printf.sprintf "User %d" id) ]
+let[@website] main =
+  Sitelet.infer (fun (_ : endpoint context) ep ->
+    match ep with
+    | Home ->
+        Content.page
+          ~title:"Home"
+          [
+            h1 [] [text "Home"];
+            hydrate (fun () ->
+              let v = Var.create "before" in
 
-let[@website] site = Sitelet.Infer render
+              div [
+                  on.click (fun _ _ -> Var.set v "after")
+              ] [
+                  textView (Var.view v)
+              ]
+            )
+          ]
+    | User id ->
+        Content.page
+          ~title:"User"
+          [
+            h1 [] [text (Printf.sprintf "User %d" id)]
+          ]
+  )
 ```
 
 - `WebSharper_Server` (`runtimes/ocaml/webSharper_Server.{mli,ml}`): `Request`/
@@ -277,8 +294,8 @@ let[@website] site = Sitelet.Infer render
   (`make`/`empty`/`(+)`/`infer`); `Server.serve ?port ?static ?bundle`.
 - The `.mli` is shared: the frontend typechecks against the generated
   `WebSharper_UI`; the native server links the `WebSharper_UI` shadow
-  (`runtimes/ocaml/webSharper_UI.ml`, same module name) + the impl. So a view
-  compiles unchanged on both tiers.
+  (`runtimes/ui-server/webSharper_UI.ml`, same module name) + the impl. So a
+  view compiles unchanged on both tiers.
 - `Content.Page` emits `<!doctype html>…<script ws-replace="scripts"></script>`;
   `Server.serve ~bundle` replaces that with `<script type="module" src="/<bundle>.js">`.
 - `Sitelet.Infer` is expanded **before typing**: the endpoint variant (its

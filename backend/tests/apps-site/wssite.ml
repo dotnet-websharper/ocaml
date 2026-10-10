@@ -13,29 +13,29 @@ type endpoint =
 
 let[@rpc] add a b = Async.return (a + b)
 
-let render (_ : endpoint context) ep =
-  match ep with
-  | Home ->
-      Content.page
-        ~title:"Site"
-        [
-          h1 [] [text "Site"];
-          p [] [text "server-rendered"];
-          hydrate (fun () ->
-            let v = Var.create "before" in
+let[@website] main =
+  Sitelet.infer (fun (_ : endpoint context) ep ->
+    match ep with
+    | Home ->
+        Content.page
+          ~title:"Site"
+          [
+            h1 [] [text "Site"];
+            p [] [text "server-rendered"];
+            hydrate (fun () ->
+              let v = Var.create "before" in
 
-            div [
-                on.click (fun _ _ -> Var.set v "after")
-            ] [
-                textView (Var.view v)
-            ]
-          )
-        ]
-  | User id ->
-      Content.page
-        ~title:"User"
-        [
-          h1 [] [text (Printf.sprintf "User %d" id)]
-        ]
-
-let[@website] site = Sitelet.infer render
+              div [
+                  on.click (fun _ _ -> Var.set v "after")
+              ] [
+                  textView (Var.view v)
+              ]
+            )
+          ]
+    | User id ->
+        Content.page
+          ~title:"User"
+          [
+            h1 [] [text (Printf.sprintf "User %d" id)]
+          ]
+  )
