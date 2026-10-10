@@ -74,22 +74,31 @@ module Sitelet = struct
 
   (* Overwritten by the frontend with a generated router/link. *)
   let infer handle = { route = (fun _ -> None); link = (fun _ -> "/"); handle }
+
+  (* A single content route. *)
+  let content method_ path handle =
+    {
+      route = (fun req -> if req.method_ = method_ && req.path = path then Some () else None);
+      link = (fun () -> path);
+      handle;
+    }
 end
 
 let replace_scripts bundle body =
-  match bundle with
-  | None -> body
-  | Some b ->
-      let pat = "<script ws-replace=\"scripts\"></script>" in
-      let tag = Printf.sprintf "<script type=\"module\" src=\"/%s.js\"></script>" b in
-      let bl = String.length body and pl = String.length pat in
-      let buf = Buffer.create bl in
-      let rec go i =
-        if i + pl <= bl && String.sub body i pl = pat then (Buffer.add_string buf tag; go (i + pl))
-        else if i < bl then (Buffer.add_char buf body.[i]; go (i + 1))
-      in
-      go 0;
-      Buffer.contents buf
+  let pat = "<script ws-replace=\"scripts\"></script>" in
+  let tag =
+    match bundle with
+    | Some b -> Printf.sprintf "<script type=\"module\" src=\"/%s.js\"></script>" b
+    | None -> ""
+  in
+  let bl = String.length body and pl = String.length pat in
+  let buf = Buffer.create bl in
+  let rec go i =
+    if i + pl <= bl && String.sub body i pl = pat then (Buffer.add_string buf tag; go (i + pl))
+    else if i < bl then (Buffer.add_char buf body.[i]; go (i + 1))
+  in
+  go 0;
+  Buffer.contents buf
 
 let content_type_of path =
   match String.lowercase_ascii (Filename.extension path) with

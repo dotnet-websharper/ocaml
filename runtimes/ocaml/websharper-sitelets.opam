@@ -1,0 +1,14 @@
+opam-version: "2.0"
+synopsis: "Native OCaml server runtime for wsocaml (sitelets)"
+description: "WebSharper-style sitelets, content, SSR and hydration runtime, and a minimal HTTP server for wsocaml servers."
+maintainer: "IntelliFactory"
+authors: "IntelliFactory"
+license: "Apache-2.0"
+homepage: "https://websharper.com/"
+bug-reports: "https://github.com/dotnet-websharper/issues"
+depends: [
+  "ocaml" {>= "5.0"}
+  "dune" {>= "3.0"}
+  "yojson"
+]
+build: [ ["dune" "build" "-p" name "-j" jobs] ]

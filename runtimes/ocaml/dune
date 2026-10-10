@@ -1,0 +1,6 @@
+(library
+ (name websharper_sitelets)
+ (public_name websharper-sitelets)
+ (wrapped false)
+ (modules Ssr WebSharper_UI WebSharper_Server WebSharper_ClientServer Wsrpc Async)
+ (libraries unix yojson))

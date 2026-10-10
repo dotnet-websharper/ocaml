@@ -42,6 +42,9 @@ module Sitelet : sig
 
   (* Expanded by the frontend into `make` with a generated router/link. *)
   val infer : (('a) context -> 'a -> content) -> ('a) t
+
+  (* A single content route. *)
+  val content : string -> string -> (unit context -> unit -> content) -> unit t
 end
 
 module Server : sig
