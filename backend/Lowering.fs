@@ -26,6 +26,40 @@ module Lowering =
             ClientUnits: ResizeArray<string * Expression>
         }
 
+    // Rewrites the free variables of a client closure to reads from an
+    // environment object (`env["name"]`) and records them.
+    type private FreeVarRewrite(envId: Id) =
+        inherit Transformer()
+
+        let bound = HashSet<Id>()
+        let free = List<Id>()
+
+        member _.Free = free
+
+        override this.TransformVar v =
+            if bound.Contains v then Var v
+            else
+                if not (free.Contains v) then free.Add v
+                ItemGet(Var envId, Value(String(defaultArg v.Name "x")), Purity.Pure)
+
+        override this.TransformFunction(ps, tv, r, body) =
+            let added = (ps @ Option.toList tv) |> List.filter bound.Add
+            let res = base.TransformFunction(ps, tv, r, body)
+            for i in added do bound.Remove i |> ignore
+            res
+
+        override this.TransformLet(id, v, b) =
+            let added = if bound.Add id then [ id ] else []
+            let res = base.TransformLet(id, v, b)
+            for i in added do bound.Remove i |> ignore
+            res
+
+        override this.TransformLetRec(bs, b) =
+            let added = (bs |> List.map fst) |> List.filter bound.Add
+            let res = base.TransformLetRec(bs, b)
+            for i in added do bound.Remove i |> ignore
+            res
+
     let id n = Id.New(n, false)
     let mutableId n = Id.New(n, true)
     let vid (i: Ident) = id i.Name
@@ -380,8 +414,15 @@ module Lowering =
                 match p.Name.Value with
                 | "wsclient:client" ->
                     let key = sprintf "client%d" c.ClientUnits.Count
-                    c.ClientUnits.Add(key, f)
-                    if List.isEmpty rest then f else apply ()
+                    let envId = id ("env_" + key)
+                    let rw = FreeVarRewrite(envId)
+                    let rewritten = rw.TransformExpression f
+                    c.ClientUnits.Add(key, Function([ envId ], None, None, Return rewritten))
+                    let envObj =
+                        Object [ for v in rw.Free -> (defaultArg v.Name "x", MemberKind.Simple, Var v) ]
+                    let register = rt c "registerClient" [ Value(String key); envObj ]
+                    let value = if List.isEmpty rest then f else apply ()
+                    Sequential [ StatementExpr(ExprStatement register, None); value ]
                 | "wsclient:run"
                 | "wsclient:server" -> if List.isEmpty rest then f else apply ()
                 | other -> failwithf "wsclient: unknown marker %s" other

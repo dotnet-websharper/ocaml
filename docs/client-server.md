@@ -157,4 +157,14 @@ the same runtime from OCaml-compiled code.
 - Error surfacing for closures capturing non-serializable names (functions,
   mutable refs) — start by rejecting unsupported captures with a clear message.
 
-Start with **M1**.
+## Status
+
+- **M1 done**: markers recognized by the backend (`wsclient:client`/`server`/`run`); a
+  `client` closure compiles to a standalone unit `<out>/clientserver/<key>.js`.
+- **M2 done**: the closure's free variables are rewritten to reads from an
+  environment object and the unit is emitted as a factory `(env) => closure`;
+  the entry registers the captured values as JSON (`OCamlRuntime.registerClient`).
+- Next: **M3** (stable keys, multiple/units import wiring) and **M4** (UI
+  integration + hydration).
+
+Start with **M3**.

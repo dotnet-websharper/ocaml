@@ -131,6 +131,13 @@ if (!globalThis.OCamlRuntime) {
     return a;
   }
 
+  // Client/server: captured environments of `client` closures. The server
+  // registers the captured values by key; the client runtime reads them.
+  function registerClient(key, env) {
+    var store = globalThis.OCamlRuntime.__clients || (globalThis.OCamlRuntime.__clients = {});
+    store[key] = env;
+  }
+
   function caml_trampoline_return(f, args) {
     return { tramp: f, args: args };
   }
@@ -169,6 +176,7 @@ if (!globalThis.OCamlRuntime) {
     caml_closure: caml_closure,
     caml_to_js: caml_to_js,
     caml_list_to_array: caml_list_to_array,
+    registerClient: registerClient,
     caml_apply: caml_apply,
     caml_trampoline: caml_trampoline,
     caml_trampoline_return: caml_trampoline_return,
