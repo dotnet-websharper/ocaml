@@ -140,26 +140,18 @@ let main argv =
             | Block ss -> Block(ss |> List.map normalize)
             | _ -> stripper.TransformStatement (Breaker.BreakStatement (Breaker.optimizer.TransformStatement s))
 
-        // `[@rpc]` bodies go to a server bundle that registers them by name; the
-        // client-side proxies call back through `OCamlRuntime.rpcCall`.
-        let writeServerBundle (fns: (string * Expression) list) =
-            if not (List.isEmpty fns) then
-                let dir = Path.Combine(output, "server")
-                Directory.CreateDirectory dir |> ignore
+        // Server-only and `[@rpc]` bodies go to a server bundle (compiled in
+        // server mode, which registers the rpc handlers); the client bundle in
+        // turn stubs them out.
+        let writeServerBundle (stmts: Statement list) (usesRuntime: bool) =
+            let ast = stmts |> List.map normalize
+            let jsAst, _ = JavaScriptWriter.transformProgram Output.JavaScript pref ast
+            let code = Writer.ProgramToString pref jsAst
+            let code = if usesRuntime then runtimePrelude () + code else code
+            // Written next to the client bundle so its `./<unit>.js` imports resolve.
+            File.WriteAllText(Path.Combine(output, ir.Unit + ".server.js"), code)
 
-                let stmts =
-                    [ for (name, fn) in fns ->
-                          ExprStatement(
-                              Application(
-                                  GlobalAccess(Address.LibAddr [ "OCamlRuntime"; "registerRpc" ]),
-                                  [ Value(String name); fn ],
-                                  ApplicationInfo.None
-                              )
-                          ) ]
-                    |> List.map normalize
-
-                let jsAst, _ = JavaScriptWriter.transformProgram Output.JavaScript pref stmts
-                File.WriteAllText(Path.Combine(dir, ir.Unit + ".js"), runtimePrelude () + Writer.ProgramToString pref jsAst)
+        let hasServer = not (List.isEmpty ir.Rpc && List.isEmpty ir.Server)
 
         if references.Count > 0 && wsCompile then
             // A'' path: lower member calls to WebSharper nodes and let
@@ -167,7 +159,7 @@ let main argv =
             // (imports, module object and entry) against the referenced metadata.
             let ctx = (bindings references).Value
             ctx.Comp.AssemblyName <- "."
-            let stmt, usesRuntime, serverFns = compileEntry (Some ctx) ir
+            let stmt, usesRuntime = compileEntry false (Some ctx) ir
             let comp = ctx.Comp
             comp.SetEntryPoint stmt
             Translator.DotNetToJavaScript.CompileFull comp
@@ -196,23 +188,28 @@ let main argv =
                 File.WriteAllText(Path.Combine(output, target), js)
 
             packageReferences (List.ofSeq references) output pref
-            writeServerBundle serverFns
         else if references.Count = 0 then
-            let stmts, usesRuntime, serverFns = compile false None ir
+            let stmts, usesRuntime = compile false false None ir
             let ast = stmts |> List.map normalize
             let jsAst, _ = JavaScriptWriter.transformProgram Output.JavaScript pref ast
             let js = Writer.ProgramToString pref jsAst
             let code = if usesRuntime then runtimePrelude () + js else js
             File.WriteAllText(Path.Combine(output, ir.Unit + ".js"), code)
-            writeServerBundle serverFns
+
+            if hasServer then
+                let sstmts, suses = compile false true None ir
+                writeServerBundle sstmts suses
         else
-            let stmts, usesRuntime, serverFns = compile false (bindings references) ir
+            let stmts, usesRuntime = compile false false (bindings references) ir
             let ast = stmts |> List.map normalize
             let jsAst, _ = JavaScriptWriter.transformProgram Output.JavaScript pref ast
             let js = Writer.ProgramToString pref jsAst
             let code = if usesRuntime then runtimePrelude () + js else js
             File.WriteAllText(Path.Combine(output, ir.Unit + ".js"), code)
-            writeServerBundle serverFns
+
+            if hasServer then
+                let sstmts, suses = compile false true (bindings references) ir
+                writeServerBundle sstmts suses
 
         ignore packageRefs
 

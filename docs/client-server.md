@@ -66,8 +66,11 @@ The frontend reads them from the parsetree and emits the marked names in the IR
   calls `OCamlRuntime.rpcCall("g", args)`; the real body is collected into a
   **server bundle** `<out>/server/<unit>.js` that registers it via
   `OCamlRuntime.registerRpc`. (The runtime stands in for an HTTP round-trip.)
-- Include only JS-targeted code in the client bundle; emit the server bundle for
-  `[@rpc]` bodies and server-only code (split pending).
+- The unit is compiled twice: a **client** build (keeps the entry + `[@javascript]`
+  code + `rpcCall` proxies; stubs server-only and `[@rpc]` bodies) and a
+  **server** build (`<out>/<unit>.server.js`; keeps server-only + `[@rpc]`
+  bodies, stubs client code, registers the rpc handlers). Only client code is in
+  the client bundle.
 - For client code embedded in a rendered view, emit `ClientCode`-style
   instructions (see §4).
 
@@ -96,11 +99,11 @@ the same runtime from OCaml-compiled code.
 - **B1 — boundary (done).** `[@javascript]`/`[@rpc]` read from the parsetree,
   emitted in the IR; the frontend rejects a client→server direct reference.
 - **B2 — RPC (done).** A top-level `[@rpc]` value's client binding is an
-  `OCamlRuntime.rpcCall` proxy; its body is emitted to `<out>/server/<unit>.js`
+  `OCamlRuntime.rpcCall` proxy; its body is emitted to `<out>/<unit>.server.js`
   and registered with `OCamlRuntime.registerRpc`. The runtime call is
-  synchronous (standing in for an HTTP round-trip). Remaining: a real async
-  transport, serialization of arguments/results, and excluding server code from
-  the client bundle.
+  synchronous (standing in for an HTTP round-trip). The client bundle now
+  excludes server-only + `[@rpc]` bodies (compiled into the server bundle).
+  Remaining: a real async transport and argument/result serialization.
 - **M3 — first-class client code.** Stable keys by `(assembly, unit, position)`;
   multiple client units; import wiring; `scripts/test-quick.sh` coverage.
 - **M4 — UI integration + hydration.** Marked client code as `On.*`/`Attr`

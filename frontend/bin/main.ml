@@ -307,11 +307,11 @@ let parse file =
    [@javascript] marks a JS-targeted (client) value; [@rpc] marks a server
    value callable from the client; every other top-level value is server-only
    and must not be referenced by client-side code. *)
+let attrNames (attrs: Parsetree.attributes) =
+  List.map (fun (a: Parsetree.attribute) -> a.attr_name.txt) attrs
+
 let clientMarks (ast: Parsetree.structure) =
-  let js = ref [] and rpc = ref [] and top = Hashtbl.create 16 in
-  let attrNames (attrs: Parsetree.attributes) =
-    List.map (fun (a: Parsetree.attribute) -> a.attr_name.txt) attrs
-  in
+  let js = ref [] and rpc = ref [] and srv = ref [] in
   List.iter
     (fun (item: Parsetree.structure_item) ->
       match item.pstr_desc with
@@ -320,15 +320,15 @@ let clientMarks (ast: Parsetree.structure) =
             (fun (vb: Parsetree.value_binding) ->
               match vb.pvb_pat.ppat_desc with
               | Parsetree.Ppat_var { txt = n; _ } ->
-                  Hashtbl.replace top n ();
                   let a = attrNames vb.pvb_attributes in
                   if List.mem "javascript" a then js := n :: !js
                   else if List.mem "rpc" a then rpc := n :: !rpc
+                  else srv := n :: !srv
               | _ -> ())
             vbs
       | _ -> ())
     ast;
-  (List.rev !js, List.rev !rpc, top)
+  (List.rev !js, List.rev !rpc, List.rev !srv)
 
 let referencedNames (e: Parsetree.expression) =
   let acc = ref [] in
@@ -345,9 +345,6 @@ let referencedNames (e: Parsetree.expression) =
   in
   it.expr it e;
   !acc
-
-let attrNames (attrs: Parsetree.attributes) =
-  List.map (fun (a: Parsetree.attribute) -> a.attr_name.txt) attrs
 
 let checkBoundary (ast: Parsetree.structure) =
   let role = Hashtbl.create 16 in
@@ -415,7 +412,7 @@ let () =
     let env = Compmisc.initial_env () in
     let ast = parse !input in
     checkBoundary ast;
-    let js, rpc, _ = clientMarks ast in
+    let js, rpc, srv = clientMarks ast in
     let typed, _, _, _, _ = Typemod.type_structure env ast in
     let u =
       if !unit_name <> "" then !unit_name
@@ -433,6 +430,7 @@ let () =
           ("mainModuleBlockSize", `Int program.main_module_block_size);
           ("javascript", `List (List.map (fun n -> `String n) js));
           ("rpc", `List (List.map (fun n -> `String n) rpc));
+          ("server", `List (List.map (fun n -> `String n) srv));
           ( "requiredGlobals",
             `List
               (Ident.Set.elements program.required_globals

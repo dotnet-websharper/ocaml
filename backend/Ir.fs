@@ -66,6 +66,7 @@ type UnitIR =
         RequiredGlobals: string list
         JavaScript: string list
         Rpc: string list
+        Server: string list
         Code: LExpr
     }
 
@@ -176,6 +177,10 @@ module Json =
                 | _ -> []
             Rpc =
                 match r.TryGetProperty "rpc" with
+                | true, v -> [ for i in v.EnumerateArray() -> i.GetString() ]
+                | _ -> []
+            Server =
+                match r.TryGetProperty "server" with
                 | true, v -> [ for i in v.EnumerateArray() -> i.GetString() ]
                 | _ -> []
             Code = expr (p "code" r)

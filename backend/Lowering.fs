@@ -22,10 +22,15 @@ module Lowering =
             Runtime: bool ref
             Bindings: WebSharper.OCaml.Bindings.Context option
             Ws: bool
-            // Top-level `[@rpc]` values: client sees an `rpcCall` proxy, the
-            // real bodies go to the server bundle.
+            // Boundary: [@javascript]/[@rpc]/server-only top-level values, and
+            // whether this is the server build (server code kept, client stubbed).
+            JavaScript: Set<string>
             RpcNames: Set<string>
-            ServerFns: ResizeArray<string * Expression>
+            ServerOnly: Set<string>
+            Server: bool
+            // True while lowering the module's top-level let chain (vs. nested
+            // locals inside a function body).
+            TopLevel: bool
         }
 
     let id n = Id.New(n, false)
@@ -119,7 +124,7 @@ module Lowering =
         | LExpr.Var n -> getVar c n.Id
         | LExpr.Const k -> lit c k
         | LExpr.Fun(ps, b) ->
-            let cc = clone c in
+            let cc = { clone c with TopLevel = false } in
 
             let ids =
                 ps
@@ -135,15 +140,32 @@ module Lowering =
             let x = vid n in
             cc.Vars[n.Id] <- x
 
-            match v with
-            | LExpr.Fun(ps, _) when c.RpcNames.Contains n.Name ->
-                // Server body into the server bundle; client binds a proxy.
-                c.ServerFns.Add(n.Name, expr c v)
-                let ids = ps |> List.map vid
-                let call =
-                    rt c "rpcCall" [ Value(String n.Name); NewTuple(List.map Var ids, []) ]
-                Let(x, Function(ids, None, None, Return call), expr cc b)
-            | _ -> Let(x, expr c v, expr cc b)
+            let top = c.TopLevel
+            let stub () = Let(x, Undefined, expr cc b)
+            let keep () = Let(x, expr c v, expr cc b)
+
+            if top && c.RpcNames.Contains n.Name then
+                match v with
+                | LExpr.Fun(ps, _) ->
+                    if c.Server then
+                        // Server build: keep the body and register the handler.
+                        let register = rt c "registerRpc" [ Value(String n.Name); Var x ]
+                        Let(x, expr c v, Sequential [ StatementExpr(ExprStatement register, None); expr cc b ])
+                    else
+                        // Client build: bind a proxy that calls back by name.
+                        let ids = ps |> List.map vid
+                        let call = rt c "rpcCall" [ Value(String n.Name); NewTuple(List.map Var ids, []) ]
+                        Let(x, Function(ids, None, None, Return call), expr cc b)
+                | _ -> if c.Server then keep () else stub ()
+            elif top && c.JavaScript.Contains n.Name then
+                if c.Server then stub () else keep ()
+            elif top && c.ServerOnly.Contains n.Name then
+                if c.Server then keep () else stub ()
+            elif c.Server && top then
+                // The client entry and any other client-only top-level code.
+                stub ()
+            else
+                keep ()
         | LExpr.LetRec(bs, b) ->
             let cc = clone c in
 
@@ -599,7 +621,7 @@ module Lowering =
 
         List.foldBack (fun (test, b) acc -> Conditional(test, body c b, acc)) cases fallback
 
-    let compile (ws: bool) (bindings: WebSharper.OCaml.Bindings.Context option) (ir: UnitIR) =
+    let compile (ws: bool) (server: bool) (bindings: WebSharper.OCaml.Bindings.Context option) (ir: UnitIR) =
         let gs = Dictionary<string, Id>()
         let runtime = ref false
 
@@ -612,8 +634,11 @@ module Lowering =
                 Runtime = runtime
                 Bindings = bindings
                 Ws = ws
+                JavaScript = Set.ofList ir.JavaScript
                 RpcNames = Set.ofList ir.Rpc
-                ServerFns = ResizeArray()
+                ServerOnly = Set.ofList ir.Server
+                Server = server
+                TopLevel = true
             }
 
         let imports =
@@ -629,11 +654,11 @@ module Lowering =
         let init = VarDeclaration(me, Object [])
         let body = ExprStatement(expr c ir.Code)
         let export = ExportDecl(true, ExprStatement(Var me))
-        imports @ [ init; body; export ], runtime.Value, List.ofSeq c.ServerFns
+        imports @ [ init; body; export ], runtime.Value
 
     // Lower just the module body to a single statement suitable as a
     // WebSharper entry point (used by the compilation/packager pipeline).
-    let compileEntry (bindings: WebSharper.OCaml.Bindings.Context option) (ir: UnitIR) =
+    let compileEntry (server: bool) (bindings: WebSharper.OCaml.Bindings.Context option) (ir: UnitIR) =
         let runtime = ref false
         let globalExprs = Dictionary<string, Expression>()
 
@@ -646,8 +671,11 @@ module Lowering =
                 Runtime = runtime
                 Bindings = bindings
                 Ws = true
+                JavaScript = Set.ofList ir.JavaScript
                 RpcNames = Set.ofList ir.Rpc
-                ServerFns = ResizeArray()
+                ServerOnly = Set.ofList ir.Server
+                Server = server
+                TopLevel = true
             }
 
         // Required OCaml units become WebSharper JS imports so the packager
@@ -665,5 +693,4 @@ module Lowering =
             [ VarDeclaration(me, Object [])
               ExprStatement(expr c ir.Code)
               ExportDecl(true, ExprStatement(Var me)) ],
-        runtime.Value,
-        List.ofSeq c.ServerFns
+        runtime.Value

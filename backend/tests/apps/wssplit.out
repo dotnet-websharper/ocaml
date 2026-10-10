@@ -1,0 +1,4 @@
+client-has-secret: false
+server-has-secret: true
+f=42
+g=777798
