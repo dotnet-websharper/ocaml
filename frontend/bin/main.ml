@@ -1277,18 +1277,21 @@ let transformClientServer (ast: Parsetree.structure) : Parsetree.structure =
     m.expr m e
   in
   (* Server marker: `__client id` (placeholder) or `__hydrate id (fun () -> view)`. *)
-  let marker mode id (arg: Parsetree.expression) =
+  (* Relocate the synthesized wrapper to [loc], *then* substitute the user's
+     fragment so its own locations are preserved (errors inside the fragment
+     point at the offending expression, not at the call). *)
+  let marker mode loc id (arg: Parsetree.expression) =
     let s =
       if mode then Printf.sprintf "WebSharper_ClientServer.__hydrate %S (zzz_arg)" id
       else Printf.sprintf "WebSharper_ClientServer.__client %S" id
     in
-    let e = Parse.expression (Lexing.from_string s) in
+    let e = relocate loc (Parse.expression (Lexing.from_string s)) in
     if mode then subst arg e else e
   in
   (* Client binding: `fun () -> WebSharper_UI.Doc.runById id (view)`. *)
-  let binding_value id (arg: Parsetree.expression) =
+  let binding_value loc id (arg: Parsetree.expression) =
     let s = Printf.sprintf "fun () -> WebSharper_UI.Doc.runById %S (zzz_arg ())" id in
-    subst arg (Parse.expression (Lexing.from_string s))
+    subst arg (relocate loc (Parse.expression (Lexing.from_string s)))
   in
   let mapper =
     { Ast_mapper.default_mapper with
@@ -1301,7 +1304,7 @@ let transformClientServer (ast: Parsetree.structure) : Parsetree.structure =
               let arg = Ast_mapper.default_mapper.expr self arg in
               let id = id_of arg in
               frags := (id, arg) :: !frags;
-              Ast_mapper.default_mapper.expr self (relocate e.pexp_loc (marker (Option.get (csCall f)) id arg))
+              Ast_mapper.default_mapper.expr self (marker (Option.get (csCall f)) e.pexp_loc id arg)
           (* `on.x` -> `On.x` (WebSharper.UI's `On` module). *)
           | Parsetree.Pexp_field
               ( { Parsetree.pexp_desc = Parsetree.Pexp_ident { txt = Longident.Lident "on"; _ }; _ },
@@ -1332,7 +1335,7 @@ let transformClientServer (ast: Parsetree.structure) : Parsetree.structure =
             { Parsetree.attr_name = { txt = "client"; loc }; attr_payload = Parsetree.PStr []; attr_loc = loc }
           in
           let vb =
-            { Parsetree.pvb_pat = pat; pvb_expr = relocate loc (binding_value id arg); pvb_attributes = [ client_attr ]; pvb_loc = loc; pvb_constraint = None }
+            { Parsetree.pvb_pat = pat; pvb_expr = binding_value loc id arg; pvb_attributes = [ client_attr ]; pvb_loc = loc; pvb_constraint = None }
           in
           { Parsetree.pstr_desc = Parsetree.Pstr_value (Asttypes.Nonrecursive, [ vb ]); pstr_loc = loc })
         !frags
