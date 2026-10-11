@@ -119,6 +119,36 @@ example against the installed opam package and then emits JS. `examples/dom` is
 a jsdom-backed DOM example. `examples/hello` and `examples/basics` compile plain
 OCaml units and need no bindings.
 
+## Client/server: sitelets & hydration
+
+A wsocaml app is written once and compiled to both tiers. A `[@website]`
+**sitelet** serves pages (`Content.*`) and RPC on the native OCaml server, and
+`client`/`hydrate` embed client-side pieces in a server-rendered page.
+
+- `[@rpc]` — the client gets a proxy; the body runs on the native server.
+- `[@endpoint "METHOD /path"]` on a DU case + `Sitelet.infer` — the frontend
+  generates the router/URL builder from the endpoint variant.
+- `open WebSharper_ClientServer` then `hydrate (fun () -> view)` /
+  `client (fun () -> view)` embed a client-side piece in a page.
+
+The `hydrate`/`client` pipeline:
+
+1. the frontend **lifts** the fragment into a `[@client]` binding
+   `let ws<id> () = Doc.runById "<id>" view` (opaque `ws<digits>` id) and replaces
+   the call with a marker (`__hydrate`/`__client`);
+2. the native server renders the marker: `hydrate` server-renders the view into
+   `<div id="<id>" data-ws-key="<id>">…</div>` (SSR); `client` renders it empty
+   (client-only);
+3. `Content.page` + `Server.serve ~bundle` inject the bundle and, **after** it, a
+   bootstrap `<script type="module">globalThis.OCamlRuntime.hydrate()</script>`
+   (both deferred module scripts, so the bundle registers client code first);
+4. the client bundle registers the lifted binding (`OCamlRuntime.registerClient`);
+5. on load `hydrate()` clears each `[data-ws-key]` region and runs the binding
+   (`Doc.runById`), re-rendering the same view client-side — currently
+   **client-owned** (not node-preserving).
+
+See `examples/hello-world` and `docs/client-server.md` for details.
+
 ## Tests
 
     bash backend/tests/run-tests.sh            # build the backend and run all tests
