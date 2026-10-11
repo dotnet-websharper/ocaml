@@ -1401,11 +1401,35 @@ let transformClientServer (ast: Parsetree.structure) : Parsetree.structure =
     in
     insert [] mapped
 
+(* Typecheck the server-only items against the *native* packages (the
+   `WebSharper_UI` shadow, `WebSharper_Server`, `WebSharper_ClientServer`), so
+   server-specific errors (e.g. a UI combinator the native shadow lacks) are
+   reported at the user's source instead of in the generated `server.ml`.
+   Warnings are suppressed here (the full source is already checked above). *)
+let typecheckServer (dirs : string list) (items : Parsetree.structure) : unit =
+  if dirs <> [] then begin
+    let saved_dirs = !Clflags.include_dirs in
+    let saved_warnings = Warnings.backup () in
+    Fun.protect
+      ~finally:(fun () ->
+        Warnings.restore saved_warnings;
+        Clflags.include_dirs := saved_dirs)
+      (fun () ->
+        (* Replace (don't extend) the include path: the native packages must
+           shadow the client `WebSharper_UI` binding and the server-API stubs. *)
+        Clflags.include_dirs := List.rev dirs;
+        ignore (Warnings.parse_options false "-a");
+        Compmisc.init_path ();
+        let nenv = Compmisc.initial_env () in
+        ignore (Typemod.type_structure nenv items))
+  end
+
 let () =
   let input = ref ""
   and output = ref ""
   and unit_name = ref ""
   and includes = ref []
+  and server_includes = ref []
   and emit_server = ref None
   and dts = ref None
   and static_dir = ref None in
@@ -1417,6 +1441,7 @@ let () =
       ("--emit-server", Arg.String (fun x -> emit_server := Some x), "emit a native RPC server .ml");
       ("--dts", Arg.String (fun x -> dts := Some x), "emit TypeScript declarations for [@export]");
       ("--static", Arg.String (fun x -> static_dir := Some x), "static assets directory for the server");
+      ("--server-include", Arg.String (fun x -> server_includes := x :: !server_includes), "include dir for the native server typecheck");
       ("-I", Arg.String (fun x -> includes := x :: !includes), "include dir");
     ]
     (fun _ -> ())
@@ -1441,6 +1466,8 @@ let () =
     let typed, _, _, _, typedEnv = Typemod.type_structure env ast in
     (match !emit_server with
     | Some p ->
+        typecheckServer (List.rev !server_includes)
+          (serverItems ast (List.filter (fun n -> not (List.mem n cli)) js));
         emitServer p ast typed typedEnv js rpc cli website u !static_dir !input;
         exit 0
     | None -> ());

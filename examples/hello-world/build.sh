@@ -13,6 +13,7 @@ eval "$(opam env)"
 
 q() { ocamlfind query "$1" 2>/dev/null || true; }
 ui="$(q websharper-ui)"; jsl="$(q websharper-javascript)"; rt="$(q websharper-runtime)"; sl="$(q websharper-stdlib)"
+server="$(q websharper-server)"; uiserver="$(q websharper-ui-server)"; yojson="$(q yojson)"
 
 # Client-facing server-API stubs (typechecked against the generated WebSharper_UI).
 cmi="$out/cmi"; mkdir -p "$cmi"
@@ -26,6 +27,7 @@ WS_EXTRA_INC="$cmi" bash "$root/scripts/build-ui-app.sh" "$entry" "$out/client" 
 # 2. Native server generated from the same source (sitelet + RPC + hydration).
 "$root/frontend/_build/default/bin/main.exe" \
   --input "$entry" --emit-server "$out/server.ml" --unit Main --static "$out/client" \
+  --server-include "$server" --server-include "$uiserver" --server-include "$yojson" \
   -I "$cmi" -I "$ui" -I "$jsl" -I "$rt" -I "$sl" -I "$(ocamlc -where)"
 
 # 3. Compile it against the installed websharper-server / websharper-ui-server.
