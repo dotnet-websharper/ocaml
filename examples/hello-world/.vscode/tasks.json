@@ -9,6 +9,7 @@
       "problemMatcher": {
         "owner": "wsocaml",
         "source": "wsocaml",
+        "fileLocation": "absolute",
         "pattern": {
           "regexp": "^(.+?):(\\d+):(\\d+): (error|warning): (.*)$",
           "file": 1,

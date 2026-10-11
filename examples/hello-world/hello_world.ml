@@ -20,7 +20,7 @@ let[@website] main =
           [
             h1 [] [text "Hello, world!"];
             p [] [text "Served by websharper-server, hydrated by WebSharper.UI."];
-            hydrate (fun () ->
+            hydrate (fun () _ ->
               let v = Var.create "before" in
               div [
                   on.click (fun _ _ -> Var.set v "after")
