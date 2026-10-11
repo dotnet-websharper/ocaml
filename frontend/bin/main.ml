@@ -971,16 +971,54 @@ let serverItems (ast: Parsetree.structure) (js: string list) : Parsetree.structu
       | _ -> Some item)
     ast
 
+let absPath (f : string) =
+  if f = "" then f
+  else if Filename.is_relative f then Filename.concat (Sys.getcwd ()) f
+  else f
+
+(* Emit a `# <line> "<file>"` directive so the native compiler (run from the
+   output directory) reports diagnostics at the user's source, not at the
+   generated `server.ml`. *)
+let addLineDirective (buf : Buffer.t) (loc : Location.t) =
+  let p = loc.Location.loc_start in
+  if p.pos_lnum > 0 && p.pos_fname <> "" then
+    Buffer.add_string buf (Printf.sprintf "# %d %S\n" p.pos_lnum (absPath p.pos_fname))
+
+let printStructureItem (item : Parsetree.structure_item) : string =
+  let b = Buffer.create 256 in
+  let fmt = Format.formatter_of_buffer b in
+  Pprintast.structure_item fmt item;
+  Format.pp_print_flush fmt ();
+  Buffer.contents b
+
 let prettyStructure (items: Parsetree.structure) : string =
   let buf = Buffer.create 512 in
-  let fmt = Format.formatter_of_buffer buf in
-  Pprintast.structure fmt items;
-  Format.pp_print_flush fmt ();
+  List.iter
+    (fun (item : Parsetree.structure_item) ->
+      addLineDirective buf item.pstr_loc;
+      let s = printStructureItem item in
+      Buffer.add_string buf s;
+      if s = "" || s.[String.length s - 1] <> '\n' then Buffer.add_char buf '\n')
+    items;
   Buffer.contents buf
+
+let bindingLoc (name : string) (ast : Parsetree.structure) : Location.t option =
+  List.find_map
+    (fun (item : Parsetree.structure_item) ->
+      match item.pstr_desc with
+      | Parsetree.Pstr_value (_, vbs) ->
+          List.find_map
+            (fun (vb : Parsetree.value_binding) ->
+              match vb.pvb_pat.ppat_desc with
+              | Parsetree.Ppat_var { txt; _ } when txt = name -> Some vb.pvb_loc
+              | _ -> None)
+            vbs
+      | _ -> None)
+    ast
 
 let emitServer (path: string) (ast: Parsetree.structure) (typed: Typedtree.structure) (env: Env.t)
     (js: string list) (rpcs: string list) (clients: string list) (website: string option) (unitName: string)
-    (static_dir: string option) =
+    (static_dir: string option) (srcfile: string) =
   let files = typedTypes typed in
   let sigs =
     rpcs |> List.map (fun name ->
@@ -993,6 +1031,19 @@ let emitServer (path: string) (ast: Parsetree.structure) (typed: Typedtree.struc
   let sb = Buffer.create 2048 in
   Buffer.add_string sb "(* Generated native RPC server. Do not edit. *)\n";
   Buffer.add_string sb (prettyStructure (serverItems ast (List.filter (fun n -> not (List.mem n clients)) js)));
+  (* Generated helpers/bootstrap: attribute to the `[@website]` sitelet (or the
+     top of the source) so native diagnostics stay in the user's file. *)
+  let gen_loc =
+    match website with
+    | Some w -> (match bindingLoc w ast with Some l -> l | None -> Location.none)
+    | None -> Location.none
+  in
+  if gen_loc.Location.loc_start.pos_lnum <= 0 || gen_loc.Location.loc_start.pos_fname = "" then
+    addLineDirective sb
+      { Location.none with
+        loc_start = { Lexing.pos_fname = srcfile; pos_lnum = 1; pos_bol = 0; pos_cnum = 0 };
+        loc_ghost = false }
+  else addLineDirective sb gen_loc;
   Buffer.add_string sb "\n";
   Buffer.add_string sb (helperDefs env recSet collected);
   Buffer.add_string sb "let () =\n";
@@ -1390,7 +1441,7 @@ let () =
     let typed, _, _, _, typedEnv = Typemod.type_structure env ast in
     (match !emit_server with
     | Some p ->
-        emitServer p ast typed typedEnv js rpc cli website u !static_dir;
+        emitServer p ast typed typedEnv js rpc cli website u !static_dir !input;
         exit 0
     | None -> ());
     let program = Translmod.transl_implementation u (typed, Tcoerce_none) in
