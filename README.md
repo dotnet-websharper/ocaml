@@ -104,13 +104,18 @@ bindings first, then build:
 client-side piece** (`WebSharper_ClientServer.hydrate`). `dune build` produces
 both tiers via `--emit-server`:
 
+    opam repo add wsocaml ./bindings && opam install websharper-javascript
     opam install ./runtimes/ocaml ./runtimes/ui-server   # websharper-server + websharper-ui-server
-    cd examples/hello-world && dune build
-    ./_build/default/out/server &                        # serves http://127.0.0.1:8123/
-    node verify.mjs _build/default/out                   # SSR + hydration check
+    cd examples/hello-world && bash build.sh             # -> out/{client,server}
+    ./out/server &                                       # serves http://127.0.0.1:8123/
+    node verify.mjs out                                  # SSR + hydration check
 
 (Requires `frontend/` and `backend/` to be built: `cd frontend && dune build`,
 `dotnet build backend`.)
+
+`dune build` in `examples/hello-world` only type-checks the source (its `dune`
+has a `library` stanza so the editor resolves the libraries); the app is built
+by `build.sh`, so editing does not trigger a build.)
 
 `examples/js` references the binding package directly in its `dune` file
 (`(libraries websharper-javascript)` and

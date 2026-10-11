@@ -4,7 +4,7 @@ import { JSDOM } from 'jsdom';
 import { pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
 
-const out = process.argv[2] ?? '_build/default/out';
+const out = process.argv[2] ?? 'out';
 const base = 'http://127.0.0.1:8123';
 
 const page = await (await fetch(base + '/')).text();
