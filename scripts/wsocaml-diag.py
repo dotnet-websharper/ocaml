@@ -19,7 +19,7 @@ Usage: <tool output> | wsocaml-diag.py
 import re
 import sys
 
-HEADER = re.compile(r'^File "(.+)", line (\d+), characters (\d+)-\d+:')
+HEADER = re.compile(r'^File "(.+)", lines? (\d+)(?:-\d+)?, characters (\d+)(?:-\d+)?:')
 MESSAGE = re.compile(r'^(Error|Warning\s+\d+\s+\[[^\]]*\]|Warning):?\s?(.*)$')
 EXCEPTION = re.compile(r'^[A-Z][A-Za-z0-9_]*\.[A-Za-z_]+\([^)]*\)\s*$')
 
@@ -53,8 +53,8 @@ def main() -> int:
                     message = m.group(2).strip()
                 # else: source/caret excerpt -> skip
                 continue
-            # after the message: indented lines continue it
-            if text[:1] in (" ", "\t") and not EXCEPTION.match(text.strip()):
+            # after the message: indented lines and `Hint:` lines continue it
+            if (text[:1] in (" ", "\t") or text.startswith("Hint:")) and not EXCEPTION.match(text.strip()):
                 message = (message + " " + text.strip()).strip()
                 continue
             flush()
