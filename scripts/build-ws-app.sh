@@ -42,7 +42,7 @@ done < "$work/order.txt"
 # 2) compile the entry to IR to discover required modules
 "$fe" --input "$entry" --output "$out/Main.wsir.json" --dts "$out/Main.d.ts" --unit Main -I "$bindir" -I "$work" "${runtime_inc[@]}" -I "$s"
 
-globals="$(python3 -c "import json,sys; print(' '.join(json.load(open(sys.argv[1]))['requiredGlobals']))" "$out/Main.wsir.json")"
+globals="$("$root/frontend/_build/default/bin/required_globals.exe" "$out/Main.wsir.json")"
 
 # 3) compile each required binding module to JS. Wrapped libraries expose
 #    internal units named <Lib>__<Module>; map them back to their source file.

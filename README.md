@@ -18,7 +18,7 @@ Lambda into `wsocaml-ir-4`, and the backend lowers it to WebSharper AST and emit
 | `backend/` | F#/.NET backend: `.wsir.json` → `.js` (also handles WebSharper bindings) |
 | `binding-adaptor/` | F# tool: WebSharper binding assembly → OCaml opam package |
 | `bindings/` | local opam repository of generated bindings (`websharper-xxx`) |
-| `bindings-legacy/` | raw-FFI test fixture (`gen-bindings.py`), used by the `jsbind`/`dom` emit tests |
+| `bindings-legacy/` | raw-FFI test fixture (`frontend/bin/gen_bindings.ml`), used by the `jsbind`/`dom` emit tests |
 | `runtimes/ocaml/` | `websharper-server`: representation-agnostic sitelets, Content, SSR nodes, HTTP |
 | `runtimes/ui-server/` | `websharper-ui-server`: the native `WebSharper_UI` shadow (converts to `Ssr.node`) |
 | `examples/` | dune projects built on the generated bindings / `websharper-server` |
