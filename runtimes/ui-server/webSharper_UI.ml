@@ -33,6 +33,33 @@ module On = struct
   let click (_ : 'a -> 'b -> unit) : Attr.t = ("", "")
 end
 
+(* IDE-facing shim: the wsocaml compiler rewrites `on.<event>` to `On.<event>`,
+   but a stock OCaml toolchain (Merlin/ocaml-lsp) sees `on.click` as a field
+   access, so `on` is provided here so source typechecks editor-side. *)
+type event
+type on_handlers = {
+  click : (event -> event -> unit) -> Attr.t;
+  dblclick : (event -> event -> unit) -> Attr.t;
+  change : (event -> event -> unit) -> Attr.t;
+  input : (event -> event -> unit) -> Attr.t;
+  keydown : (event -> event -> unit) -> Attr.t;
+  keyup : (event -> event -> unit) -> Attr.t;
+  submit : (event -> event -> unit) -> Attr.t;
+}
+
+let _on_noop (_ : event -> event -> unit) : Attr.t = ("", "")
+
+let on =
+  {
+    click = _on_noop;
+    dblclick = _on_noop;
+    change = _on_noop;
+    input = _on_noop;
+    keydown = _on_noop;
+    keyup = _on_noop;
+    submit = _on_noop;
+  }
+
 module Doc = struct
   type t = Ssr.node list
 

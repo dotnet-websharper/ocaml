@@ -1,3 +1,9 @@
+; IDE/typecheck context (so Merlin/ocaml-lsp can resolve the libraries).
+(library
+ (name hello_world_ml)
+ (modules hello_world)
+ (libraries websharper-server websharper-ui-server))
+
 (rule
  (target (dir out))
  (deps hello_world.ml build.sh)
