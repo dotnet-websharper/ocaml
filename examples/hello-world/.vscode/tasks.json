@@ -1,0 +1,25 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "wsocaml: build",
+      "type": "shell",
+      "command": "bash check.sh",
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": {
+        "owner": "wsocaml",
+        "source": "wsocaml",
+        "pattern": {
+          "regexp": "^(.+?):(\\d+):(\\d+): (error|warning): (.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
+      },
+      "group": { "kind": "build", "isDefault": true },
+      "presentation": { "reveal": "silent", "clear": true }
+    }
+  ]
+}

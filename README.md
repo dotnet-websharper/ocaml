@@ -115,7 +115,13 @@ both tiers via `--emit-server`:
 
 `dune build` in `examples/hello-world` only type-checks the source (its `dune`
 has a `library` stanza so the editor resolves the libraries); the app is built
-by `build.sh`, so editing does not trigger a build.)
+by `build.sh`, so editing does not trigger a build.
+
+To surface `build.sh` (frontend/codegen/native) errors in VS Code, run the
+default build task **wsocaml: build** (`Cmd/Ctrl+Shift+B`): `check.sh` builds and
+pipes the output through `scripts/wsocaml-diag.py`, which rewrites OCaml's
+multi-line reports into `file:line:col: error|warning: message` so they appear in
+the Problems panel.)
 
 `examples/js` references the binding package directly in its `dune` file
 (`(libraries websharper-javascript)` and
