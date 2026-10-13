@@ -25,7 +25,7 @@ Lambda into `wsocaml-ir-4`, and the backend lowers it to WebSharper AST and emit
 | `examples/` | dune projects built on the generated bindings / `websharper-server` |
 | `scripts/` | build/test helpers |
 | `backend/tests/` | test harness (IR fixtures + apps) |
-| `docs/` | design notes (`client-server.md`, `codegen.md`, `templates.md`) |
+| `docs/` | design notes (`client-server.md`, `codegen.md`, `templates.md`, `ws-differences.md`) |
 
 ## Build
 
@@ -161,6 +161,25 @@ The `hydrate`/`client` pipeline:
    **client-owned** (not node-preserving).
 
 See `examples/hello-world` and `docs/client-server.md` for details.
+
+## Differences from .NET WebSharper
+
+wsocaml reuses WebSharper's AST, runtime and binding packages, so most of the
+programming model matches .NET WS. The deliberate differences and the known gaps are
+collected in [`docs/ws-differences.md`](docs/ws-differences.md). In brief:
+
+- **Instance members are functions.** Interop APIs are generated as
+  `recv -> args -> ret` (e.g. `Var.get : 'a Var.t -> 'a`) rather than CLR instance
+  members; OCaml method sends (`obj#m`) are not supported (`Lsend`). This is
+  WebSharper's own `[<Prototype(false)>]` representation — WS's default is a JS
+  class with prototype methods, reattached to plain/JSON objects via
+  `WebSharperRuntime.Create` (`Object.create(ctor.prototype)` + assign).
+- **`V` reactive notation** (`V (a.V + b.V)`) is **not supported**: the backend does
+  not resolve generic type arguments at `ws:` call sites (so `Macros.V` fails), and
+  macro instance accessors like `Var.V` lose their receiver. The flattened spelling
+  would be `V.v (Var.v a + Var.v b)`.
+- Other gaps (anchors, cross-file templates, `ServerLoad`/`ClientLoad`,
+  node-preserving hydration, `int32`/`int64` on the wire) are listed there too.
 
 ## Templates
 
