@@ -102,17 +102,28 @@ WebSharper_UI.Var.set c.vars.filter "abc"
 
 ### Events
 
-Event holes get a nominal type from the event name (`click` → `mouse_event`,
-`keydown` → `keyboard_event`, `focus`/`blur` → `focus_event`, otherwise
-`event`), aliased in `WebSharper_UI.Template`:
+Event holes get a **nominal** type from the event name (`click` →
+`WebSharper_JavaScript.MouseEvent.t`, `keydown` → `KeyboardEvent.t`,
+`focus`/`blur` → `FocusEvent.t`, `wheel` → `WheelEvent.t`, otherwise `Event.t`),
+per WebSharper's `tags.csv`:
 
 ```ocaml
 (* <button ws-onclick="Remove"> *)
-c |> Greeting.remove (fun el ev -> (* ev : WebSharper_UI.Template.mouse_event *) ())
+c |> Card.remove (fun el ev -> (* ev : WebSharper_JavaScript.MouseEvent.t *)
+     Console.log (string_of_int (MouseEvent.button ev)))
 ```
 
-Every event also has a `_withModel` variant whose handler receives a record with
-access to the instance's `vars` (and, in future, `anchors`):
+Event types are abstract; upcast to a base explicitly (the equivalent of F#’s
+`:>`):
+
+```ocaml
+let ev : WebSharper_JavaScript.MouseEvent.t = ... in
+let e : WebSharper_JavaScript.Event.t = MouseEvent.as_event ev in
+Event.stopPropagation e
+```
+
+Each event also has a `_withModel` variant whose handler receives a record with
+access to the instance's `vars`:
 
 ```ocaml
 c
@@ -120,6 +131,9 @@ c
      WebSharper_UI.Var.set e.vars.filter "clicked";
      ignore e.target)
 ```
+
+(DOM *node* types — `Element`, `Node`, `Document` — remain collapsed to the
+single abstract `EventTarget.t`, so no coercions are needed between them.)
 
 ### Anchors
 

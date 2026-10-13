@@ -323,6 +323,8 @@ let generateClass
     (spec: Spec)
     (assemblyName: string)
     (isAbstract: bool)
+    (isEvent: bool)
+    (baseModules: string list)
     (moduleName: string)
     (address: Address)
     (td: TypeDefinitionInfo)
@@ -341,6 +343,8 @@ let generateClass
         memberSpecs |> List.exists (fun m -> m.Member = wsName && m.Skip)
 
     let alias =
+        if isEvent then None
+        else
         match env.TypesModuleOf moduleName with
         | Some t -> Some(t + "." + moduleName)
         | None ->
@@ -486,16 +490,29 @@ let generateClass
                   Kinds = methodKinds kv.Value.CompiledForm })
             |> Seq.toList
 
+    let upcasts =
+        if not isEvent then []
+        else
+            baseModules
+            |> List.map (fun bm ->
+                { Name = "as_" + lowerFirst bm
+                  Signature = recv + " -> " + bm + ".t"
+                  Tag = "%identity"
+                  Kinds = "(inline)" })
+
     { Module = moduleName
       Generics = generics
       Alias = alias
       Address = address
-      Methods = methods
+      Methods = methods @ upcasts
       Fields = fields
       Constructors = ctors }
 
 let renderMember (m: Member) =
-    sprintf "(* %s *)\nexternal %s : %s = \"%s\" \"%s\"\n" m.Kinds m.Name m.Signature m.Tag m.Tag
+    if m.Tag.StartsWith "%" then
+        sprintf "(* %s *)\nexternal %s : %s = \"%s\"\n" m.Kinds m.Name m.Signature m.Tag
+    else
+        sprintf "(* %s *)\nexternal %s : %s = \"%s\" \"%s\"\n" m.Kinds m.Name m.Signature m.Tag m.Tag
 
 let renderClassBody (g: GeneratedClass) =
     let sb = StringBuilder()

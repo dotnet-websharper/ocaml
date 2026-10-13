@@ -19,4 +19,4 @@ let doc (c : t) : WebSharper_UI.Doc.t =
       WebSharper_UI.TemplateHoleAttribute.create "link" c.link;
       WebSharper_UI.TemplateHoleElt.create "body" c.body;
       WebSharper_UI.TemplateHole.makeVar "filter" c.vars.filter;
-      WebSharper_UI.TemplateHoleEvent.create "remove" c.remove ]
+      WebSharper_UI.TemplateHoleEvent.create "remove" (fun el ev -> c.remove el (Obj.magic ev)) ]

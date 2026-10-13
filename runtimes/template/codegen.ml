@@ -193,17 +193,18 @@ let signature ~base (p : Hole.parsed) : string =
 (* --- implementation --------------------------------------------------------- *)
 
 let hole_expr (h : Hole.hole) : string =
-  let fn =
-    match h.kind with
-    | Hole.Simple -> "WebSharper_UI.TemplateHole.makeText"
-    | Hole.Doc -> "WebSharper_UI.TemplateHoleElt.create"
-    | Hole.Attr -> "WebSharper_UI.TemplateHoleAttribute.create"
-    | Hole.Event _ -> "WebSharper_UI.TemplateHoleEvent.create"
-    | Hole.ElemHandler -> "WebSharper_UI.TemplateHoleAfterRender.create"
-    | Hole.Var ty -> var_fn ty
-  in
+  let name = ocaml_string (String.lowercase_ascii h.name) in
   let arg = if is_var h then "c.vars." ^ lcfirst h.name else "c." ^ lcfirst h.name in
-  Printf.sprintf "%s %s %s" fn (ocaml_string (String.lowercase_ascii h.name)) arg
+  match h.kind with
+  | Hole.Simple -> Printf.sprintf "WebSharper_UI.TemplateHole.makeText %s %s" name arg
+  | Hole.Doc -> Printf.sprintf "WebSharper_UI.TemplateHoleElt.create %s %s" name arg
+  | Hole.Attr -> Printf.sprintf "WebSharper_UI.TemplateHoleAttribute.create %s %s" name arg
+  | Hole.Event _ ->
+      (* `TemplateHoleEvent.create` takes the base `Event.t`; the user's handler
+         is typed with the specific event (e.g. `MouseEvent.t`) - downcast. *)
+      Printf.sprintf "WebSharper_UI.TemplateHoleEvent.create %s (fun el ev -> %s el (Obj.magic ev))" name arg
+  | Hole.ElemHandler -> Printf.sprintf "WebSharper_UI.TemplateHoleAfterRender.create %s %s" name arg
+  | Hole.Var ty -> Printf.sprintf "%s %s %s" (var_fn ty) name arg
 
 let rec impl_of ~server ~base (t : Hole.template) (inner : Hole.template list) : string =
   let tname = match t.name with Some n -> "Some " ^ ocaml_string n | None -> "None" in

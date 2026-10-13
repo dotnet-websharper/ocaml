@@ -586,10 +586,33 @@ let gen
         | null -> false
         | t -> t.IsAbstract
 
+    // Ancestor modules (nearest first), from the CLR base-class chain (the WS
+    // metadata omits some DOM bases). DOM event types become abstract with
+    // explicit upcasts (`as_event`, ...), so the editor shows per-event types
+    // while nodes stay collapsed.
+    let ancestorModules (td: TypeDefinitionInfo) : string list =
+        let rec go (t: System.Type) acc =
+            match t.BaseType with
+            | null -> acc
+            | bt ->
+                (match Map.tryFind bt.FullName localByFull with
+                 | Some bm when not (List.contains bm acc) -> go bt (bm :: acc)
+                 | _ -> go bt acc)
+        in
+        match targetAsm.GetType td.FullName with
+        | null -> []
+        | t -> List.rev (go t [])
+
     let generated =
         selected
         |> List.map (fun (a, td, ci, _) ->
-            generateClass env (opaqueFor (moduleOf td)) spec assemblyName (isAbstract td) (moduleOf td) a td ci)
+            let rawAncestors = ancestorModules td |> List.filter localModules.Contains
+            let m = moduleOf td
+            let isEvent = m = "Event" || List.contains "Event" rawAncestors
+            // DOM events all derive from EventTarget, but the CLR model stops at
+            // Event (base Object); add the upcast explicitly.
+            let ancestors = if isEvent then List.distinct (rawAncestors @ [ "EventTarget" ]) else rawAncestors
+            generateClass env (opaqueFor m) spec assemblyName (isAbstract td) isEvent ancestors m a td ci)
 
     // Merge classes that share the same address into one module (disambiguating
     // member-name clashes); e.g. a generic type and its static-helper type.
