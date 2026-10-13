@@ -21,11 +21,13 @@ let[@website] main =
           Greeting.create ()
           |> Greeting.title "Hello, world!"
           |> Greeting.body "Served by websharper-server, rendered from a template."
+          |> Greeting.onClick_withModel (fun e -> e.target)
+          |> Greeting.doc
         in
         Content.page
           ~title:"Hello, world!"
           [
-            greeting |> Greeting.doc;
+            greeting;
             hydrate (fun () ->
               let v = Var.create "before" in
               div [

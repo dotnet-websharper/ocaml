@@ -21,14 +21,32 @@ let val_ty_to_string = function
   | Hole.File -> "WebSharper_UI.Template.file array"
   | Hole.String | Hole.StringList | Hole.DateTime | Hole.DomElement | Hole.Any -> "string"
 
+(* Event name -> WebSharper.JavaScript event type alias, from WebSharper's
+   `tags.csv` (lowercased names; default `event`). *)
+let event_type_map =
+  [ "abort", "ui_event"; "domactivate", "ui_event"; "load", "ui_event"; "resize", "ui_event";
+    "scroll", "ui_event"; "select", "ui_event"; "unload", "ui_event";
+    "click", "mouse_event"; "contextmenu", "mouse_event"; "dblclick", "mouse_event";
+    "mousedown", "mouse_event"; "mouseenter", "mouse_event"; "mouseleave", "mouse_event";
+    "mousemove", "mouse_event"; "mouseout", "mouse_event"; "mouseover", "mouse_event";
+    "mouseup", "mouse_event"; "show", "mouse_event";
+    "keydown", "keyboard_event"; "keypress", "keyboard_event"; "keyup", "keyboard_event";
+    "blur", "focus_event"; "focus", "focus_event";
+    "compositionend", "composition_event"; "compositionstart", "composition_event";
+    "compositionupdate", "composition_event";
+    "domattrmodified", "mutation_event"; "domcharacterdatamodified", "mutation_event";
+    "domnodeinserted", "mutation_event"; "domnodeinsertedintodocument", "mutation_event";
+    "domnoderemoved", "mutation_event"; "domnoderemovedfromdocument", "mutation_event";
+    "domsubtreemodified", "mutation_event";
+    "wheel", "wheel_event" ]
+
 let event_type name =
-  match String.lowercase_ascii name with
-  | "click" | "dblclick" | "contextmenu" | "mousedown" | "mouseup" | "mousemove"
-  | "mouseover" | "mouseout" | "mouseenter" | "mouseleave" ->
-      "WebSharper_UI.Template.mouse_event"
-  | "keydown" | "keyup" | "keypress" -> "WebSharper_UI.Template.keyboard_event"
-  | "focus" | "blur" | "focusin" | "focusout" -> "WebSharper_UI.Template.focus_event"
-  | _ -> "WebSharper_UI.Template.event"
+  let a =
+    match List.assoc_opt (String.lowercase_ascii name) event_type_map with
+    | Some a -> a
+    | None -> "event"
+  in
+  "WebSharper_UI.Template." ^ a
 
 let element_type = "WebSharper_UI.Template.element"
 

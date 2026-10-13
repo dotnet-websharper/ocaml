@@ -126,13 +126,19 @@ end
    and substitute the holes, producing the initial SSR markup. Events and
    after-render handlers have no server-side effect. *)
 module Template = struct
-  type element = unit
-  type event = unit
-  type mouse_event = unit
-  type keyboard_event = unit
-  type focus_event = unit
-  type date = unit
-  type file = unit
+  (* The element/event types are the real WebSharper.JavaScript types on both
+     tiers so handler signatures are accurate; only the values differ (the
+     server never runs them). *)
+  type element = WebSharper_JavaScript.Element.t
+  type event = WebSharper_JavaScript.Event.t
+  type ui_event = WebSharper_JavaScript.UIEvent.t
+  type mouse_event = WebSharper_JavaScript.MouseEvent.t
+  type keyboard_event = WebSharper_JavaScript.KeyboardEvent.t
+  type focus_event = WebSharper_JavaScript.FocusEvent.t
+  type composition_event = WebSharper_JavaScript.CompositionEvent.t
+  type mutation_event = WebSharper_JavaScript.MutationEvent.t
+  type wheel_event = WebSharper_JavaScript.WheelEvent.t
+  type file = WebSharper_JavaScript.File.t
 
   type value =
     | VText of string
@@ -162,8 +168,8 @@ module Template = struct
   let varDom name _ = { tname = name; tvalue = VMisc }
   let event name _ = { tname = name; tvalue = VMisc }
   let afterRender name _ = { tname = name; tvalue = VMisc }
-  (* Anchors are client-only; no server-side value. *)
-  let anchor (_ : string) : element = ()
+  (* Anchors are client-only; never evaluated on the server. *)
+  let anchor (_ : string) : element = failwith "WebSharper_UI.Template.anchor is client-only"
 
   let starts_with pre s =
     String.length s >= String.length pre && String.sub s 0 (String.length pre) = pre

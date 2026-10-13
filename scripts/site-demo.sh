@@ -26,7 +26,7 @@ cp "$root/runtimes/ocaml/ssr.ml" \
    "$root/runtimes/ocaml/wsrpc.ml" "$root/runtimes/ocaml/webSharper_Server.ml" \
    "$root/runtimes/ocaml/webSharper_ClientServer.ml" \
    "$root/runtimes/ocaml/async.ml" "$root/runtimes/ui-server/webSharper_UI.ml" "$out/"
-(cd "$out" && ocamlfind ocamlopt -package unix,yojson,websharper-template -linkpkg wsrpc.ml ssr.ml async.ml webSharper_UI.ml webSharper_ClientServer.ml webSharper_Server.ml server.ml -o server)
+(cd "$out" && ocamlfind ocamlopt -package unix,yojson,websharper-template,websharper-javascript -linkpkg wsrpc.ml ssr.ml async.ml webSharper_UI.ml webSharper_ClientServer.ml webSharper_Server.ml server.ml -o server)
 
 # Fail fast if the port is already taken (avoids silent cross-talk with a
 # leftover server).

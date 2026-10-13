@@ -5,9 +5,13 @@
 
 type element = WebSharper_JavaScript.Element.t
 type event = WebSharper_JavaScript.Event.t
+type ui_event = WebSharper_JavaScript.UIEvent.t
 type mouse_event = WebSharper_JavaScript.MouseEvent.t
 type keyboard_event = WebSharper_JavaScript.KeyboardEvent.t
 type focus_event = WebSharper_JavaScript.FocusEvent.t
+type composition_event = WebSharper_JavaScript.CompositionEvent.t
+type mutation_event = WebSharper_JavaScript.MutationEvent.t
+type wheel_event = WebSharper_JavaScript.WheelEvent.t
 type file = WebSharper_JavaScript.File.t
 type hole = TemplateHole.t
 
