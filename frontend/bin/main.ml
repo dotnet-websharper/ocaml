@@ -1413,7 +1413,7 @@ let template_payload_string (p : Parsetree.payload) : string option =
       Some s
   | _ -> None
 
-let expand_template_module ~dir (path : string) : Parsetree.structure =
+let expand_template_module ~dir ~loc (path : string) : Parsetree.structure =
   let full = if Filename.is_relative path then Filename.concat dir path else path in
   let src = In_channel.with_open_bin full In_channel.input_all in
   let base = Filename.remove_extension (Filename.basename full) |> String.lowercase_ascii in
@@ -1421,7 +1421,11 @@ let expand_template_module ~dir (path : string) : Parsetree.structure =
   let code = Codegen.implementation ~base ~src parsed in
   let lb = Lexing.from_string code in
   Location.init lb full;
-  Parse.implementation lb
+  let items = Parse.implementation lb in
+  (* Point the generated code at the `[%template "..."`] site so diagnostics and
+     `#` line directives stay in the user's source. *)
+  let m = { Ast_mapper.default_mapper with location = (fun _ _ -> loc) } in
+  m.structure m items
 
 let transformTemplates ~dir (ast : Parsetree.structure) : Parsetree.structure =
   let mapper =
@@ -1432,7 +1436,7 @@ let transformTemplates ~dir (ast : Parsetree.structure) : Parsetree.structure =
           | Parsetree.Pmod_extension ({ txt = "template"; _ }, payload) -> (
               match template_payload_string payload with
               | Some path ->
-                  { me with pmod_desc = Parsetree.Pmod_structure (expand_template_module ~dir path) }
+                  { me with pmod_desc = Parsetree.Pmod_structure (expand_template_module ~dir ~loc:me.pmod_loc path) }
               | None -> Ast_mapper.default_mapper.module_expr self me)
           | _ -> Ast_mapper.default_mapper.module_expr self me) }
   in
@@ -1494,7 +1498,7 @@ let () =
     let tdir () = match !template_root with Some d -> d | None -> Filename.dirname !input in
     if !preprocess then begin
       let ast = transformTemplates ~dir:(tdir ()) (parse !input) in
-      Format.printf "%a@." Pprintast.structure ast;
+      print_string (prettyStructure ast);
       exit 0
     end;
     Clflags.include_dirs := List.rev !includes @ !Clflags.include_dirs;
