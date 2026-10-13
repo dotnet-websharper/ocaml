@@ -1469,7 +1469,9 @@ let () =
   and server_includes = ref []
   and emit_server = ref None
   and dts = ref None
-  and static_dir = ref None in
+  and static_dir = ref None
+  and preprocess = ref false
+  and template_root = ref None in
   Arg.parse
     [
       ("--input", Arg.Set_string input, ".ml input");
@@ -1479,6 +1481,8 @@ let () =
       ("--dts", Arg.String (fun x -> dts := Some x), "emit TypeScript declarations for [@export]");
       ("--static", Arg.String (fun x -> static_dir := Some x), "static assets directory for the server");
       ("--server-include", Arg.String (fun x -> server_includes := x :: !server_includes), "include dir for the native server typecheck");
+      ("--preprocess", Arg.Set preprocess, "expand [%template] and print the source");
+      ("--template-root", Arg.String (fun x -> template_root := Some x), "base directory for [%template] paths");
       ("-I", Arg.String (fun x -> includes := x :: !includes), "include dir");
     ]
     (fun _ -> ())
@@ -1487,10 +1491,16 @@ let () =
     prerr_endline "--input required";
     exit 2);
   try
+    let tdir () = match !template_root with Some d -> d | None -> Filename.dirname !input in
+    if !preprocess then begin
+      let ast = transformTemplates ~dir:(tdir ()) (parse !input) in
+      Format.printf "%a@." Pprintast.structure ast;
+      exit 0
+    end;
     Clflags.include_dirs := List.rev !includes @ !Clflags.include_dirs;
     Compmisc.init_path ();
     let env = Compmisc.initial_env () in
-    let dir = Filename.dirname !input in
+    let dir = tdir () in
     let ast = transformClientServer (transformInfer (transformTemplates ~dir (parse !input))) in
     checkBoundary ast;
     let js, rpc, srv = clientMarks ast in

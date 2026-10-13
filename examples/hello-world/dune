@@ -4,4 +4,7 @@
  (name hello_world_ml)
  (modules hello_world)
  (libraries websharper-server websharper-ui-server websharper-javascript)
- (flags (:standard -w -33)))
+ (flags (:standard -w -33))
+ (preprocess
+  (action
+   (run bash %{dep:preprocess.sh} %{input-file} %{dep:views/greeting.html}))))
