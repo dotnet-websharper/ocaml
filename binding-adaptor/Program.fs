@@ -110,6 +110,43 @@ let private jsModule =
       "" ]
     |> String.concat "\n"
 
+// Hand-written overlay added to the `websharper-ui` binding package: the wsocaml
+// templating runtime entry point (`WebSharper_UI.Template`). Generated template
+// modules call `Template.getOrLoad` with the raw source and typed holes; on the
+// client this delegates to the WebSharper.UI template runtime.
+let private websharperUiTemplate =
+    """(* Hand-written overlay: the wsocaml templating runtime entry point,
+   `WebSharper_UI.Template`. Generated template modules call
+   `WebSharper_UI.Template.getOrLoad` with the raw source and typed holes; on
+   the client this delegates to the WebSharper.UI template runtime. *)
+
+type element = WebSharper_JavaScript.Element.t
+type event = WebSharper_JavaScript.Event.t
+type hole = TemplateHole.t
+
+let text name (v : string) = TemplateHole.makeText name v
+let view name (v : string View.t) = TemplateHole.makeTextView name v
+let elt name (v : Doc.t) = TemplateHoleElt.create name v
+let attr name (v : Attr.t) = TemplateHoleAttribute.create name v
+let event name (f : element -> event -> unit) = TemplateHoleEvent.create name f
+let afterRender name (f : element -> unit) =
+  TemplateHoleAfterRender.create name f
+let varStr name (v : string Var.t) = TemplateHole.makeVar name v
+let varBool name (v : bool Var.t) = TemplateHole.makeVar_2 name v
+let varFloat name (v : float Var.t) = TemplateHole.makeVar_8 name v
+
+let getOrLoad ~base ~name ~src ~refs ~keep_unfilled (holes : hole list) : Doc.t =
+  ignore refs;
+  ignore keep_unfilled;
+  let fopt = function
+    | None -> WebSharper_StdLib.FSharpOption.none ()
+    | Some x -> WebSharper_StdLib.FSharpOption.some x
+  in
+  ClientDoc.getOrLoadTemplate base (fopt name)
+    (fun () -> DomUtility.parseHTMLIntoFakeRoot src)
+    holes
+"""
+
 // Writes <pkg>.opam into the source tree and the repo metadata (with extra-files
 // checksums required by opam >= 2.3) into the version directory.
 let private finalizeOpamPackage (pkgDir: string) (srcDir: string) (pkgId: string) (opamBody: string) =
@@ -700,6 +737,15 @@ let gen
                 renderItems sb group
                 File.WriteAllText(Path.Combine(libDir, lowerFirst head + ".ml"), sb.ToString())
                 yield lowerFirst head ]
+
+    // Inject the hand-written templating runtime overlay for the UI package.
+    let allModules =
+        allModules
+        @ (if pkgId = "websharper-ui" then
+               File.WriteAllText(Path.Combine(libDir, "template.ml"), websharperUiTemplate)
+               [ "template" ]
+           else
+               [])
 
     // Dune wraps library `webSharper_JavaScript` in module `WebSharper_JavaScript`.
     let libName = lowerFirst (assemblyName.Replace(".", "_"))
