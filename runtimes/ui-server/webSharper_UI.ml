@@ -122,6 +122,115 @@ module Html = struct
   let button = button
 end
 
+(* Input constructors (`WebSharper.UI.Client.Doc+InputType`). Server-side rendering
+   emits the initial input markup; the client hydrates/interacts. *)
+module ClientCheckedInput = struct
+  type 'a t = { ctext : string }
+  let make (_ : 'a) : 'a t = { ctext = "" }
+  let newInvalid (s : string) : 'a t = { ctext = s }
+  let newBlank (s : string) : 'a t = { ctext = s }
+  let newValid (_ : 'a) (s : string) : 'a t = { ctext = s }
+  let input (t : 'a t) = t.ctext
+end
+
+module DocInputType = struct
+  type t = Doc.t
+
+  let el_input typ (attrs : Attr.t list) (value : string option) : Doc.t =
+    let attrs = List.filter (fun (k, _) -> k <> "") attrs in
+    let attrs = ("type", typ) :: attrs in
+    let attrs = match value with Some v -> ("value", v) :: attrs | None -> attrs in
+    [ Ssr.el "input" attrs [] ]
+
+  let str typ attrs (v : string Var.t) = el_input typ attrs (Some (Var.get v))
+  let strV typ attrs v = el_input typ attrs (Some v)
+  let ints typ attrs (v : int Var.t) = el_input typ attrs (Some (string_of_int (Var.get v)))
+  let intsV typ attrs v = el_input typ attrs (Some (string_of_int v))
+  let floats typ attrs (v : float Var.t) = el_input typ attrs (Some (Printf.sprintf "%g" (Var.get v)))
+  let floatsV typ attrs v = el_input typ attrs (Some (Printf.sprintf "%g" v))
+
+  let text attrs v = str "text" attrs v
+  let password attrs v = str "password" attrs v
+  let color attrs v = str "color" attrs v
+  let date attrs v = str "date" attrs v
+  let email attrs v = str "email" attrs v
+  let month attrs v = str "month" attrs v
+  let search attrs v = str "search" attrs v
+  let tel attrs v = str "tel" attrs v
+  let time attrs v = str "time" attrs v
+  let url attrs v = str "url" attrs v
+  let week attrs v = str "week" attrs v
+  let textV attrs v = strV "text" attrs v
+  let passwordV attrs v = strV "password" attrs v
+  let colorV attrs v = strV "color" attrs v
+  let dateV attrs v = strV "date" attrs v
+  let emailV attrs v = strV "email" attrs v
+  let monthV attrs v = strV "month" attrs v
+  let searchV attrs v = strV "search" attrs v
+  let telV attrs v = strV "tel" attrs v
+  let timeV attrs v = strV "time" attrs v
+  let urlV attrs v = strV "url" attrs v
+  let weekV attrs v = strV "week" attrs v
+
+  let dateTimeLocal attrs (_ : WebSharper_StdLib.DateTime2.t Var.t) =
+    el_input "datetime-local" attrs None
+  let dateTimeLocalV attrs (_ : WebSharper_StdLib.DateTime2.t) =
+    el_input "datetime-local" attrs None
+
+  let intUnchecked attrs v = ints "number" attrs v
+  let intUncheckedV attrs v = intsV "number" attrs v
+  let range attrs v = ints "range" attrs v
+  let rangeV attrs v = intsV "range" attrs v
+  let floatUnchecked attrs v = floats "number" attrs v
+  let floatUncheckedV attrs v = floatsV "number" attrs v
+
+  let int attrs (v : int ClientCheckedInput.t Var.t) =
+    el_input "number" attrs (Some (ClientCheckedInput.input (Var.get v)))
+  let intV attrs (v : int ClientCheckedInput.t) =
+    el_input "number" attrs (Some (ClientCheckedInput.input v))
+  let float attrs (v : float ClientCheckedInput.t Var.t) =
+    el_input "number" attrs (Some (ClientCheckedInput.input (Var.get v)))
+  let floatV attrs (v : float ClientCheckedInput.t) =
+    el_input "number" attrs (Some (ClientCheckedInput.input v))
+
+  let file attrs (_ : WebSharper_JavaScript.File.t array Var.t) = el_input "file" attrs None
+  let fileV attrs (_ : WebSharper_JavaScript.File.t array) = el_input "file" attrs None
+
+  let textArea attrs (v : string Var.t) =
+    [ Ssr.el "textarea" (List.filter (fun (k, _) -> k <> "") attrs) [ Ssr.text (Var.get v) ] ]
+  let textAreaV attrs v =
+    [ Ssr.el "textarea" (List.filter (fun (k, _) -> k <> "") attrs) [ Ssr.text v ] ]
+
+  let checkBox attrs (v : bool Var.t) =
+    let attrs =
+      List.filter (fun (k, _) -> k <> "") attrs @ [ ("type", "checkbox") ]
+      @ (if Var.get v then [ ("checked", "") ] else [])
+    in
+    [ Ssr.el "input" attrs [] ]
+
+  let checkBoxGroup (_ : Attr.t list) (_ : 'a) (_ : 'a WebSharper_StdLib.FSharpList.t Var.t) : Doc.t =
+    [ Ssr.el "div" [] [] ]
+  let radio (_ : Attr.t list) (_ : 'a) (_ : 'a Var.t) : Doc.t = el_input "radio" [] None
+  let select (_ : Attr.t list) (_ : 'a -> string) (_ : 'a WebSharper_StdLib.FSharpList.t) (_ : 'a Var.t) : Doc.t =
+    [ Ssr.el "select" [] [] ]
+  let selectDyn (_ : Attr.t list) (_ : 'a -> string) (_ : 'a WebSharper_StdLib.FSharpList.t View.t) (_ : 'a Var.t) : Doc.t =
+    [ Ssr.el "select" [] [] ]
+  let selectMultiple (_ : Attr.t list) (_ : 'a -> string)
+      (_ : 'a WebSharper_StdLib.FSharpList.t) (_ : 'a WebSharper_StdLib.FSharpList.t Var.t) : Doc.t =
+    [ Ssr.el "select" [ ("multiple", "") ] [] ]
+  let selectMultipleDyn (_ : Attr.t list) (_ : 'a -> string)
+      (_ : 'a WebSharper_StdLib.FSharpList.t View.t) (_ : 'a WebSharper_StdLib.FSharpList.t Var.t) : Doc.t =
+    [ Ssr.el "select" [ ("multiple", "") ] [] ]
+  let selectOptional (_ : Attr.t list) (_ : string) (_ : 'a -> string)
+      (_ : 'a WebSharper_StdLib.FSharpList.t) (_ : 'a WebSharper_StdLib.FSharpOption.t Var.t) : Doc.t =
+    [ Ssr.el "select" [] [] ]
+  let selectDynOptional (_ : Attr.t list) (_ : string) (_ : 'a -> string)
+      (_ : 'a WebSharper_StdLib.FSharpList.t View.t) (_ : 'a WebSharper_StdLib.FSharpOption.t Var.t) : Doc.t =
+    [ Ssr.el "select" [] [] ]
+end
+
+module EltInputType = DocInputType
+
 (* WebSharper.UI.Notation: typed `Var` operators (`!` deref, `:=` set, `<~` modify). *)
 module Notation = struct
   let ( ! ) (v : 'a Var.t) : 'a = Var.get v

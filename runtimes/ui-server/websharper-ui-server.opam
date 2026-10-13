@@ -12,5 +12,6 @@ depends: [
   "websharper-server"
   "websharper-template"
   "websharper-javascript"
+  "websharper-stdlib"
 ]
 build: [ ["dune" "build" "-p" name "-j" jobs] ]

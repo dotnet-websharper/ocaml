@@ -23,7 +23,7 @@ bash "$root/scripts/build-ui-app.sh" "$entry" "$out/client" >/dev/null
 
 # 3. Compile the native server (SSR renderer + UI shadow + HTTP server).
 cp "$root/runtimes/ocaml/ssr.ml" "$root/runtimes/ui-server/webSharper_UI.ml" "$root/runtimes/ocaml/wsrpc.ml" "$out/"
-(cd "$out" && ocamlfind ocamlopt -package unix,yojson,websharper-template,websharper-javascript -linkpkg ssr.ml webSharper_UI.ml wsrpc.ml server.ml -o server)
+(cd "$out" && ocamlfind ocamlopt -package unix,yojson,websharper-template,websharper-javascript,websharper-stdlib -linkpkg ssr.ml webSharper_UI.ml wsrpc.ml server.ml -o server)
 
 # 4. Serve, then drive: fetch the page, hydrate in jsdom, click.
 # Fail fast if the port is already taken (avoids silent cross-talk with a

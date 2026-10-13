@@ -3,4 +3,5 @@
  (public_name websharper-ui-server)
  (wrapped false)
  (modules WebSharper_UI)
- (libraries websharper-server websharper-template websharper-javascript))
+ (libraries websharper-server websharper-template websharper-javascript
+            websharper-stdlib))
