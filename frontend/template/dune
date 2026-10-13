@@ -1,4 +1,5 @@
 (library
- (name wsocaml_template)
- (modules html hole codegen)
- (libraries compiler-libs.common))
+ (name wsocaml_template_codegen)
+ (wrapped false)
+ (modules codegen)
+ (libraries compiler-libs.common websharper-template))
