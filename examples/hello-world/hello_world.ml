@@ -11,15 +11,21 @@ open WebSharper_Server
 type endpoint =
   | Home [@endpoint "GET /"]
 
+module Greeting = [%template "views/greeting.html"]
+
 let[@website] main =
   Sitelet.infer (fun (_ : endpoint context) ep ->
     match ep with
     | Home ->
+        let greeting =
+          Greeting.create ()
+          |> Greeting.title "Hello, world!"
+          |> Greeting.body "Served by websharper-server, rendered from a template."
+        in
         Content.page
           ~title:"Hello, world!"
           [
-            h1 [] [text "Hello, world!"];
-            p [] [text "Served by websharper-server, hydrated by WebSharper.UI."];
+            greeting |> Greeting.doc;
             hydrate (fun () ->
               let v = Var.create "before" in
               div [
