@@ -24,10 +24,11 @@ let[@website] main =
             hydrate (fun () ->
               Greeting.create ()
               |> Greeting.title "Hello, world!"
-              |> Greeting.body "Served by websharper-server, rendered from a template."
+              |> Greeting.body "Served by websharper-server, rendered from a websharper-ui template."
               |> Greeting.onIncrement_withModel (fun e ->
-                   let c = e.vars.counter in
-                   c := !c +. 1.)
+                   e.vars.counter := !(e.vars.counter) +. 1.)
+              |> Greeting.onDecrement_withModel (fun e ->
+                   e.vars.counter := !(e.vars.counter) +. 1.)
               |> Greeting.doc)
           ]
   )
