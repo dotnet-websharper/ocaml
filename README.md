@@ -177,8 +177,9 @@ Content.page ~title:"Home" [ Greeting.doc g ]
 
 Inner templates (`ws-template`) become submodules; event holes get nominal types
 (`mouse_event`, `keyboard_event`, …) and `_withModel` variants with access to the
-instance vars. `dune` preprocess + `preprocess.sh` gives the editor full
-ocaml-lsp support for `[%template]`. See `docs/templates.md`.
+instance vars; anchors are supported. The `wsocaml-template-ppx` ppx
+(`(preprocess (pps wsocaml-template-ppx))`) gives the editor full ocaml-lsp
+support for `[%template]`. See `docs/templates.md`.
 
 
 ## Tests

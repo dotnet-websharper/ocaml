@@ -5,6 +5,7 @@ depends: [
   "ocaml" {= "5.4.1"}
   "dune" {>= "3.11"}
   "yojson"
+  "websharper-template"
   "odoc" {with-doc}
 ]
 build: [

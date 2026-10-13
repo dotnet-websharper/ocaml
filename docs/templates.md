@@ -162,18 +162,20 @@ with a content hole and caller code.
 
 ## 5. Editor workflow (VS Code / ocaml-lsp)
 
-The frontend has a `--preprocess` mode that expands `[%template]`. A dune
-preprocess action wires it into the editor, so ocaml-lsp sees the generated
-module (autocomplete, type errors) and re-runs when the template changes:
+Add the template ppx to the editor's dune library:
 
 ```lisp
-(preprocess
- (action
-  (run bash %{dep:preprocess.sh} %{input-file} %{dep:views/greeting.html})))
+(preprocess (pps wsocaml-template-ppx))
 ```
 
-`preprocess.sh` runs `wsocaml-frontend --preprocess --input <file>`. Add one
-`%{dep:…}` per referenced template so dune tracks them.
+Dune forwards `pps` preprocessors to merlin, so ocaml-lsp expands `[%template]`
+and you get autocomplete/type errors on the generated module. (Dune does *not*
+forward custom `(preprocess (action …))` to merlin, which is why a ppx is used;
+it shares the frontend's `Codegen`.)
+
+Install it once with `opam install ./frontend` (provides `wsocaml-template-ppx`).
+The real build (`build.sh`) does not use the ppx — the frontend expands
+`[%template]` itself while also tracking the template as a dependency.
 
 ## 6. Server-side rendering
 

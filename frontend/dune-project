@@ -4,4 +4,8 @@
 (package
  (name websharper-ocaml)
  (synopsis "Typed OCaml frontend for WebSharper")
- (depends (ocaml (= 5.4.1)) dune yojson))
+ (depends (ocaml (= 5.4.1)) dune yojson websharper-template))
+(package
+ (name wsocaml-template-ppx)
+ (synopsis "wsocaml template ppx (expands [%template])")
+ (depends (ocaml (= 5.4.1)) dune ppxlib websharper-template))

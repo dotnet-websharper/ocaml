@@ -1,10 +1,9 @@
 ; Editor/typecheck context (Merlin/ocaml-lsp). The app itself is built by
-; build.sh, not by `dune build` (so editing does not trigger that build).
+; build.sh, not by `dune build`. `(pps wsocaml-template-ppx)` expands
+; `[%template ...]` for the editor; build.sh uses the frontend's own expansion.
 (library
  (name hello_world_ml)
  (modules hello_world)
  (libraries websharper-server websharper-ui-server websharper-javascript)
  (flags (:standard -w -33))
- (preprocess
-  (action
-   (run bash %{dep:preprocess.sh} %{input-file} %{dep:views/greeting.html}))))
+ (preprocess (pps wsocaml-template-ppx)))

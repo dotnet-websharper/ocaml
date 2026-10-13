@@ -1,5 +1,0 @@
-(library
- (name wsocaml_template_codegen)
- (wrapped false)
- (modules codegen)
- (libraries compiler-libs.common websharper-template))
