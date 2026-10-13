@@ -26,9 +26,13 @@ let[@website] main =
               |> Greeting.title "Hello, world!"
               |> Greeting.body "Served by websharper-server, rendered from a websharper-ui template."
               |> Greeting.onIncrement_withModel (fun e ->
-                   e.vars.counter := !(e.vars.counter) +. 1.)
+                  (* Var: update syntax *)
+                  e.vars.counter <~ (fun i -> i +. 1.)
+              )
               |> Greeting.onDecrement_withModel (fun e ->
-                   e.vars.counter := !(e.vars.counter) +. 1.)
+                  (* Var: assignment syntax *)
+                   e.vars.counter := !(e.vars.counter) -. 1.
+              )
               |> Greeting.doc)
           ]
   )
