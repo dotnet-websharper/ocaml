@@ -1401,6 +1401,43 @@ let transformClientServer (ast: Parsetree.structure) : Parsetree.structure =
     in
     insert [] mapped
 
+(* --- [%template "path"] expansion -------------------------------------------
+   Expands `module Card = [%template "views/card.html"]` into a generated module
+   (class type + setters + combinators + submodules) produced by `Codegen`. The
+   template is located relative to the source file. *)
+
+let template_payload_string (p : Parsetree.payload) : string option =
+  match p with
+  | Parsetree.PStr
+      [ { pstr_desc = Parsetree.Pstr_eval ({ pexp_desc = Parsetree.Pexp_constant { pconst_desc = Parsetree.Pconst_string (s, _, _); _ }; _ }, _); _ } ] ->
+      Some s
+  | _ -> None
+
+let expand_template_module ~dir (path : string) : Parsetree.structure =
+  let full = if Filename.is_relative path then Filename.concat dir path else path in
+  let src = In_channel.with_open_bin full In_channel.input_all in
+  let base = Filename.remove_extension (Filename.basename full) |> String.lowercase_ascii in
+  let parsed = Hole.analyze (Markup.parse src) in
+  let code = Codegen.implementation ~base ~src parsed in
+  let lb = Lexing.from_string code in
+  Location.init lb full;
+  Parse.implementation lb
+
+let transformTemplates ~dir (ast : Parsetree.structure) : Parsetree.structure =
+  let mapper =
+    { Ast_mapper.default_mapper with
+      module_expr =
+        (fun self (me : Parsetree.module_expr) ->
+          match me.pmod_desc with
+          | Parsetree.Pmod_extension ({ txt = "template"; _ }, payload) -> (
+              match template_payload_string payload with
+              | Some path ->
+                  { me with pmod_desc = Parsetree.Pmod_structure (expand_template_module ~dir path) }
+              | None -> Ast_mapper.default_mapper.module_expr self me)
+          | _ -> Ast_mapper.default_mapper.module_expr self me) }
+  in
+  mapper.structure mapper ast
+
 (* Typecheck the server-only items against the *native* packages (the
    `WebSharper_UI` shadow, `WebSharper_Server`, `WebSharper_ClientServer`), so
    server-specific errors (e.g. a UI combinator the native shadow lacks) are
@@ -1453,7 +1490,8 @@ let () =
     Clflags.include_dirs := List.rev !includes @ !Clflags.include_dirs;
     Compmisc.init_path ();
     let env = Compmisc.initial_env () in
-    let ast = transformClientServer (transformInfer (parse !input)) in
+    let dir = Filename.dirname !input in
+    let ast = transformClientServer (transformInfer (transformTemplates ~dir (parse !input))) in
     checkBoundary ast;
     let js, rpc, srv = clientMarks ast in
     let exp = exportMarks ast in
