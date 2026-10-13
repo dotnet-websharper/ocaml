@@ -1,0 +1,6 @@
+(library
+ (name webSharper_UI_Templating_Runtime)
+ (public_name websharper-ui-templating-runtime)
+ (modules providerBuilderModule runtime handler clientTemplateInstanceHandlers client templateInitializer providerBuilder templateInstance)
+ (libraries websharper-javascript websharper-runtime websharper-stdlib websharper-ui)
+)

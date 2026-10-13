@@ -23,6 +23,12 @@ let varBool name (v : bool Var.t) = TemplateHole.makeVar_2 name v
 let varFloat name (v : float Var.t) = TemplateHole.makeVar_8 name v
 let varFile name (v : file array Var.t) = TemplateHoleVarFile.create name v
 
+(* Resolve an `ws-anchor="Name"` DOM element at handler time. *)
+external global_document : unit -> WebSharper_JavaScript.Document.t = "jsget:document"
+
+let anchor (name : string) : element =
+  WebSharper_JavaScript.Document.querySelector (global_document ()) ("[ws-anchor=\"" ^ name ^ "\"]")
+
 let getOrLoad ~base ~name ~src ~refs ~keep_unfilled (holes : hole list) : Doc.t =
   ignore refs;
   ignore keep_unfilled;

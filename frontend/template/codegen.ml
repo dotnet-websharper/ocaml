@@ -98,6 +98,22 @@ let vars_record (t : Hole.template) =
            vs)
     ^ " } : vars)"
 
+let anchors_type (t : Hole.template) =
+  if t.anchors = [] then "unit"
+  else
+    "{ "
+    ^ String.concat "; "
+        (List.map (fun a -> Printf.sprintf "%s : %s" (lcfirst a) element_type) t.anchors)
+    ^ " }"
+
+let anchors_expr (t : Hole.template) =
+  if t.anchors = [] then "()"
+  else
+    "({ "
+    ^ String.concat "; "
+        (List.map (fun a -> Printf.sprintf "%s = WebSharper_UI.Template.anchor %s" (lcfirst a) (ocaml_string a)) t.anchors)
+    ^ " } : anchors)"
+
 (* field declaration for a non-var hole *)
 let field_decl (h : Hole.hole) : string =
   let n = lcfirst h.name in
@@ -146,7 +162,7 @@ let rec sig_of ~indent (t : Hole.template) (inner : Hole.template list) : string
   in
   let lines =
     [ Printf.sprintf "type vars = %s" (vars_type t);
-      "type anchors = unit";
+      Printf.sprintf "type anchors = %s" (anchors_type t);
       event_type_decl t;
       t_type t;
       "val create : unit -> t" ]
@@ -192,8 +208,8 @@ let rec impl_of ~base (t : Hole.template) (inner : Hole.template list) : string 
         | Hole.Event _ ->
             [ Printf.sprintf "let %s v c = c.%s <- v; c" n n;
               Printf.sprintf
-                "let %s_withModel v c = c.%s <- (fun target event -> v { vars = c.vars; anchors = (); target; event }); c"
-                n n ]
+                "let %s_withModel v c = c.%s <- (fun target event -> v { vars = c.vars; anchors = %s; target; event }); c"
+                n n (anchors_expr t) ]
         | Hole.ElemHandler -> [ Printf.sprintf "let %s v c = c.%s <- v; c" n n ]
         | Hole.Var _ -> []
         | _ -> [ Printf.sprintf "let %s v c = c.%s <- v; c" n n ])
@@ -214,7 +230,7 @@ let rec impl_of ~base (t : Hole.template) (inner : Hole.template list) : string 
   in
   String.concat "\n"
     ([ Printf.sprintf "type vars = %s" (vars_type t);
-       "type anchors = unit";
+       Printf.sprintf "type anchors = %s" (anchors_type t);
        event_type_decl t;
        t_type t;
        "let references : (string * string * string) list = []";

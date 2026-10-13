@@ -121,6 +121,25 @@ c
      ignore e.target)
 ```
 
+### Anchors
+
+`ws-anchor="Name"` marks an element as an anchor, exposed in the `anchors`
+record on the `event` argument of `_withModel` handlers:
+
+```html
+<input ws-anchor="Name">
+```
+
+```ocaml
+type anchors = { name : WebSharper_UI.Template.element }
+
+c
+|> Tpl.go_withModel (fun e -> (* e.anchors.name : element *) ())
+```
+
+Anchors are resolved at handler time by querying the document for
+`[ws-anchor="Name"]` (see §7).
+
 ## 4. Inner templates
 
 `ws-template`, `ws-children-template`, and `<template name="…">` define named
@@ -174,9 +193,11 @@ which is what makes the same module usable on both tiers and leaves room for the
 ## 7. Limitations (current)
 
 - **Record surface, not classes** — see §2.
-- **`anchors` are not resolved yet** (`type anchors = unit`). `ws-anchor` is
-  parsed, but filling anchor references needs the WebSharper templating runtime
-  (`TemplateInstance.Anchor`), which is not bound yet.
+- **Anchors** are resolved client-side by a **document-wide**
+  `[ws-anchor="Name"]` query at handler time (not scoped to the template
+  instance). Scoped resolution — and WebSharper-compatible server-side event
+  dispatch — needs the `websharper-ui-templating-runtime` binding (now generated
+  and installable) wired into the runtime.
 - **Cross-file instantiation** (`ws-file.Tpl`) is not implemented; `references`
   is currently `[]`.
 - **`ws-dom`** variables and **`datetime-local`** vars fall back to `string`.

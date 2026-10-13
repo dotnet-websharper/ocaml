@@ -126,13 +126,13 @@ end
    and substitute the holes, producing the initial SSR markup. Events and
    after-render handlers have no server-side effect. *)
 module Template = struct
-  type element
-  type event
-  type mouse_event
-  type keyboard_event
-  type focus_event
-  type date
-  type file
+  type element = unit
+  type event = unit
+  type mouse_event = unit
+  type keyboard_event = unit
+  type focus_event = unit
+  type date = unit
+  type file = unit
 
   type value =
     | VText of string
@@ -162,13 +162,15 @@ module Template = struct
   let varDom name _ = { tname = name; tvalue = VMisc }
   let event name _ = { tname = name; tvalue = VMisc }
   let afterRender name _ = { tname = name; tvalue = VMisc }
+  (* Anchors are client-only; no server-side value. *)
+  let anchor (_ : string) : element = ()
 
   let starts_with pre s =
     String.length s >= String.length pre && String.sub s 0 (String.length pre) = pre
 
   let is_marker kl =
     kl = "ws-hole" || kl = "ws-replace" || kl = "ws-attr" || kl = "ws-var" || kl = "ws-dom"
-    || kl = "ws-onafterrender" || kl = "ws-anchor" || starts_with "ws-on" kl
+    || kl = "ws-onafterrender" || starts_with "ws-on" kl
     || kl = "data-hole" || kl = "data-replace" || kl = "data-attr" || kl = "data-var"
     || kl = "data-var-unchecked" || starts_with "data-event-" kl
 

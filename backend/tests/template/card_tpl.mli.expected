@@ -1,7 +1,7 @@
 (* GENERATED from card.html — do not edit. *)
 
 type vars = { filter : string WebSharper_UI.Var.t }
-type anchors = unit
+type anchors = { title : WebSharper_UI.Template.element }
 type 'e event = { vars : vars; anchors : anchors; target : WebSharper_UI.Template.element; event : 'e }
 type t = { vars : vars; mutable title : string; mutable link : WebSharper_UI.Attr.t; mutable body : WebSharper_UI.Doc.t; mutable remove : WebSharper_UI.Template.element -> WebSharper_UI.Template.mouse_event -> unit; }
 val create : unit -> t
