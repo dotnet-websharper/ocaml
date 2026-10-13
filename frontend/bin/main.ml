@@ -1413,12 +1413,12 @@ let template_payload_string (p : Parsetree.payload) : string option =
       Some s
   | _ -> None
 
-let expand_template_module ~dir ~loc (path : string) : Parsetree.structure =
+let expand_template_module ~server ~dir ~loc (path : string) : Parsetree.structure =
   let full = if Filename.is_relative path then Filename.concat dir path else path in
   let src = In_channel.with_open_bin full In_channel.input_all in
   let base = Filename.remove_extension (Filename.basename full) |> String.lowercase_ascii in
   let parsed = Hole.analyze (Markup.parse src) in
-  let code = Codegen.implementation ~base ~src parsed in
+  let code = Codegen.implementation ~server ~base ~src parsed in
   let lb = Lexing.from_string code in
   Location.init lb full;
   let items = Parse.implementation lb in
@@ -1427,7 +1427,7 @@ let expand_template_module ~dir ~loc (path : string) : Parsetree.structure =
   let m = { Ast_mapper.default_mapper with location = (fun _ _ -> loc) } in
   m.structure m items
 
-let transformTemplates ~dir (ast : Parsetree.structure) : Parsetree.structure =
+let transformTemplates ~server ~dir (ast : Parsetree.structure) : Parsetree.structure =
   let mapper =
     { Ast_mapper.default_mapper with
       module_expr =
@@ -1436,7 +1436,7 @@ let transformTemplates ~dir (ast : Parsetree.structure) : Parsetree.structure =
           | Parsetree.Pmod_extension ({ txt = "template"; _ }, payload) -> (
               match template_payload_string payload with
               | Some path ->
-                  { me with pmod_desc = Parsetree.Pmod_structure (expand_template_module ~dir ~loc:me.pmod_loc path) }
+                  { me with pmod_desc = Parsetree.Pmod_structure (expand_template_module ~server ~dir ~loc:me.pmod_loc path) }
               | None -> Ast_mapper.default_mapper.module_expr self me)
           | _ -> Ast_mapper.default_mapper.module_expr self me) }
   in
@@ -1497,15 +1497,22 @@ let () =
   try
     let tdir () = match !template_root with Some d -> d | None -> Filename.dirname !input in
     if !preprocess then begin
-      let ast = transformTemplates ~dir:(tdir ()) (parse !input) in
+      let ast = transformTemplates ~server:false ~dir:(tdir ()) (parse !input) in
       print_string (prettyStructure ast);
       exit 0
     end;
-    Clflags.include_dirs := List.rev !includes @ !Clflags.include_dirs;
+    (* `--emit-server` generates the native server form of templates (shadow
+       types), so put the native packages first; keep the client includes too so
+       non-template code still resolves. *)
+    let main_includes =
+      if !emit_server <> None then List.rev !server_includes @ List.rev !includes
+      else List.rev !includes
+    in
+    Clflags.include_dirs := main_includes @ !Clflags.include_dirs;
     Compmisc.init_path ();
     let env = Compmisc.initial_env () in
     let dir = tdir () in
-    let ast = transformClientServer (transformInfer (transformTemplates ~dir (parse !input))) in
+    let ast = transformClientServer (transformInfer (transformTemplates ~server:(!emit_server <> None) ~dir (parse !input))) in
     checkBoundary ast;
     let js, rpc, srv = clientMarks ast in
     let exp = exportMarks ast in
@@ -1552,6 +1559,10 @@ let () =
                       incr i
                   | _ -> ())
                 vbs
+          (* Modules occupy a module-block slot too (e.g. a generated
+             `[%template]` module preceding the value bindings), so they shift
+             the indices of subsequent values. *)
+          | Typedtree.Tstr_module _ -> incr i
           | _ -> ())
         typed.str_items;
       List.rev !acc

@@ -17,25 +17,15 @@ let[@website] main =
   Sitelet.infer (fun (_ : endpoint context) ep ->
     match ep with
     | Home ->
-        let greeting =
-          Greeting.create ()
-          |> Greeting.title "Hello, world!"
-          |> Greeting.body "Served by websharper-server, rendered from a template."
-          |> Greeting.onIncrement_withModel (fun e ->
-               Var.set e.vars.counter (Var.get e.vars.counter +. 1.))
-          |> Greeting.doc
-        in
         Content.page
           ~title:"Hello, world!"
           [
-            greeting;
             hydrate (fun () ->
-              let v = Var.create "before" in
-              div [
-                  on.click (fun _ _ -> Var.set v "after")
-              ] [
-                  textView (Var.view v)
-              ]
-            )
+              Greeting.create ()
+              |> Greeting.title "Hello, world!"
+              |> Greeting.body "Served by websharper-server, rendered from a template."
+              |> Greeting.onIncrement_withModel (fun e ->
+                   Var.set e.vars.counter (Var.get e.vars.counter +. 1.))
+              |> Greeting.doc)
           ]
   )

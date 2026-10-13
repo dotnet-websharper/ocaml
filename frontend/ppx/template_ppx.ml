@@ -38,7 +38,7 @@ let expand ~path (template : string) : structure =
   in
   let src = In_channel.with_open_bin full In_channel.input_all in
   let base = Filename.remove_extension (Filename.basename full) |> String.lowercase_ascii in
-  let code = Codegen.implementation ~base ~src (Hole.analyze (Markup.parse src)) in
+  let code = Codegen.implementation ~server:true ~base ~src (Hole.analyze (Markup.parse src)) in
   let lexbuf = Lexing.from_string code in
   Location.init lexbuf full;
   Parse.implementation lexbuf

@@ -121,56 +121,61 @@ module Html = struct
   let button = button
 end
 
-(* Server-side template engine. Structure-as-data: the generated code passes the
-   raw template source and the hole values; we parse the source (shared parser)
-   and substitute the holes, producing the initial SSR markup. Events and
-   after-render handlers have no server-side effect. *)
-module Template = struct
-  (* The element/event types are the real WebSharper.JavaScript types on both
-     tiers so handler signatures are accurate; only the values differ (the
-     server never runs them). *)
-  type element = WebSharper_JavaScript.Element.t
-  type event = WebSharper_JavaScript.Event.t
-  type ui_event = WebSharper_JavaScript.UIEvent.t
-  type mouse_event = WebSharper_JavaScript.MouseEvent.t
-  type keyboard_event = WebSharper_JavaScript.KeyboardEvent.t
-  type focus_event = WebSharper_JavaScript.FocusEvent.t
-  type composition_event = WebSharper_JavaScript.CompositionEvent.t
-  type mutation_event = WebSharper_JavaScript.MutationEvent.t
-  type wheel_event = WebSharper_JavaScript.WheelEvent.t
-  type file = WebSharper_JavaScript.File.t
+(* Server-side template engine. The generated code builds `TemplateHole` values
+   (mirroring the WebSharper.UI client API) and calls `Template.getOrLoad`; we
+   parse the raw source (shared parser) and substitute the holes into the SSR
+   node tree. Events and after-render handlers have no server-side effect. *)
 
+module TemplateHole = struct
   type value =
     | VText of string
-    | VView of string View.t
     | VElt of Doc.t
     | VAttr of Attr.t
+    | VEvent
+    | VAfterRender
     | VVarStr of string Var.t
     | VVarBool of bool Var.t
     | VVarFloat of float Var.t
-    | VVarInt of int Var.t
-    | VVarStringList of string array Var.t
-    | VMisc
+    | VVarFile
 
-  type hole = { tname : string; tvalue : value }
+  type t = { thname : string; thvalue : value }
 
-  let text name v = { tname = name; tvalue = VText v }
-  let view name v = { tname = name; tvalue = VView v }
-  let elt name v = { tname = name; tvalue = VElt v }
-  let attr name v = { tname = name; tvalue = VAttr v }
-  let varStr name v = { tname = name; tvalue = VVarStr v }
-  let varBool name v = { tname = name; tvalue = VVarBool v }
-  let varFloat name v = { tname = name; tvalue = VVarFloat v }
-  let varInt name v = { tname = name; tvalue = VVarInt v }
-  let varStringList name v = { tname = name; tvalue = VVarStringList v }
-  let varDate name _ = { tname = name; tvalue = VMisc }
-  let varFile name _ = { tname = name; tvalue = VMisc }
-  let varDom name _ = { tname = name; tvalue = VMisc }
-  let event name _ = { tname = name; tvalue = VMisc }
-  let afterRender name _ = { tname = name; tvalue = VMisc }
-  (* Anchors are client-only; never evaluated on the server. *)
-  let anchor (_ : string) : element = failwith "WebSharper_UI.Template.anchor is client-only"
+  let makeText name v = { thname = name; thvalue = VText v }
+  let makeTextView name _ = { thname = name; thvalue = VText "" }
+  let makeVar name v = { thname = name; thvalue = VVarStr v }
+  let makeVar_2 name v = { thname = name; thvalue = VVarBool v }
+  let makeVar_8 name v = { thname = name; thvalue = VVarFloat v }
+end
 
+module TemplateHoleElt = struct
+  type t = TemplateHole.t
+  let create name (v : Doc.t) = { TemplateHole.thname = name; thvalue = TemplateHole.VElt v }
+end
+
+module TemplateHoleAttribute = struct
+  type t = TemplateHole.t
+  let create name (v : Attr.t) = { TemplateHole.thname = name; thvalue = TemplateHole.VAttr v }
+end
+
+module TemplateHoleEvent = struct
+  type t = TemplateHole.t
+  let create name (_ : WebSharper_JavaScript.Element.t -> WebSharper_JavaScript.Event.t -> unit) =
+    { TemplateHole.thname = name; thvalue = TemplateHole.VEvent }
+end
+
+module TemplateHoleAfterRender = struct
+  type t = TemplateHole.t
+  let create name (_ : WebSharper_JavaScript.Element.t -> unit) =
+    { TemplateHole.thname = name; thvalue = TemplateHole.VAfterRender }
+end
+
+module TemplateHoleVarFile = struct
+  type t = TemplateHole.t
+  let create name (_ : WebSharper_JavaScript.File.t array Var.t) =
+    { TemplateHole.thname = name; thvalue = TemplateHole.VVarFile }
+end
+
+module Template = struct
   let starts_with pre s =
     String.length s >= String.length pre && String.sub s 0 (String.length pre) = pre
 
@@ -180,19 +185,17 @@ module Template = struct
     || kl = "data-hole" || kl = "data-replace" || kl = "data-attr" || kl = "data-var"
     || kl = "data-var-unchecked" || starts_with "data-event-" kl
 
-  let hole_string (v : value) : string =
+  let hole_string (v : TemplateHole.value) : string =
     match v with
-    | VText s -> s
-    | VView v -> View.get v
-    | VVarStr v -> Var.get v
-    | VVarBool v -> if Var.get v then "true" else "false"
-    | VVarFloat v -> string_of_float (Var.get v)
-    | VVarInt v -> string_of_int (Var.get v)
-    | VVarStringList v -> String.concat "," (Array.to_list (Var.get v))
-    | VElt _ | VAttr _ | VMisc -> ""
+    | TemplateHole.VText s -> s
+    | TemplateHole.VVarStr v -> Var.get v
+    | TemplateHole.VVarBool v -> if Var.get v then "true" else "false"
+    | TemplateHole.VVarFloat v -> Printf.sprintf "%g" (Var.get v)
+    | TemplateHole.VElt _ | TemplateHole.VAttr _ | TemplateHole.VEvent | TemplateHole.VAfterRender
+    | TemplateHole.VVarFile -> ""
 
   (* Replace `${Name}` occurrences using the filled holes. *)
-  let subst (tbl : (string, value) Hashtbl.t) (s : string) : string =
+  let subst (tbl : (string, TemplateHole.t) Hashtbl.t) (s : string) : string =
     let n = String.length s in
     let b = Buffer.create n in
     let i = ref 0 in
@@ -201,8 +204,10 @@ module Template = struct
         let j = ref (!i + 2) in
         while !j < n && s.[!j] <> '}' do incr j done;
         if !j < n then begin
-          let name = String.sub s (!i + 2) (!j - !i - 2) in
-          (match Hashtbl.find_opt tbl name with Some v -> Buffer.add_string b (hole_string v) | None -> ());
+          let name = String.lowercase_ascii (String.sub s (!i + 2) (!j - !i - 2)) in
+          (match Hashtbl.find_opt tbl name with
+           | Some h -> Buffer.add_string b (hole_string h.TemplateHole.thvalue)
+           | None -> ());
           i := !j + 1
         end
         else (Buffer.add_char b s.[!i]; incr i)
@@ -222,7 +227,11 @@ module Template = struct
 
   and render_element tbl (el : Markup.element) : Doc.t =
     match Markup.find_attr el "ws-replace" with
-    | Some name -> (match Hashtbl.find_opt tbl name with Some (VElt d) -> d | _ -> [])
+    | Some name0 -> (
+        let name = String.lowercase_ascii name0 in
+        match Hashtbl.find_opt tbl name with
+        | Some { TemplateHole.thvalue = TemplateHole.VElt d; _ } -> d
+        | _ -> [])
     | None ->
         let attrs =
           List.filter_map
@@ -233,27 +242,34 @@ module Template = struct
         in
         let attrs =
           match Markup.find_attr el "ws-attr" with
-          | Some name -> (
-              match Hashtbl.find_opt tbl name with Some (VAttr (k, v)) -> (k, v) :: attrs | _ -> attrs)
+          | Some name0 -> (
+              let name = String.lowercase_ascii name0 in
+              match Hashtbl.find_opt tbl name with
+              | Some { TemplateHole.thvalue = TemplateHole.VAttr (k, v); _ } -> (k, v) :: attrs
+              | _ -> attrs)
           | None -> attrs
         in
         let attrs =
           match Markup.find_attr el "ws-var" with
-          | Some name -> (
+          | Some name0 -> (
+              let name = String.lowercase_ascii name0 in
               match Hashtbl.find_opt tbl name with
-              | Some (VVarStr v) -> ("value", Var.get v) :: attrs
-              | Some v -> ("value", hole_string v) :: attrs
+              | Some h -> ("value", hole_string h.TemplateHole.thvalue) :: attrs
               | None -> attrs)
           | None -> attrs
         in
         let children =
           match Markup.find_attr el "ws-hole" with
-          | Some name -> (match Hashtbl.find_opt tbl name with Some (VElt d) -> d | _ -> [])
+          | Some name0 -> (
+              let name = String.lowercase_ascii name0 in
+              match Hashtbl.find_opt tbl name with
+              | Some { TemplateHole.thvalue = TemplateHole.VElt d; _ } -> d
+              | _ -> [])
           | None -> render_nodes tbl el.children
         in
         [ Ssr.el el.tag attrs children ]
 
-  let getOrLoad ~base ~name ~src ~refs ~keep_unfilled (holes : hole list) : Doc.t =
+  let getOrLoad ~base ~name ~src ~refs ~keep_unfilled (holes : TemplateHole.t list) : Doc.t =
     ignore base; ignore refs; ignore keep_unfilled;
     let parsed = Hole.analyze (Markup.parse src) in
     let tpl =
@@ -264,8 +280,7 @@ module Template = struct
           | Some t -> t
           | None -> parsed.Hole.root)
     in
-    let tbl : (string, value) Hashtbl.t = Hashtbl.create 16 in
-    List.iter (fun h -> Hashtbl.replace tbl h.tname h.tvalue) holes;
+    let tbl : (string, TemplateHole.t) Hashtbl.t = Hashtbl.create 16 in
+    List.iter (fun (h : TemplateHole.t) -> Hashtbl.replace tbl (String.lowercase_ascii h.thname) h) holes;
     render_nodes tbl tpl.Hole.body
 end
-

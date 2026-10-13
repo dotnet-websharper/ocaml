@@ -18,37 +18,37 @@ let lcfirst s = if s = "" then s else String.uncapitalize_ascii s
 let val_ty_to_string = function
   | Hole.Number -> "float"
   | Hole.Bool -> "bool"
-  | Hole.File -> "WebSharper_UI.Template.file array"
+  | Hole.File -> "WebSharper_JavaScript.File.t array"
   | Hole.String | Hole.StringList | Hole.DateTime | Hole.DomElement | Hole.Any -> "string"
 
-(* Event name -> WebSharper.JavaScript event type alias, from WebSharper's
-   `tags.csv` (lowercased names; default `event`). *)
+(* Event name -> WebSharper.JavaScript event type, from WebSharper's `tags.csv`
+   (lowercased names; default `Event`). *)
 let event_type_map =
-  [ "abort", "ui_event"; "domactivate", "ui_event"; "load", "ui_event"; "resize", "ui_event";
-    "scroll", "ui_event"; "select", "ui_event"; "unload", "ui_event";
-    "click", "mouse_event"; "contextmenu", "mouse_event"; "dblclick", "mouse_event";
-    "mousedown", "mouse_event"; "mouseenter", "mouse_event"; "mouseleave", "mouse_event";
-    "mousemove", "mouse_event"; "mouseout", "mouse_event"; "mouseover", "mouse_event";
-    "mouseup", "mouse_event"; "show", "mouse_event";
-    "keydown", "keyboard_event"; "keypress", "keyboard_event"; "keyup", "keyboard_event";
-    "blur", "focus_event"; "focus", "focus_event";
-    "compositionend", "composition_event"; "compositionstart", "composition_event";
-    "compositionupdate", "composition_event";
-    "domattrmodified", "mutation_event"; "domcharacterdatamodified", "mutation_event";
-    "domnodeinserted", "mutation_event"; "domnodeinsertedintodocument", "mutation_event";
-    "domnoderemoved", "mutation_event"; "domnoderemovedfromdocument", "mutation_event";
-    "domsubtreemodified", "mutation_event";
-    "wheel", "wheel_event" ]
+  [ "abort", "UIEvent"; "domactivate", "UIEvent"; "load", "UIEvent"; "resize", "UIEvent";
+    "scroll", "UIEvent"; "select", "UIEvent"; "unload", "UIEvent";
+    "click", "MouseEvent"; "contextmenu", "MouseEvent"; "dblclick", "MouseEvent";
+    "mousedown", "MouseEvent"; "mouseenter", "MouseEvent"; "mouseleave", "MouseEvent";
+    "mousemove", "MouseEvent"; "mouseout", "MouseEvent"; "mouseover", "MouseEvent";
+    "mouseup", "MouseEvent"; "show", "MouseEvent";
+    "keydown", "KeyboardEvent"; "keypress", "KeyboardEvent"; "keyup", "KeyboardEvent";
+    "blur", "FocusEvent"; "focus", "FocusEvent";
+    "compositionend", "CompositionEvent"; "compositionstart", "CompositionEvent";
+    "compositionupdate", "CompositionEvent";
+    "domattrmodified", "MutationEvent"; "domcharacterdatamodified", "MutationEvent";
+    "domnodeinserted", "MutationEvent"; "domnodeinsertedintodocument", "MutationEvent";
+    "domnoderemoved", "MutationEvent"; "domnoderemovedfromdocument", "MutationEvent";
+    "domsubtreemodified", "MutationEvent";
+    "wheel", "WheelEvent" ]
 
 let event_type name =
-  let a =
+  let t =
     match List.assoc_opt (String.lowercase_ascii name) event_type_map with
     | Some a -> a
-    | None -> "event"
+    | None -> "Event"
   in
-  "WebSharper_UI.Template." ^ a
+  "WebSharper_JavaScript." ^ t ^ ".t"
 
-let element_type = "WebSharper_UI.Template.element"
+let element_type = "WebSharper_JavaScript.Element.t"
 
 let ocaml_string s =
   let b = Buffer.create (String.length s + 16) in
@@ -78,10 +78,10 @@ let def_var = function
   | _ -> "\"\""
 
 let var_fn = function
-  | Hole.Bool -> "varBool"
-  | Hole.Number -> "varFloat"
-  | Hole.File -> "varFile"
-  | _ -> "varStr"
+  | Hole.Bool -> "WebSharper_UI.TemplateHole.makeVar_2"
+  | Hole.Number -> "WebSharper_UI.TemplateHole.makeVar_8"
+  | Hole.File -> "WebSharper_UI.TemplateHoleVarFile.create"
+  | _ -> "WebSharper_UI.TemplateHole.makeVar"
 
 let event_type_decl (_ : Hole.template) =
   Printf.sprintf
@@ -116,13 +116,8 @@ let vars_record (t : Hole.template) =
            vs)
     ^ " } : vars)"
 
-let anchors_type (t : Hole.template) =
-  if t.anchors = [] then "unit"
-  else
-    "{ "
-    ^ String.concat "; "
-        (List.map (fun a -> Printf.sprintf "%s : %s" (lcfirst a) element_type) t.anchors)
-    ^ " }"
+(* Anchors are not resolved yet (see docs/templates.md). *)
+let anchors_type (_ : Hole.template) = "unit"
 
 let anchors_expr (t : Hole.template) =
   if t.anchors = [] then "()"
@@ -200,17 +195,17 @@ let signature ~base (p : Hole.parsed) : string =
 let hole_expr (h : Hole.hole) : string =
   let fn =
     match h.kind with
-    | Hole.Simple -> "text"
-    | Hole.Doc -> "elt"
-    | Hole.Attr -> "attr"
-    | Hole.Event _ -> "event"
-    | Hole.ElemHandler -> "afterRender"
+    | Hole.Simple -> "WebSharper_UI.TemplateHole.makeText"
+    | Hole.Doc -> "WebSharper_UI.TemplateHoleElt.create"
+    | Hole.Attr -> "WebSharper_UI.TemplateHoleAttribute.create"
+    | Hole.Event _ -> "WebSharper_UI.TemplateHoleEvent.create"
+    | Hole.ElemHandler -> "WebSharper_UI.TemplateHoleAfterRender.create"
     | Hole.Var ty -> var_fn ty
   in
   let arg = if is_var h then "c.vars." ^ lcfirst h.name else "c." ^ lcfirst h.name in
-  Printf.sprintf "WebSharper_UI.Template.%s %s %s" fn (ocaml_string h.name) arg
+  Printf.sprintf "%s %s %s" fn (ocaml_string (String.lowercase_ascii h.name)) arg
 
-let rec impl_of ~base (t : Hole.template) (inner : Hole.template list) : string =
+let rec impl_of ~server ~base (t : Hole.template) (inner : Hole.template list) : string =
   let tname = match t.name with Some n -> "Some " ^ ocaml_string n | None -> "None" in
   let create =
     Printf.sprintf "let create () : t = { vars = %s; %s }"
@@ -226,8 +221,8 @@ let rec impl_of ~base (t : Hole.template) (inner : Hole.template list) : string 
         | Hole.Event _ ->
             [ Printf.sprintf "let %s v c = c.%s <- v; c" n n;
               Printf.sprintf
-                "let %s_withModel v c = c.%s <- (fun target event -> v { vars = c.vars; anchors = %s; target; event }); c"
-                n n (anchors_expr t) ]
+                "let %s_withModel v c = c.%s <- (fun target event -> v { vars = c.vars; anchors = (); target; event }); c"
+                n n ]
         | Hole.ElemHandler -> [ Printf.sprintf "let %s v c = c.%s <- v; c" n n ]
         | Hole.Var _ -> []
         | _ -> [ Printf.sprintf "let %s v c = c.%s <- v; c" n n ])
@@ -235,15 +230,20 @@ let rec impl_of ~base (t : Hole.template) (inner : Hole.template list) : string 
   in
   let holes = String.concat ";\n      " (List.map hole_expr t.holes) in
   let doc =
-    Printf.sprintf
-      "let doc (c : t) : WebSharper_UI.Doc.t =\n  WebSharper_UI.Template.getOrLoad ~base:%s ~name:%s ~src ~refs:references ~keep_unfilled:false\n    [ %s ]"
-      (ocaml_string base) tname holes
+    if server then
+      Printf.sprintf
+        "let doc (c : t) : WebSharper_UI.Doc.t =\n  WebSharper_UI.Template.getOrLoad ~base:%s ~name:%s ~src ~refs:references ~keep_unfilled:false\n    [ %s ]"
+        (ocaml_string base) tname holes
+    else
+      Printf.sprintf
+        "let doc (c : t) : WebSharper_UI.Doc.t =\n  let fopt = function None -> WebSharper_StdLib.FSharpOption.none () | Some x -> WebSharper_StdLib.FSharpOption.some x in\n  WebSharper_UI.ClientDoc.getOrLoadTemplate %s (fopt %s)\n    (fun () -> WebSharper_UI.DomUtility.parseHTMLIntoFakeRoot src)\n    [ %s ]"
+        (ocaml_string base) tname holes
   in
   let inner_mods =
     List.map
       (fun (sub : Hole.template) ->
         Printf.sprintf "module %s = struct\n%s\nend" (String.capitalize_ascii (Option.get sub.name))
-          (impl_of ~base sub []))
+          (impl_of ~server ~base sub []))
       inner
   in
   String.concat "\n"
@@ -255,7 +255,7 @@ let rec impl_of ~base (t : Hole.template) (inner : Hole.template list) : string 
        create ]
      @ combinators @ [ doc ] @ inner_mods)
 
-let implementation ~base ~src (p : Hole.parsed) : string =
+let implementation ~server ~base ~src (p : Hole.parsed) : string =
   Printf.sprintf "(* GENERATED from %s.html — do not edit. *)\n\nlet src = %s\n\n%s\n"
     base (ocaml_string src)
-    (impl_of ~base p.root p.inner)
+    (impl_of ~server ~base p.root p.inner)

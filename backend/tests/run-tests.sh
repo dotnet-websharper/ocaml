@@ -433,7 +433,7 @@ tplgen="$here/../../frontend/_build/default/bin/template_gen.exe"
 tpl="$here/template"
 if [ -x "$tplgen" ]; then
   tout="$tmp/template"; mkdir -p "$tout"
-  if "$tplgen" "$tpl/card.html" "$tout" Card_tpl > "$tmp/tpl.gen.log" 2>&1; then
+  if "$tplgen" --server "$tpl/card.html" "$tout" Card_tpl > "$tmp/tpl.gen.log" 2>&1; then
     if [ "$update" = 1 ]; then
       cp "$tout/Card_tpl.mli" "$tpl/card_tpl.mli.expected"
       cp "$tout/Card_tpl.ml" "$tpl/card_tpl.ml.expected"

@@ -176,8 +176,8 @@ Content.page ~title:"Home" [ Greeting.doc g ]
 ```
 
 Inner templates (`ws-template`) become submodules; event holes get nominal types
-(`mouse_event`, `keyboard_event`, …) and `_withModel` variants with access to the
-instance vars; anchors are supported. The `websharper-ocaml-ppx` ppx
+(`MouseEvent.t`, `KeyboardEvent.t`, …) and `_withModel` variants with access to
+the instance vars. The `websharper-ocaml-ppx` ppx
 (`(preprocess (pps websharper-ocaml-ppx))`) gives the editor full ocaml-lsp
 support for `[%template]`. See `docs/templates.md`.
 

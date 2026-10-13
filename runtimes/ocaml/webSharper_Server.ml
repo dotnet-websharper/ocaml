@@ -116,7 +116,26 @@ let content_type_of path =
   | ".svg" -> "image/svg+xml"
   | _ -> "application/octet-stream"
 
+let percent_decode (s : string) : string =
+  let n = String.length s in
+  let hex c =
+    if c >= '0' && c <= '9' then Char.code c - 48
+    else if c >= 'a' && c <= 'f' then Char.code c - 87
+    else if c >= 'A' && c <= 'F' then Char.code c - 55
+    else -1
+  in
+  let b = Buffer.create n in
+  let i = ref 0 in
+  while !i < n do
+    if s.[!i] = '%' && !i + 2 < n && hex s.[!i + 1] >= 0 && hex s.[!i + 2] >= 0 then (
+      Buffer.add_char b (Char.chr ((hex s.[!i + 1] * 16) + hex s.[!i + 2]));
+      i := !i + 3)
+    else (Buffer.add_char b s.[!i]; incr i)
+  done;
+  Buffer.contents b
+
 let serve_file dir path =
+  let path = percent_decode path in
   let rel = if String.length path > 0 && path.[0] = '/' then String.sub path 1 (String.length path - 1) else path in
   let full = Filename.concat dir rel in
   if Sys.file_exists full && not (Sys.is_directory full) then (

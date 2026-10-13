@@ -112,6 +112,9 @@ if (!globalThis.OCamlRuntime) {
     function curried() {
       var args = Array.prototype.slice.call(arguments);
       if (args.length >= arity) return caml_apply(f, args);
+      // OCaml `unit -> a` closures have arity 1; WebSharper calls such thunks
+      // with no arguments, so apply unit.
+      if (arity === 1 && args.length === 0) return caml_apply(f, [0]);
       return function () {
         return curried.apply(null, args.concat(Array.prototype.slice.call(arguments)));
       };
