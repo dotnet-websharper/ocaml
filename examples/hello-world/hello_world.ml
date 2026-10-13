@@ -25,7 +25,7 @@ let[@website] main =
               |> Greeting.title "Hello, world!"
               |> Greeting.body "Served by websharper-server, rendered from a template."
               |> Greeting.onIncrement_withModel (fun e ->
-                   Var.set e.vars.counter (Var.get e.vars.counter +. 1.))
+                   Var.update e.vars.counter (fun n -> n +. 1.))
               |> Greeting.doc)
           ]
   )

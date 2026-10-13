@@ -19,6 +19,7 @@ module Var = struct
   let create x = { v = x }
   let get t = t.v
   let set t x = t.v <- x
+  let update t f = t.v <- f t.v
   let view t = { View.get = (fun () -> t.v) }
 end
 
