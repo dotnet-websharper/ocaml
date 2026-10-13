@@ -1,6 +1,7 @@
 open WebSharper_JavaScript
 open WebSharper_UI
 open WebSharper_UI.Html
+open WebSharper_UI.Notation
 open WebSharper_ClientServer
 open WebSharper_Server
 
@@ -10,16 +11,6 @@ open WebSharper_Server
 
 type endpoint =
   | Home [@endpoint "GET /"]
-
-(* WebSharper.UI.Notation-style `Var` operators. (WS's own `Notation.(:=)`/`(!)`
-   are F# SRTP-inline and do not lower through wsocaml, so define them here over
-   the real `Var.get`/`Var.set`.) *)
-module Notation = struct
-  let ( := ) (v : 'a Var.t) (x : 'a) = Var.set v x
-  let ( ! ) (v : 'a Var.t) = Var.get v
-end
-
-open Notation
 
 module Greeting = [%template "views/greeting.html"]
 

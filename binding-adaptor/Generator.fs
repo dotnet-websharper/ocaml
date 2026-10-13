@@ -448,6 +448,18 @@ let generateClass
               Kinds = methodKinds form })
         |> Seq.toList
 
+    // WebSharper.UI.Notation: expose typed `Var` operators retargeted to the real
+    // `Var` methods (WS's own Notation operators are F# SRTP-inline and cannot
+    // lower through wsocaml).
+    let methods =
+        if td.FullName = "WebSharper.UI.Notation" then
+            [ { Name = "(!)"; Signature = "'a Var.t -> 'a"
+                Tag = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#Get|"; Kinds = "(inline)" }
+              { Name = "(:=)"; Signature = "'a Var.t -> 'a -> unit"
+                Tag = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#Set|'0"; Kinds = "(inline)" }
+              { Name = "(<~)"; Signature = "'a Var.t -> ('a -> 'a) -> unit"
+                Tag = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var`1::default#Update|fn"; Kinds = "(inline)" } ]
+        else methods
     let fields =
         ci.Fields
         |> Seq.filter (fun kv -> not (isSkipped kv.Key))

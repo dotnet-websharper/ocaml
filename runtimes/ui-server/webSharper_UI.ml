@@ -122,6 +122,13 @@ module Html = struct
   let button = button
 end
 
+(* WebSharper.UI.Notation: typed `Var` operators (`!` deref, `:=` set, `<~` modify). *)
+module Notation = struct
+  let ( ! ) (v : 'a Var.t) : 'a = Var.get v
+  let ( := ) (v : 'a Var.t) (x : 'a) : unit = Var.set v x
+  let ( <~ ) (v : 'a Var.t) (f : 'a -> 'a) : unit = Var.set v (f (Var.get v))
+end
+
 (* Server-side template engine. The generated code builds `TemplateHole` values
    (mirroring the WebSharper.UI client API) and calls `Template.getOrLoad`; we
    parse the raw source (shared parser) and substitute the holes into the SSR
