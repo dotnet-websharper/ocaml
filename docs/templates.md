@@ -165,7 +165,7 @@ with a content hole and caller code.
 Add the template ppx to the editor's dune library:
 
 ```lisp
-(preprocess (pps wsocaml-template-ppx))
+(preprocess (pps websharper-ocaml-ppx))
 ```
 
 Dune forwards `pps` preprocessors to merlin, so ocaml-lsp expands `[%template]`
@@ -173,7 +173,7 @@ and you get autocomplete/type errors on the generated module. (Dune does *not*
 forward custom `(preprocess (action …))` to merlin, which is why a ppx is used;
 it shares the frontend's `Codegen`.)
 
-Install it once with `opam install ./frontend` (provides `wsocaml-template-ppx`).
+Install it once with `opam install ./frontend` (provides `websharper-ocaml-ppx`).
 The real build (`build.sh`) does not use the ppx — the frontend expands
 `[%template]` itself while also tracking the template as a dependency.
 

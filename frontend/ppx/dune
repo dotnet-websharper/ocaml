@@ -1,5 +1,5 @@
 (library
- (name wsocaml_template_ppx)
- (public_name wsocaml-template-ppx)
+ (name websharper_ocaml_ppx)
+ (public_name websharper-ocaml-ppx)
  (kind ppx_rewriter)
  (libraries ppxlib websharper-template))
