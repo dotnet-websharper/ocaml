@@ -1,0 +1,22 @@
+(* GENERATED from card.html — do not edit. *)
+
+let src = "<!doctype html>\n<div class=\"card\">\n  <!-- card -->\n  <h1>${Title}</h1>\n  <a ws-attr=\"Link\">more</a>\n  <div ws-hole=\"Body\"></div>\n  <input ws-var=\"Filter\" placeholder=\"filter\">\n  <button ws-onclick=\"Remove\">remove</button>\n</div>\n"
+
+type vars = { filter : string WebSharper_UI.Var.t }
+type anchors = unit
+type 'e event = { vars : vars; anchors : anchors; target : WebSharper_UI.Template.element; event : 'e }
+type t = { vars : vars; mutable title : string; mutable link : WebSharper_UI.Attr.t; mutable body : WebSharper_UI.Doc.t; mutable remove : WebSharper_UI.Template.element -> WebSharper_UI.Template.mouse_event -> unit; }
+let references : (string * string * string) list = []
+let create () : t = { vars = ({ filter = WebSharper_UI.Var.create ("") } : vars); title = ""; link = WebSharper_UI.Attr.empty (); body = WebSharper_UI.Doc.empty (); remove = (fun _ _ -> ()) }
+let title v c = c.title <- v; c
+let link v c = c.link <- v; c
+let body v c = c.body <- v; c
+let remove v c = c.remove <- v; c
+let remove_withModel v c = c.remove <- (fun target event -> v { vars = c.vars; anchors = (); target; event }); c
+let doc (c : t) : WebSharper_UI.Doc.t =
+  WebSharper_UI.Template.getOrLoad ~base:"card" ~name:None ~src ~refs:references ~keep_unfilled:false
+    [ WebSharper_UI.Template.text "Title" c.title;
+      WebSharper_UI.Template.attr "Link" c.link;
+      WebSharper_UI.Template.elt "Body" c.body;
+      WebSharper_UI.Template.varStr "Filter" c.vars.filter;
+      WebSharper_UI.Template.event "Remove" c.remove ]

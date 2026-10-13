@@ -18,10 +18,18 @@ let lcfirst s = if s = "" then s else String.uncapitalize_ascii s
 let val_ty_to_string = function
   | Hole.Number -> "float"
   | Hole.Bool -> "bool"
-  | Hole.String | Hole.StringList | Hole.DateTime | Hole.File | Hole.DomElement | Hole.Any ->
-      "string"
+  | Hole.File -> "WebSharper_UI.Template.file array"
+  | Hole.String | Hole.StringList | Hole.DateTime | Hole.DomElement | Hole.Any -> "string"
 
-let event_type (_ : string) = "WebSharper_UI.Template.event"
+let event_type name =
+  match String.lowercase_ascii name with
+  | "click" | "dblclick" | "contextmenu" | "mousedown" | "mouseup" | "mousemove"
+  | "mouseover" | "mouseout" | "mouseenter" | "mouseleave" ->
+      "WebSharper_UI.Template.mouse_event"
+  | "keydown" | "keyup" | "keypress" -> "WebSharper_UI.Template.keyboard_event"
+  | "focus" | "blur" | "focusin" | "focusout" -> "WebSharper_UI.Template.focus_event"
+  | _ -> "WebSharper_UI.Template.event"
+
 let element_type = "WebSharper_UI.Template.element"
 
 let ocaml_string s =
@@ -48,11 +56,13 @@ let non_vars_of (t : Hole.template) = List.filter (fun (h : Hole.hole) -> not (i
 let def_var = function
   | Hole.Number -> "0."
   | Hole.Bool -> "false"
+  | Hole.File -> "[||]"
   | _ -> "\"\""
 
 let var_fn = function
   | Hole.Bool -> "varBool"
   | Hole.Number -> "varFloat"
+  | Hole.File -> "varFile"
   | _ -> "varStr"
 
 let event_type_decl (_ : Hole.template) =

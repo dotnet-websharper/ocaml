@@ -428,6 +428,46 @@ else
   echo "SKIP site (ocamlfind/yojson/websharper-ui not available)"
 fi
 
+# Templates: generator goldens + native SSR render of the generated module.
+tplgen="$here/../../frontend/_build/default/bin/template_gen.exe"
+tpl="$here/template"
+if [ -x "$tplgen" ]; then
+  tout="$tmp/template"; mkdir -p "$tout"
+  if "$tplgen" "$tpl/card.html" "$tout" Card_tpl > "$tmp/tpl.gen.log" 2>&1; then
+    if [ "$update" = 1 ]; then
+      cp "$tout/Card_tpl.mli" "$tpl/card_tpl.mli.expected"
+      cp "$tout/Card_tpl.ml" "$tpl/card_tpl.ml.expected"
+      echo "updated template codegen goldens"
+    fi
+    ok=1
+    if ! diff -u "$tpl/card_tpl.mli.expected" "$tout/Card_tpl.mli" > "$tmp/tpl.mli.diff"; then
+      echo "FAIL template (codegen .mli)"; sed 's/^/    /' "$tmp/tpl.mli.diff"; ok=0
+    fi
+    if ! diff -u "$tpl/card_tpl.ml.expected" "$tout/Card_tpl.ml" > "$tmp/tpl.ml.diff"; then
+      echo "FAIL template (codegen .ml)"; sed 's/^/    /' "$tmp/tpl.ml.diff"; ok=0
+    fi
+    if [ "$ok" = 1 ] && command -v ocamlfind > /dev/null 2>&1 \
+       && ocamlfind query websharper-ui-server > /dev/null 2>&1; then
+      cp "$tpl/driver.ml" "$tout/"
+      if (cd "$tout" && ocamlfind ocamlopt -package websharper-ui-server -linkpkg \
+            Card_tpl.mli Card_tpl.ml driver.ml -o render) > "$tmp/tpl.build" 2>&1; then
+        "$tout/render" > "$tmp/tpl.actual" 2>&1
+        if [ "$update" = 1 ]; then cp "$tmp/tpl.actual" "$tpl/expected.out"; echo "updated template expected.out"; fi
+        if ! diff -u "$tpl/expected.out" "$tmp/tpl.actual" > "$tmp/tpl.out.diff"; then
+          echo "FAIL template (render)"; sed 's/^/    /' "$tmp/tpl.out.diff"; ok=0
+        fi
+      else
+        echo "FAIL template (build)"; sed 's/^/    /' "$tmp/tpl.build"; ok=0
+      fi
+    fi
+    if [ "$ok" = 1 ]; then echo "PASS template"; pass=$((pass + 1)); else fail=$((fail + 1)); fi
+  else
+    echo "FAIL template (generator)"; sed 's/^/    /' "$tmp/tpl.gen.log"; fail=$((fail + 1))
+  fi
+else
+  echo "SKIP template (frontend not built)"
+fi
+
 echo
 echo "passed: $pass, failed: $fail"
 [ "$fail" = 0 ]

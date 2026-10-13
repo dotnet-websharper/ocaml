@@ -14,16 +14,18 @@ Lambda into `wsocaml-ir-4`, and the backend lowers it to WebSharper AST and emit
 
 | Path | Purpose |
 | --- | --- |
-| `frontend/` | OCaml (dune) frontend: `.ml` → `wsocaml-ir-4` |
+| `frontend/` | OCaml (dune) frontend: `.ml` → `wsocaml-ir-4`; template codegen (`frontend/template/`) |
 | `backend/` | F#/.NET backend: `.wsir.json` → `.js` (also handles WebSharper bindings) |
 | `binding-adaptor/` | F# tool: WebSharper binding assembly → OCaml opam package |
 | `bindings/` | local opam repository of generated bindings (`websharper-xxx`) |
 | `bindings-legacy/` | raw-FFI test fixture (`frontend/bin/gen_bindings.ml`), used by the `jsbind`/`dom` emit tests |
+| `runtimes/template/` | `websharper-template`: shared HTML parser + template hole model |
 | `runtimes/ocaml/` | `websharper-server`: representation-agnostic sitelets, Content, SSR nodes, HTTP |
-| `runtimes/ui-server/` | `websharper-ui-server`: the native `WebSharper_UI` shadow (converts to `Ssr.node`) |
+| `runtimes/ui-server/` | `websharper-ui-server`: the native `WebSharper_UI` shadow (converts to `Ssr.node`) + template engine |
 | `examples/` | dune projects built on the generated bindings / `websharper-server` |
 | `scripts/` | build/test helpers |
 | `backend/tests/` | test harness (IR fixtures + apps) |
+| `docs/` | design notes (`client-server.md`, `codegen.md`, `templates.md`) |
 
 ## Build
 
@@ -159,6 +161,25 @@ The `hydrate`/`client` pipeline:
    **client-owned** (not node-preserving).
 
 See `examples/hello-world` and `docs/client-server.md` for details.
+
+## Templates
+
+WebSharper.UI-style templates: `[%template "views/card.html"]` expands an HTML
+file (with `${…}` and `ws-*`/`data-*` holes) into a typed OCaml module (a
+mutable record of holes + pipe combinators) that works on both tiers, with SSR.
+
+```ocaml
+module Greeting = [%template "views/greeting.html"]
+
+let g = Greeting.create () |> Greeting.title "Hi" |> Greeting.body "…"
+Content.page ~title:"Home" [ Greeting.doc g ]
+```
+
+Inner templates (`ws-template`) become submodules; event holes get nominal types
+(`mouse_event`, `keyboard_event`, …) and `_withModel` variants with access to the
+instance vars. `dune` preprocess + `preprocess.sh` gives the editor full
+ocaml-lsp support for `[%template]`. See `docs/templates.md`.
+
 
 ## Tests
 

@@ -5,6 +5,10 @@
 
 type element = WebSharper_JavaScript.Element.t
 type event = WebSharper_JavaScript.Event.t
+type mouse_event = WebSharper_JavaScript.MouseEvent.t
+type keyboard_event = WebSharper_JavaScript.KeyboardEvent.t
+type focus_event = WebSharper_JavaScript.FocusEvent.t
+type file = WebSharper_JavaScript.File.t
 type hole = TemplateHole.t
 
 let text name (v : string) = TemplateHole.makeText name v
@@ -17,6 +21,7 @@ let afterRender name (f : element -> unit) =
 let varStr name (v : string Var.t) = TemplateHole.makeVar name v
 let varBool name (v : bool Var.t) = TemplateHole.makeVar_2 name v
 let varFloat name (v : float Var.t) = TemplateHole.makeVar_8 name v
+let varFile name (v : file array Var.t) = TemplateHoleVarFile.create name v
 
 let getOrLoad ~base ~name ~src ~refs ~keep_unfilled (holes : hole list) : Doc.t =
   ignore refs;

@@ -128,6 +128,11 @@ end
 module Template = struct
   type element
   type event
+  type mouse_event
+  type keyboard_event
+  type focus_event
+  type date
+  type file
 
   type value =
     | VText of string
@@ -152,6 +157,9 @@ module Template = struct
   let varFloat name v = { tname = name; tvalue = VVarFloat v }
   let varInt name v = { tname = name; tvalue = VVarInt v }
   let varStringList name v = { tname = name; tvalue = VVarStringList v }
+  let varDate name _ = { tname = name; tvalue = VMisc }
+  let varFile name _ = { tname = name; tvalue = VMisc }
+  let varDom name _ = { tname = name; tvalue = VMisc }
   let event name _ = { tname = name; tvalue = VMisc }
   let afterRender name _ = { tname = name; tvalue = VMisc }
 

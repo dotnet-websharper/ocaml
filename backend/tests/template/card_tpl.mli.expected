@@ -1,0 +1,14 @@
+(* GENERATED from card.html — do not edit. *)
+
+type vars = { filter : string WebSharper_UI.Var.t }
+type anchors = unit
+type 'e event = { vars : vars; anchors : anchors; target : WebSharper_UI.Template.element; event : 'e }
+type t = { vars : vars; mutable title : string; mutable link : WebSharper_UI.Attr.t; mutable body : WebSharper_UI.Doc.t; mutable remove : WebSharper_UI.Template.element -> WebSharper_UI.Template.mouse_event -> unit; }
+val create : unit -> t
+val title : string -> t -> t
+val link : WebSharper_UI.Attr.t -> t -> t
+val body : WebSharper_UI.Doc.t -> t -> t
+val remove : (WebSharper_UI.Template.element -> WebSharper_UI.Template.mouse_event -> unit) -> t -> t
+val remove_withModel : (WebSharper_UI.Template.mouse_event event -> unit) -> t -> t
+val doc : t -> WebSharper_UI.Doc.t
+val references : (string * string * string) list

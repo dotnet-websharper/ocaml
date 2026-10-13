@@ -69,7 +69,7 @@ extra-files: [
   ["lib/storage.ml" "md5=8565c672d8a6a4da14de95e6080a084f"]
   ["lib/submitter.ml" "md5=ead9dd4f8050d120b90d93598a8105bc"]
   ["lib/svgElementsElt.ml" "md5=bea9e70156e6cdea102d3143c1f49901"]
-  ["lib/template.ml" "md5=fffe04bff6dc00472300de4a31fe5c60"]
+  ["lib/template.ml" "md5=fc871880c0e26a0df6109192f5ab25e9"]
   ["lib/templateHole.ml" "md5=f5978211ccf044ef44d073c1b5405f72"]
   ["lib/templateHoleAfterRender.ml" "md5=b8abd9ff3725ecb37dd1074795abb6e1"]
   ["lib/templateHoleAfterRenderE.ml" "md5=342497e76f8317ccbede24bf47ff3dd5"]
