@@ -1505,7 +1505,7 @@ let () =
        types), so put the native packages first; keep the client includes too so
        non-template code still resolves. *)
     let main_includes =
-      if !emit_server <> None then List.rev !server_includes @ List.rev !includes
+      if !emit_server <> None then List.rev !includes @ List.rev !server_includes
       else List.rev !includes
     in
     Clflags.include_dirs := main_includes @ !Clflags.include_dirs;
