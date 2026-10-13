@@ -2,4 +2,4 @@
  (name wsocaml_template)
  (public_name websharper-template)
  (wrapped false)
- (modules Html Hole))
+ (modules Markup Hole))

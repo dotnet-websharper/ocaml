@@ -10,5 +10,6 @@ depends: [
   "ocaml" {>= "5.0"}
   "dune" {>= "3.0"}
   "websharper-server"
+  "websharper-template"
 ]
 build: [ ["dune" "build" "-p" name "-j" jobs] ]

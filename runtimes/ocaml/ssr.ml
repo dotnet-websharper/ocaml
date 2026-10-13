@@ -7,10 +7,14 @@
 type node =
   | Text of string
   | Raw of string
+  | Comment of string
+  | Doctype of string
   | El of string * (string * string) list * node list
 
 let text s = Text s
 let raw s = Raw s
+let comment s = Comment s
+let doctype s = Doctype s
 let el name attrs children = El (name, attrs, children)
 
 let escape (s : string) =
@@ -29,6 +33,8 @@ let escape (s : string) =
 let rec render_node = function
   | Text s -> escape s
   | Raw s -> s
+  | Comment s -> "<!--" ^ s ^ "-->"
+  | Doctype s -> s
   | El (name, attrs, children) ->
       let a =
         String.concat "" (List.map (fun (k, v) -> Printf.sprintf " %s=\"%s\"" k (escape v)) attrs)
@@ -38,12 +44,15 @@ let rec render_node = function
         name
 
 let render ?(title = "") ?(scripts = []) (body : node list) =
+  let doctype, body =
+    match body with Doctype d :: rest -> d, rest | _ -> "<!doctype html>", body
+  in
   let head = Printf.sprintf "<meta charset=\"utf-8\"><title>%s</title>" (escape title) in
   let sc =
     String.concat ""
       (List.map (fun src -> Printf.sprintf "<script type=\"module\" src=\"%s\"></script>" src) scripts)
   in
-  "<!doctype html><html><head>" ^ head ^ "</head><body>"
+  doctype ^ "<html><head>" ^ head ^ "</head><body>"
   ^ String.concat "" (List.map render_node body)
   ^ sc ^ "</body></html>"
 

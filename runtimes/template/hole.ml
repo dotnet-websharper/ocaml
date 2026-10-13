@@ -25,6 +25,7 @@ type template = {
   name : string option; (* None = the file's root template *)
   holes : hole list;
   anchors : string list;
+  body : Markup.node list; (* the nodes the template renders *)
 }
 
 type parsed = { root : template; inner : template list }
@@ -70,12 +71,12 @@ let add_hole acc name kind =
     | Some h -> h.kind <- merge_kind h.kind kind
     | None -> acc.holes <- acc.holes @ [ { name; kind } ]
 
-let var_type_of (el : Html.element) : val_ty =
+let var_type_of (el : Markup.element) : val_ty =
   match String.lowercase_ascii el.tag with
   | "textarea" -> String
-  | "select" -> (match Html.find_attr el "multiple" with Some _ -> StringList | None -> Any)
+  | "select" -> (match Markup.find_attr el "multiple" with Some _ -> StringList | None -> Any)
   | "input" -> (
-      match Html.find_attr el "type" with
+      match Markup.find_attr el "type" with
       | Some t -> (
           match String.lowercase_ascii t with
           | "number" | "range" -> Number
@@ -103,31 +104,31 @@ let scan_attr acc el (k, v) =
   else if starts_with "data-event-" kl then
     add_hole acc v (Event (String.sub kl 11 (String.length kl - 11)))
 
-let analyze (nodes : Html.node list) : parsed =
+let analyze (nodes : Markup.node list) : parsed =
   let inner : template list ref = ref [] in
-  let rec register_inner name (body : Html.node list) =
+  let rec register_inner name (body : Markup.node list) =
     let sub = new_acc () in
     scan_nodes sub body;
     inner :=
-      { name = Some name; holes = sub.holes; anchors = sub.anchors } :: !inner
+      { name = Some name; holes = sub.holes; anchors = sub.anchors; body } :: !inner
   and scan_nodes acc nodes = List.iter (scan_node acc) nodes
-  and scan_node acc (node : Html.node) =
+  and scan_node acc (node : Markup.node) =
     match node with
-    | Html.Text s -> List.iter (fun n -> add_hole acc n Simple) (split_holes s)
-    | Html.Comment _ | Html.Doctype _ -> ()
-    | Html.Element el -> scan_element acc el
-  and scan_element acc (el : Html.element) =
-    match Html.find_attr el "ws-template" with
-    | Some name -> register_inner name [ Html.Element el ]
+    | Markup.Text s -> List.iter (fun n -> add_hole acc n Simple) (split_holes s)
+    | Markup.Comment _ | Markup.Doctype _ -> ()
+    | Markup.Element el -> scan_element acc el
+  and scan_element acc (el : Markup.element) =
+    match Markup.find_attr el "ws-template" with
+    | Some name -> register_inner name [ Markup.Element el ]
     | None -> (
-        match Html.find_attr el "ws-children-template" with
+        match Markup.find_attr el "ws-children-template" with
         | Some name -> register_inner name el.children
         | None -> (
             let is_template_elem = String.lowercase_ascii el.tag = "template" in
             if is_template_elem then
               match
-                ( Html.find_attr el "name",
-                  Html.find_attr el "id" )
+                ( Markup.find_attr el "name",
+                  Markup.find_attr el "id" )
               with
               | Some nm, _ | None, Some nm -> register_inner nm el.children
               | None, None -> ()
@@ -138,5 +139,5 @@ let analyze (nodes : Html.node list) : parsed =
   in
   let root_acc = new_acc () in
   scan_nodes root_acc nodes;
-  { root = { name = None; holes = root_acc.holes; anchors = root_acc.anchors };
+  { root = { name = None; holes = root_acc.holes; anchors = root_acc.anchors; body = nodes };
     inner = List.rev !inner }

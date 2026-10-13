@@ -26,6 +26,7 @@ module Attr = struct
   type t = string * string
 
   let create k v = (k, v)
+  let empty () = ("", "")
 end
 
 module On = struct
@@ -64,7 +65,7 @@ module Doc = struct
   type t = Ssr.node list
 
   let text s = [ Ssr.text s ]
-  let empty : t = []
+  let empty () : t = []
   let textView (v : string View.t) = [ Ssr.text (View.get v) ]
   let render (d : t) = String.concat "" (List.map Ssr.render_node d)
 
@@ -119,3 +120,136 @@ module Html = struct
   let a = a
   let button = button
 end
+
+(* Server-side template engine. Structure-as-data: the generated code passes the
+   raw template source and the hole values; we parse the source (shared parser)
+   and substitute the holes, producing the initial SSR markup. Events and
+   after-render handlers have no server-side effect. *)
+module Template = struct
+  type element
+  type event
+
+  type value =
+    | VText of string
+    | VView of string View.t
+    | VElt of Doc.t
+    | VAttr of Attr.t
+    | VVarStr of string Var.t
+    | VVarBool of bool Var.t
+    | VVarFloat of float Var.t
+    | VVarInt of int Var.t
+    | VVarStringList of string array Var.t
+    | VMisc
+
+  type hole = { tname : string; tvalue : value }
+
+  let text name v = { tname = name; tvalue = VText v }
+  let view name v = { tname = name; tvalue = VView v }
+  let elt name v = { tname = name; tvalue = VElt v }
+  let attr name v = { tname = name; tvalue = VAttr v }
+  let varStr name v = { tname = name; tvalue = VVarStr v }
+  let varBool name v = { tname = name; tvalue = VVarBool v }
+  let varFloat name v = { tname = name; tvalue = VVarFloat v }
+  let varInt name v = { tname = name; tvalue = VVarInt v }
+  let varStringList name v = { tname = name; tvalue = VVarStringList v }
+  let event name _ = { tname = name; tvalue = VMisc }
+  let afterRender name _ = { tname = name; tvalue = VMisc }
+
+  let starts_with pre s =
+    String.length s >= String.length pre && String.sub s 0 (String.length pre) = pre
+
+  let is_marker kl =
+    kl = "ws-hole" || kl = "ws-replace" || kl = "ws-attr" || kl = "ws-var" || kl = "ws-dom"
+    || kl = "ws-onafterrender" || kl = "ws-anchor" || starts_with "ws-on" kl
+    || kl = "data-hole" || kl = "data-replace" || kl = "data-attr" || kl = "data-var"
+    || kl = "data-var-unchecked" || starts_with "data-event-" kl
+
+  let hole_string (v : value) : string =
+    match v with
+    | VText s -> s
+    | VView v -> View.get v
+    | VVarStr v -> Var.get v
+    | VVarBool v -> if Var.get v then "true" else "false"
+    | VVarFloat v -> string_of_float (Var.get v)
+    | VVarInt v -> string_of_int (Var.get v)
+    | VVarStringList v -> String.concat "," (Array.to_list (Var.get v))
+    | VElt _ | VAttr _ | VMisc -> ""
+
+  (* Replace `${Name}` occurrences using the filled holes. *)
+  let subst (tbl : (string, value) Hashtbl.t) (s : string) : string =
+    let n = String.length s in
+    let b = Buffer.create n in
+    let i = ref 0 in
+    while !i < n do
+      if !i < n - 1 && s.[!i] = '$' && s.[!i + 1] = '{' then begin
+        let j = ref (!i + 2) in
+        while !j < n && s.[!j] <> '}' do incr j done;
+        if !j < n then begin
+          let name = String.sub s (!i + 2) (!j - !i - 2) in
+          (match Hashtbl.find_opt tbl name with Some v -> Buffer.add_string b (hole_string v) | None -> ());
+          i := !j + 1
+        end
+        else (Buffer.add_char b s.[!i]; incr i)
+      end
+      else (Buffer.add_char b s.[!i]; incr i)
+    done;
+    Buffer.contents b
+
+  let rec render_nodes tbl nodes = List.concat_map (render_node tbl) nodes
+
+  and render_node tbl (node : Markup.node) : Doc.t =
+    match node with
+    | Markup.Text s -> [ Ssr.text (subst tbl s) ]
+    | Markup.Comment c -> [ Ssr.comment c ]
+    | Markup.Doctype d -> [ Ssr.doctype d ]
+    | Markup.Element el -> render_element tbl el
+
+  and render_element tbl (el : Markup.element) : Doc.t =
+    match Markup.find_attr el "ws-replace" with
+    | Some name -> (match Hashtbl.find_opt tbl name with Some (VElt d) -> d | _ -> [])
+    | None ->
+        let attrs =
+          List.filter_map
+            (fun (k, v) ->
+              let kl = String.lowercase_ascii k in
+              if is_marker kl then None else Some (k, subst tbl v))
+            el.attrs
+        in
+        let attrs =
+          match Markup.find_attr el "ws-attr" with
+          | Some name -> (
+              match Hashtbl.find_opt tbl name with Some (VAttr (k, v)) -> (k, v) :: attrs | _ -> attrs)
+          | None -> attrs
+        in
+        let attrs =
+          match Markup.find_attr el "ws-var" with
+          | Some name -> (
+              match Hashtbl.find_opt tbl name with
+              | Some (VVarStr v) -> ("value", Var.get v) :: attrs
+              | Some v -> ("value", hole_string v) :: attrs
+              | None -> attrs)
+          | None -> attrs
+        in
+        let children =
+          match Markup.find_attr el "ws-hole" with
+          | Some name -> (match Hashtbl.find_opt tbl name with Some (VElt d) -> d | _ -> [])
+          | None -> render_nodes tbl el.children
+        in
+        [ Ssr.el el.tag attrs children ]
+
+  let getOrLoad ~base ~name ~src ~refs ~keep_unfilled (holes : hole list) : Doc.t =
+    ignore base; ignore refs; ignore keep_unfilled;
+    let parsed = Hole.analyze (Markup.parse src) in
+    let tpl =
+      match name with
+      | None -> parsed.Hole.root
+      | Some n -> (
+          match List.find_opt (fun (t : Hole.template) -> t.name = Some n) parsed.Hole.inner with
+          | Some t -> t
+          | None -> parsed.Hole.root)
+    in
+    let tbl : (string, value) Hashtbl.t = Hashtbl.create 16 in
+    List.iter (fun h -> Hashtbl.replace tbl h.tname h.tvalue) holes;
+    render_nodes tbl tpl.Hole.body
+end
+

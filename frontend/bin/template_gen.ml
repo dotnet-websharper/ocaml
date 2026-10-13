@@ -19,7 +19,7 @@ let () =
         Filename.remove_extension (Filename.basename file) |> String.lowercase_ascii
       in
       let src = In_channel.with_open_bin file In_channel.input_all in
-      let nodes = Html.parse src in
+      let nodes = Markup.parse src in
       let parsed = Hole.analyze nodes in
       let sig_text = Codegen.signature ~base parsed in
       let impl_text = Codegen.implementation ~base ~src parsed in
