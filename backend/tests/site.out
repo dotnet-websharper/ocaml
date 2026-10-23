@@ -1,11 +1,20 @@
 has-title: true
 has-ssr: true
 has-hydrate: true
+has-event-marker: true
 has-scripts: true
 has-bootstrap: true
 user-ssr: true
+user-link: true
+echo-ssr: true
+item-ssr: true
+item-link: true
+search-ssr: true
+search-link: true
 hydrated: true
 before: before
+event-attached: true
 after: after
+event-after: yes
 rpc add(20,22): 42
 static: 200 text/javascript

@@ -25,7 +25,7 @@ Lambda into `wsocaml-ir-4`, and the backend lowers it to WebSharper AST and emit
 | `examples/` | dune projects built on the generated bindings / `websharper-server` |
 | `scripts/` | build/test helpers |
 | `backend/tests/` | test harness (IR fixtures + apps) |
-| `docs/` | design notes (`client-server.md`, `codegen.md`, `templates.md`, `ws-differences.md`) |
+| `docs/` | design notes (`client-server.md`, `codegen.md`, `routing.md`, `templates.md`, `ws-differences.md`) |
 
 ## Build
 
@@ -140,7 +140,10 @@ A wsocaml app is written once and compiled to both tiers. A `[@website]`
 
 - `[@rpc]` — the client gets a proxy; the body runs on the native server.
 - `[@endpoint "METHOD /path"]` on a DU case + `Sitelet.infer` — the frontend
-  generates the router/URL builder from the endpoint variant.
+  generates the router/URL builder from the endpoint variant: `@name` binds a
+  payload slot (an inline-record field, or `@0`/`@1`… for a tuple payload) and
+  `?key=@name` binds a query parameter. Every scenario is walked through in
+  [`docs/routing.md`](docs/routing.md).
 - `open WebSharper_ClientServer` then `hydrate (fun () -> view)` /
   `client (fun () -> view)` embed a client-side piece in a page.
 

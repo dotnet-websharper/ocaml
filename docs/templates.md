@@ -135,6 +135,12 @@ c
 (DOM *node* types — `Element`, `Node`, `Document` — remain collapsed to the
 single abstract `EventTarget.t`, so no coercions are needed between them.)
 
+> The `ws-on<event>` attribute family is shared with server-rendered handlers:
+> for a template the value names a **hole** (resolved from the template's hole
+> table), whereas the compiler emits `ws-on<event>="<key>"` for an `on.<event>`
+> handler on a server-rendered element, and the client runtime attaches only
+> values that are registered keys. See `docs/client-server.md` §4.1.
+
 ### Anchors
 
 `ws-anchor="Name"` is parsed but **anchors are not resolved yet** (the `anchors`

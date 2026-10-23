@@ -1,0 +1,1 @@
+endpoint_tuple_index_range.ml:5:3:43: error: the endpoint 'Move' has no argument '1' (use '@0')

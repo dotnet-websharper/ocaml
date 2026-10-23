@@ -11,7 +11,8 @@ open WebSharper_Server
 
 type endpoint =
   | Home [@endpoint "GET /"]
-
+  | Echo of { msg:string } [@endpoint "GET /echo/@msg"]
+  
 module Greeting = [%template "views/greeting.html"]
 
 let[@website] main =
@@ -21,6 +22,9 @@ let[@website] main =
         Content.page
           ~title:"Hello, world!"
           [
+            div [
+              on.click (fun _ _ -> Console.log "Adam!")
+            ] [text "Click me!"];
             hydrate (fun () ->
               Greeting.create ()
               |> Greeting.title "Hello, world!"
@@ -35,4 +39,6 @@ let[@website] main =
               )
               |> Greeting.doc)
           ]
+    | Echo msg ->
+        Content.text (Printf.sprintf "Hello:%s" msg.msg)
   )

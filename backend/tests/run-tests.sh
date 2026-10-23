@@ -468,6 +468,46 @@ else
   echo "SKIP template (frontend not built)"
 fi
 
+# Frontend diagnostics: each fixture must fail with the expected located error,
+# normalized by `diag.exe` to `file:line:col:col: severity: message` (the fixture
+# directory is stripped so the goldens are portable).
+errs="$here/errors"
+fe="$wsroot/frontend/_build/default/bin/main.exe"
+diagexe="$wsroot/frontend/_build/default/bin/diag.exe"
+if [ -d "$errs" ] && [ -x "$fe" ] && [ -x "$diagexe" ] \
+   && command -v ocamlfind > /dev/null 2>&1 \
+   && ocamlfind query websharper-ui > /dev/null 2>&1; then
+  e_ui="$(ocamlfind query websharper-ui)"
+  e_jsl="$(ocamlfind query websharper-javascript)"
+  e_rt="$(ocamlfind query websharper-runtime)"
+  e_sl="$(ocamlfind query websharper-stdlib)"
+  for ml in "$errs"/*.ml; do
+    [ -f "$ml" ] || continue
+    name="$(basename "$ml" .ml)"
+    # The frontend is expected to fail; the diagnostic stream is what we compare.
+    "$fe" --input "$ml" --output "$tmp/$name.wsir.json" --emit-server "$tmp/$name.server.ml" \
+      --unit Main -I "$e_ui" -I "$e_jsl" -I "$e_rt" -I "$e_sl" -I "$(ocamlc -where)" 2>&1 \
+      | "$diagexe" | sed "s|^$errs/||" > "$tmp/$name.err" || true
+    expected="$errs/$name.err"
+    if [ "$update" = 1 ]; then cp "$tmp/$name.err" "$expected"; echo "updated $name.err"; fi
+    if [ ! -s "$tmp/$name.err" ]; then
+      echo "FAIL error $name (no diagnostic)"; fail=$((fail + 1)); continue
+    fi
+    if [ ! -f "$expected" ]; then
+      echo "FAIL error $name (missing $(basename "$expected"); run with --update)"
+      fail=$((fail + 1)); continue
+    fi
+    if ! diff -u "$expected" "$tmp/$name.err" > "$tmp/$name.err.diff"; then
+      echo "FAIL error $name (diagnostic mismatch)"
+      sed 's/^/    /' "$tmp/$name.err.diff"
+      fail=$((fail + 1)); continue
+    fi
+    echo "PASS error $name"; pass=$((pass + 1))
+  done
+else
+  echo "SKIP errors (frontend/ocamlfind not available)"
+fi
+
 echo
 echo "passed: $pass, failed: $fail"
 [ "$fail" = 0 ]

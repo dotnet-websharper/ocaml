@@ -1,0 +1,1 @@
+endpoint_missing_attr.ml:4:3:19: error: the endpoint constructor 'Echo' has no [@endpoint "METHOD /path"] attribute

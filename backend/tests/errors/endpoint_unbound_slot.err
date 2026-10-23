@@ -1,0 +1,1 @@
+endpoint_unbound_slot.ml:4:3:68: error: the endpoint 'User' does not bind its field 'name' (add '@name' to the path or query)

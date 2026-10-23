@@ -1,0 +1,1 @@
+endpoint_constant_binding.ml:4:3:38: error: the endpoint 'Plain' has no argument 'x' (it takes no arguments)

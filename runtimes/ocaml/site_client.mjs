@@ -12,10 +12,20 @@ const page = await (await fetch(base + '/')).text();
 console.log('has-title:', page.includes('<title>Site</title>'));
 console.log('has-ssr:', page.includes('server-rendered'));
 console.log('has-hydrate:', page.includes('data-ws-key=') && page.includes('>before<'));
+console.log('has-event-marker:', page.includes('ws-onclick='));
 console.log('has-scripts:', page.includes('<script type="module" src="/Main.js"></script>'));
 console.log('has-bootstrap:', page.includes('OCamlRuntime.hydrate()'));
 const user = await (await fetch(base + '/user/5')).text();
 console.log('user-ssr:', user.includes('User 5'));
+console.log('user-link:', user.includes('link=/echo/hi'));
+const echo = await (await fetch(base + '/echo/hi')).text();
+console.log('echo-ssr:', echo.includes('Echo:hi'));
+const item = await (await fetch(base + '/item/abc/7')).text();
+console.log('item-ssr:', item.includes('Item:abc:7'));
+console.log('item-link:', item.includes('link=/item/abc/7'));
+const search = await (await fetch(base + '/search?q=ocaml&page=2')).text();
+console.log('search-ssr:', search.includes('Search:ocaml:2'));
+console.log('search-link:', search.includes('link=/user/2'));
 
 const dom = new JSDOM(page, { url: 'http://localhost/', pretendToBeVisual: true });
 globalThis.window = dom.window;
@@ -31,8 +41,12 @@ setTimeout(async () => {
   console.log('hydrated:', n > 0);
   console.log('before:', region.textContent);
   region.firstElementChild.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
+  const button = dom.window.document.querySelector('button[ws-onclick]');
+  console.log('event-attached:', !!button && globalThis.OCamlRuntime.clientCode[button.getAttribute('ws-onclick')] !== undefined);
+  button.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
   setTimeout(async () => {
     console.log('after:', region.textContent);
+    console.log('event-after:', button.getAttribute('data-clicked'));
     const r = await fetch(base + '/rpc', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

@@ -1,0 +1,1 @@
+event_handler_capture.ml:8:18:44: error: this event handler is rendered by the server, so it must be closed; it captures the local 'v'

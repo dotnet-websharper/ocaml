@@ -1,0 +1,1 @@
+client_server_reference.ml:6:57:63: error: client-side 'reveal' references server-only 'secret'; mark it [@javascript] or [@rpc]

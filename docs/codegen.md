@@ -26,29 +26,37 @@ Both outputs share the same frontend pipeline up to typechecking
 (`frontend/bin/main.ml`):
 
 ```
-parse            -->  transformInfer  -->  transformClientServer  -->  typecheck
-                                                                          |
-                              +-------------------------------------------+------------------+
-                              |                                                              |
-                     (default) emit IR /.js/.d.ts                                (--emit-server) emit server.ml
+parse            -->  transformInfer  -->  transformClientServer  -->  transformClientEvents  -->  typecheck
+                                                                                                     |
+                              +---------------------------------------------------------------------+------------------+
+                              |                                                                                        |
+                     (default) emit IR /.js/.d.ts                                                  (--emit-server) emit server.ml
 ```
 
 - `parse` (`main.ml:299`) reads the file and attaches real locations
   (`Location.init`).
-- `transformInfer` (`main.ml:1230`) expands `Sitelet.infer`/`Sitelet.Infer`
+- `transformInfer` (`main.ml:1383`) expands `Sitelet.infer`/`Sitelet.Infer`
   into `Sitelet.make route link handler`, synthesizing the router/URL builder
   from the endpoint variant.
-- `transformClientServer` (`main.ml:1299`) lifts `client`/`hydrate` fragments
+- `transformClientServer` (`main.ml:1452`) lifts `client`/`hydrate` fragments
   into opaque `[@client]` bindings and rewrites `on.<event>` to `On.<event>`.
+- `transformClientEvents` (`main.ml:1693`) handles `on.<event>` handlers on
+  server-rendered elements: it lifts each handler into a top-level
+  `[@javascript]` binding under an interned key and, on the server, replaces the
+  call with a `ws-on<event>="<key>"` marker (`WebSharper_UI.Attr.create`). The
+  same pass runs in the client build, where the call becomes
+  `On.<event> <key>` and the key is registered for `attachEvents` (see
+  `client-server.md` §4.1). Handlers inside `client`/`hydrate` regions are left
+  to the client (dropped from the server body).
 - `typecheck` runs once on the combined AST.
-- `emitServer` (`main.ml:1019`) is what this document is about.
+- `emitServer` (`main.ml:1018`) is what this document is about.
 
 `server.ml` is only produced when the frontend is invoked with `--emit-server`.
 
 ## 2. What is selected: `serverItems`
 
 `emitServer` starts from the **transformed** AST and keeps a filtered version of
-it, computed by `serverItems ast js` (`main.ml:940`). It walks item by item:
+it, computed by `serverItems ast js` (`main.ml:939`). It walks item by item:
 
 | Source item | Kept in `server.ml`? |
 | --- | --- |
@@ -57,6 +65,7 @@ it, computed by `serverItems ast js` (`main.ml:940`). It walks item by item:
 | any other `open` | yes |
 | `let[@javascript] f` (client) | **dropped** |
 | `let[@export] f` (JS API) | **dropped** |
+| `let wsh<digits> = …` (lifted server-rendered handler) | **dropped** |
 | `let[@rpc] f` (server, callable from the client) | yes |
 | `let f` (server-only) | yes |
 | `let[@client] ws<id>` (lifted region) | yes |
@@ -69,7 +78,7 @@ The exact filter is `js minus clients`: `emitServer` passes
 `[@client]` bindings survive.
 
 Kept values also have their **marker attributes stripped** (`stripMarkers`,
-`main.ml:925`): `javascript`, `rpc`, `export`, `client`, `website` are removed
+`main.ml:924`): `javascript`, `rpc`, `export`, `client`, `website` are removed
 before printing. The constructors' `[@endpoint …]` attributes were already
 removed by `transformInfer`.
 
@@ -78,29 +87,29 @@ removed by `transformInfer`.
 After the kept items, `emitServer` appends three things derived from the
 program's types and markers:
 
-1. **JSON codecs** — `helperDefs` (`main.ml:733`): `toJson_*`/`ofJson_*`
+1. **JSON codecs** — `helperDefs` (`main.ml:732`): `toJson_*`/`ofJson_*`
    functions generated from the `[@rpc]` argument/result types.
 2. **RPC registration** — one `Wsrpc.register "<name>" …` per `[@rpc]`
-   (`main.ml:1050`), unwrapping an `'a Async.t` handler with `Async.run_sync`
+   (`main.ml:1049`), unwrapping an `'a Async.t` handler with `Async.run_sync`
    where needed.
 3. **Bootstrap** — `WebSharper_Server.Server.serve ~port ~bundle ~static <sitelet>`
-   for a `[@website]` sitelet, or `Wsrpc.serve …` otherwise (`main.ml:1068`).
+   for a `[@website]` sitelet, or `Wsrpc.serve …` otherwise (`main.ml:1067`).
 
 ## 3. How it is printed
 
-`prettyStructure` (`main.ml:994`) does **not** copy source text. For each item
+`prettyStructure` (`main.ml:993`) does **not** copy source text. For each item
 it:
 
 1. emits a `# <line> "<absolute file>"` directive from the item's `pstr_loc`
-   (`addLineDirective`, `main.ml:982`), then
+   (`addLineDirective`, `main.ml:981`), then
 2. prints the item with `Pprintast.structure_item` (`printStructureItem`,
-   `main.ml:987`).
+   `main.ml:986`).
 
 `Pprintast` is the OCaml compiler's own printer (the one behind `-dsource`). It
 re-lays out the AST — indentation, line breaks, parentheses — and drops
 everything that is not in the AST. The generated helpers/bootstrap get one
 directive pointing at the `[@website]` binding (or at source line 1 when there
-is none, `main.ml:1041`).
+is none, `main.ml:1040`).
 
 ## 4. Worked example
 
@@ -183,6 +192,13 @@ Observe:
 - The `[@website]` attribute on `main` is gone.
 - The `# <line> "<file>"` lines point each item back at its source line.
 
+An `on.<event>` handler on a **server-rendered** element looks different: it is
+removed from `server.ml` and the element carries a marker, e.g.
+`div [WebSharper_UI.Attr.create "ws-onclick" "wsh36132450"] [text "Click me!"]`,
+with the (client-only) handler lifted into a `let wsh36132450 = … [@javascript]`
+binding that is dropped here and registered in the client bundle
+(`client-server.md` §4.1).
+
 ## 5. Why the printed code can look different
 
 1. **Reformatting.** `Pprintast` reproduces the AST, not your whitespace: it
@@ -209,7 +225,7 @@ mechanisms keep errors attached to your source:
 - **Native typecheck (`--server-include`).** In `--emit-server` mode the
   frontend typechecks the server-filtered items against the *native* packages
   (`websharper-server`, `websharper-ui-server`) via `typecheckServer`
-  (`main.ml:1409`). Server-specific errors — for example a UI combinator the
+  (`main.ml:1959`). Server-specific errors — for example a UI combinator the
   server-side `WebSharper_UI` shadow lacks — are reported at the **exact**
   source line/column. `examples/hello-world/build.sh` passes the native
   `--server-include` directories. Warnings are suppressed in this pass because

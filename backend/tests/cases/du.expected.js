@@ -307,6 +307,45 @@ if (!globalThis.OCamlRuntime) {
         n++;
       }
     }
+    attachEvents();
+    return n;
+  }
+
+  // Server-rendered event handlers: for an `on.<event> handler` on a
+  // server-rendered element the server emits `ws-on<event>="<key>"` and the
+  // handler is lifted into a registered client binding; attach it here (the
+  // handler receives the element and the event). Template regions use the same
+  // attribute family with a hole name, which is not a registered key, so they
+  // are skipped.
+  function attachEvents(root) {
+    var doc = root || globalThis.document;
+    if (!doc || !doc.querySelectorAll) return 0;
+    var store = globalThis.OCamlRuntime.clientCode || {};
+    var nodes = doc.querySelectorAll("*");
+    var n = 0;
+    for (var i = 0; i < nodes.length; i++) {
+      var el = nodes[i];
+      if (el.__wsEventsAttached) continue;
+      var attrs = el.attributes;
+      if (!attrs) continue;
+      var attached = 0;
+      for (var j = 0; j < attrs.length; j++) {
+        var name = attrs[j].name;
+        if (name.length <= 5 || name.lastIndexOf("ws-on", 0) !== 0) continue;
+        var fn = store[attrs[j].value];
+        if (!fn) continue;
+        (function (el, ev, fn) {
+          el.addEventListener(ev, function (e) {
+            caml_apply(fn, [el, e]);
+          });
+        })(el, name.slice(5), fn);
+        attached++;
+      }
+      if (attached > 0) {
+        el.__wsEventsAttached = true;
+        n += attached;
+      }
+    }
     return n;
   }
 
@@ -425,6 +464,7 @@ if (!globalThis.OCamlRuntime) {
     exported: exported,
     registerClient: registerClient,
     hydrate: hydrate,
+    attachEvents: attachEvents,
     caml_apply: caml_apply,
     caml_trampoline: caml_trampoline,
     caml_trampoline_return: caml_trampoline_return,

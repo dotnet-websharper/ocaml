@@ -1,0 +1,1 @@
+endpoint_optional_segment.ml:5:3:79: error: the endpoint 'Posts' has an empty query part (write 'key=@name'; optional segments like '@page?' are not supported)

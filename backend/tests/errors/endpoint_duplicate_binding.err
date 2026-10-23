@@ -1,0 +1,1 @@
+endpoint_duplicate_binding.ml:4:3:72: error: the endpoint 'User' binds 'id' twice

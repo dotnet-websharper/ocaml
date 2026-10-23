@@ -393,7 +393,7 @@ let referencedNames (e: Parsetree.expression) =
       expr =
         (fun self (e: Parsetree.expression) ->
           (match e.pexp_desc with
-          | Parsetree.Pexp_ident { txt = Longident.Lident n; _ } -> acc := n :: !acc
+          | Parsetree.Pexp_ident { txt = Longident.Lident n; loc } -> acc := (n, loc) :: !acc
           | _ -> ());
           Ast_iterator.default_iterator.expr self e);
     }
@@ -431,13 +431,12 @@ let checkBoundary (ast: Parsetree.structure) =
               match vb.pvb_pat.ppat_desc with
               | Parsetree.Ppat_var { txt = n; _ } when (try Hashtbl.find role n = "js" with Not_found -> false) ->
                   referencedNames vb.pvb_expr
-                  |> List.iter (fun r ->
+                  |> List.iter (fun (r, loc) ->
                          match (try Some (Hashtbl.find role r) with Not_found -> None) with
                          | Some "server" ->
-                             failwith (
-                               Printf.sprintf
-                                 "client-side '%s' references server-only '%s'; mark it [@javascript] or [@rpc]"
-                                 n r)
+                             Location.raise_errorf ~loc
+                               "client-side '%s' references server-only '%s'; mark it [@javascript] or [@rpc]"
+                               n r
                          | _ -> ())
               | _ -> ())
             vbs
@@ -1086,10 +1085,13 @@ let emitServer (path: string) (ast: Parsetree.structure) (typed: Typedtree.struc
 
 (* --- [@endpoint] / Sitelet.Infer ------------------------------------------
    The endpoint is a variant whose constructors carry
-   [@endpoint "METHOD /path/@arg/..."]; each `@` variable is (positionally) an
-   argument of that constructor. `Sitelet.Infer (fun ctx ep -> ...)` is expanded
-   into `Sitelet.make route link (fun ctx ep -> ...)` with a generated router and
-   URL builder. *)
+   [@endpoint "METHOD /path/@name?key=@name"]; each `@name` binds a payload
+   slot: an inline-record payload is addressed by field name, a tuple payload by
+   argument index (`@0`, `@1`, …). The `@names` must form a bijection over the
+   payload (checked with located errors) and the URL order is free.
+   `Sitelet.Infer (fun ctx ep -> ...)` is expanded into
+   `Sitelet.make route link (fun ctx ep -> ...)` with a generated router and URL
+   builder. *)
 
 let attrString (attrs: Parsetree.attributes) (name: string) : string option =
   List.find_map
@@ -1132,6 +1134,14 @@ let fmtArg (ty: string) (v: string) =
   | "float" -> Printf.sprintf "string_of_float %s" v
   | _ -> v
 
+(* A concrete argument type name for diagnostics (`int`, `Foo.t`, `'a`, …). *)
+let coreNameDisplay (ct: Parsetree.core_type) =
+  let buf = Buffer.create 16 in
+  let fmt = Format.formatter_of_buffer buf in
+  Pprintast.core_type fmt ct;
+  Format.pp_print_flush fmt ();
+  Buffer.contents buf
+
 let endpointCtorsOf (ast: Parsetree.structure) =
   List.find_map
     (fun (item: Parsetree.structure_item) ->
@@ -1148,39 +1158,170 @@ let endpointCtorsOf (ast: Parsetree.structure) =
       | _ -> None)
     ast
 
-let ctorArgsOf (c: Parsetree.constructor_declaration) =
+(* Every constructor of the endpoint variant must carry an [@endpoint] attribute;
+   a missing one is reported at the constructor. *)
+let endpointOf (c: Parsetree.constructor_declaration) =
+  match attrString c.pcd_attributes "endpoint" with
+  | Some ep -> ep
+  | None ->
+      Location.raise_errorf ~loc:c.pcd_loc
+        "the endpoint constructor '%s' has no [@endpoint \"METHOD /path\"] attribute"
+        c.pcd_name.txt
+
+(* Payload slots addressed by `@name` in the endpoint string: an inline record
+   carries its field names (`@name` is the field name, URL order is free); a
+   tuple payload is positional and its slots are the argument indexes
+   (`@0`, `@1`, …). *)
+let payloadSlots (c: Parsetree.constructor_declaration) : (string * Parsetree.core_type) list =
   match c.pcd_args with
-  | Parsetree.Pcstr_tuple ts -> ts
-  | Parsetree.Pcstr_record ls -> List.map (fun (l: Parsetree.label_declaration) -> l.pld_type) ls
+  | Parsetree.Pcstr_tuple ts -> List.mapi (fun i t -> (string_of_int i, t)) ts
+  | Parsetree.Pcstr_record ls ->
+      List.map (fun (l: Parsetree.label_declaration) -> (l.pld_name.txt, l.pld_type)) ls
+
+let isRecordPayload (c: Parsetree.constructor_declaration) =
+  match c.pcd_args with Parsetree.Pcstr_record _ -> true | _ -> false
+
+(* `[@endpoint "METHOD /path?key=@name&…"]` -> method, path segments, query
+   `(key, slot)` pairs. A query item must be `key=@name`; anything else — an
+   empty query part, a bare flag, a literal value — is an error, so no part of
+   the route is silently ignored. *)
+let parseEndpoint (cname: string) (loc: Location.t) (ep: string) =
+  let meth, rest = splitMethod ep in
+  let path, query =
+    match String.index_opt rest '?' with
+    | None -> (rest, "")
+    | Some i -> (String.sub rest 0 i, String.sub rest (i + 1) (String.length rest - i - 1))
+  in
+  let segs = List.filter (fun x -> x <> "") (String.split_on_char '/' path) in
+  let items = List.filter (fun x -> x <> "") (String.split_on_char '&' query) in
+  let bad kv =
+    Location.raise_errorf ~loc
+      "unsupported query item '%s' in the endpoint '%s' (use 'key=@name')" kv cname
+  in
+  if String.index_opt rest '?' <> None && items = [] then
+    Location.raise_errorf ~loc
+      "the endpoint '%s' has an empty query part (write 'key=@name'; optional segments like \
+       '@page?' are not supported)"
+      cname;
+  let qs =
+    List.map
+      (fun kv ->
+        match String.index_opt kv '=' with
+        | None -> bad kv
+        | Some j ->
+            let k = String.sub kv 0 j in
+            let v = String.sub kv (j + 1) (String.length kv - j - 1) in
+            if String.length v >= 2 && v.[0] = '@' then (k, String.sub v 1 (String.length v - 1))
+            else bad kv)
+      items
+  in
+  (meth, segs, qs)
+
+(* A slot bound to a URL position (a path segment, or a query key). *)
+type endpoint_binding = {
+  eb_slot : string;
+  eb_var : string;
+  eb_type : string;
+  eb_query : string option;
+}
+
+type endpoint_seg = Lit of string | Bind of endpoint_binding
+
+type endpoint_plan = {
+  ep_meth : string;
+  ep_segs : endpoint_seg list;
+  ep_query : endpoint_binding list;
+  ep_bindings : endpoint_binding list;
+  ep_slots : (string * Parsetree.core_type) list;
+}
+
+(* Resolve an endpoint's `@names` to its payload slots, checked as a bijection
+   (every `@name` names a slot, every slot is bound exactly once); all
+   diagnostics point at the constructor. *)
+let endpointPlan (c: Parsetree.constructor_declaration) (ep: string) : endpoint_plan =
+  let cname = c.pcd_name.txt and loc = c.pcd_loc in
+  let slots = payloadSlots c in
+  let record = isRecordPayload c in
+  let kind = if record then "field" else "argument" in
+  let meth, segs, qs = parseEndpoint cname loc ep in
+  let tbl: (string, endpoint_binding) Hashtbl.t = Hashtbl.create 8 in
+  let created = ref [] in
+  let next = ref 0 in
+  let bind (slot: string) (query: string option) =
+    let ty =
+      match List.assoc_opt slot slots with
+      | Some ty -> ty
+      | None ->
+          let hint =
+            if slots = [] then "it takes no arguments"
+            else if record then Printf.sprintf "fields: %s" (String.concat ", " (List.map fst slots))
+            else
+              Printf.sprintf "use %s"
+                (String.concat " or " (List.map (fun (s, _) -> "'@" ^ s ^ "'") slots))
+          in
+          Location.raise_errorf ~loc "the endpoint '%s' has no %s '%s' (%s)" cname kind slot hint
+    in
+    if Hashtbl.mem tbl slot then
+      Location.raise_errorf ~loc "the endpoint '%s' binds '%s' twice" cname slot;
+    let b =
+      { eb_slot = slot; eb_var = Printf.sprintf "v%d" !next; eb_type = coreName ty; eb_query = query }
+    in
+    incr next;
+    Hashtbl.replace tbl slot b;
+    created := b :: !created;
+    b
+  in
+  let isBind s = String.length s > 1 && s.[0] = '@' in
+  let bindName s = String.sub s 1 (String.length s - 1) in
+  let segs = List.map (fun s -> if isBind s then Bind (bind (bindName s) None) else Lit s) segs in
+  let qs = List.map (fun (k, slot) -> bind slot (Some k)) qs in
+  List.iter
+    (fun (slot, _) ->
+      if not (Hashtbl.mem tbl slot) then
+        Location.raise_errorf ~loc
+          "the endpoint '%s' does not bind its %s '%s' (add '@%s' to the path or query)" cname
+          kind slot slot)
+    slots;
+  List.iter
+    (fun (slot, ty) ->
+      let b = Hashtbl.find tbl slot in
+      if not (List.mem b.eb_type [ "int"; "string"; "bool"; "float" ]) then
+        Location.raise_errorf ~loc
+          "unsupported type '%s' for %s '%s' of '%s' (use int, string, bool or float)"
+          (coreNameDisplay ty) kind slot cname)
+    slots;
+  { ep_meth = meth; ep_segs = segs; ep_query = qs; ep_bindings = List.rev !created; ep_slots = slots }
 
 let genRoute (ctors: Parsetree.constructor_declaration list) =
   let cases =
     List.map
       (fun (c: Parsetree.constructor_declaration) ->
         let cname = c.pcd_name.txt in
-        let ep = Option.get (attrString c.pcd_attributes "endpoint") in
-        let meth, path = splitMethod ep in
-        let segs = List.filter (fun x -> x <> "") (String.split_on_char '/' path) in
-        let args = ctorArgsOf c in
-        let k = ref 0 in
+        let p = endpointPlan c (endpointOf c) in
         let pats =
-          List.map
-            (fun seg ->
-              if String.length seg > 0 && seg.[0] = '@' then (
-                let v = Printf.sprintf "v%d" !k in
-                incr k;
-                v)
-              else Printf.sprintf "%S" seg)
-            segs
+          List.map (function Lit s -> Printf.sprintf "%S" s | Bind b -> b.eb_var) p.ep_segs
         in
-        let parsed = List.mapi (fun i t -> parseArg (coreName t) (Printf.sprintf "v%d" i)) args in
+        let access (slot: string) =
+          let b = List.find (fun b -> b.eb_slot = slot) p.ep_bindings in
+          match b.eb_query with
+          | None -> b.eb_var
+          | Some k -> Printf.sprintf "(Stdlib.List.assoc %S req.query)" k
+        in
+        let args =
+          List.map (fun (slot, ty) -> (slot, parseArg (coreName ty) (access slot))) p.ep_slots
+        in
         let applied =
-          match parsed with
-          | [] -> cname
-          | [ x ] -> Printf.sprintf "%s (%s)" cname x
-          | xs -> Printf.sprintf "%s (%s)" cname (String.concat ", " xs)
+          if isRecordPayload c then
+            Printf.sprintf "%s { %s }" cname
+              (String.concat "; " (List.map (fun (slot, a) -> Printf.sprintf "%s = %s" slot a) args))
+          else
+            match List.map snd args with
+            | [] -> cname
+            | [ x ] -> Printf.sprintf "%s (%s)" cname x
+            | xs -> Printf.sprintf "%s (%s)" cname (String.concat ", " xs)
         in
-        Printf.sprintf "  | %S, [ %s ] -> (try Some (%s) with _ -> None)" meth (String.concat "; " pats) applied)
+        Printf.sprintf "  | %S, [ %s ] -> (try Some (%s) with _ -> None)" p.ep_meth
+          (String.concat "; " pats) applied)
       ctors
   in
   Printf.sprintf
@@ -1192,30 +1333,48 @@ let genLink (ctors: Parsetree.constructor_declaration list) =
     List.map
       (fun (c: Parsetree.constructor_declaration) ->
         let cname = c.pcd_name.txt in
-        let ep = Option.get (attrString c.pcd_attributes "endpoint") in
-        let _, path = splitMethod ep in
-        let segs = List.filter (fun x -> x <> "") (String.split_on_char '/' path) in
-        let args = ctorArgsOf c in
-        let vars = List.mapi (fun i _ -> Printf.sprintf "v%d" i) args in
+        let p = endpointPlan c (endpointOf c) in
+        (* One pattern variable per payload slot (the bijection guarantees every
+           slot is used exactly once, so the lookups below always succeed). *)
+        let vars: (string, string) Hashtbl.t = Hashtbl.create 8 in
+        List.iteri (fun i (slot, _) -> Hashtbl.replace vars slot (Printf.sprintf "v%d" i)) p.ep_slots;
+        let var_of slot = Hashtbl.find vars slot in
         let pat =
-          match vars with
-          | [] -> cname
-          | [ v ] -> Printf.sprintf "%s %s" cname v
-          | vs -> Printf.sprintf "%s (%s)" cname (String.concat ", " vs)
+          if isRecordPayload c then
+            Printf.sprintf "%s { %s }" cname
+              (String.concat "; "
+                 (List.map (fun (slot, _) -> Printf.sprintf "%s = %s" slot (var_of slot)) p.ep_slots))
+          else
+            match p.ep_slots with
+            | [] -> cname
+            | [ (s, _) ] -> Printf.sprintf "%s %s" cname (var_of s)
+            | slots ->
+                Printf.sprintf "%s (%s)" cname
+                  (String.concat ", " (List.map (fun (s, _) -> var_of s) slots))
         in
-        let k = ref 0 in
+        let value b = fmtArg b.eb_type (var_of b.eb_slot) in
         let parts =
           List.map
-            (fun seg ->
-              if String.length seg > 0 && seg.[0] = '@' then (
-                let i = !k in
-                incr k;
-                Printf.sprintf "(%s)" (fmtArg (coreName (List.nth args i)) (Printf.sprintf "v%d" i)))
-              else Printf.sprintf "%S" seg)
-            segs
+            (function Lit s -> Printf.sprintf "%S" s | Bind b -> Printf.sprintf "(%s)" (value b))
+            p.ep_segs
         in
-        let expr = match parts with [] -> "\"/\"" | _ -> "\"/\" ^ " ^ String.concat " ^ \"/\" ^ " parts in
-        Printf.sprintf "  | %s -> %s" pat expr)
+        let path_expr =
+          match parts with [] -> "\"/\"" | _ -> "\"/\" ^ " ^ String.concat " ^ \"/\" ^ " parts
+        in
+        let query_expr =
+          match p.ep_query with
+          | [] -> ""
+          | qs ->
+              " ^ \"?\" ^ "
+              ^ String.concat " ^ \"&\" ^ "
+                  (List.map
+                     (fun b ->
+                       Printf.sprintf "%S ^ (%s)"
+                         (match b.eb_query with Some k -> k ^ "=" | None -> "")
+                         (value b))
+                     qs)
+        in
+        Printf.sprintf "  | %s -> %s" pat (path_expr ^ query_expr))
       ctors
   in
   "(function\n" ^ String.concat "\n" cases ^ ")"
@@ -1401,6 +1560,362 @@ let transformClientServer (ast: Parsetree.structure) : Parsetree.structure =
     in
     insert [] mapped
 
+(* --- Client-only event handlers on the native server ------------------------
+   `On.<event> handler` on a server-rendered element: the handler is client-only
+   code (the client bindings carry `ws:` externals) and cannot run natively. The
+   handler is lifted into a top-level [@javascript] binding under a stable,
+   content-derived key; the server renders a `ws-on<event>="<key>"` marker and
+   the client runtime attaches the registered handler (Runtime.js
+   `attachEvents`). The same key is computed in the client build, where the call
+   is rewritten to `On.<event> <key>` and the binding is registered for
+   hydration.
+
+   Handlers inside a `[@client]`/`[@hydrate]` region are rendered (and
+   re-rendered) by the client, so on the server their body is dropped - it may
+   use client-only bindings that cannot link natively - and the client keeps it
+   inline. A server-rendered handler must be closed: one that captures a local
+   of the enclosing scope cannot be lifted, which is a located error. *)
+
+let clientEventNames =
+  [ "click"; "dblclick"; "change"; "input"; "keydown"; "keyup"; "submit" ]
+
+(* `On.<event>` (the rewritten form is a qualified ident) or `On.<event>` as a
+   field access. *)
+let clientEventOf (e: Parsetree.expression) : string option =
+  let event (lid: Longident.t) =
+    match List.rev (Longident.flatten lid) with
+    | ev :: _ when List.mem ev clientEventNames -> Some ev
+    | _ -> None
+  in
+  match e.pexp_desc with
+  | Parsetree.Pexp_ident { txt = lid; _ } -> (
+      match List.rev (Longident.flatten lid) with
+      | ev :: "On" :: _ when List.mem ev clientEventNames -> Some ev
+      | _ -> None)
+  | Parsetree.Pexp_field
+      ({ Parsetree.pexp_desc = Parsetree.Pexp_ident { txt = lid; _ }; _ }, { txt = fld; _ })
+    when (match List.rev (Longident.flatten lid) with "On" :: _ -> true | _ -> false) ->
+      event fld
+  | _ -> None
+
+(* Names bound by a pattern (`x` in `x`, `x` in `p as x`). *)
+let patVars (p: Parsetree.pattern) : string list =
+  let acc = ref [] in
+  let it =
+    {
+      Ast_iterator.default_iterator with
+      pat =
+        (fun self (p: Parsetree.pattern) ->
+          (match p.ppat_desc with
+          | Parsetree.Ppat_var { txt = n; _ } -> acc := n :: !acc
+          | Parsetree.Ppat_alias (_, { txt = n; _ }) -> acc := n :: !acc
+          | _ -> ());
+          Ast_iterator.default_iterator.pat self p);
+    }
+  in
+  it.pat it p;
+  !acc
+
+(* Names bound by the value parameters of a function. *)
+let paramVars (params: Parsetree.function_param list) : string list =
+  List.concat_map
+    (fun (p: Parsetree.function_param) ->
+      match p.pparam_desc with
+      | Parsetree.Pparam_val (_, _, pat) -> patVars pat
+      | Parsetree.Pparam_newtype _ -> [])
+    params
+
+(* Unqualified value names that are free in an expression (the binders the
+   expression introduces itself, e.g. a lambda's parameters, are excluded). *)
+let freeNames (e: Parsetree.expression) : string list =
+  let out = ref [] in
+  let counts: (string, int) Hashtbl.t = Hashtbl.create 16 in
+  let push ns =
+    List.iter
+      (fun n -> Hashtbl.replace counts n (1 + try Hashtbl.find counts n with Not_found -> 0))
+      ns
+  in
+  let pop ns =
+    List.iter
+      (fun n ->
+        let c = try Hashtbl.find counts n with Not_found -> 0 in
+        if c <= 1 then Hashtbl.remove counts n else Hashtbl.replace counts n (c - 1))
+      ns
+  in
+  let cases (self: Ast_iterator.iterator) cs =
+    List.iter
+      (fun (c: Parsetree.case) ->
+        let ns = patVars c.pc_lhs in
+        push ns;
+        self.expr self c.pc_rhs;
+        pop ns)
+      cs
+  in
+  let it =
+    {
+      Ast_iterator.default_iterator with
+      expr =
+        (fun self (x: Parsetree.expression) ->
+          match x.pexp_desc with
+          | Parsetree.Pexp_ident { txt = Longident.Lident n; _ } -> out := n :: !out
+          | Parsetree.Pexp_function (params, _, body) ->
+              let ns = paramVars params in
+              push ns;
+              (match body with
+              | Parsetree.Pfunction_body b -> self.expr self b
+              | Parsetree.Pfunction_cases (cs, _, _) -> cases self cs);
+              pop ns
+          | Parsetree.Pexp_match (s, cs) ->
+              self.expr self s;
+              cases self cs
+          | Parsetree.Pexp_try (b, cs) ->
+              self.expr self b;
+              cases self cs
+          | Parsetree.Pexp_let (rf, vbs, body) ->
+              List.iter
+                (fun (vb: Parsetree.value_binding) ->
+                  let ns = patVars vb.pvb_pat in
+                  if rf = Asttypes.Recursive then push ns;
+                  self.expr self vb.pvb_expr;
+                  if rf = Asttypes.Recursive then pop ns)
+                vbs;
+              let ns = List.concat_map (fun (vb: Parsetree.value_binding) -> patVars vb.pvb_pat) vbs in
+              push ns;
+              self.expr self body;
+              pop ns
+          | Parsetree.Pexp_for (p, a, b, _, body) ->
+              self.expr self a;
+              self.expr self b;
+              let ns = patVars p in
+              push ns;
+              self.expr self body;
+              pop ns
+          | _ -> Ast_iterator.default_iterator.expr self x);
+    }
+  in
+  it.expr it e;
+  !out
+
+let transformClientEvents ~(server: bool) (ast: Parsetree.structure) : Parsetree.structure * string list =
+  let lifted: (string * Parsetree.expression) list ref = ref [] in
+  let seen: (string, unit) Hashtbl.t = Hashtbl.create 16 in
+  let interned: (string, string) Hashtbl.t = Hashtbl.create 16 in
+  let byKey: (string, string) Hashtbl.t = Hashtbl.create 16 in
+  let locals: (string, int) Hashtbl.t = Hashtbl.create 32 in
+  let push ns =
+    List.iter
+      (fun n -> Hashtbl.replace locals n (1 + try Hashtbl.find locals n with Not_found -> 0))
+      ns
+  in
+  let pop ns =
+    List.iter
+      (fun n ->
+        let c = try Hashtbl.find locals n with Not_found -> 0 in
+        if c <= 1 then Hashtbl.remove locals n else Hashtbl.replace locals n (c - 1))
+      ns
+  in
+  let is_local n = Hashtbl.mem locals n in
+  (* Intern the printed handler: the same body gets the same `wsh` key in every
+     build (server and client), so the marker and the registered binding agree. *)
+  let keyOf (arg: Parsetree.expression) =
+    let buf = Buffer.create 64 in
+    let fmt = Format.formatter_of_buffer buf in
+    Pprintast.expression fmt arg;
+    Format.pp_print_flush fmt ();
+    let text = Buffer.contents buf in
+    match Hashtbl.find_opt interned text with
+    | Some k -> k
+    | None ->
+        let rec pick k =
+          match Hashtbl.find_opt byKey k with
+          | None -> k
+          | Some t when String.equal t text -> k
+          | Some _ -> pick (k ^ "_")
+        in
+        let k = pick ("wsh" ^ string_of_int (abs (Hashtbl.hash text))) in
+        Hashtbl.replace interned text k;
+        Hashtbl.replace byKey k text;
+        k
+  in
+  let ident loc n =
+    { Parsetree.pexp_desc = Parsetree.Pexp_ident { txt = Longident.Lident n; loc };
+      pexp_loc = loc; pexp_loc_stack = []; pexp_attributes = [] }
+  in
+  let noop loc = relocate loc (Parse.expression (Lexing.from_string "fun _ _ -> ()")) in
+  let marker loc ev key =
+    relocate loc
+      (Parse.expression
+         (Lexing.from_string (Printf.sprintf "WebSharper_UI.Attr.create %S %S" ("ws-on" ^ ev) key)))
+  in
+  let in_client = ref false in
+  (* `WebSharper_ClientServer.__hydrate id view`: `view` is server-rendered and
+     then re-rendered by the client on hydration, so its handlers behave like
+     those of a `[@client]` region (dropped on the server, kept inline on the
+     client) rather than getting a marker. *)
+  let isHydrateMarker (e: Parsetree.expression) =
+    match e.pexp_desc with
+    | Parsetree.Pexp_ident { txt = lid; _ } -> (
+        match Longident.flatten lid with
+        | [ "WebSharper_ClientServer"; "__hydrate" ] -> true
+        | _ -> false)
+    | _ -> false
+  in
+  let rec walk (self: Ast_mapper.mapper) (e: Parsetree.expression) : Parsetree.expression =
+    if !in_client then
+      (* A hydrated region: rendered by the client, so on the server drop the
+         handler body (it may not link natively) and keep it inline on the
+         client. *)
+      match e.pexp_desc with
+      | Parsetree.Pexp_apply (fn, [ (lbl, arg) ]) when server && clientEventOf fn <> None ->
+          Ast_mapper.default_mapper.expr self
+            { e with pexp_desc = Parsetree.Pexp_apply (fn, [ (lbl, noop arg.pexp_loc) ]) }
+      | _ -> Ast_mapper.default_mapper.expr self e
+    else
+      match e.pexp_desc with
+      | Parsetree.Pexp_apply (fn, [ (lbl, arg) ]) when clientEventOf fn <> None -> (
+          let ev = Option.get (clientEventOf fn) in
+          let arg = walk self arg in
+          let key = keyOf arg in
+          match List.find_opt is_local (freeNames arg) with
+          | Some name ->
+              if server then
+                Location.raise_errorf ~loc:arg.pexp_loc
+                  "this event handler is rendered by the server, so it must be closed; it captures \
+                   the local '%s'" name
+              else { e with pexp_desc = Parsetree.Pexp_apply (fn, [ (lbl, arg) ]) }
+          | None ->
+              if not (Hashtbl.mem seen key) then begin
+                Hashtbl.replace seen key ();
+                lifted := (key, arg) :: !lifted
+              end;
+              if server then marker e.pexp_loc ev key
+              else { e with pexp_desc = Parsetree.Pexp_apply (fn, [ (lbl, ident arg.pexp_loc key) ]) })
+      (* The view inside a hydration marker is a client-rendered region. *)
+      | Parsetree.Pexp_apply (fn, args) when isHydrateMarker fn ->
+          let fn = walk self fn in
+          let args =
+            List.map
+              (fun ((lbl, a): Asttypes.arg_label * Parsetree.expression) ->
+                let saved = !in_client in
+                in_client := true;
+                let a = walk self a in
+                in_client := saved;
+                (lbl, a))
+              args
+          in
+          { e with pexp_desc = Parsetree.Pexp_apply (fn, args) }
+      (* Descend into local binder scopes so a handler inside them sees them. *)
+      | Parsetree.Pexp_function (params, c, body) ->
+          let params =
+            List.map
+              (fun (p: Parsetree.function_param) ->
+                match p.pparam_desc with
+                | Parsetree.Pparam_val (lbl, def, pat) ->
+                    { p with pparam_desc = Parsetree.Pparam_val (lbl, Option.map (walk self) def, self.pat self pat) }
+                | Parsetree.Pparam_newtype _ -> p)
+              params
+          in
+          let ns = paramVars params in
+          push ns;
+          let body =
+            match body with
+            | Parsetree.Pfunction_body b -> Parsetree.Pfunction_body (walk self b)
+            | Parsetree.Pfunction_cases (cs, loc, attrs) ->
+                Parsetree.Pfunction_cases (walk_cases self cs, loc, attrs)
+          in
+          pop ns;
+          { e with pexp_desc = Parsetree.Pexp_function (params, c, body) }
+      | Parsetree.Pexp_match (s, cs) ->
+          { e with pexp_desc = Parsetree.Pexp_match (walk self s, walk_cases self cs) }
+      | Parsetree.Pexp_try (b, cs) ->
+          { e with pexp_desc = Parsetree.Pexp_try (walk self b, walk_cases self cs) }
+      | Parsetree.Pexp_let (rf, vbs, body) ->
+          let vbs =
+            List.map
+              (fun (vb: Parsetree.value_binding) ->
+                let ns = patVars vb.pvb_pat in
+                if rf = Asttypes.Recursive then push ns;
+                let vb = { vb with pvb_expr = walk self vb.pvb_expr } in
+                if rf = Asttypes.Recursive then pop ns;
+                vb)
+              vbs
+          in
+          let ns = List.concat_map (fun (vb: Parsetree.value_binding) -> patVars vb.pvb_pat) vbs in
+          push ns;
+          let body = walk self body in
+          pop ns;
+          { e with pexp_desc = Parsetree.Pexp_let (rf, vbs, body) }
+      | Parsetree.Pexp_for (p, a, b, dir, body) ->
+          let a = walk self a and b = walk self b in
+          let p = self.pat self p in
+          let ns = patVars p in
+          push ns;
+          let body = walk self body in
+          pop ns;
+          { e with pexp_desc = Parsetree.Pexp_for (p, a, b, dir, body) }
+      | _ -> Ast_mapper.default_mapper.expr self e
+  and walk_cases (self: Ast_mapper.mapper) (cs: Parsetree.case list) : Parsetree.case list =
+    List.map
+      (fun (c: Parsetree.case) ->
+        let p = self.pat self c.pc_lhs in
+        let ns = patVars p in
+        push ns;
+        let guard = Option.map (walk self) c.pc_guard in
+        let rhs = walk self c.pc_rhs in
+        pop ns;
+        { Parsetree.pc_lhs = p; pc_guard = guard; pc_rhs = rhs })
+      cs
+  in
+  let mapper =
+    {
+      Ast_mapper.default_mapper with
+      (* A `[@client]`/`[@hydrate]` region is rendered by the client; only the
+         top-level binding carries the marker, so track it here. *)
+      structure_item =
+        (fun self (item: Parsetree.structure_item) ->
+          match item.pstr_desc with
+          | Parsetree.Pstr_value (_, vbs) ->
+              let saved = !in_client in
+              in_client :=
+                List.exists
+                  (fun (vb: Parsetree.value_binding) -> List.mem "client" (attrNames vb.pvb_attributes))
+                  vbs;
+              let item = Ast_mapper.default_mapper.structure_item self item in
+              in_client := saved;
+              item
+          | _ -> Ast_mapper.default_mapper.structure_item self item);
+      expr = walk;
+    }
+  in
+  let mapped = mapper.structure mapper ast in
+  let keys = List.rev_map fst !lifted in
+  if !lifted = [] then (mapped, keys)
+  else
+    let js_attr loc =
+      { Parsetree.attr_name = { txt = "javascript"; loc }; attr_payload = Parsetree.PStr []; attr_loc = loc }
+    in
+    let bindings =
+      List.rev_map
+        (fun ((key, arg): string * Parsetree.expression) ->
+          let loc = arg.pexp_loc in
+          let pat =
+            { Parsetree.ppat_desc = Parsetree.Ppat_var { txt = key; loc };
+              ppat_loc = loc; ppat_loc_stack = []; ppat_attributes = [] }
+          in
+          let vb =
+            { Parsetree.pvb_pat = pat; pvb_expr = arg; pvb_attributes = [ js_attr loc ]; pvb_loc = loc;
+              pvb_constraint = None }
+          in
+          { Parsetree.pstr_desc = Parsetree.Pstr_value (Asttypes.Nonrecursive, [ vb ]); pstr_loc = loc })
+        !lifted
+    in
+    let rec insert acc = function
+      | [] -> List.rev_append acc bindings
+      | (({ Parsetree.pstr_desc = Parsetree.Pstr_value _; _ } :: _) as rest) -> List.rev_append acc (bindings @ rest)
+      | item :: rest -> insert (item :: acc) rest
+    in
+    (insert [] mapped, keys)
+
 (* --- [%template "path"] expansion -------------------------------------------
    Expands `module Card = [%template "views/card.html"]` into a generated module
    (class type + setters + combinators + submodules) produced by `Codegen`. The
@@ -1512,7 +2027,8 @@ let () =
     Compmisc.init_path ();
     let env = Compmisc.initial_env () in
     let dir = tdir () in
-    let ast = transformClientServer (transformInfer (transformTemplates ~server:(!emit_server <> None) ~dir (parse !input))) in
+    let ast0 = transformClientServer (transformInfer (transformTemplates ~server:(!emit_server <> None) ~dir (parse !input))) in
+    let ast, eventKeys = transformClientEvents ~server:(!emit_server <> None) ast0 in
     checkBoundary ast;
     let js, rpc, srv = clientMarks ast in
     let exp = exportMarks ast in
@@ -1606,7 +2122,7 @@ let () =
           ("exports", `List exports);
           ( "clients",
             `List
-              (cli
+              ((cli @ eventKeys)
               |> List.map (fun name ->
                      let index = try List.assoc name topIndex with Not_found -> -1 in
                      `Assoc

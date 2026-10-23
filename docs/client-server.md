@@ -166,7 +166,8 @@ Server rendering emits HTML plus placeholders, mirroring WebSharper's
   bundle script, so the bundle registers the client code first; `hydrate()`
   collects `[data-ws-key]` placeholders, looks up the registered client code,
   clears the placeholder (the client owns the region) and runs it, reusing the
-  same `Doc`/`Elt` runtime.
+  same `Doc`/`Elt` runtime. It then calls `attachEvents()` to wire up any
+  server-rendered `on.<event>` handlers (§4.1).
 
 Example:
 
@@ -203,6 +204,41 @@ reconciliation (reusing the server DOM tree, preserving focus/scroll/input)
 requires implementing WebSharper's `ws-hole`/`ws-attr-holes` server-render
 protocol (template-based) in the shadow; it is future work.
 
+### 4.1 Server-rendered event handlers
+
+An `on.<event> handler` on a **server-rendered** element (i.e. outside a
+`client`/`hydrate` region) has no server-side effect, and its body is client-only
+code that cannot link natively. The compiler lifts the handler into a top-level
+`[@javascript]` binding under a stable, content-derived key and renders a marker
+attribute in its place:
+
+```ocaml
+button [ on.click (fun el _ -> Element.setAttribute el "data-clicked" "yes") ] [ text "go" ]
+```
+```html
+<button ws-onclick="wsh1061593301">go</button>
+```
+
+- The key is a hash of the handler's printed source (`wsh<digits>`), interned per
+  unit, so the **same handler text gets the same key in every build** (server and
+  client) and repeated occurrences share one binding.
+- The client build registers the lifted binding
+  (`OCamlRuntime.registerClient(key, …)`) and `hydrate()` then runs
+  `attachEvents()`: it scans for `ws-on<event>` attributes, looks the value up in
+  the registered store, and attaches a listener calling the handler with
+  `(element, event)`.
+- Handlers must be **closed**: one that captures a local of the enclosing scope
+  cannot be lifted and is a located error —
+  `this event handler is rendered by the server, so it must be closed; it
+  captures the local '<name>'`.
+- Handlers **inside** a `client`/`hydrate` region are unaffected: the client
+  renders (and re-renders) them, so the server only drops the handler body (it
+  may use client-only bindings) and the client keeps it inline.
+
+The attribute family is shared with templates, where `ws-on<event>="Name"` names
+a template hole; `attachEvents` only attaches values that are registered keys, so
+the two mechanisms do not interfere.
+
 ## 5. Milestones
 
 - **B1 — boundary (done).** `[@javascript]`/`[@rpc]` read from the parsetree,
@@ -229,8 +265,9 @@ protocol (template-based) in the shadow; it is future work.
   `Sitelet<'T>` (typed endpoints) marked `[@website]`, `Content.Json/Text/Xml/
   Html/Page`, and `Server.serve`. `Sitelet.Infer` is **compiler-expanded** into
   `Sitelet.make route link` with a router/URL-builder generated from the endpoint
-  variant + `[@endpoint "GET /path/@arg"]` (each `@arg` is a constructor
-  argument). `Content.Page` renders the view and injects the bundle into the
+  variant + `[@endpoint "GET /path/@name"]` (`@name` binds a payload slot — a
+  record field, or `@0`/`@1`… for a tuple payload; see §7). `Content.Page`
+  renders the view and injects the bundle into the
   `ws-replace="scripts"` placeholder. `WebSharper_ClientServer.client`/`hydrate`
   (both `unit -> Doc`) are lifted into `[@client]` bindings under opaque
   `ws<digits>` ids; the server renders the marker (hydrate also SSR-renders the
@@ -248,7 +285,9 @@ protocol (template-based) in the shadow; it is future work.
 - Streaming vs. whole-page hydration; partial hydration granularity.
 - Cross-.NET-server interop (a non-OCaml server) would need a key +
   serialization contract independent of OCaml source positions.
-- Error surfacing for unsupported captures (functions, mutable refs).
+- Error surfacing for unsupported captures: a server-rendered `on.<event>`
+  handler that captures a local is now a located error (§4.1); other captures
+  (functions, mutable refs) still surface as generated-code type errors.
 
 ## 7. The server (sitelet)
 
@@ -260,12 +299,13 @@ open WebSharper_Server
 
 type endpoint =
   | Home        [@endpoint "GET /"]
-  | User of int [@endpoint "GET /user/@id"]
+  | User of int [@endpoint "GET /user/@0"]
+  | Search of { q : string; page : int } [@endpoint "GET /search?q=@q&page=@page"]
 
 let[@rpc] add a b = Async.return (a + b)
 
 let[@website] main =
-  Sitelet.infer (fun (_ : endpoint context) ep ->
+  Sitelet.infer (fun (ctx : endpoint context) ep ->
     match ep with
     | Home ->
         Content.page
@@ -280,14 +320,21 @@ let[@website] main =
               ] [
                   textView (Var.view v)
               ]
-            )
+            );
+            (* server-rendered element with a client handler (§4.1) *)
+            button
+              [ on.click (fun el _ -> Element.setAttribute el "data-clicked" "yes") ]
+              [ text "click me" ]
           ]
     | User id ->
         Content.page
           ~title:"User"
           [
-            h1 [] [text (Printf.sprintf "User %d" id)]
+            h1 [] [text (Printf.sprintf "User %d" id)];
+            p [] [text (Printf.sprintf "link=%s" (ctx.link (User (id + 1))))]
           ]
+    | Search s ->
+        Content.text (Printf.sprintf "Search:%s:%d" s.q s.page)
   )
 ```
 
@@ -302,29 +349,59 @@ let[@website] main =
   `Server.serve ~bundle` replaces that with `<script type="module" src="/<bundle>.js">`.
 - `Sitelet.Infer` is expanded **before typing**: the endpoint variant (its
   constructors carry `[@endpoint …]`) yields `route : request -> endpoint option`
-  and `link : endpoint -> string`; each `@arg` maps positionally to a constructor
-  argument (int/string/bool/float parsed).
+  and `link : endpoint -> string`.
+- `[@endpoint "METHOD /path"]` declares one constructor's route. Non-`@` path
+  segments match literally; each `@name` binds a **payload slot**, and the
+  `@names` must form a **bijection** over the payload (a located error otherwise).
+  The URL order follows the endpoint string, not the declaration order:
+  - an **inline record** payload is addressed by **field name**:
+    `| User of { id : int; name : string } [@endpoint "GET /user/@name/@id"]`
+    routes `/user/<name>/<id>` and links `User { id = 5; name = "bob" }` to
+    `/user/bob/5` (`link … /user/@id/@name` would swap them);
+  - a **tuple** payload is positional: its slots are the **argument indexes**,
+    so `| Move of int * string [@endpoint "PUT /move/@1/@0"]` takes argument 0
+    from the second segment;
+  - `?key=@name` binds a **query parameter** (both the key and the slot are
+    significant); every query item must have that shape.
+  Slot types must be `int`/`string`/`bool`/`float` (parsed on the way in,
+  formatted on the way out). A missing or malformed query parameter, or a path
+  that doesn't match, yields `None` (404).
 - `WebSharper_ClientServer.client`/`hydrate (fun () -> view)` are lifted into
   `let ws<id> () = Doc.runById "<id>" view` `[@client]` bindings (opaque
   `ws<digits>` id) and replaced by a marker node; the runtime hydrates each
   `[data-ws-key]` region. Fragments must be closed (no captures).
+- `on.<event> handler` on a **server-rendered** element is lifted into a
+  `[@javascript]` binding (`wsh<digits>` key) and rendered as a
+  `ws-on<event>="<key>"` marker, which the client's `attachEvents()` wires up
+  (§4.1); the handler must be closed.
 - `--emit-server` emits `Wsrpc.register "name" …` per `[@rpc]` and
   `WebSharper_Server.Server.serve ~port:8123 ~bundle ~static <sitelet>`; `--static`
   serves the client build dir (`text/javascript`).
 - `scripts/site-demo.sh` (`frontend/test: site`) drives it: SSR pages (`/`,
-  `/user/5`), injected scripts, hydration + click, RPC, static asset.
+  `/user/5`, `/echo/…`, `/search?q=…&page=…`), injected scripts, hydration +
+  click, a server-rendered element with a client handler (SSR marker →
+  `attachEvents` → click), generated `link` round-trips, RPC, static asset.
 - Deferred: node-identity reconciliation (`ws-hole`/`ws-attr-holes`), most
-  sitelet combinators (`Sum`/`Shift`/`Protect`), query-string field binding,
-  `Content.Json` codecs, sessions/cookies.
+  sitelet combinators (`Sum`/`Shift`/`Protect`), `Content.Json` codecs,
+  sessions/cookies — and see §7.2 for endpoint routing.
 
 ### 7.1 Source conventions
 
 - `open WebSharper_ClientServer` and use unqualified `hydrate`/`client`.
 - Use `text`/`textView` from `open WebSharper_UI.Html` (no `Doc.` prefix).
 - Event handlers are `on.<event>` (lowercase, e.g. `on.click`); the compiler
-  rewrites them to `On.<event>`.
+  rewrites them to `On.<event>`. On a server-rendered element the handler is
+  lifted and the element carries a `ws-on<event>` marker instead, so the handler
+  must be closed (no locals from the enclosing scope) — see §4.1.
 - A DU sitelet is a single `let[@website] main = Sitelet.infer (fun _ ep -> …)`
   (lowercase `Sitelet.infer`); `render` is inlined rather than a separate value.
+- **Every** constructor of the endpoint variant must carry an
+  `[@endpoint "METHOD /path"]` attribute; `@name` binds a payload slot — a record
+  field name (`| User of { id : int; name : string } [@endpoint "GET /user/@name/@id"]`)
+  or the argument index for a tuple payload (`| Echo of string [@endpoint "GET /echo/@0"]`);
+  `?key=@name` binds a query parameter. A constructor without the attribute, an
+  unknown/duplicate/unbound slot, or a tuple slot that isn't `@<index>` is a
+  located compile error.
 - HTML combinator layout:
   - short combinators are one-liners: `h1 [] [text "…"]` (no inner padding);
   - an **empty or single** attribute list stays on the element's line, and the
@@ -364,3 +441,49 @@ let[@website] main =
           ]
   )
 ```
+
+### 7.2 Endpoint routing: status
+
+`[@endpoint …]` is compiled by `endpointPlan`/`genRoute`/`genLink`
+(`frontend/bin/main.ml`); the router and the URL builder are generated from the
+same plan, so a route parses exactly what it links.
+[`routing.md`](routing.md) has a worked example of every scenario (constant,
+positional and record payloads, reordered URLs, query parameters, methods,
+diagnostics and the planned extensions).
+
+**Implemented**
+
+- `@name` ↔ payload-slot binding: inline records by **field name** (URL order
+  free), tuple payloads by **argument index** (`@0`, `@1`, …; the URL order is
+  free too, since the index *is* the slot). Checked as a bijection —
+  unknown slot, duplicate binding, unbound slot and a non-index tuple name are
+  located errors.
+- Query parameters (`?key=@name`); a missing or unparseable parameter (or a
+  malformed query item) means the route doesn't match (`None`, i.e. 404).
+- Method + literal path segments; codecs `int`/`string`/`bool`/`float`
+  (`parseArg`/`fmtArg`), both directions.
+- Diagnostics, all at the constructor and normalized by `diag.exe`; goldens in
+  `backend/tests/errors/*.ml`: missing `[@endpoint]`, unknown slot, duplicate
+  binding, unbound slot, tuple name, query-item syntax (including an empty query
+  part / the unsupported `@page?`), unsupported slot type. Examples of each:
+  [`routing.md`](routing.md) §12.
+
+**Not implemented (possible extensions)**
+
+- Optional segments (e.g. `@page?`), catch-all/rest segments (`@rest...`), and
+  defaults for missing query parameters.
+- Codec-by-name annotations (`@x:slug`) so a slot can use a user-defined type
+  instead of the four built-ins.
+- Payloads that are **named record types** (`| User of user`): only inline
+  records are resolved; a named payload would need a lookup of the type's
+  declaration.
+- Dotted/nested slot names (`@date.y`) for structured payloads.
+- Several `[@endpoint]` aliases per constructor (today only the first attribute
+  is read).
+- Literal query requirements (`?flag`, `?k=v`) — every query item must currently
+  be `key=@name`.
+- URL percent-encoding/decoding: `link` formats values raw and the server's
+  `parse_query` doesn't decode, so values containing `/`, `&`, `?` or spaces are
+  not round-tripped.
+- Route-ambiguity detection (two constructors matching the same method+segments):
+  the first `[@endpoint]` in declaration order wins.
