@@ -655,6 +655,16 @@ module Lowering =
 
             ExportDecl(false, VarDeclaration(fid, body)))
 
+    // Register the unit's named type declarations once at module init:
+    // `OCamlRuntime.registerTypes([...])`. The per-rpc/export descriptors (and
+    // the `[@export]` wrappers) reference them by id instead of repeating them.
+    let typeRegs (c: Ctx) (ir: UnitIR) =
+        match ir.Types with
+        | [] -> []
+        | ts ->
+            [ ExprStatement(
+                  rt c "registerTypes" [ Value(String("[" + String.concat "," ts + "]")) ]) ]
+
     // Register [@client] values for hydration: `OCamlRuntime.registerClient(key, me[idx])`.
     let clientRegs (c: Ctx) (me: Id) =
         c.Clients
@@ -697,7 +707,8 @@ module Lowering =
         let init = VarDeclaration(me, Object [])
         let body = ExprStatement(expr c ir.Code)
         let export = ExportDecl(true, ExprStatement(Var me))
-        imports @ [ init; body; export ] @ clientRegs c me @ exportDecls c me, runtime.Value
+        imports @ [ init ] @ typeRegs c ir @ [ body; export ] @ clientRegs c me @ exportDecls c me,
+        runtime.Value
 
     // Lower just the module body to a single statement suitable as a
     // WebSharper entry point (used by the compilation/packager pipeline).
@@ -736,9 +747,10 @@ module Lowering =
         globalExprs[ir.ModuleIdent] <- Var me
 
         Block(
-            [ VarDeclaration(me, Object [])
-              ExprStatement(expr c ir.Code)
-              ExportDecl(true, ExprStatement(Var me)) ]
+            typeRegs c ir
+            @ [ VarDeclaration(me, Object [])
+                ExprStatement(expr c ir.Code)
+                ExportDecl(true, ExprStatement(Var me)) ]
             @ clientRegs c me @ exportDecls c me
         ),
         runtime.Value

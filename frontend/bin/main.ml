@@ -511,6 +511,18 @@ let typeName (p: Path.t) =
     s;
   Buffer.contents b
 
+(* A stable identity for a concrete type instantiation, used as the key of the
+   IR's unit-level `types` section. Unlike `instKey` (which is an OCaml/TS
+   identifier fragment) this is unit-qualified, so the same name in two units
+   cannot collide, and it carries the instantiation, e.g.
+   `Main.point`, `Main.tree<int>`. *)
+let rec typeId (unit_: string) (t: Types.type_expr) : string =
+  match Types.get_desc t with
+  | Types.Tconstr (p, [], _) -> unit_ ^ "." ^ Path.name p
+  | Types.Tconstr (p, args, _) ->
+      unit_ ^ "." ^ Path.name p ^ "<" ^ String.concat "," (List.map (typeId unit_) args) ^ ">"
+  | _ -> failwith "unsupported [@rpc] type (identity)"
+
 (* A key for a concrete instantiation, e.g. `int tree` -> "tree_int". *)
 let rec instKey (t: Types.type_expr) : string =
   match Types.get_desc t with
@@ -806,9 +818,11 @@ let rec dtsType env (defs: (string, string * string) Hashtbl.t) (t: Types.type_e
 (* --- Type descriptors (JS-side marshalling) ---
    A compact, recursion-aware description of a type in the external
    representation, consumed by the runtime to marshal OCaml values to/from JS.
-   Named record/variant types live in a shared table and are referenced by key. *)
-
-let rec descr env (defs: (string, Yojson.Safe.t) Hashtbl.t) (t: Types.type_expr) : Yojson.Safe.t =
+   Named records/variants are *declared* once per unit, in [defs], keyed by their
+   stable [typeId], and referenced by id — so a type shared by several
+   rpcs/exports is described once (the unit's `types` section of the IR);
+   primitives, lists, options, arrays and tuples stay inline. *)
+let rec descr unit_ env (defs: (string, Yojson.Safe.t) Hashtbl.t) (t: Types.type_expr) : Yojson.Safe.t =
   match Types.get_desc t with
   | Types.Tconstr (p, _, _) when Path.same p Predef.path_int -> `Assoc [ ("k", `String "int") ]
   | Types.Tconstr (p, _, _) when Path.same p Predef.path_bool -> `Assoc [ ("k", `String "bool") ]
@@ -817,20 +831,20 @@ let rec descr env (defs: (string, Yojson.Safe.t) Hashtbl.t) (t: Types.type_expr)
   | Types.Tconstr (p, _, _) when Path.same p Predef.path_char -> `Assoc [ ("k", `String "char") ]
   | Types.Tconstr (p, _, _) when Path.same p Predef.path_unit -> `Assoc [ ("k", `String "unit") ]
   | Types.Tconstr (p, [ a ], _) when Path.same p Predef.path_list ->
-      `Assoc [ ("k", `String "list"); ("e", descr env defs a) ]
+      `Assoc [ ("k", `String "list"); ("e", descr unit_ env defs a) ]
   | Types.Tconstr (p, [ a ], _) when Path.same p Predef.path_option ->
-      `Assoc [ ("k", `String "option"); ("e", descr env defs a) ]
+      `Assoc [ ("k", `String "option"); ("e", descr unit_ env defs a) ]
   | Types.Tconstr (p, [ a ], _) when Path.same p Predef.path_array ->
-      `Assoc [ ("k", `String "array"); ("e", descr env defs a) ]
+      `Assoc [ ("k", `String "array"); ("e", descr unit_ env defs a) ]
   | Types.Tconstr (p, args, _) ->
       let d = Env.find_type p env in
       (match d.type_kind with
        | Types.Type_abstract _ ->
            (match d.type_manifest with
-            | Some m -> descr env defs (subst (withSub d args) m)
+            | Some m -> descr unit_ env defs (subst (withSub d args) m)
             | None -> failwith ("unsupported [@rpc] type: " ^ instKey t))
        | _ ->
-      let k = instKey t in
+      let k = typeId unit_ t in
       if not (Hashtbl.mem defs k) then (
         Hashtbl.add defs k (`Assoc [ ("k", `String "pending") ]);
         let sub = withSub d args in
@@ -838,12 +852,12 @@ let rec descr env (defs: (string, Yojson.Safe.t) Hashtbl.t) (t: Types.type_expr)
           match d.type_kind with
           | Types.Type_record (ls, _) ->
               `Assoc
-                [ ("key", `String k); ("kind", `String "record");
+                [ ("id", `String k); ("kind", `String "record");
                   ( "fields",
                     `List
                       (List.map
                          (fun (l: Types.label_declaration) ->
-                           `List [ `String (Ident.name l.ld_id); descr env defs (subst sub l.ld_type) ])
+                           `List [ `String (Ident.name l.ld_id); descr unit_ env defs (subst sub l.ld_type) ])
                          ls) ) ]
           | Types.Type_variant (cs, _) ->
               let consts = List.filter isConstCtor cs in
@@ -855,16 +869,31 @@ let rec descr env (defs: (string, Yojson.Safe.t) Hashtbl.t) (t: Types.type_expr)
                        if isConstCtor c then `List [ `String nm; `Int (indexOf c consts); `List [] ]
                        else
                          let ts = List.map (subst sub) (Option.get (ctorArgs c)) in
-                         `List [ `String nm; `Int (indexOf c nonc); `List (List.map (descr env defs) ts) ])
+                         `List
+                           [ `String nm; `Int (indexOf c nonc);
+                             `List (List.map (descr unit_ env defs) ts) ])
               in
-              `Assoc [ ("key", `String k); ("kind", `String "variant"); ("cases", `List cases) ]
+              `Assoc [ ("id", `String k); ("kind", `String "variant"); ("cases", `List cases) ]
           | _ -> failwith ("unsupported [@rpc] type: " ^ k)
         in
         Hashtbl.replace defs k def);
-      `Assoc [ ("k", `String "named"); ("key", `String k) ])
+      `Assoc [ ("k", `String "named"); ("id", `String k) ])
   | Types.Ttuple ts ->
-      `Assoc [ ("k", `String "tuple"); ("e", `List (List.map (fun (_, x) -> descr env defs x) ts)) ]
+      `Assoc
+        [ ("k", `String "tuple");
+          ("e", `List (List.map (fun (_, x) -> descr unit_ env defs x) ts)) ]
   | _ -> failwith "unsupported [@rpc] type (descriptor)"
+
+(* Declarations are sorted by id so the emitted IR is reproducible. *)
+let declaredId (j: Yojson.Safe.t) =
+  match j with
+  | `Assoc kvs -> (match List.assoc_opt "id" kvs with Some (`String s) -> s | _ -> "")
+  | _ -> ""
+
+let unitTypes (defs: (string, Yojson.Safe.t) Hashtbl.t) : Yojson.Safe.t =
+  `List
+    (Hashtbl.fold (fun _ v acc -> v :: acc) defs []
+     |> List.sort (fun a b -> compare (declaredId a) (declaredId b)))
 
 
 let rec arrows (t: Types.type_expr) : Types.type_expr list * Types.type_expr =
@@ -2048,17 +2077,18 @@ let () =
     | None -> ());
     let program = Translmod.transl_implementation u (typed, Tcoerce_none) in
     let files = typedTypes typed in
+    (* One declaration table for the whole unit: a type reached by several
+       rpcs/exports is declared once, in the unit's `types` section. *)
+    let typeDecls = Hashtbl.create 32 in
     let rpcMeta =
       rpc
       |> List.map (fun name ->
              let ty = Hashtbl.find files name in
              let ps, ret = arrows ty in
              let ret = match asyncElem ret with Some i -> i | None -> ret in
-             let defs = Hashtbl.create 16 in
-             let args = List.map (descr typedEnv defs) ps in
-             let result = descr typedEnv defs ret in
-             let types = `List (Hashtbl.fold (fun _ v acc -> v :: acc) defs []) in
-             let meta = Yojson.Safe.to_string (`Assoc [ ("types", types); ("args", `List args); ("result", result) ]) in
+             let args = List.map (descr u typedEnv typeDecls) ps in
+             let result = descr u typedEnv typeDecls ret in
+             let meta = Yojson.Safe.to_string (`Assoc [ ("args", `List args); ("result", result) ]) in
              `Assoc [ ("name", `String name); ("meta", `String meta) ])
     in
     let topIndex =
@@ -2089,13 +2119,11 @@ let () =
              let ty = Hashtbl.find files name in
              let ps, ret = arrows ty in
              let isFn = ps <> [] in
-             let defs = Hashtbl.create 16 in
-             let args = if isFn then List.map (descr typedEnv defs) ps else [] in
-             let result = descr typedEnv defs (if isFn then ret else ty) in
-             let types = `List (Hashtbl.fold (fun _ v acc -> v :: acc) defs []) in
+             let args = if isFn then List.map (descr u typedEnv typeDecls) ps else [] in
+             let result = descr u typedEnv typeDecls (if isFn then ret else ty) in
              let meta =
                Yojson.Safe.to_string
-                 (`Assoc [ ("types", types); ("args", `List args); ("result", result) ])
+                 (`Assoc [ ("args", `List args); ("result", result) ])
              in
              let index = try List.assoc name topIndex with Not_found -> -1 in
              `Assoc
@@ -2111,8 +2139,9 @@ let () =
     let json =
       `Assoc
         [
-          ("schema", `String "wsocaml-ir-5");
+          ("schema", `String "wsocaml-ir-6");
           ("unit", `String u);
+          ("types", unitTypes typeDecls);
           ("moduleIdent", `String (Ident.name program.module_ident));
           ("mainModuleBlockSize", `Int program.main_module_block_size);
           ("javascript", `List (List.map (fun n -> `String n) js));

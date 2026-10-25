@@ -70,6 +70,10 @@ type UnitIR =
         Rpcs: (string * string) list
         Exports: (string * int * int * string) list
         Clients: (string * int) list
+        // Unit-level named type declarations (records/variants), each a JSON
+        // object (raw text) keyed by its stable id. Shared by all rpcs/exports,
+        // which reference them by id; `wsocaml-ir-6` and up. Empty for 4/5.
+        Types: string list
         Code: LExpr
     }
 
@@ -199,6 +203,10 @@ module Json =
             Clients =
                 match r.TryGetProperty "clients" with
                 | true, v -> [ for i in v.EnumerateArray() -> s "key" i, (p "index" i).GetInt32() ]
+                | _ -> []
+            Types =
+                match r.TryGetProperty "types" with
+                | true, v -> [ for i in v.EnumerateArray() -> i.GetRawText() ]
                 | _ -> []
             Code = expr (p "code" r)
         }

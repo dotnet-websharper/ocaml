@@ -18,6 +18,10 @@ cp "$root/runtimes/ocaml/wsrpc.ml" "$out/"
 cp "$root/runtimes/ocaml/async.ml" "$out/"
 (cd "$out" && ocamlfind ocamlopt -package unix,yojson -linkpkg wsrpc.ml async.ml server.ml -o rpc_server)
 
+# Client bundle for the same source: drives the *generated* `[@rpc]` proxies
+# (type descriptor + runtime marshaller) against the native server above.
+bash "$root/scripts/build-ws-app.sh" "$jslib" "$entry" "$out/client" > /dev/null
+
 # Fail fast if the port is already taken (avoids silent cross-talk with a
 # leftover server).
 if command -v lsof >/dev/null 2>&1 && lsof -nP -iTCP:8123 -sTCP:LISTEN >/dev/null 2>&1; then
@@ -34,4 +38,4 @@ for _ in $(seq 1 100); do
   (exec 3<>/dev/tcp/127.0.0.1/8123) 2>/dev/null && break
   sleep 0.1
 done
-node "$root/runtimes/ocaml/client_data.mjs"
+node "$root/runtimes/ocaml/client_data.mjs" "$out/client"

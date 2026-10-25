@@ -1,1 +1,11 @@
 f=42
+client move => 11,2
+client area Dot => 0
+client area Circle => 75
+client area Rect => 12
+client swap => hi,7
+client total => 6
+client or_else Some => 105
+client or_else None => -1
+client sum_tree => 3
+client rev => 3,2,1

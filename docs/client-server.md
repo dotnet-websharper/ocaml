@@ -7,7 +7,7 @@ small runtime *hydrates* on page load — with no F# quotations.
 This documents the mechanism and an incremental plan. It builds on what already
 exists:
 
-- the OCaml frontend (`frontend/`) emits an IR (`wsocaml-ir-5`) per unit;
+- the OCaml frontend (`frontend/`) emits an IR (`wsocaml-ir-6`) per unit;
 - the backend (`backend/`, `--ws-compile`) lowers IR to WebSharper AST and runs
   the WebSharper packager (`Compilation`/`CompileFull`/`packageAssembly`);
 - a kitchen-sink app + `scripts/test-quick.sh` give a fast inner loop;
@@ -111,9 +111,13 @@ unchanged:
 **Native server** (`--emit-server`): the codecs (`ofJson`/`toJson` in
 `frontend/bin/main.ml`) are generated from the inferred types to/from this
 representation. **JS side** (client `rpcCall` + `[@export]`): the frontend emits
-a compact **type descriptor** per rpc/export into the IR (schema
-`wsocaml-ir-5`); a runtime marshaller (`Runtime.js`) converts between the OCaml
-runtime representation and the external one.
+the unit's named record/variant declarations **once** (`UnitIR.Types`, keyed by a
+stable `<unit>.<path>` id) plus a compact **type descriptor** per rpc/export that
+references them by id (schema `wsocaml-ir-6`; `wsocaml-ir-4`/`5` descriptors still
+carry their own `types` array). The backend emits
+`OCamlRuntime.registerTypes([…])` once at module init and a runtime marshaller
+(`Runtime.js`) converts between the OCaml runtime representation and the external
+one, resolving ids from that registry.
 
 Supported: `int`/`float`/`string`/`bool`/`char`/`unit`, `list`, `option`,
 arrays, tuples, records, (regular) variants and `result`, nested. **Recursive**
@@ -163,6 +167,11 @@ wire format. The smaller design, if it is ever worth it: **generate the client
 codecs too** (reuse the `descr` type walk, emit OCaml that compiles to JS,
 targeting `WebSharper_JavaScript.JSON`), leaving the runtime descriptor only for
 the dynamic `[@export]` boundary.
+
+> `JSON.md` (repo root) is the long form: what WebSharper's JSON machinery
+> actually is (compile-time `System.Type` reflection, `CustomTypeInfo`,
+> `JsonSerializerEntry`), the runtime-representation delta, and what adopting it
+> would take.
 
 ### 3.3 Interop: `[@export]` and JS consumers
 

@@ -2,6 +2,9 @@
 // external representation (records -> objects, variants -> {"$":...,"$0":...},
 // lists/arrays -> arrays, options -> value/null, tuples -> arrays), matching
 // what the OCaml client marshals.
+import { pathToFileURL } from 'node:url';
+import { resolve } from 'node:path';
+
 const endpoint = 'http://127.0.0.1:8123/rpc';
 
 const calls = [
@@ -26,4 +29,16 @@ for (const [name, args] of calls) {
   });
   const json = await res.json();
   console.log(name + ' => ' + JSON.stringify(json.result));
+}
+
+// The same shapes through the *client* bundle's generated descriptors: import
+// the server bundle first (installs the runtime prelude), point the transport at
+// the native server, then import the client bundle, whose `let () =` chains the
+// calls. Node keeps the process alive until those fetches settle, so the lines
+// land after `f=42` without any timer.
+if (process.argv[2]) {
+  const dir = process.argv[2];
+  await import(pathToFileURL(resolve(dir, 'Main.server.js')).href);
+  globalThis.OCamlRuntime.rpcEndpoint = endpoint;
+  await import(pathToFileURL(resolve(dir, 'Main.js')).href);
 }

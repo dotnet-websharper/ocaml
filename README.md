@@ -4,17 +4,17 @@
 
 ```
 Parse -> Typemod.type_structure -> Translmod.transl_implementation -> Lambda.program
-  -> wsocaml-ir-5 -> WebSharper AST -> JavaScript
+  -> wsocaml-ir-6 -> WebSharper AST -> JavaScript
 ```
 
 OCaml itself handles typing and pattern-match compilation; the frontend serializes
-Lambda into `wsocaml-ir-5`, and the backend lowers it to WebSharper AST and emits JS.
+Lambda into `wsocaml-ir-6`, and the backend lowers it to WebSharper AST and emits JS.
 
 ## Layout
 
 | Path | Purpose |
 | --- | --- |
-| `frontend/` | OCaml (dune) frontend: `.ml` → `wsocaml-ir-5`; template codegen (`frontend/template/`) |
+| `frontend/` | OCaml (dune) frontend: `.ml` → `wsocaml-ir-6`; template codegen (`frontend/template/`) |
 | `backend/` | F#/.NET backend: `.wsir.json` → `.js` (also handles WebSharper bindings) |
 | `binding-adaptor/` | F# tool: WebSharper binding assembly → OCaml opam package |
 | `bindings/` | local opam repository of generated bindings (`websharper-xxx`) |

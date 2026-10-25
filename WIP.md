@@ -91,10 +91,10 @@ the URL).
   the native tier gets generated `yojson` codecs. This is *not* a substitute for
   WebSharper's built-in JSON: WS's serializer is metadata-driven and we never
   mint `TypeDefinition`s (our values are OCaml-runtime blocks), and the peer is
-  native OCaml, so the encoding must exist on both sides regardless (rationale
-  in `docs/client-server.md` §3.2). The smaller design, if worth it: **generate
-  the client codecs too** from the same type walk, leaving the descriptor only
-  for the dynamic `[@export]` boundary;
+  native OCaml, so the encoding must exist on both sides regardless (short form
+  in `docs/client-server.md` §3.2; full analysis + roadmap in `JSON.md`). The
+  smaller design, if worth it: **generate the client codecs too** from the same
+  type walk, leaving the descriptor only for the dynamic `[@export]` boundary;
 - **external JS libraries (`[<Require>]`/resources)** — a binding to a
   non-WebSharper lib (e.g. Chart.js) lowers to a **global** (`new
   globalThis.Chart(…)`) and needs no bundler, but wsocaml does not honour

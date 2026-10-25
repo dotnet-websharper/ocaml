@@ -106,9 +106,14 @@ dotnet backend/bin/Debug/net10.0/WebSharper.OCaml.dll --ir app.wsir.json \
   `WebSharper.UI.dll`, `WebSharper.StdLib.dll`, `WebSharper.JavaScript.dll`);
   `--ws-compile` runs the WebSharper packager/bundler instead of plain emission.
 - The IR is the *only* contract between the OCaml frontend and the F# backend.
-  `Program.fs` validates `schema` (`wsocaml-ir-5`, with `wsocaml-ir-4` still
+  `Program.fs` validates `schema` (`wsocaml-ir-6`, with `wsocaml-ir-5`/`4` still
   accepted), so a shape change means bumping the string in `frontend/bin/main.ml`
   **and** the check in `Program.fs`.
+- `types` (unit-level, `wsocaml-ir-6`) holds the named record/variant
+  declarations keyed by a stable id; per-rpc/export metas reference them by id and
+  the backend emits `OCamlRuntime.registerTypes([…])` once (`Lowering.typeRegs`).
+  Additive: `ir-4`/`5` descriptors keep their own `types`/`key` refs, so the
+  committed `cases/*.wsir.json` fixtures still compile (see `JSON.md` §5).
 
 ## Regenerating generated things (never hand-edit these)
 
@@ -124,10 +129,11 @@ dotnet backend/bin/Debug/net10.0/WebSharper.OCaml.dll --ir app.wsir.json \
 
 | Doc | Covers | Update it when |
 | --- | --- | --- |
-| `docs/client-server.md` | tier split, hydration/SSR, server-rendered event handlers (§4.1), sitelets (§7), endpoint status (§7.2), deferred work (§6) | boundary, hydration or sitelet semantics change |
+| `docs/client-server.md` | tier split, hydration/SSR, server-rendered event handlers (§4.1), sitelets (§7), endpoint status (§7.2), deferred work (§6), the RPC external representation (§3.2) | boundary, hydration or sitelet semantics change |
+| `JSON.md` (repo root) | the RPC/`[@export]` marshalling long form: why it is hand-rolled rather than WebSharper's built-in JSON, what WS's JSON machinery actually is (`System.Type` reflection, `CustomTypeInfo`, `JsonSerializerEntry`), the runtime-representation delta, what adopting it would take, alternatives | the wire format, the `Runtime.js` marshaller, the IR descriptors, or a decision on the WS-JSON roadmap changes |
 | `docs/hydrate-client.md` | `hydrate`/`client` regions end to end: the compiler lift + IR `clients`, client `registerClient`, `server.ml` selection and bootstrap, served HTML, the `Runtime.js` lifecycle, invariants | region/hydration implementation, `Runtime.js`, or emitted-marker changes |
 | `docs/client-bundle.md` | the client JS output: file layout, the per-class WebSharper ESM modules the packager emits, how relative imports resolve, static serving, the runtime prelude, why no bundler, external JS libraries (§11: globals vs `[<Import>]`) | JS emission/`--ws-compile`/packaging, how the bundle is served, or external-lib/resource handling |
-| `docs/routing.md` | `[@endpoint]` semantics with verified snippets (§1–§11), diagnostics (§12), not-implemented list (§13) | endpoint semantics change (its snippets are copied from a real `--emit-server` run) |
+| `docs/routing.md` | `[@endpoint]` semantics with verified snippets (§1–§11), diagnostics (§12), client-side hash routing / `Router.installHash` (§13), not-implemented list (§14) | endpoint semantics change (its snippets are copied from a real `--emit-server` run) |
 | `docs/codegen.md` | what lands in `server.ml`, selection rules, diagnostics plumbing; cites `main.ml:<line>` | `emitServer`/printing changes — and refresh those line numbers |
 | `docs/templates.md` | `[%template]` surface and hole types; deferred items (anchors, cross-file templates) | template codegen changes |
 | `docs/ws-differences.md` | intentional differences from .NET WebSharper | a behaviour intentionally diverges |

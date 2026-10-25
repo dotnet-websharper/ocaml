@@ -148,12 +148,28 @@ if (!globalThis.OCamlRuntime) {
     return m;
   }
 
-  function resolveType(types, key) {
-    for (var i = 0; i < types.length; i++) if (types[i].key === key) return types[i];
-    throw new globalThis.Error("unknown rpc type " + key);
+  // Named type declarations are registered once per unit (`registerTypes`) and
+  // referenced by id; descriptors from older IRs (<= wsocaml-ir-5) still carry
+  // their own `types` array with `key` references.
+  function registerTypes(json) {
+    var reg = globalThis.OCamlRuntime.__types || (globalThis.OCamlRuntime.__types = {});
+    var arr = JSON.parse(json);
+    for (var i = 0; i < arr.length; i++) reg[arr[i].id] = arr[i];
   }
 
-  function marshalOut(types, c, v) {
+  function resolveType(meta, c) {
+    if (c.id !== undefined) {
+      var reg = globalThis.OCamlRuntime.__types || {};
+      var d = reg[c.id];
+      if (!d) throw new globalThis.Error("unknown rpc type " + c.id);
+      return d;
+    }
+    var types = meta.types || [];
+    for (var i = 0; i < types.length; i++) if (types[i].key === c.key) return types[i];
+    throw new globalThis.Error("unknown rpc type " + c.key);
+  }
+
+  function marshalOut(meta, c, v) {
     switch (c.k) {
       case "int":
       case "float":
@@ -168,42 +184,46 @@ if (!globalThis.OCamlRuntime) {
       case "list": {
         var a = [];
         while (typeof v === "object" && v !== null) {
-          a.push(marshalOut(types, c.e, v["0"]));
+          a.push(marshalOut(meta, c.e, v["0"]));
           v = v["1"];
         }
         return a;
       }
       case "option":
-        return v === 0 ? null : marshalOut(types, c.e, v["0"]);
+        return v === 0 ? null : marshalOut(meta, c.e, v["0"]);
       case "array": {
         var r = [];
-        for (var i = 0; i < v.length; i++) r.push(marshalOut(types, c.e, v[i]));
+        for (var i = 0; i < v.length; i++) r.push(marshalOut(meta, c.e, v[i]));
         return r;
       }
       case "tuple": {
         var r = [];
-        for (var i = 0; i < c.e.length; i++) r.push(marshalOut(types, c.e[i], v[String(i)]));
+        for (var i = 0; i < c.e.length; i++) r.push(marshalOut(meta, c.e[i], v[String(i)]));
         return r;
       }
       case "named": {
-        var d = resolveType(types, c.key);
+        var d = resolveType(meta, c);
         if (d.kind === "record") {
           var o = {};
           for (var i = 0; i < d.fields.length; i++)
-            o[d.fields[i][0]] = marshalOut(types, d.fields[i][1], v[String(i)]);
+            o[d.fields[i][0]] = marshalOut(meta, d.fields[i][1], v[String(i)]);
           return o;
         }
         var cases = d.cases;
+        // Constant constructors are immediates and non-constant ones are blocks;
+        // the two tag spaces are numbered independently, so only compare against
+        // cases of the same kind (a case has arguments iff it is non-constant).
         if (typeof v !== "object" || v === null) {
-          for (var i = 0; i < cases.length; i++) if (cases[i][1] === v) return { $: cases[i][0] };
+          for (var i = 0; i < cases.length; i++)
+            if (cases[i][2].length === 0 && cases[i][1] === v) return { $: cases[i][0] };
           throw new globalThis.Error("bad variant tag " + v);
         }
         for (var i = 0; i < cases.length; i++)
-          if (cases[i][1] === v.$tag) {
+          if (cases[i][2].length > 0 && cases[i][1] === v.$tag) {
             var o = { $: cases[i][0] };
             var args = cases[i][2];
             for (var j = 0; j < args.length; j++)
-              o["$" + j] = marshalOut(types, args[j], v[String(j)]);
+              o["$" + j] = marshalOut(meta, args[j], v[String(j)]);
             return o;
           }
         throw new globalThis.Error("bad variant tag " + v.$tag);
@@ -212,7 +232,7 @@ if (!globalThis.OCamlRuntime) {
     throw new globalThis.Error("marshalOut: " + c.k);
   }
 
-  function marshalIn(types, c, v) {
+  function marshalIn(meta, c, v) {
     switch (c.k) {
       case "int":
       case "float":
@@ -227,27 +247,27 @@ if (!globalThis.OCamlRuntime) {
       case "list": {
         var r = 0;
         for (var i = v.length - 1; i >= 0; i--)
-          r = { $tag: 0, "0": marshalIn(types, c.e, v[i]), "1": r };
+          r = { $tag: 0, "0": marshalIn(meta, c.e, v[i]), "1": r };
         return r;
       }
       case "option":
-        return v === null || v === undefined ? 0 : { $tag: 0, "0": marshalIn(types, c.e, v) };
+        return v === null || v === undefined ? 0 : { $tag: 0, "0": marshalIn(meta, c.e, v) };
       case "array": {
         var r = [];
-        for (var i = 0; i < v.length; i++) r.push(marshalIn(types, c.e, v[i]));
+        for (var i = 0; i < v.length; i++) r.push(marshalIn(meta, c.e, v[i]));
         return r;
       }
       case "tuple": {
         var o = { $tag: 0 };
-        for (var i = 0; i < c.e.length; i++) o[String(i)] = marshalIn(types, c.e[i], v[i]);
+        for (var i = 0; i < c.e.length; i++) o[String(i)] = marshalIn(meta, c.e[i], v[i]);
         return o;
       }
       case "named": {
-        var d = resolveType(types, c.key);
+        var d = resolveType(meta, c);
         if (d.kind === "record") {
           var o = { $tag: 0 };
           for (var i = 0; i < d.fields.length; i++)
-            o[String(i)] = marshalIn(types, d.fields[i][1], v[d.fields[i][0]]);
+            o[String(i)] = marshalIn(meta, d.fields[i][1], v[d.fields[i][0]]);
           return o;
         }
         var cases = d.cases;
@@ -258,7 +278,7 @@ if (!globalThis.OCamlRuntime) {
             if (args.length === 0) return tag;
             var o = { $tag: tag };
             for (var j = 0; j < args.length; j++)
-              o[String(j)] = marshalIn(types, args[j], v["$" + j]);
+              o[String(j)] = marshalIn(meta, args[j], v["$" + j]);
             return o;
           }
         throw new globalThis.Error("bad variant case " + v.$);
@@ -277,12 +297,12 @@ if (!globalThis.OCamlRuntime) {
     var res;
     if (isFn) {
       var ocamlArgs = [];
-      for (var i = 0; i < args.length; i++) ocamlArgs.push(marshalIn(meta.types, meta.args[i], args[i]));
+      for (var i = 0; i < args.length; i++) ocamlArgs.push(marshalIn(meta, meta.args[i], args[i]));
       res = caml_apply(v, ocamlArgs);
     } else {
       res = v;
     }
-    return marshalOut(meta.types, meta.result, res);
+    return marshalOut(meta, meta.result, res);
   }
 
   // [@client] hydration: server-rendered pages carry `[data-ws-key]` placeholders;
@@ -359,11 +379,11 @@ if (!globalThis.OCamlRuntime) {
   function rpcCall(name, metaJson, args) {
     var meta = rpcMeta(name, metaJson);
     var extArgs = args.map(function (a, i) {
-      return marshalOut(meta.types, meta.args[i], a);
+      return marshalOut(meta, meta.args[i], a);
     });
     var payload = JSON.stringify({ name: name, args: extArgs });
     return globalThis.OCamlRuntime.rpcTransport(payload).then(function (response) {
-      return marshalIn(meta.types, meta.result, JSON.parse(response).result);
+      return marshalIn(meta, meta.result, JSON.parse(response).result);
     });
   }
 
@@ -386,11 +406,11 @@ if (!globalThis.OCamlRuntime) {
       var entry = (globalThis.OCamlRuntime.__serverRpc || {})[p.name];
       var meta = entry.meta;
       var ocamlArgs = p.args.map(function (a, i) {
-        return marshalIn(meta.types, meta.args[i], a);
+        return marshalIn(meta, meta.args[i], a);
       });
       // Handlers may be synchronous or return an `Async.t` (a promise).
       return Promise.resolve(entry.fn.apply(null, ocamlArgs)).then(function (result) {
-        return JSON.stringify({ result: marshalOut(meta.types, meta.result, result) });
+        return JSON.stringify({ result: marshalOut(meta, meta.result, result) });
       });
     });
   }
@@ -455,6 +475,7 @@ if (!globalThis.OCamlRuntime) {
     caml_closure: caml_closure,
     caml_to_js: caml_to_js,
     caml_list_to_array: caml_list_to_array,
+    registerTypes: registerTypes,
     registerRpc: registerRpc,
     rpcCall: rpcCall,
     rpcTransport: rpcTransport,

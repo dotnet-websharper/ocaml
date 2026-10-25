@@ -121,7 +121,7 @@ let main argv =
 
         let ir = Json.read input
 
-        if ir.Schema <> "wsocaml-ir-5" && ir.Schema <> "wsocaml-ir-4" then
+        if ir.Schema <> "wsocaml-ir-6" && ir.Schema <> "wsocaml-ir-5" && ir.Schema <> "wsocaml-ir-4" then
             failwith $"unsupported IR {ir.Schema}"
 
         Directory.CreateDirectory output |> ignore
