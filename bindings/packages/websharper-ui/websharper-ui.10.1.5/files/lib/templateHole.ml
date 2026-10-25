@@ -31,9 +31,9 @@ external makeVarLens_2 : string -> bool -> t = "ws:WebSharper.UI!WebSharper.UI/W
 (* inline *)
 external makeVar_2 : string -> (bool) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#MakeVar|System.String|WebSharper.UI.Var`1<System.Boolean>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#MakeVar|System.String|WebSharper.UI.Var`1<System.Boolean>"
 (* macro *)
-external makeVarLens_3 : string -> WebSharper_StdLib.DateTime2.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#MakeVarLens|System.String|System.DateTime" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#MakeVarLens|System.String|System.DateTime"
+external makeVarLens_3 : string -> WebSharper_StdLib.DateTime.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#MakeVarLens|System.String|System.DateTime" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#MakeVarLens|System.String|System.DateTime"
 (* inline *)
-external makeVar_3 : string -> (WebSharper_StdLib.DateTime2.t) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#MakeVar|System.String|WebSharper.UI.Var`1<System.DateTime>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#MakeVar|System.String|WebSharper.UI.Var`1<System.DateTime>"
+external makeVar_3 : string -> (WebSharper_StdLib.DateTime.t) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#MakeVar|System.String|WebSharper.UI.Var`1<System.DateTime>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#MakeVar|System.String|WebSharper.UI.Var`1<System.DateTime>"
 (* inline *)
 external makeVar_4 : string -> ((WebSharper_JavaScript.File.t) array) Var.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#MakeVar|System.String|WebSharper.UI.Var`1<WebSharper.JavaScript.File[]>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#MakeVar|System.String|WebSharper.UI.Var`1<WebSharper.JavaScript.File[]>"
 (* macro *)

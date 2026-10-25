@@ -23,7 +23,7 @@ extra-files: [
   ["lib/clientTemplateInstanceHandlers.ml" "md5=177e286df6521487a14bf608ff770d18"]
   ["lib/dune" "md5=4ce530b869f55263e6cabb0e667b3d66"]
   ["lib/handler.ml" "md5=1f1245bb3f5666a9567356047faf3d50"]
-  ["lib/providerBuilder.ml" "md5=a199ff236fb8a1e9c3c4dbcd2c338b0d"]
+  ["lib/providerBuilder.ml" "md5=656b43c2a4b6e075bebeb2853e4d64aa"]
   ["lib/providerBuilderModule.ml" "md5=24a209ad817f472da874bdb662a88410"]
   ["lib/runtime.ml" "md5=cad5948ce29d3fae58135b0a8db0e132"]
   ["lib/templateInitializer.ml" "md5=053ca258b1cb989572b425fe99bf5bb2"]

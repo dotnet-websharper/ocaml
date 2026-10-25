@@ -23,11 +23,11 @@ external booleanToEcma : t -> bool -> WebSharper_JavaScript.Boolean.t = "ws:WebS
 (* inline *)
 external booleanToJS : t -> bool -> WebSharper_JavaScript.Boolean.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Extensions::#Boolean.ToJS|System.Boolean" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Extensions::#Boolean.ToJS|System.Boolean"
 (* inline *)
-external dateToDotNet : t -> WebSharper_JavaScript.Date.t -> DateTime2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Extensions::#Date.ToDotNet|WebSharper.JavaScript.Date" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Extensions::#Date.ToDotNet|WebSharper.JavaScript.Date"
+external dateToDotNet : t -> WebSharper_JavaScript.Date.t -> DateTime.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Extensions::#Date.ToDotNet|WebSharper.JavaScript.Date" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Extensions::#Date.ToDotNet|WebSharper.JavaScript.Date"
 (* inline *)
-external dateTimeToEcma : t -> DateTime2.t -> WebSharper_JavaScript.Date.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Extensions::#DateTime.ToEcma|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Extensions::#DateTime.ToEcma|System.DateTime"
+external dateTimeToEcma : t -> DateTime.t -> WebSharper_JavaScript.Date.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Extensions::#DateTime.ToEcma|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Extensions::#DateTime.ToEcma|System.DateTime"
 (* inline *)
-external dateTimeget_JS : t -> DateTime2.t -> WebSharper_JavaScript.Date.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Extensions::#DateTime.get_JS|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Extensions::#DateTime.get_JS|System.DateTime"
+external dateTimeget_JS : t -> DateTime.t -> WebSharper_JavaScript.Date.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Extensions::#DateTime.get_JS|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Extensions::#DateTime.get_JS|System.DateTime"
 (* inline *)
 external dateTimeOffsetToEcma : t -> DateTimeOffset.t -> WebSharper_JavaScript.Date.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Extensions::#DateTimeOffset.ToEcma|System.DateTimeOffset" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Extensions::#DateTimeOffset.ToEcma|System.DateTimeOffset"
 (* inline *)

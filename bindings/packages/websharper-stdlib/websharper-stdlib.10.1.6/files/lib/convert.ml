@@ -7,7 +7,7 @@ external toBoolean_2 : int -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/Sys
 (* inline *)
 external toBoolean_3 : char -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToBoolean|System.Char" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToBoolean|System.Char"
 (* inline *)
-external toBoolean_4 : DateTime2.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToBoolean|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToBoolean|System.DateTime"
+external toBoolean_4 : DateTime.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToBoolean|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToBoolean|System.DateTime"
 (* inline *)
 external toBoolean_5 : float -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToBoolean|System.Double" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToBoolean|System.Double"
 (* inline *)
@@ -35,7 +35,7 @@ external toByte_2 : int -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.
 (* inline *)
 external toByte_3 : char -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToByte|System.Char" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToByte|System.Char"
 (* inline *)
-external toByte_4 : DateTime2.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToByte|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToByte|System.DateTime"
+external toByte_4 : DateTime.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToByte|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToByte|System.DateTime"
 (* inline *)
 external toByte_5 : float -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToByte|System.Double" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToByte|System.Double"
 (* inline *)
@@ -63,7 +63,7 @@ external toSByte_2 : int -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System
 (* inline *)
 external toSByte_3 : char -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToSByte|System.Char" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToSByte|System.Char"
 (* inline *)
-external toSByte_4 : DateTime2.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToSByte|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToSByte|System.DateTime"
+external toSByte_4 : DateTime.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToSByte|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToSByte|System.DateTime"
 (* inline *)
 external toSByte_5 : float -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToSByte|System.Double" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToSByte|System.Double"
 (* inline *)
@@ -91,7 +91,7 @@ external toChar_2 : int -> char = "ws:WebSharper.StdLib!WebSharper.StdLib/System
 (* inline *)
 external toChar_3 : char -> char = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToChar|System.Char" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToChar|System.Char"
 (* inline *)
-external toChar_4 : DateTime2.t -> char = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToChar|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToChar|System.DateTime"
+external toChar_4 : DateTime.t -> char = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToChar|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToChar|System.DateTime"
 (* inline *)
 external toChar_5 : float -> char = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToChar|System.Double" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToChar|System.Double"
 (* inline *)
@@ -119,7 +119,7 @@ external toInt32_2 : int -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System
 (* inline *)
 external toInt32_3 : char -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToInt32|System.Char" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToInt32|System.Char"
 (* inline *)
-external toInt32_4 : DateTime2.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToInt32|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToInt32|System.DateTime"
+external toInt32_4 : DateTime.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToInt32|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToInt32|System.DateTime"
 (* inline *)
 external toInt32_5 : float -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToInt32|System.Double" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToInt32|System.Double"
 (* inline *)
@@ -147,7 +147,7 @@ external toInt64_2 : int -> int64 = "ws:WebSharper.StdLib!WebSharper.StdLib/Syst
 (* inline *)
 external toInt64_3 : char -> int64 = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToInt64|System.Char" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToInt64|System.Char"
 (* inline *)
-external toInt64_4 : DateTime2.t -> int64 = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToInt64|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToInt64|System.DateTime"
+external toInt64_4 : DateTime.t -> int64 = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToInt64|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToInt64|System.DateTime"
 (* inline *)
 external toInt64_5 : float -> int64 = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToInt64|System.Double" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToInt64|System.Double"
 (* inline *)
@@ -175,7 +175,7 @@ external toInt16_2 : int -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System
 (* inline *)
 external toInt16_3 : char -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToInt16|System.Char" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToInt16|System.Char"
 (* inline *)
-external toInt16_4 : DateTime2.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToInt16|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToInt16|System.DateTime"
+external toInt16_4 : DateTime.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToInt16|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToInt16|System.DateTime"
 (* inline *)
 external toInt16_5 : float -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToInt16|System.Double" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToInt16|System.Double"
 (* inline *)
@@ -203,7 +203,7 @@ external toUInt32_2 : int -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/Syste
 (* inline *)
 external toUInt32_3 : char -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToUInt32|System.Char" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToUInt32|System.Char"
 (* inline *)
-external toUInt32_4 : DateTime2.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToUInt32|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToUInt32|System.DateTime"
+external toUInt32_4 : DateTime.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToUInt32|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToUInt32|System.DateTime"
 (* inline *)
 external toUInt32_5 : float -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToUInt32|System.Double" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToUInt32|System.Double"
 (* inline *)
@@ -231,7 +231,7 @@ external toUInt64_2 : int -> int64 = "ws:WebSharper.StdLib!WebSharper.StdLib/Sys
 (* inline *)
 external toUInt64_3 : char -> int64 = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToUInt64|System.Char" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToUInt64|System.Char"
 (* inline *)
-external toUInt64_4 : DateTime2.t -> int64 = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToUInt64|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToUInt64|System.DateTime"
+external toUInt64_4 : DateTime.t -> int64 = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToUInt64|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToUInt64|System.DateTime"
 (* inline *)
 external toUInt64_5 : float -> int64 = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToUInt64|System.Double" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToUInt64|System.Double"
 (* inline *)
@@ -259,7 +259,7 @@ external toUInt16_2 : int -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/Syste
 (* inline *)
 external toUInt16_3 : char -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToUInt16|System.Char" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToUInt16|System.Char"
 (* inline *)
-external toUInt16_4 : DateTime2.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToUInt16|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToUInt16|System.DateTime"
+external toUInt16_4 : DateTime.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToUInt16|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToUInt16|System.DateTime"
 (* inline *)
 external toUInt16_5 : float -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToUInt16|System.Double" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToUInt16|System.Double"
 (* inline *)
@@ -281,33 +281,33 @@ external toUInt16_13 : int -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/Syst
 (* inline *)
 external toUInt16_14 : int64 -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToUInt16|System.UInt64" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToUInt16|System.UInt64"
 (* inline *)
-external toDateTime : bool -> DateTime2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Boolean" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Boolean"
+external toDateTime : bool -> DateTime.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Boolean" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Boolean"
 (* inline *)
-external toDateTime_2 : int -> DateTime2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Byte" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Byte"
+external toDateTime_2 : int -> DateTime.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Byte" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Byte"
 (* inline *)
-external toDateTime_3 : char -> DateTime2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Char" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Char"
+external toDateTime_3 : char -> DateTime.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Char" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Char"
 (* inline *)
-external toDateTime_4 : DateTime2.t -> DateTime2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.DateTime"
+external toDateTime_4 : DateTime.t -> DateTime.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.DateTime"
 (* inline *)
-external toDateTime_5 : float -> DateTime2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Double" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Double"
+external toDateTime_5 : float -> DateTime.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Double" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Double"
 (* inline *)
-external toDateTime_6 : int -> DateTime2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Int16" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Int16"
+external toDateTime_6 : int -> DateTime.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Int16" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Int16"
 (* inline *)
-external toDateTime_7 : int -> DateTime2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Int32"
+external toDateTime_7 : int -> DateTime.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Int32"
 (* inline *)
-external toDateTime_8 : int64 -> DateTime2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Int64" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Int64"
+external toDateTime_8 : int64 -> DateTime.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Int64" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Int64"
 (* inline *)
-external toDateTime_9 : int -> DateTime2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.SByte" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.SByte"
+external toDateTime_9 : int -> DateTime.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.SByte" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.SByte"
 (* inline *)
-external toDateTime_10 : float -> DateTime2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Single" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Single"
+external toDateTime_10 : float -> DateTime.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Single" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.Single"
 (* inline *)
-external toDateTime_11 : string -> DateTime2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.String" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.String"
+external toDateTime_11 : string -> DateTime.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.String" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.String"
 (* inline *)
-external toDateTime_12 : int -> DateTime2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.UInt16" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.UInt16"
+external toDateTime_12 : int -> DateTime.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.UInt16" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.UInt16"
 (* inline *)
-external toDateTime_13 : int -> DateTime2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.UInt32" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.UInt32"
+external toDateTime_13 : int -> DateTime.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.UInt32" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.UInt32"
 (* inline *)
-external toDateTime_14 : int64 -> DateTime2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.UInt64" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.UInt64"
+external toDateTime_14 : int64 -> DateTime.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.UInt64" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDateTime|System.UInt64"
 (* inline *)
 external toSingle : bool -> float = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToSingle|System.Boolean" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToSingle|System.Boolean"
 (* inline *)
@@ -315,7 +315,7 @@ external toSingle_2 : int -> float = "ws:WebSharper.StdLib!WebSharper.StdLib/Sys
 (* inline *)
 external toSingle_3 : char -> float = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToSingle|System.Char" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToSingle|System.Char"
 (* inline *)
-external toSingle_4 : DateTime2.t -> float = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToSingle|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToSingle|System.DateTime"
+external toSingle_4 : DateTime.t -> float = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToSingle|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToSingle|System.DateTime"
 (* inline *)
 external toSingle_5 : float -> float = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToSingle|System.Double" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToSingle|System.Double"
 (* inline *)
@@ -343,7 +343,7 @@ external toDouble_2 : int -> float = "ws:WebSharper.StdLib!WebSharper.StdLib/Sys
 (* inline *)
 external toDouble_3 : char -> float = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDouble|System.Char" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDouble|System.Char"
 (* inline *)
-external toDouble_4 : DateTime2.t -> float = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDouble|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDouble|System.DateTime"
+external toDouble_4 : DateTime.t -> float = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDouble|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDouble|System.DateTime"
 (* inline *)
 external toDouble_5 : float -> float = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDouble|System.Double" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Convert::#ToDouble|System.Double"
 (* inline *)

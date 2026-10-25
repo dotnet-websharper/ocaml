@@ -31,7 +31,7 @@ extra-files: [
   ["lib/router3.ml" "md5=e0ebf978cae3d55866caf36744328d4c"]
   ["lib/routerExtensions.ml" "md5=3eb3e6a46c91c2781016bf8c1f0ef534"]
   ["lib/routerModule.ml" "md5=1ffd75ef5177fb3b302d3b45d88b0b46"]
-  ["lib/routerOperators.ml" "md5=66a5bce18eac8356e387754865a6645f"]
+  ["lib/routerOperators.ml" "md5=34946329cdacbf99244a3ef4b4c47de3"]
   ["lib/routerRouter2Types.ml" "md5=b85783631362e21e481eeec311f93fb3"]
   ["lib/stringEncoding.ml" "md5=62804bcdd9153207c6c2b9acefeaaf99"]
   ["websharper-sitelets.opam" "md5=fbd40c1edeca096e2f8152e8915629c8"]

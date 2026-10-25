@@ -271,6 +271,38 @@ Costs
 - Full adoption (Phases 1–5) is only worth it if both are wanted, or if
   WebSharper-JSON-level interop is a hard requirement.
 
+### What "gain" actually means for the scalar types
+
+**Boundary types.** The .NET types WS's JSON has built-ins for are reachable
+through the generated bindings — `websharper-stdlib` binds `System.DateTime`
+(now `WebSharper_StdLib.DateTime`), `DateTimeOffset`, `TimeSpan`, `Guid`,
+`BigInteger`, `Nullable<'T>`, `FSharpMap`/`FSharpSet`/`HashSet`/`ISet`,
+`Dictionary`/`IList`/`IEnumerable`, and `websharper-javascript` adds the JS
+`Date`/`BigInt`. There is **no binding** for `System.Uri`, `System.Decimal` or
+`System.Numerics.Complex`, so those stay unreachable however the wire is done.
+
+**OCaml counterparts.** Only the collection/option family has same-shaped OCaml
+types (`option`, `list`, `array`, `Seq.t`, `Map.Make`, `Set.Make`, `Hashtbl`) —
+and even there `Map`/`Set` are *functors*, not first-class generic types, so a
+type-driven codec cannot be generic over the key type. The scalar types have
+nothing in the stdlib: `DateTime`/`DateTimeOffset`/`TimeSpan` exist only as
+`unix`'s `Unix.tm` + `float` (a server-only library) or as third-party
+`ptime`/`timedesc`; `Guid` as `uuidm`; `BigInteger`/`decimal` as `zarith`. The
+usable frontier is narrower still: the client tier ships only 14 `Stdlib__*`
+shims (`Stdlib, Array, Buffer, Bytes, Char, Float, Hashtbl, Int, List, Option,
+Printf, Result, String, Sys`), so `Map`/`Set`/`Int64` **typecheck and then fail at
+runtime**, and a third-party library would have to compile to JS.
+
+**Consequence.** Adopting WS's JSON buys the *serialization rules* for those
+types, not new OCaml types. The sane shape is to keep the **WS binding type** as
+the boundary type (that is what the JS APIs and the WS metadata speak) and
+implement it natively behind a shadow with a representation of our choosing
+(`Ptime.t`, `float` epoch, `int64` ms, …), matching WS's exact wire form
+(ISO-8601 `toISOString`, ms number, `{d, o}`). The cheap alternative the tree
+already uses is to keep time-like values as **strings** — `Hole.DateTime` (a
+`ws-var` on `<input type="datetime-local">`) is generated as a `string` hole for
+exactly this reason.
+
 ---
 
 ## 8. Open questions

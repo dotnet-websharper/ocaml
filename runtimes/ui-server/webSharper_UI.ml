@@ -181,9 +181,9 @@ module DocInputType = struct
   let urlV attrs v = strV "url" attrs v
   let weekV attrs v = strV "week" attrs v
 
-  let dateTimeLocal attrs (_ : WebSharper_StdLib.DateTime2.t Var.t) =
+  let dateTimeLocal attrs (_ : WebSharper_StdLib.DateTime.t Var.t) =
     el_input "datetime-local" attrs None
-  let dateTimeLocalV attrs (_ : WebSharper_StdLib.DateTime2.t) =
+  let dateTimeLocalV attrs (_ : WebSharper_StdLib.DateTime.t) =
     el_input "datetime-local" attrs None
 
   let intUnchecked attrs v = ints "number" attrs v

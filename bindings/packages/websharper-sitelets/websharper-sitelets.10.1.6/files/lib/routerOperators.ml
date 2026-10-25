@@ -35,7 +35,7 @@ external get_rBool : unit -> (bool) Router2.t = "ws:WebSharper.Sitelets!WebSharp
 (* inline *)
 external get_rWildcard : unit -> (string) Router2.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#get_rWildcard|" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#get_rWildcard|"
 (* inline *)
-external get_rDateTime : unit -> (WebSharper_StdLib.DateTime2.t) Router2.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#get_rDateTime|" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#get_rDateTime|"
+external get_rDateTime : unit -> (WebSharper_StdLib.DateTime.t) Router2.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#get_rDateTime|" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#get_rDateTime|"
 (* inline *)
 external jSEmpty : unit -> (Js.t) Router2.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#JSEmpty|" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#JSEmpty|"
 (* inline *)
@@ -43,7 +43,7 @@ external jSJson : unit -> ('a) Router2.t = "ws:WebSharper.Sitelets!WebSharper.Si
 (* inline *)
 external jSJson_2 : unit -> ('a) Router2.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#get_JSJson|" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#get_JSJson|"
 (* func *)
-external rDateTime : unit -> (WebSharper_StdLib.DateTime2.t) Router2.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#rDateTime|" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#rDateTime|"
+external rDateTime : unit -> (WebSharper_StdLib.DateTime.t) Router2.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#rDateTime|" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#rDateTime|"
 (* func *)
 external rWildcard : unit -> (string) Router2.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#rWildcard|" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#rWildcard|"
 (* func *)

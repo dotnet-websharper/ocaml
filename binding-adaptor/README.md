@@ -139,7 +139,13 @@ Classes that resolve to the same module name are grouped:
   with its `module X`. For `qualified` packages the address check is relaxed
   (helpers are often module-root types);
 - otherwise each gets a numeric suffix on the last segment (`Foo`, `Foo2`, …),
-  ordered so prototype-bearing types keep the bare name.
+  ordered so prototype-bearing types keep the bare name. When *every* member of
+  the group is a module-root type there is no prototype-bearing winner and the
+  order falls back to the metadata enumeration order (deterministic for a given
+  assembly, but incidental) — e.g. `System.DateTime` vs
+  `WebSharper.JavaScript.Pervasives.DateTime` produced `DateTime2`. Repair such
+  pairs with a `modules[].name` rename in the package's spec
+  (`specs/websharper-stdlib.spec` does this).
 
 ---
 
@@ -242,6 +248,15 @@ Member/field names are lower-cased at the first character, non-identifier
 characters are stripped, a leading digit gets a `_` prefix, an empty name
 becomes `x`, and OCaml keywords (including OCaml 5's `effect`) get a trailing
 `_`.
+
+### Upcasts
+
+An event-like class (an F# `IEvent<'T>`-derived type — `Event`, and the DOM event
+types) additionally gets `as_<base>` members with the `%identity` tag, one per
+base module in the same package plus the DOM `EventTarget`. A base in a
+*referenced* package is emitted qualified (`WebSharper_JavaScript.EventTarget`),
+and an unresolvable base is dropped, so the generated module never names a module
+it does not depend on.
 
 ---
 

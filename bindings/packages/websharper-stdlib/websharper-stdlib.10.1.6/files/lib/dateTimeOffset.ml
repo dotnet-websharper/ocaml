@@ -11,7 +11,7 @@ external toLocalTime : t -> t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.D
 (* inline *)
 external toUniversalTime : t -> t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::#ToUniversalTime|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::#ToUniversalTime|"
 (* inline *)
-external utcDateTime : t -> DateTime2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::#get_UtcDateTime|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::#get_UtcDateTime|"
+external utcDateTime : t -> DateTime.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::#get_UtcDateTime|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::#get_UtcDateTime|"
 (* inline *)
 external timeOfDay : t -> TimeSpan.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::#get_TimeOfDay|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::#get_TimeOfDay|"
 (* inline *)
@@ -33,7 +33,7 @@ external dayOfWeek : t -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.
 (* inline *)
 external ticks : t -> int64 = "ws:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::#get_Ticks|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::#get_Ticks|"
 (* func *)
-external dateTime : unit -> DateTime2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::#get_DateTime|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::#get_DateTime|"
+external dateTime : unit -> DateTime.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::#get_DateTime|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::#get_DateTime|"
 (* inline *)
 external add : t -> TimeSpan.t -> t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::#Add|System.TimeSpan" "ws:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::#Add|System.TimeSpan"
 (* inline *)
@@ -77,10 +77,10 @@ external op_Subtraction_2 : t -> t -> TimeSpan.t = "ws:WebSharper.StdLib!WebShar
 (* instance *)
 external get_o : t -> int = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::#o" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::#o"
 (* instance *)
-external get_d : t -> DateTime2.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::#d" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::#d"
+external get_d : t -> DateTime.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::#d" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::#d"
 (* inline *)
-external create : DateTime2.t -> int -> t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::"
+external create : DateTime.t -> int -> t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::"
 (* inline *)
-external create_2 : DateTime2.t -> TimeSpan.t -> t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::"
+external create_2 : DateTime.t -> TimeSpan.t -> t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::"
 (* inline *)
-external create_3 : DateTime2.t -> t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::"
+external create_3 : DateTime.t -> t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.DateTimeOffset::"

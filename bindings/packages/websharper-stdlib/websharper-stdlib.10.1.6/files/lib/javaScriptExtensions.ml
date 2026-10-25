@@ -9,7 +9,7 @@ external toJS_3 : Object.t -> WebSharper_JavaScript.Error.t = "ws:WebSharper.Std
 (* inline *)
 external toJS_4 : bool -> WebSharper_JavaScript.Boolean.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.JavaScriptExtensions::#ToJS|System.Boolean" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.JavaScriptExtensions::#ToJS|System.Boolean"
 (* inline *)
-external toJS_5 : DateTime2.t -> WebSharper_JavaScript.Date.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.JavaScriptExtensions::#ToJS|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.JavaScriptExtensions::#ToJS|System.DateTime"
+external toJS_5 : DateTime.t -> WebSharper_JavaScript.Date.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.JavaScriptExtensions::#ToJS|System.DateTime" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.JavaScriptExtensions::#ToJS|System.DateTime"
 (* inline *)
 external toJS_6 : int -> WebSharper_JavaScript.Number.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.JavaScriptExtensions::#ToJS|System.Byte" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.JavaScriptExtensions::#ToJS|System.Byte"
 (* inline *)

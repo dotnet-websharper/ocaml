@@ -10,6 +10,8 @@ external removeHandler : ('a) t -> Js.t -> unit = "ws:WebSharper.StdLib!WebSharp
 external addHandler : ('a) t -> Js.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Control.Event.Event`1::default#AddHandler|Microsoft.FSharp.Control.FSharpHandler`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Control.Event.Event`1::default#AddHandler|Microsoft.FSharp.Control.FSharpHandler`1<'0>"
 (* instance *)
 external trigger : ('a) t -> 'a -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Control.Event.Event`1::default#Trigger|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Control.Event.Event`1::default#Trigger|'0"
+(* (inline) *)
+external as_eventTarget : ('a) t -> WebSharper_JavaScript.EventTarget.t = "%identity"
 (* instance *)
 external get_handlers : ('a) t -> (Js.t) List.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Control.Event.Event`1::default#Handlers" "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Control.Event.Event`1::default#Handlers"
 (* static *)

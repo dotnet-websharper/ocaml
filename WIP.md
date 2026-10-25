@@ -118,7 +118,12 @@ the URL).
 - nested OCaml modules not produced (names are flat/qualified);
 - non-public/unrepresentable types degrade to `Js.t`;
 - server-only members taking quotations are stubs/omitted;
-- cross-assembly compilation relies on the backend minting disjoint numeric ids.
+- cross-assembly compilation relies on the backend minting disjoint numeric ids;
+- **remaining collision suffixes** — `DateTime`/`DateTimeFormat` is done
+  (`specs/websharper-stdlib.spec`); the same treatment is available for
+  `Nullable2`, `IList2`, `IDictionary2`, `FSharpList2`, `FSharpSet2`, `Router2`, …
+  Each needs a `spec` rename for *both* members of the colliding group, then
+  regenerating the dependents (see `AGENTS.md` gotcha 15).
 
 ### Suggested order
 Do **A first** (small, fixes a correctness bug where `link` can emit a URL its

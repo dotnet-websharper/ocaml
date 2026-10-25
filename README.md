@@ -62,15 +62,47 @@ static/instance/new access.
 
 Generated packages reference other WebSharper packages with `--reference`; cross-
 package types are emitted qualified and the opam/dune dependencies are generated
-automatically. `WebSharper.UI.Router` refers to `WebSharper.Sitelets.Router<'T>`,
-so the UI binding is generated with the Sitelets reference too:
+automatically. Regenerate the whole set in this order (a package's `--reference`
+set mirrors the `depends:` of its `opam`):
 
-    dotnet .../binding-adaptor.dll gen WebSharper.Sitelets.dll --version 10.1.6 --dest ./bindings \
-      --reference .../WebSharper.JavaScript.dll --reference .../WebSharper.StdLib.dll
+    BIND=~/.nuget/packages/websharper/10.1.6.676/lib/netstandard2.0
+    UI=~/.nuget/packages/websharper.ui/10.1.5.676/lib/netstandard2.0
+    GEN="dotnet binding-adaptor/bin/Debug/net10.0/binding-adaptor.dll gen"
 
-    dotnet .../binding-adaptor.dll gen WebSharper.UI.dll --version 10.1.5 --dest ./bindings \
-      --reference .../WebSharper.JavaScript.dll --reference .../WebSharper.StdLib.dll \
-      --reference .../WebSharper.Sitelets.dll --spec specs/websharper-ui.spec
+    $GEN $BIND/WebSharper.JavaScript.dll --version 10.1.6 --dest ./bindings
+
+    $GEN $BIND/WebSharper.StdLib.dll --version 10.1.6 --dest ./bindings \
+      --reference $BIND/WebSharper.JavaScript.dll --spec specs/websharper-stdlib.spec
+
+    $GEN $BIND/WebSharper.Sitelets.dll --version 10.1.6 --dest ./bindings \
+      --reference $BIND/WebSharper.JavaScript.dll --reference $BIND/WebSharper.StdLib.dll
+
+    $GEN $UI/WebSharper.UI.dll --version 10.1.5 --dest ./bindings \
+      --reference $BIND/WebSharper.JavaScript.dll --reference $BIND/WebSharper.StdLib.dll \
+      --reference $BIND/WebSharper.Sitelets.dll --spec specs/websharper-ui.spec
+
+    $GEN $UI/WebSharper.UI.Templating.Runtime.dll --version 10.1.5 --dest ./bindings \
+      --reference $BIND/WebSharper.JavaScript.dll --reference $BIND/WebSharper.StdLib.dll \
+      --reference $UI/WebSharper.UI.dll
+
+A spec is looked up in the explicit `--spec` path, else as
+`specs/<pkg-id>.spec` — for the package being generated **and for every
+`--reference`**. So `specs/websharper-stdlib.spec` also applies while generating
+Sitelets/UI/…, and must be present before regenerating those.
+
+Two naming repairs live in the specs:
+
+- `specs/websharper-stdlib.spec`: the flat, address-derived module naming gives
+  both `System.DateTime` and `WebSharper.JavaScript.Pervasives.DateTime` the
+  module `DateTime`. Neither is a prototype-bearing `default` export, so the
+  documented tie-break (those win the bare name) does not apply and the winner is
+  decided by metadata order — `System.DateTime` came out as `DateTime2`. The spec
+  gives the real one `DateTime` and the date-formatting helper `DateTimeFormat`.
+- `specs/websharper-ui.spec`: `WebSharper.UI.Router` refers to
+  `WebSharper.Sitelets.Router<'T>`, so UI is generated with the Sitelets
+  reference (otherwise the `Router<'T>` argument mis-binds), and the spec merges
+  same-named type/module pairs (`Var<'T>` + `Var`) and names a few modules
+  (`Html`, `On`).
 
 The native server shadows live in `runtimes/ocaml`, `runtimes/ui-server`
 (`WebSharper_UI` + `WebSharper_Sitelets`, the latter implementing the hash router

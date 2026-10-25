@@ -119,7 +119,7 @@ dotnet backend/bin/Debug/net10.0/WebSharper.OCaml.dll --ir app.wsir.json \
 
 | Artifact | Regenerate with |
 | --- | --- |
-| `bindings/**` (opam packages of WebSharper bindings) | `dotnet binding-adaptor/bin/Debug/net10.0/binding-adaptor.dll gen <Binding.dll> --version <v> --dest ./bindings` (exact lines in `README.md`); `specs/*.spec` control the generated module names/merges. `websharper-ui` **must** be generated with `--reference WebSharper.Sitelets.dll` (else `WebSharper.UI.Router`'s `Router<'T>` argument mis-binds to `Router.t`) |
+| `bindings/**` (opam packages of WebSharper bindings) | `dotnet binding-adaptor/bin/Debug/net10.0/binding-adaptor.dll gen <Binding.dll> --version <v> --dest ./bindings` (the ordered, exact command set is in `README.md`); `specs/*.spec` control the generated module names/merges, and are applied for the package **and for every `--reference`**, so a spec must exist before regenerating its dependents. `websharper-ui` **must** be generated with `--reference WebSharper.Sitelets.dll` (else `WebSharper.UI.Router`'s `Router<'T>` argument mis-binds to `Router.t`); `specs/websharper-stdlib.spec` names `System.DateTime` `DateTime` (and the helper `DateTimeFormat`) |
 | `bindings-legacy/**` | raw-FFI fixture for the `jsbind`/`dom` tests (`frontend/bin/gen_bindings.ml`) |
 | `frontend/bin/stdlib_shims_data.ml` | `frontend/bin/gen_stdlib_shim.ml` |
 | all test goldens (`*.expected.js`, `*.out`, `*.err`, `*.expected`) | `bash backend/tests/run-tests.sh --update` |
@@ -153,7 +153,7 @@ dotnet backend/bin/Debug/net10.0/WebSharper.OCaml.dll --ir app.wsir.json \
 | `runtimes/ui-server/webSharper_Sitelets.ml` | native shadow of the `WebSharper.Sitelets` hash router (`Router`/`Router2`/`RouterModule`/`Route`) that `WebSharper.UI.Router.installHash` takes; the server never hashes |
 | `runtimes/template/` | `websharper-template`: HTML parser + hole model + `Codegen` for `[%template]` |
 | `binding-adaptor/` | F# tool: binding assembly → OCaml opam package |
-| `specs/*.spec` | binding-adaptor input controlling generated package/module shape |
+| `specs/*.spec` | binding-adaptor input controlling generated package/module shape: `websharper-ui.spec` (merges + `Html`/`On` names) and `websharper-stdlib.spec` (`System.DateTime` -> `DateTime`, `WebSharper.JavaScript.Pervasives+DateTime` -> `DateTimeFormat`) |
 | `scripts/*.sh` | per-scenario drivers (see "What the suite covers") |
 | `backend/tests/apps-site/`, `apps-ui/`, `apps-ws/`, `apps/`, `cases/`, `cases-ws/`, `errors/`, `template/` | the harness families |
 | `examples/` | dune projects type-checked against the installed bindings; `examples/hello-world` is the end-to-end reference app |
@@ -223,6 +223,20 @@ dotnet backend/bin/Debug/net10.0/WebSharper.OCaml.dll --ir app.wsir.json \
     the page does not have). `bash build.sh` plus `curl` is the reliable check;
     `hello_world.ml` uses `[@endpoint "GET /echo/@0"]` (tuple payloads are
     positional).
+15. **Binding module names are collision-suffixed.** binding-adaptor derives a
+    module name from a class's JS address (last segment) or its .NET simple name
+    (`Generator.classModuleName`), groups colliding names, sorts prototype-bearing
+    (`default`-export) classes first — they keep the bare name — and suffixes the
+    rest `2`, `3`, …; a group merges instead only when exactly one member is the
+    max-arity type and the others are static helpers (`Var<'T>` + `Var`). When
+    *both* members are module-root the tie-break is metadata order, which is where
+    `DateTime2`/`Nullable2`/`IList2` came from; fix such pairs with a `spec`
+    rename (`specs/websharper-stdlib.spec` does it for `DateTime`). A spec is
+    applied for the package **and for each `--reference`**, so add it before
+    regenerating dependents. Regenerating can also surface unrelated generator
+    drift (e.g. `event.ml` gaining a `%identity` upcast) — review the diff, and
+    note that an upcast to a base in another package must be qualified via
+    `TypeEnv.ExternalSimple`.
 
 ## Adding a feature
 

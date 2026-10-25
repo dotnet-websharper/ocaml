@@ -13,10 +13,10 @@ external tryParse : string -> (int) FSharpOption.t = "ws:WebSharper.StdLib!WebSh
 (* func *)
 external timePortion : int -> TimeSpan.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.DateTimeHelpers::#TimePortion|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.DateTimeHelpers::#TimePortion|System.Int32"
 (* func *)
-external datePortion : int -> DateTime2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.DateTimeHelpers::#DatePortion|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.DateTimeHelpers::#DatePortion|System.Int32"
+external datePortion : int -> DateTime.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.DateTimeHelpers::#DatePortion|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.DateTimeHelpers::#DatePortion|System.Int32"
 (* func *)
-external addMonths : int -> int -> DateTime2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.DateTimeHelpers::#AddMonths|System.Int32|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.DateTimeHelpers::#AddMonths|System.Int32|System.Int32"
+external addMonths : int -> int -> DateTime.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.DateTimeHelpers::#AddMonths|System.Int32|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.DateTimeHelpers::#AddMonths|System.Int32|System.Int32"
 (* func *)
-external addYears : int -> int -> DateTime2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.DateTimeHelpers::#AddYears|System.Int32|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.DateTimeHelpers::#AddYears|System.Int32|System.Int32"
+external addYears : int -> int -> DateTime.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.DateTimeHelpers::#AddYears|System.Int32|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.DateTimeHelpers::#AddYears|System.Int32|System.Int32"
 (* func *)
-external create : int -> int -> int -> int -> int -> int -> int -> DateTime2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.DateTimeHelpers::#Create|System.Int32|System.Int32|System.Int32|System.Int32|System.Int32|System.Int32|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.DateTimeHelpers::#Create|System.Int32|System.Int32|System.Int32|System.Int32|System.Int32|System.Int32|System.Int32"
+external create : int -> int -> int -> int -> int -> int -> int -> DateTime.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.DateTimeHelpers::#Create|System.Int32|System.Int32|System.Int32|System.Int32|System.Int32|System.Int32|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.DateTimeHelpers::#Create|System.Int32|System.Int32|System.Int32|System.Int32|System.Int32|System.Int32|System.Int32"

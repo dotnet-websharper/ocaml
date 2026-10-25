@@ -502,15 +502,29 @@ let generateClass
                   Kinds = methodKinds kv.Value.CompiledForm })
             |> Seq.toList
 
+    // An upcast target is named by its *module*. A base in this package is used
+    // as-is; one that lives in a referenced package (the DOM `EventTarget`, which
+    // `Program.fs` adds for events) must be qualified with that package's wrapper
+    // (`WebSharper_JavaScript.EventTarget`); anything unresolvable is dropped
+    // rather than emitted as an unbound name.
+    let baseRef (bm: string) =
+        if env.LocalModules.Contains bm then Some bm
+        else
+            match Map.tryFind bm env.ExternalSimple with
+            | Some (path, _, _) -> Some path
+            | None -> None
+
     let upcasts =
         if not isEvent then []
         else
             baseModules
-            |> List.map (fun bm ->
-                { Name = "as_" + lowerFirst bm
-                  Signature = recv + " -> " + bm + ".t"
-                  Tag = "%identity"
-                  Kinds = "(inline)" })
+            |> List.choose (fun bm ->
+                baseRef bm
+                |> Option.map (fun path ->
+                    { Name = "as_" + lowerFirst bm
+                      Signature = recv + " -> " + path + ".t"
+                      Tag = "%identity"
+                      Kinds = "(inline)" }))
 
     { Module = moduleName
       Generics = generics

@@ -15,7 +15,7 @@ external intValueUnchecked : (int) Var.t -> Attr.t = "ws:WebSharper.UI!WebSharpe
 (* func *)
 external fileValue : ((WebSharper_JavaScript.File.t) array) Var.t -> Attr.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Attr::#FileValue|WebSharper.UI.Var`1<WebSharper.JavaScript.File[]>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Attr::#FileValue|WebSharper.UI.Var`1<WebSharper.JavaScript.File[]>"
 (* func *)
-external dateTimeValue : (WebSharper_StdLib.DateTime2.t) Var.t -> Attr.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Attr::#DateTimeValue|WebSharper.UI.Var`1<System.DateTime>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Attr::#DateTimeValue|WebSharper.UI.Var`1<System.DateTime>"
+external dateTimeValue : (WebSharper_StdLib.DateTime.t) Var.t -> Attr.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Attr::#DateTimeValue|WebSharper.UI.Var`1<System.DateTime>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Attr::#DateTimeValue|WebSharper.UI.Var`1<System.DateTime>"
 (* func *)
 external stringListValue : ((string) array) Var.t -> Attr.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Attr::#StringListValue|WebSharper.UI.Var`1<System.String[]>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Attr::#StringListValue|WebSharper.UI.Var`1<System.String[]>"
 (* func *)

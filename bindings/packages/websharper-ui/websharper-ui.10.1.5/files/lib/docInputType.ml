@@ -9,7 +9,7 @@ external colorV : (Attr.t) list -> string -> Doc.t = "ws:WebSharper.UI!WebSharpe
 (* macro *)
 external dateV : (Attr.t) list -> string -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc.InputType::#DateV|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc.InputType::#DateV|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|System.String"
 (* macro *)
-external dateTimeLocalV : (Attr.t) list -> WebSharper_StdLib.DateTime2.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc.InputType::#DateTimeLocalV|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|System.DateTime" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc.InputType::#DateTimeLocalV|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|System.DateTime"
+external dateTimeLocalV : (Attr.t) list -> WebSharper_StdLib.DateTime.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc.InputType::#DateTimeLocalV|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|System.DateTime" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc.InputType::#DateTimeLocalV|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|System.DateTime"
 (* macro *)
 external emailV : (Attr.t) list -> string -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc.InputType::#EmailV|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc.InputType::#EmailV|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|System.String"
 (* macro *)
@@ -45,7 +45,7 @@ external color : (Attr.t) list -> (string) Var.t -> Doc.t = "ws:WebSharper.UI!We
 (* inline *)
 external date : (Attr.t) list -> (string) Var.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc.InputType::#Date|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|WebSharper.UI.Var`1<System.String>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc.InputType::#Date|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|WebSharper.UI.Var`1<System.String>"
 (* inline *)
-external dateTimeLocal : (Attr.t) list -> (WebSharper_StdLib.DateTime2.t) Var.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc.InputType::#DateTimeLocal|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|WebSharper.UI.Var`1<System.DateTime>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc.InputType::#DateTimeLocal|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|WebSharper.UI.Var`1<System.DateTime>"
+external dateTimeLocal : (Attr.t) list -> (WebSharper_StdLib.DateTime.t) Var.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc.InputType::#DateTimeLocal|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|WebSharper.UI.Var`1<System.DateTime>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc.InputType::#DateTimeLocal|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|WebSharper.UI.Var`1<System.DateTime>"
 (* inline *)
 external email : (Attr.t) list -> (string) Var.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc.InputType::#Email|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|WebSharper.UI.Var`1<System.String>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc.InputType::#Email|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|WebSharper.UI.Var`1<System.String>"
 (* inline *)
