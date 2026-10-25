@@ -119,11 +119,15 @@ the URL).
 - non-public/unrepresentable types degrade to `Js.t`;
 - server-only members taking quotations are stubs/omitted;
 - cross-assembly compilation relies on the backend minting disjoint numeric ids;
-- **remaining collision suffixes** — `DateTime`/`DateTimeFormat` is done
-  (`specs/websharper-stdlib.spec`); the same treatment is available for
-  `Nullable2`, `IList2`, `IDictionary2`, `FSharpList2`, `FSharpSet2`, `Router2`, …
-  Each needs a `spec` rename for *both* members of the colliding group, then
-  regenerating the dependents (see `AGENTS.md` gotcha 15).
+- **collision suffixes** — the genuine clashes are repaired in
+  `specs/websharper-stdlib.spec` / `websharper-sitelets.spec` (`DateTime`,
+  `<Type>Module` helpers, `Nullable`/`Optional` vs their helpers, the
+  `*Enumerator`s, `InferRouter`). The **arity families** (`Tuple2..9`, `Union2..7`,
+  `Func*`, `ThisFunc*`, `Params*`, `IList2`, `IEnumerable2`, `Task2`, …) are
+  deliberately left: the digit is systematic there, so a rename would make arity
+  harder to read. Remaining cosmetic ones: the JS-global vs .NET type/module
+  pairs in `websharper-javascript` (`Object`/`Object2`, `Array`/`Array2`,
+  `DataView`/`DataView2`) and `Console`/`Console2` in stdlib.
 
 ### Suggested order
 Do **A first** (small, fixes a correctness bug where `link` can emit a URL its

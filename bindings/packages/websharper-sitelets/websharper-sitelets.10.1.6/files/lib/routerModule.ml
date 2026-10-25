@@ -19,7 +19,7 @@ external list : ('a) Router2.t -> (('a) WebSharper_StdLib.FSharpList.t) Router2.
 (* func *)
 external option : ('a) Router2.t -> (('a) WebSharper_StdLib.FSharpOption.t) Router2.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterModule::#Option|WebSharper.Sitelets.Router`1<'0>" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterModule::#Option|WebSharper.Sitelets.Router`1<'0>"
 (* func *)
-external nullable : ('a) Router2.t -> (('a) WebSharper_StdLib.Nullable2.t) Router2.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterModule::#Nullable|WebSharper.Sitelets.Router`1<'0>" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterModule::#Nullable|WebSharper.Sitelets.Router`1<'0>"
+external nullable : ('a) Router2.t -> (('a) WebSharper_StdLib.Nullable.t) Router2.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterModule::#Nullable|WebSharper.Sitelets.Router`1<'0>" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterModule::#Nullable|WebSharper.Sitelets.Router`1<'0>"
 (* func *)
 external array : ('a) Router2.t -> (('a) array) Router2.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterModule::#Array|WebSharper.Sitelets.Router`1<'0>" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterModule::#Array|WebSharper.Sitelets.Router`1<'0>"
 (* func *)
@@ -63,7 +63,7 @@ external parse : ('a) Router2.t -> Route.t -> ('a) WebSharper_StdLib.FSharpOptio
 (* func *)
 external body : (string -> ('a) WebSharper_StdLib.FSharpOption.t) -> ('a -> string) -> ('a) Router2.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterModule::#Body|fn|fn" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterModule::#Body|fn|fn"
 (* func *)
-external queryNullable : string -> ('a) Router2.t -> (('a) WebSharper_StdLib.Nullable2.t) Router2.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterModule::#QueryNullable|System.String|WebSharper.Sitelets.Router`1<'0>" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterModule::#QueryNullable|System.String|WebSharper.Sitelets.Router`1<'0>"
+external queryNullable : string -> ('a) Router2.t -> (('a) WebSharper_StdLib.Nullable.t) Router2.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterModule::#QueryNullable|System.String|WebSharper.Sitelets.Router`1<'0>" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterModule::#QueryNullable|System.String|WebSharper.Sitelets.Router`1<'0>"
 (* func *)
 external queryOption : string -> ('a) Router2.t -> (('a) WebSharper_StdLib.FSharpOption.t) Router2.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterModule::#QueryOption|System.String|WebSharper.Sitelets.Router`1<'0>" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterModule::#QueryOption|System.String|WebSharper.Sitelets.Router`1<'0>"
 (* func *)

@@ -1,6 +1,6 @@
 (library
  (name webSharper_Sitelets)
  (public_name websharper-sitelets)
- (modules routerRouter2Types corsAllows cors stringEncoding router router2 routerModule routerExtensions routerOperators router3 iRouter iListArrayConverter route bodyTextNeededForRoute listArrayConverter)
+ (modules routerRouter2Types corsAllows cors stringEncoding router router2 routerModule routerExtensions routerOperators inferRouter iRouter iListArrayConverter route bodyTextNeededForRoute listArrayConverter)
  (libraries websharper-javascript websharper-runtime websharper-stdlib)
 )

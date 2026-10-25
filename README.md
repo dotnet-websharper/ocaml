@@ -75,7 +75,8 @@ set mirrors the `depends:` of its `opam`):
       --reference $BIND/WebSharper.JavaScript.dll --spec specs/websharper-stdlib.spec
 
     $GEN $BIND/WebSharper.Sitelets.dll --version 10.1.6 --dest ./bindings \
-      --reference $BIND/WebSharper.JavaScript.dll --reference $BIND/WebSharper.StdLib.dll
+      --reference $BIND/WebSharper.JavaScript.dll --reference $BIND/WebSharper.StdLib.dll \
+      --spec specs/websharper-sitelets.spec
 
     $GEN $UI/WebSharper.UI.dll --version 10.1.5 --dest ./bindings \
       --reference $BIND/WebSharper.JavaScript.dll --reference $BIND/WebSharper.StdLib.dll \
@@ -90,15 +91,36 @@ A spec is looked up in the explicit `--spec` path, else as
 `--reference`**. So `specs/websharper-stdlib.spec` also applies while generating
 Sitelets/UI/…, and must be present before regenerating those.
 
-Two naming repairs live in the specs:
+Specs in `specs/` repair what the flat, address-derived naming cannot:
 
-- `specs/websharper-stdlib.spec`: the flat, address-derived module naming gives
-  both `System.DateTime` and `WebSharper.JavaScript.Pervasives.DateTime` the
-  module `DateTime`. Neither is a prototype-bearing `default` export, so the
-  documented tie-break (those win the bare name) does not apply and the winner is
-  decided by metadata order — `System.DateTime` came out as `DateTime2`. The spec
-  gives the real one `DateTime` and the date-formatting helper `DateTimeFormat`.
-- `specs/websharper-ui.spec`: `WebSharper.UI.Router` refers to
+- `specs/websharper-stdlib.spec` — module-name collisions:
+  - both `System.DateTime` and `WebSharper.JavaScript.Pervasives.DateTime`
+    derive `DateTime`. Neither is a prototype-bearing `default` export, so the
+    documented tie-break does not apply and metadata order decides —
+    `System.DateTime` came out as `DateTime2`. Named `DateTime` /
+    `DateTimeFormat`.
+  - a helper that is the *module* of a type takes `<Type>Module` (or a namespace
+    qualifier): `FSharpListModule`, `FSharpSetModule`, `LinkedListModule`,
+    `DelegateEventModule`, and `ControlEvent` for `WebSharper.Control.Event`
+    (`EventModule` is taken by F#'s own `Microsoft.FSharp.Control.EventModule`).
+  - generic-vs-helper: the bare name goes to the *generic* type — `Nullable`
+    (`System.Nullable<'T>`) + `NullableHelpers`, `Optional`
+    (`WebSharper.JavaScript.Optional<'T>`) + `OptionalHelpers`.
+  - unrelated helpers in different namespaces: `JavaScriptPervasives`
+    (`WebSharper.JavaScript.Pervasives`; `WebSharper.Pervasives` keeps the bare
+    name) and `LinqEnumerable` (`System.Linq.Enumerable`; `WebSharper.Enumerable`
+    keeps the bare name).
+  - nested enumerators are named after their parent: `ListEnumerator`,
+    `LinkedListEnumerator`, `DictionaryKeyEnumerator`,
+    `DictionaryValueEnumerator`, `DictionaryEnumerator`, `HashSetEnumerator`.
+  - deliberately left alone: the **arity families**, where the digit is
+    systematic and useful (`Tuple2`..`Tuple9` = `Tuple<'T1>`.., `ValueTuple*`,
+    `Union2`..`Union7`, `Func*`, `ThisFunc*`, `Params*`, `IList2` = `IList<'T>`,
+    `IEnumerable2`, `Task2`, …).
+- `specs/websharper-sitelets.spec` — `InferRouter.Router` -> `InferRouter`
+  (`Router`, `Router2` = `Router<'T>`, and `RouterModule` are the sitelets router
+  itself).
+- `specs/websharper-ui.spec` — `WebSharper.UI.Router` refers to
   `WebSharper.Sitelets.Router<'T>`, so UI is generated with the Sitelets
   reference (otherwise the `Router<'T>` argument mis-binds), and the spec merges
   same-named type/module pairs (`Var<'T>` + `Var`) and names a few modules

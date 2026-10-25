@@ -85,7 +85,7 @@ external jSList : ('a) Router2.t -> (('a) WebSharper_StdLib.FSharpList.t) Router
 (* inline *)
 external jSOption : ('a) Router2.t -> (('a) WebSharper_StdLib.FSharpOption.t) Router2.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#JSOption|WebSharper.Sitelets.Router`1<'0>" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#JSOption|WebSharper.Sitelets.Router`1<'0>"
 (* inline *)
-external jSNullable : ('a) Router2.t -> (('a) WebSharper_StdLib.Nullable2.t) Router2.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#JSNullable|WebSharper.Sitelets.Router`1<'0>" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#JSNullable|WebSharper.Sitelets.Router`1<'0>"
+external jSNullable : ('a) Router2.t -> (('a) WebSharper_StdLib.Nullable.t) Router2.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#JSNullable|WebSharper.Sitelets.Router`1<'0>" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#JSNullable|WebSharper.Sitelets.Router`1<'0>"
 (* inline *)
 external jSFormData : ('a) Router2.t -> ('a) Router2.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#JSFormData|WebSharper.Sitelets.Router`1<'0>" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#JSFormData|WebSharper.Sitelets.Router`1<'0>"
 (* inline *)
@@ -103,7 +103,7 @@ external jSQuery : string -> ('a) Router2.t -> ('a) Router2.t = "ws:WebSharper.S
 (* inline *)
 external jSQueryOption : string -> ('a) Router2.t -> (('a) WebSharper_StdLib.FSharpOption.t) Router2.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#JSQueryOption|System.String|WebSharper.Sitelets.Router`1<'0>" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#JSQueryOption|System.String|WebSharper.Sitelets.Router`1<'0>"
 (* inline *)
-external jSQueryNullable : string -> ('a) Router2.t -> (('a) WebSharper_StdLib.Nullable2.t) Router2.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#JSQueryNullable|System.String|WebSharper.Sitelets.Router`1<'0>" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#JSQueryNullable|System.String|WebSharper.Sitelets.Router`1<'0>"
+external jSQueryNullable : string -> ('a) Router2.t -> (('a) WebSharper_StdLib.Nullable.t) Router2.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#JSQueryNullable|System.String|WebSharper.Sitelets.Router`1<'0>" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#JSQueryNullable|System.String|WebSharper.Sitelets.Router`1<'0>"
 (* func *)
 external isCorrectMethod : ('a) WebSharper_StdLib.FSharpOption.t -> ('a) WebSharper_StdLib.FSharpOption.t -> bool = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#isCorrectMethod|Microsoft.FSharp.Core.FSharpOption`1<'0>|Microsoft.FSharp.Core.FSharpOption`1<'0>" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.RouterOperators::#isCorrectMethod|Microsoft.FSharp.Core.FSharpOption`1<'0>|Microsoft.FSharp.Core.FSharpOption`1<'0>"
 (* func *)

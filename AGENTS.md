@@ -119,7 +119,7 @@ dotnet backend/bin/Debug/net10.0/WebSharper.OCaml.dll --ir app.wsir.json \
 
 | Artifact | Regenerate with |
 | --- | --- |
-| `bindings/**` (opam packages of WebSharper bindings) | `dotnet binding-adaptor/bin/Debug/net10.0/binding-adaptor.dll gen <Binding.dll> --version <v> --dest ./bindings` (the ordered, exact command set is in `README.md`); `specs/*.spec` control the generated module names/merges, and are applied for the package **and for every `--reference`**, so a spec must exist before regenerating its dependents. `websharper-ui` **must** be generated with `--reference WebSharper.Sitelets.dll` (else `WebSharper.UI.Router`'s `Router<'T>` argument mis-binds to `Router.t`); `specs/websharper-stdlib.spec` names `System.DateTime` `DateTime` (and the helper `DateTimeFormat`) |
+| `bindings/**` (opam packages of WebSharper bindings) | `dotnet binding-adaptor/bin/Debug/net10.0/binding-adaptor.dll gen <Binding.dll> --version <v> --dest ./bindings` (the ordered, exact command set is in `README.md`); `specs/*.spec` control the generated module names/merges, and are applied for the package **and for every `--reference`**, so a spec must exist before regenerating its dependents. `websharper-ui` **must** be generated with `--reference WebSharper.Sitelets.dll` (else `WebSharper.UI.Router`'s `Router<'T>` argument mis-binds to `Router.t`); `specs/websharper-stdlib.spec` and `specs/websharper-sitelets.spec` repair the module-name collisions the flat naming cannot decide (`System.DateTime` -> `DateTime`, `<Type>Module` helpers, `Nullable`/`NullableHelpers`, the `*Enumerator`s, `InferRouter`) |
 | `bindings-legacy/**` | raw-FFI fixture for the `jsbind`/`dom` tests (`frontend/bin/gen_bindings.ml`) |
 | `frontend/bin/stdlib_shims_data.ml` | `frontend/bin/gen_stdlib_shim.ml` |
 | all test goldens (`*.expected.js`, `*.out`, `*.err`, `*.expected`) | `bash backend/tests/run-tests.sh --update` |
@@ -153,7 +153,7 @@ dotnet backend/bin/Debug/net10.0/WebSharper.OCaml.dll --ir app.wsir.json \
 | `runtimes/ui-server/webSharper_Sitelets.ml` | native shadow of the `WebSharper.Sitelets` hash router (`Router`/`Router2`/`RouterModule`/`Route`) that `WebSharper.UI.Router.installHash` takes; the server never hashes |
 | `runtimes/template/` | `websharper-template`: HTML parser + hole model + `Codegen` for `[%template]` |
 | `binding-adaptor/` | F# tool: binding assembly → OCaml opam package |
-| `specs/*.spec` | binding-adaptor input controlling generated package/module shape: `websharper-ui.spec` (merges + `Html`/`On` names) and `websharper-stdlib.spec` (`System.DateTime` -> `DateTime`, `WebSharper.JavaScript.Pervasives+DateTime` -> `DateTimeFormat`) |
+| `specs/*.spec` | binding-adaptor input controlling generated package/module shape: `websharper-stdlib.spec` (the collision repairs listed in `README.md`: `System.DateTime` -> `DateTime`, `WebSharper.JavaScript.Pervasives+DateTime` -> `DateTimeFormat`, `<Type>Module` helpers, `Nullable`/`Optional` vs their helpers, `JavaScriptPervasives`, `LinqEnumerable`, the `*Enumerator`s), `websharper-sitelets.spec` (`InferRouter+Router` -> `InferRouter`) and `websharper-ui.spec` (merges + `Html`/`On` names) |
 | `scripts/*.sh` | per-scenario drivers (see "What the suite covers") |
 | `backend/tests/apps-site/`, `apps-ui/`, `apps-ws/`, `apps/`, `cases/`, `cases-ws/`, `errors/`, `template/` | the harness families |
 | `examples/` | dune projects type-checked against the installed bindings; `examples/hello-world` is the end-to-end reference app |
@@ -230,8 +230,12 @@ dotnet backend/bin/Debug/net10.0/WebSharper.OCaml.dll --ir app.wsir.json \
     rest `2`, `3`, …; a group merges instead only when exactly one member is the
     max-arity type and the others are static helpers (`Var<'T>` + `Var`). When
     *both* members are module-root the tie-break is metadata order, which is where
-    `DateTime2`/`Nullable2`/`IList2` came from; fix such pairs with a `spec`
-    rename (`specs/websharper-stdlib.spec` does it for `DateTime`). A spec is
+    `DateTime2`/`Nullable2`/`IList2` came from; fix such pairs with a `spec` rename
+    (`specs/websharper-stdlib.spec` / `websharper-sitelets.spec` do it for the
+    genuine clashes — see `README.md`). Leave the **arity families** alone: there
+    the digit is systematic and useful (`Tuple2` = `Tuple<'T1>`, `Union2`,
+    `ThisFunc2..7`, `IList2` = `IList<'T>`, `Task2`, …) — renaming them only makes
+    the arity harder to read. A spec is
     applied for the package **and for each `--reference`**, so add it before
     regenerating dependents. Regenerating can also surface unrelated generator
     drift (e.g. `event.ml` gaining a `%identity` upcast) — review the diff, and

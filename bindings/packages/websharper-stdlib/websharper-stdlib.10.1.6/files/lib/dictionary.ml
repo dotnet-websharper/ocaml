@@ -7,7 +7,7 @@ external keys : ('a, 'b) t -> ('a, 'b) DictionaryKeyCollectionValueCollectionTyp
 (* instance *)
 external values : ('a, 'b) t -> ('a, 'b) DictionaryKeyCollectionValueCollectionTypes.ValueCollection.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#get_Values|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#get_Values|"
 (* instance *)
-external getEnumerator : ('a, 'b) t -> ('a, 'b) Enumerator6.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#GetEnumerator|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#GetEnumerator|"
+external getEnumerator : ('a, 'b) t -> ('a, 'b) DictionaryEnumerator.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#GetEnumerator|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#GetEnumerator|"
 (* instance *)
 external clear : ('a, 'b) t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#Clear|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#Clear|"
 (* instance *)

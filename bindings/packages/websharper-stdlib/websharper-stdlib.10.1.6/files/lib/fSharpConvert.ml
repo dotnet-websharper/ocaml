@@ -41,7 +41,7 @@ external fun__18 : Js.t -> ('a -> ('b -> ('c -> ('d -> ('e -> ('f -> ('g -> ('h 
 (* inline *)
 external option : 'a -> ('a) FSharpOption.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.FSharpConvert::#Option|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.FSharpConvert::#Option|'0"
 (* inline *)
-external option_2 : ('a) Nullable2.t -> ('a) FSharpOption.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.FSharpConvert::#Option|System.Nullable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.FSharpConvert::#Option|System.Nullable`1<'0>"
+external option_2 : ('a) Nullable.t -> ('a) FSharpOption.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.FSharpConvert::#Option|System.Nullable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.FSharpConvert::#Option|System.Nullable`1<'0>"
 (* inline *)
 external some : 'a -> ('a) FSharpOption.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.FSharpConvert::#Some|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.FSharpConvert::#Some|'0"
 (* inline *)

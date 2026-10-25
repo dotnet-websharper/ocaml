@@ -7,9 +7,9 @@ external any : ('a) list -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/Syste
 (* inline *)
 external asEnumerable : ('a) list -> ('a) IEnumerable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#AsEnumerable|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#AsEnumerable|System.Collections.Generic.IEnumerable`1<'0>"
 (* inline *)
-external average : ((int) Nullable2.t) list -> (float) Nullable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int32>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int32>>"
+external average : ((int) Nullable.t) list -> (float) Nullable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int32>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int32>>"
 (* inline *)
-external average_2 : ((int64) Nullable2.t) list -> (float) Nullable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int64>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int64>>"
+external average_2 : ((int64) Nullable.t) list -> (float) Nullable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int64>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int64>>"
 (* inline *)
 external average_3 : (float) list -> float = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<System.Double>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<System.Double>"
 (* inline *)
@@ -37,11 +37,11 @@ external lastOrDefault : ('a) list -> 'a = "ws:WebSharper.StdLib!WebSharper.StdL
 (* inline *)
 external longCount : ('a) list -> int64 = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#LongCount|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#LongCount|System.Collections.Generic.IEnumerable`1<'0>"
 (* inline *)
-external max : ((int) Nullable2.t) list -> (int) Nullable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int32>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int32>>"
+external max : ((int) Nullable.t) list -> (int) Nullable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int32>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int32>>"
 (* inline *)
 external max_2 : (float) list -> float = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<System.Double>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<System.Double>"
 (* inline *)
-external max_3 : ((int64) Nullable2.t) list -> (int64) Nullable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int64>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int64>>"
+external max_3 : ((int64) Nullable.t) list -> (int64) Nullable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int64>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int64>>"
 (* inline *)
 external max_4 : (int64) list -> int64 = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<System.Int64>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<System.Int64>"
 (* inline *)
@@ -49,11 +49,11 @@ external max_5 : (int) list -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/Sys
 (* inline *)
 external max_6 : ('a) list -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<'0>"
 (* inline *)
-external min : ((int) Nullable2.t) list -> (int) Nullable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int32>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int32>>"
+external min : ((int) Nullable.t) list -> (int) Nullable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int32>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int32>>"
 (* inline *)
 external min_2 : (float) list -> float = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<System.Double>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<System.Double>"
 (* inline *)
-external min_3 : ((int64) Nullable2.t) list -> (int64) Nullable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int64>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int64>>"
+external min_3 : ((int64) Nullable.t) list -> (int64) Nullable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int64>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int64>>"
 (* inline *)
 external min_4 : (int64) list -> int64 = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<System.Int64>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<System.Int64>"
 (* inline *)
@@ -69,11 +69,11 @@ external singleOrDefault : ('a) list -> 'a = "ws:WebSharper.StdLib!WebSharper.St
 (* inline *)
 external sum : (int64) list -> int64 = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<System.Int64>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<System.Int64>"
 (* inline *)
-external sum_2 : ((int64) Nullable2.t) list -> (int64) Nullable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int64>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int64>>"
+external sum_2 : ((int64) Nullable.t) list -> (int64) Nullable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int64>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int64>>"
 (* inline *)
 external sum_3 : (float) list -> float = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<System.Double>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<System.Double>"
 (* inline *)
-external sum_4 : ((int) Nullable2.t) list -> (int) Nullable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int32>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int32>>"
+external sum_4 : ((int) Nullable.t) list -> (int) Nullable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int32>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Int32>>"
 (* inline *)
 external sum_5 : (int) list -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<System.Int32>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<System.Int32>"
 (* inline *)
@@ -81,15 +81,15 @@ external toArray : ('a) list -> ('a) array = "ws:WebSharper.StdLib!WebSharper.St
 (* inline *)
 external toList : ('a) list -> ('a) List.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#ToList|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#ToList|System.Collections.Generic.IEnumerable`1<'0>"
 (* func *)
-external sum_6 : ((float) Nullable2.t) list -> (float) Nullable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Double>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Double>>"
+external sum_6 : ((float) Nullable.t) list -> (float) Nullable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Double>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Double>>"
 (* func *)
 external reverse : ('a) list -> ('a) IEnumerable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Reverse|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Reverse|System.Collections.Generic.IEnumerable`1<'0>"
 (* func *)
-external min_7 : ((float) Nullable2.t) list -> (float) Nullable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Double>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Double>>"
+external min_7 : ((float) Nullable.t) list -> (float) Nullable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Double>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Double>>"
 (* func *)
-external max_7 : ((float) Nullable2.t) list -> (float) Nullable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Double>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Double>>"
+external max_7 : ((float) Nullable.t) list -> (float) Nullable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Double>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Double>>"
 (* func *)
-external average_6 : ((float) Nullable2.t) list -> (float) Nullable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Double>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Double>>"
+external average_6 : ((float) Nullable.t) list -> (float) Nullable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Double>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<System.Nullable`1<System.Double>>"
 (* inline *)
 external aggregate : ('a) list -> Js.t -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Aggregate|System.Collections.Generic.IEnumerable`1<'0>|System.Func`3<'0,'0,'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Aggregate|System.Collections.Generic.IEnumerable`1<'0>|System.Func`3<'0,'0,'0>"
 (* inline *)
@@ -97,13 +97,13 @@ external all : ('a) list -> Js.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdL
 (* inline *)
 external any_2 : ('a) list -> Js.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Any|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Boolean>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Any|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Boolean>"
 (* inline *)
-external average_7 : ('a) list -> Js.t -> (float) Nullable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int64>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int64>>"
+external average_7 : ('a) list -> Js.t -> (float) Nullable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int64>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int64>>"
 (* inline *)
 external average_8 : ('a) list -> Js.t -> float = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Int64>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Int64>"
 (* inline *)
-external average_9 : ('a) list -> Js.t -> (float) Nullable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int32>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int32>>"
+external average_9 : ('a) list -> Js.t -> (float) Nullable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int32>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int32>>"
 (* inline *)
-external average_10 : ('a) list -> Js.t -> (float) Nullable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Double>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Double>>"
+external average_10 : ('a) list -> Js.t -> (float) Nullable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Double>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Double>>"
 (* inline *)
 external average_11 : ('a) list -> Js.t -> float = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Double>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Average|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Double>"
 (* inline *)
@@ -139,11 +139,11 @@ external max_8 : ('a) list -> Js.t -> int64 = "ws:WebSharper.StdLib!WebSharper.S
 (* inline *)
 external max_9 : ('a) list -> Js.t -> float = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Double>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Double>"
 (* inline *)
-external max_10 : ('a) list -> Js.t -> (float) Nullable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Double>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Double>>"
+external max_10 : ('a) list -> Js.t -> (float) Nullable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Double>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Double>>"
 (* inline *)
-external max_11 : ('a) list -> Js.t -> (int64) Nullable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int64>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int64>>"
+external max_11 : ('a) list -> Js.t -> (int64) Nullable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int64>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int64>>"
 (* inline *)
-external max_12 : ('a) list -> Js.t -> (int) Nullable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int32>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int32>>"
+external max_12 : ('a) list -> Js.t -> (int) Nullable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int32>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int32>>"
 (* inline *)
 external max_13 : ('a) list -> Js.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Int32>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Max|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Int32>"
 (* inline *)
@@ -153,11 +153,11 @@ external min_8 : ('a) list -> Js.t -> int64 = "ws:WebSharper.StdLib!WebSharper.S
 (* inline *)
 external min_9 : ('a) list -> Js.t -> float = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Double>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Double>"
 (* inline *)
-external min_10 : ('a) list -> Js.t -> (float) Nullable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Double>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Double>>"
+external min_10 : ('a) list -> Js.t -> (float) Nullable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Double>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Double>>"
 (* inline *)
-external min_11 : ('a) list -> Js.t -> (int64) Nullable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int64>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int64>>"
+external min_11 : ('a) list -> Js.t -> (int64) Nullable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int64>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int64>>"
 (* inline *)
-external min_12 : ('a) list -> Js.t -> (int) Nullable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int32>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int32>>"
+external min_12 : ('a) list -> Js.t -> (int) Nullable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int32>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int32>>"
 (* inline *)
 external min_13 : ('a) list -> Js.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Int32>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Min|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Int32>"
 (* inline *)
@@ -179,11 +179,11 @@ external sum_7 : ('a) list -> Js.t -> int64 = "ws:WebSharper.StdLib!WebSharper.S
 (* inline *)
 external sum_8 : ('a) list -> Js.t -> float = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Double>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Double>"
 (* inline *)
-external sum_9 : ('a) list -> Js.t -> (float) Nullable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Double>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Double>>"
+external sum_9 : ('a) list -> Js.t -> (float) Nullable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Double>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Double>>"
 (* inline *)
-external sum_10 : ('a) list -> Js.t -> (int64) Nullable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int64>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int64>>"
+external sum_10 : ('a) list -> Js.t -> (int64) Nullable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int64>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int64>>"
 (* inline *)
-external sum_11 : ('a) list -> Js.t -> (int) Nullable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int32>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int32>>"
+external sum_11 : ('a) list -> Js.t -> (int) Nullable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int32>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Nullable`1<System.Int32>>"
 (* inline *)
 external sum_12 : ('a) list -> Js.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Int32>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Linq.Enumerable::#Sum|System.Collections.Generic.IEnumerable`1<'0>|System.Func`2<'0,System.Int32>"
 (* inline *)

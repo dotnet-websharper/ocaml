@@ -11,7 +11,7 @@ external isSome : ('a) FSharpValueOption.t -> bool = "ws:WebSharper.StdLib!WebSh
 (* inline *)
 external flatten : (('a) FSharpValueOption.t) FSharpValueOption.t -> ('a) FSharpValueOption.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.ValueOption::#Flatten|Microsoft.FSharp.Core.FSharpValueOption`1<Microsoft.FSharp.Core.FSharpValueOption`1<'0>>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.ValueOption::#Flatten|Microsoft.FSharp.Core.FSharpValueOption`1<Microsoft.FSharp.Core.FSharpValueOption`1<'0>>"
 (* func *)
-external ofNullable : ('a) Nullable2.t -> ('a) FSharpValueOption.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.ValueOption::#OfNullable|System.Nullable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.ValueOption::#OfNullable|System.Nullable`1<'0>"
+external ofNullable : ('a) Nullable.t -> ('a) FSharpValueOption.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.ValueOption::#OfNullable|System.Nullable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.ValueOption::#OfNullable|System.Nullable`1<'0>"
 (* func *)
 external ofObj : 'a -> ('a) FSharpValueOption.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.ValueOption::#OfObj|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.ValueOption::#OfObj|'0"
 (* func *)
@@ -19,7 +19,7 @@ external toArray : ('a) FSharpValueOption.t -> ('a) array = "ws:WebSharper.StdLi
 (* func *)
 external toList : ('a) FSharpValueOption.t -> ('a) FSharpList.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.ValueOption::#ToList|Microsoft.FSharp.Core.FSharpValueOption`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.ValueOption::#ToList|Microsoft.FSharp.Core.FSharpValueOption`1<'0>"
 (* func *)
-external toNullable : ('a) FSharpValueOption.t -> ('a) Nullable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.ValueOption::#ToNullable|Microsoft.FSharp.Core.FSharpValueOption`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.ValueOption::#ToNullable|Microsoft.FSharp.Core.FSharpValueOption`1<'0>"
+external toNullable : ('a) FSharpValueOption.t -> ('a) Nullable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.ValueOption::#ToNullable|Microsoft.FSharp.Core.FSharpValueOption`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.ValueOption::#ToNullable|Microsoft.FSharp.Core.FSharpValueOption`1<'0>"
 (* func *)
 external toObj : ('a) FSharpValueOption.t -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.ValueOption::#ToObj|Microsoft.FSharp.Core.FSharpValueOption`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.ValueOption::#ToObj|Microsoft.FSharp.Core.FSharpValueOption`1<'0>"
 (* inline *)
