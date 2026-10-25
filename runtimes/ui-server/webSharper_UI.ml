@@ -10,7 +10,13 @@ module View = struct
 
   let get t = t.get ()
   let map f t = { get = (fun () -> f (get t)) }
+  let map2 f a b = { get = (fun () -> f (get a) (get b)) }
+  let map3 f a b c = { get = (fun () -> f (get a) (get b) (get c)) }
   let const x = { get = (fun () -> x) }
+
+  (* The server renders once; `Sink` registers a client-side reaction, so here it
+     just observes the current value. *)
+  let sink f t = f (get t)
 end
 
 module Var = struct
@@ -68,6 +74,9 @@ module Doc = struct
   let text s = [ Ssr.text s ]
   let empty () : t = []
   let textView (v : string View.t) = [ Ssr.text (View.get v) ]
+  let concat (ds : t list) : t = List.concat ds
+  (* The server renders the current value once; the client binding re-renders. *)
+  let bindView (f : 'a -> t) (v : 'a View.t) : t = f (View.get v)
   let render (d : t) = String.concat "" (List.map Ssr.render_node d)
 
   (* On the server, `runById` renders the doc into a region. *)
@@ -238,6 +247,39 @@ module Notation = struct
   let ( <~ ) (v : 'a Var.t) (f : 'a -> 'a) : unit = Var.set v (f (Var.get v))
 end
 
+(* WebSharper.UI.Router (hash routing) is client-only: on the server the sitelet
+   owns the URL, so the router value is never consulted and `installHash` just
+   yields a `Var` holding the default. The surface mirrors the client binding so
+   that shared source typechecks on both tiers. *)
+module Router = struct
+  let installHash (default : 'a) (_ : 'a WebSharper_Sitelets.Router2.t) : 'a Var.t =
+    Var.create default
+
+  let installHashInto (v : 'a Var.t) (default : 'a) (_ : 'a WebSharper_Sitelets.Router2.t) : unit =
+    Var.set v default
+
+  let install (default : 'a) (_ : 'a WebSharper_Sitelets.Router2.t) : 'a Var.t = Var.create default
+
+  let installInto (v : 'a Var.t) (default : 'a) (_ : 'a WebSharper_Sitelets.Router2.t) : unit =
+    Var.set v default
+
+  let linkHash (r : 'a WebSharper_Sitelets.Router2.t) (v : 'a) : string =
+    WebSharper_Sitelets.RouterModule.hashLink r v
+
+  let getCurrentHash (_ : string -> 'a option) (default : 'a) : 'a = default
+end
+
+module RouterExtensions = struct
+  let installHash (r : 'a WebSharper_Sitelets.Router2.t) (default : 'a) : 'a Var.t =
+    Router.installHash default r
+
+  let install (r : 'a WebSharper_Sitelets.Router2.t) (default : 'a) : 'a Var.t =
+    Router.install default r
+
+  let linkHash (r : 'a WebSharper_Sitelets.Router2.t) (v : 'a) : string =
+    Router.linkHash r v
+end
+
 (* Server-side template engine. The generated code builds `TemplateHole` values
    (mirroring the WebSharper.UI client API) and calls `Template.getOrLoad`; we
    parse the raw source (shared parser) and substitute the holes into the SSR
@@ -258,7 +300,7 @@ module TemplateHole = struct
   type t = { thname : string; thvalue : value }
 
   let makeText name v = { thname = name; thvalue = VText v }
-  let makeTextView name _ = { thname = name; thvalue = VText "" }
+  let makeTextView name (v : string View.t) = { thname = name; thvalue = VText (View.get v) }
   let makeVar name v = { thname = name; thvalue = VVarStr v }
   let makeVar_2 name v = { thname = name; thvalue = VVarBool v }
   let makeVar_8 name v = { thname = name; thvalue = VVarFloat v }
@@ -302,6 +344,16 @@ module Template = struct
     || kl = "data-hole" || kl = "data-replace" || kl = "data-attr" || kl = "data-var"
     || kl = "data-var-unchecked" || starts_with "data-event-" kl
 
+  (* A template definition: the element is itself a sub-template (`ws-template`),
+     its children are (`ws-children-template`), or it is an HTML5 `<template>`
+     with a `name`/`id`. These are detached from the body and re-emitted as
+     `ws-children-template` placeholders (see `getOrLoad`). *)
+  let is_template_el (el : Markup.element) =
+    Markup.find_attr el "ws-template" <> None
+    || Markup.find_attr el "ws-children-template" <> None
+    || (String.lowercase_ascii el.tag = "template"
+        && (Markup.find_attr el "name" <> None || Markup.find_attr el "id" <> None))
+
   let hole_string (v : TemplateHole.value) : string =
     match v with
     | TemplateHole.VText s -> s
@@ -311,8 +363,12 @@ module Template = struct
     | TemplateHole.VElt _ | TemplateHole.VAttr _ | TemplateHole.VEvent | TemplateHole.VAfterRender
     | TemplateHole.VVarFile -> ""
 
-  (* Replace `${Name}` occurrences using the filled holes. *)
-  let subst (tbl : (string, TemplateHole.t) Hashtbl.t) (s : string) : string =
+  let find (tbl : (string, TemplateHole.t) Hashtbl.t) (name : string) =
+    Hashtbl.find_opt tbl (String.lowercase_ascii name)
+
+  (* Replace `${Name}` occurrences using the filled holes. With [keep_unfilled]
+     an unfilled hole is left as its plain `${Name}` marker (for the client). *)
+  let subst tbl ~keep_unfilled (s : string) : string =
     let n = String.length s in
     let b = Buffer.create n in
     let i = ref 0 in
@@ -321,10 +377,10 @@ module Template = struct
         let j = ref (!i + 2) in
         while !j < n && s.[!j] <> '}' do incr j done;
         if !j < n then begin
-          let name = String.lowercase_ascii (String.sub s (!i + 2) (!j - !i - 2)) in
-          (match Hashtbl.find_opt tbl name with
+          let name = String.sub s (!i + 2) (!j - !i - 2) in
+          (match find tbl name with
            | Some h -> Buffer.add_string b (hole_string h.TemplateHole.thvalue)
-           | None -> ());
+           | None -> if keep_unfilled then Buffer.add_string b ("${" ^ name ^ "}"));
           i := !j + 1
         end
         else (Buffer.add_char b s.[!i]; incr i)
@@ -333,71 +389,95 @@ module Template = struct
     done;
     Buffer.contents b
 
-  let rec render_nodes tbl nodes = List.concat_map (render_node tbl) nodes
+  (* A filled event / after-render hole has no server-side behaviour, so it is
+     always written back as its `ws-on<event>` / `ws-onafterrender` marker and
+     the client attaches the handler (WS's `Attr.ServerHandler`). *)
+  let is_handler_hole tbl name =
+    match find tbl name with
+    | Some { TemplateHole.thvalue = TemplateHole.VEvent; _ }
+    | Some { TemplateHole.thvalue = TemplateHole.VAfterRender; _ } -> true
+    | _ -> false
 
-  and render_node tbl (node : Markup.node) : Doc.t =
+  (* One attribute of a rendered element (the `ws-hole` / `ws-replace` markers
+     are handled on the element itself). *)
+  let attr tbl ~keep_unfilled (k, v) : (string * string) option =
+    let kl = String.lowercase_ascii k in
+    if kl = "ws-hole" || kl = "ws-replace" then None
+    else if kl = "ws-attr" then (
+      match find tbl v with
+      | Some { TemplateHole.thvalue = TemplateHole.VAttr (ak, av); _ } -> Some (ak, av)
+      | _ -> if keep_unfilled then Some (k, v) else None)
+    else if kl = "ws-var" then (
+      match find tbl v with
+      | Some h -> Some ("value", hole_string h.TemplateHole.thvalue)
+      | None -> if keep_unfilled then Some (k, v) else None)
+    else if kl = "ws-onafterrender" || starts_with "ws-on" kl then
+      if keep_unfilled || is_handler_hole tbl v then Some (k, v) else None
+    else if is_marker kl then None
+    else Some (k, subst tbl ~keep_unfilled v)
+
+  let rec render_nodes tbl ~keep_unfilled nodes = List.concat_map (render_node tbl ~keep_unfilled) nodes
+
+  and render_node tbl ~keep_unfilled (node : Markup.node) : Doc.t =
     match node with
-    | Markup.Text s -> [ Ssr.text (subst tbl s) ]
+    | Markup.Text s -> [ Ssr.text (subst tbl ~keep_unfilled s) ]
     | Markup.Comment c -> [ Ssr.comment c ]
     | Markup.Doctype d -> [ Ssr.doctype d ]
-    | Markup.Element el -> render_element tbl el
+    (* Sub-template definitions are not content; they are re-emitted as
+       placeholders at the end of the root render. *)
+    | Markup.Element el when is_template_el el -> []
+    | Markup.Element el -> render_element tbl ~keep_unfilled el
 
-  and render_element tbl (el : Markup.element) : Doc.t =
+  and render_element tbl ~keep_unfilled (el : Markup.element) : Doc.t =
     match Markup.find_attr el "ws-replace" with
     | Some name0 -> (
-        let name = String.lowercase_ascii name0 in
-        match Hashtbl.find_opt tbl name with
+        match find tbl name0 with
         | Some { TemplateHole.thvalue = TemplateHole.VElt d; _ } -> d
-        | _ -> [])
+        | _ -> if keep_unfilled then [ Ssr.el el.tag [ ("ws-replace", name0) ] [] ] else [])
     | None ->
+        let ws_hole = Markup.find_attr el "ws-hole" in
+        let attrs = List.filter_map (attr tbl ~keep_unfilled) el.attrs in
         let attrs =
-          List.filter_map
-            (fun (k, v) ->
-              let kl = String.lowercase_ascii k in
-              if is_marker kl then None else Some (k, subst tbl v))
-            el.attrs
-        in
-        let attrs =
-          match Markup.find_attr el "ws-attr" with
-          | Some name0 -> (
-              let name = String.lowercase_ascii name0 in
-              match Hashtbl.find_opt tbl name with
-              | Some { TemplateHole.thvalue = TemplateHole.VAttr (k, v); _ } -> (k, v) :: attrs
-              | _ -> attrs)
-          | None -> attrs
-        in
-        let attrs =
-          match Markup.find_attr el "ws-var" with
-          | Some name0 -> (
-              let name = String.lowercase_ascii name0 in
-              match Hashtbl.find_opt tbl name with
-              | Some h -> ("value", hole_string h.TemplateHole.thvalue) :: attrs
-              | None -> attrs)
-          | None -> attrs
+          match ws_hole with
+          | Some name0 when keep_unfilled -> ("ws-hole", name0) :: attrs
+          | _ -> attrs
         in
         let children =
-          match Markup.find_attr el "ws-hole" with
+          match ws_hole with
           | Some name0 -> (
-              let name = String.lowercase_ascii name0 in
-              match Hashtbl.find_opt tbl name with
+              match find tbl name0 with
               | Some { TemplateHole.thvalue = TemplateHole.VElt d; _ } -> d
               | _ -> [])
-          | None -> render_nodes tbl el.children
+          | None -> render_nodes tbl ~keep_unfilled el.children
         in
         [ Ssr.el el.tag attrs children ]
 
+  (* A sub-template placeholder (`<div style="display:none" ws-children-template="name">`
+     wrapping the template body written in plain mode), as WS's `writeWrappedTemplate`
+     emits for every other template of the file under `<body>`. *)
+  let placeholder name (t : Hole.template) : Doc.t =
+    let plain : (string, TemplateHole.t) Hashtbl.t = Hashtbl.create 1 in
+    let body = render_nodes plain ~keep_unfilled:true t.Hole.body in
+    [ Ssr.el "div" [ ("style", "display:none"); ("ws-children-template", name) ] body ]
+
   let getOrLoad ~base ~name ~src ~refs ~keep_unfilled (holes : TemplateHole.t list) : Doc.t =
-    ignore base; ignore refs; ignore keep_unfilled;
+    ignore base; ignore refs;
     let parsed = Hole.analyze (Markup.parse src) in
-    let tpl =
-      match name with
-      | None -> parsed.Hole.root
-      | Some n -> (
-          match List.find_opt (fun (t : Hole.template) -> t.name = Some n) parsed.Hole.inner with
-          | Some t -> t
-          | None -> parsed.Hole.root)
-    in
     let tbl : (string, TemplateHole.t) Hashtbl.t = Hashtbl.create 16 in
     List.iter (fun (h : TemplateHole.t) -> Hashtbl.replace tbl (String.lowercase_ascii h.thname) h) holes;
-    render_nodes tbl tpl.Hole.body
+    match name with
+    | None ->
+        (* The root render carries the other templates of the file as
+           `ws-children-template` placeholders (WS appends them under `<body>`). *)
+        let body = render_nodes tbl ~keep_unfilled parsed.Hole.root.Hole.body in
+        let extra =
+          List.filter_map
+            (fun (t : Hole.template) -> Option.map (fun n -> placeholder n t) t.Hole.name)
+            parsed.Hole.inner
+        in
+        body @ List.concat extra
+    | Some n -> (
+        match List.find_opt (fun (t : Hole.template) -> t.name = Some n) parsed.Hole.inner with
+        | Some t -> render_nodes tbl ~keep_unfilled t.Hole.body
+        | None -> render_nodes tbl ~keep_unfilled parsed.Hole.root.Hole.body)
 end

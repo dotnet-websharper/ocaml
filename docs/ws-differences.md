@@ -148,11 +148,23 @@ Consolidated; see the linked note for detail.
   - `ws-dom` and `datetime-local`/`dateTimeLocal` vars fall back to `string`;
   - `ServerLoad`/`ClientLoad` are not configurable (source is always embedded);
   - a template used directly in a server page is static, not hydrated in place.
+- **Routing** (`docs/routing.md` §13):
+  - client-side `Router.installHash` works (the `websharper-sitelets` binding +
+    a shadow), but its server side is a **no-op** (there is no URL to parse);
+  - `Router.Infer` (the type-provider that reads `[<EndPoint>]` attributes) is a
+    compile-time macro and is not available — build routers with
+    `RouterModule.table`/`single`/`shift`/`sum`/`map` instead;
+  - `Router`'s path/query combinators that take F# collections/`Func` (`create`,
+    `createWithQuery`, `query*`, `body`, `fetch`, `xHR`) are bound but not
+    shadowed (server typecheck rejects them).
 - **Client/server** (`docs/client-server.md` §6):
   - hydration is **client-owned**, not node-preserving (the region is cleared and
     re-rendered);
   - the client "entry" designation and the `ClientCode`/`IRequiresResources`
     pipeline are still minimal;
+  - external JS libraries (`[<Require>]`/`IResourceDefinition`) are not
+    injected: a binding lowers to a **global** (`new globalThis.Chart(…)`) but
+    its `<script>` tag must be added by hand (`docs/client-bundle.md` §11);
   - cross-.NET-server interop would need a key + serialization contract independent
     of OCaml source positions.
 - **Boundary wire form** (`docs/client-server.md` §3.2):

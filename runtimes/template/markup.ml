@@ -173,3 +173,52 @@ let find_attr (el : element) (name : string) : string option =
     el.attrs
 
 let has_attr (el : element) (name : string) : bool = find_attr el name <> None
+
+(* Serialize nodes back to HTML. The template codegen gives each template its own
+   source (see `Codegen`), so nested templates from one authoring file compile to
+   separate sources and the runtime never has to look up `<template>` elements
+   (that path stack-overflows on WebSharper's structural `Unchecked.Hash`). *)
+let escape_attr (s : string) =
+  let b = Buffer.create (String.length s) in
+  String.iter
+    (fun c ->
+      match c with
+      | '"' -> Buffer.add_string b "&quot;"
+      | '&' -> Buffer.add_string b "&amp;"
+      | c -> Buffer.add_char b c)
+    s;
+  Buffer.contents b
+
+let rec print_node (b : Buffer.t) (nd : node) =
+  match nd with
+  | Text s -> Buffer.add_string b s
+  | Comment c ->
+      Buffer.add_string b "<!--";
+      Buffer.add_string b c;
+      Buffer.add_string b "-->"
+  | Doctype d -> Buffer.add_string b d
+  | Element el ->
+      Buffer.add_char b '<';
+      Buffer.add_string b el.tag;
+      List.iter
+        (fun (k, v) ->
+          Buffer.add_char b ' ';
+          Buffer.add_string b k;
+          Buffer.add_string b "=\"";
+          Buffer.add_string b (escape_attr v);
+          Buffer.add_char b '"')
+        el.attrs;
+      let tag_l = String.lowercase_ascii el.tag in
+      if el.self_closing || List.mem tag_l void_tags then Buffer.add_string b "/>"
+      else begin
+        Buffer.add_char b '>';
+        List.iter (print_node b) el.children;
+        Buffer.add_string b "</";
+        Buffer.add_string b el.tag;
+        Buffer.add_char b '>'
+      end
+
+let print (nodes : node list) : string =
+  let b = Buffer.create 512 in
+  List.iter (print_node b) nodes;
+  Buffer.contents b

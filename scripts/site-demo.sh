@@ -25,8 +25,8 @@ WS_EXTRA_INC="$cmi" bash "$root/scripts/build-ui-app.sh" "$entry" "$out/client" 
 cp "$root/runtimes/ocaml/ssr.ml" \
    "$root/runtimes/ocaml/wsrpc.ml" "$root/runtimes/ocaml/webSharper_Server.ml" \
    "$root/runtimes/ocaml/webSharper_ClientServer.ml" \
-   "$root/runtimes/ocaml/async.ml" "$root/runtimes/ui-server/webSharper_UI.ml" "$out/"
-(cd "$out" && ocamlfind ocamlopt -package unix,yojson,websharper-template,websharper-javascript,websharper-stdlib -linkpkg wsrpc.ml ssr.ml async.ml webSharper_UI.ml webSharper_ClientServer.ml webSharper_Server.ml server.ml -o server)
+   "$root/runtimes/ocaml/async.ml" "$root/runtimes/ui-server/webSharper_Sitelets.ml" "$root/runtimes/ui-server/webSharper_UI.ml" "$out/"
+(cd "$out" && ocamlfind ocamlopt -package unix,yojson,websharper-template,websharper-javascript,websharper-stdlib -linkpkg wsrpc.ml ssr.ml async.ml webSharper_Sitelets.ml webSharper_UI.ml webSharper_ClientServer.ml webSharper_Server.ml server.ml -o server)
 
 # Fail fast if the port is already taken (avoids silent cross-talk with a
 # leftover server).
@@ -39,5 +39,9 @@ fi
 pid=$!
 cleanup() { kill "$pid" 2>/dev/null || true; wait "$pid" 2>/dev/null || true; }
 trap cleanup EXIT INT TERM
-sleep 1
+# Wait until the server is listening (a fixed sleep is flaky under load).
+for _ in $(seq 1 100); do
+  (exec 3<>/dev/tcp/127.0.0.1/8123) 2>/dev/null && break
+  sleep 0.1
+done
 node "$root/runtimes/ocaml/site_client.mjs" "$out/client"

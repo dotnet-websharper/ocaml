@@ -22,8 +22,8 @@ bash "$root/scripts/build-ui-app.sh" "$entry" "$out/client" >/dev/null
   -I "$ui_lib" -I "$js_lib" -I "$rt_lib" -I "$sl_lib" -I "$(ocamlc -where)"
 
 # 3. Compile the native server (SSR renderer + UI shadow + HTTP server).
-cp "$root/runtimes/ocaml/ssr.ml" "$root/runtimes/ui-server/webSharper_UI.ml" "$root/runtimes/ocaml/wsrpc.ml" "$out/"
-(cd "$out" && ocamlfind ocamlopt -package unix,yojson,websharper-template,websharper-javascript,websharper-stdlib -linkpkg ssr.ml webSharper_UI.ml wsrpc.ml server.ml -o server)
+cp "$root/runtimes/ocaml/ssr.ml" "$root/runtimes/ui-server/webSharper_Sitelets.ml" "$root/runtimes/ui-server/webSharper_UI.ml" "$root/runtimes/ocaml/wsrpc.ml" "$out/"
+(cd "$out" && ocamlfind ocamlopt -package unix,yojson,websharper-template,websharper-javascript,websharper-stdlib -linkpkg ssr.ml webSharper_Sitelets.ml webSharper_UI.ml wsrpc.ml server.ml -o server)
 
 # 4. Serve, then drive: fetch the page, hydrate in jsdom, click.
 # Fail fast if the port is already taken (avoids silent cross-talk with a
@@ -37,5 +37,9 @@ fi
 pid=$!
 cleanup() { kill "$pid" 2>/dev/null || true; wait "$pid" 2>/dev/null || true; }
 trap cleanup EXIT INT TERM
-sleep 1
+# Wait until the server is listening (a fixed sleep is flaky under load).
+for _ in $(seq 1 100); do
+  (exec 3<>/dev/tcp/127.0.0.1/8123) 2>/dev/null && break
+  sleep 0.1
+done
 node "$root/runtimes/ocaml/ssr_client.mjs" "$out/client"

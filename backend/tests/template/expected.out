@@ -5,5 +5,5 @@
   <a href="/more">more</a>
   <div><b>bold</b></div>
   <input value="abc" placeholder="filter"></input>
-  <button>remove</button>
+  <button ws-onclick="Remove">remove</button>
 </div>

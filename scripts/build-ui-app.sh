@@ -17,17 +17,22 @@ ui_lib="$(q websharper-ui)"
 js_lib="$(q websharper-javascript)"
 rt_lib="$(q websharper-runtime)"
 sl_lib="$(q websharper-stdlib)"
+# WebSharper.UI's Router binding refers to WebSharper.Sitelets.Router<'T>.
+st_lib="$(q websharper-sitelets)"
 
 newest() { ls "$@" 2>/dev/null | sort | tail -1; }
 js_dll="$(newest "$HOME"/.nuget/packages/websharper/*/lib/netstandard2.0/WebSharper.JavaScript.dll)"
 sl_dll="$(newest "$HOME"/.nuget/packages/websharper/*/lib/netstandard2.0/WebSharper.StdLib.dll)"
 ui_dll="$(newest "$HOME"/.nuget/packages/websharper.ui/*/lib/netstandard2.0/WebSharper.UI.dll)"
+st_dll="$(newest "$HOME"/.nuget/packages/websharper/*/lib/netstandard2.0/WebSharper.Sitelets.dll)"
 
 inc=(-I "$ui_lib" -I "$js_lib" -I "$s")
 [ -n "$rt_lib" ] && inc+=(-I "$rt_lib")
 [ -n "$sl_lib" ] && inc+=(-I "$sl_lib")
+[ -n "$st_lib" ] && inc+=(-I "$st_lib")
 for e in ${WS_EXTRA_INC:-}; do inc+=(-I "$e"); done
 refs=(--reference "$ui_dll" --reference "$sl_dll" --reference "$js_dll")
+[ -n "$st_dll" ] && refs+=(--reference "$st_dll")
 
 srcdir="$(cd "$(dirname "$entry")" && pwd)"
 work="$out/.deps"

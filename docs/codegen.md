@@ -35,12 +35,13 @@ parse            -->  transformInfer  -->  transformClientServer  -->  transform
 
 - `parse` (`main.ml:299`) reads the file and attaches real locations
   (`Location.init`).
-- `transformInfer` (`main.ml:1383`) expands `Sitelet.infer`/`Sitelet.Infer`
+- `transformInfer` (`main.ml:1389`) expands `Sitelet.infer`/`Sitelet.Infer`
   into `Sitelet.make route link handler`, synthesizing the router/URL builder
   from the endpoint variant.
-- `transformClientServer` (`main.ml:1452`) lifts `client`/`hydrate` fragments
-  into opaque `[@client]` bindings and rewrites `on.<event>` to `On.<event>`.
-- `transformClientEvents` (`main.ml:1693`) handles `on.<event>` handlers on
+- `transformClientServer` (`main.ml:1458`) lifts `client`/`hydrate` fragments
+  into opaque `[@client]` bindings and rewrites `on.<event>` to `On.<event>`
+  (see [`hydrate-client.md`](hydrate-client.md)).
+- `transformClientEvents` (`main.ml:1699`) handles `on.<event>` handlers on
   server-rendered elements: it lifts each handler into a top-level
   `[@javascript]` binding under an interned key and, on the server, replaces the
   call with a `ws-on<event>="<key>"` marker (`WebSharper_UI.Attr.create`). The
@@ -157,7 +158,7 @@ let ws204306509 () =
   WebSharper_UI.Doc.runById "ws204306509"
     ((fun () ->
         let v = Var.create "before" in
-        div [On.click (fun _ _ -> Var.set v "after")] [textView (Var.view v)])
+        div [On.click (fun _ _ -> ())] [textView (Var.view v)])
        ())
 # 14 "/abs/hello_world.ml"
 let main =
@@ -173,7 +174,7 @@ let main =
              WebSharper_ClientServer.__hydrate "ws204306509"
                (fun () ->
                   let v = Var.create "before" in
-                  div [On.click (fun _ _ -> Var.set v "after")]
+                  div [On.click (fun _ _ -> ())]
                     [textView (Var.view v)])])
 # 14 "/abs/hello_world.ml"
 
@@ -188,7 +189,12 @@ Observe:
 - `hydrate (fun () -> …)` is both replaced by
   `WebSharper_ClientServer.__hydrate "ws204306509" (fun () -> …)` **and** lifted
   into the new `let ws204306509 () = …` binding.
-- `on.click` became `On.click`.
+- `on.click` became `On.click`, **and the handler body became `fun _ _ -> ()`**:
+  the view is rendered (and re-rendered) by the client, so the server body never
+  needs the client-only handler. The client build keeps the real body
+  (`Var.set v "after"`) and wires it up when `hydrate()` re-renders the region.
+  Region handlers are **not** lifted to a `ws-on<event>` marker — that is only for
+  server-rendered elements (below). See [`hydrate-client.md`](hydrate-client.md) §4.
 - The `[@website]` attribute on `main` is gone.
 - The `# <line> "<file>"` lines point each item back at its source line.
 
@@ -225,7 +231,7 @@ mechanisms keep errors attached to your source:
 - **Native typecheck (`--server-include`).** In `--emit-server` mode the
   frontend typechecks the server-filtered items against the *native* packages
   (`websharper-server`, `websharper-ui-server`) via `typecheckServer`
-  (`main.ml:1959`). Server-specific errors — for example a UI combinator the
+  (`main.ml:1965`). Server-specific errors — for example a UI combinator the
   server-side `WebSharper_UI` shadow lacks — are reported at the **exact**
   source line/column. `examples/hello-world/build.sh` passes the native
   `--server-include` directories. Warnings are suppressed in this pass because
@@ -247,6 +253,16 @@ while a plain type error is reported at the exact expression:
 ```
 …/hello_world.ml:21:25:27: error: The constant 42 has type int but an expression was expected of type string
 ```
+
+The frontend's own diagnostics (`checkBoundary`, `endpointOf`/`endpointPlan`,
+`transformClientEvents`) go through the same path by raising a located
+`Location.Error` (`Location.raise_errorf ~loc`), which the driver's handler
+prints and `frontend/bin/diag.ml` normalizes to
+`file:line:startCol:endCol: severity: message`. Raising anything else is a
+**trap**: in OCaml 5.4 `Location.report_exception` re-raises non-`Location.Error`
+exceptions, so the process dies with a bare `Fatal error: exception …` and no
+source location (that is how a missing `[@endpoint]` used to surface, from an
+`Option.get` in the route generator).
 
 ## 7. Guarantees and limits
 

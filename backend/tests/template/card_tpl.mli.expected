@@ -3,12 +3,14 @@
 type vars = { filter : string WebSharper_UI.Var.t }
 type anchors = unit
 type 'e event = { vars : vars; anchors : anchors; target : WebSharper_JavaScript.Element.t; event : 'e }
-type t = { vars : vars; mutable title : string; mutable link : WebSharper_UI.Attr.t; mutable body : WebSharper_UI.Doc.t; mutable remove : WebSharper_JavaScript.Element.t -> WebSharper_JavaScript.MouseEvent.t -> unit; }
+type t = { vars : vars; mutable title : string WebSharper_UI.View.t; mutable link : WebSharper_UI.Attr.t; mutable body : WebSharper_UI.Doc.t; mutable remove : WebSharper_JavaScript.Element.t -> WebSharper_JavaScript.MouseEvent.t -> unit; }
 val create : unit -> t
 val title : string -> t -> t
+val title_view : string WebSharper_UI.View.t -> t -> t
 val link : WebSharper_UI.Attr.t -> t -> t
 val body : WebSharper_UI.Doc.t -> t -> t
 val remove : (WebSharper_JavaScript.Element.t -> WebSharper_JavaScript.MouseEvent.t -> unit) -> t -> t
 val remove_withModel : (WebSharper_JavaScript.MouseEvent.t event -> unit) -> t -> t
-val doc : t -> WebSharper_UI.Doc.t
+val doc : ?keepUnfilled:bool -> t -> WebSharper_UI.Doc.t
+val bind : t -> unit
 val references : (string * string * string) list

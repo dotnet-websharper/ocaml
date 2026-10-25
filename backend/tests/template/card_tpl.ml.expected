@@ -1,22 +1,23 @@
 (* GENERATED from card.html — do not edit. *)
 
-let src = "<!doctype html>\n<div class=\"card\">\n  <!-- card -->\n  <h1>${Title}</h1>\n  <a ws-attr=\"Link\">more</a>\n  <div ws-hole=\"Body\"></div>\n  <input ws-var=\"Filter\" placeholder=\"filter\">\n  <button ws-onclick=\"Remove\">remove</button>\n</div>\n"
-
 type vars = { filter : string WebSharper_UI.Var.t }
 type anchors = unit
 type 'e event = { vars : vars; anchors : anchors; target : WebSharper_JavaScript.Element.t; event : 'e }
-type t = { vars : vars; mutable title : string; mutable link : WebSharper_UI.Attr.t; mutable body : WebSharper_UI.Doc.t; mutable remove : WebSharper_JavaScript.Element.t -> WebSharper_JavaScript.MouseEvent.t -> unit; }
+type t = { vars : vars; mutable title : string WebSharper_UI.View.t; mutable link : WebSharper_UI.Attr.t; mutable body : WebSharper_UI.Doc.t; mutable remove : WebSharper_JavaScript.Element.t -> WebSharper_JavaScript.MouseEvent.t -> unit; }
+let src = "<!doctype html>\n<div class=\"card\">\n  <!-- card -->\n  <h1>${Title}</h1>\n  <a ws-attr=\"Link\">more</a>\n  <div ws-hole=\"Body\"></div>\n  <input ws-var=\"Filter\" placeholder=\"filter\"/>\n  <button ws-onclick=\"Remove\">remove</button>\n</div>\n"
 let references : (string * string * string) list = []
-let create () : t = { vars = ({ filter = WebSharper_UI.Var.create ("") } : vars); title = ""; link = WebSharper_UI.Attr.empty (); body = WebSharper_UI.Doc.empty (); remove = (fun _ _ -> ()) }
-let title v c = c.title <- v; c
+let create () : t = { vars = ({ filter = WebSharper_UI.Var.create ("") } : vars); title = WebSharper_UI.View.const ""; link = WebSharper_UI.Attr.empty (); body = WebSharper_UI.Doc.empty (); remove = (fun _ _ -> ()) }
+let title v c = c.title <- WebSharper_UI.View.const v; c
+let title_view v c = c.title <- v; c
 let link v c = c.link <- v; c
 let body v c = c.body <- v; c
 let remove v c = c.remove <- v; c
 let remove_withModel v c = c.remove <- (fun target event -> v { vars = c.vars; anchors = (); target; event }); c
-let doc (c : t) : WebSharper_UI.Doc.t =
-  WebSharper_UI.Template.getOrLoad ~base:"card" ~name:None ~src ~refs:references ~keep_unfilled:false
-    [ WebSharper_UI.TemplateHole.makeText "title" c.title;
+let doc ?(keepUnfilled = false) (c : t) : WebSharper_UI.Doc.t =
+  WebSharper_UI.Template.getOrLoad ~base:"card" ~name:(None) ~src ~refs:references ~keep_unfilled:keepUnfilled
+    (if keepUnfilled then [] else [ WebSharper_UI.TemplateHole.makeTextView "title" c.title;
       WebSharper_UI.TemplateHoleAttribute.create "link" c.link;
       WebSharper_UI.TemplateHoleElt.create "body" c.body;
       WebSharper_UI.TemplateHole.makeVar "filter" c.vars.filter;
-      WebSharper_UI.TemplateHoleEvent.create "remove" (fun el ev -> c.remove el (Obj.magic ev)) ]
+      WebSharper_UI.TemplateHoleEvent.create "remove" (fun el ev -> c.remove el (Obj.magic ev)) ])
+let bind (_ : t) : unit = ()

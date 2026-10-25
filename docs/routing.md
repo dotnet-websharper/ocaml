@@ -302,7 +302,49 @@ These are the `backend/tests/errors/*.ml` goldens, normalized by
 `frontend/bin/diag.exe` to `file:line:col:col: severity: message` for the editor
 problem matcher.
 
-## 13. What is not implemented yet
+## 13. Client-side hash routing — `Router.installHash`
+
+Everything above is **server-side** routing (URL → the `[@endpoint]` DU, and
+`ctx.link` back). For **client-side** routing on the URL fragment,
+`WebSharper.UI.Router.installHash` is bound: build a router with the
+`WebSharper_Sitelets.RouterModule` combinators, then install it as a reactive
+`Var`:
+
+```ocaml
+type filter = All | Active | Completed
+
+(* #/   #/active   #/completed *)
+let filter_router : filter WebSharper_Sitelets.Router2.t =
+  WebSharper_Sitelets.RouterModule.table
+    [ (All, ""); (Active, "active"); (Completed, "completed") ]
+
+let filter_var : filter Var.t =
+  WebSharper_UI.Router.installHash All filter_router
+```
+
+- `Router.installHash default router : 'a Var.t` reads the current hash, listens
+  to `hashchange`/`popstate`, intercepts clicks on `#…` anchors
+  (`preventDefault`), and pushes `Router.HashLink` when the `Var` changes.
+- `RouterModule.table [ (v, "path") ]` is one way to build a router; the binding
+  also has `fromString`, `single`, `shift`, `sum`, `map`, `filter`, `delay`,
+  `link`, `hashLink`, `tryLink`, `parse`, `write`, `cast`. A `Link` requires that
+  a route consumes the whole path, so `""` (the bare `#/`) only matches the empty
+  hash — that is why `All` is listed first.
+- On the **native server** there is no URL, so the `websharper-ui-server` shadow's
+  `Router.installHash` is a no-op returning `Var.create default`; its
+  `WebSharper_Sitelets` implements the same combinators (and the router
+  representation is pure OCaml), so one source typechecks on both tiers.
+
+`examples/todomvc-full` uses this for its `#/`, `#/active`, `#/completed` filter,
+with the links written as plain `<a href="#/…">`.
+
+The pieces: the generated `websharper-sitelets` binding
+(`binding-adaptor gen WebSharper.Sitelets.dll`, referred to by the regenerated
+`websharper-ui`), `runtimes/ui-server/webSharper_Sitelets.ml` (shadow), and
+`-I $(ocamlfind query websharper-sitelets)` + `--reference
+WebSharper.Sitelets.dll` in `scripts/build-ui-app.sh`.
+
+## 14. What is not implemented yet
 
 These are **rejected** today (a variant of the diagnostics above), not silently
 accepted:

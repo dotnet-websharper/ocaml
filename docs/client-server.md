@@ -7,7 +7,7 @@ small runtime *hydrates* on page load — with no F# quotations.
 This documents the mechanism and an incremental plan. It builds on what already
 exists:
 
-- the OCaml frontend (`frontend/`) emits an IR (`wsocaml-ir-4`) per unit;
+- the OCaml frontend (`frontend/`) emits an IR (`wsocaml-ir-5`) per unit;
 - the backend (`backend/`, `--ws-compile`) lowers IR to WebSharper AST and runs
   the WebSharper packager (`Compilation`/`CompileFull`/`packageAssembly`);
 - a kitchen-sink app + `scripts/test-quick.sh` give a fast inner loop;
@@ -124,6 +124,46 @@ error. `scripts/rpc-data.sh` round-trips a
 record/variant/recursive-tree/array/tuple/list/option workload through a native
 server (`frontend/test: rpc-data`).
 
+#### Why not WebSharper's built-in JSON
+
+The external representation above **is** WebSharper's JSON encoding (variant
+objects `{"$":…}`, arrays for `list`/`array`, `null` for `None`, records as
+objects), so this is not a bespoke format — but it is *activated by our own*
+code (`Runtime.js`'s `marshalIn`/`marshalOut` + the emitted descriptor, and the
+generated native `yojson` codecs) rather than by `WebSharper.Core.Json` /
+`WebSharper.Json`:
+
+- **the peer is native OCaml.** The server side is `yojson` in
+  `runtimes/ocaml/wsrpc.ml` with no WebSharper runtime, so an encoder/decoder
+  must exist natively regardless. Delegating the client half to WS would not
+  remove that half — it would just make two serializers that have to agree
+  byte-for-byte.
+- **wsocaml types carry no WebSharper metadata.** WS's JSON is metadata-driven:
+  it serializes by looking up a type's `Serializable`/`JsonInfo` in the
+  assembly metadata (`M.TypeDefinition`, `Json.Provider.Activate`). The backend
+  never *mints* `TypeDefinition`s — OCaml records/variants lower to plain JS
+  blocks (`{ $tag: 0, "0": … }`, see `backend/Lowering.fs`). The only metadata in
+  play is loaded from the `--reference` assemblies (`backend/Bindings.fs`,
+  `IO.LoadMetadata`), which is what the `ws:` externals resolve against. There is
+  no entry for a user's `type point = { x; y }` to hand to `Json.Activate`.
+- **the client's in-memory values are the OCaml runtime representation**
+  (`0` for `[]`, `{ $tag:0, "0":… }` for `Some`), not WebSharper's own
+  representation, so a representation→representation bridge is needed before
+  *any* serializer — that bridge is exactly `marshalIn`/`marshalOut`. Adding WS's
+  serializer on top would be strictly more code.
+- **the built-in JS JSON is used where it applies**: the RPC envelope
+  (`JSON.stringify`/`JSON.parse`) and the type descriptors are plain JSON.
+- the same external shape also serves **`[@export]` consumers that are plain JS**
+  (`backend/tests/apps-ws/wlib.mjs` + the generated `.d.ts`), which a typed
+  WS serializer does not address.
+
+So `Runtime.js`'s marshaller is our `Json.Activate`, and the generated native
+codecs are the other language's serializer — the two halves of one documented
+wire format. The smaller design, if it is ever worth it: **generate the client
+codecs too** (reuse the `descr` type walk, emit OCaml that compiles to JS,
+targeting `WebSharper_JavaScript.JSON`), leaving the runtime descriptor only for
+the dynamic `[@export]` boundary.
+
 ### 3.3 Interop: `[@export]` and JS consumers
 
 Top-level values marked `[@export]` are part of the unit's **JS API**:
@@ -186,7 +226,7 @@ let[@client] app () =
 **Server-side rendering (SSR) of the compiled view:** a `[@client]` value
 (`unit -> unit`, e.g. `Doc.runById "app" (view ())`) is compiled for **both
 tiers** — the client against the generated `WebSharper_UI` binding, the server
-against the native shadow `runtimes/ocaml/wsui_server.ml` (a subset:
+against the native shadow `runtimes/ui-server/webSharper_UI.ml` (a subset:
 `Doc`/`Var`/`View`/`Attr`/`On` + the HTML combinators). `--emit-server` rewrites
 `open WebSharper_UI*` to the shadow, keeps `[@client]` values, runs them at
 startup (their `Doc.runById` renders into regions via `runtimes/ocaml/ssr.ml`),
@@ -198,11 +238,14 @@ The client then hydrates each region with `OCamlRuntime.hydrate()`.
 native server from the *same* `apps-ui/wsclient.ml`, fetches the served page,
 hydrates in jsdom, and clicks (SSR `before` -> hydrate -> `after`).
 
-Scope: hydration is **client-owned** — the client re-renders the region (with
-identical initial markup, so it is seamless). Node-identity-preserving
-reconciliation (reusing the server DOM tree, preserving focus/scroll/input)
+Scope: hydration is **client-owned** — `OCamlRuntime.hydrate()` clears the region
+(`textContent = ""`) and calls `Doc.runById`, so the client re-renders the whole
+subtree from scratch. It only *looks* seamless because the initial markup is
+identical; DOM identity (focus, scroll, typed input, `<details open>`, …) is not
+preserved. Node-identity-preserving reconciliation (adopting the server DOM tree)
 requires implementing WebSharper's `ws-hole`/`ws-attr-holes` server-render
-protocol (template-based) in the shadow; it is future work.
+protocol in the shadow; it is future work. The full source-to-runtime
+walkthrough is in [`hydrate-client.md`](hydrate-client.md).
 
 ### 4.1 Server-rendered event handlers
 
@@ -234,6 +277,12 @@ button [ on.click (fun el _ -> Element.setAttribute el "data-clicked" "yes") ] [
 - Handlers **inside** a `client`/`hydrate` region are unaffected: the client
   renders (and re-renders) them, so the server only drops the handler body (it
   may use client-only bindings) and the client keeps it inline.
+- Only these events are understood: `click`, `dblclick`, `change`, `input`,
+  `keydown`, `keyup`, `submit` (`clientEventNames` in `main.ml`). Of those, the
+  client binding spells `dblClick`/`keyDown`/`keyUp` in camelCase while the
+  rewrite of `on.<event>` is verbatim, so today **`on.click`, `on.change`,
+  `on.input` and `on.submit` are the only ones that also resolve client-side**
+  (`on.dblclick`/`on.keydown`/`on.keyup` become `On.dblclick`/…).
 
 The attribute family is shared with templates, where `ws-on<event>="Name"` names
 a template hole; `attachEvents` only attaches values that are registered keys, so
@@ -258,7 +307,7 @@ the two mechanisms do not interfere.
 - **M4 — UI integration + hydration (done).** `[@client]` values are registered
   under `data-ws-key` (name) and hydrated by `OCamlRuntime.hydrate()`. **SSR of
   the compiled view**: the same view source compiles against `WebSharper_UI`
-  (client) and the native `Wsui_server` shadow (server); `--emit-server` renders
+  (client) and the native `WebSharper_UI` shadow (server); `--emit-server` renders
   it into regions and serves `Ssr.page` (`scripts/ssr-demo.sh`, test `ssr`).
   Remaining: node-identity-preserving reconciliation (WS `ws-hole` protocol).
 - **M5 — server (done, first cut).** The server is a first-class entity: a
@@ -282,6 +331,9 @@ the two mechanisms do not interfere.
   itself) — for now the check covers `[@javascript]` bindings only.
 - How much of WebSharper's `ClientCode`/`IRequiresResources` pipeline to reuse
   vs. reimplement in OCaml-friendly form.
+- External JS libraries: `[<Require>]`/`IResourceDefinition` are not rendered, so
+  a binding to a non-WebSharper lib lowers to a global whose `<script>` the user
+  supplies (`client-bundle.md` §11). `[<Import>]` is not modelled either.
 - Streaming vs. whole-page hydration; partial hydration granularity.
 - Cross-.NET-server interop (a non-OCaml server) would need a key +
   serialization contract independent of OCaml source positions.
@@ -346,7 +398,9 @@ let[@website] main =
   (`runtimes/ui-server/webSharper_UI.ml`, same module name) + the impl. So a
   view compiles unchanged on both tiers.
 - `Content.Page` emits `<!doctype html>…<script ws-replace="scripts"></script>`;
-  `Server.serve ~bundle` replaces that with `<script type="module" src="/<bundle>.js">`.
+  `Server.serve ~bundle` replaces that with `<script type="module" src="/<bundle>.js">`
+  (how that bundle and its WebSharper imports get served without a bundler:
+  [`client-bundle.md`](client-bundle.md)).
 - `Sitelet.Infer` is expanded **before typing**: the endpoint variant (its
   constructors carry `[@endpoint …]`) yields `route : request -> endpoint option`
   and `link : endpoint -> string`.

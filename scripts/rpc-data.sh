@@ -29,5 +29,9 @@ fi
 pid=$!
 cleanup() { kill "$pid" 2>/dev/null || true; wait "$pid" 2>/dev/null || true; }
 trap cleanup EXIT INT TERM
-sleep 1
+# Wait until the server is listening (a fixed sleep is flaky under load).
+for _ in $(seq 1 100); do
+  (exec 3<>/dev/tcp/127.0.0.1/8123) 2>/dev/null && break
+  sleep 0.1
+done
 node "$root/runtimes/ocaml/client_data.mjs"

@@ -4,17 +4,17 @@
 
 ```
 Parse -> Typemod.type_structure -> Translmod.transl_implementation -> Lambda.program
-  -> wsocaml-ir-4 -> WebSharper AST -> JavaScript
+  -> wsocaml-ir-5 -> WebSharper AST -> JavaScript
 ```
 
 OCaml itself handles typing and pattern-match compilation; the frontend serializes
-Lambda into `wsocaml-ir-4`, and the backend lowers it to WebSharper AST and emits JS.
+Lambda into `wsocaml-ir-5`, and the backend lowers it to WebSharper AST and emits JS.
 
 ## Layout
 
 | Path | Purpose |
 | --- | --- |
-| `frontend/` | OCaml (dune) frontend: `.ml` → `wsocaml-ir-4`; template codegen (`frontend/template/`) |
+| `frontend/` | OCaml (dune) frontend: `.ml` → `wsocaml-ir-5`; template codegen (`frontend/template/`) |
 | `backend/` | F#/.NET backend: `.wsir.json` → `.js` (also handles WebSharper bindings) |
 | `binding-adaptor/` | F# tool: WebSharper binding assembly → OCaml opam package |
 | `bindings/` | local opam repository of generated bindings (`websharper-xxx`) |
@@ -25,7 +25,8 @@ Lambda into `wsocaml-ir-4`, and the backend lowers it to WebSharper AST and emit
 | `examples/` | dune projects built on the generated bindings / `websharper-server` |
 | `scripts/` | build/test helpers |
 | `backend/tests/` | test harness (IR fixtures + apps) |
-| `docs/` | design notes (`client-server.md`, `codegen.md`, `routing.md`, `templates.md`, `ws-differences.md`) |
+| `docs/` | design notes (`client-server.md`, `hydrate-client.md`, `client-bundle.md`, `codegen.md`, `routing.md`, `templates.md`, `ws-differences.md`) |
+| `AGENTS.md` | build/test conventions, layout and the traps to know when changing the compiler |
 
 ## Build
 
@@ -61,10 +62,19 @@ static/instance/new access.
 
 Generated packages reference other WebSharper packages with `--reference`; cross-
 package types are emitted qualified and the opam/dune dependencies are generated
-automatically:
+automatically. `WebSharper.UI.Router` refers to `WebSharper.Sitelets.Router<'T>`,
+so the UI binding is generated with the Sitelets reference too:
+
+    dotnet .../binding-adaptor.dll gen WebSharper.Sitelets.dll --version 10.1.6 --dest ./bindings \
+      --reference .../WebSharper.JavaScript.dll --reference .../WebSharper.StdLib.dll
 
     dotnet .../binding-adaptor.dll gen WebSharper.UI.dll --version 10.1.5 --dest ./bindings \
-      --reference .../WebSharper.JavaScript.dll --reference .../WebSharper.StdLib.dll
+      --reference .../WebSharper.JavaScript.dll --reference .../WebSharper.StdLib.dll \
+      --reference .../WebSharper.Sitelets.dll --spec specs/websharper-ui.spec
+
+The native server shadows live in `runtimes/ocaml`, `runtimes/ui-server`
+(`WebSharper_UI` + `WebSharper_Sitelets`, the latter implementing the hash router
+`WebSharper_UI.Router.installHash` uses) and `runtimes/template`.
 
 Each binding package is a **wrapped** dune library, so identically-named types
 across packages do not collide (`WebSharper_JavaScript.Event.t`,
@@ -80,15 +90,21 @@ EventTarget.t`, and `Document.getElementById : Document.t -> string -> Element.t
 
 ### Packaging referenced assemblies
 
-The backend can run the WebSharper packager over `--reference` assemblies
-(`--package-references`), emitting one ESM module per type under
-`<out>/<Assembly>/<Type>.js` plus the WebSharper runtime at
+With `--ws-compile`, the backend runs the WebSharper packager over the
+`--reference` assemblies, emitting one ESM module per WebSharper type under
+`<out>/<Assembly>/<Type>.js` plus the runtime at
 `<out>/WebSharper.Core.JavaScript/Runtime.js`:
 
-    dotnet .../WebSharper.OCaml.dll --ir Main.wsir.json --output out --package-references \
-      --reference WebSharper.UI.dll --reference WebSharper.StdLib.dll
+    dotnet .../WebSharper.OCaml.dll --ir Main.wsir.json --output out --ws-compile \
+      --reference WebSharper.UI.dll --reference WebSharper.StdLib.dll \
+      --reference WebSharper.JavaScript.dll
 
-(Linking the entry's calls to these packaged modules is the remaining step.)
+The entry file's calls into those assemblies are emitted as relative ESM imports
+(`import … from "./WebSharper.UI/WebSharper.UI.Doc.js"`), so the whole thing runs
+in the browser with **no bundler** — see
+[`docs/client-bundle.md`](docs/client-bundle.md). (`--package-references` is
+parsed but currently a no-op: packaging runs whenever `--ws-compile` has
+references.)
 
 ## Examples
 
@@ -114,6 +130,19 @@ both tiers via `--emit-server`:
 
 (Requires `frontend/` and `backend/` to be built: `cd frontend && dune build`,
 `dotnet build backend`.)
+
+`examples/todomvc` is a **TodoMVC** app written with WebSharper.UI **templates**
+(the markup is `views/todomvc.html`; `todomvc.ml` fills its holes). Like
+`hello-world` it builds both tiers — a client bundle and a native server that
+serves the page:
+
+    cd examples/todomvc && bash build.sh
+    ./out/server &                         # http://127.0.0.1:8123/
+
+`examples/todomvc-full` is the same app using the WebSharper **SSR split**: the
+server renders the template skeleton (`Tmpl.doc ~keepUnfilled:true`) and the
+client binds it (`Tmpl.bind`) to reactive `View`/`Var`/`Doc` holes. It shows
+nested templates and `.Bind()` working end to end (see `docs/templates.md`).
 
 `dune build` in `examples/hello-world` only type-checks the source (its `dune`
 has a `library` stanza so the editor resolves the libraries); the app is built

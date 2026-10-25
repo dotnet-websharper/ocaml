@@ -44,13 +44,26 @@ terminal, and pipe combinators:
 type vars = unit
 type anchors = unit
 type 'e event = { vars : vars; anchors : anchors; target : WebSharper_UI.Template.element; event : 'e }
-type t = { vars : vars; mutable title : string; mutable body : string }
+type t = { vars : vars; mutable title : string WebSharper_UI.View.t;
+                            mutable body : string WebSharper_UI.View.t }
 val create : unit -> t
 val title : string -> t -> t
+val title_view : string WebSharper_UI.View.t -> t -> t
 val body : string -> t -> t
-val doc : t -> WebSharper_UI.Doc.t
+val body_view : string WebSharper_UI.View.t -> t -> t
+val doc : ?keepUnfilled:bool -> t -> WebSharper_UI.Doc.t   (* root template *)
+val bind : t -> unit                                        (* root template *)
 val references : (string * string * string) list
 ```
+
+- **Text holes are `View`s** (`title : string View.t`): the plain setter wraps the
+  string in `View.const`, and a `<name>_view` setter takes a `View<string>` so the
+  value can be reactive (the client rebuilds the attribute/text on change).
+- **`doc ?keepUnfilled`** is server-side only. `keepUnfilled:true` renders the
+  plain template — every hole left as its marker — for the client to fill (§6).
+- **`bind`** is on the **root** template only: it binds the served document to the
+  instance (WebSharper's `Bind`/`RunFullDocTemplate`); server-side it is `()`.
+  Sub-template modules get `doc` but no `bind`/`?keepUnfilled`.
 
 ### Usage
 
@@ -68,13 +81,15 @@ Content.page ~title:"Hello" [ Greeting.doc g ]
 ```
 
 > The surface is a **record with pipe combinators**, not a class: the wsocaml IR
-> does not support object method sends, so classes cannot be lowered to JS.
+> does not support object method sends, so classes cannot be lowered to JS. It
+> mirrors WebSharper's *runtime* (`ProviderBuilder` / `Runtime.GetOrLoadTemplate`
+> / `CompletedHoles` / `Builder.BindBody`), not its method sugar.
 
 ## 3. Holes
 
 | Hole | Syntax | OCaml type |
 | --- | --- | --- |
-| text | `${Name}` in text/attributes | `string` |
+| text | `${Name}` in text/attributes | `string` (+ `_view : string WebSharper_UI.View.t`) |
 | doc (content) | `ws-hole="Name"` | `WebSharper_UI.Doc.t` |
 | doc (replace) | `ws-replace="Name"` | `WebSharper_UI.Doc.t` |
 | attribute | `ws-attr="Name"` | `WebSharper_UI.Attr.t` |
@@ -163,6 +178,25 @@ sub-templates; they become **submodules**:
 Greeting.Row.create () |> Greeting.Row.name "a" |> Greeting.Row.doc
 ```
 
+The codegen gives every template its own `src` string (its own markup) and its
+own runtime base name, so a single `.html` with several `<template name="…">` (or
+`ws-template` / `ws-children-template`) works. This is necessary because a
+`<template>` element's content is *inert* at runtime (parsed into `.content`,
+invisible to `querySelectorAll`), and WebSharper.UI's nested-template lookup
+otherwise hashes DOM nodes structurally (`Unchecked.Hash`) and overflows the
+stack.
+
+The **client** source strips the sub-template definitions (each template is built
+from its own source), but the **server** source keeps them, because the native
+renderer re-emits every other template of the file as a
+`<div style="display:none" ws-children-template="name">…</div>` placeholder at the
+end of the root render (WebSharper's `writeWrappedTemplate`) — that is what lets a
+client `.Bind()` find the sub-templates in the served document.
+
+A template whose source is a **full HTML document** (e.g. the official TodoMVC
+`index.html`, `<!doctype html><html>…`) is compiled to its `<body>` for rendering;
+the served page supplies `<head>` (styles, scripts).
+
 Cyclic template references are rejected (as in WebSharper); express recursion
 with a content hole and caller code.
 
@@ -192,20 +226,47 @@ because the generated module is part of the entry unit).
 
 The **native server** provides the same surface in the `webSharper_UI` shadow: a
 `TemplateHole` mirror plus `Template.getOrLoad`, a real engine that parses the
-raw source (the shared `websharper-template` parser) and substitutes the holes
-into the `Ssr` node tree. DOCTYPE and comments are preserved; events and
-after-render handlers have no server-side effect. `--emit-server` generates the
-server form of `doc` (OCaml-option `name`, shadow call); the client build
-generates the client form (`ClientDoc` + `WebSharper_StdLib.FSharpOption`).
+raw source (the shared `websharper-template` parser) and renders it into the
+`Ssr` node tree. DOCTYPE and comments are preserved. `--emit-server` generates the
+server form of `doc` (shadow call); the client build generates the client form
+(`ClientDoc` + `WebSharper_StdLib.FSharpOption`).
+
+The renderer mirrors WebSharper's `Runtime.GetOrLoadTemplate`:
+
+- a **filled** text/doc/attr/var hole is substituted (`value="…"`, the doc's
+  nodes, …);
+- a **filled event / after-render** hole is written back as its
+  `ws-on<event>` / `ws-onafterrender` marker (it has no server-side effect; the
+  client attaches the handler — WebSharper's `Attr.ServerHandler`);
+- every other template of the file is re-emitted as a
+  `ws-children-template` placeholder (see §4).
+
+With **`doc ~keepUnfilled:true`** (and no holes, i.e. a fresh instance) every hole
+is left as its plain `${…}` / `ws-hole` / `ws-replace` / `ws-attr` / `ws-var`
+marker, so the served page is a skeleton the client fills. The **`bind`** terminal
+then runs WebSharper's `RunFullDocTemplate` over `document.body` — this is the
+SSR split used by `examples/todomvc-full`:
+
+```ocaml
+(* server *)
+Content.page [ Tmpl.doc ~keepUnfilled:true (Tmpl.create ()) ]
+
+(* client *)
+let inst = Tmpl.create () |> Tmpl.todos (Doc.bindView view …) |> … in
+Tmpl.bind inst
+```
+
+> `keepUnfilled` keeps only the *unfilled* holes; the codegen passes no holes for
+> it, so on a fresh instance the whole template is plain. Filled event handlers
+> are markers regardless (see above).
+>
+> A template used directly in a sitelet page **without** `bind` is static markup
+> and is not interactive on the client; wrap it in `hydrate`/`client` for
+> interactivity, or use the `keepUnfilled` + `bind` split above.
 
 The generated code passes the raw template source as data (structure-as-data),
 which is what makes the same module usable on both tiers and leaves room for the
 `ServerLoad`/`ClientLoad` modes.
-
-> A template used directly in a sitelet page is **server-rendered static markup**
-> and is not interactive on the client. To make it interactive (events/vars),
-> wrap it in `hydrate`/`client` (or the whole page would need WebSharper's
-> full-document template hydration).
 
 ## 7. Limitations (current)
 
@@ -216,8 +277,12 @@ which is what makes the same module usable on both tiers and leaves room for the
 - **`ws-dom`** variables and **`datetime-local`** vars fall back to `string`.
 - **`ServerLoad`/`ClientLoad`** are not configurable yet; the runtime always
   embeds the source (`Once`/`Inline`).
-- **A template is not hydrated in place** when used directly in a server-rendered
-  page; wrap it in `hydrate`/`client` for interactivity (see §6).
+- **`bind` / `keepUnfilled` is all-or-nothing**: the record cannot tell "unset"
+  from "set to the default", so `doc ~keepUnfilled:true` passes no holes and the
+  whole template is rendered plain (a skeleton). Per-hole server/client splits
+  would need set-tracking.
+- **Reactive holes are text (`*_view`), docs and vars**; `ws-attr` and
+  `ws-onafterrender` are not reactive yet.
 
 These are tracked follow-ups; the codegen is structured so adding them does not
 change the generated API shape.

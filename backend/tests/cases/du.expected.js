@@ -808,6 +808,29 @@ if (!globalThis.OCamlRuntime) {
     caml_string_concat: function (a, b) {
       return a + b;
     },
+    // `=`/`<>`/comparison on strings are emitted as the `%string_*` primitives
+    // (not the generic caml_equal/caml_compare), so they need their own entries.
+    caml_string_equal: function (a, b) {
+      return a === b ? 1 : 0;
+    },
+    caml_string_notequal: function (a, b) {
+      return a !== b ? 1 : 0;
+    },
+    caml_string_compare: function (a, b) {
+      return a < b ? -1 : a > b ? 1 : 0;
+    },
+    caml_string_lessthan: function (a, b) {
+      return a < b ? 1 : 0;
+    },
+    caml_string_lessequal: function (a, b) {
+      return a <= b ? 1 : 0;
+    },
+    caml_string_greaterthan: function (a, b) {
+      return a > b ? 1 : 0;
+    },
+    caml_string_greaterequal: function (a, b) {
+      return a >= b ? 1 : 0;
+    },
     caml_int_of_string: function (s) {
       var n = parseInt(s, 10);
       if (isNaN(n) || !/^\s*[+-]?[0-9]+\s*$/.test(s)) throw new globalThis.Error("Failure(\"int_of_string\")");

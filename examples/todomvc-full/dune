@@ -1,0 +1,9 @@
+; Editor/typecheck context (Merlin/ocaml-lsp). The app itself is built by
+; build.sh, not by `dune build`. `(pps websharper-ocaml-ppx)` expands
+; `[%template ...]` for the editor; build.sh uses the frontend's own expansion.
+(library
+ (name todomvc_ml)
+ (modules todomvc)
+ (libraries websharper-server websharper-ui-server websharper-javascript)
+ (flags (:standard -w -33))
+ (preprocess (pps websharper-ocaml-ppx)))

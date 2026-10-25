@@ -2,6 +2,6 @@
  (name websharper_ui_server)
  (public_name websharper-ui-server)
  (wrapped false)
- (modules WebSharper_UI)
+ (modules WebSharper_UI WebSharper_Sitelets)
  (libraries websharper-server websharper-template websharper-javascript
             websharper-stdlib))

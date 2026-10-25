@@ -119,7 +119,16 @@ let analyze (nodes : Markup.node list) : parsed =
     | Markup.Element el -> scan_element acc el
   and scan_element acc (el : Markup.element) =
     match Markup.find_attr el "ws-template" with
-    | Some name -> register_inner name [ Markup.Element el ]
+    | Some name ->
+        (* The element itself is the sub-template; drop the marker before
+           scanning its body so it does not match again (infinite recursion). *)
+        let body =
+          [ Markup.Element
+              { el with
+                attrs =
+                  List.filter (fun (k, _) -> String.lowercase_ascii k <> "ws-template") el.attrs } ]
+        in
+        register_inner name body
     | None -> (
         match Markup.find_attr el "ws-children-template" with
         | Some name -> register_inner name el.children

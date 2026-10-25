@@ -11,6 +11,7 @@ depends: [
   "dune" {>= "3.0"}
   "websharper-javascript"
   "websharper-runtime"
+  "websharper-sitelets"
   "websharper-stdlib"
 ]
 build: [
@@ -35,7 +36,7 @@ extra-files: [
   ["lib/docInputType.ml" "md5=51d33ee8dff8e4fe513c0fa3d18b3b7e"]
   ["lib/domUtility.ml" "md5=d6b0da046b800cfb3926efdc3eada15d"]
   ["lib/domUtilityInsertPos.ml" "md5=a648ae0f347230c0ab05f43e0d049ac2"]
-  ["lib/dune" "md5=6cd574b56c2e68751899bd40d1f8fba0"]
+  ["lib/dune" "md5=d75214da1cb2753319ea4bc42cefd72d"]
   ["lib/easing.ml" "md5=83e23e05207967ce8b7db76ee430ef01"]
   ["lib/elt.ml" "md5=de1257bef85d2c9eb9652669132fba4e"]
   ["lib/eltInputType.ml" "md5=4a45422e4124e7db23bfc04111a1ae02"]
@@ -63,8 +64,8 @@ extra-files: [
   ["lib/on.ml" "md5=b2bdca466f11faba3b5497388c39725b"]
   ["lib/reactiveExtensions.ml" "md5=8940bf140c5839306f96ba6cdb08adc4"]
   ["lib/routeMap.ml" "md5=bced0eccc262e04d1e708d71fafe7bf9"]
-  ["lib/router.ml" "md5=d00932ba3ddc6444736125f19b23bfde"]
-  ["lib/routerExtensions.ml" "md5=3dd9ba53edb2582a28fbb93538fa6d73"]
+  ["lib/router.ml" "md5=8037a485dadbb647f2a24ff7765fc7e9"]
+  ["lib/routerExtensions.ml" "md5=c1663ce100e55cffc6910aec1235c63a"]
   ["lib/serializer.ml" "md5=86477422b85346b6b339c8a5bf0ddb9d"]
   ["lib/storage.ml" "md5=8565c672d8a6a4da14de95e6080a084f"]
   ["lib/submitter.ml" "md5=ead9dd4f8050d120b90d93598a8105bc"]
@@ -99,5 +100,5 @@ extra-files: [
   ["lib/varViewViewBuilderTypes.ml" "md5=b4bcd3700b4c4d1caaacdbde70c8f7d0"]
   ["lib/view.ml" "md5=2b044d66752a8029b2e48dad1e36b38b"]
   ["lib/viewBuilder.ml" "md5=bbcd708b258e320d4ddabb03dd7f9edb"]
-  ["websharper-ui.opam" "md5=53334d204a5a86ce74ccf48b4de47700"]
+  ["websharper-ui.opam" "md5=17bfe89ab2562f5fc041232a764074bd"]
 ]

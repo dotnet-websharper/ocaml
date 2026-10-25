@@ -131,7 +131,8 @@ let anchors_expr (t : Hole.template) =
 let field_decl (h : Hole.hole) : string =
   let n = lcfirst h.name in
   match h.kind with
-  | Hole.Simple -> Printf.sprintf "mutable %s : string" n
+  (* Text holes are `View`s so `_view` setters can make them reactive. *)
+  | Hole.Simple -> Printf.sprintf "mutable %s : string WebSharper_UI.View.t" n
   | Hole.Doc -> Printf.sprintf "mutable %s : WebSharper_UI.Doc.t" n
   | Hole.Attr -> Printf.sprintf "mutable %s : WebSharper_UI.Attr.t" n
   | Hole.Event ev -> Printf.sprintf "mutable %s : %s -> %s -> unit" n element_type (event_type ev)
@@ -141,7 +142,7 @@ let field_decl (h : Hole.hole) : string =
 let field_init (h : Hole.hole) : string =
   let n = lcfirst h.name in
   match h.kind with
-  | Hole.Simple -> Printf.sprintf "%s = \"\"" n
+  | Hole.Simple -> Printf.sprintf "%s = WebSharper_UI.View.const \"\"" n
   | Hole.Doc -> Printf.sprintf "%s = WebSharper_UI.Doc.empty ()" n
   | Hole.Attr -> Printf.sprintf "%s = WebSharper_UI.Attr.empty ()" n
   | Hole.Event _ -> Printf.sprintf "%s = (fun _ _ -> ())" n
@@ -155,7 +156,9 @@ let t_type (t : Hole.template) : string =
 let comb_sigs (h : Hole.hole) : string list =
   let n = lcfirst h.name in
   match h.kind with
-  | Hole.Simple -> [ Printf.sprintf "val %s : string -> t -> t" n ]
+  | Hole.Simple ->
+      [ Printf.sprintf "val %s : string -> t -> t" n;
+        Printf.sprintf "val %s_view : string WebSharper_UI.View.t -> t -> t" n ]
   | Hole.Doc -> [ Printf.sprintf "val %s : WebSharper_UI.Doc.t -> t -> t" n ]
   | Hole.Attr -> [ Printf.sprintf "val %s : WebSharper_UI.Attr.t -> t -> t" n ]
   | Hole.Event ev ->
@@ -173,6 +176,13 @@ let rec sig_of ~indent (t : Hole.template) (inner : Hole.template list) : string
           (sig_of ~indent:(indent + 2) sub []) pad)
       inner
   in
+  let is_root = t.name = None in
+  let doc_sig =
+    if is_root then "val doc : ?keepUnfilled:bool -> t -> WebSharper_UI.Doc.t"
+    else "val doc : t -> WebSharper_UI.Doc.t"
+  in
+  (* `Bind` is only on the root template (it binds the served document). *)
+  let bind_sig = if is_root then [ "val bind : t -> unit" ] else [] in
   let lines =
     [ Printf.sprintf "type vars = %s" (vars_type t);
       Printf.sprintf "type anchors = %s" (anchors_type t);
@@ -180,7 +190,8 @@ let rec sig_of ~indent (t : Hole.template) (inner : Hole.template list) : string
       t_type t;
       "val create : unit -> t" ]
     @ List.concat_map comb_sigs t.holes
-    @ [ "val doc : t -> WebSharper_UI.Doc.t" ]
+    @ [ doc_sig ]
+    @ bind_sig
     @ inner_mods
     @ [ "val references : (string * string * string) list" ]
   in
@@ -196,7 +207,7 @@ let hole_expr (h : Hole.hole) : string =
   let name = ocaml_string (String.lowercase_ascii h.name) in
   let arg = if is_var h then "c.vars." ^ lcfirst h.name else "c." ^ lcfirst h.name in
   match h.kind with
-  | Hole.Simple -> Printf.sprintf "WebSharper_UI.TemplateHole.makeText %s %s" name arg
+  | Hole.Simple -> Printf.sprintf "WebSharper_UI.TemplateHole.makeTextView %s %s" name arg
   | Hole.Doc -> Printf.sprintf "WebSharper_UI.TemplateHoleElt.create %s %s" name arg
   | Hole.Attr -> Printf.sprintf "WebSharper_UI.TemplateHoleAttribute.create %s %s" name arg
   | Hole.Event _ ->
@@ -206,8 +217,58 @@ let hole_expr (h : Hole.hole) : string =
   | Hole.ElemHandler -> Printf.sprintf "WebSharper_UI.TemplateHoleAfterRender.create %s %s" name arg
   | Hole.Var ty -> Printf.sprintf "%s %s %s" (var_fn ty) name arg
 
+let is_template_el (el : Markup.element) =
+  Markup.find_attr el "ws-template" <> None
+  || Markup.find_attr el "ws-children-template" <> None
+  || (String.lowercase_ascii el.tag = "template"
+      && (Markup.find_attr el "name" <> None || Markup.find_attr el "id" <> None))
+
+(* Serialize each template's own markup and compile it as its own source. Nested
+   `<template>` elements in a `[%template]` source are not usable at runtime (their
+   content is inert, and looking them up hashes DOM nodes), so the codegen splits
+   the one authoring file into per-template sources. *)
+let rec strip_templates (nodes : Markup.node list) : Markup.node list =
+  List.filter_map
+    (fun (nd : Markup.node) ->
+      match nd with
+      | Markup.Element el when is_template_el el -> None
+      | Markup.Element el ->
+          Some (Markup.Element { el with Markup.children = strip_templates el.Markup.children })
+      | _ -> Some nd)
+    nodes
+
+(* A template may be a full HTML document (the official TodoMVC template is);
+   render its `<body>` (the served page supplies `<head>`). *)
+let rec find_body (nodes : Markup.node list) : Markup.node list option =
+  List.find_map
+    (fun (nd : Markup.node) ->
+      match nd with
+      | Markup.Element el when String.lowercase_ascii el.tag = "html" ->
+          List.find_map
+            (fun (c : Markup.node) ->
+              match c with
+              | Markup.Element b when String.lowercase_ascii b.tag = "body" -> Some b.Markup.children
+              | _ -> None)
+            el.Markup.children
+      | _ -> None)
+    nodes
+
+(* The server source keeps the file's other templates so the native renderer can
+   re-emit them as `ws-children-template` placeholders (WS's `writeWrappedTemplate`);
+   the client source strips them because the client builds each template from its
+   own source (a nested `<template>`'s content is inert in `parseHTMLIntoFakeRoot`). *)
+let template_src ~server (t : Hole.template) : string =
+  match t.name with
+  | None ->
+      let body = match find_body t.body with Some ns -> ns | None -> t.body in
+      Markup.print (if server then body else strip_templates body)
+  | Some _ -> Markup.print t.body
+
 let rec impl_of ~server ~base (t : Hole.template) (inner : Hole.template list) : string =
-  let tname = match t.name with Some n -> "Some " ^ ocaml_string n | None -> "None" in
+  let this_base =
+    match t.name with None -> base | Some n -> base ^ "-" ^ String.lowercase_ascii n
+  in
+  let src = ocaml_string (template_src ~server t) in
   let create =
     Printf.sprintf "let create () : t = { vars = %s; %s }"
       (vars_record t)
@@ -226,19 +287,45 @@ let rec impl_of ~server ~base (t : Hole.template) (inner : Hole.template list) :
                 n n ]
         | Hole.ElemHandler -> [ Printf.sprintf "let %s v c = c.%s <- v; c" n n ]
         | Hole.Var _ -> []
+        | Hole.Simple ->
+            [ Printf.sprintf "let %s v c = c.%s <- WebSharper_UI.View.const v; c" n n;
+              Printf.sprintf "let %s_view v c = c.%s <- v; c" n n ]
         | _ -> [ Printf.sprintf "let %s v c = c.%s <- v; c" n n ])
       t.holes
   in
   let holes = String.concat ";\n      " (List.map hole_expr t.holes) in
+  let is_root = t.name = None in
+  (* `?keepUnfilled` is server-side only (it keeps the *unfilled* holes as plain
+     `ws-*` / `${…}` markers for the client to fill with `bind`). A fresh instance
+     is the usual argument, so with it the codegen passes no holes at all and the
+     renderer emits the plain template. *)
+  let doc_params = if is_root then "?(keepUnfilled = false) " else "" in
+  let doc_ignore = if is_root then "  ignore keepUnfilled;\n" else "" in
   let doc =
     if server then
+      let arg =
+        if is_root then "(if keepUnfilled then [] else [ " ^ holes ^ " ])"
+        else "[ " ^ holes ^ " ]"
+      in
       Printf.sprintf
-        "let doc (c : t) : WebSharper_UI.Doc.t =\n  WebSharper_UI.Template.getOrLoad ~base:%s ~name:%s ~src ~refs:references ~keep_unfilled:false\n    [ %s ]"
-        (ocaml_string base) tname holes
+        "let doc %s(c : t) : WebSharper_UI.Doc.t =\n  WebSharper_UI.Template.getOrLoad ~base:%s ~name:(None) ~src ~refs:references ~keep_unfilled:%s\n    %s"
+        doc_params (ocaml_string this_base)
+        (if is_root then "keepUnfilled" else "false")
+        arg
     else
       Printf.sprintf
-        "let doc (c : t) : WebSharper_UI.Doc.t =\n  let fopt = function None -> WebSharper_StdLib.FSharpOption.none () | Some x -> WebSharper_StdLib.FSharpOption.some x in\n  WebSharper_UI.ClientDoc.getOrLoadTemplate %s (fopt %s)\n    (fun () -> WebSharper_UI.DomUtility.parseHTMLIntoFakeRoot src)\n    [ %s ]"
-        (ocaml_string base) tname holes
+        "let doc %s(c : t) : WebSharper_UI.Doc.t =\n%s  let fopt = function None -> WebSharper_StdLib.FSharpOption.none () | Some x -> WebSharper_StdLib.FSharpOption.some x in\n  WebSharper_UI.ClientDoc.getOrLoadTemplate %s (fopt (None))\n    (fun () -> WebSharper_UI.DomUtility.parseHTMLIntoFakeRoot src)\n    [ %s ]"
+        doc_params doc_ignore (ocaml_string this_base) holes
+  in
+  (* Root only: bind the served document to this instance's holes (WS's
+     `Bind`/`RunFullDocTemplate`). Server-side it is a no-op. *)
+  let bind =
+    if not is_root then ""
+    else if server then "let bind (_ : t) : unit = ()"
+    else
+      Printf.sprintf
+        "let bind (c : t) : unit =\n  ignore (WebSharper_UI.ClientDoc.runFullDocTemplate [ %s ])"
+        holes
   in
   let inner_mods =
     List.map
@@ -252,11 +339,12 @@ let rec impl_of ~server ~base (t : Hole.template) (inner : Hole.template list) :
        Printf.sprintf "type anchors = %s" (anchors_type t);
        event_type_decl t;
        t_type t;
+       Printf.sprintf "let src = %s" src;
        "let references : (string * string * string) list = []";
        create ]
-     @ combinators @ [ doc ] @ inner_mods)
+     @ combinators @ [ doc ] @ (if bind = "" then [] else [ bind ]) @ inner_mods)
 
 let implementation ~server ~base ~src (p : Hole.parsed) : string =
-  Printf.sprintf "(* GENERATED from %s.html — do not edit. *)\n\nlet src = %s\n\n%s\n"
-    base (ocaml_string src)
+  ignore src;
+  Printf.sprintf "(* GENERATED from %s.html — do not edit. *)\n\n%s\n" base
     (impl_of ~server ~base p.root p.inner)
