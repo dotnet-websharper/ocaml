@@ -37,6 +37,10 @@ refs=(--reference "$ui_dll" --reference "$sl_dll" --reference "$js_dll")
 srcdir="$(cd "$(dirname "$entry")" && pwd)"
 work="$out/.deps"
 mkdir -p "$work"
+# Typed-JSON stub (`WebSharper_Json`). Keep it a .ml: an .mli drops the
+# primitive, and the frontend then sees a plain global instead of a `ccall`.
+cp "$root/runtimes/server-api/webSharper_Json.ml" "$work/"
+(cd "$work" && ocamlc -c -I "$s" webSharper_Json.ml)
 
 sibs=()
 for f in "$srcdir"/*.ml; do

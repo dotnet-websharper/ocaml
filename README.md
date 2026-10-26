@@ -251,6 +251,25 @@ The `hydrate`/`client` pipeline:
 
 See `examples/hello-world` and `docs/client-server.md` for details.
 
+### Typed JSON
+
+`WebSharper_Json.encode v` / `WebSharper_Json.decode s` serialize any supported
+OCaml type in the *same* external representation `[@rpc]`/`[@export]` use, so no
+hand-written encoder/decoder is needed:
+
+```ocaml
+let save (ts : todo list) =
+  Storage.setItem (storage ()) key (WebSharper_Json.encode ts)
+
+let load () =
+  try (WebSharper_Json.decode (Storage.getItem (storage ()) key) : todo list)
+  with _ -> []
+```
+
+The descriptor comes from the value's type at the call site, so annotate
+polymorphic callers (`let save (ts : todo list)`). Client-only today. See
+[`JSON.md`](JSON.md) §1.1 for how the frontend/backend/runtime split it.
+
 ## Differences from .NET WebSharper
 
 wsocaml reuses WebSharper's AST, runtime and binding packages, so most of the

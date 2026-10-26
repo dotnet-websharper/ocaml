@@ -2,7 +2,8 @@
 
 *Status: design note + roadmap. The short version of §2 lives in
 `docs/client-server.md` §3.2; this file is the long form (why, what adopting
-WebSharper's JSON would take, and the alternatives).*
+WebSharper's JSON would take, and the alternatives). §1.1 documents the
+application-level typed JSON (`WebSharper_Json`) that reuses this machinery.*
 
 The RPC/`[@export]` boundary carries values between an **OCaml client compiled to
 JS** (frontend → `.wsir.json` IR → F# backend → WebSharper packager) and a
@@ -35,7 +36,7 @@ Three artifacts implement it:
 | --- | --- | --- |
 | generated **native** `toJson_*` / `ofJson_*` (`yojson`) | the server half | `frontend/bin/main.ml` (`enc` / `dec` / `helperDefs`, emitted into `server.ml`; `Wsrpc.register` in `runtimes/ocaml/wsrpc.ml`) |
 | the unit's **named type declarations** (`UnitIR.Types`) | the shared type model | `frontend/bin/main.ml` (`typeId` / `descr` / `unitTypes`; IR `types`) |
-| a compact **type descriptor** per rpc/export, embedded in the IR | describes the payload shape to the client | `frontend/bin/main.ml` (`descr`; IR `rpcs` / `exports`) |
+| a compact **type descriptor** per rpc/export, embedded in the IR | describes the payload shape to the client | `frontend/bin/main.ml` (`descr`; IR `rpcs` / `exports` / `json`) |
 | the **client marshaller** — descriptor interpreter | the client half | `backend/Runtime.js` (`registerTypes` / `resolveType` / `marshalIn` / `marshalOut` / `rpcMeta`, driving `rpcCall`, `exported`, `registerRpc`) |
 
 Named records/variants are declared **once per unit** (`types`, keyed by a stable
@@ -44,6 +45,50 @@ them at module init (`OCamlRuntime.registerTypes([…])`) and resolves ids from 
 registry. `UnitIR` (`backend/Ir.fs`) is otherwise a lowered lambda `Code` plus
 `Rpcs` / `Exports` / `Clients`. Descriptors from `wsocaml-ir-4`/`5` still carry
 their own `types` array with `key` references and are resolved from it.
+
+### 1.1 Typed JSON for application code (`WebSharper_Json`)
+
+`[@rpc]`/`[@export]` describe *their own* payloads. Plain client state (the
+TodoMVC list in `localStorage`, a cached form, …) can use the same machinery
+directly:
+
+```ocaml
+let s = WebSharper_Json.encode (todos : todo list)     (* JSON text *)
+let (ts : todo list) = WebSharper_Json.decode s
+```
+
+How it fits the four artifacts above:
+
+1. `runtimes/server-api/webSharper_Json.ml` declares the user-facing
+   `encode : 'a -> string` / `decode : string -> 'a` as `external`s with
+   wsocaml-specific primitives, plus the index-carrying `__encode`/`__decode`
+   the frontend rewrites calls to. **Keep it a `.ml`**: an `.mli` drops the
+   primitive from the `.cmi`, and the frontend then sees a plain global instead
+   of a `ccall`.
+2. `frontend/bin/main.ml` (`transformJson`, run after `transformClientEvents`)
+   rewrites `WebSharper_Json.encode e` to `WebSharper_Json.__encode <i> e`, tags
+   it `[@ws_json_encode <i>]`, and leaves `decode` symmetric. After typechecking,
+   `jsonCalls` reads the **instantiated type** at that node, runs the same
+   `descr` as rpcs/exports (declaring named types in the shared unit `types`),
+   and emits `<i>` → descriptor in the IR's `json` section.
+3. `backend/Lowering.fs` (`prim`) inlines the descriptor and lowers the
+   primitive to `OCamlRuntime.jsonEncode(descriptor, v)` /
+   `jsonDecode(descriptor, s)`; `backend/Runtime.js` reuses
+   `marshalOut`/`marshalIn` with `JSON.stringify`/`JSON.parse`.
+
+Properties: the text is exactly the `[@rpc]`/`[@export` external representation
+(§1's table), so persisted data can later be served by an rpc with no format
+change, and there is no second marshaler to keep in sync. The type must be
+**concrete at the call site** — the descriptor is derived from it — so annotate
+polymorphic callers (`let save (ts : todo list) = …`); a type variable is a
+located diagnostic. The call must be direct (an alias of
+`WebSharper_Json.encode` cannot supply the call-site index).
+
+Scope: **client-only** for now. The machinery is the client half of §1, and app
+code that needs `WebSharper_Json` normally lives in a `let () =` block, which is
+dropped from `server.ml`. A native implementation of the same descriptor
+(`yojson`, reusing the §1.1 descriptor interpreter's rules) is a mechanical
+follow-on if server-side typed JSON is needed.
 
 ---
 
@@ -326,12 +371,13 @@ exactly this reason.
 
 | File | Relevant part |
 | --- | --- |
-| `frontend/bin/main.ml` | `enc` / `dec` (native codecs), `descr` (IR descriptor), `helperDefs`, `emitServer` (registers `Wsrpc` handlers), `rpcs` / `exports` in the IR |
-| `backend/Ir.fs` | `UnitIR` (`Rpcs`, `Exports`, `Code`) — no type declarations |
-| `backend/Lowering.fs` | `lit` (`Block` → `$tag` block), variant tag checks, `RpcMeta`, `rpcCall` / `exported` / `registerRpc` emission |
+| `frontend/bin/main.ml` | `enc` / `dec` (native codecs), `descr` (IR descriptor), `helperDefs`, `emitServer` (registers `Wsrpc` handlers), `rpcs` / `exports` / `json` in the IR; `transformJson` / `jsonCalls` (typed JSON) |
+| `backend/Ir.fs` | `UnitIR` (`Rpcs`, `Exports`, `Clients`, `Types`, `Json`, `Code`) |
+| `backend/Lowering.fs` | `lit` (`Block` → `$tag` block), variant tag checks, `RpcMeta`, `Json` (`jsonEncode`/`jsonDecode` at the primitive), `rpcCall` / `exported` / `registerRpc` emission |
 | `backend/Program.fs` | `--ws-compile` path: `Compilation`, `CompileFull`, `ToCurrentMetadata`, `packageAssembly`, `packageReferences` |
 | `backend/Bindings.fs` | `Context.Comp = Compilation(refMeta)`, `IO.LoadMetadata` over `--reference` assemblies |
-| `backend/Runtime.js` | `marshalIn` / `marshalOut` / `rpcMeta`, `rpcCall`, `rpcTransport`, `exported`, `registerRpc` |
+| `backend/Runtime.js` | `marshalIn` / `marshalOut` / `rpcMeta`, `jsonEncode` / `jsonDecode`, `rpcCall`, `rpcTransport`, `exported`, `registerRpc` |
+| `runtimes/server-api/webSharper_Json.ml` | the typed-JSON stub (`encode`/`decode` + the `__`-prefixed indexed forms) |
 | `runtimes/ocaml/wsrpc.ml` | `Yojson`-based handler registry + HTTP server |
 | `docs/client-server.md` §3.2 | external representation + the short "why not WS JSON" note |
 

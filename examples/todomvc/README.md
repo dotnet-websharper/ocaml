@@ -45,6 +45,9 @@ bash build.sh
 
 ## How it fits together
 
+- **Persistence** uses typed JSON: `WebSharper_Json.encode (ts : todo list)` /
+  `decode`, so the stored `[{"id","title","completed"}, …]` shape is derived from
+  the OCaml type instead of a hand-written encoder (`JSON.md` §1.1).
 - **Client-only app.** Everything lives in one top-level `let ()`. Such a binding
   is *dropped* from `server.ml` (its pattern is not `Ppat_var`), so the app runs
   only in the client bundle — while the frontend still typechecks the whole file

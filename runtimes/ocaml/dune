@@ -2,5 +2,5 @@
  (name websharper_server)
  (public_name websharper-server)
  (wrapped false)
- (modules Ssr Async Wsrpc WebSharper_Server WebSharper_ClientServer)
+ (modules Ssr Async Wsrpc WebSharper_Server WebSharper_ClientServer WebSharper_Json)
  (libraries unix yojson))

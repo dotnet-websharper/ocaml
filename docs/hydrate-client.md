@@ -49,9 +49,9 @@ Both tiers run the *same* `transformClientServer`. Only `transformClientEvents`
 (and `transformTemplates`) take a `~server` flag, and `serverItems` filters at
 emission time.
 
-## 3. `transformClientServer` (`main.ml:1458`) — lift the fragment, install the marker
+## 3. `transformClientServer` (`main.ml:1487`) — lift the fragment, install the marker
 
-Recognizes `client`/`hydrate` in call position (`csCall`, `:1460`):
+Recognizes `client`/`hydrate` in call position (`csCall`, `:1489`):
 
 | call | marker |
 | --- | --- |
@@ -59,7 +59,7 @@ Recognizes `client`/`hydrate` in call position (`csCall`, `:1460`):
 | `hydrate (fun () -> view)` | SSR'd (`__hydrate`) |
 
 For each call it computes a **stable id** from the *printed* fragment
-(`id_of`, `:1469`):
+(`id_of`, `:1498`):
 
 ```ocaml
 "ws" ^ string_of_int (abs (Hashtbl.hash (Pprintast.expression arg)))
@@ -67,29 +67,29 @@ For each call it computes a **stable id** from the *printed* fragment
 
 and does two rewrites from the same fragment:
 
-1. **In place** (marker, `:1493`):
+1. **In place** (marker, `:1546`):
    - `hydrate` → `WebSharper_ClientServer.__hydrate "ws<id>" (fun () -> view)`
    - `client`  → `WebSharper_ClientServer.__client "ws<id>"`
-2. **Appended top-level binding** (`binding_value`, `:1502`), inserted after the
-   opens/types and before the first value binding (`insert`, `:1556`):
+2. **Appended top-level binding** (`binding_value`, `:1531`), inserted after the
+   opens/types and before the first value binding (`insert`, `:1585`):
    ```ocaml
    let[@client] ws<id> () = WebSharper_UI.Doc.runById "ws<id>" (view)
    ```
 
-Also, in the fragment: `on.<event>` field access → `On.<event>` (`:1519`).
+Also, in the fragment: `on.<event>` field access → `On.<event>` (`:1553`).
 
 The two rewrites use the same id because it derives from the fragment text —
 that is the cross-tier contract (same trick as the content-hashed event keys,
 `AGENTS.md` gotcha 11).
 
-## 4. `transformClientEvents` (`main.ml:1699`) — region vs server-rendered handlers
+## 4. `transformClientEvents` (`main.ml:1728`) — region vs server-rendered handlers
 
 `~server:true` only for `--emit-server`.
 
 **a) Handlers inside a region are "client-rendered".** The `__hydrate` marker
-marks its view (`isHydrateMarker`, `:1755`), and every top-level `[@client]`
-binding marks itself (`structure_item`, `:1874`). Inside (`!in_client`), on the
-**server** a handler's body is replaced by `fun _ _ -> ()` (`:1769`); on the
+marks its view (`isHydrateMarker`, `:1784`), and every top-level `[@client]`
+binding marks itself (`structure_item`, `:1903`). Inside (`!in_client`), on the
+**server** a handler's body is replaced by `fun _ _ -> ()` (`:1800`); on the
 **client** it is left inline. There is **no** `ws-on<event>` marker and no lifted
 binding — the client attaches the handler when `Doc.runById` re-renders during
 `hydrate()`.
@@ -101,26 +101,26 @@ Verified: for `div [ on.click (fun _ _ -> Var.set v "after") ]` inside a
 
 **b) `on.<event>` on a *server-rendered* element** (outside any region) is lifted
 into a top-level `[@javascript]` binding (`wsh<digits>`, key = `Hashtbl.hash` of
-the printed handler, `keyOf` `:1720`); then:
-- server build → `WebSharper_UI.Attr.create "ws-on<event>" "<key>"` (`marker`, `:1745`),
+the printed handler, `keyOf` `:1749`); then:
+- server build → `WebSharper_UI.Attr.create "ws-on<event>" "<key>"` (`marker`, `:1777`),
 - client build → `On.<event> <key>`.
 
 A server-rendered handler must be **closed**: if `freeNames` shows it captures a
-local, that is a located error (`:1779`). Region handlers are exempt.
+local, that is a located error (`:1812`). Region handlers are exempt.
 
 The lifted event keys are returned as `eventKeys`.
 
-## 5. Classification and the IR (`main.ml:313`, `:2029`)
+## 5. Classification and the IR (`main.ml:313`, `:2269`)
 
 - `clientMarks` (`:313`): `js` = names of `[@javascript] ∪ [@export] ∪ [@client]`;
   `rpc`; `srv` (everything else).
 - `clientNames` (`:335`): `cli` = names with `[@client]` (the `ws<id>` liftings).
 - `checkBoundary` (`:404`): a `js` value that references a `server`-only
   top-level is a located error.
-- IR (`:2111`):
+- IR (`:2269`):
   - `javascript`, `rpc`, `server`, `exports` name lists;
   - `clients` = `(cli @ eventKeys)` mapped to `{name; key; index}`, where `index`
-    is the value's module-block slot (`topIndex`, `:2064`).
+    is the value's module-block slot (`topIndex`, `:2217`).
 
 ## 6. Client build (backend)
 
@@ -148,7 +148,7 @@ client binding that is `WebSharper.UI.Client.Doc.RunById`
 
 ## 7. Server build (`--emit-server`)
 
-`serverItems` (`:939`) keeps, item by item:
+`serverItems` (`:968`) keeps, item by item:
 
 | item | kept in `server.ml`? |
 | --- | --- |
@@ -159,9 +159,9 @@ client binding that is `WebSharper.UI.Client.Doc.RunById`
 | `let[@rpc]`, `let` (server-only), `type`/`module`/… | yes |
 
 The filter is literally `js minus clients`, so `[@client]` survives. Marker
-attributes are stripped (`stripMarkers`, `:924`). The server items are
+attributes are stripped (`stripMarkers`, `:953`). The server items are
 typechecked against the **native** packages via `typecheckServer`
-(`--server-include` appended last so the shadows win, `:2022`).
+(`--server-include` appended last so the shadows win, `:2174`).
 
 Native shadows used at link time:
 
@@ -171,7 +171,7 @@ Native shadows used at link time:
   `Doc.runById id d = Ssr.regions_replace id (render d)` (`:73`) and
   `Doc.t = Ssr.node list` is **eager**.
 
-Bootstrap (`emitServer`, `:1067`):
+Bootstrap (`emitServer`, `:1104`):
 
 - **with `[@website]`** (sitelet path — `apps-site`, `hello-world`):
   ```ocaml

@@ -8,8 +8,7 @@ we called out as the strongest next candidates.
 > Status: working notes, not a committed design. Fold sections back into
 > `docs/*.md` (see the docs map in `AGENTS.md`) when work actually lands.
 
-Last synced: 2026-10-25, after `848ef29` (server-rendered event handlers +
-name-significant endpoint routing).
+Last synced: 2026-10-26, after the typed-JSON (`WebSharper_Json`) work.
 
 ---
 
@@ -95,6 +94,12 @@ the URL).
   in `docs/client-server.md` §3.2; full analysis + roadmap in `JSON.md`). The
   smaller design, if worth it: **generate the client codecs too** from the same
   type walk, leaving the descriptor only for the dynamic `[@export]` boundary;
+  app-level typed JSON now reuses the descriptor directly
+  (`WebSharper_Json.encode`/`decode`, `JSON.md` §1.1) — but only client-side;
+- **native typed JSON** — `WebSharper_Json` has no server implementation, so
+  serializing a value in server-only code (an `[@rpc]` body, a sitelet) still
+  means the generated `toJson_*`/`ofJson_*`. A `yojson` interpreter of the same
+  descriptor would close the gap;
 - **external JS libraries (`[<Require>]`/resources)** — a binding to a
   non-WebSharper lib (e.g. Chart.js) lowers to a **global** (`new
   globalThis.Chart(…)`) and needs no bundler, but wsocaml does not honour

@@ -29,6 +29,8 @@ module Lowering =
             RpcMeta: Map<string, string>
             Exports: (string * int * int * string) list
             Clients: (string * int) list
+            // Typed-JSON call-site descriptors, inlined at the primitive call site.
+            Json: Map<int, string>
             ServerOnly: Set<string>
             Server: bool
             // True while lowering the module's top-level let chain (vs. nested
@@ -301,6 +303,24 @@ module Lowering =
         | _ -> expr c e
 
     and prim c p xs =
+        // Typed JSON: the frontend rewrote `WebSharper_Json.encode v` /
+        // `decode s` to `__encode <i> v` / `__decode <i> s`; `<i>` keys the type
+        // descriptor the frontend recorded in the IR.
+        let jsonMeta i =
+            match c.Json.TryFind i with
+            | Some m -> m
+            | None -> failwith $"typed JSON: no descriptor for call site {i}"
+
+        match p.Tag, p.Name, xs with
+        | "ccall", Some "wsocaml:json_encode", [ LExpr.Const (LConst.I i); v ] ->
+            rt c "jsonEncode" [ Value(String(jsonMeta i)); expr c v ]
+        | "ccall", Some "wsocaml:json_decode", [ LExpr.Const (LConst.I i); v ] ->
+            rt c "jsonDecode" [ Value(String(jsonMeta i)); expr c v ]
+        | "ccall", Some ("wsocaml:json_encode_unindexed" | "wsocaml:json_decode_unindexed"), _ ->
+            failwith "WebSharper_Json.encode/decode must be called directly (the call-site type is needed)"
+        | _ -> prim0 c p xs
+
+    and prim0 c p xs =
         let es = List.map (expr c) xs
 
         // Adapt OCaml argument values to what JS/WebSharper expects:
@@ -689,6 +709,7 @@ module Lowering =
                 RpcMeta = Map.ofList ir.Rpcs
                 Exports = ir.Exports
                 Clients = ir.Clients
+                Json = Map.ofList ir.Json
                 ServerOnly = Set.ofList ir.Server
                 Server = server
                 TopLevel = true
@@ -730,6 +751,7 @@ module Lowering =
                 RpcMeta = Map.ofList ir.Rpcs
                 Exports = ir.Exports
                 Clients = ir.Clients
+                Json = Map.ofList ir.Json
                 ServerOnly = Set.ofList ir.Server
                 Server = server
                 TopLevel = true

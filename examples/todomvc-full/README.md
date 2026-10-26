@@ -51,6 +51,9 @@ bash build.sh
 
 ## How it fits together
 
+- **Persistence** uses typed JSON: `WebSharper_Json.encode (ts : todo list)` /
+  `decode`, so the stored `[{"id","title","completed"}, …]` shape is derived from
+  the OCaml type instead of a hand-written encoder (`JSON.md` §1.1).
 - **SSR split.** The sitelet renders `Tmpl.doc ~keepUnfilled:true (Tmpl.create ())`
   into `Content.page`, i.e. the template body with every hole left as its plain
   `ws-*` / `${…}` marker and the row re-emitted as a hidden

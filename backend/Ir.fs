@@ -70,6 +70,9 @@ type UnitIR =
         Rpcs: (string * string) list
         Exports: (string * int * int * string) list
         Clients: (string * int) list
+        // Typed-JSON call sites (`WebSharper_Json.encode`/`decode`): call-site
+        // index -> external-representation descriptor (raw JSON text). `wsocaml-ir-6`.
+        Json: (int * string) list
         // Unit-level named type declarations (records/variants), each a JSON
         // object (raw text) keyed by its stable id. Shared by all rpcs/exports,
         // which reference them by id; `wsocaml-ir-6` and up. Empty for 4/5.
@@ -203,6 +206,10 @@ module Json =
             Clients =
                 match r.TryGetProperty "clients" with
                 | true, v -> [ for i in v.EnumerateArray() -> s "key" i, (p "index" i).GetInt32() ]
+                | _ -> []
+            Json =
+                match r.TryGetProperty "json" with
+                | true, v -> [ for i in v.EnumerateArray() -> (p "index" i).GetInt32(), s "meta" i ]
                 | _ -> []
             Types =
                 match r.TryGetProperty "types" with

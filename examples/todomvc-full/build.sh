@@ -17,9 +17,11 @@ server="$(q websharper-server)"; uiserver="$(q websharper-ui-server)"; yojson="$
 
 # Client-facing server-API stubs (typechecked against the generated WebSharper_UI).
 cmi="$out/cmi"; mkdir -p "$cmi"
-cp "$root/runtimes/server-api/webSharper_Server.mli" "$root/runtimes/server-api/webSharper_ClientServer.mli" "$cmi/"
+cp "$root/runtimes/server-api/webSharper_Server.mli" "$root/runtimes/server-api/webSharper_ClientServer.mli" \
+  "$root/runtimes/server-api/webSharper_Json.ml" "$cmi/"
 (cd "$cmi" && ocamlc -c webSharper_Server.mli -I "$ui" -I "$jsl" -I "$rt" -I "$sl" -I "$(ocamlc -where)" \
-  && ocamlc -c webSharper_ClientServer.mli -I "$ui" -I "$jsl" -I "$rt" -I "$sl" -I "$(ocamlc -where)")
+  && ocamlc -c webSharper_ClientServer.mli -I "$ui" -I "$jsl" -I "$rt" -I "$sl" -I "$(ocamlc -where)" \
+  && ocamlc -c webSharper_Json.ml -I "$(ocamlc -where)")
 
 # 1. JS client bundle.
 WS_EXTRA_INC="$cmi" bash "$root/scripts/build-ui-app.sh" "$entry" "$out/client" >/dev/null

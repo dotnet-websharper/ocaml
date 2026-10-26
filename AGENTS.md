@@ -143,11 +143,12 @@ dotnet backend/bin/Debug/net10.0/WebSharper.OCaml.dll --ir app.wsir.json \
 
 | Path | What it is |
 | --- | --- |
-| `frontend/bin/main.ml` | the compiler: parse → `transformTemplates` → `transformInfer` → `transformClientServer` → `transformClientEvents` → `checkBoundary` → typecheck → emit IR or `server.ml` |
+| `frontend/bin/main.ml` | the compiler: parse → `transformTemplates` → `transformInfer` → `transformClientServer` → `transformClientEvents` → `transformJson` → `checkBoundary` → typecheck → emit IR or `server.ml` (`jsonCalls` reads typed-JSON call sites off the typedtree) |
 | `frontend/bin/diag.ml` | rewrites multi-line compiler reports to `file:line:startCol:endCol: severity: message` for the editor problem matcher |
 | `backend/` | F#: `Ir.fs` reads the IR, `Lowering.fs` lowers to WebSharper AST, `Program.fs` bundles/validates, `Runtime.js` is an embedded resource |
 | `runtimes/server-api/*.mli` | client-facing stubs of the server API (frontend typechecks app source against these) |
-| `runtimes/ocaml/*.ml` | native implementations: `ssr.ml` (HTML nodes/regions), `wsrpc.ml` (JSON-RPC server), `webSharper_Server.ml`, `webSharper_ClientServer.ml`, `async.ml` |
+| `runtimes/server-api/webSharper_Json.ml` | typed-JSON stub (`WebSharper_Json.encode`/`decode`); a `.ml` on purpose, so its `wsocaml:json_*` primitives survive into the `.cmi` |
+| `runtimes/ocaml/*.ml` | native implementations: `ssr.ml` (HTML nodes/regions), `wsrpc.ml` (JSON-RPC server), `webSharper_Server.ml`, `webSharper_ClientServer.ml`, `webSharper_Json.ml` (native shadow of the client-only typed JSON), `async.ml` |
 | `runtimes/ocaml/*.mjs` | the node drivers the demos use (`site_client.mjs` needs jsdom) |
 | `runtimes/ui-server/webSharper_UI.ml` | native SSR shadow of WebSharper.UI (`Doc`/`View`/`Var`/`Attr`/`Router` + the `Template` engine), same module name as the client binding |
 | `runtimes/ui-server/webSharper_Sitelets.ml` | native shadow of the `WebSharper.Sitelets` hash router (`Router` = `Router<'T>`, `RouterMatcher`, `RouterModule`, `Route`) that `WebSharper.UI.Router.installHash` takes; the server never hashes |
@@ -245,6 +246,18 @@ dotnet backend/bin/Debug/net10.0/WebSharper.OCaml.dll --ir app.wsir.json \
     drift (e.g. `event.ml` gaining a `%identity` upcast) — review the diff, and
     note that an upcast to a base in another package must be qualified via
     `TypeEnv.ExternalSimple`.
+
+16. **Typed JSON is call-site-indexed and client-only.** `WebSharper_Json.encode
+    e` / `decode s` become `__encode <i> e` / `__decode <i> s` in `transformJson`;
+    after typechecking `jsonCalls` reads the instantiated type at that node and
+    the IR's `json` section maps `<i>` to a `descr` descriptor, which
+    `Lowering.prim` inlines as `OCamlRuntime.jsonEncode/Decode`. Consequences:
+    the stub must stay a `.ml` (an `.mli` drops the `wsocaml:json_*` primitive
+    and the call turns into a plain global), the value's type must be concrete
+    at the call site (annotate polymorphic callers), and the descriptor shares
+    the unit's `types` table, so `registerTypes` must run before a `named`
+    decode. There is no native implementation: `let () =` bodies (where this is
+    normally used) are dropped from `server.ml`.
 
 ## Adding a feature
 

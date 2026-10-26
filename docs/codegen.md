@@ -35,13 +35,13 @@ parse            -->  transformInfer  -->  transformClientServer  -->  transform
 
 - `parse` (`main.ml:299`) reads the file and attaches real locations
   (`Location.init`).
-- `transformInfer` (`main.ml:1389`) expands `Sitelet.infer`/`Sitelet.Infer`
+- `transformInfer` (`main.ml:1418`) expands `Sitelet.infer`/`Sitelet.Infer`
   into `Sitelet.make route link handler`, synthesizing the router/URL builder
   from the endpoint variant.
-- `transformClientServer` (`main.ml:1458`) lifts `client`/`hydrate` fragments
+- `transformClientServer` (`main.ml:1487`) lifts `client`/`hydrate` fragments
   into opaque `[@client]` bindings and rewrites `on.<event>` to `On.<event>`
   (see [`hydrate-client.md`](hydrate-client.md)).
-- `transformClientEvents` (`main.ml:1699`) handles `on.<event>` handlers on
+- `transformClientEvents` (`main.ml:1728`) handles `on.<event>` handlers on
   server-rendered elements: it lifts each handler into a top-level
   `[@javascript]` binding under an interned key and, on the server, replaces the
   call with a `ws-on<event>="<key>"` marker (`WebSharper_UI.Attr.create`). The
@@ -49,15 +49,19 @@ parse            -->  transformInfer  -->  transformClientServer  -->  transform
   `On.<event> <key>` and the key is registered for `attachEvents` (see
   `client-server.md` §4.1). Handlers inside `client`/`hydrate` regions are left
   to the client (dropped from the server body).
+- `transformJson` (`main.ml:1958`) rewrites `WebSharper_Json.encode`/`decode`
+  calls into the indexed `__encode`/`__decode` primitives the backend lowers to
+  `OCamlRuntime.jsonEncode/Decode` (client-only; `JSON.md` §1.1). Its rewrites
+  live in `let () =` blocks and are dropped with the client code.
 - `typecheck` runs once on the combined AST.
-- `emitServer` (`main.ml:1018`) is what this document is about.
+- `emitServer` (`main.ml:1047`) is what this document is about.
 
 `server.ml` is only produced when the frontend is invoked with `--emit-server`.
 
 ## 2. What is selected: `serverItems`
 
 `emitServer` starts from the **transformed** AST and keeps a filtered version of
-it, computed by `serverItems ast js` (`main.ml:939`). It walks item by item:
+it, computed by `serverItems ast js` (`main.ml:968`). It walks item by item:
 
 | Source item | Kept in `server.ml`? |
 | --- | --- |
@@ -79,7 +83,7 @@ The exact filter is `js minus clients`: `emitServer` passes
 `[@client]` bindings survive.
 
 Kept values also have their **marker attributes stripped** (`stripMarkers`,
-`main.ml:924`): `javascript`, `rpc`, `export`, `client`, `website` are removed
+`main.ml:953`): `javascript`, `rpc`, `export`, `client`, `website` are removed
 before printing. The constructors' `[@endpoint …]` attributes were already
 removed by `transformInfer`.
 
@@ -88,29 +92,29 @@ removed by `transformInfer`.
 After the kept items, `emitServer` appends three things derived from the
 program's types and markers:
 
-1. **JSON codecs** — `helperDefs` (`main.ml:732`): `toJson_*`/`ofJson_*`
+1. **JSON codecs** — `helperDefs` (`main.ml:744`): `toJson_*`/`ofJson_*`
    functions generated from the `[@rpc]` argument/result types.
 2. **RPC registration** — one `Wsrpc.register "<name>" …` per `[@rpc]`
-   (`main.ml:1049`), unwrapping an `'a Async.t` handler with `Async.run_sync`
+   (`main.ml:1093`), unwrapping an `'a Async.t` handler with `Async.run_sync`
    where needed.
 3. **Bootstrap** — `WebSharper_Server.Server.serve ~port ~bundle ~static <sitelet>`
-   for a `[@website]` sitelet, or `Wsrpc.serve …` otherwise (`main.ml:1067`).
+   for a `[@website]` sitelet, or `Wsrpc.serve …` otherwise (`main.ml:1104`).
 
 ## 3. How it is printed
 
-`prettyStructure` (`main.ml:993`) does **not** copy source text. For each item
+`prettyStructure` (`main.ml:1022`) does **not** copy source text. For each item
 it:
 
 1. emits a `# <line> "<absolute file>"` directive from the item's `pstr_loc`
-   (`addLineDirective`, `main.ml:981`), then
+   (`addLineDirective`, `main.ml:1010`), then
 2. prints the item with `Pprintast.structure_item` (`printStructureItem`,
-   `main.ml:986`).
+   `main.ml:1015`).
 
 `Pprintast` is the OCaml compiler's own printer (the one behind `-dsource`). It
 re-lays out the AST — indentation, line breaks, parentheses — and drops
 everything that is not in the AST. The generated helpers/bootstrap get one
 directive pointing at the `[@website]` binding (or at source line 1 when there
-is none, `main.ml:1040`).
+is none, `main.ml:1066`).
 
 ## 4. Worked example
 
@@ -231,7 +235,7 @@ mechanisms keep errors attached to your source:
 - **Native typecheck (`--server-include`).** In `--emit-server` mode the
   frontend typechecks the server-filtered items against the *native* packages
   (`websharper-server`, `websharper-ui-server`) via `typecheckServer`
-  (`main.ml:1965`). Server-specific errors — for example a UI combinator the
+  (`main.ml:2116`). Server-specific errors — for example a UI combinator the
   server-side `WebSharper_UI` shadow lacks — are reported at the **exact**
   source line/column. `examples/hello-world/build.sh` passes the native
   `--server-include` directories. Warnings are suppressed in this pass because

@@ -1,0 +1,6 @@
+encode={"todos":[{"id":1,"title":"a \"b\"\n\tc\\d","completed":true},{"id":-2,"title":"ü","completed":false}],"shapes":[{"$":"Dot"},{"$":"Circle","$0":5},{"$":"Rect","$0":2,"$1":3}],"note":"hi","pair":["k",7],"nested":null}
+roundtrip=true
+decode=true,x:1
+reencode={"todos":[],"shapes":[{"$":"Circle","$0":9}],"note":null,"pair":["x",1],"nested":[4,5]}
+ints=1,2,3
+bool=true

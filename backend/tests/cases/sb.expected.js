@@ -287,6 +287,27 @@ if (!globalThis.OCamlRuntime) {
     throw new globalThis.Error("marshalIn: " + c.k);
   }
 
+  // Typed JSON (`WebSharper_Json.encode`/`decode`): the descriptor is the same
+  // external representation as `[@rpc]`, so JSON.stringify/parse only have to
+  // see the marshalled form. The caller inlines the descriptor at each call
+  // site; `registerTypes` must have run for `named` references.
+  function jsonMeta(metaJson) {
+    var cache = globalThis.OCamlRuntime.__jsonMetaCache || (globalThis.OCamlRuntime.__jsonMetaCache = {});
+    var m = cache[metaJson];
+    if (!m) m = cache[metaJson] = JSON.parse(metaJson);
+    return m;
+  }
+
+  function jsonEncode(metaJson, v) {
+    var meta = jsonMeta(metaJson);
+    return JSON.stringify(marshalOut(meta, meta, v));
+  }
+
+  function jsonDecode(metaJson, s) {
+    var meta = jsonMeta(metaJson);
+    return marshalIn(meta, meta, JSON.parse(s));
+  }
+
   // Exported OCaml values/functions for JS consumers: marshals JS arguments in,
   // applies the OCaml function (uncurried) or reads the value, marshals the
   // result out.
@@ -476,6 +497,8 @@ if (!globalThis.OCamlRuntime) {
     caml_to_js: caml_to_js,
     caml_list_to_array: caml_list_to_array,
     registerTypes: registerTypes,
+    jsonEncode: jsonEncode,
+    jsonDecode: jsonDecode,
     registerRpc: registerRpc,
     rpcCall: rpcCall,
     rpcTransport: rpcTransport,

@@ -37,48 +37,19 @@ let () =
   let key = "todos-ocaml" in
   let storage () = Window.localStorage (Window.self ()) in
 
-  (* --- persistence: `[{ "id", "title", "completed" }, …]` ------------------ *)
-
-  let json_escape s =
-    let b = Buffer.create (String.length s) in
-    String.iter
-      (fun c ->
-        match c with
-        | '"' -> Buffer.add_string b "\\\""
-        | '\\' -> Buffer.add_string b "\\\\"
-        | '\n' -> Buffer.add_string b "\\n"
-        | '\r' -> Buffer.add_string b "\\r"
-        | '\t' -> Buffer.add_string b "\\t"
-        | c when Char.code c < 0x20 -> Buffer.add_string b (Printf.sprintf "\\u%04x" (Char.code c))
-        | c -> Buffer.add_char b c)
-      s;
-    Buffer.contents b
-  in
-  let encode (ts : todo list) =
-    "["
-    ^ String.concat ","
-        (List.map
-           (fun t ->
-             Printf.sprintf "{\"id\":%d,\"title\":\"%s\",\"completed\":%b}" t.id
-               (json_escape t.title) t.completed)
-           ts)
-    ^ "]"
-  in
-  let decode (s : string) : todo list =
-    if String.trim s = "" then []
-    else
-      let arr : Js.t = JSON.parse s in
-      let n : int = Js.to_js (Js.get arr "length") in
-      List.init n (fun i ->
-          let o : Js.t = Js.get_index arr i in
-          { id = (Js.to_js (Js.get o "id") : int);
-            title = (Js.to_js (Js.get o "title") : string);
-            completed = (Js.to_js (Js.get o "completed") : bool) })
-  in
+  (* --- persistence: typed JSON (`[{ "id", "title", "completed" }, …]`) ------
+     `WebSharper_Json` describes `todo list` from its OCaml type and marshals it
+     in the same external representation `[@rpc]`/`[@export]` use, so the stored
+     payload is unchanged. *)
   let load () =
-    try decode (WebSharper_JavaScript.Storage.getItem (storage ()) key) with _ -> []
+    (* `getItem` is `null` when the key is absent; a malformed/empty payload
+       should start from an empty list, not fail at startup. *)
+    try (WebSharper_Json.decode (WebSharper_JavaScript.Storage.getItem (storage ()) key) : todo list)
+    with _ -> []
   in
-  let save ts = WebSharper_JavaScript.Storage.setItem (storage ()) key (encode ts) in
+  let save (ts : todo list) =
+    WebSharper_JavaScript.Storage.setItem (storage ()) key (WebSharper_Json.encode ts)
+  in
 
   (* --- state -------------------------------------------------------------- *)
 

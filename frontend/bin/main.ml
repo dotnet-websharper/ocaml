@@ -842,7 +842,7 @@ let rec descr unit_ env (defs: (string, Yojson.Safe.t) Hashtbl.t) (t: Types.type
        | Types.Type_abstract _ ->
            (match d.type_manifest with
             | Some m -> descr unit_ env defs (subst (withSub d args) m)
-            | None -> failwith ("unsupported [@rpc] type: " ^ instKey t))
+            | None -> failwith ("unsupported marshalled type: " ^ instKey t))
        | _ ->
       let k = typeId unit_ t in
       if not (Hashtbl.mem defs k) then (
@@ -874,7 +874,7 @@ let rec descr unit_ env (defs: (string, Yojson.Safe.t) Hashtbl.t) (t: Types.type
                              `List (List.map (descr unit_ env defs) ts) ])
               in
               `Assoc [ ("id", `String k); ("kind", `String "variant"); ("cases", `List cases) ]
-          | _ -> failwith ("unsupported [@rpc] type: " ^ k)
+          | _ -> failwith ("unsupported marshalled type: " ^ k)
         in
         Hashtbl.replace defs k def);
       `Assoc [ ("k", `String "named"); ("id", `String k) ])
@@ -882,7 +882,7 @@ let rec descr unit_ env (defs: (string, Yojson.Safe.t) Hashtbl.t) (t: Types.type
       `Assoc
         [ ("k", `String "tuple");
           ("e", `List (List.map (fun (_, x) -> descr unit_ env defs x) ts)) ]
-  | _ -> failwith "unsupported [@rpc] type (descriptor)"
+  | _ -> failwith "unsupported marshalled type (descriptor)"
 
 (* Declarations are sorted by id so the emitted IR is reproducible. *)
 let declaredId (j: Yojson.Safe.t) =
@@ -1945,6 +1945,128 @@ let transformClientEvents ~(server: bool) (ast: Parsetree.structure) : Parsetree
     in
     (insert [] mapped, keys)
 
+(* --- Typed JSON (`WebSharper_Json.encode`/`decode`) -------------------------
+   `WebSharper_Json.encode v` / `WebSharper_Json.decode s` are typed JSON: the
+   value's *OCaml type* decides the external representation. A rewrite maps each
+   call to the same-named `__encode`/`__decode` external with a call-site index,
+   tagged with a `[@ws_json_encode <i>]`/`[@ws_json_decode <i>]` attribute. After
+   typechecking, `jsonCalls` reads the instantiated type off that node, describes
+   it with the same `descr` used by `[@rpc]`/`[@export]`, and records it under
+   `<i>` in the IR; the backend inlines the descriptor at that primitive call
+   site (`Lowering.prim`). Client-only, for now. *)
+
+let transformJson (ast: Parsetree.structure) : Parsetree.structure =
+  let next = ref 0 in
+  let jsonCall (e: Parsetree.expression) :
+      (string * Parsetree.expression * Asttypes.arg_label * Parsetree.expression) option =
+    match e.pexp_desc with
+    | Parsetree.Pexp_apply
+        ( ({ Parsetree.pexp_desc = Parsetree.Pexp_ident { txt = lid; _ }; _ } as fn),
+          [ (lbl, arg) ] ) -> (
+        match Longident.flatten lid with
+        | [ "WebSharper_Json"; "encode" ] -> Some ("encode", fn, lbl, arg)
+        | [ "WebSharper_Json"; "decode" ] -> Some ("decode", fn, lbl, arg)
+        | _ -> None)
+    | _ -> None
+  in
+  let mapper =
+    {
+      Ast_mapper.default_mapper with
+      expr =
+        (fun self (e: Parsetree.expression) ->
+          match jsonCall e with
+          | Some (kind, fn, lbl, arg) ->
+              (* Recurse into the argument with our own override, so a nested
+                 `encode`/`decode` is rewritten too. *)
+              let arg = self.expr self arg in
+              let i = !next in
+              incr next;
+              let loc = e.pexp_loc in
+              let ci =
+                { Parsetree.pexp_desc =
+                    Parsetree.Pexp_constant
+                      { pconst_desc = Parsetree.Pconst_integer (string_of_int i, None); pconst_loc = loc };
+                  pexp_loc = loc;
+                  pexp_loc_stack = [];
+                  pexp_attributes = [] }
+              in
+              let fn =
+                { fn with
+                  Parsetree.pexp_desc =
+                    Parsetree.Pexp_ident
+                      { txt =
+                          Option.get
+                            (Longident.unflatten [ "WebSharper_Json"; "__" ^ kind ]);
+                        loc } }
+              in
+              let attr =
+                { Parsetree.attr_name = { txt = "ws_json_" ^ kind; loc };
+                  attr_payload = Parsetree.PStr [ { pstr_desc = Parsetree.Pstr_eval (ci, []); pstr_loc = loc } ];
+                  attr_loc = loc }
+              in
+              { e with
+                Parsetree.pexp_desc = Parsetree.Pexp_apply (fn, [ (lbl, ci); (lbl, arg) ]);
+                pexp_attributes = attr :: e.pexp_attributes }
+          | None -> Ast_mapper.default_mapper.expr self e);
+    }
+  in
+  mapper.structure mapper ast
+
+(* After typechecking: for every rewritten call, describe the instantiated type
+   in the IR's external representation. `encode` describes its argument, `decode`
+   its result. *)
+let jsonCalls (u: string) (typed: Typedtree.structure) (env: Env.t)
+    (defs: (string, Yojson.Safe.t) Hashtbl.t) : (int * string) list =
+  let acc = ref [] in
+  let attrIndex (name: string) (attrs: Parsetree.attributes) =
+    List.find_map
+      (fun (a: Parsetree.attribute) ->
+        if a.attr_name.txt <> name then None
+        else
+          match a.attr_payload with
+          | Parsetree.PStr
+              [ { pstr_desc =
+                    Parsetree.Pstr_eval
+                      ({ pexp_desc = Parsetree.Pexp_constant { pconst_desc = Parsetree.Pconst_integer (s, _); _ }; _ }, _);
+                  _ } ] ->
+              int_of_string_opt s
+          | _ -> None)
+      attrs
+  in
+  let record loc i ty =
+    let meta =
+      try Yojson.Safe.to_string (descr u env defs ty)
+      with Failure msg ->
+        Location.raise_errorf ~loc "cannot marshal this type to typed JSON: %s" msg
+    in
+    acc := (i, meta) :: !acc
+  in
+  let it =
+    { Tast_iterator.default_iterator with
+      expr =
+        (fun self (e: Typedtree.expression) ->
+          (match e.exp_desc with
+          | Typedtree.Texp_apply (_, args) -> (
+              match attrIndex "ws_json_encode" e.exp_attributes with
+              | Some i ->
+                  let last =
+                    List.fold_left
+                      (fun acc (_, a) ->
+                        match a with Typedtree.Arg x -> Some x | Typedtree.Omitted _ -> acc)
+                      None args
+                  in
+                  Option.iter (fun (arg: Typedtree.expression) -> record arg.exp_loc i arg.exp_type) last
+              | None -> (
+                  match attrIndex "ws_json_decode" e.exp_attributes with
+                  | Some i -> record e.exp_loc i e.exp_type
+                  | None -> ()))
+          | _ -> ());
+          Tast_iterator.default_iterator.expr self e);
+    }
+  in
+  it.structure it typed;
+  List.sort (fun (a, _) (b, _) -> compare a b) !acc
+
 (* --- [%template "path"] expansion -------------------------------------------
    Expands `module Card = [%template "views/card.html"]` into a generated module
    (class type + setters + combinators + submodules) produced by `Codegen`. The
@@ -2058,6 +2180,7 @@ let () =
     let dir = tdir () in
     let ast0 = transformClientServer (transformInfer (transformTemplates ~server:(!emit_server <> None) ~dir (parse !input))) in
     let ast, eventKeys = transformClientEvents ~server:(!emit_server <> None) ast0 in
+    let ast = transformJson ast in
     checkBoundary ast;
     let js, rpc, srv = clientMarks ast in
     let exp = exportMarks ast in
@@ -2130,6 +2253,13 @@ let () =
                [ ("name", `String name); ("index", `Int index); ("arity", `Int (List.length ps));
                  ("meta", `String meta) ])
     in
+    (* Typed JSON call sites: `<index>` -> type descriptor. Shares the unit's
+       declaration table with rpcs/exports, so a type used by both is declared
+       once. *)
+    let json =
+      jsonCalls u typed typedEnv typeDecls
+      |> List.map (fun (i, meta) -> `Assoc [ ("index", `Int i); ("meta", `String meta) ])
+    in
     (match !dts with
      | Some p ->
          let ch = open_out p in
@@ -2149,6 +2279,7 @@ let () =
           ("server", `List (List.map (fun n -> `String n) srv));
           ("rpcs", `List rpcMeta);
           ("exports", `List exports);
+          ("json", `List json);
           ( "clients",
             `List
               ((cli @ eventKeys)

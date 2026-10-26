@@ -128,6 +128,11 @@ error. `scripts/rpc-data.sh` round-trips a
 record/variant/recursive-tree/array/tuple/list/option workload through a native
 server (`frontend/test: rpc-data`).
 
+Application code can reuse the same representation directly:
+`WebSharper_Json.encode v` / `decode s` (client-only) derive the descriptor from
+the value's *OCaml type* at the call site — no hand-written encoder. See
+`JSON.md` §1.1.
+
 #### Why not WebSharper's built-in JSON
 
 The external representation above **is** WebSharper's JSON encoding (variant
