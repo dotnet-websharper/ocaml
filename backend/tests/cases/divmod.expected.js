@@ -176,7 +176,10 @@ if (!globalThis.OCamlRuntime) {
       case "string":
         return v;
       case "bool":
-        return v !== 0;
+        // An OCaml `bool` is `0`/`1` (the codegen, `marshalIn` and the `caml_*`
+        // helpers agree), but a value that came from JS interop can be a real
+        // boolean; a strict `v !== 0` would turn a JS `false` into `true`.
+        return !!v;
       case "char":
         return String.fromCharCode(v);
       case "unit":

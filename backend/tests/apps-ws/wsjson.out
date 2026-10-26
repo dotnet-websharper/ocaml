@@ -4,3 +4,7 @@ decode=true,x:1
 reencode={"todos":[],"shapes":[{"$":"Circle","$0":9}],"note":null,"pair":["x",1],"nested":[4,5]}
 ints=1,2,3
 bool=true
+not=true=false
+cmp=false
+bool-eq=true
+negated={"id":7,"title":"N","completed":false}

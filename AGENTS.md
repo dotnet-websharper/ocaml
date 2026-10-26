@@ -286,6 +286,16 @@ dotnet backend/bin/Debug/net10.0/WebSharper.OCaml.dll --ir app.wsir.json \
     the reverse — `dune build` under `examples/` is an editor convenience only.
     README → *Name collisions and shadowing*.
 
+18. **`bool` is `0`/`1` at runtime; keep it that way.** Source literals,
+    `marshalIn`, and the `caml_*` helpers all use `0`/`1`, so the inline
+    bool-producing prims must too: `not` lowers to `a ? 0 : 1` and the
+    comparisons to `(... ? 1 : 0)` (`Lowering.boolVal`). A JS `false`
+    (from a bare `!` or a JS comparison) is a different value: it is not
+    `=== 0`, so bool equality breaks, and `caml_compare`/`marshalOut` mis-handle
+    it — `marshalOut` used to send it as `true`, which is how a toggled TodoMVC
+    checkbox failed to survive a reload. `marshalOut`'s `bool` case is `!!v` so
+    a real JS boolean *from JS interop* still marshals correctly.
+
 ## Adding a feature
 
 - Runtime/JS behaviour or sitelet/RPC coverage → extend

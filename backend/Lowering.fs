@@ -85,14 +85,21 @@ module Lowering =
 
     let bin op a b = Binary(a, op, b)
 
+    // OCaml `bool` is `0`/`1` at runtime: source literals, `marshalIn`, and the
+    // `caml_*` helpers all produce that. The inline bool-producing prims must
+    // agree. A JS `false` from `not`/a comparison is neither `=== 0` (so bool
+    // equality is wrong), nor matched by `caml_compare` (mixing `false` with
+    // `0` compares unequal), and `marshalOut` would turn it into `true`.
+    let boolVal (e: Expression) = Conditional(e, Value(Int 1), Value(Int 0))
+
     let cmp op a b =
         match op with
-        | "eq" -> bin BinaryOperator.ReferenceEqualsOp a b
-        | "ne" -> bin BinaryOperator.NotReferenceEquals a b
-        | "lt" -> bin BinaryOperator.Less a b
-        | "gt" -> bin BinaryOperator.Greater a b
-        | "le" -> bin BinaryOperator.LessOrEquals a b
-        | "ge" -> bin BinaryOperator.GreaterOrEquals a b
+        | "eq" -> boolVal (bin BinaryOperator.ReferenceEqualsOp a b)
+        | "ne" -> boolVal (bin BinaryOperator.NotReferenceEquals a b)
+        | "lt" -> boolVal (bin BinaryOperator.Less a b)
+        | "gt" -> boolVal (bin BinaryOperator.Greater a b)
+        | "le" -> boolVal (bin BinaryOperator.LessOrEquals a b)
+        | "ge" -> boolVal (bin BinaryOperator.GreaterOrEquals a b)
         | _ -> failwith $"unsupported comparison {op}"
 
     let exitTag = "$ocamlExit"
@@ -415,7 +422,7 @@ module Lowering =
         | "makelazy", [ f ] -> rt c "caml_lazy_make" [ f ]
         | "makeforward", [ v ] -> rt c "caml_lazy_make_forward" [ v ]
         | "atomic_load", [ r; _ ] -> rt c "caml_atomic_load" [ r ]
-        | "not", [ a ] -> Unary(UnaryOperator.Not, a)
+        | "not", [ a ] -> Conditional(a, Value(Int 0), Value(Int 1))
         | "negint", [ a ]
         | "negfloat", [ a ] -> Unary(UnaryOperator.Inversion, a)
         | "intcomp", [ a; b ]

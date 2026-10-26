@@ -30,6 +30,9 @@ is the code that applies it on each tier.
 | record | object `{ x, y }` (field names) |
 | variant | `{"$":"Case","$0":a,…}`; constants `{"$":"Case"}` |
 
+(`bool` is `0`/`1` inside the OCaml runtime; the client marshaller accepts that
+or a real JS boolean, so a value that came from JS interop is handled too.)
+
 Three artifacts implement it:
 
 | Artifact | Role | Where |

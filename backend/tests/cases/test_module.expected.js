@@ -176,7 +176,10 @@ if (!globalThis.OCamlRuntime) {
       case "string":
         return v;
       case "bool":
-        return v !== 0;
+        // An OCaml `bool` is `0`/`1` (the codegen, `marshalIn` and the `caml_*`
+        // helpers agree), but a value that came from JS interop can be a real
+        // boolean; a strict `v !== 0` would turn a JS `false` into `true`.
+        return !!v;
       case "char":
         return String.fromCharCode(v);
       case "unit":
@@ -1015,5 +1018,5 @@ if (!globalThis.OCamlRuntime) {
 let a={};
 const b=globalThis.OCamlRuntime.caml_closure(2, (d, e) => d+e);
 const c=globalThis.OCamlRuntime.caml_closure(1, (d) => d*d);
-a={$tag:0, "0":b, "1":c, "2":globalThis.OCamlRuntime.caml_apply(b, [20, 22])===42?globalThis.OCamlRuntime.caml_apply(c, [6]):0};
+a={$tag:0, "0":b, "1":c, "2":(globalThis.OCamlRuntime.caml_apply(b, [20, 22])===42?1:0)?globalThis.OCamlRuntime.caml_apply(c, [6]):0};
 export default a;

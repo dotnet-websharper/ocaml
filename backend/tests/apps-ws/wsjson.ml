@@ -48,4 +48,13 @@ let () =
   let ints : int list = decode "[1,2,3]" in
   Console.log ("ints=" ^ String.concat "," (List.map string_of_int ints));
   let flag : bool = decode "true" in
-  Console.log ("bool=" ^ string_of_bool flag)
+  Console.log ("bool=" ^ string_of_bool flag);
+  (* A `bool` produced by `not`/a comparison is a JS boolean in the client
+     runtime, while literals/`marshalIn`/`caml_*` use `0`/`1`; the marshaller
+     and the inline bool prims must agree (regression: `false` used to cross as
+     `true`, so a toggled checkbox did not survive a reload). *)
+  let negated = { id = 7; title = "N"; completed = not true } in
+  Console.log ("not=true=" ^ encode negated.completed);
+  Console.log ("cmp=" ^ encode (1 > 2));
+  Console.log ("bool-eq=" ^ encode (negated.completed = false));
+  Console.log ("negated=" ^ encode negated)
