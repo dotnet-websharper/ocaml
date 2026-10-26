@@ -2156,9 +2156,12 @@ let typecheckServer (dirs : string list) (items : Parsetree.structure) : unit =
         Warnings.restore saved_warnings;
         Clflags.include_dirs := saved_dirs)
       (fun () ->
-        (* Replace (don't extend) the include path: the native packages must
-           shadow the client `WebSharper_UI` binding and the server-API stubs. *)
-        Clflags.include_dirs := List.rev dirs;
+        (* The native packages come first, so they shadow the client
+           `WebSharper_UI` binding and the server-API stubs; the client dirs stay
+           on the path, so shared source can still name a client-only package's
+           modules (e.g. `WebSharper_StdLib`, which the kept module aliases may
+           reference). *)
+        Clflags.include_dirs := List.rev dirs @ saved_dirs;
         ignore (Warnings.parse_options false "-a");
         Compmisc.init_path ();
         let nenv = Compmisc.initial_env () in
@@ -2264,7 +2267,11 @@ let () =
                 vbs
           (* Modules occupy a module-block slot too (e.g. a generated
              `[%template]` module preceding the value bindings), so they shift
-             the indices of subsequent values. *)
+             the indices of subsequent values. A bare module *alias*
+             (`module M = Other`, i.e. `Tmod_ident`) is the exception: the
+             compiler shares the aliased module's field, so it does not grow the
+             block (a constrained alias such as `module M = (Other : S)` does). *)
+          | Typedtree.Tstr_module { mb_expr = { mod_desc = Typedtree.Tmod_ident _; _ }; _ } -> ()
           | Typedtree.Tstr_module _ -> incr i
           | _ -> ())
         typed.str_items;

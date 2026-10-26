@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "name": "todomvc-wsocaml",
+  "description": "TodoMVC implemented in OCaml with WebSharper.UI",
+  "dependencies": {
+    "todomvc-app-css": "^2.4.3",
+    "todomvc-common": "^1.0.5"
+  }
+}

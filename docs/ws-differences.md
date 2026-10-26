@@ -148,6 +148,13 @@ Consolidated; see the linked note for detail.
   while `build.sh`/the suite use the generated `websharper-ui` binding (80), so a
   bare `Storage`/`Array` may typecheck in the editor and fail in the build (or the
   reverse). README → *Name collisions and shadowing* has the tables.
+- **`IEnumerable`-returning members** — the generator types an `IEnumerable<'T>`
+  *parameter* as an OCaml list but a *result* as the opaque
+  `WebSharper_StdLib.IEnumerable2.t`, so a member that returns a sequence
+  (`ListModel.view`/`map`, `Seq.*`, `List.toSeq`) cannot be consumed from OCaml
+  source. Use the value/state behind it instead — e.g. `ListModel.var` (the
+  backing `Var<array>`) to map a reactive `View`, `ListModel.iter` for a
+  snapshot (`examples/todomvc-lm`).
 - **Objects / method sends** — §1: `Lsend` unsupported; interop is function-shaped.
 - **`V` notation** — §2: generic type args not resolved; `.V` receiver dropped.
 - **Templates** (`docs/templates.md` §7):

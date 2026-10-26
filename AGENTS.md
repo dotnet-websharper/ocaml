@@ -151,14 +151,14 @@ dotnet backend/bin/Debug/net10.0/WebSharper.OCaml.dll --ir app.wsir.json \
 | `runtimes/server-api/webSharper_Json.ml` | typed-JSON stub (`WebSharper_Json.encode`/`decode`); a `.ml` on purpose, so its `wsocaml:json_*` primitives survive into the `.cmi` |
 | `runtimes/ocaml/*.ml` | native implementations: `ssr.ml` (HTML nodes/regions), `wsrpc.ml` (JSON-RPC server), `webSharper_Server.ml`, `webSharper_ClientServer.ml`, `webSharper_Json.ml` (native shadow of the client-only typed JSON), `async.ml` |
 | `runtimes/ocaml/*.mjs` | the node drivers the demos use (`site_client.mjs` needs jsdom) |
-| `runtimes/ui-server/webSharper_UI.ml` | native SSR shadow of WebSharper.UI (`Doc`/`View`/`Var`/`Attr`/`Router` + the `Template` engine), same module name as the client binding |
+| `runtimes/ui-server/webSharper_UI.ml` | native SSR shadow of WebSharper.UI (`Doc`/`View`/`Var`/`Attr`/`Router`/`ListModel` + the `Template` engine), same module name as the client binding |
 | `runtimes/ui-server/webSharper_Sitelets.ml` | native shadow of the `WebSharper.Sitelets` hash router (`Router` = `Router<'T>`, `RouterMatcher`, `RouterModule`, `Route`) that `WebSharper.UI.Router.installHash` takes; the server never hashes |
 | `runtimes/template/` | `websharper-template`: HTML parser + hole model + `Codegen` for `[%template]` |
 | `binding-adaptor/` | F# tool: binding assembly → OCaml opam package |
 | `specs/*.spec` | binding-adaptor input controlling generated package/module shape: `websharper-stdlib.spec` (the collision repairs listed in `README.md`: `System.DateTime` -> `DateTime`, `WebSharper.JavaScript.Pervasives+DateTime` -> `DateTimeFormat`, `<Type>Module` helpers, `Nullable`/`Optional` vs their helpers, `JavaScriptPervasives`, `LinqEnumerable`, the `*Enumerator`s), `websharper-sitelets.spec` (``WebSharper.Sitelets.Router`1`` -> `Router` + `RouterMatcher`, `InferRouter+Router` -> `InferRouter`) and `websharper-ui.spec` (merges + `Html`/`On` names) |
 | `scripts/*.sh` | per-scenario drivers (see "What the suite covers") |
 | `backend/tests/apps-site/`, `apps-ui/`, `apps-ws/`, `apps/`, `cases/`, `cases-ws/`, `errors/`, `template/` | the harness families |
-| `examples/` | dune projects type-checked against the installed bindings; `examples/hello-world` is the end-to-end reference app |
+| `examples/` | dune projects type-checked against the installed bindings; `hello-world` is the end-to-end reference app, `todomvc` (client-rendered) / `todomvc-full` (SSR + `bind` + hash router) / `todomvc-lm` (`ListModel` state) are the WebSharper.UI ones |
 
 ## Gotchas
 
@@ -295,6 +295,19 @@ dotnet backend/bin/Debug/net10.0/WebSharper.OCaml.dll --ir app.wsir.json \
     it — `marshalOut` used to send it as `true`, which is how a toggled TodoMVC
     checkbox failed to survive a reload. `marshalOut`'s `bool` case is `!!v` so
     a real JS boolean *from JS interop* still marshals correctly.
+
+19. **A bare top-level module *alias* takes no module-block slot.**
+    `module M = Other` (typedtree `Tstr_module` with `Tmod_ident`) shares the
+    aliased module's field, so `Translmod` does not grow the block — but
+    `topIndex` used to `incr` for every `Tstr_module`, shifting the
+    `[@rpc]`/`[@client]`/`[@export]` indices by one and misbinding the hydrated
+    region (a runtime `TypeError`, not a build error). Only bare `Tmod_ident` is
+    skipped: `module M = struct … end` and a constrained alias
+    (`module M = (Other : S)`) do take a slot. `apps-site` has such an alias as a
+    regression test. Relatedly, `--emit-server`'s `typecheckServer` now *prepends*
+    the native include dirs to the client ones (it used to replace them), so
+    shared source may name a client-only package's modules (e.g.
+    `WebSharper_StdLib`) from a top-level item that survives into `server.ml`.
 
 ## Adding a feature
 

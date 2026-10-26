@@ -15,6 +15,13 @@ type endpoint =
   | Item of { id : int; slug : string } [@endpoint "GET /item/@slug/@id"]
   | Search of { q : string; page : int } [@endpoint "GET /search?q=@q&page=@page"]
 
+(* An unused top-level module *alias*, kept as a regression test: (a) the
+   `--emit-server` typecheck keeps module items, so a client-only package's
+   modules must resolve next to the native ones, and (b) a bare alias shares the
+   aliased module's slot, so it must not shift the `[@rpc]`/`[@client]` value
+   indices (it used to, misbinding the hydrated region). *)
+module FOpt = WebSharper_StdLib.FSharpOption
+
 let[@rpc] add a b = Async.return (a + b)
 
 let[@website] main =

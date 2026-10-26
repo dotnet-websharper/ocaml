@@ -36,6 +36,41 @@ module Attr = struct
   let empty () = ("", "")
 end
 
+(* `WebSharper.UI.ListModel`: a reactive, keyed collection (`('k, 't) t` — key
+   first, then the item, matching the generated binding). The client binding is
+   the real implementation; here only the surface a shared view source uses is
+   mirrored, so the client block (dropped from `server.ml`) typechecks on this
+   side too. UI collections are client-only: the keyed update members have no
+   server meaning and raise if a *server* value ever evaluates them. *)
+module ListModel = struct
+  type ('k, 't) t = { key_of : 't -> 'k; items : 't array Var.t }
+
+  let create (key : 't -> 'k) (init : 't list) : ('k, 't) t =
+    { key_of = key; items = Var.create (Stdlib.Array.of_list init) }
+
+  let var (m : ('k, 't) t) : 't array Var.t = m.items
+  let length (m : ('k, 't) t) : int = Stdlib.Array.length (Var.get m.items)
+  let iter (m : ('k, 't) t) (f : 't -> unit) : unit = Stdlib.Array.iter f (Var.get m.items)
+
+  let to_list (m : ('k, 't) t) : 't list = Stdlib.Array.to_list (Var.get m.items)
+  let replace (m : ('k, 't) t) (xs : 't list) : unit = Var.set m.items (Stdlib.Array.of_list xs)
+
+  let append (m : ('k, 't) t) (x : 't) : unit = replace m (to_list m @ [ x ])
+  let clear (m : ('k, 't) t) : unit = replace m []
+
+  let removeByKey (m : ('k, 't) t) (k : 'k) : unit =
+    replace m (List.filter (fun x -> m.key_of x <> k) (to_list m))
+
+  let removeBy (m : ('k, 't) t) (p : 't -> bool) : unit =
+    replace m (List.filter (fun x -> not (p x)) (to_list m))
+
+  let updateBy (_ : ('k, 't) t) (_ : 't -> 't WebSharper_StdLib.FSharpOption.t) (_ : 'k) : unit =
+    failwith "WebSharper_UI.ListModel.updateBy is client-only"
+
+  let updateAll (_ : ('k, 't) t) (_ : 't -> 't WebSharper_StdLib.FSharpOption.t) : unit =
+    failwith "WebSharper_UI.ListModel.updateAll is client-only"
+end
+
 module On = struct
   (* Event handlers have no server-side effect. *)
   let click (_ : 'a -> 'b -> unit) : Attr.t = ("", "")

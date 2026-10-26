@@ -251,9 +251,15 @@ serves the page:
     ./out/server &                         # http://127.0.0.1:8123/
 
 `examples/todomvc-full` is the same app using the WebSharper **SSR split**: the
-server renders the template skeleton (`Tmpl.doc ~keepUnfilled:true`) and the
-client binds it (`Tmpl.bind`) to reactive `View`/`Var`/`Doc` holes. It shows
+server renders the template skeleton (`TodoPage.doc ~keepUnfilled:true`) and the
+client binds it (`TodoPage.bind`) to reactive `View`/`Var`/`Doc` holes. It shows
 nested templates and `.Bind()` working end to end (see `docs/templates.md`).
+
+`examples/todomvc-lm` is `todomvc-full` with the row state in a WebSharper.UI
+**`ListModel`** — a reactive, keyed collection (`ListModel.append`/`updateBy`/
+`removeByKey`, read through its backing `Var`). It is the reference for
+`ListModel` usage from OCaml (F# `option` for the update functions, `var`/`iter`
+in place of the `IEnumerable`-returning members).
 
 `dune build` in `examples/hello-world` only type-checks the source (its `dune`
 has a `library` stanza so the editor resolves the libraries); the app is built
@@ -261,9 +267,9 @@ by `build.sh`, so editing does not trigger a build.
 
 To surface `build.sh` (frontend/codegen/native) errors in VS Code, run the
 default build task **wsocaml: build** (`Cmd/Ctrl+Shift+B`): `check.sh` builds and
-pipes the output through `scripts/wsocaml-diag.py`, which rewrites OCaml's
+pipes the output through `frontend/bin/diag.exe`, which rewrites OCaml's
 multi-line reports into `file:line:col: error|warning: message` so they appear in
-the Problems panel.)
+the Problems panel.
 
 `examples/js` references the binding package directly in its `dune` file
 (`(libraries websharper-javascript)` and
