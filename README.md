@@ -139,6 +139,60 @@ across packages do not collide (`WebSharper_JavaScript.Event.t`,
 lives in the unwrapped `websharper-runtime` package. Use `open WebSharper_JavaScript`
 (etc.) to bring a package's modules into scope.
 
+### Name collisions and shadowing
+
+Wrapping keeps *types* apart, but `open` still works on names: `open`ing two
+packages that export a module with the same name makes them collide, and **the
+last `open` wins** (`open` is also *not* an order-independent import; it really
+does shadow). The DOM binding and the UI binding share four module names:
+
+| bare name | `WebSharper_JavaScript` | `WebSharper_UI` (client binding) |
+| --- | --- | --- |
+| `Storage` | the DOM `Storage` (`setItem` / `getItem`) | `WebSharper.UI.Storage` — reactive, `localStorage : string -> Serializer.t -> t` |
+| `Array` | `globalThis.Array` | `WebSharper.UI.Array` (`ofSeqNonCopying`, …) |
+| `Attr` | `WebSharper.JavaScript.Attr` | `WebSharper.UI.Attr` |
+| `Notation` | JS `Notation` | `WebSharper.UI.Notation` (the `!` / `V` operators) |
+
+So with
+
+```ocaml
+open WebSharper_JavaScript
+open WebSharper_UI          (* shadows Storage/Array/Attr/Notation *)
+```
+
+`Storage.setItem …` resolves to `WebSharper_UI.Storage`, which has no `setItem`,
+and fails with `Unbound value Storage.setItem` (the *module* is bound, the member
+is not). Qualify the DOM side, or alias it once:
+
+```ocaml
+module JsStorage = WebSharper_JavaScript.Storage
+```
+
+Everything else in `WebSharper_JavaScript` survives `open WebSharper_UI`
+(`Window`, `Console`, `JSON`, `Date`, `Math`, `Document`, …). The JS binding also
+shadows **OCaml stdlib** names — `String`, `Array`, `Object`, `Number`, `Boolean`,
+`RegExp`, `Promise`, `Date`, `Math`, `JSON`, `Console` — which is why the examples
+keep `module String = Stdlib.String` (and would need `Stdlib.Array`/`Stdlib.List`
+similarly). Values are shadowed too, and order decides: `WebSharper_UI.Html`
+exports `client : Js.t -> Doc.t`, while `WebSharper_ClientServer` exports
+`client : (unit -> Doc.t) -> Doc.t` — `examples/hello-world` opens
+`WebSharper_ClientServer` **after** `Html` so `client`/`hydrate` mean hydration.
+
+One wsocaml-specific trap: **the editor and the compiler disagree here**, because
+they typecheck against different `WebSharper_UI` modules.
+
+| checked by | libraries | what `WebSharper_UI` is |
+| --- | --- | --- |
+| VS Code / `dune build` (`examples/*/dune`) | `websharper-server`, `websharper-ui-server`, `websharper-javascript` | the **native shadow** (`runtimes/ui-server/webSharper_UI.ml`, 19 submodules) — **no `Storage`/`Array`** |
+| `check.sh` / `build.sh` / the test suite | `websharper-ui`, `websharper-javascript`, … | the **generated client binding** (80 submodules) — has `Storage`/`Array` |
+
+So a bare `Storage`/`Array` can typecheck in the editor (the shadow has no such
+name, so the JS one shows through) and fail in the real client build — or the
+reverse (`WebSharper_UI.Storage.localStorage` exists only in the build). Treat
+`dune build` under `examples/` as an editor convenience: only `check.sh` /
+`build.sh` / the test suite compile what ships. When in doubt, qualify the DOM
+module or alias it at the top of the file.
+
 Cyclic type hierarchies (e.g. the DOM `EventTarget`/`Node`/`Element`/`Document`
 graph) are collapsed to a single shared abstract type so cross-references keep
 their real types instead of `Js.t` — `Document.t = Element.t = Node.t =

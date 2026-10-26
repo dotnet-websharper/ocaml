@@ -140,6 +140,14 @@ Fixing it needs (a) inferring/attaching resolved generic type args when lowering
 
 Consolidated; see the linked note for detail.
 
+- **Binding `open`s shadow, and the editor checks different modules than the
+  build** — `open WebSharper_UI` after `open WebSharper_JavaScript` hides
+  `Storage`/`Array`/`Attr`/`Notation` (qualify the DOM side or alias it:
+  `module JsStorage = WebSharper_JavaScript.Storage`), and `examples/*/dune`
+  typechecks against the native *shadow* (`websharper-ui-server`, 19 submodules)
+  while `build.sh`/the suite use the generated `websharper-ui` binding (80), so a
+  bare `Storage`/`Array` may typecheck in the editor and fail in the build (or the
+  reverse). README → *Name collisions and shadowing* has the tables.
 - **Objects / method sends** — §1: `Lsend` unsupported; interop is function-shaped.
 - **`V` notation** — §2: generic type args not resolved; `.V` receiver dropped.
 - **Templates** (`docs/templates.md` §7):

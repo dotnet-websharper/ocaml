@@ -84,9 +84,15 @@ land in the Problems panel), and **wsocaml: run (server on :8123)** — from
   `#…` `href`s (no hand-rolled `hashchange` listener; the native shadow's
   `installHash` is a no-op because the server owns the URL).
 
-The app also typechecks against the **native shadow**
-(`runtimes/ui-server/webSharper_UI.ml`), which is why it sticks to the shadow's
-`Doc`/`View`/`Var` surface. This example drove several compiler/runtime changes:
+The `dune` project (the editor) checks the app against the **native shadow**
+(`runtimes/ui-server/webSharper_UI.ml`), while the build uses the generated client
+binding (`websharper-ui`) — which is why it sticks to the surface the two have in
+common (`Doc`/`View`/`Var`). `open WebSharper_UI` also shadows
+`WebSharper_JavaScript.Storage`/`Array`/`Attr`/`Notation`, so the DOM calls are
+qualified (or aliased — the top-level README's *Name collisions and shadowing*
+explains why the editor and the build can disagree about a bare name).
+
+This example drove several compiler/runtime changes:
 `?keepUnfilled`/`bind` and `*_view` text holes in `runtimes/template/codegen.ml`;
 plain-marker / handler-marker / sub-template-placeholder rendering
 (`keep_unfilled`, `ws-on*`, `ws-children-template`) in the shadow; the missing

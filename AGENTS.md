@@ -272,6 +272,20 @@ dotnet backend/bin/Debug/net10.0/WebSharper.OCaml.dll --ir app.wsir.json \
     There is no native implementation: `let () =` bodies (where this is normally
     used) are dropped from `server.ml`.
 
+17. **Binding `open`s shadow, and the editor typechecks against the *shadows*
+    while the build uses the generated bindings.** `open WebSharper_UI` (client
+    binding)
+    re-exports `Storage`, `Array`, `Attr`, `Notation`, hiding the same-named
+    `WebSharper_JavaScript` modules — the DOM side needs qualifying or an alias
+    (`module JsStorage = WebSharper_JavaScript.Storage`). `WebSharper_JavaScript`
+    in turn shadows stdlib modules (`String`, `Array`, `Object`, …), hence
+    `module String = Stdlib.String` in the examples. And because
+    `examples/*/dune` lists `websharper-ui-server` (the 19-submodule native
+    shadow) while `build.sh`/the suite list the generated `websharper-ui` (80),
+    a bare `Storage`/`Array` can typecheck in the editor and fail in the build, or
+    the reverse — `dune build` under `examples/` is an editor convenience only.
+    README → *Name collisions and shadowing*.
+
 ## Adding a feature
 
 - Runtime/JS behaviour or sitelet/RPC coverage → extend

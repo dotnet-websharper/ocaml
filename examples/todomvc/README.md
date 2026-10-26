@@ -56,9 +56,16 @@ land in the Problems panel), and **wsocaml: run (server on :8123)** — from
   the OCaml type instead of a hand-written encoder (`JSON.md` §1.1).
 - **Client-only app.** Everything lives in one top-level `let ()`. Such a binding
   is *dropped* from `server.ml` (its pattern is not `Ppat_var`), so the app runs
-  only in the client bundle — while the frontend still typechecks the whole file
-  against the **native shadow** (`runtimes/ui-server/webSharper_UI.ml`), which is
-  why the app sticks to the shadow's `Doc`/`View`/`Var` surface.
+  only in the client bundle. The build typechecks it against the generated client
+  binding (`websharper-ui`), while the `dune` project (`dune build`, the editor)
+  checks the **native shadow** (`runtimes/ui-server/webSharper_UI.ml`) — which is
+  why the app sticks to the surface the two have in common (`Doc`/`View`/`Var`).
+- **Opens and shadowing.** `open WebSharper_UI` re-exports a `Storage` of its own
+  (`WebSharper.UI.Storage`), hiding `WebSharper_JavaScript.Storage`; the DOM calls
+  are aliased (`module JsStorage = WebSharper_JavaScript.Storage`) rather than
+  fully qualified everywhere. See the top-level README's *Name collisions and
+  shadowing* for the full list (`Storage`/`Array`/`Attr`/`Notation`, and why the
+  editor and the build can disagree).
 - **The server** is a one-route sitelet that serves the shell
   (`<div id="root"></div>` + the bundle + `/css/app.css`); the client bundle
   renders the app into `#root` with `Doc.runById`.

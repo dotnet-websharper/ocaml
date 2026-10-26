@@ -6,6 +6,12 @@ open WebSharper_Server
 (* `open WebSharper_JavaScript` shadows the OCaml `String`; keep it. *)
 module String = Stdlib.String
 
+(* `open WebSharper_UI` also re-exports a `Storage` of its own
+   (`WebSharper.UI.Storage`, the reactive storage type), which hides the DOM
+   `WebSharper_JavaScript.Storage`; alias it once instead of qualifying every use
+   (top-level README, "Name collisions and shadowing"). *)
+module JsStorage = WebSharper_JavaScript.Storage
+
 (* WS.UI template (adapted from the TodoMVC app template). Nested templates
    (`body`, `todoItem`) are submodules; the codegen compiles each to its own
    source (see docs/templates.md). *)
@@ -40,11 +46,11 @@ let () =
   let load () =
     (* `getItem` is `null` when the key is absent; a malformed/empty payload
        should start from an empty list, not fail at startup. *)
-    try (WebSharper_Json.decode (WebSharper_JavaScript.Storage.getItem (storage ()) key) : todo list)
+    try (WebSharper_Json.decode (JsStorage.getItem (storage ()) key) : todo list)
     with _ -> []
   in
   let save (ts : todo list) =
-    WebSharper_JavaScript.Storage.setItem (storage ()) key (WebSharper_Json.encode ts)
+    JsStorage.setItem (storage ()) key (WebSharper_Json.encode ts)
   in
 
   (* --- state -------------------------------------------------------------- *)
