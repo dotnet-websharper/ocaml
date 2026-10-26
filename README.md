@@ -117,9 +117,12 @@ Specs in `specs/` repair what the flat, address-derived naming cannot:
     systematic and useful (`Tuple2`..`Tuple9` = `Tuple<'T1>`.., `ValueTuple*`,
     `Union2`..`Union7`, `Func*`, `ThisFunc*`, `Params*`, `IList2` = `IList<'T>`,
     `IEnumerable2`, `Task2`, …).
-- `specs/websharper-sitelets.spec` — `InferRouter.Router` -> `InferRouter`
-  (`Router`, `Router2` = `Router<'T>`, and `RouterModule` are the sitelets router
-  itself).
+- `specs/websharper-sitelets.spec` — the **generic** router
+  `WebSharper.Sitelets.Router<'T>` takes the bare `Router` (it is the type
+  `RouterModule.table` returns and `WebSharper_UI.Router.installHash` takes),
+  and the non-generic route matcher becomes `RouterMatcher`; `InferRouter.Router`
+  -> `InferRouter` (`RouterModule` is the module of router combinators, `Route`
+  the route).
 - `specs/websharper-ui.spec` — `WebSharper.UI.Router` refers to
   `WebSharper.Sitelets.Router<'T>`, so UI is generated with the Sitelets
   reference (otherwise the `Router<'T>` argument mis-binds), and the spec merges

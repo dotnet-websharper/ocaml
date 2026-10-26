@@ -142,7 +142,7 @@ let () =
 
   (* A WebSharper hash router; `installHash` wires `hashchange` + anchor clicks
      and gives a reactive `Var<filter>` (server-side it just holds the default). *)
-  let filter_router : filter WebSharper_Sitelets.Router2.t =
+  let filter_router : filter WebSharper_Sitelets.Router.t =
     WebSharper_Sitelets.RouterModule.table
       [ (All, ""); (Active, "active"); (Completed, "completed") ]
   in

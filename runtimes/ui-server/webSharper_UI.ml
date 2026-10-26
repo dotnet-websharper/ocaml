@@ -252,31 +252,31 @@ end
    yields a `Var` holding the default. The surface mirrors the client binding so
    that shared source typechecks on both tiers. *)
 module Router = struct
-  let installHash (default : 'a) (_ : 'a WebSharper_Sitelets.Router2.t) : 'a Var.t =
+  let installHash (default : 'a) (_ : 'a WebSharper_Sitelets.Router.t) : 'a Var.t =
     Var.create default
 
-  let installHashInto (v : 'a Var.t) (default : 'a) (_ : 'a WebSharper_Sitelets.Router2.t) : unit =
+  let installHashInto (v : 'a Var.t) (default : 'a) (_ : 'a WebSharper_Sitelets.Router.t) : unit =
     Var.set v default
 
-  let install (default : 'a) (_ : 'a WebSharper_Sitelets.Router2.t) : 'a Var.t = Var.create default
+  let install (default : 'a) (_ : 'a WebSharper_Sitelets.Router.t) : 'a Var.t = Var.create default
 
-  let installInto (v : 'a Var.t) (default : 'a) (_ : 'a WebSharper_Sitelets.Router2.t) : unit =
+  let installInto (v : 'a Var.t) (default : 'a) (_ : 'a WebSharper_Sitelets.Router.t) : unit =
     Var.set v default
 
-  let linkHash (r : 'a WebSharper_Sitelets.Router2.t) (v : 'a) : string =
+  let linkHash (r : 'a WebSharper_Sitelets.Router.t) (v : 'a) : string =
     WebSharper_Sitelets.RouterModule.hashLink r v
 
   let getCurrentHash (_ : string -> 'a option) (default : 'a) : 'a = default
 end
 
 module RouterExtensions = struct
-  let installHash (r : 'a WebSharper_Sitelets.Router2.t) (default : 'a) : 'a Var.t =
+  let installHash (r : 'a WebSharper_Sitelets.Router.t) (default : 'a) : 'a Var.t =
     Router.installHash default r
 
-  let install (r : 'a WebSharper_Sitelets.Router2.t) (default : 'a) : 'a Var.t =
+  let install (r : 'a WebSharper_Sitelets.Router.t) (default : 'a) : 'a Var.t =
     Router.install default r
 
-  let linkHash (r : 'a WebSharper_Sitelets.Router2.t) (v : 'a) : string =
+  let linkHash (r : 'a WebSharper_Sitelets.Router.t) (v : 'a) : string =
     Router.linkHash r v
 end
 

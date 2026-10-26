@@ -7,14 +7,14 @@ external hrefToAbsolute : string -> (string) WebSharper_StdLib.FSharpOption.t = 
 (* func *)
 external trimFragment : string -> string = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Router::#trimFragment|System.String" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Router::#trimFragment|System.String"
 (* func *)
-external installHash : 'a -> ('a) WebSharper_Sitelets.Router2.t -> ('a) Var.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Router::#InstallHash|'0|WebSharper.Sitelets.Router`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Router::#InstallHash|'0|WebSharper.Sitelets.Router`1<'0>"
+external installHash : 'a -> ('a) WebSharper_Sitelets.Router.t -> ('a) Var.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Router::#InstallHash|'0|WebSharper.Sitelets.Router`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Router::#InstallHash|'0|WebSharper.Sitelets.Router`1<'0>"
 (* func *)
 external getCurrentHash : (string -> ('a) WebSharper_StdLib.FSharpOption.t) -> 'a -> 'a = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Router::#getCurrentHash|fn|'0" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Router::#getCurrentHash|fn|'0"
 (* func *)
-external install : 'a -> ('a) WebSharper_Sitelets.Router2.t -> ('a) Var.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Router::#Install|'0|WebSharper.Sitelets.Router`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Router::#Install|'0|WebSharper.Sitelets.Router`1<'0>"
+external install : 'a -> ('a) WebSharper_Sitelets.Router.t -> ('a) Var.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Router::#Install|'0|WebSharper.Sitelets.Router`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Router::#Install|'0|WebSharper.Sitelets.Router`1<'0>"
 (* func *)
 external getCurrent : (WebSharper_Sitelets.Route.t -> ('a) WebSharper_StdLib.FSharpOption.t) -> 'a -> 'a = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Router::#getCurrent|fn|'0" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Router::#getCurrent|fn|'0"
 (* func *)
-external installHashInto : ('a) Var.t -> 'a -> ('a) WebSharper_Sitelets.Router2.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Router::#InstallHashInto|WebSharper.UI.Var`1<'0>|'0|WebSharper.Sitelets.Router`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Router::#InstallHashInto|WebSharper.UI.Var`1<'0>|'0|WebSharper.Sitelets.Router`1<'0>"
+external installHashInto : ('a) Var.t -> 'a -> ('a) WebSharper_Sitelets.Router.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Router::#InstallHashInto|WebSharper.UI.Var`1<'0>|'0|WebSharper.Sitelets.Router`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Router::#InstallHashInto|WebSharper.UI.Var`1<'0>|'0|WebSharper.Sitelets.Router`1<'0>"
 (* func *)
-external installInto : ('a) Var.t -> 'a -> ('a) WebSharper_Sitelets.Router2.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Router::#InstallInto|WebSharper.UI.Var`1<'0>|'0|WebSharper.Sitelets.Router`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Router::#InstallInto|WebSharper.UI.Var`1<'0>|'0|WebSharper.Sitelets.Router`1<'0>"
+external installInto : ('a) Var.t -> 'a -> ('a) WebSharper_Sitelets.Router.t -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Router::#InstallInto|WebSharper.UI.Var`1<'0>|'0|WebSharper.Sitelets.Router`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Router::#InstallInto|WebSharper.UI.Var`1<'0>|'0|WebSharper.Sitelets.Router`1<'0>"

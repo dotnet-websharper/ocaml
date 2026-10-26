@@ -314,7 +314,7 @@ Everything above is **server-side** routing (URL → the `[@endpoint]` DU, and
 type filter = All | Active | Completed
 
 (* #/   #/active   #/completed *)
-let filter_router : filter WebSharper_Sitelets.Router2.t =
+let filter_router : filter WebSharper_Sitelets.Router.t =
   WebSharper_Sitelets.RouterModule.table
     [ (All, ""); (Active, "active"); (Completed, "completed") ]
 

@@ -150,10 +150,10 @@ dotnet backend/bin/Debug/net10.0/WebSharper.OCaml.dll --ir app.wsir.json \
 | `runtimes/ocaml/*.ml` | native implementations: `ssr.ml` (HTML nodes/regions), `wsrpc.ml` (JSON-RPC server), `webSharper_Server.ml`, `webSharper_ClientServer.ml`, `async.ml` |
 | `runtimes/ocaml/*.mjs` | the node drivers the demos use (`site_client.mjs` needs jsdom) |
 | `runtimes/ui-server/webSharper_UI.ml` | native SSR shadow of WebSharper.UI (`Doc`/`View`/`Var`/`Attr`/`Router` + the `Template` engine), same module name as the client binding |
-| `runtimes/ui-server/webSharper_Sitelets.ml` | native shadow of the `WebSharper.Sitelets` hash router (`Router`/`Router2`/`RouterModule`/`Route`) that `WebSharper.UI.Router.installHash` takes; the server never hashes |
+| `runtimes/ui-server/webSharper_Sitelets.ml` | native shadow of the `WebSharper.Sitelets` hash router (`Router` = `Router<'T>`, `RouterMatcher`, `RouterModule`, `Route`) that `WebSharper.UI.Router.installHash` takes; the server never hashes |
 | `runtimes/template/` | `websharper-template`: HTML parser + hole model + `Codegen` for `[%template]` |
 | `binding-adaptor/` | F# tool: binding assembly → OCaml opam package |
-| `specs/*.spec` | binding-adaptor input controlling generated package/module shape: `websharper-stdlib.spec` (the collision repairs listed in `README.md`: `System.DateTime` -> `DateTime`, `WebSharper.JavaScript.Pervasives+DateTime` -> `DateTimeFormat`, `<Type>Module` helpers, `Nullable`/`Optional` vs their helpers, `JavaScriptPervasives`, `LinqEnumerable`, the `*Enumerator`s), `websharper-sitelets.spec` (`InferRouter+Router` -> `InferRouter`) and `websharper-ui.spec` (merges + `Html`/`On` names) |
+| `specs/*.spec` | binding-adaptor input controlling generated package/module shape: `websharper-stdlib.spec` (the collision repairs listed in `README.md`: `System.DateTime` -> `DateTime`, `WebSharper.JavaScript.Pervasives+DateTime` -> `DateTimeFormat`, `<Type>Module` helpers, `Nullable`/`Optional` vs their helpers, `JavaScriptPervasives`, `LinqEnumerable`, the `*Enumerator`s), `websharper-sitelets.spec` (``WebSharper.Sitelets.Router`1`` -> `Router` + `RouterMatcher`, `InferRouter+Router` -> `InferRouter`) and `websharper-ui.spec` (merges + `Html`/`On` names) |
 | `scripts/*.sh` | per-scenario drivers (see "What the suite covers") |
 | `backend/tests/apps-site/`, `apps-ui/`, `apps-ws/`, `apps/`, `cases/`, `cases-ws/`, `errors/`, `template/` | the harness families |
 | `examples/` | dune projects type-checked against the installed bindings; `examples/hello-world` is the end-to-end reference app |
@@ -208,7 +208,7 @@ dotnet backend/bin/Debug/net10.0/WebSharper.OCaml.dll --ir app.wsir.json \
     `ocamlfind` directly (not via dune), so `webSharper_Sitelets.ml` must be
     copied and listed **before** `webSharper_UI.ml` there too. `build-ui-app.sh`
     needs `-I $(ocamlfind query websharper-sitelets)` (the regenerated
-    `WebSharper.UI.Router` cmi names `WebSharper_Sitelets.Router2.t`) and
+    `WebSharper.UI.Router` cmi names `WebSharper_Sitelets.Router.t`) and
     `--reference WebSharper.Sitelets.dll`.
 12. **Event keys are content-derived**: `wsh<digits>` = `Hashtbl.hash` of the
     handler's `Pprintast` text, which is stable across processes — that is what
@@ -229,13 +229,17 @@ dotnet backend/bin/Debug/net10.0/WebSharper.OCaml.dll --ir app.wsir.json \
     (`default`-export) classes first — they keep the bare name — and suffixes the
     rest `2`, `3`, …; a group merges instead only when exactly one member is the
     max-arity type and the others are static helpers (`Var<'T>` + `Var`). When
-    *both* members are module-root the tie-break is metadata order, which is where
-    `DateTime2`/`Nullable2`/`IList2` came from; fix such pairs with a `spec` rename
-    (`specs/websharper-stdlib.spec` / `websharper-sitelets.spec` do it for the
-    genuine clashes — see `README.md`). Leave the **arity families** alone: there
-    the digit is systematic and useful (`Tuple2` = `Tuple<'T1>`, `Union2`,
-    `ThisFunc2..7`, `IList2` = `IList<'T>`, `Task2`, …) — renaming them only makes
-    the arity harder to read. A spec is
+    *both* members are module-root the tie-break is metadata order — that is where
+    `DateTime2`, `Nullable2` and `Router2` came from; fix such pairs with a `spec`
+    rename (`specs/websharper-stdlib.spec` / `websharper-sitelets.spec` — the full
+    list is in `README.md`). Distinguish them from the **arity families**, which
+    are left alone because the digit *is* the arity there (`Tuple2` =
+    `Tuple<'T1>`, `Union2`, `ThisFunc2..7`, `ParamsFunc*`, `IList2` = `IList<'T>`,
+    `IEnumerable2`, `Task2`, …) — a rename there only makes arity harder to read.
+    Note the fix usually has *two* entries (the generic/useful member takes the
+    bare name), and after renaming check the regenerated file list for fresh
+    `*2` files: `EventModule` silently collided with F#'s own
+    `Microsoft.FSharp.Control.EventModule`. A spec is
     applied for the package **and for each `--reference`**, so add it before
     regenerating dependents. Regenerating can also surface unrelated generator
     drift (e.g. `event.ml` gaining a `%identity` upcast) — review the diff, and
