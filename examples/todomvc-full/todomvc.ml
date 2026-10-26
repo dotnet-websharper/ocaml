@@ -12,7 +12,7 @@ module JsStorage = WebSharper_JavaScript.Storage
    templating attributes added in place; the row is a nested `<template
    name="todoItem">` (a submodule). The server renders it with `keepUnfilled`
    (a skeleton of `ws-*` markers) and the client binds it (`bind`). *)
-module TodoMvcPage = [%template "views/todomvc.html"]
+module TodoPage = [%template "views/todomvc.html"]
 
 (* --- model ---------------------------------------------------------------- *)
 
@@ -31,7 +31,7 @@ let[@website] main =
   Sitelet.infer (fun (_ : endpoint context) _ ->
     Content.page ~title:"TodoMVC · wsocaml"
       ~head:"<link rel=\"stylesheet\" href=\"/css/app.css\">"
-      [ TodoMvcPage.doc ~keepUnfilled:true (TodoMvcPage.create ()) ])
+      [ TodoPage.doc ~keepUnfilled:true (TodoPage.create ()) ])
 
 (* Everything below lives in a single top-level `let ()`: it is dropped from the
    native server (a non-`Ppat_var` binding) and runs only in the client bundle. *)
@@ -52,7 +52,7 @@ let () =
   let rec save (ts : todo list) =
     JsStorage.setItem (storage ()) key (encode ts)
   in
-  
+
   (* --- state -------------------------------------------------------------- *)
 
   let state = Var.create { todos = load (); editing = None } in
@@ -138,22 +138,22 @@ let () =
 
   let render_item (s : state) (t : todo) =
     let editing = s.editing = Some t.id in
-    let inst = TodoMvcPage.TodoItem.create () in
+    let inst = TodoPage.TodoItem.create () in
     Var.set inst.vars.editText t.title;
     inst
-    |> TodoMvcPage.TodoItem.itemClass
+    |> TodoPage.TodoItem.itemClass
         ((if t.completed then "completed " else "") ^ (if editing then "editing" else ""))
-    |> TodoMvcPage.TodoItem.title t.title
-    |> TodoMvcPage.TodoItem.toggleAttr
+    |> TodoPage.TodoItem.title t.title
+    |> TodoPage.TodoItem.toggleAttr
         (if t.completed then Attr.create "checked" "checked" else Attr.empty ())
-    |> TodoMvcPage.TodoItem.toggle (fun _ _ -> toggle t.id)
-    |> TodoMvcPage.TodoItem.editStart (fun _ _ -> start_edit t.id)
-    |> TodoMvcPage.TodoItem.destroy (fun _ _ -> destroy t.id)
-    |> TodoMvcPage.TodoItem.editCommit_withModel (fun e -> commit_edit t.id e.vars.editText)
-    |> TodoMvcPage.TodoItem.editKey_withModel (fun e ->
+    |> TodoPage.TodoItem.toggle (fun _ _ -> toggle t.id)
+    |> TodoPage.TodoItem.editStart (fun _ _ -> start_edit t.id)
+    |> TodoPage.TodoItem.destroy (fun _ _ -> destroy t.id)
+    |> TodoPage.TodoItem.editCommit_withModel (fun e -> commit_edit t.id e.vars.editText)
+    |> TodoPage.TodoItem.editKey_withModel (fun e ->
         if is_enter e.event then commit_edit t.id e.vars.editText
         else if is_escape e.event then stop_edit ())
-    |> TodoMvcPage.TodoItem.doc
+    |> TodoPage.TodoItem.doc
   in
 
   (* The document is server-rendered once (a skeleton of `ws-*` markers) and then
@@ -172,20 +172,20 @@ let () =
   let initial = (Var.get state, Var.get filter_var) in
 
   let inst =
-    TodoMvcPage.create ()
-    |> TodoMvcPage.newTodoKey_withModel (fun e -> if is_enter e.event then add e.vars.newTodo; Var.set e.vars.newTodo "")
-    |> TodoMvcPage.newTodoFocus focus
-    |> TodoMvcPage.mainClass_view (cls (fun (s, _) -> hidden_if (s.todos = [])))
-    |> TodoMvcPage.footerClass_view (cls (fun (s, _) -> hidden_if (s.todos = [])))
-    |> TodoMvcPage.toggleAttr
+    TodoPage.create ()
+    |> TodoPage.newTodoKey_withModel (fun e -> if is_enter e.event then add e.vars.newTodo; Var.set e.vars.newTodo "")
+    |> TodoPage.newTodoFocus focus
+    |> TodoPage.mainClass_view (cls (fun (s, _) -> hidden_if (s.todos = [])))
+    |> TodoPage.footerClass_view (cls (fun (s, _) -> hidden_if (s.todos = [])))
+    |> TodoPage.toggleAttr
          (if (fst initial).todos <> [] && remaining initial = 0 then Attr.create "checked" "checked"
           else Attr.empty ())
-    |> TodoMvcPage.toggleAll (fun _ _ -> toggle_all ())
-    |> TodoMvcPage.todos
+    |> TodoPage.toggleAll (fun _ _ -> toggle_all ())
+    |> TodoPage.todos
          (Doc.bindView
             (fun m -> Doc.concat (List.map (render_item (fst m)) (List.filter (visible m) (fst m).todos)))
             view)
-    |> TodoMvcPage.count
+    |> TodoPage.count
          (Doc.bindView
             (fun m ->
               let n = remaining m in
@@ -193,16 +193,16 @@ let () =
                 [ strong [] [ Doc.text (string_of_int n) ];
                   Doc.text (" " ^ (if n = 1 then "item" else "items") ^ " left") ])
             view)
-    |> TodoMvcPage.allClass_view (cls (selected All))
-    |> TodoMvcPage.activeClass_view (cls (selected Active))
-    |> TodoMvcPage.completedClass_view (cls (selected Completed))
-    |> TodoMvcPage.clearClass_view
+    |> TodoPage.allClass_view (cls (selected All))
+    |> TodoPage.activeClass_view (cls (selected Active))
+    |> TodoPage.completedClass_view (cls (selected Completed))
+    |> TodoPage.clearClass_view
          (cls (fun m -> hidden_if (List.length (fst m).todos = remaining m)))
-    |> TodoMvcPage.clearCompleted (fun _ _ -> clear_completed ())
+    |> TodoPage.clearCompleted (fun _ _ -> clear_completed ())
   in
 
   (* --- start -------------------------------------------------------------- *)
 
   (* Bind the server-rendered document to the reactive instance. The filter
      links are plain `<a href="#/…">`, intercepted by the hash router. *)
-  TodoMvcPage.bind inst
+  TodoPage.bind inst
