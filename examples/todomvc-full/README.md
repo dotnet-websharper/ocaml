@@ -7,7 +7,7 @@ HTML5 document) with `ws-*`/`${…}` templating attributes added in place. It us
 the WebSharper **SSR split**: the native server renders the template once with
 `keepUnfilled` (a skeleton of `ws-*` markers, plus a `ws-children-template`
 placeholder for the row) and the client bundle **binds** it to the reactive
-state with `Tmpl.bind`. It builds both tiers like
+state with `TodoPage.bind`. It builds both tiers like
 [`examples/hello-world`](../hello-world): a client bundle and a native OCaml
 server that serves the page.
 
@@ -60,12 +60,12 @@ land in the Problems panel), and **wsocaml: run (server on :8123)** — from
 - **Persistence** uses typed JSON: `WebSharper_Json.encode (ts : todo list)` /
   `decode`, so the stored `[{"id","title","completed"}, …]` shape is derived from
   the OCaml type instead of a hand-written encoder (`JSON.md` §1.1).
-- **SSR split.** The sitelet renders `Tmpl.doc ~keepUnfilled:true (Tmpl.create ())`
+- **SSR split.** The sitelet renders `TodoPage.doc ~keepUnfilled:true (TodoPage.create ())`
   into `Content.page`, i.e. the template body with every hole left as its plain
   `ws-*` / `${…}` marker and the row re-emitted as a hidden
   `<div ws-children-template="todoItem">`. The client (`let () = …`, dropped from
   `server.ml` because its pattern is not `Ppat_var`) builds the instance, then
-  calls `Tmpl.bind inst`, which runs WebSharper's `RunFullDocTemplate` over the
+  calls `TodoPage.bind inst`, which runs WebSharper's `RunFullDocTemplate` over the
   served `document.body` (see `docs/templates.md`).
 - **Reactivity comes from the holes.** `ws-var` holes bind `Var`s; the row list
   (`todos`) and the counter (`count`) are `Doc.bindView`s over the state; the
