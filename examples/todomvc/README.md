@@ -26,6 +26,8 @@ Escape discards, empty destroys; input focused), delete, pluralized **counter**,
 | `css/app.css` | a compact TodoMVC stylesheet |
 | `build.sh` | builds `out/client` (bundle + css) and `out/server` |
 | `run.sh` | builds and runs the server on http://127.0.0.1:8123/ |
+| `check.sh` | build with single-line diagnostics for the VS Code problem matcher |
+| `.vscode/tasks.json` | VS Code `Cmd+Shift+B` build task + "run" task (same as `hello-world`) |
 | `dune` | editor/typecheck context (the `websharper-ocaml-ppx` expands `[%template]`) |
 
 ## Build & run
@@ -42,6 +44,10 @@ or step by step:
 bash build.sh
 ./out/server &     # http://127.0.0.1:8123/
 ```
+
+In VS Code, `Cmd+Shift+B` runs the default **wsocaml: build** task (diagnostics
+land in the Problems panel), and **wsocaml: run (server on :8123)** — from
+*Terminal → Run Task…* — builds and serves the site.
 
 ## How it fits together
 
