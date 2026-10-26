@@ -508,6 +508,24 @@ else
   echo "SKIP errors (frontend/ocamlfind not available)"
 fi
 
+# Diagnostic normalization (`diag.exe`): an exception *message* must survive
+# even when it ends in `)`; only the redundant `Printexc.to_string` line that
+# follows a formatted report (`Typecore.Error(_, _, _)`, `Location.Error(_)`)
+# is dropped.
+if [ -x "$diagexe" ]; then
+  msg='System.Exception: WebSharper_Json.encode/decode must be called directly (the call-site type is needed)'
+  printf '%s\n%s\n%s\n' "$msg" 'Location.Error(_)' 'Unhandled exception. System.Exception: boom (context)' \
+    | "$diagexe" > "$tmp/diag.actual" 2>&1
+  printf '%s\n%s\n' "$msg" 'Unhandled exception. System.Exception: boom (context)' > "$tmp/diag.expected"
+  if diff -u "$tmp/diag.expected" "$tmp/diag.actual" > "$tmp/diag.diff"; then
+    echo "PASS diag"; pass=$((pass + 1))
+  else
+    echo "FAIL diag (normalization)"; sed 's/^/    /' "$tmp/diag.diff"; fail=$((fail + 1))
+  fi
+else
+  echo "SKIP diag ($diagexe not built)"
+fi
+
 echo
 echo "passed: $pass, failed: $fail"
 [ "$fail" = 0 ]

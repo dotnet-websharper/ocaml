@@ -1,4 +1,5 @@
 open WebSharper_JavaScript
+open WebSharper_Json
 
 (* `open WebSharper_JavaScript` shadows the OCaml `String`; keep it. *)
 module String = Stdlib.String
@@ -28,23 +29,23 @@ let () =
       pair = ("k", 7);
       nested = None }
   in
-  let s = WebSharper_Json.encode p in
+  let s = encode p in
   Console.log ("encode=" ^ s);
-  let q : payload = WebSharper_Json.decode s in
+  let q : payload = decode s in
   Console.log ("roundtrip=" ^ string_of_bool (WebSharper_Json.encode q = s));
   (* A hand-written payload in the same representation decodes type-safely. *)
   let lit =
     "{\"todos\":[],\"shapes\":[{\"$\":\"Circle\",\"$0\":9}],\"note\":null,"
     ^ "\"pair\":[\"x\",1],\"nested\":[4,5]}"
   in
-  let r : payload = WebSharper_Json.decode lit in
+  let r : payload = decode lit in
   let show_pair (pr : string * int) =
     let a, b = pr in
     a ^ ":" ^ string_of_int b
   in
   Console.log ("decode=" ^ string_of_bool (r.note = None) ^ "," ^ show_pair r.pair);
-  Console.log ("reencode=" ^ WebSharper_Json.encode r);
-  let ints : int list = WebSharper_Json.decode "[1,2,3]" in
+  Console.log ("reencode=" ^ encode r);
+  let ints : int list = decode "[1,2,3]" in
   Console.log ("ints=" ^ String.concat "," (List.map string_of_int ints));
-  let flag : bool = WebSharper_Json.decode "true" in
+  let flag : bool = decode "true" in
   Console.log ("bool=" ^ string_of_bool flag)

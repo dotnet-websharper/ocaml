@@ -68,6 +68,7 @@ bash backend/tests/run-tests.sh --update    # refresh *.expected.js / *.out / *.
 | `apps-ui/*.ml` | `build-ui-app.sh` | `<name>.out` (+ `<name>.mjs` driver) |
 | `apps-site/wssite.ml` | `site-demo.sh` end to end (native server) | `site.out` |
 | `errors/*.ml` | frontend + `diag.exe` (must fail) | `<name>.err` |
+| diag normalization | inline in `run-tests.sh` (an exception message ending in `)` must survive) | — |
 | `template/` | `template_gen.exe` goldens + a native render of `card_tpl` | `card_tpl.ml/.mli.expected`, `expected.out` |
 | rpc / ssr | `rpc-demo.sh`, `rpc-data.sh`, `ssr-demo.sh` | `rpc_server.out`, `rpc_data.out`, `ssr.out` |
 
@@ -173,9 +174,15 @@ dotnet backend/bin/Debug/net10.0/WebSharper.OCaml.dll --ir app.wsir.json \
    `Fatal error: exception …` with no file/line. `genRoute`'s old `Option.get`
    crash was exactly that; `endpointOf`/`endpointPlan`/`checkBoundary`/
    `transformClientEvents` now raise located errors — keep it that way.
-4. **`diag.exe` drops `X.Y(...)`-shaped lines** (see `is_exception` in
-   `frontend/bin/diag.ml`), which is why the driver also printing
-   `Printexc.to_string exn` does not pollute the matcher output.
+4. **`diag.exe` drops the redundant `X.Y(...)` line** the driver prints after a
+   formatted report (`Printexc.to_string exn`, e.g. `Typecore.Error(_, _, _)`,
+   `Location.Error(_)`; see `is_exception` in `frontend/bin/diag.ml`). It only
+   drops it when the line has **no colon**, so exception *messages* such as
+   `System.Exception: … (…)`, `Unhandled exception. …`, and
+   `Fatal error: exception …` still reach the terminal. Do not widen this to
+   "anything ending in `)`" — that swallowed the only useful line of backend
+   crashes whose message ends with `)` (and there is a `diag` regression test in
+   `backend/tests/run-tests.sh`).
 5. **OCaml 5.4 parsetree:** `Pexp_fun` no longer exists — functions are
    `Pexp_function (function_param list, type_constraint option, function_body)`
    with `function_param = { pparam_desc; pparam_loc }`. `Ast_mapper` exposes
@@ -251,13 +258,19 @@ dotnet backend/bin/Debug/net10.0/WebSharper.OCaml.dll --ir app.wsir.json \
     e` / `decode s` become `__encode <i> e` / `__decode <i> s` in `transformJson`;
     after typechecking `jsonCalls` reads the instantiated type at that node and
     the IR's `json` section maps `<i>` to a `descr` descriptor, which
-    `Lowering.prim` inlines as `OCamlRuntime.jsonEncode/Decode`. Consequences:
-    the stub must stay a `.ml` (an `.mli` drops the `wsocaml:json_*` primitive
-    and the call turns into a plain global), the value's type must be concrete
-    at the call site (annotate polymorphic callers), and the descriptor shares
-    the unit's `types` table, so `registerTypes` must run before a `named`
-    decode. There is no native implementation: `let () =` bodies (where this is
-    normally used) are dropped from `server.ml`.
+    `Lowering.prim` inlines as `OCamlRuntime.jsonEncode/Decode`. The bare
+    `encode`/`decode` spelling is only rewritten when the unit has
+    `open WebSharper_Json` (so a user-defined `encode` is not hijacked).
+    Consequences: the stub must stay a `.ml` (an `.mli` drops the
+    `wsocaml:json_*` primitive and the call turns into a plain global), the
+    value's type must be concrete at the call site (annotate polymorphic
+    callers), and the descriptor shares the unit's `types` table, so
+    `registerTypes` must run before a `named` decode. A use the rewrite cannot
+    see (an alias, `List.map WebSharper_Json.encode …`) is a located diagnostic
+    in `jsonCalls`; a type it cannot describe (e.g. `state Var.t`, or a type
+    variable) is a located `cannot marshal a value of type … to typed JSON`.
+    There is no native implementation: `let () =` bodies (where this is normally
+    used) are dropped from `server.ml`.
 
 ## Adding a feature
 

@@ -267,7 +267,8 @@ let load () =
 ```
 
 The descriptor comes from the value's type at the call site, so annotate
-polymorphic callers (`let save (ts : todo list)`). Client-only today. See
+polymorphic callers (`let save (ts : todo list)`). `open WebSharper_Json` also
+allows the bare `encode`/`decode` spelling. Client-only today. See
 [`JSON.md`](JSON.md) §1.1 for how the frontend/backend/runtime split it.
 
 ## Differences from .NET WebSharper

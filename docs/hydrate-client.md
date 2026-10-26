@@ -110,17 +110,17 @@ local, that is a located error (`:1812`). Region handlers are exempt.
 
 The lifted event keys are returned as `eventKeys`.
 
-## 5. Classification and the IR (`main.ml:313`, `:2269`)
+## 5. Classification and the IR (`main.ml:313`, `:2303`)
 
 - `clientMarks` (`:313`): `js` = names of `[@javascript] ∪ [@export] ∪ [@client]`;
   `rpc`; `srv` (everything else).
 - `clientNames` (`:335`): `cli` = names with `[@client]` (the `ws<id>` liftings).
 - `checkBoundary` (`:404`): a `js` value that references a `server`-only
   top-level is a located error.
-- IR (`:2269`):
+- IR (`:2303`):
   - `javascript`, `rpc`, `server`, `exports` name lists;
   - `clients` = `(cli @ eventKeys)` mapped to `{name; key; index}`, where `index`
-    is the value's module-block slot (`topIndex`, `:2217`).
+    is the value's module-block slot (`topIndex`, `:2251`).
 
 ## 6. Client build (backend)
 

@@ -22,10 +22,18 @@ let is_prefix p s =
 let starts_with_space s = String.length s > 0 && (s.[0] = ' ' || s.[0] = '\t')
 let is_digit c = c >= '0' && c <= '9'
 
-(* `^[A-Z][A-Za-z0-9_]*\.[A-Za-z_]+(...)$` (the `Printexc.to_string exn` line). *)
+(* `^[A-Z][A-Za-z0-9_]*\.[A-Za-z_]+(...)$` — the redundant `Printexc.to_string
+   exn` line the frontend prints *after* a formatted report (e.g.
+   `Typecore.Error(_, _, _)`).
+
+   It must not match an exception *message*: those end up in the terminal as
+   `System.Exception: …` / `Unhandled exception. …` / `Fatal error: exception …`
+   (all contain a colon), and dropping one hides the only useful line when the
+   failure has no `File "…", lines …` location. *)
 let is_exception s =
   let n = String.length s in
   n > 0 && s.[0] >= 'A' && s.[0] <= 'Z' && String.contains s '.' && s.[n - 1] = ')'
+  && not (String.contains s ':')
 
 let skip_to_digit s i =
   let j = ref i in

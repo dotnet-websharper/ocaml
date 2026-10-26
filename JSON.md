@@ -78,11 +78,16 @@ How it fits the four artifacts above:
 
 Properties: the text is exactly the `[@rpc]`/`[@export` external representation
 (§1's table), so persisted data can later be served by an rpc with no format
-change, and there is no second marshaler to keep in sync. The type must be
+change, and there is no second marshaler to keep in sync. `open WebSharper_Json`
+also allows the bare `encode`/`decode` spelling (only then is an unqualified
+name rewritten, so a user-defined `encode` is not hijacked). The type must be
 **concrete at the call site** — the descriptor is derived from it — so annotate
 polymorphic callers (`let save (ts : todo list) = …`); a type variable is a
-located diagnostic. The call must be direct (an alias of
-`WebSharper_Json.encode` cannot supply the call-site index).
+located diagnostic. The call must be direct: an alias or a value use
+(`List.map WebSharper_Json.encode …`) cannot supply the call-site index and is
+reported at that reference. A type with no external representation (a `Var`, a
+function, …) is reported as `cannot marshal a value of type '…' to typed JSON`
+at the offending argument.
 
 Scope: **client-only** for now. The machinery is the client half of §1, and app
 code that needs `WebSharper_Json` normally lives in a `let () =` block, which is

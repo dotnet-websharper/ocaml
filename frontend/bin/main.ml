@@ -1957,6 +1957,21 @@ let transformClientEvents ~(server: bool) (ast: Parsetree.structure) : Parsetree
 
 let transformJson (ast: Parsetree.structure) : Parsetree.structure =
   let next = ref 0 in
+  (* `open WebSharper_Json` allows the bare `encode`/`decode` spelling. Only
+     rewrite unqualified names when the unit opens the stub, so a user-defined
+     `encode` elsewhere is left alone. *)
+  let opened =
+    List.exists
+      (fun (item: Parsetree.structure_item) ->
+        match item.pstr_desc with
+        | Parsetree.Pstr_open
+            { popen_expr = { pmod_desc = Parsetree.Pmod_ident { txt; _ }; _ }; _ } -> (
+            match Longident.flatten txt with
+            | [ "WebSharper_Json" ] -> true
+            | _ -> false)
+        | _ -> false)
+      ast
+  in
   let jsonCall (e: Parsetree.expression) :
       (string * Parsetree.expression * Asttypes.arg_label * Parsetree.expression) option =
     match e.pexp_desc with
@@ -1966,6 +1981,8 @@ let transformJson (ast: Parsetree.structure) : Parsetree.structure =
         match Longident.flatten lid with
         | [ "WebSharper_Json"; "encode" ] -> Some ("encode", fn, lbl, arg)
         | [ "WebSharper_Json"; "decode" ] -> Some ("decode", fn, lbl, arg)
+        | [ "encode" ] when opened -> Some ("encode", fn, lbl, arg)
+        | [ "decode" ] when opened -> Some ("decode", fn, lbl, arg)
         | _ -> None)
     | _ -> None
   in
@@ -2034,12 +2051,19 @@ let jsonCalls (u: string) (typed: Typedtree.structure) (env: Env.t)
       attrs
   in
   let record loc i ty =
-    let meta =
-      try Yojson.Safe.to_string (descr u env defs ty)
-      with Failure msg ->
-        Location.raise_errorf ~loc "cannot marshal this type to typed JSON: %s" msg
-    in
-    acc := (i, meta) :: !acc
+    match (try Some (Yojson.Safe.to_string (descr u env defs ty)) with Failure _ -> None) with
+    | Some meta -> acc := (i, meta) :: !acc
+    | None ->
+        let tystr =
+          Printtyp.wrap_printing_env ~error:false env (fun () ->
+              Format.asprintf "%a" Printtyp.type_scheme ty)
+        in
+        let hint =
+          match Types.get_desc ty with
+          | Types.Tvar _ -> "; annotate the value with its type"
+          | _ -> ""
+        in
+        Location.raise_errorf ~loc "cannot marshal a value of type '%s' to typed JSON%s" tystr hint
   in
   let it =
     { Tast_iterator.default_iterator with
@@ -2060,6 +2084,16 @@ let jsonCalls (u: string) (typed: Typedtree.structure) (env: Env.t)
                   match attrIndex "ws_json_decode" e.exp_attributes with
                   | Some i -> record e.exp_loc i e.exp_type
                   | None -> ()))
+          (* A reference the rewrite did not turn into `__encode`/`__decode`
+             (an alias, or `List.map encode …`): the backend cannot recover the
+             call-site type, so report it here, with a location. *)
+          | Typedtree.Texp_ident (_, { txt; loc }, _) -> (
+              match Longident.flatten txt with
+              | [ "WebSharper_Json"; ("encode" | "decode" as n) ] ->
+                  Location.raise_errorf ~loc
+                    "WebSharper_Json.%s must be applied to exactly one argument (the call-site \
+                     type is needed)" n
+              | _ -> ())
           | _ -> ());
           Tast_iterator.default_iterator.expr self e);
     }
