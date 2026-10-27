@@ -134,6 +134,76 @@ if (!globalThis.OCamlRuntime) {
     return a;
   }
 
+  // `IEnumerable<'T>` <=> OCaml `Seq.t` bridging. A WebSharper `IEnumerable` is
+  // a `{ GetEnumerator() }` object (WebSharper's `Seq` also accepts plain
+  // arrays); an OCaml `Seq.t` is `unit -> node` with `node = 0` (nil) or
+  // `{ $tag: 0, "0": head, "1": tail }`.
+  //
+  // Both directions materialise once — a WebSharper sequence can be single-pass
+  // and an OCaml `Seq.t` built here must be re-iterable — so the conversion is
+  // eager. Use it where a value crosses the OCaml/JS boundary; values that stay
+  // inside a WebSharper container (e.g. the `seq` inside a `View`) keep their
+  // WebSharper representation.
+  function seqNodes(v) {
+    var a = [];
+    if (v !== null && v !== undefined) {
+      if (typeof v.GetEnumerator === "function") {
+        var e = v.GetEnumerator();
+        try {
+          while (e.MoveNext()) a.push(e.Current);
+        } finally {
+          if (typeof e.Dispose === "function") e.Dispose();
+        }
+      } else if (typeof v.length === "number") {
+        for (var i = 0; i < v.length; i++) a.push(v[i]);
+      }
+    }
+    return a;
+  }
+
+  function js_to_caml_seq(v) {
+    var a = seqNodes(v);
+    var mk = function (i) {
+      return function () {
+        return i < a.length ? { $tag: 0, "0": a[i], "1": mk(i + 1) } : 0;
+      };
+    };
+    return mk(0);
+  }
+
+  function caml_seq_to_js(s) {
+    var a = [];
+    var node = s();
+    while (node !== 0) {
+      a.push(node[0]);
+      node = node[1]();
+    }
+    return a;
+  }
+
+  // Adapter for an OCaml closure passed to a WebSharper `fn` parameter whose
+  // type mentions `IEnumerable`: incoming arguments in a "seq" position are
+  // converted to `Seq.t` for the OCaml side, and a returned `Seq.t` back to a
+  // WebSharper enumerable.
+  function caml_to_js_seq(f, kinds, ret) {
+    var g = caml_to_js(f);
+    var isSeq = function (k) {
+      return k === "seq";
+    };
+    if (!kinds.some(isSeq) && !isSeq(ret)) return g;
+    var n = kinds.length;
+    function wrapped() {
+      var args = Array.prototype.slice.call(arguments);
+      for (var i = 0; i < n && i < args.length; i++) {
+        if (isSeq(kinds[i])) args[i] = js_to_caml_seq(args[i]);
+      }
+      var r = g.apply(null, args);
+      return isSeq(ret) ? caml_seq_to_js(r) : r;
+    }
+    wrapped.arity = g.arity;
+    return wrapped;
+  }
+
   // RPC: values cross the boundary in a JS-idiomatic representation (records ->
   // objects, variants -> {"$":...,"$0":...}, lists/arrays -> arrays, options ->
   // value/null, tuples -> arrays). A compact type descriptor ("meta") drives
@@ -499,6 +569,9 @@ if (!globalThis.OCamlRuntime) {
     caml_closure: caml_closure,
     caml_to_js: caml_to_js,
     caml_list_to_array: caml_list_to_array,
+    js_to_caml_seq: js_to_caml_seq,
+    caml_seq_to_js: caml_seq_to_js,
+    caml_to_js_seq: caml_to_js_seq,
     registerTypes: registerTypes,
     jsonEncode: jsonEncode,
     jsonDecode: jsonDecode,

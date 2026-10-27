@@ -331,22 +331,50 @@ module Lowering =
         let es = List.map (expr c) xs
 
         // Adapt OCaml argument values to what JS/WebSharper expects:
-        //  - closures for `fn` parameters must be callable curried from JS;
-        //  - lists for `IEnumerable` parameters must become JS arrays.
+        //  - closures for `fn` parameters must be callable curried from JS, with
+        //    `IEnumerable` positions of their arrows converted;
+        //  - lists for `IEnumerable` parameters must become JS arrays;
+        //  - a parameter the binding rendered as `Seq.t` (the spec's `seqParams`
+        //    sequence modules) must become a WebSharper enumerable.
+        let isEnumerableType (t: Type) =
+            match t with
+            | Type.ConcreteType tc ->
+                let n = tc.Entity.Value.FullName
+                n.StartsWith "System.Collections.Generic.IEnumerable"
+                || n.StartsWith "System.Collections.IEnumerable"
+            | _ -> false
+
+        let rec flattenArrow (t: Type) =
+            match t with
+            | Type.FSharpFuncType(a, b) ->
+                let ps, r = flattenArrow b
+                a :: ps, r
+            | _ -> [], t
+
         let adaptArg (t: Type) (e: Expression) =
             match t with
-            | Type.FSharpFuncType _ -> rt c "caml_to_js" [ e ]
+            | Type.FSharpFuncType _ ->
+                let ps, r = flattenArrow t
+                let kinds = ps |> List.map (fun p -> if isEnumerableType p then "seq" else "")
+                let ret = if isEnumerableType r then "seq" else ""
+                if List.forall ((=) "") kinds && ret = "" then rt c "caml_to_js" [ e ]
+                else rt c "caml_to_js_seq" [ e; Value(String(String.concat "," kinds)); Value(String ret) ]
             | Type.ConcreteType tc
                 when tc.Entity.Value.FullName.StartsWith "System.Collections.Generic.IEnumerable"
                      || tc.Entity.Value.FullName.StartsWith "System.Collections.IEnumerable" ->
                 rt c "caml_list_to_array" [ e ]
             | _ -> e
 
-        let adaptArgs (parameters: Type list) (args: Expression list) =
+        let adaptArgs (parameters: Type list) (seqFlags: bool list) (args: Expression list) =
             let n = parameters.Length
             let extra = args.Length - n
             args
-            |> List.mapi (fun i e -> if i < extra then e else adaptArg parameters.[i - extra] e)
+            |> List.mapi (fun i e ->
+                if i < extra then e
+                else
+                    let j = i - extra
+                    if (try List.item j seqFlags with _ -> false) then rt c "caml_seq_to_js" [ e ]
+                    else adaptArg parameters.[j] e)
 
         match p.Tag, es with
         | "ignore", [ x ] ->
@@ -520,12 +548,16 @@ module Lowering =
                                     else None)
                             else None
                         match tryCtor es.Length, (if es.Length > 0 then tryCtor (es.Length - 1) else None) with
-                        | Some(ctorKey, ps), _ -> Ctor(WebSharper.OCaml.Bindings.concrete e.TypeKey, ctorKey, adaptArgs ps es)
+                        | Some(ctorKey, ps), _ ->
+                            Ctor(
+                                WebSharper.OCaml.Bindings.concrete e.TypeKey,
+                                ctorKey,
+                                adaptArgs ps (List.replicate ps.Length false) es)
                         | None, Some(ctorKey, ps) ->
                             Ctor(
                                 WebSharper.OCaml.Bindings.concrete e.TypeKey,
                                 ctorKey,
-                                adaptArgs ps (List.truncate (es.Length - 1) es))
+                                adaptArgs ps (List.replicate ps.Length false) (List.truncate (es.Length - 1) es))
                         | _ -> failwith $"wsnew: no matching constructor for {addr}"
                     else
                         New(GlobalAccess e.Address, [], es)
@@ -583,43 +615,55 @@ module Lowering =
             elif name.StartsWith "ws:" then
                 let parts = (name.Substring 3).Split('|')
                 let qual, mn = splitOn '#' parts.[0]
-                let ps = parts.[1..] |> Array.toList |> List.filter (fun s -> s <> "")
+                // A parameter the binding rendered as `Seq.t` carries a `@seq`
+                // marker (see `paramType`); strip it for the metadata lookup and
+                // use it to pick the converter.
+                let ps =
+                    parts.[1..] |> Array.toList |> List.filter (fun s -> s <> "")
+                let paramTypes, seqFlags =
+                    ps
+                    |> List.map (fun s ->
+                        match splitOn '@' s with
+                        | t, f -> t, f = "seq")
+                    |> List.unzip
                 let asm, addr = splitOn '!' qual
                 match tryClass c asm addr with
                 | Some e ->
-                    match WebSharper.OCaml.Bindings.findMethod e.Class mn ps with
+                    match WebSharper.OCaml.Bindings.findMethod e.Class mn paramTypes with
                     | Some(hkey, mi, cmi) ->
-                        let es = adaptArgs mi.Parameters es
-                        if c.Ws then
-                            let td = WebSharper.OCaml.Bindings.concrete e.TypeKey
-                            let m = WebSharper.OCaml.Bindings.concreteM hkey
-                            // Instance methods get the receiver as `this`; the
-                            // receiver is present iff the call has one more arg
-                            // than the metadata parameters.
-                            if es.Length = mi.Parameters.Length + 1 then
-                                Call(Some es.Head, td, m, es.Tail)
-                            else
-                                Call(None, td, m, es)
-                        else
-                            let form = cmi.CompiledForm
-                            if form.IsMacro then
-                                failwith $"ws: '{mn}' is a WebSharper macro; macros are not supported"
-                            elif form.IsNew then
-                                New(GlobalAccess e.Address, [], es)
-                            elif form.IsInline then
-                                WebSharper.OCaml.Bindings.substituteHoles es cmi.Expression
-                            elif WebSharper.OCaml.Bindings.hasBody cmi.Expression then
-                                if WebSharper.OCaml.Bindings.maxHole cmi.Expression >= 0 then
-                                    WebSharper.OCaml.Bindings.substituteHoles es cmi.Expression
+                        let es = adaptArgs mi.Parameters seqFlags es
+                        let call =
+                            if c.Ws then
+                                let td = WebSharper.OCaml.Bindings.concrete e.TypeKey
+                                let m = WebSharper.OCaml.Bindings.concreteM hkey
+                                // Instance methods get the receiver as `this`; the
+                                // receiver is present iff the call has one more arg
+                                // than the metadata parameters.
+                                if es.Length = mi.Parameters.Length + 1 then
+                                    Call(Some es.Head, td, m, es.Tail)
                                 else
-                                    app cmi.Expression es
-                            elif form.IsInstance then
-                                match es with
-                                | recv :: rest ->
-                                    app (ItemGet(recv, Value(String(WebSharper.OCaml.Bindings.methodJsName mi)), Purity.Pure)) rest
-                                | [] -> failwith "ws: instance method expects a receiver"
+                                    Call(None, td, m, es)
                             else
-                                app (ItemGet(GlobalAccess e.Address, Value(String(WebSharper.OCaml.Bindings.methodJsName mi)), Purity.Pure)) es
+                                let form = cmi.CompiledForm
+                                if form.IsMacro then
+                                    failwith $"ws: '{mn}' is a WebSharper macro; macros are not supported"
+                                elif form.IsNew then
+                                    New(GlobalAccess e.Address, [], es)
+                                elif form.IsInline then
+                                    WebSharper.OCaml.Bindings.substituteHoles es cmi.Expression
+                                elif WebSharper.OCaml.Bindings.hasBody cmi.Expression then
+                                    if WebSharper.OCaml.Bindings.maxHole cmi.Expression >= 0 then
+                                        WebSharper.OCaml.Bindings.substituteHoles es cmi.Expression
+                                    else
+                                        app cmi.Expression es
+                                elif form.IsInstance then
+                                    match es with
+                                    | recv :: rest ->
+                                        app (ItemGet(recv, Value(String(WebSharper.OCaml.Bindings.methodJsName mi)), Purity.Pure)) rest
+                                    | [] -> failwith "ws: instance method expects a receiver"
+                                else
+                                    app (ItemGet(GlobalAccess e.Address, Value(String(WebSharper.OCaml.Bindings.methodJsName mi)), Purity.Pure)) es
+                        if isEnumerableType mi.ReturnType then rt c "js_to_caml_seq" [ call ] else call
                     | None -> failwith $"ws: unknown member {mn}"
                 | None -> failwith $"ws: unknown class {addr}"
             else

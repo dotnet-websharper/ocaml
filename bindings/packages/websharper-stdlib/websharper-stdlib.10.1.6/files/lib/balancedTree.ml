@@ -17,9 +17,9 @@ external right : ('a) Tree.t -> ('a) Tree.t = "ws:WebSharper.StdLib!WebSharper.S
 (* inline *)
 external node : ('a) Tree.t -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.BalancedTree::#Node|WebSharper.Collections.BalancedTree+Tree`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.BalancedTree::#Node|WebSharper.Collections.BalancedTree+Tree`1<'0>"
 (* inline *)
-external ascend : ('a) Tree.t -> ('a) IEnumerableOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.BalancedTree::#Ascend|WebSharper.Collections.BalancedTree+Tree`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.BalancedTree::#Ascend|WebSharper.Collections.BalancedTree+Tree`1<'0>"
+external ascend : ('a) Tree.t -> ('a) Seq.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.BalancedTree::#Ascend|WebSharper.Collections.BalancedTree+Tree`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.BalancedTree::#Ascend|WebSharper.Collections.BalancedTree+Tree`1<'0>"
 (* inline *)
-external descend : ('a) Tree.t -> ('a) IEnumerableOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.BalancedTree::#Descend|WebSharper.Collections.BalancedTree+Tree`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.BalancedTree::#Descend|WebSharper.Collections.BalancedTree+Tree`1<'0>"
+external descend : ('a) Tree.t -> ('a) Seq.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.BalancedTree::#Descend|WebSharper.Collections.BalancedTree+Tree`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.BalancedTree::#Descend|WebSharper.Collections.BalancedTree+Tree`1<'0>"
 (* func *)
 external max : ('a) Tree.t -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.BalancedTree::#Max|WebSharper.Collections.BalancedTree+Tree`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.BalancedTree::#Max|WebSharper.Collections.BalancedTree+Tree`1<'0>"
 (* func *)
@@ -39,7 +39,7 @@ external remove : 'a -> ('a) Tree.t -> ('a) Tree.t = "ws:WebSharper.StdLib!WebSh
 (* func *)
 external lookup : 'a -> ('a) Tree.t -> ('a) Tree.t * ('b) array = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.BalancedTree::#Lookup|'0|WebSharper.Collections.BalancedTree+Tree`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.BalancedTree::#Lookup|'0|WebSharper.Collections.BalancedTree+Tree`1<'0>"
 (* func *)
-external enumerate : bool -> ('a) Tree.t -> ('a) IEnumerableOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.BalancedTree::#Enumerate|System.Boolean|WebSharper.Collections.BalancedTree+Tree`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.BalancedTree::#Enumerate|System.Boolean|WebSharper.Collections.BalancedTree+Tree`1<'0>"
+external enumerate : bool -> ('a) Tree.t -> ('a) Seq.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.BalancedTree::#Enumerate|System.Boolean|WebSharper.Collections.BalancedTree+Tree`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.BalancedTree::#Enumerate|System.Boolean|WebSharper.Collections.BalancedTree+Tree`1<'0>"
 (* func *)
 external change : 'a -> (('a) FSharpOption.t -> ('a) FSharpOption.t) -> ('a) Tree.t -> ('a) Tree.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.BalancedTree::#Change|'0|fn|WebSharper.Collections.BalancedTree+Tree`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.BalancedTree::#Change|'0|fn|WebSharper.Collections.BalancedTree+Tree`1<'0>"
 (* func *)

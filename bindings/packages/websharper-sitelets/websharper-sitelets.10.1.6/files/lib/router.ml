@@ -9,9 +9,9 @@ external box : ('a) t -> (Js.t) t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/
 (* inline *)
 external array : ('a) t -> (('a) array) t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router`1::#Array|" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router`1::#Array|"
 (* inline *)
-external parse : ('a) t -> (Route.t -> (Route.t * 'a) WebSharper_StdLib.IEnumerableOf.t) = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router`1::#get_Parse|" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router`1::#get_Parse|"
+external parse : ('a) t -> (Route.t -> (Route.t * 'a) Seq.t) = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router`1::#get_Parse|" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router`1::#get_Parse|"
 (* inline *)
-external write : ('a) t -> ('a -> ((Route.t) WebSharper_StdLib.IEnumerableOf.t) WebSharper_StdLib.FSharpOption.t) = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router`1::#get_Write|" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router`1::#get_Write|"
+external write : ('a) t -> ('a -> ((Route.t) Seq.t) WebSharper_StdLib.FSharpOption.t) = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router`1::#get_Write|" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router`1::#get_Write|"
 (* inline *)
 external query : ('a) t -> string -> ('a) t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router`1::#Query|System.String" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router`1::#Query|System.String"
 (* inline *)
@@ -41,8 +41,8 @@ external op_Division_5 : ('a) t -> ('b) t -> ('a * 'b) t = "ws:WebSharper.Sitele
 (* inline *)
 external fetch : ('a) t -> 'a -> string -> WebSharper_JavaScript.RequestOptions.t -> (WebSharper_JavaScript.Response.t) WebSharper_JavaScript.Promise.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router`1::#Fetch|'0|System.String|WebSharper.JavaScript.RequestOptions" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router`1::#Fetch|'0|System.String|WebSharper.JavaScript.RequestOptions"
 (* instance *)
-external get_write : ('a) t -> ('a -> ((Route.t) WebSharper_StdLib.IEnumerableOf.t) WebSharper_StdLib.FSharpOption.t) = "wsget:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router`1::#Write" "wsget:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router`1::#Write"
+external get_write : ('a) t -> ('a -> ((Route.t) Seq.t) WebSharper_StdLib.FSharpOption.t) = "wsget:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router`1::#Write" "wsget:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router`1::#Write"
 (* instance *)
-external get_parse : ('a) t -> (Route.t -> (Route.t * 'a) WebSharper_StdLib.IEnumerableOf.t) = "wsget:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router`1::#Parse" "wsget:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router`1::#Parse"
+external get_parse : ('a) t -> (Route.t -> (Route.t * 'a) Seq.t) = "wsget:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router`1::#Parse" "wsget:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router`1::#Parse"
 (* func *)
-external create : (Route.t -> (Route.t * 'a) WebSharper_StdLib.IEnumerableOf.t) -> ('a -> ((Route.t) WebSharper_StdLib.IEnumerableOf.t) WebSharper_StdLib.FSharpOption.t) -> ('a) t = "wsnew:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router`1::" "wsnew:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router`1::"
+external create : (Route.t -> (Route.t * 'a) Seq.t) -> ('a -> ((Route.t) Seq.t) WebSharper_StdLib.FSharpOption.t) -> ('a) t = "wsnew:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router`1::" "wsnew:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router`1::"

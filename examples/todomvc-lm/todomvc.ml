@@ -162,8 +162,8 @@ let () =
 
   (* --- view (the template's holes) ---------------------------------------- *)
 
-  let render_item (m : model) (t : todo) =
-    let being_edited = m.editing = Some t.id in
+  let render_item (editing : int option) (t : todo) =
+    let being_edited = editing = Some t.id in
     let inst = TodoPage.TodoItem.create () in
     Var.set inst.vars.editText t.title;
     inst
@@ -182,9 +182,26 @@ let () =
     |> TodoPage.TodoItem.doc
   in
 
+  (* The rows are rendered with `View.mapSeqCachedBy`: one row `Doc` per key,
+     so the DOM of a row survives a re-render and only the rows whose *contents*
+     changed are rebuilt (the key covers what the row renders — its `id`,
+     `title` and `completed`). The row being edited is rendered by the hole
+     below, from the model's `editing`. *)
+  let row_docs : (todo * Doc.t) Seq.t View.t =
+    View.mapSeqCachedBy
+      (fun (t : todo) -> t.id, t.title, t.completed)
+      (fun t -> (t, render_item None t))
+      (ListModel.view todos)
+  in
+
   (* The document is server-rendered once (a skeleton of `ws-*` markers) and then
      bound on the client with `bind`. The reactive holes are `View`-driven, so
-     each mutation re-renders only the affected parts. *)
+     each mutation re-renders only the affected parts.
+     `ListModel.view` and `mapSeqCachedBy` yield `Seq.t`s, which the OCaml side
+     consumes with `List.of_seq` (`Seq`/`List` are shimmed in the client bundle). *)
+  let page : (model * (todo * Doc.t) Seq.t) View.t =
+    View.map2 (fun m rows -> (m, rows)) view row_docs
+  in
   let visible (m : model) t =
     match m.filter with All -> true | Active -> not t.completed | Completed -> t.completed
   in
@@ -208,8 +225,15 @@ let () =
     |> TodoPage.toggleAll (fun _ _ -> toggle_all ())
     |> TodoPage.todos
          (Doc.bindView
-            (fun m -> Doc.concat (List.map (render_item m) (List.filter (visible m) m.todos)))
-            view)
+            (fun (m, rows) ->
+              Doc.concat
+                (List.filter_map
+                   (fun (t, d) ->
+                     if not (visible m t) then None
+                     else if m.editing = Some t.id then Some (render_item m.editing t)
+                     else Some d)
+                   (List.of_seq rows)))
+            page)
     |> TodoPage.count
          (Doc.bindView
             (fun m ->

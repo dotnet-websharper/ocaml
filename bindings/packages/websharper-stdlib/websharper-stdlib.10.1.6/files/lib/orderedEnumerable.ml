@@ -3,6 +3,6 @@ type ('a) t
 (* instance *)
 external get_primary : ('a) t -> IComparerOf.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.OrderedEnumerable`1::default#primary" "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.OrderedEnumerable`1::default#primary"
 (* instance *)
-external get_source : ('a) t -> ('a) IEnumerableOf.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.OrderedEnumerable`1::default#source" "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.OrderedEnumerable`1::default#source"
+external get_source : ('a) t -> ('a) Seq.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.OrderedEnumerable`1::default#source" "wsget:WebSharper.StdLib!WebSharper.StdLib/WebSharper.OrderedEnumerable`1::default#source"
 (* new *)
 external create : ('a) list -> IComparerOf.t -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/WebSharper.OrderedEnumerable`1::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/WebSharper.OrderedEnumerable`1::default"

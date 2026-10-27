@@ -5,6 +5,14 @@ function out(s) {
   else if (typeof console !== 'undefined') console.log(String(s));
 }
 function ap(f, args) { return globalThis.OCamlRuntime ? globalThis.OCamlRuntime.caml_apply(f, args) : f.apply(null, args); }
+function seqElems(x) {
+  const a = [];
+  if (typeof x === 'function') { let n = x(); while (n !== 0) { a.push(n['0']); n = n['1'](); } return a; }
+  if (x && typeof x.GetEnumerator === 'function') { const e = x.GetEnumerator(); try { while (e.MoveNext()) a.push(e.Current); } finally { if (typeof e.Dispose === 'function') e.Dispose(); } return a; }
+  if (x && typeof x.length === 'number') { for (let i = 0; i < x.length; i++) a.push(x[i]); return a; }
+  return a;
+}
+function seqOfArray(a) { const mk = (i) => () => i < a.length ? { $tag: 0, '0': a[i], '1': mk(i + 1) } : 0; return mk(0); }
 const s = { $tag: 0 };
 s[0] = function () { throw new Error('List field 0 not implemented'); };
 s[1] = function () { throw new Error('List field 1 not implemented'); };
@@ -112,5 +120,6 @@ s[53] = (k, l) => { while (l !== 0) { const p = l['0']; if (p['0'] === k) return
 s[54] = (k, l) => { while (l !== 0) { const p = l['0']; if (p['0'] === k) return { $tag: 0, '0': p['1'] }; l = l['1']; } return 0; };
 s[57] = (k, l) => { while (l !== 0) { if (l['0']['0'] === k) return 1; l = l['1']; } return 0; };
 s[59] = (k, l) => { const s = []; while (l !== 0) { if (l['0']['0'] !== k) s.push(l['0']); l = l['1']; } let r = 0; for (let i = s.length - 1; i >= 0; i--) r = { $tag: 0, '0': s[i], '1': r }; return r; };
+s[69] = (x) => { const a = seqElems(x); let l = 0; for (let i = a.length - 1; i >= 0; i--) l = { $tag: 0, '0': a[i], '1': l }; return l; };
 s[73] = (f, l) => { let i = 0; while (l !== 0) { ap(f, [i, l['0']]); i++; l = l['1']; } return 0; };
 export default s;

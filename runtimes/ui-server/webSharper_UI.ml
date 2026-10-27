@@ -17,6 +17,20 @@ module View = struct
   (* The server renders once; `Sink` registers a client-side reaction, so here it
      just observes the current value. *)
   let sink f t = f (get t)
+
+  (* Cached sequence mappings are client-only (they keep per-key state across
+     re-renders); the shadow only needs their signatures. *)
+  let mapSeqCached (_ : 'a -> 'b) (_ : 'c t) : 'b Seq.t t =
+    failwith "WebSharper_UI.View.mapSeqCached is client-only"
+
+  let mapSeqCachedBy (_ : 'a -> 'k) (_ : 'a -> 'b) (_ : 'c t) : 'b Seq.t t =
+    failwith "WebSharper_UI.View.mapSeqCachedBy is client-only"
+
+  let mapSeqCachedView (_ : 'a t -> 'b) (_ : 'c t) : 'b Seq.t t =
+    failwith "WebSharper_UI.View.mapSeqCachedView is client-only"
+
+  let mapSeqCachedViewBy (_ : 'a -> 'k) (_ : 'k -> 'a t -> 'b) (_ : 'c t) : 'b Seq.t t =
+    failwith "WebSharper_UI.View.mapSeqCachedViewBy is client-only"
 end
 
 module Var = struct
@@ -49,6 +63,9 @@ module ListModel = struct
     { key_of = key; items = Var.create (Stdlib.Array.of_list init) }
 
   let var (m : ('k, 't) t) : 't array Var.t = m.items
+  (* The client binding's `view` is a reactive sequence; the server renders once. *)
+  let view (m : ('k, 't) t) : 't Seq.t View.t =
+    View.const (List.to_seq (Stdlib.Array.to_list (Var.get m.items)))
   let length (m : ('k, 't) t) : int = Stdlib.Array.length (Var.get m.items)
   let iter (m : ('k, 't) t) (f : 't -> unit) : unit = Stdlib.Array.iter f (Var.get m.items)
 

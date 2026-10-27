@@ -29,7 +29,7 @@ external maxKeyValue : ('a, 'b) FSharpMap.t -> 'a * 'b = "ws:WebSharper.StdLib!W
 (* func *)
 external minKeyValue : ('a, 'b) FSharpMap.t -> 'a * 'b = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.MapModule::#MinKeyValue|Microsoft.FSharp.Collections.FSharpMap`2<'0,'1>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.MapModule::#MinKeyValue|Microsoft.FSharp.Collections.FSharpMap`2<'0,'1>"
 (* func *)
-external toSeq : ('a, 'b) FSharpMap.t -> ('a * 'b) IEnumerableOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.MapModule::#ToSeq|Microsoft.FSharp.Collections.FSharpMap`2<'0,'1>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.MapModule::#ToSeq|Microsoft.FSharp.Collections.FSharpMap`2<'0,'1>"
+external toSeq : ('a, 'b) FSharpMap.t -> ('a * 'b) Seq.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.MapModule::#ToSeq|Microsoft.FSharp.Collections.FSharpMap`2<'0,'1>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.MapModule::#ToSeq|Microsoft.FSharp.Collections.FSharpMap`2<'0,'1>"
 (* inline *)
 external containsKey : 'a -> ('a, 'b) FSharpMap.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.MapModule::#ContainsKey|'0|Microsoft.FSharp.Collections.FSharpMap`2<'0,'1>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.MapModule::#ContainsKey|'0|Microsoft.FSharp.Collections.FSharpMap`2<'0,'1>"
 (* inline *)

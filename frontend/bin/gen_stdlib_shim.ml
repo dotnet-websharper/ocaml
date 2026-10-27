@@ -100,6 +100,7 @@ let impl_of_unit = function
   | "Char" -> Stdlib_shims_data.char
   | "Int" -> Stdlib_shims_data.int
   | "Sys" -> Stdlib_shims_data.sys
+  | "Seq" -> Stdlib_shims_data.seq
   | "Float" -> Stdlib_shims_data.float
   | _ -> []
 
@@ -126,6 +127,7 @@ let () =
   add
     "function ap(f, args) { return globalThis.OCamlRuntime ? globalThis.OCamlRuntime.caml_apply(f, args) : f.apply(null, args); }";
   if unit = "Printf" then List.iter add Stdlib_shims_data.printf_helpers;
+  if unit = "Seq" || unit = "List" || unit = "Array" then List.iter add Stdlib_shims_data.seq_helpers;
   add "const s = { $tag: 0 };";
   for i = 0 to n - 1 do
     add (Printf.sprintf "s[%d] = function () { throw new Error('%s field %d not implemented'); };" i unit i)

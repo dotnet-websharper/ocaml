@@ -82,7 +82,9 @@ let builtinType (fullName: string) =
 
 type TypeCtx =
     { Lookup: string -> (string * int) option
-      mutable Fresh: int }
+      mutable Fresh: int
+      // Render `IEnumerable<'T>` *parameters* as `'T Seq.t` (spec `seqParams`).
+      SeqParams: bool }
 
 type TypeEnv =
     { LocalModules: Set<string>
@@ -101,8 +103,22 @@ type TypeEnv =
       // module that holds its (and its siblings') abstract type.
       TypesModuleOf: string -> string option }
 
+// A WebSharper `IEnumerable<'T>` is presented as an OCaml `Seq.t`; the backend
+// converts at the boundary (`js_to_caml_seq` / `caml_seq_to_js`).
+let isEnumerableFullName (n: string) =
+    n.StartsWith "System.Collections.Generic.IEnumerable" || n.StartsWith "System.Collections.IEnumerable"
+
+let isEnumerableType (t: Type) =
+    match t with
+    | Type.ConcreteType c -> isEnumerableFullName c.Entity.Value.FullName
+    | _ -> false
+
 let rec mapType (ctx: TypeCtx) (t: Type) : string =
     match t with
+    | Type.ConcreteType c when isEnumerableFullName c.Entity.Value.FullName ->
+        match c.Generics with
+        | [ g ] -> "(" + mapType ctx g + ") Seq.t"
+        | _ -> "Js.t Seq.t"
     | Type.VoidType -> "unit"
     | Type.ConcreteType c ->
         let td = c.Entity.Value
@@ -137,10 +153,12 @@ let rec mapType (ctx: TypeCtx) (t: Type) : string =
 // stay opaque (`IEnumerableOf.t`).
 let rec paramType (ctx: TypeCtx) (t: Type) : string =
     match t with
-    | Type.ConcreteType c when c.Entity.Value.FullName.StartsWith "System.Collections.Generic.IEnumerable" ->
-        match c.Generics with
-        | [ g ] -> "(" + mapType ctx g + ") list"
-        | _ -> "Js.t list"
+    | Type.ConcreteType c when isEnumerableFullName c.Entity.Value.FullName ->
+        let elem =
+            match c.Generics with
+            | [ g ] -> mapType ctx g
+            | _ -> "Js.t"
+        if ctx.SeqParams then "(" + elem + ") Seq.t" else "(" + elem + ") list"
     | Type.ConcreteType c when c.Entity.Value.FullName = "System.Collections.IEnumerable" -> "Js.t list"
     | _ -> mapType ctx t
 
@@ -391,7 +409,10 @@ let generateClass
                                 env.Deps.Add pkg |> ignore
                                 Some(qm, ar)
                             | None -> None)
-          Fresh = 0 }
+          Fresh = 0
+          SeqParams =
+            spec.Modules
+            |> List.exists (fun m -> m.Type = td.FullName && m.SeqParams) }
 
     let used = System.Collections.Generic.Dictionary<string, int>()
 
@@ -447,7 +468,13 @@ let generateClass
                 unique (renameOf mi.MethodName |> Option.map sanitize
                         |> Option.defaultWith (fun () -> sanitize (memberName mi.MethodName)))
             let tag =
-                let ps = mi.Parameters |> List.map typeDisplay
+                // A parameter rendered as `Seq.t` (spec `seqParams`) is marked
+                // `@seq` so the backend converts it instead of a list-to-array.
+                let ps =
+                    mi.Parameters
+                    |> List.map (fun p ->
+                        typeDisplay p
+                        + (if ctx.SeqParams && isEnumerableType p then "@seq" else ""))
                 sprintf "ws:%s#%s|%s" qual mi.MethodName (String.concat "|" ps)
             { Name = name
               Signature = String.concat " -> " (argTypes @ [ ret ])

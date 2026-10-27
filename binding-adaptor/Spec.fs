@@ -35,7 +35,11 @@ type ModuleSpec =
       Name: string option
       Merge: string list
       Alias: string option
-      Skip: bool }
+      Skip: bool
+      // Present `IEnumerable<'T>` *parameters* of this type's members as
+      // `'T Seq.t` instead of the default OCaml list (sequence-processing
+      // modules such as F# `Seq`/`List` and `System.Linq.Enumerable`).
+      SeqParams: bool }
 
 type MemberSpec =
     { Type: string
@@ -93,7 +97,8 @@ let load (path: string) : Spec =
               Name = str m "name"
               Merge = strList m "merge"
               Alias = str m "alias"
-              Skip = skipOr m } ]
+              Skip = skipOr m
+              SeqParams = boolProp m "seqParams" false } ]
 
     let members =
         [ for m in array "members" ->

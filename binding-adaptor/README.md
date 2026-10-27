@@ -188,12 +188,24 @@ Other rules:
 - **`ByRef`** → the underlying type.
 - Anything else → `Js.t`.
 
-### `IEnumerable` parameters are lists
+### `IEnumerable`: `Seq.t` results, list parameters
 
-A **parameter** typed `System.Collections.Generic.IEnumerable<T>` becomes
-`(T) list` (non-generic `IEnumerable` → `Js.t list`); return and field types
-stay opaque (`WebSharper_StdLib.IEnumerableOf.t`). The backend converts the list
-to a JS array at the call boundary (§12), so combinators read:
+A **result** (or field) typed `IEnumerable<'T>` is presented as the OCaml
+`(T) Seq.t`; the backend wraps it with `js_to_caml_seq` at the call boundary.
+A **parameter** is `(T) list` by default (the list is converted to a JS array at
+the call boundary, §12), so combinators read:
+
+```ocaml
+ListModel.view todos           (* : todo Seq.t View.t *)
+List.of_seq (List.of_seq …)    (* consume a `Seq.t` result *)
+```
+
+… and a module marked `"seqParams": true` in its spec (the sequence-processing
+modules: F# `Seq`, `List` and `System.Linq.Enumerable`) instead takes
+`(T) Seq.t` for its `IEnumerable` parameters, with the backend converting it to
+a WebSharper enumerable (`caml_seq_to_js`). `Seq`/`List` are shimmed in the
+client bundle (`frontend/bin/gen_stdlib_shim.ml`) and accept both
+representations:
 
 ```ocaml
 open WebSharper_UI.Html
@@ -401,6 +413,7 @@ A JSON file overlaying explicit decisions (see `specs/websharper-ui.spec`):
 |---|---|
 | `qualified` (top level) | enable §4.2 qualified module names |
 | `modules[].name` | force a module name (may be dotted) |
+| `modules[].seqParams` | present this type's `IEnumerable<'T>` *parameters* as `'T Seq.t` (sequence modules) |
 | `modules[].merge` | merge the listed type full names into this module |
 | `modules[].alias` | make this type an alias of another module's `t` (not emitted) |
 | `modules[].skip` / `drop` | do not generate this type |

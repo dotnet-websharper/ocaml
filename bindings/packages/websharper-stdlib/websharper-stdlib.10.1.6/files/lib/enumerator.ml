@@ -23,7 +23,7 @@ external count : ('a) ICollectionOf.t -> int = "ws:WebSharper.StdLib!WebSharper.
 (* func *)
 external reset : IEnumerator.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Reset|System.Collections.IEnumerator" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Reset|System.Collections.IEnumerator"
 (* func *)
-external get0 : Js.t list -> IEnumerator.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Get0|System.Collections.IEnumerable" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Get0|System.Collections.IEnumerable"
+external get0 : (Js.t) list -> IEnumerator.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Get0|System.Collections.IEnumerable" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Get0|System.Collections.IEnumerable"
 (* func *)
 external get : ('a) list -> ('a) IEnumeratorOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Get|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Get|System.Collections.Generic.IEnumerable`1<'0>"
 (* func *)

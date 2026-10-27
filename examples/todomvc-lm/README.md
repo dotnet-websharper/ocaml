@@ -79,11 +79,13 @@ Notes that come out of the generated binding:
 - **F# `option`.** `ListModel.updateBy`/`updateAll` take `'T -> 'T option` in
   F# terms, i.e. `WebSharper_StdLib.FSharpOption.t` — not OCaml's `option` — so
   the app builds them with `FOpt.some`/`FOpt.none`.
-- **Reading the rows.** `ListModel.view`/`map` return an `IEnumerable` which
-  these OCaml bindings cannot consume (`IEnumerable` *parameters* are typed as
-  OCaml lists), so the reactive rows come from the model's backing
-  `Var<array>` (`ListModel.var` → `Var.view` → `View.map`) and the snapshots used
-  for persistence/`next id` come from `ListModel.iter`.
+- **Reading the rows.** `ListModel.view` is the reactive row sequence
+  (`todo Seq.t View.t` — `IEnumerable<'T>` is presented as OCaml `Seq.t`). The
+  list is rendered through `View.mapSeqCachedBy`, keyed by what a row shows
+  (`id`, `title`, `completed`), so a row's DOM survives a re-render and only the
+  changed rows are rebuilt; the row being edited is rendered from the model's
+  `editing`. The resulting `Doc.t Seq.t` is consumed with `List.of_seq`, and the
+  snapshots used for persistence/`next id` come from `ListModel.iter`.
 - **Persistence** stays typed JSON (`WebSharper_Json.encode`/`decode` on
   `todo list`): WS's own `ListModel.CreateWithStorage` needs a `Serializer<'T>`,
   which wsocaml does not have for OCaml types (`JSON.md`).

@@ -148,13 +148,22 @@ Consolidated; see the linked note for detail.
   while `build.sh`/the suite use the generated `websharper-ui` binding (80), so a
   bare `Storage`/`Array` may typecheck in the editor and fail in the build (or the
   reverse). README → *Name collisions and shadowing* has the tables.
-- **`IEnumerable`-returning members** — the generator types an `IEnumerable<'T>`
-  *parameter* as an OCaml list but a *result* as the opaque
-  `WebSharper_StdLib.IEnumerableOf.t`, so a member that returns a sequence
-  (`ListModel.view`/`map`, `Seq.*`, `List.toSeq`) cannot be consumed from OCaml
-  source. Use the value/state behind it instead — e.g. `ListModel.var` (the
-  backing `Var<array>`) to map a reactive `View`, `ListModel.iter` for a
-  snapshot (`examples/todomvc-lm`).
+- **`IEnumerable<'T>` is presented as OCaml `Seq.t`** (it used to be an opaque
+  `IEnumerableOf.t` for results). The generator maps it in *both* directions and
+  the backend converts where a value crosses the OCaml/JS boundary
+  (`js_to_caml_seq` / `caml_seq_to_js`: a WebSharper `IEnumerable` is a
+  `{ GetEnumerator() }` object, an OCaml `Seq.t` is `unit -> node`). `IEnumerable`
+  *parameters* are still OCaml `list`s by default (so `div [attrs] [docs]` reads
+  well); a spec's `"seqParams": true` marks the sequence-processing modules
+  (`SeqModule`, `ListModule`, `LinqEnumerable`), whose parameters become
+  `'T Seq.t` and whose results (`Seq.t`) are consumable with `List.of_seq`.
+  The client bundle ships `Seq`/`List` shims (`frontend/bin/gen_stdlib_shim.ml`)
+  whose `of_seq`/`Seq.*` accept *either* representation, so a sequence that is
+  still inside a WebSharper container (e.g. the `seq` of a
+  `View.mapSeqCached*`) is consumable without an explicit conversion. Edges: an
+  OCaml-built `Seq.t` nested in a WebSharper container that a WebSharper member
+  then enumerates is not converted; conversion materialises (so infinite
+  sequences are not supported).
 - **Objects / method sends** — §1: `Lsend` unsupported; interop is function-shaped.
 - **`V` notation** — §2: generic type args not resolved; `.V` receiver dropped.
 - **Templates** (`docs/templates.md` §7):

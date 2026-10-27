@@ -315,6 +315,19 @@ dotnet backend/bin/Debug/net10.0/WebSharper.OCaml.dll --ir app.wsir.json \
     shared source may name a client-only package's modules (e.g.
     `WebSharper_StdLib`) from a top-level item that survives into `server.ml`.
 
+20. **`IEnumerable<'T>` is OCaml `Seq.t`, converted at the boundary.**
+    `Generator.isEnumerableFullName` makes `mapType` present an `IEnumerable<'T>`
+    *result* as `'T Seq.t` (and `paramType` too, for a type whose spec sets
+    `seqParams`, e.g. F# `Seq`/`List`/`LinqEnumerable` — those parameters also
+    carry a `@seq` marker in the `ws:` prim string that `Lowering` strips for the
+    metadata lookup and uses to pick `caml_seq_to_js`). A WebSharper
+    `IEnumerable` is a `{ GetEnumerator() }` object and an OCaml `Seq.t` is
+    `unit -> node`, so the conversions (`js_to_caml_seq` / `caml_seq_to_js`, plus
+    `caml_to_js_seq` for `fn` arrows) are in `backend/Runtime.js` and are
+    *eager*. `IEnumerable` inside a `fn` position whose type is a *type variable*
+    (`Doc.bindView`'s `'a -> Doc`) cannot be converted from the metadata alone —
+    that is why the `Seq`/`List` shims accept either representation.
+
 ## Adding a feature
 
 - Runtime/JS behaviour or sitelet/RPC coverage → extend

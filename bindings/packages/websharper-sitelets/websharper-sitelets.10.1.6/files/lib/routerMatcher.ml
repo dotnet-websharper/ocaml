@@ -5,9 +5,9 @@ external empty : unit -> ('a) RouterRouterMatcherTypes.Router.t = "ws:WebSharper
 (* inline *)
 external json : unit -> ('a) RouterRouterMatcherTypes.Router.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router::#Json|" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router::#Json|"
 (* inline *)
-external parse : t -> (Route.t -> (Route.t) WebSharper_StdLib.IEnumerableOf.t) = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router::#get_Parse|" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router::#get_Parse|"
+external parse : t -> (Route.t -> (Route.t) Seq.t) = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router::#get_Parse|" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router::#get_Parse|"
 (* inline *)
-external segment : t -> (Route.t) WebSharper_StdLib.IEnumerableOf.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router::#get_Segment|" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router::#get_Segment|"
+external segment : t -> (Route.t) Seq.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router::#get_Segment|" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router::#get_Segment|"
 (* inline *)
 external mapTo : t -> 'a -> ('a) RouterRouterMatcherTypes.Router.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router::#MapTo|'0" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router::#MapTo|'0"
 (* inline *)
@@ -35,8 +35,8 @@ external sum : (('a) RouterRouterMatcherTypes.Router.t) array -> ('a) RouterRout
 (* inline *)
 external table : ('a * string) array -> ('a) RouterRouterMatcherTypes.Router.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router::#Table|('0,System.String)[]" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router::#Table|('0,System.String)[]"
 (* instance *)
-external get_segment : t -> (Route.t) WebSharper_StdLib.IEnumerableOf.t = "wsget:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router::#Segment" "wsget:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router::#Segment"
+external get_segment : t -> (Route.t) Seq.t = "wsget:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router::#Segment" "wsget:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router::#Segment"
 (* instance *)
-external get_parse : t -> (Route.t -> (Route.t) WebSharper_StdLib.IEnumerableOf.t) = "wsget:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router::#Parse" "wsget:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router::#Parse"
+external get_parse : t -> (Route.t -> (Route.t) Seq.t) = "wsget:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router::#Parse" "wsget:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router::#Parse"
 (* func *)
-external create : (Route.t -> (Route.t) WebSharper_StdLib.IEnumerableOf.t) -> (Route.t) list -> t = "wsnew:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router::" "wsnew:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router::"
+external create : (Route.t -> (Route.t) Seq.t) -> (Route.t) list -> t = "wsnew:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router::" "wsnew:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Router::"

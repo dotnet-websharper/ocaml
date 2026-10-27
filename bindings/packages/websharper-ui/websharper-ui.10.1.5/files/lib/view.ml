@@ -9,7 +9,7 @@ external constAsync : WebSharper_StdLib.FSharpAsync.t -> ('a) t = "ws:WebSharper
 (* func *)
 external const : 'a -> ('a) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#Const|'0" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#Const|'0"
 (* func *)
-external sequence : (('a) t) list -> (('a) WebSharper_StdLib.IEnumerableOf.t) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#Sequence|System.Collections.Generic.IEnumerable`1<WebSharper.UI.View`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#Sequence|System.Collections.Generic.IEnumerable`1<WebSharper.UI.View`1<'0>>"
+external sequence : (('a) t) list -> (('a) Seq.t) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#Sequence|System.Collections.Generic.IEnumerable`1<WebSharper.UI.View`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#Sequence|System.Collections.Generic.IEnumerable`1<WebSharper.UI.View`1<'0>>"
 (* func *)
 external joinInner : (('a) t) t -> ('a) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#JoinInner|WebSharper.UI.View`1<WebSharper.UI.View`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#JoinInner|WebSharper.UI.View`1<WebSharper.UI.View`1<'0>>"
 (* func *)
@@ -23,9 +23,9 @@ external tryGet : ('a) t -> ('a) WebSharper_StdLib.FSharpOption.t = "ws:WebSharp
 (* func *)
 external createLazy : (unit -> Js.t) -> ('a) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#CreateLazy|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#CreateLazy|fn"
 (* inline *)
-external convert : ('a -> 'b) -> (('a) WebSharper_StdLib.IEnumerableOf.t) t -> (('b) WebSharper_StdLib.IEnumerableOf.t) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#Convert|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#Convert|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>"
+external convert : ('a -> 'b) -> (('a) Seq.t) t -> (('b) Seq.t) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#Convert|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#Convert|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>"
 (* inline *)
-external convertSeq : (('a) t -> 'b) -> (('a) WebSharper_StdLib.IEnumerableOf.t) t -> (('b) WebSharper_StdLib.IEnumerableOf.t) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#ConvertSeq|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#ConvertSeq|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>"
+external convertSeq : (('a) t -> 'b) -> (('a) Seq.t) t -> (('b) Seq.t) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#ConvertSeq|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#ConvertSeq|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>"
 (* func *)
 external apply : (('a -> 'b)) t -> ('a) t -> ('b) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#Apply|WebSharper.UI.View`1<fn>|WebSharper.UI.View`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#Apply|WebSharper.UI.View`1<fn>|WebSharper.UI.View`1<'0>"
 (* func *)
@@ -43,11 +43,11 @@ external bindInner : ('a -> ('b) t) -> ('a) t -> ('b) t = "ws:WebSharper.UI!WebS
 (* func *)
 external bind : ('a -> ('b) t) -> ('a) t -> ('b) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#Bind|fn|WebSharper.UI.View`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#Bind|fn|WebSharper.UI.View`1<'0>"
 (* func *)
-external mapSeqCachedView : (('a) t -> 'b) -> ('c) t -> (('b) WebSharper_StdLib.IEnumerableOf.t) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#MapSeqCachedView|fn|WebSharper.UI.View`1<'2>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#MapSeqCachedView|fn|WebSharper.UI.View`1<'2>"
+external mapSeqCachedView : (('a) t -> 'b) -> ('c) t -> (('b) Seq.t) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#MapSeqCachedView|fn|WebSharper.UI.View`1<'2>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#MapSeqCachedView|fn|WebSharper.UI.View`1<'2>"
 (* func *)
 external convertSeqNode : (('a) t -> 'b) -> 'a -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#ConvertSeqNode|fn|'0" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#ConvertSeqNode|fn|'0"
 (* func *)
-external mapSeqCached : ('a -> 'b) -> ('c) t -> (('b) WebSharper_StdLib.IEnumerableOf.t) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#MapSeqCached|fn|WebSharper.UI.View`1<'2>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#MapSeqCached|fn|WebSharper.UI.View`1<'2>"
+external mapSeqCached : ('a -> 'b) -> ('c) t -> (('b) Seq.t) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#MapSeqCached|fn|WebSharper.UI.View`1<'2>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#MapSeqCached|fn|WebSharper.UI.View`1<'2>"
 (* func *)
 external withInit : 'a -> ('a) t -> ('a) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#WithInit|'0|WebSharper.UI.View`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#WithInit|'0|WebSharper.UI.View`1<'0>"
 (* func *)
@@ -61,15 +61,15 @@ external mapCached : ('a -> 'b) -> ('a) t -> ('b) t = "ws:WebSharper.UI!WebSharp
 (* func *)
 external map : ('a -> 'b) -> ('a) t -> ('b) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#Map|fn|WebSharper.UI.View`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#Map|fn|WebSharper.UI.View`1<'0>"
 (* inline *)
-external convertBy : ('a -> 'c) -> ('a -> 'b) -> (('a) WebSharper_StdLib.IEnumerableOf.t) t -> (('b) WebSharper_StdLib.IEnumerableOf.t) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#ConvertBy|fn|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#ConvertBy|fn|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>"
+external convertBy : ('a -> 'c) -> ('a -> 'b) -> (('a) Seq.t) t -> (('b) Seq.t) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#ConvertBy|fn|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#ConvertBy|fn|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>"
 (* inline *)
-external convertSeqBy : ('a -> 'c) -> ('c -> (('a) t -> 'b)) -> (('a) WebSharper_StdLib.IEnumerableOf.t) t -> (('b) WebSharper_StdLib.IEnumerableOf.t) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#ConvertSeqBy|fn|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#ConvertSeqBy|fn|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>"
+external convertSeqBy : ('a -> 'c) -> ('c -> (('a) t -> 'b)) -> (('a) Seq.t) t -> (('b) Seq.t) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#ConvertSeqBy|fn|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#ConvertSeqBy|fn|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>"
 (* func *)
 external updateWhile : 'a -> (bool) t -> ('a) t -> ('a) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#UpdateWhile|'0|WebSharper.UI.View`1<System.Boolean>|WebSharper.UI.View`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#UpdateWhile|'0|WebSharper.UI.View`1<System.Boolean>|WebSharper.UI.View`1<'0>"
 (* func *)
-external mapSeqCachedViewBy : ('a -> 'c) -> ('c -> (('a) t -> 'b)) -> ('d) t -> (('b) WebSharper_StdLib.IEnumerableOf.t) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#MapSeqCachedViewBy|fn|fn|WebSharper.UI.View`1<'3>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#MapSeqCachedViewBy|fn|fn|WebSharper.UI.View`1<'3>"
+external mapSeqCachedViewBy : ('a -> 'c) -> ('c -> (('a) t -> 'b)) -> ('d) t -> (('b) Seq.t) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#MapSeqCachedViewBy|fn|fn|WebSharper.UI.View`1<'3>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#MapSeqCachedViewBy|fn|fn|WebSharper.UI.View`1<'3>"
 (* func *)
-external mapSeqCachedBy : ('a -> 'c) -> ('a -> 'b) -> ('d) t -> (('b) WebSharper_StdLib.IEnumerableOf.t) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#MapSeqCachedBy|fn|fn|WebSharper.UI.View`1<'3>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#MapSeqCachedBy|fn|fn|WebSharper.UI.View`1<'3>"
+external mapSeqCachedBy : ('a -> 'c) -> ('a -> 'b) -> ('d) t -> (('b) Seq.t) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#MapSeqCachedBy|fn|fn|WebSharper.UI.View`1<'3>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#MapSeqCachedBy|fn|fn|WebSharper.UI.View`1<'3>"
 (* func *)
 external snapshotOn : 'a -> ('b) t -> ('a) t -> ('a) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#SnapshotOn|'0|WebSharper.UI.View`1<'1>|WebSharper.UI.View`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.View::#SnapshotOn|'0|WebSharper.UI.View`1<'1>|WebSharper.UI.View`1<'0>"
 (* func *)

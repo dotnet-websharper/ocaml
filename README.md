@@ -147,6 +147,16 @@ across packages do not collide (`WebSharper_JavaScript.Event.t`,
 lives in the unwrapped `websharper-runtime` package. Use `open WebSharper_JavaScript`
 (etc.) to bring a package's modules into scope.
 
+`System.Collections.Generic.IEnumerable<'T>` is presented as the OCaml
+`'T Seq.t` — a *result* is converted at the call boundary
+(`js_to_caml_seq`/`caml_seq_to_js`), while a *parameter* stays an OCaml `list`
+by default (`div [attrs] [docs]`) unless the type's spec sets
+`"seqParams": true` (F# `Seq`/`List`, `System.Linq.Enumerable`), in which case it
+is a `Seq.t` too. `Seq` and `List.of_seq` are shimmed in the client bundle
+(`frontend/bin/gen_stdlib_shim.ml`) and accept *both* representations, so a
+sequence still inside a WebSharper container (e.g. `View.mapSeqCached*`'s
+`View<Seq.t>`) is consumable directly.
+
 ### Name collisions and shadowing
 
 Wrapping keeps *types* apart, but `open` still works on names: `open`ing two
@@ -265,9 +275,9 @@ nested templates and `.Bind()` working end to end (see `docs/templates.md`).
 
 `examples/todomvc-lm` is `todomvc-full` with the row state in a WebSharper.UI
 **`ListModel`** — a reactive, keyed collection (`ListModel.append`/`updateBy`/
-`removeByKey`, read through its backing `Var`). It is the reference for
-`ListModel` usage from OCaml (F# `option` for the update functions, `var`/`iter`
-in place of the `IEnumerable`-returning members).
+`removeByKey`). It is the reference for `ListModel` usage from OCaml: F# `option`
+for the update functions, and the reactive rows via `ListModel.view` +
+`View.mapSeqCachedBy` (the resulting `Seq.t` is consumed with `List.of_seq`).
 
 `dune build` in `examples/hello-world` only type-checks the source (its `dune`
 has a `library` stanza so the editor resolves the libraries); the app is built

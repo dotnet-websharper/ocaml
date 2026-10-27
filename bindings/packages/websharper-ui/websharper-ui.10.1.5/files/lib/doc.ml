@@ -11,7 +11,7 @@ external static : WebSharper_JavaScript.Element.t -> t = "ws:WebSharper.UI!WebSh
 (* inline *)
 external clientSide : Js.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ClientSide|Microsoft.FSharp.Quotations.FSharpExpr`1<'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ClientSide|Microsoft.FSharp.Quotations.FSharpExpr`1<'0>"
 (* static *)
-external mixedNodes : (Js.t) list -> (Attr.t) WebSharper_StdLib.IEnumerableOf.t * (t) WebSharper_StdLib.IEnumerableOf.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#MixedNodes|System.Collections.Generic.IEnumerable`1<System.Object>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#MixedNodes|System.Collections.Generic.IEnumerable`1<System.Object>"
+external mixedNodes : (Js.t) list -> (Attr.t) Seq.t * (t) Seq.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#MixedNodes|System.Collections.Generic.IEnumerable`1<System.Object>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#MixedNodes|System.Collections.Generic.IEnumerable`1<System.Object>"
 (* static *)
 external toMixedDoc : Js.t -> t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ToMixedDoc|System.Object" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Doc::default#ToMixedDoc|System.Object"
 (* static *)

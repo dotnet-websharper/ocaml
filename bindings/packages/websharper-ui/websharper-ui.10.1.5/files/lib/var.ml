@@ -49,7 +49,7 @@ external createLogged : string -> 'a -> ('a) t = "ws:WebSharper.UI!WebSharper.UI
 (* inline *)
 external op_DynamicAssignment : 'a -> string -> 'b -> unit = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#op_DynamicAssignment|'0|System.String|'1" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#op_DynamicAssignment|'0|System.String|'1"
 (* static *)
-external mapLens : ('a -> 'c) -> (('a) t -> 'b) -> (('a) WebSharper_StdLib.FSharpList.t) t -> (('b) WebSharper_StdLib.IEnumerableOf.t) VarViewViewBuilderTypes.View.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#MapLens|fn|fn|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#MapLens|fn|fn|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>"
+external mapLens : ('a -> 'c) -> (('a) t -> 'b) -> (('a) WebSharper_StdLib.FSharpList.t) t -> (('b) Seq.t) VarViewViewBuilderTypes.View.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#MapLens|fn|fn|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#MapLens|fn|fn|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>"
 (* static *)
 external lens_3 : ('a) t -> ('a -> 'b) -> ('a -> ('b -> 'a)) -> ('b) t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Lens|WebSharper.UI.Var`1<'0>|fn|fn" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Var::default#Lens|WebSharper.UI.Var`1<'0>|fn|fn"
 (* new *)

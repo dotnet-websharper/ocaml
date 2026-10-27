@@ -73,6 +73,29 @@ let array = [
       ({wsjs|sort|wsjs}, {wsjs|(cmp, a) => { a.sort((x, y) => ap(cmp, [x, y])); return 0; }|wsjs});
       ({wsjs|stable_sort|wsjs}, {wsjs|(cmp, a) => { a.sort((x, y) => ap(cmp, [x, y])); return 0; }|wsjs});
   ]
+(* Sequ(ence)s: the OCaml `Seq.t` *and* the WebSharper `IEnumerable` runtime
+   representations, since a value typed `Seq.t` may be either (see the runtime's
+   `js_to_caml_seq`) — `seqElems` accepts both. *)
+let seq_helpers = [
+  {wsjs|function seqElems(x) {|wsjs};
+  {wsjs|  const a = [];|wsjs};
+  {wsjs|  if (typeof x === 'function') { let n = x(); while (n !== 0) { a.push(n['0']); n = n['1'](); } return a; }|wsjs};
+  {wsjs|  if (x && typeof x.GetEnumerator === 'function') { const e = x.GetEnumerator(); try { while (e.MoveNext()) a.push(e.Current); } finally { if (typeof e.Dispose === 'function') e.Dispose(); } return a; }|wsjs};
+  {wsjs|  if (x && typeof x.length === 'number') { for (let i = 0; i < x.length; i++) a.push(x[i]); return a; }|wsjs};
+  {wsjs|  return a;|wsjs};
+  {wsjs|}|wsjs};
+  {wsjs|function seqOfArray(a) { const mk = (i) => () => i < a.length ? { $tag: 0, '0': a[i], '1': mk(i + 1) } : 0; return mk(0); }|wsjs};
+]
+let seq = [
+      ({wsjs|map|wsjs}, {wsjs|(f, x) => seqOfArray(seqElems(x).map((v) => ap(f, [v])))|wsjs});
+      ({wsjs|mapi|wsjs}, {wsjs|(f, x) => seqOfArray(seqElems(x).map((v, i) => ap(f, [i, v])))|wsjs});
+      ({wsjs|filter|wsjs}, {wsjs|(f, x) => seqOfArray(seqElems(x).filter((v) => ap(f, [v])))|wsjs});
+      ({wsjs|iter|wsjs}, {wsjs|(f, x) => { const a = seqElems(x); for (let i = 0; i < a.length; i++) ap(f, [a[i]]); return 0; }|wsjs});
+      ({wsjs|fold_left|wsjs}, {wsjs|(f, init, x) => { let acc = init; const a = seqElems(x); for (let i = 0; i < a.length; i++) acc = ap(f, [acc, a[i]]); return acc; }|wsjs});
+      ({wsjs|length|wsjs}, {wsjs|(x) => seqElems(x).length|wsjs});
+      ({wsjs|to_list|wsjs}, {wsjs|(x) => { const a = seqElems(x); let l = 0; for (let i = a.length - 1; i >= 0; i--) l = { $tag: 0, '0': a[i], '1': l }; return l; }|wsjs});
+      ({wsjs|of_list|wsjs}, {wsjs|(l) => { const a = []; while (l !== 0) { a.push(l['0']); l = l['1']; } return seqOfArray(a); }|wsjs});
+]
 let string = [
       ({wsjs|length|wsjs}, {wsjs|(s) => s.length|wsjs});
       ({wsjs|get|wsjs}, {wsjs|(s, i) => s.charCodeAt(i)|wsjs});
@@ -112,6 +135,7 @@ let list = [
       ({wsjs|cons|wsjs}, {wsjs|(x, l) => ({ $tag: 0, '0': x, '1': l })|wsjs});
       ({wsjs|singleton|wsjs}, {wsjs|(x) => ({ $tag: 0, '0': x, '1': 0 })|wsjs});
       ({wsjs|is_empty|wsjs}, {wsjs|(l) => (l === 0 ? 1 : 0)|wsjs});
+      ({wsjs|of_seq|wsjs}, {wsjs|(x) => { const a = seqElems(x); let l = 0; for (let i = a.length - 1; i >= 0; i--) l = { $tag: 0, '0': a[i], '1': l }; return l; }|wsjs});
       ({wsjs|rev|wsjs}, {wsjs|(l) => { let r = 0; while (l !== 0) { r = { $tag: 0, '0': l['0'], '1': r }; l = l['1']; } return r; }|wsjs});
       ({wsjs|rev_append|wsjs}, {wsjs|(l1, l2) => { while (l1 !== 0) { l2 = { $tag: 0, '0': l1['0'], '1': l2 }; l1 = l1['1']; } return l2; }|wsjs});
       ({wsjs|append|wsjs}, {wsjs|(l1, l2) => { const s = []; while (l1 !== 0) { s.push(l1['0']); l1 = l1['1']; } let r = l2; for (let i = s.length - 1; i >= 0; i--) r = { $tag: 0, '0': s[i], '1': r }; return r; }|wsjs});
