@@ -240,10 +240,16 @@ dotnet backend/bin/Debug/net10.0/WebSharper.OCaml.dll --ir app.wsir.json \
     *both* members are module-root the tie-break is metadata order — that is where
     `DateTime2`, `Nullable2` and `Router2` came from; fix such pairs with a `spec`
     rename (`specs/websharper-stdlib.spec` / `websharper-sitelets.spec` — the full
-    list is in `README.md`). Distinguish them from the **arity families**, which
-    are left alone because the digit *is* the arity there (`Tuple2` =
-    `Tuple<'T1>`, `Union2`, `ThisFunc2..7`, `ParamsFunc*`, `IList2` = `IList<'T>`,
-    `IEnumerable2`, `Task2`, …) — a rename there only makes arity harder to read.
+    list is in `README.md`). Distinguish a collision (different .NET types that
+    merely share a derived module name — positional `2`, `3`, …, as today; JS
+    globals like `Object`/`Array`/`Console` are pinned) from a **generic family**
+    (the *same* .NET type name at different arities), which is named by arity
+    with an `Of` suffix by `Program.fs` `finalNamesFor`: `<Name>Of` for one type
+    parameter, `<Name><n>Of` for n >= 2 (`TaskOf<'T>`, `IEnumerableOf<'T>`,
+    `TupleOf<'T1>`, `Tuple2Of<'T1,'T2>`, `Union2Of`, `FSharpFunc2Of`,
+    `ThisFunc2Of`, `ParamsFunc2Of`, …). The arity is read from the metadata name
+    (`arityOf`), not the class's generic count — cyclic interfaces such as
+    `IComparable<'T>`/`IDictionary<'K,'V>` are collapsed to `type t`.
     Note the fix usually has *two* entries (the generic/useful member takes the
     bare name), and after renaming check the regenerated file list for fresh
     `*2` files: `EventModule` silently collided with F#'s own

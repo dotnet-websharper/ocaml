@@ -3,7 +3,7 @@ type t
 (* func *)
 external forceLazy : unit -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.LazyExtensions::#forceLazy|" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.LazyExtensions::#forceLazy|"
 (* func *)
-external cachedLazy : unit -> ((unit -> Js.t), Js.t) Union2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.LazyExtensions::#cachedLazy|" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.LazyExtensions::#cachedLazy|"
+external cachedLazy : unit -> ((unit -> Js.t), Js.t) Union2Of.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.LazyExtensions::#cachedLazy|" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.LazyExtensions::#cachedLazy|"
 (* func *)
 external force : ('a) Lazy.t -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.LazyExtensions::#Force|System.Lazy`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.LazyExtensions::#Force|System.Lazy`1<'0>"
 (* func *)

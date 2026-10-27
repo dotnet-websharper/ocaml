@@ -7,7 +7,7 @@ external valueObj : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Te
 (* instance *)
 external name : t -> string = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#get_Name|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#get_Name|"
 (* instance *)
-external asChoiceView : t -> (string, (string) View.t) WebSharper_StdLib.FSharpChoice.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#get_AsChoiceView|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#get_AsChoiceView|"
+external asChoiceView : t -> (string, (string) View.t) WebSharper_StdLib.FSharpChoice2Of.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#get_AsChoiceView|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#get_AsChoiceView|"
 (* instance *)
 external forTextView : t -> ((string) View.t) WebSharper_StdLib.FSharpOption.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#ForTextView|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHole::default#ForTextView|"
 (* instance *)

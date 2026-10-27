@@ -45,13 +45,13 @@ external get_hash : ('a, 'b) t -> ('a -> int) = "wsget:WebSharper.StdLib!WebShar
 (* instance *)
 external get_equals : ('a, 'b) t -> ('a * 'a, bool) FuncWithArgs.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#equals" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default#equals"
 (* new *)
-external create : IDictionary2.t -> IEqualityComparer2.t -> ('a, 'b) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default"
+external create : IDictionary2Of.t -> IEqualityComparerOf.t -> ('a, 'b) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default"
 (* new *)
-external create_2 : IDictionary2.t -> ('a, 'b) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default"
+external create_2 : IDictionary2Of.t -> ('a, 'b) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default"
 (* new *)
-external create_3 : int -> IEqualityComparer2.t -> ('a, 'b) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default"
+external create_3 : int -> IEqualityComparerOf.t -> ('a, 'b) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default"
 (* new *)
-external create_4 : IEqualityComparer2.t -> ('a, 'b) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default"
+external create_4 : IEqualityComparerOf.t -> ('a, 'b) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default"
 (* new *)
 external create_5 : int -> ('a, 'b) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.Dictionary`2::default"
 (* new *)

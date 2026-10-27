@@ -59,9 +59,9 @@ external get_hash : ('a) t -> ('a -> int) = "wsget:WebSharper.StdLib!WebSharper.
 (* instance *)
 external get_equals : ('a) t -> ('a * 'a, bool) FuncWithArgs.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#equals" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default#equals"
 (* new *)
-external create : ('a) list -> IEqualityComparer2.t -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default"
+external create : ('a) list -> IEqualityComparerOf.t -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default"
 (* new *)
-external create_2 : IEqualityComparer2.t -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default"
+external create_2 : IEqualityComparerOf.t -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default"
 (* new *)
 external create_3 : ('a) list -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.HashSet`1::default"
 (* new *)

@@ -3,8 +3,8 @@ type t
 (* inline *)
 external asAsync : ('a) WebSharper_JavaScript.Promise.t -> FSharpAsync.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.PromiseExtensions::#AsAsync|WebSharper.JavaScript.Promise`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.PromiseExtensions::#AsAsync|WebSharper.JavaScript.Promise`1<'0>"
 (* inline *)
-external asTask : ('a) WebSharper_JavaScript.Promise.t -> ('a) Task2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.PromiseExtensions::#AsTask|WebSharper.JavaScript.Promise`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.PromiseExtensions::#AsTask|WebSharper.JavaScript.Promise`1<'0>"
+external asTask : ('a) WebSharper_JavaScript.Promise.t -> ('a) TaskOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.PromiseExtensions::#AsTask|WebSharper.JavaScript.Promise`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.PromiseExtensions::#AsTask|WebSharper.JavaScript.Promise`1<'0>"
 (* inline *)
 external asPromise : FSharpAsync.t -> ('a) WebSharper_JavaScript.Promise.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.PromiseExtensions::#AsPromise|Microsoft.FSharp.Control.FSharpAsync`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.PromiseExtensions::#AsPromise|Microsoft.FSharp.Control.FSharpAsync`1<'0>"
 (* inline *)
-external asPromise_2 : ('a) Task2.t -> ('a) WebSharper_JavaScript.Promise.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.PromiseExtensions::#AsPromise|System.Threading.Tasks.Task`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.PromiseExtensions::#AsPromise|System.Threading.Tasks.Task`1<'0>"
+external asPromise_2 : ('a) TaskOf.t -> ('a) WebSharper_JavaScript.Promise.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.PromiseExtensions::#AsPromise|System.Threading.Tasks.Task`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.PromiseExtensions::#AsPromise|System.Threading.Tasks.Task`1<'0>"

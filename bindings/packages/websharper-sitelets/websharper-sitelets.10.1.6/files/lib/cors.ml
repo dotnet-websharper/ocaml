@@ -3,4 +3,4 @@ type t
 (* inline *)
 external of_ : 'a -> t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Cors::#Of|'0" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Cors::#Of|'0"
 (* inline *)
-external ofPreflight : t -> ('a, unit) WebSharper_StdLib.FSharpChoice.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Cors::#|Of|Preflight||WebSharper.Sitelets.Cors`1<'0>" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Cors::#|Of|Preflight||WebSharper.Sitelets.Cors`1<'0>"
+external ofPreflight : t -> ('a, unit) WebSharper_StdLib.FSharpChoice2Of.t = "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Cors::#|Of|Preflight||WebSharper.Sitelets.Cors`1<'0>" "ws:WebSharper.Sitelets!WebSharper.Sitelets/WebSharper.Sitelets.Cors::#|Of|Preflight||WebSharper.Sitelets.Cors`1<'0>"

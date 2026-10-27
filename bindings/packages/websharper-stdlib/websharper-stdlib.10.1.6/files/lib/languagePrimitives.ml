@@ -5,7 +5,7 @@ external genericZero : unit -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/Micr
 (* inline *)
 external genericOne : unit -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.LanguagePrimitives::#GenericOne|" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.LanguagePrimitives::#GenericOne|"
 (* inline *)
-external fastGenericComparer : unit -> IComparer2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.LanguagePrimitives::#FastGenericComparer|" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.LanguagePrimitives::#FastGenericComparer|"
+external fastGenericComparer : unit -> IComparerOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.LanguagePrimitives::#FastGenericComparer|" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.LanguagePrimitives::#FastGenericComparer|"
 (* inline *)
 external genericHash : 'a -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.LanguagePrimitives::#GenericHash|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.LanguagePrimitives::#GenericHash|'0"
 (* inline *)

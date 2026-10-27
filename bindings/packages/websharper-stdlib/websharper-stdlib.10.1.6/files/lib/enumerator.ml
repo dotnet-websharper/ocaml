@@ -13,29 +13,29 @@ external lIsReadOnly : IList.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib
 (* func *)
 external isFixedSize : IList.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#IsFixedSize|System.Collections.IList" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#IsFixedSize|System.Collections.IList"
 (* func *)
-external clear : ('a) ICollection2.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Clear|System.Collections.Generic.ICollection`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Clear|System.Collections.Generic.ICollection`1<'0>"
+external clear : ('a) ICollectionOf.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Clear|System.Collections.Generic.ICollection`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Clear|System.Collections.Generic.ICollection`1<'0>"
 (* func *)
-external isReadOnly : ('a) ICollection2.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#IsReadOnly|System.Collections.Generic.ICollection`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#IsReadOnly|System.Collections.Generic.ICollection`1<'0>"
+external isReadOnly : ('a) ICollectionOf.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#IsReadOnly|System.Collections.Generic.ICollection`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#IsReadOnly|System.Collections.Generic.ICollection`1<'0>"
 (* func *)
 external count0 : ICollection.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Count0|System.Collections.ICollection" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Count0|System.Collections.ICollection"
 (* func *)
-external count : ('a) ICollection2.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Count|System.Collections.Generic.ICollection`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Count|System.Collections.Generic.ICollection`1<'0>"
+external count : ('a) ICollectionOf.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Count|System.Collections.Generic.ICollection`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Count|System.Collections.Generic.ICollection`1<'0>"
 (* func *)
 external reset : IEnumerator.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Reset|System.Collections.IEnumerator" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Reset|System.Collections.IEnumerator"
 (* func *)
 external get0 : Js.t list -> IEnumerator.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Get0|System.Collections.IEnumerable" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Get0|System.Collections.IEnumerable"
 (* func *)
-external get : ('a) list -> ('a) IEnumerator2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Get|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Get|System.Collections.Generic.IEnumerable`1<'0>"
+external get : ('a) list -> ('a) IEnumeratorOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Get|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Get|System.Collections.Generic.IEnumerable`1<'0>"
 (* func *)
-external stringEnumerator : string -> ('a) IEnumerator2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#StringEnumerator|System.String" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#StringEnumerator|System.String"
+external stringEnumerator : string -> ('a) IEnumeratorOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#StringEnumerator|System.String" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#StringEnumerator|System.String"
 (* inline *)
-external new_ : 'a -> (('a, 'b) T.t -> bool) -> ('b) IEnumerator2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#New|'0|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#New|'0|fn"
+external new_ : 'a -> (('a, 'b) T.t -> bool) -> ('b) IEnumeratorOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#New|'0|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#New|'0|fn"
 (* func *)
-external lRemoveAt : ('a) IList2.t -> int -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#LRemoveAt|System.Collections.Generic.IList`1<'0>|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#LRemoveAt|System.Collections.Generic.IList`1<'0>|System.Int32"
+external lRemoveAt : ('a) IListOf.t -> int -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#LRemoveAt|System.Collections.Generic.IList`1<'0>|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#LRemoveAt|System.Collections.Generic.IList`1<'0>|System.Int32"
 (* func *)
-external lIndexOf : ('a) IList2.t -> 'a -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#LIndexOf|System.Collections.Generic.IList`1<'0>|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#LIndexOf|System.Collections.Generic.IList`1<'0>|'0"
+external lIndexOf : ('a) IListOf.t -> 'a -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#LIndexOf|System.Collections.Generic.IList`1<'0>|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#LIndexOf|System.Collections.Generic.IList`1<'0>|'0"
 (* func *)
-external lItemGet : ('a) IList2.t -> int -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#LItemGet|System.Collections.Generic.IList`1<'0>|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#LItemGet|System.Collections.Generic.IList`1<'0>|System.Int32"
+external lItemGet : ('a) IListOf.t -> int -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#LItemGet|System.Collections.Generic.IList`1<'0>|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#LItemGet|System.Collections.Generic.IList`1<'0>|System.Int32"
 (* func *)
 external lRemoveAt0 : IList.t -> int -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#LRemoveAt0|System.Collections.IList|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#LRemoveAt0|System.Collections.IList|System.Int32"
 (* func *)
@@ -49,17 +49,17 @@ external lAdd : IList.t -> Js.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib
 (* func *)
 external lItem0Get : IList.t -> int -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#LItem0Get|System.Collections.IList|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#LItem0Get|System.Collections.IList|System.Int32"
 (* func *)
-external remove : ('a) ICollection2.t -> 'a -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Remove|System.Collections.Generic.ICollection`1<'0>|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Remove|System.Collections.Generic.ICollection`1<'0>|'0"
+external remove : ('a) ICollectionOf.t -> 'a -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Remove|System.Collections.Generic.ICollection`1<'0>|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Remove|System.Collections.Generic.ICollection`1<'0>|'0"
 (* func *)
-external contains : ('a) ICollection2.t -> 'a -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Contains|System.Collections.Generic.ICollection`1<'0>|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Contains|System.Collections.Generic.ICollection`1<'0>|'0"
+external contains : ('a) ICollectionOf.t -> 'a -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Contains|System.Collections.Generic.ICollection`1<'0>|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Contains|System.Collections.Generic.ICollection`1<'0>|'0"
 (* func *)
-external add : ('a) ICollection2.t -> 'a -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Add|System.Collections.Generic.ICollection`1<'0>|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Add|System.Collections.Generic.ICollection`1<'0>|'0"
+external add : ('a) ICollectionOf.t -> 'a -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Add|System.Collections.Generic.ICollection`1<'0>|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#Add|System.Collections.Generic.ICollection`1<'0>|'0"
 (* inline *)
-external newDisposing : 'a -> (('a, 'b) T.t -> unit) -> (('a, 'b) T.t -> bool) -> ('b) IEnumerator2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#NewDisposing|'0|fn|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#NewDisposing|'0|fn|fn"
+external newDisposing : 'a -> (('a, 'b) T.t -> unit) -> (('a, 'b) T.t -> bool) -> ('b) IEnumeratorOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#NewDisposing|'0|fn|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#NewDisposing|'0|fn|fn"
 (* func *)
-external lInsert : ('a) IList2.t -> int -> 'a -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#LInsert|System.Collections.Generic.IList`1<'0>|System.Int32|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#LInsert|System.Collections.Generic.IList`1<'0>|System.Int32|'0"
+external lInsert : ('a) IListOf.t -> int -> 'a -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#LInsert|System.Collections.Generic.IList`1<'0>|System.Int32|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#LInsert|System.Collections.Generic.IList`1<'0>|System.Int32|'0"
 (* func *)
-external lItemSet : ('a) IList2.t -> int -> 'a -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#LItemSet|System.Collections.Generic.IList`1<'0>|System.Int32|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#LItemSet|System.Collections.Generic.IList`1<'0>|System.Int32|'0"
+external lItemSet : ('a) IListOf.t -> int -> 'a -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#LItemSet|System.Collections.Generic.IList`1<'0>|System.Int32|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#LItemSet|System.Collections.Generic.IList`1<'0>|System.Int32|'0"
 (* func *)
 external lInsert0 : IList.t -> int -> Js.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#LInsert0|System.Collections.IList|System.Int32|System.Object" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#LInsert0|System.Collections.IList|System.Int32|System.Object"
 (* func *)
@@ -69,6 +69,6 @@ external copyTo0 : ICollection.t -> Array.t -> int -> unit = "ws:WebSharper.StdL
 (* func *)
 external arrayCopyTo : Array.t -> Array.t -> int -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#ArrayCopyTo|System.Array|System.Array|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#ArrayCopyTo|System.Array|System.Array|System.Int32"
 (* func *)
-external arrayEnumerator : (Js.t) array -> ('a) IEnumerator2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#ArrayEnumerator|System.Object[]" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#ArrayEnumerator|System.Object[]"
+external arrayEnumerator : (Js.t) array -> ('a) IEnumeratorOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#ArrayEnumerator|System.Object[]" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#ArrayEnumerator|System.Object[]"
 (* func *)
-external copyTo : ('a) ICollection2.t -> ('a) array -> int -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#CopyTo|System.Collections.Generic.ICollection`1<'0>|'0[]|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#CopyTo|System.Collections.Generic.ICollection`1<'0>|'0[]|System.Int32"
+external copyTo : ('a) ICollectionOf.t -> ('a) array -> int -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#CopyTo|System.Collections.Generic.ICollection`1<'0>|'0[]|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Enumerator::#CopyTo|System.Collections.Generic.ICollection`1<'0>|'0[]|System.Int32"

@@ -49,7 +49,7 @@ external lastIndexOf : ('a) t -> 'a -> int = "ws:WebSharper.StdLib!WebSharper.St
 (* inline *)
 external removeAt : ('a) t -> int -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#RemoveAt|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#RemoveAt|System.Int32"
 (* inline *)
-external sort_2 : ('a) t -> IComparer2.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#Sort|System.Collections.Generic.IComparer`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#Sort|System.Collections.Generic.IComparer`1<'0>"
+external sort_2 : ('a) t -> IComparerOf.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#Sort|System.Collections.Generic.IComparer`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#Sort|System.Collections.Generic.IComparer`1<'0>"
 (* inline *)
 external sort_3 : ('a) t -> Js.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#Sort|System.Comparison`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#Sort|System.Comparison`1<'0>"
 (* inline *)
@@ -59,7 +59,7 @@ external removeAll : Js.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/Syste
 (* func *)
 external remove : 'a -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#Remove|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#Remove|'0"
 (* inline *)
-external binarySearch_2 : ('a) t -> 'a -> IComparer2.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#BinarySearch|'0|System.Collections.Generic.IComparer`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#BinarySearch|'0|System.Collections.Generic.IComparer`1<'0>"
+external binarySearch_2 : ('a) t -> 'a -> IComparerOf.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#BinarySearch|'0|System.Collections.Generic.IComparer`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#BinarySearch|'0|System.Collections.Generic.IComparer`1<'0>"
 (* inline *)
 external findIndex_2 : ('a) t -> int -> Js.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#FindIndex|System.Int32|System.Predicate`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#FindIndex|System.Int32|System.Predicate`1<'0>"
 (* inline *)
@@ -89,9 +89,9 @@ external indexOf_3 : ('a) t -> 'a -> int -> int -> int = "ws:WebSharper.StdLib!W
 (* inline *)
 external lastIndexOf_3 : ('a) t -> 'a -> int -> int -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#LastIndexOf|'0|System.Int32|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#LastIndexOf|'0|System.Int32|System.Int32"
 (* inline *)
-external sort_4 : ('a) t -> int -> int -> IComparer2.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#Sort|System.Int32|System.Int32|System.Collections.Generic.IComparer`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#Sort|System.Int32|System.Int32|System.Collections.Generic.IComparer`1<'0>"
+external sort_4 : ('a) t -> int -> int -> IComparerOf.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#Sort|System.Int32|System.Int32|System.Collections.Generic.IComparer`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#Sort|System.Int32|System.Int32|System.Collections.Generic.IComparer`1<'0>"
 (* inline *)
-external binarySearch_3 : ('a) t -> int -> int -> 'a -> IComparer2.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#BinarySearch|System.Int32|System.Int32|'0|System.Collections.Generic.IComparer`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#BinarySearch|System.Int32|System.Int32|'0|System.Collections.Generic.IComparer`1<'0>"
+external binarySearch_3 : ('a) t -> int -> int -> 'a -> IComparerOf.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#BinarySearch|System.Int32|System.Int32|'0|System.Collections.Generic.IComparer`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#BinarySearch|System.Int32|System.Int32|'0|System.Collections.Generic.IComparer`1<'0>"
 (* inline *)
 external copyTo : ('a) t -> ('a) array -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#CopyTo|'0[]" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Collections.Generic.List`1::#CopyTo|'0[]"
 (* inline *)

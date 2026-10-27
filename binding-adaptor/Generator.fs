@@ -134,7 +134,7 @@ let rec mapType (ctx: TypeCtx) (t: Type) : string =
 
 // WebSharper `IEnumerable` parameters are presented as OCaml lists; the
 // backend converts them to JS arrays at the call boundary. Return/field types
-// stay opaque (`IEnumerable2.t`).
+// stay opaque (`IEnumerableOf.t`).
 let rec paramType (ctx: TypeCtx) (t: Type) : string =
     match t with
     | Type.ConcreteType c when c.Entity.Value.FullName.StartsWith "System.Collections.Generic.IEnumerable" ->
@@ -207,6 +207,13 @@ let simpleTypeName (fullName: string) =
     let i = max (fullName.LastIndexOf '.') (fullName.LastIndexOf '+')
     let s = if i >= 0 then fullName.Substring(i + 1) else fullName
     if s.Contains "`" then s.Substring(0, s.IndexOf '`') else s
+
+// The type's own arity, from its metadata name (`Namespace.IComparable`1` -> 1).
+// (The generated OCaml type may have been collapsed to a shared abstract type,
+// so the class's own generic count is not always available.)
+let arityOf (td: TypeDefinitionInfo) =
+    let i = td.FullName.LastIndexOf '`'
+    if i < 0 then 0 else int (td.FullName.Substring(i + 1))
 
 let validModuleName (s: string) =
     s.Length > 0

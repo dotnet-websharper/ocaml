@@ -21,7 +21,7 @@ external spliceExpression : Js.t -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib
 (* inline *)
 external spliceUntypedExpression : Js.t -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.ExtraTopLevelOperators::#SpliceUntypedExpression|Microsoft.FSharp.Quotations.FSharpExpr" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.ExtraTopLevelOperators::#SpliceUntypedExpression|Microsoft.FSharp.Quotations.FSharpExpr"
 (* inline *)
-external createDictionary : ('a * 'b) list -> IDictionary2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.ExtraTopLevelOperators::#CreateDictionary|System.Collections.Generic.IEnumerable`1<('0,'1)>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.ExtraTopLevelOperators::#CreateDictionary|System.Collections.Generic.IEnumerable`1<('0,'1)>"
+external createDictionary : ('a * 'b) list -> IDictionary2Of.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.ExtraTopLevelOperators::#CreateDictionary|System.Collections.Generic.IEnumerable`1<('0,'1)>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.ExtraTopLevelOperators::#CreateDictionary|System.Collections.Generic.IEnumerable`1<('0,'1)>"
 (* inline *)
 external createReadOnlyDictionary : ('a * 'b) list -> IReadOnlyDictionary.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.ExtraTopLevelOperators::#CreateReadOnlyDictionary|System.Collections.Generic.IEnumerable`1<('0,'1)>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.ExtraTopLevelOperators::#CreateReadOnlyDictionary|System.Collections.Generic.IEnumerable`1<('0,'1)>"
 (* inline *)

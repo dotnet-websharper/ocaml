@@ -3,7 +3,7 @@ type t = TemplateHole.t
 (* instance *)
 external value : t -> string = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.Text::default#get_Value|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.Text::default#get_Value|"
 (* instance *)
-external asChoiceView : t -> (string, (string) View.t) WebSharper_StdLib.FSharpChoice.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.Text::default#get_AsChoiceView|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.Text::default#get_AsChoiceView|"
+external asChoiceView : t -> (string, (string) View.t) WebSharper_StdLib.FSharpChoice2Of.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.Text::default#get_AsChoiceView|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.Text::default#get_AsChoiceView|"
 (* instance *)
 external valueObj : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.Text::default#get_ValueObj|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.Text::default#get_ValueObj|"
 (* instance *)

@@ -15,9 +15,9 @@ external adjustSigned : Js.t -> int -> Js.t = "ws:WebSharper.StdLib!WebSharper.S
 (* func *)
 external nullableConv : Js.t -> (Js.t -> 'a) -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Utils::#nullableConv|System.Object|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Utils::#nullableConv|System.Object|fn"
 (* func *)
-external bigintRange : BigInteger.t -> BigInteger.t -> (BigInteger.t) IEnumerable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Utils::#bigintRange|System.Numerics.BigInteger|System.Numerics.BigInteger" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Utils::#bigintRange|System.Numerics.BigInteger|System.Numerics.BigInteger"
+external bigintRange : BigInteger.t -> BigInteger.t -> (BigInteger.t) IEnumerableOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Utils::#bigintRange|System.Numerics.BigInteger|System.Numerics.BigInteger" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Utils::#bigintRange|System.Numerics.BigInteger|System.Numerics.BigInteger"
 (* func *)
-external charRange : char -> char -> (char) IEnumerable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Utils::#charRange|System.Char|System.Char" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Utils::#charRange|System.Char|System.Char"
+external charRange : char -> char -> (char) IEnumerableOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Utils::#charRange|System.Char|System.Char" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Utils::#charRange|System.Char|System.Char"
 (* func *)
 external printList : (Js.t -> string) -> (Js.t) FSharpList.t -> string = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Utils::#printList|fn|Microsoft.FSharp.Collections.FSharpList`1<System.Object>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Utils::#printList|fn|Microsoft.FSharp.Collections.FSharpList`1<System.Object>"
 (* func *)
@@ -41,9 +41,9 @@ external nullableOpL : Js.t -> Js.t -> (Js.t -> (Js.t -> 'a)) -> 'a = "ws:WebSha
 (* func *)
 external nullableOp : Js.t -> Js.t -> (Js.t -> (Js.t -> 'a)) -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Utils::#nullableOp|System.Object|System.Object|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Utils::#nullableOp|System.Object|System.Object|fn"
 (* func *)
-external bigintStep : BigInteger.t -> BigInteger.t -> BigInteger.t -> (BigInteger.t) IEnumerable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Utils::#bigintStep|System.Numerics.BigInteger|System.Numerics.BigInteger|System.Numerics.BigInteger" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Utils::#bigintStep|System.Numerics.BigInteger|System.Numerics.BigInteger|System.Numerics.BigInteger"
+external bigintStep : BigInteger.t -> BigInteger.t -> BigInteger.t -> (BigInteger.t) IEnumerableOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Utils::#bigintStep|System.Numerics.BigInteger|System.Numerics.BigInteger|System.Numerics.BigInteger" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Utils::#bigintStep|System.Numerics.BigInteger|System.Numerics.BigInteger|System.Numerics.BigInteger"
 (* func *)
-external charStep : char -> char -> char -> (char) IEnumerable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Utils::#charStep|System.Char|System.Char|System.Char" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Utils::#charStep|System.Char|System.Char|System.Char"
+external charStep : char -> char -> char -> (char) IEnumerableOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Utils::#charStep|System.Char|System.Char|System.Char" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Utils::#charStep|System.Char|System.Char|System.Char"
 (* func *)
 external printArray2D : (Js.t -> string) -> (Js.t) array -> string = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Utils::#printArray2D|fn|System.Object[][]" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Utils::#printArray2D|fn|System.Object[][]"
 (* func *)

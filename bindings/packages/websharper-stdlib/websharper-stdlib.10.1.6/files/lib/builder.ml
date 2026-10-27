@@ -9,7 +9,7 @@ external returnFrom : t -> ('a) WebSharper_JavaScript.Promise.t -> ('a) WebSharp
 (* inline *)
 external returnFrom_2 : t -> FSharpAsync.t -> ('a) WebSharper_JavaScript.Promise.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise.Builder::#ReturnFrom|Microsoft.FSharp.Control.FSharpAsync`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise.Builder::#ReturnFrom|Microsoft.FSharp.Control.FSharpAsync`1<'0>"
 (* inline *)
-external returnFrom_3 : t -> ('a) Task2.t -> ('a) WebSharper_JavaScript.Promise.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise.Builder::#ReturnFrom|System.Threading.Tasks.Task`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise.Builder::#ReturnFrom|System.Threading.Tasks.Task`1<'0>"
+external returnFrom_3 : t -> ('a) TaskOf.t -> ('a) WebSharper_JavaScript.Promise.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise.Builder::#ReturnFrom|System.Threading.Tasks.Task`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise.Builder::#ReturnFrom|System.Threading.Tasks.Task`1<'0>"
 (* inline *)
 external delay : t -> (unit -> ('a) WebSharper_JavaScript.Promise.t) -> ('a) WebSharper_JavaScript.Promise.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise.Builder::#Delay|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise.Builder::#Delay|fn"
 (* inline *)
@@ -17,7 +17,7 @@ external bind : t -> ('a) WebSharper_JavaScript.Promise.t -> ('a -> ('b) WebShar
 (* inline *)
 external bind_2 : t -> FSharpAsync.t -> ('a -> ('b) WebSharper_JavaScript.Promise.t) -> ('b) WebSharper_JavaScript.Promise.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise.Builder::#Bind|Microsoft.FSharp.Control.FSharpAsync`1<'0>|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise.Builder::#Bind|Microsoft.FSharp.Control.FSharpAsync`1<'0>|fn"
 (* inline *)
-external bind_3 : t -> ('a) Task2.t -> ('a -> ('b) WebSharper_JavaScript.Promise.t) -> ('b) WebSharper_JavaScript.Promise.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise.Builder::#Bind|System.Threading.Tasks.Task`1<'0>|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise.Builder::#Bind|System.Threading.Tasks.Task`1<'0>|fn"
+external bind_3 : t -> ('a) TaskOf.t -> ('a -> ('b) WebSharper_JavaScript.Promise.t) -> ('b) WebSharper_JavaScript.Promise.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise.Builder::#Bind|System.Threading.Tasks.Task`1<'0>|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise.Builder::#Bind|System.Threading.Tasks.Task`1<'0>|fn"
 (* inline *)
 external using : t -> 'a -> ('a -> ('b) WebSharper_JavaScript.Promise.t) -> ('b) WebSharper_JavaScript.Promise.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise.Builder::#Using|'0|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise.Builder::#Using|'0|fn"
 (* inline *)

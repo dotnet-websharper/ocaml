@@ -37,7 +37,7 @@ external length : ('a) array -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/Mi
 (* inline *)
 external reverse : ('a) array -> ('a) array = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#Reverse|'0[]" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#Reverse|'0[]"
 (* inline *)
-external toSeq : ('a) array -> ('a) IEnumerable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#ToSeq|'0[]" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#ToSeq|'0[]"
+external toSeq : ('a) array -> ('a) IEnumerableOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#ToSeq|'0[]" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#ToSeq|'0[]"
 (* macro *)
 external sum : ('a) array -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#Sum|'0[]" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ArrayModule::#Sum|'0[]"
 (* inline *)

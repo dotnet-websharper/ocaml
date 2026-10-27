@@ -5,7 +5,7 @@ external pairwise : Js.t -> Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Micro
 (* inline *)
 external add : ('a -> unit) -> Js.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.EventModule::#Add|fn|Microsoft.FSharp.Control.IEvent`2<'1,'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.EventModule::#Add|fn|Microsoft.FSharp.Control.IEvent`2<'1,'0>"
 (* func *)
-external split : ('a -> ('b, 'c) FSharpChoice.t) -> Js.t -> Js.t * Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.EventModule::#Split|fn|Microsoft.FSharp.Control.IEvent`2<'3,'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.EventModule::#Split|fn|Microsoft.FSharp.Control.IEvent`2<'3,'0>"
+external split : ('a -> ('b, 'c) FSharpChoice2Of.t) -> Js.t -> Js.t * Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.EventModule::#Split|fn|Microsoft.FSharp.Control.IEvent`2<'3,'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.EventModule::#Split|fn|Microsoft.FSharp.Control.IEvent`2<'3,'0>"
 (* func *)
 external partition : ('a -> bool) -> Js.t -> Js.t * Js.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.EventModule::#Partition|fn|Microsoft.FSharp.Control.IEvent`2<'1,'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.EventModule::#Partition|fn|Microsoft.FSharp.Control.IEvent`2<'1,'0>"
 (* func *)

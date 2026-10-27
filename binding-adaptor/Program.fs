@@ -325,10 +325,62 @@ let gen
             let suffix (p: string list) (n: int) =
                 List.mapi (fun i seg -> if i = p.Length - 1 then seg + string n else seg) p
 
+            // A generic member of a family is named by its *arity*: `Of` for one
+            // type parameter, `<n>Of` for n >= 2 (`Task<'T>` -> `TaskOf`,
+            // `Tuple<'T1,'T2>` -> `Tuple2Of`), so the digit always means the
+            // arity. The arity-0 member keeps the bare name when it is free.
+            let withOf (n: int) (p: string list) =
+                List.mapi
+                    (fun i seg -> if i = p.Length - 1 then seg + (if n = 1 then "Of" else string n + "Of") else seg)
+                    p
 
-            sorted
-            |> List.iteri (fun i (_, td, _, _) ->
-                dict.[td.FullName] <- (if mergeable || i = 0 then basePath else suffix basePath (i + 1)))
+            let taken = System.Collections.Generic.HashSet<string list>()
+
+            let claim (p: string list) =
+                let rec pick k =
+                    let candidate = if k = 1 then p else suffix p k
+                    if taken.Add candidate then candidate else pick (k + 1)
+                pick 1
+
+            let overridden (td: TypeDefinitionInfo) = nameOverride.ContainsKey td.FullName
+
+            // JS globals (`globalThis.Object`/`Array`) are thin wrappers over a JS
+            // global rather than a generic/non-generic .NET family; their current
+            // names are the established interop surface, so a group that involves
+            // one keeps the positional naming.
+            let jsGlobal =
+                sorted
+                |> List.exists (fun (a, _, _, _) ->
+                    (a.ToString()).StartsWith("globalThis", StringComparison.Ordinal))
+
+            // The `Of` rule targets a genuine arity family: several classes with
+            // the *same* .NET type name at different arities (`Task`/`Task\`1`,
+            // `Tuple`/`Tuple\`1`…), not unrelated types that merely collide in
+            // their derived module name.
+            let family =
+                not mergeable
+                && not jsGlobal
+                && List.length sorted > 1
+                && (sorted |> List.exists (fun (_, td, _, _) -> arityOf td >= 1))
+                && (sorted |> List.map (fun (_, td, _, _) -> simpleTypeName td.FullName) |> List.distinct |> List.length) = 1
+
+            if mergeable then
+                for (_, td, _, _) in sorted do
+                    dict.[td.FullName] <- basePath
+            elif family then
+                // Generics first (by arity), so an arity-0 sibling only gets the
+                // bare name when no generic claimed it.
+                for (_, td, _, _) in sorted do
+                    if overridden td then dict.[td.FullName] <- basePath
+                    elif arityOf td >= 1 then dict.[td.FullName] <- claim (withOf (arityOf td) basePath)
+                for (_, td, _, _) in sorted do
+                    if not (dict.ContainsKey td.FullName) then dict.[td.FullName] <- claim basePath
+            else
+                // Collision, not a family: the first keeps the bare name, the rest
+                // are suffixed by position (as before).
+                sorted
+                |> List.iteri (fun i (_, td, _, _) ->
+                    dict.[td.FullName] <- (if i = 0 then basePath else suffix basePath (i + 1)))
 
         dict |> Seq.map (fun kv -> kv.Key, kv.Value) |> Map.ofSeq
 

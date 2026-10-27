@@ -51,7 +51,7 @@ external ref_2 : 'a -> ('a) FSharpRef.t = "ws:WebSharper.StdLib!WebSharper.StdLi
 (* inline *)
 external async : Object.t -> FSharpAsync.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.FSharpConvert::#Async|System.Threading.Tasks.Task" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.FSharpConvert::#Async|System.Threading.Tasks.Task"
 (* inline *)
-external async_2 : ('a) Task2.t -> FSharpAsync.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.FSharpConvert::#Async|System.Threading.Tasks.Task`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.FSharpConvert::#Async|System.Threading.Tasks.Task`1<'0>"
+external async_2 : ('a) TaskOf.t -> FSharpAsync.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.FSharpConvert::#Async|System.Threading.Tasks.Task`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.FSharpConvert::#Async|System.Threading.Tasks.Task`1<'0>"
 (* inline *)
 external asyncValue : 'a -> FSharpAsync.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.FSharpConvert::#AsyncValue|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.FSharpConvert::#AsyncValue|'0"
 (* inline *)

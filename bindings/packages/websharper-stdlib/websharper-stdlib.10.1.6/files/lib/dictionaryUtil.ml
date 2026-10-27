@@ -7,6 +7,6 @@ external alreadyAdded : unit -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/Web
 (* func *)
 external notPresent : unit -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.DictionaryUtil::#notPresent|" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.DictionaryUtil::#notPresent|"
 (* func *)
-external equals : IEqualityComparer2.t -> ('a * 'a, bool) FuncWithArgs.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.DictionaryUtil::#equals|System.Collections.Generic.IEqualityComparer`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.DictionaryUtil::#equals|System.Collections.Generic.IEqualityComparer`1<'0>"
+external equals : IEqualityComparerOf.t -> ('a * 'a, bool) FuncWithArgs.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.DictionaryUtil::#equals|System.Collections.Generic.IEqualityComparer`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.DictionaryUtil::#equals|System.Collections.Generic.IEqualityComparer`1<'0>"
 (* func *)
-external getHashCode : IEqualityComparer2.t -> 'a -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.DictionaryUtil::#getHashCode|System.Collections.Generic.IEqualityComparer`1<'0>|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.DictionaryUtil::#getHashCode|System.Collections.Generic.IEqualityComparer`1<'0>|'0"
+external getHashCode : IEqualityComparerOf.t -> 'a -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.DictionaryUtil::#getHashCode|System.Collections.Generic.IEqualityComparer`1<'0>|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Collections.DictionaryUtil::#getHashCode|System.Collections.Generic.IEqualityComparer`1<'0>|'0"

@@ -5,11 +5,11 @@ external do_ : unit -> Builder.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSh
 (* inline *)
 external do__2 : unit -> Builder.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise::#get_Do|" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise::#get_Do|"
 (* func *)
-external asTask : ('a) WebSharper_JavaScript.Promise.t -> ('a) Task2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise::#AsTask|WebSharper.JavaScript.Promise`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise::#AsTask|WebSharper.JavaScript.Promise`1<'0>"
+external asTask : ('a) WebSharper_JavaScript.Promise.t -> ('a) TaskOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise::#AsTask|WebSharper.JavaScript.Promise`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise::#AsTask|WebSharper.JavaScript.Promise`1<'0>"
 (* func *)
 external asAsync : ('a) WebSharper_JavaScript.Promise.t -> FSharpAsync.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise::#AsAsync|WebSharper.JavaScript.Promise`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise::#AsAsync|WebSharper.JavaScript.Promise`1<'0>"
 (* func *)
-external ofTask : ('a) Task2.t -> ('a) WebSharper_JavaScript.Promise.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise::#OfTask|System.Threading.Tasks.Task`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise::#OfTask|System.Threading.Tasks.Task`1<'0>"
+external ofTask : ('a) TaskOf.t -> ('a) WebSharper_JavaScript.Promise.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise::#OfTask|System.Threading.Tasks.Task`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise::#OfTask|System.Threading.Tasks.Task`1<'0>"
 (* func *)
 external ofAsync : FSharpAsync.t -> ('a) WebSharper_JavaScript.Promise.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise::#OfAsync|Microsoft.FSharp.Control.FSharpAsync`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.JavaScript.Promise::#OfAsync|Microsoft.FSharp.Control.FSharpAsync`1<'0>"
 (* func *)

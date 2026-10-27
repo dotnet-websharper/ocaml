@@ -57,11 +57,11 @@ external runReplaceById : string -> Doc.t -> unit = "ws:WebSharper.UI!WebSharper
 (* inline *)
 external bindSeqCached : ('a -> 'b) -> ('c) View.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#BindSeqCached|fn|WebSharper.UI.View`1<'2>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#BindSeqCached|fn|WebSharper.UI.View`1<'2>"
 (* inline *)
-external convert : ('a -> 'b) -> (('a) WebSharper_StdLib.IEnumerable2.t) View.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#Convert|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#Convert|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>"
+external convert : ('a -> 'b) -> (('a) WebSharper_StdLib.IEnumerableOf.t) View.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#Convert|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#Convert|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>"
 (* inline *)
 external bindSeqCachedView : (('a) View.t -> 'b) -> ('c) View.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#BindSeqCachedView|fn|WebSharper.UI.View`1<'2>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#BindSeqCachedView|fn|WebSharper.UI.View`1<'2>"
 (* inline *)
-external convertSeq : (('a) View.t -> 'b) -> (('a) WebSharper_StdLib.IEnumerable2.t) View.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#ConvertSeq|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#ConvertSeq|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>"
+external convertSeq : (('a) View.t -> 'b) -> (('a) WebSharper_StdLib.IEnumerableOf.t) View.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#ConvertSeq|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#ConvertSeq|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>"
 (* inline *)
 external bindListModel : ('a -> 'b) -> ('c, 'a) ListModel.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#BindListModel|fn|WebSharper.UI.ListModel`2<'2,'0>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#BindListModel|fn|WebSharper.UI.ListModel`2<'2,'0>"
 (* inline *)
@@ -91,13 +91,13 @@ external namedTemplate : string -> (string) WebSharper_StdLib.FSharpOption.t -> 
 (* inline *)
 external bindSeqCachedBy : ('a -> 'b) -> ('a -> 'c) -> ('d) View.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#BindSeqCachedBy|fn|fn|WebSharper.UI.View`1<'3>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#BindSeqCachedBy|fn|fn|WebSharper.UI.View`1<'3>"
 (* inline *)
-external convertBy : ('a -> 'b) -> ('a -> 'c) -> (('a) WebSharper_StdLib.IEnumerable2.t) View.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#ConvertBy|fn|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#ConvertBy|fn|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>"
+external convertBy : ('a -> 'b) -> ('a -> 'c) -> (('a) WebSharper_StdLib.IEnumerableOf.t) View.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#ConvertBy|fn|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#ConvertBy|fn|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>"
 (* inline *)
 external bindSeqCachedViewBy : ('a -> 'b) -> ('b -> (('a) View.t -> 'c)) -> ('d) View.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#BindSeqCachedViewBy|fn|fn|WebSharper.UI.View`1<'3>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#BindSeqCachedViewBy|fn|fn|WebSharper.UI.View`1<'3>"
 (* inline *)
 external bindLens : ('a -> 'b) -> (('a) Var.t -> 'c) -> (('a) WebSharper_StdLib.FSharpList.t) Var.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#BindLens|fn|fn|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#BindLens|fn|fn|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>"
 (* inline *)
-external convertSeqBy : ('a -> 'b) -> ('b -> (('a) View.t -> 'c)) -> (('a) WebSharper_StdLib.IEnumerable2.t) View.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#ConvertSeqBy|fn|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#ConvertSeqBy|fn|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>"
+external convertSeqBy : ('a -> 'b) -> ('b -> (('a) View.t -> 'c)) -> (('a) WebSharper_StdLib.IEnumerableOf.t) View.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#ConvertSeqBy|fn|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#ConvertSeqBy|fn|fn|WebSharper.UI.View`1<System.Collections.Generic.IEnumerable`1<'0>>"
 (* inline *)
 external checkBoxGroup : (Attr.t) list -> 'a -> (('a) WebSharper_StdLib.FSharpList.t) Var.t -> Doc.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#CheckBoxGroup|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|'0|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.Client.Doc::#CheckBoxGroup|System.Collections.Generic.IEnumerable`1<WebSharper.UI.Attr>|'0|WebSharper.UI.Var`1<Microsoft.FSharp.Collections.FSharpList`1<'0>>"
 (* inline *)

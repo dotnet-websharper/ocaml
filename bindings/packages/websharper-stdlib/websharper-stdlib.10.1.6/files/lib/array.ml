@@ -95,13 +95,13 @@ external lastIndexOf_4 : ('a) array -> 'a -> int = "ws:WebSharper.StdLib!WebShar
 (* inline *)
 external sort_10 : ('a) array -> ('b) array -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#Sort|'0[]|'1[]" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#Sort|'0[]|'1[]"
 (* inline *)
-external sort_11 : ('a) array -> IComparer2.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#Sort|'0[]|System.Collections.Generic.IComparer`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#Sort|'0[]|System.Collections.Generic.IComparer`1<'0>"
+external sort_11 : ('a) array -> IComparerOf.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#Sort|'0[]|System.Collections.Generic.IComparer`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#Sort|'0[]|System.Collections.Generic.IComparer`1<'0>"
 (* inline *)
 external sort_12 : ('a) array -> Js.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#Sort|'0[]|System.Comparison`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#Sort|'0[]|System.Comparison`1<'0>"
 (* inline *)
 external trueForAll : ('a) array -> Js.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#TrueForAll|'0[]|System.Predicate`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#TrueForAll|'0[]|System.Predicate`1<'0>"
 (* inline *)
-external binarySearch_6 : ('a) array -> 'a -> IComparer2.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#BinarySearch|'0[]|'0|System.Collections.Generic.IComparer`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#BinarySearch|'0[]|'0|System.Collections.Generic.IComparer`1<'0>"
+external binarySearch_6 : ('a) array -> 'a -> IComparerOf.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#BinarySearch|'0[]|'0|System.Collections.Generic.IComparer`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#BinarySearch|'0[]|'0|System.Collections.Generic.IComparer`1<'0>"
 (* inline *)
 external findIndex_2 : ('a) array -> int -> Js.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#FindIndex|'0[]|System.Int32|System.Predicate`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#FindIndex|'0[]|System.Int32|System.Predicate`1<'0>"
 (* inline *)
@@ -113,7 +113,7 @@ external lastIndexOf_5 : ('a) array -> 'a -> int -> int = "ws:WebSharper.StdLib!
 (* inline *)
 external reverse_4 : ('a) array -> int -> int -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#Reverse|'0[]|System.Int32|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#Reverse|'0[]|System.Int32|System.Int32"
 (* inline *)
-external sort_13 : ('a) array -> ('b) array -> IComparer2.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#Sort|'0[]|'1[]|System.Collections.Generic.IComparer`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#Sort|'0[]|'1[]|System.Collections.Generic.IComparer`1<'0>"
+external sort_13 : ('a) array -> ('b) array -> IComparerOf.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#Sort|'0[]|'1[]|System.Collections.Generic.IComparer`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#Sort|'0[]|'1[]|System.Collections.Generic.IComparer`1<'0>"
 (* inline *)
 external sort_14 : ('a) array -> int -> int -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#Sort|'0[]|System.Int32|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#Sort|'0[]|System.Int32|System.Int32"
 (* inline *)
@@ -125,12 +125,12 @@ external lastIndexOf_6 : ('a) array -> 'a -> int -> int -> int = "ws:WebSharper.
 (* inline *)
 external sort_15 : ('a) array -> ('b) array -> int -> int -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#Sort|'0[]|'1[]|System.Int32|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#Sort|'0[]|'1[]|System.Int32|System.Int32"
 (* inline *)
-external sort_16 : ('a) array -> int -> int -> IComparer2.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#Sort|'0[]|System.Int32|System.Int32|System.Collections.Generic.IComparer`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#Sort|'0[]|System.Int32|System.Int32|System.Collections.Generic.IComparer`1<'0>"
+external sort_16 : ('a) array -> int -> int -> IComparerOf.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#Sort|'0[]|System.Int32|System.Int32|System.Collections.Generic.IComparer`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#Sort|'0[]|System.Int32|System.Int32|System.Collections.Generic.IComparer`1<'0>"
 (* func *)
 external findLastIndex_3 : ('a) array -> int -> int -> Js.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#FindLastIndex|'0[]|System.Int32|System.Int32|System.Predicate`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#FindLastIndex|'0[]|System.Int32|System.Int32|System.Predicate`1<'0>"
 (* func *)
 external findIndex_3 : ('a) array -> int -> int -> Js.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#FindIndex|'0[]|System.Int32|System.Int32|System.Predicate`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#FindIndex|'0[]|System.Int32|System.Int32|System.Predicate`1<'0>"
 (* inline *)
-external binarySearch_8 : ('a) array -> int -> int -> 'a -> IComparer2.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#BinarySearch|'0[]|System.Int32|System.Int32|'0|System.Collections.Generic.IComparer`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#BinarySearch|'0[]|System.Int32|System.Int32|'0|System.Collections.Generic.IComparer`1<'0>"
+external binarySearch_8 : ('a) array -> int -> int -> 'a -> IComparerOf.t -> int = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#BinarySearch|'0[]|System.Int32|System.Int32|'0|System.Collections.Generic.IComparer`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#BinarySearch|'0[]|System.Int32|System.Int32|'0|System.Collections.Generic.IComparer`1<'0>"
 (* inline *)
-external sort_17 : ('a) array -> ('b) array -> int -> int -> IComparer2.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#Sort|'0[]|'1[]|System.Int32|System.Int32|System.Collections.Generic.IComparer`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#Sort|'0[]|'1[]|System.Int32|System.Int32|System.Collections.Generic.IComparer`1<'0>"
+external sort_17 : ('a) array -> ('b) array -> int -> int -> IComparerOf.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#Sort|'0[]|'1[]|System.Int32|System.Int32|System.Collections.Generic.IComparer`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Array::#Sort|'0[]|'1[]|System.Int32|System.Int32|System.Collections.Generic.IComparer`1<'0>"

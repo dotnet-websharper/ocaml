@@ -25,35 +25,35 @@ external execute : t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Th
 (* inline *)
 external continueWith : t -> Js.t -> Object.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#ContinueWith|System.Action`1<System.Threading.Tasks.Task>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#ContinueWith|System.Action`1<System.Threading.Tasks.Task>"
 (* inline *)
-external continueWith_2 : t -> Js.t -> ('a) Task2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#ContinueWith|System.Func`2<System.Threading.Tasks.Task,'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#ContinueWith|System.Func`2<System.Threading.Tasks.Task,'0>"
+external continueWith_2 : t -> Js.t -> ('a) TaskOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#ContinueWith|System.Func`2<System.Threading.Tasks.Task,'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#ContinueWith|System.Func`2<System.Threading.Tasks.Task,'0>"
 (* inline *)
 external run : Js.t -> Object.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Run|System.Action" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Run|System.Action"
 (* inline *)
 external run_2 : Js.t -> Object.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Run|System.Func`1<System.Threading.Tasks.Task>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Run|System.Func`1<System.Threading.Tasks.Task>"
 (* inline *)
-external run_3 : Js.t -> ('a) Task2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Run|System.Func`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Run|System.Func`1<'0>"
+external run_3 : Js.t -> ('a) TaskOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Run|System.Func`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Run|System.Func`1<'0>"
 (* inline *)
-external run_4 : Js.t -> ('a) Task2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Run|System.Func`1<System.Threading.Tasks.Task`1<'0>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Run|System.Func`1<System.Threading.Tasks.Task`1<'0>>"
+external run_4 : Js.t -> ('a) TaskOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Run|System.Func`1<System.Threading.Tasks.Task`1<'0>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Run|System.Func`1<System.Threading.Tasks.Task`1<'0>>"
 (* inline *)
 external delay : TimeSpan.t -> Object.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Delay|System.TimeSpan" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Delay|System.TimeSpan"
 (* inline *)
-external whenAny : (Object.t) list -> (Object.t) Task2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#WhenAny|System.Collections.Generic.IEnumerable`1<System.Threading.Tasks.Task>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#WhenAny|System.Collections.Generic.IEnumerable`1<System.Threading.Tasks.Task>"
+external whenAny : (Object.t) list -> (Object.t) TaskOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#WhenAny|System.Collections.Generic.IEnumerable`1<System.Threading.Tasks.Task>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#WhenAny|System.Collections.Generic.IEnumerable`1<System.Threading.Tasks.Task>"
 (* inline *)
-external whenAny_2 : (('a) Task2.t) list -> (('a) Task2.t) Task2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#WhenAny|System.Collections.Generic.IEnumerable`1<System.Threading.Tasks.Task`1<'0>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#WhenAny|System.Collections.Generic.IEnumerable`1<System.Threading.Tasks.Task`1<'0>>"
+external whenAny_2 : (('a) TaskOf.t) list -> (('a) TaskOf.t) TaskOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#WhenAny|System.Collections.Generic.IEnumerable`1<System.Threading.Tasks.Task`1<'0>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#WhenAny|System.Collections.Generic.IEnumerable`1<System.Threading.Tasks.Task`1<'0>>"
 (* inline *)
 external whenAll : (Object.t) list -> Object.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#WhenAll|System.Collections.Generic.IEnumerable`1<System.Threading.Tasks.Task>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#WhenAll|System.Collections.Generic.IEnumerable`1<System.Threading.Tasks.Task>"
 (* inline *)
-external whenAll_2 : (('a) Task2.t) list -> (('a) array) Task2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#WhenAll|System.Collections.Generic.IEnumerable`1<System.Threading.Tasks.Task`1<'0>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#WhenAll|System.Collections.Generic.IEnumerable`1<System.Threading.Tasks.Task`1<'0>>"
+external whenAll_2 : (('a) TaskOf.t) list -> (('a) array) TaskOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#WhenAll|System.Collections.Generic.IEnumerable`1<System.Threading.Tasks.Task`1<'0>>" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#WhenAll|System.Collections.Generic.IEnumerable`1<System.Threading.Tasks.Task`1<'0>>"
 (* static *)
 external delay_2 : int -> Object.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Delay|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Delay|System.Int32"
 (* static *)
-external fromResult : 'a -> ('a) Task2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#FromResult|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#FromResult|'0"
+external fromResult : 'a -> ('a) TaskOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#FromResult|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#FromResult|'0"
 (* static *)
-external fromException : Object.t -> ('a) Task2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#FromException|System.Exception" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#FromException|System.Exception"
+external fromException : Object.t -> ('a) TaskOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#FromException|System.Exception" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#FromException|System.Exception"
 (* static *)
 external fromException_2 : Object.t -> Object.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#FromException|System.Exception" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#FromException|System.Exception"
 (* static *)
-external fromCanceled : CancellationToken.t -> ('a) Task2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#FromCanceled|System.Threading.CancellationToken" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#FromCanceled|System.Threading.CancellationToken"
+external fromCanceled : CancellationToken.t -> ('a) TaskOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#FromCanceled|System.Threading.CancellationToken" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#FromCanceled|System.Threading.CancellationToken"
 (* static *)
 external fromCanceled_2 : CancellationToken.t -> Object.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#FromCanceled|System.Threading.CancellationToken" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#FromCanceled|System.Threading.CancellationToken"
 (* instance *)
@@ -61,35 +61,35 @@ external onCompleted : t -> (unit -> unit) -> unit = "ws:WebSharper.StdLib!WebSh
 (* inline *)
 external continueWith_3 : t -> Js.t -> Js.t -> Object.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#ContinueWith|System.Action`2<System.Threading.Tasks.Task,System.Object>|System.Object" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#ContinueWith|System.Action`2<System.Threading.Tasks.Task,System.Object>|System.Object"
 (* inline *)
-external continueWith_4 : t -> Js.t -> Js.t -> ('a) Task2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#ContinueWith|System.Func`3<System.Threading.Tasks.Task,System.Object,'0>|System.Object" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#ContinueWith|System.Func`3<System.Threading.Tasks.Task,System.Object,'0>|System.Object"
+external continueWith_4 : t -> Js.t -> Js.t -> ('a) TaskOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#ContinueWith|System.Func`3<System.Threading.Tasks.Task,System.Object,'0>|System.Object" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#ContinueWith|System.Func`3<System.Threading.Tasks.Task,System.Object,'0>|System.Object"
 (* inline *)
 external delay_3 : TimeSpan.t -> CancellationToken.t -> Object.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Delay|System.TimeSpan|System.Threading.CancellationToken" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Delay|System.TimeSpan|System.Threading.CancellationToken"
 (* static *)
 external delay_4 : int -> CancellationToken.t -> Object.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Delay|System.Int32|System.Threading.CancellationToken" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Delay|System.Int32|System.Threading.CancellationToken"
 (* static *)
-external run_5 : Js.t -> CancellationToken.t -> ('a) Task2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Run|System.Func`1<System.Threading.Tasks.Task`1<'0>>|System.Threading.CancellationToken" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Run|System.Func`1<System.Threading.Tasks.Task`1<'0>>|System.Threading.CancellationToken"
+external run_5 : Js.t -> CancellationToken.t -> ('a) TaskOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Run|System.Func`1<System.Threading.Tasks.Task`1<'0>>|System.Threading.CancellationToken" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Run|System.Func`1<System.Threading.Tasks.Task`1<'0>>|System.Threading.CancellationToken"
 (* static *)
-external run_6 : Js.t -> CancellationToken.t -> ('a) Task2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Run|System.Func`1<'0>|System.Threading.CancellationToken" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Run|System.Func`1<'0>|System.Threading.CancellationToken"
+external run_6 : Js.t -> CancellationToken.t -> ('a) TaskOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Run|System.Func`1<'0>|System.Threading.CancellationToken" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Run|System.Func`1<'0>|System.Threading.CancellationToken"
 (* static *)
 external run_7 : Js.t -> CancellationToken.t -> Object.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Run|System.Func`1<System.Threading.Tasks.Task>|System.Threading.CancellationToken" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Run|System.Func`1<System.Threading.Tasks.Task>|System.Threading.CancellationToken"
 (* static *)
 external run_8 : Js.t -> CancellationToken.t -> Object.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Run|System.Action|System.Threading.CancellationToken" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#Run|System.Action|System.Threading.CancellationToken"
 (* instance *)
-external continueWith_5 : t -> Js.t -> CancellationToken.t -> ('a) Task2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#ContinueWith|System.Func`2<System.Threading.Tasks.Task,'0>|System.Threading.CancellationToken" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#ContinueWith|System.Func`2<System.Threading.Tasks.Task,'0>|System.Threading.CancellationToken"
+external continueWith_5 : t -> Js.t -> CancellationToken.t -> ('a) TaskOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#ContinueWith|System.Func`2<System.Threading.Tasks.Task,'0>|System.Threading.CancellationToken" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#ContinueWith|System.Func`2<System.Threading.Tasks.Task,'0>|System.Threading.CancellationToken"
 (* instance *)
 external continueWith_6 : t -> Js.t -> CancellationToken.t -> Object.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#ContinueWith|System.Action`1<System.Threading.Tasks.Task>|System.Threading.CancellationToken" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#ContinueWith|System.Action`1<System.Threading.Tasks.Task>|System.Threading.CancellationToken"
 (* inline *)
 external continueWith_7 : t -> Js.t -> Js.t -> CancellationToken.t -> Object.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#ContinueWith|System.Action`2<System.Threading.Tasks.Task,System.Object>|System.Object|System.Threading.CancellationToken" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#ContinueWith|System.Action`2<System.Threading.Tasks.Task,System.Object>|System.Object|System.Threading.CancellationToken"
 (* inline *)
-external continueWith_8 : t -> Js.t -> Js.t -> CancellationToken.t -> ('a) Task2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#ContinueWith|System.Func`3<System.Threading.Tasks.Task,System.Object,'0>|System.Object|System.Threading.CancellationToken" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#ContinueWith|System.Func`3<System.Threading.Tasks.Task,System.Object,'0>|System.Object|System.Threading.CancellationToken"
+external continueWith_8 : t -> Js.t -> Js.t -> CancellationToken.t -> ('a) TaskOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#ContinueWith|System.Func`3<System.Threading.Tasks.Task,System.Object,'0>|System.Object|System.Threading.CancellationToken" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#ContinueWith|System.Func`3<System.Threading.Tasks.Task,System.Object,'0>|System.Object|System.Threading.CancellationToken"
 (* static *)
-external whenAll_3 : (('a) Task2.t) array -> (('a) array) Task2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#WhenAll|System.Threading.Tasks.Task`1<'0>[]" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#WhenAll|System.Threading.Tasks.Task`1<'0>[]"
+external whenAll_3 : (('a) TaskOf.t) array -> (('a) array) TaskOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#WhenAll|System.Threading.Tasks.Task`1<'0>[]" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#WhenAll|System.Threading.Tasks.Task`1<'0>[]"
 (* static *)
 external whenAll_4 : (Object.t) array -> Object.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#WhenAll|System.Threading.Tasks.Task[]" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#WhenAll|System.Threading.Tasks.Task[]"
 (* static *)
-external whenAny_3 : (('a) Task2.t) array -> (('a) Task2.t) Task2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#WhenAny|System.Threading.Tasks.Task`1<'0>[]" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#WhenAny|System.Threading.Tasks.Task`1<'0>[]"
+external whenAny_3 : (('a) TaskOf.t) array -> (('a) TaskOf.t) TaskOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#WhenAny|System.Threading.Tasks.Task`1<'0>[]" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#WhenAny|System.Threading.Tasks.Task`1<'0>[]"
 (* static *)
-external whenAny_4 : (Object.t) array -> (Object.t) Task2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#WhenAny|System.Threading.Tasks.Task[]" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#WhenAny|System.Threading.Tasks.Task[]"
+external whenAny_4 : (Object.t) array -> (Object.t) TaskOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#WhenAny|System.Threading.Tasks.Task[]" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#WhenAny|System.Threading.Tasks.Task[]"
 (* instance *)
 external get_exc35 : t -> Object.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#exc@35" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.Task::default#exc@35"
 (* instance *)

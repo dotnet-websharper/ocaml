@@ -138,13 +138,22 @@ Classes that resolve to the same module name are grouped:
   **static helpers** (no instance methods/fields) — this coalesces F# `type X<'T>`
   with its `module X`. For `qualified` packages the address check is relaxed
   (helpers are often module-root types);
-- otherwise each gets a numeric suffix on the last segment (`Foo`, `Foo2`, …),
-  ordered so prototype-bearing types keep the bare name. When *every* member of
-  the group is a module-root type there is no prototype-bearing winner and the
-  order falls back to the metadata enumeration order (deterministic for a given
-  assembly, but incidental) — e.g. `System.DateTime` vs
-  `WebSharper.JavaScript.Pervasives.DateTime` produced `DateTime2`. Repair such
-  pairs with a `modules[].name` rename in the package's spec
+- a **generic family** — the *same* .NET type name at different arities
+  (`Task`/`Task\`1`, `Tuple`/`Tuple\`1`…, `Union`/`Union\`2`…) — is named by
+  arity with an `Of` suffix: the arity-0 member keeps the bare name, a generic
+  one is `<Name>Of` (one type parameter) or `<Name><n>Of` (`TaskOf<'T>`,
+  `IEnumerableOf<'T>`, `TupleOf<'T1>`, `Tuple2Of<'T1,'T2>`, `Union2Of`,
+  `FSharpFunc2Of`, …). Arity comes from the metadata name (`arityOf`), since a
+  cyclic interface such as `IComparable<'T>` is collapsed to `type t`.
+  A group that wraps a JS global (`globalThis.Object`/`Array`/`console`) is not
+  a family and keeps its names;
+- otherwise each gets a positional numeric suffix on the last segment
+  (`Foo`, `Foo2`, …), ordered so prototype-bearing types keep the bare name. When
+  *every* member of the group is a module-root type there is no prototype-bearing
+  winner and the order falls back to the metadata enumeration order
+  (deterministic for a given assembly, but incidental) — e.g. `System.DateTime`
+  vs `WebSharper.JavaScript.Pervasives.DateTime` produced `DateTime2`. Repair
+  such pairs with a `modules[].name` rename in the package's spec
   (`specs/websharper-stdlib.spec` does this).
 
 ---
@@ -183,7 +192,7 @@ Other rules:
 
 A **parameter** typed `System.Collections.Generic.IEnumerable<T>` becomes
 `(T) list` (non-generic `IEnumerable` → `Js.t list`); return and field types
-stay opaque (`WebSharper_StdLib.IEnumerable2.t`). The backend converts the list
+stay opaque (`WebSharper_StdLib.IEnumerableOf.t`). The backend converts the list
 to a JS array at the call boundary (§12), so combinators read:
 
 ```ocaml

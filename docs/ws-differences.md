@@ -150,7 +150,7 @@ Consolidated; see the linked note for detail.
   reverse). README → *Name collisions and shadowing* has the tables.
 - **`IEnumerable`-returning members** — the generator types an `IEnumerable<'T>`
   *parameter* as an OCaml list but a *result* as the opaque
-  `WebSharper_StdLib.IEnumerable2.t`, so a member that returns a sequence
+  `WebSharper_StdLib.IEnumerableOf.t`, so a member that returns a sequence
   (`ListModel.view`/`map`, `Seq.*`, `List.toSeq`) cannot be consumed from OCaml
   source. Use the value/state behind it instead — e.g. `ListModel.var` (the
   backing `Var<array>`) to map a reactive `View`, `ListModel.iter` for a

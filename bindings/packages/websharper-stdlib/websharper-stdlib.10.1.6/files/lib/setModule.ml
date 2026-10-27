@@ -29,7 +29,7 @@ external toArray : ('a) FSharpSet.t -> ('a) array = "ws:WebSharper.StdLib!WebSha
 (* inline *)
 external toList : ('a) FSharpSet.t -> ('a) FSharpList.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#ToList|Microsoft.FSharp.Collections.FSharpSet`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#ToList|Microsoft.FSharp.Collections.FSharpSet`1<'0>"
 (* inline *)
-external toSeq : ('a) FSharpSet.t -> ('a) IEnumerable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#ToSeq|Microsoft.FSharp.Collections.FSharpSet`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#ToSeq|Microsoft.FSharp.Collections.FSharpSet`1<'0>"
+external toSeq : ('a) FSharpSet.t -> ('a) IEnumerableOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#ToSeq|Microsoft.FSharp.Collections.FSharpSet`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#ToSeq|Microsoft.FSharp.Collections.FSharpSet`1<'0>"
 (* inline *)
 external unionMany : (('a) FSharpSet.t) list -> ('a) FSharpSet.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#UnionMany|System.Collections.Generic.IEnumerable`1<Microsoft.FSharp.Collections.FSharpSet`1<'0>>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.SetModule::#UnionMany|System.Collections.Generic.IEnumerable`1<Microsoft.FSharp.Collections.FSharpSet`1<'0>>"
 (* inline *)

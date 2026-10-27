@@ -127,10 +127,11 @@ the URL).
 - **collision suffixes** — the genuine clashes are repaired in
   `specs/websharper-stdlib.spec` / `websharper-sitelets.spec` (`DateTime`,
   `<Type>Module` helpers, `Nullable`/`Optional` vs their helpers, the
-  `*Enumerator`s, `InferRouter`). The **arity families** (`Tuple2..9`, `Union2..7`,
-  `Func*`, `ThisFunc*`, `Params*`, `IList2`, `IEnumerable2`, `Task2`, …) are
-  deliberately left: the digit is systematic there, so a rename would make arity
-  harder to read. Remaining cosmetic ones: the JS-global vs .NET type/module
+  `*Enumerator`s, `InferRouter`). The **generic families** are now named by
+  arity with an `Of` suffix by the generator (`Task`/`TaskOf`,
+  `IEnumerable`/`IEnumerableOf`, `Tuple`/`TupleOf`/`Tuple2Of`…,
+  `Union`/`Union2Of`…, `FSharpFunc2Of`…, `ThisFunc2Of`…, `ParamsFunc2Of`…).
+  Remaining cosmetic ones: the JS-global vs .NET type/module
   pairs in `websharper-javascript` (`Object`/`Object2`, `Array`/`Array2`,
   `DataView`/`DataView2`) and `Console`/`Console2` in stdlib.
 

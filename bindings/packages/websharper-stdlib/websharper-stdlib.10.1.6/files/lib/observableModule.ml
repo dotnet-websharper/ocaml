@@ -15,7 +15,7 @@ external merge : IObservable.t -> IObservable.t -> IObservable.t = "ws:WebSharpe
 (* inline *)
 external subscribe : ('a -> unit) -> IObservable.t -> IDisposable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.ObservableModule::#Subscribe|fn|System.IObservable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.ObservableModule::#Subscribe|fn|System.IObservable`1<'0>"
 (* func *)
-external split : ('a -> ('b, 'c) FSharpChoice.t) -> IObservable.t -> IObservable.t * IObservable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.ObservableModule::#Split|fn|System.IObservable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.ObservableModule::#Split|fn|System.IObservable`1<'0>"
+external split : ('a -> ('b, 'c) FSharpChoice2Of.t) -> IObservable.t -> IObservable.t * IObservable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.ObservableModule::#Split|fn|System.IObservable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.ObservableModule::#Split|fn|System.IObservable`1<'0>"
 (* func *)
 external partition : ('a -> bool) -> IObservable.t -> IObservable.t * IObservable.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.ObservableModule::#Partition|fn|System.IObservable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Control.ObservableModule::#Partition|fn|System.IObservable`1<'0>"
 (* func *)

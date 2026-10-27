@@ -29,7 +29,7 @@ external schedule : (unit -> unit) -> unit = "ws:WebSharper.StdLib!WebSharper.St
 (* func *)
 external onCancel : (unit -> unit) -> ((IDisposable.t) AsyncBody.t -> unit) = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#OnCancel|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#OnCancel|fn"
 (* func *)
-external startChildAsTask : (('a) AsyncBody.t -> unit) -> ((('a) Task2.t) AsyncBody.t -> unit) = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#StartChildAsTask|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#StartChildAsTask|fn"
+external startChildAsTask : (('a) AsyncBody.t -> unit) -> ((('a) TaskOf.t) AsyncBody.t -> unit) = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#StartChildAsTask|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#StartChildAsTask|fn"
 (* func *)
 external sequential : ((('a) AsyncBody.t -> unit)) list -> ((('a) array) AsyncBody.t -> unit) = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#Sequential|System.Collections.Generic.IEnumerable`1<fn>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#Sequential|System.Collections.Generic.IEnumerable`1<fn>"
 (* func *)
@@ -37,7 +37,7 @@ external parallel : ((('a) AsyncBody.t -> unit)) list -> ((('a) array) AsyncBody
 (* func *)
 external sleep : int -> ((unit) AsyncBody.t -> unit) = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#Sleep|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#Sleep|System.Int32"
 (* func *)
-external awaitTask1 : ('a) Task2.t -> (('a) AsyncBody.t -> unit) = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#AwaitTask1|System.Threading.Tasks.Task`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#AwaitTask1|System.Threading.Tasks.Task`1<'0>"
+external awaitTask1 : ('a) TaskOf.t -> (('a) AsyncBody.t -> unit) = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#AwaitTask1|System.Threading.Tasks.Task`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#AwaitTask1|System.Threading.Tasks.Task`1<'0>"
 (* func *)
 external awaitTask : Object.t -> ((unit) AsyncBody.t -> unit) = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#AwaitTask|System.Threading.Tasks.Task" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#AwaitTask|System.Threading.Tasks.Task"
 (* func *)
@@ -45,7 +45,7 @@ external uncaughtAsyncError : Object.t -> unit = "ws:WebSharper.StdLib!WebSharpe
 (* func *)
 external fromContinuations : (('a -> unit) * (Object.t -> unit) * (Object.t -> unit) -> unit) -> (('a) AsyncBody.t -> unit) = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#FromContinuations|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#FromContinuations|fn"
 (* func *)
-external catch : (('a) AsyncBody.t -> unit) -> ((('a, Object.t) FSharpChoice.t) AsyncBody.t -> unit) = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#Catch|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#Catch|fn"
+external catch : (('a) AsyncBody.t -> unit) -> ((('a, Object.t) FSharpChoice2Of.t) AsyncBody.t -> unit) = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#Catch|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#Catch|fn"
 (* func *)
 external delay : (unit -> (('a) AsyncBody.t -> unit)) -> (('a) AsyncBody.t -> unit) = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#Delay|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#Delay|fn"
 (* func *)
@@ -69,9 +69,9 @@ external startChild : (('a) AsyncBody.t -> unit) -> (int) FSharpOption.t -> ((((
 (* func *)
 external parallelWithMaxDegree : ((('a) AsyncBody.t -> unit)) list -> int -> ((('a) array) AsyncBody.t -> unit) = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#ParallelWithMaxDegree|System.Collections.Generic.IEnumerable`1<fn>|System.Int32" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#ParallelWithMaxDegree|System.Collections.Generic.IEnumerable`1<fn>|System.Int32"
 (* func *)
-external startImmediateAsTask : (('a) AsyncBody.t -> unit) -> (CT.t) FSharpOption.t -> ('a) Task2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#StartImmediateAsTask|fn|Microsoft.FSharp.Core.FSharpOption`1<WebSharper.Concurrency+CT>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#StartImmediateAsTask|fn|Microsoft.FSharp.Core.FSharpOption`1<WebSharper.Concurrency+CT>"
+external startImmediateAsTask : (('a) AsyncBody.t -> unit) -> (CT.t) FSharpOption.t -> ('a) TaskOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#StartImmediateAsTask|fn|Microsoft.FSharp.Core.FSharpOption`1<WebSharper.Concurrency+CT>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#StartImmediateAsTask|fn|Microsoft.FSharp.Core.FSharpOption`1<WebSharper.Concurrency+CT>"
 (* func *)
-external startAsTask : (('a) AsyncBody.t -> unit) -> (CT.t) FSharpOption.t -> ('a) Task2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#StartAsTask|fn|Microsoft.FSharp.Core.FSharpOption`1<WebSharper.Concurrency+CT>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#StartAsTask|fn|Microsoft.FSharp.Core.FSharpOption`1<WebSharper.Concurrency+CT>"
+external startAsTask : (('a) AsyncBody.t -> unit) -> (CT.t) FSharpOption.t -> ('a) TaskOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#StartAsTask|fn|Microsoft.FSharp.Core.FSharpOption`1<WebSharper.Concurrency+CT>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#StartAsTask|fn|Microsoft.FSharp.Core.FSharpOption`1<WebSharper.Concurrency+CT>"
 (* func *)
 external awaitEvent : Js.t -> ((unit -> unit)) FSharpOption.t -> (('a) AsyncBody.t -> unit) = "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#AwaitEvent|Microsoft.FSharp.Control.IEvent`2<Microsoft.FSharp.Control.FSharpHandler`1<'0>,'0>|Microsoft.FSharp.Core.FSharpOption`1<fn>" "ws:WebSharper.StdLib!WebSharper.StdLib/WebSharper.Concurrency::#AwaitEvent|Microsoft.FSharp.Control.IEvent`2<Microsoft.FSharp.Control.FSharpHandler`1<'0>,'0>|Microsoft.FSharp.Core.FSharpOption`1<fn>"
 (* func *)

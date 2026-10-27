@@ -19,7 +19,7 @@ external notEmpty : ('a) FSharpList.t -> bool = "ws:WebSharper.StdLib!WebSharper
 (* inline *)
 external isEmpty : ('a) FSharpList.t -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#IsEmpty|Microsoft.FSharp.Collections.FSharpList`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#IsEmpty|Microsoft.FSharp.Collections.FSharpList`1<'0>"
 (* inline *)
-external toSeq : ('a) FSharpList.t -> ('a) IEnumerable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#ToSeq|Microsoft.FSharp.Collections.FSharpList`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#ToSeq|Microsoft.FSharp.Collections.FSharpList`1<'0>"
+external toSeq : ('a) FSharpList.t -> ('a) IEnumerableOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#ToSeq|Microsoft.FSharp.Collections.FSharpList`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#ToSeq|Microsoft.FSharp.Collections.FSharpList`1<'0>"
 (* inline *)
 external freshTail : ('a) FSharpList.t -> ('a) FSharpList.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#freshTail|Microsoft.FSharp.Collections.FSharpList`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Collections.ListModule::#freshTail|Microsoft.FSharp.Collections.FSharpList`1<'0>"
 (* inline *)

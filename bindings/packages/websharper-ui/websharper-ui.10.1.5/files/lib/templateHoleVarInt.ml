@@ -5,7 +5,7 @@ external value : t -> ((int) ClientCheckedInput.t) Var.t = "ws:WebSharper.UI!Web
 (* instance *)
 external forTextView : t -> ((string) View.t) WebSharper_StdLib.FSharpOption.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarInt::default#ForTextView|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarInt::default#ForTextView|"
 (* instance *)
-external asChoiceView : t -> (string, (string) View.t) WebSharper_StdLib.FSharpChoice.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarInt::default#get_AsChoiceView|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarInt::default#get_AsChoiceView|"
+external asChoiceView : t -> (string, (string) View.t) WebSharper_StdLib.FSharpChoice2Of.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarInt::default#get_AsChoiceView|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarInt::default#get_AsChoiceView|"
 (* instance *)
 external valueObj : t -> Js.t = "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarInt::default#get_ValueObj|" "ws:WebSharper.UI!WebSharper.UI/WebSharper.UI.TemplateHoleModule.VarInt::default#get_ValueObj|"
 (* instance *)

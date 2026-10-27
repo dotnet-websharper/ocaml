@@ -103,7 +103,7 @@ external ref : 'a -> ('a) FSharpRef.t = "ws:WebSharper.StdLib!WebSharper.StdLib/
 (* inline *)
 external round : 'a -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#Round|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#Round|'0"
 (* inline *)
-external createSequence : ('a) list -> ('a) IEnumerable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#CreateSequence|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#CreateSequence|System.Collections.Generic.IEnumerable`1<'0>"
+external createSequence : ('a) list -> ('a) IEnumerableOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#CreateSequence|System.Collections.Generic.IEnumerable`1<'0>" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#CreateSequence|System.Collections.Generic.IEnumerable`1<'0>"
 (* macro *)
 external sin : 'a -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#Sin|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#Sin|'0"
 (* macro *)
@@ -209,7 +209,7 @@ external lock : 'a -> (unit -> 'b) -> 'b = "ws:WebSharper.StdLib!WebSharper.StdL
 (* inline *)
 external using : 'a -> ('a -> 'b) -> 'b = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#Using|'0|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#Using|'0|fn"
 (* macro *)
-external op_Range : 'a -> 'a -> ('a) IEnumerable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#op_Range|'0|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#op_Range|'0|'0"
+external op_Range : 'a -> 'a -> ('a) IEnumerableOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#op_Range|'0|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#op_Range|'0|'0"
 (* func *)
 external invalidArg : string -> string -> 'a = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#InvalidArg|System.String|System.String" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#InvalidArg|System.String|System.String"
 (* inline *)
@@ -217,7 +217,7 @@ external op_PipeLeft2 : ('a -> ('b -> 'c)) -> 'a -> 'b -> 'c = "ws:WebSharper.St
 (* inline *)
 external op_PipeRight2 : 'a -> 'b -> ('a -> ('b -> 'c)) -> 'c = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#op_PipeRight2|'0|'1|fn" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#op_PipeRight2|'0|'1|fn"
 (* macro *)
-external op_RangeStep : 'a -> 'b -> 'a -> ('a) IEnumerable2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#op_RangeStep|'0|'1|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#op_RangeStep|'0|'1|'0"
+external op_RangeStep : 'a -> 'b -> 'a -> ('a) IEnumerableOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#op_RangeStep|'0|'1|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#op_RangeStep|'0|'1|'0"
 (* inline *)
 external op_PipeLeft3 : ('a -> ('b -> ('c -> 'd))) -> 'a -> 'b -> 'c -> 'd = "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#op_PipeLeft3|fn|'0|'1|'2" "ws:WebSharper.StdLib!WebSharper.StdLib/Microsoft.FSharp.Core.Operators::#op_PipeLeft3|fn|'0|'1|'2"
 (* inline *)

@@ -113,10 +113,18 @@ Specs in `specs/` repair what the flat, address-derived naming cannot:
   - nested enumerators are named after their parent: `ListEnumerator`,
     `LinkedListEnumerator`, `DictionaryKeyEnumerator`,
     `DictionaryValueEnumerator`, `DictionaryEnumerator`, `HashSetEnumerator`.
-  - deliberately left alone: the **arity families**, where the digit is
-    systematic and useful (`Tuple2`..`Tuple9` = `Tuple<'T1>`.., `ValueTuple*`,
-    `Union2`..`Union7`, `Func*`, `ThisFunc*`, `Params*`, `IList2` = `IList<'T>`,
-    `IEnumerable2`, `Task2`, …).
+  - **generic families** are named by *arity* with an `Of` suffix: an arity-0
+    type keeps the bare name, a generic one is `<Name>Of` (one type parameter) or
+    `<Name><n>Of` (`Task` + `TaskOf<'T>`, `IEnumerable` + `IEnumerableOf<'T>`,
+    `IList` + `IListOf<'T>`, `IDictionary` + `IDictionary2Of<'K,'V>`,
+    `Union` + `Union2Of<'T1,'T2>`…, `Tuple` + `TupleOf<'T1>` + `Tuple2Of`…
+    `Tuple8Of`, `FSharpFunc2Of`…, `ThisFunc2Of`…, `ParamsFunc2Of`…). This is a
+    generator rule (`binding-adaptor` `Program.fs` `finalNamesFor`), not a spec,
+    and it only fires for classes with the *same* .NET type name at different
+    arities; unrelated types that merely collide keep the positional `2`, `3`, …
+  - **JS globals stay as they are**: a group that wraps a `globalThis.*` class
+    (`Object`/`Object2`, `Array`/`Array2`, `Console`/`Console2`) is not a generic
+    family, so it keeps today's names.
 - `specs/websharper-sitelets.spec` — the **generic** router
   `WebSharper.Sitelets.Router<'T>` takes the bare `Router` (it is the type
   `RouterModule.table` returns and `WebSharper_UI.Router.installHash` takes),

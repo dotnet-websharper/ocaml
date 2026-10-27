@@ -5,7 +5,7 @@ external trySetCanceled : ('a) t -> bool = "ws:WebSharper.StdLib!WebSharper.StdL
 (* instance *)
 external setCanceled : ('a) t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#SetCanceled|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#SetCanceled|"
 (* instance *)
-external task : ('a) t -> ('a) Task2.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#get_Task|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#get_Task|"
+external task : ('a) t -> ('a) TaskOf.t = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#get_Task|" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#get_Task|"
 (* instance *)
 external trySetResult : ('a) t -> 'a -> bool = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#TrySetResult|'0" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#TrySetResult|'0"
 (* instance *)
@@ -21,6 +21,6 @@ external setException : ('a) t -> (Object.t) list -> unit = "ws:WebSharper.StdLi
 (* instance *)
 external setException_2 : ('a) t -> Object.t -> unit = "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#SetException|System.Exception" "ws:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#SetException|System.Exception"
 (* instance *)
-external get_task : ('a) t -> ('a) Task2.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#task" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#task"
+external get_task : ('a) t -> ('a) TaskOf.t = "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#task" "wsget:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default#task"
 (* new *)
 external create : unit -> ('a) t = "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default" "wsnew:WebSharper.StdLib!WebSharper.StdLib/System.Threading.Tasks.TaskCompletionSource`1::default"
