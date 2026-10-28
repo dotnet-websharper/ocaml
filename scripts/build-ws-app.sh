@@ -15,6 +15,8 @@ backend_flags=()
 if [ "$ws_compile" = "1" ]; then backend_flags+=(--ws-compile); fi
 bindir="$1"
 entry="$2"
+# Absolute, so diagnostics point at a real file.
+entry="$(cd "$(dirname "$entry")" && pwd)/$(basename "$entry")"
 out="${3:-$root/out}"
 mkdir -p "$out"
 s="$(ocamlc -where)"

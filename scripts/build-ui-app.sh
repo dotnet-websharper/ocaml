@@ -8,6 +8,10 @@ root="$(cd "$(dirname "$0")/.." && pwd)"
 fe="$root/frontend/_build/default/bin/main.exe"
 be="$root/backend/bin/Debug/net10.0/WebSharper.OCaml.dll"
 entry="$1"
+# Resolve the entry to an absolute path: the sibling filter below compares it
+# against `$srcdir/*.ml` (absolute), and the frontend resolves `[%template]`
+# relative to the input's directory.
+entry="$(cd "$(dirname "$entry")" && pwd)/$(basename "$entry")"
 out="${2:-$root/out}"
 mkdir -p "$out"
 s="$(ocamlc -where)"

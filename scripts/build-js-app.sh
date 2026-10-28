@@ -11,6 +11,8 @@ be="$root/backend/bin/Debug/net10.0/WebSharper.OCaml.dll"
 s="$(ocamlc -where)"
 bdir="$root/bindings-legacy"
 entry="$1"
+# Absolute, so diagnostics point at a real file.
+entry="$(cd "$(dirname "$entry")" && pwd)/$(basename "$entry")"
 out="${2:-$root/out}"
 mkdir -p "$out"
 

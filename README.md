@@ -86,6 +86,11 @@ set mirrors the `depends:` of its `opam`):
       --reference $BIND/WebSharper.JavaScript.dll --reference $BIND/WebSharper.StdLib.dll \
       --reference $UI/WebSharper.UI.dll
 
+Then install them — `scripts/reinstall-bindings.sh` (`opam update wsocaml`
+followed by `opam reinstall websharper-…`). The `opam update` matters: without
+it `reinstall` rebuilds the previously published tarball, leaving the installed
+copies stale.
+
 A spec is looked up in the explicit `--spec` path, else as
 `specs/<pkg-id>.spec` — for the package being generated **and for every
 `--reference`**. So `specs/websharper-stdlib.spec` also applies while generating

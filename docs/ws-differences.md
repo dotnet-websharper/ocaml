@@ -160,7 +160,9 @@ Consolidated; see the linked note for detail.
   The client bundle ships `Seq`/`List` shims (`frontend/bin/gen_stdlib_shim.ml`)
   whose `of_seq`/`Seq.*` accept *either* representation, so a sequence that is
   still inside a WebSharper container (e.g. the `seq` of a
-  `View.mapSeqCached*`) is consumable without an explicit conversion. Edges: an
+  `View.mapSeqCached*`) is consumable without an explicit conversion. Note that
+  the binding's own `Seq.toList`/`List.ofSeq` return `FSharpList.t`, not an OCaml
+  `list` — `List.of_seq` (the shim) is the route to an OCaml list. Edges: an
   OCaml-built `Seq.t` nested in a WebSharper container that a WebSharper member
   then enumerates is not converted; conversion materialises (so infinite
   sequences are not supported).

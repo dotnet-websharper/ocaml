@@ -56,6 +56,44 @@ bash backend/tests/run-tests.sh --update    # refresh *.expected.js / *.out / *.
   `backend/tests/apps-site/wssite.ml`), `ssr-demo.sh <out>`, `rpc-demo.sh`,
   `rpc-data.sh`.
 
+#### Working loop
+
+- **After regenerating `bindings/**`**: `scripts/reinstall-bindings.sh` (i.e.
+  `opam update wsocaml` **then** `opam reinstall …`). The `opam update` is not
+  optional — without it `reinstall` rebuilds the *previously published* tarball
+  and the installed `.ml`/`.cmi` silently stay stale, while the frontend,
+  `dune` and every app script consume the **installed** copies (never
+  `./bindings`). Editing a *shadow* in `runtimes/ui-server` needs the same
+  (it installs as `websharper-ui-server`); only `site-demo.sh`/`ssr-demo.sh`
+  copy the shadow source, so they pick it up without a reinstall.
+- **Binding changes need no frontend/backend rebuild** (the frontend reads the
+  installed `.cmi`s at run time; the backend resolves metadata from the nuget
+  DLLs). Frontend/backend edits do: `cd frontend && dune build` and
+  `dotnet build backend` (Debug — the suite drives
+  `backend/bin/Debug/net10.0/WebSharper.OCaml.dll`). **`--no-build` can therefore
+  run a stale backend DLL**: after editing `backend/`, run the suite without it
+  (or `dotnet build backend` first) — otherwise a *previous* lowering is what
+  actually executes, which looks like a mysterious runtime regression in the
+  `apps-ui`/`ssr`/`site` families.
+- **`run-tests.sh --update` also re-runs the `.out` drivers**, so a behaviour
+  regression can be baked into a golden. After `--update`, check *which* `.out`
+  files changed (`git status --porcelain backend/tests`) — the expected set is
+  usually just the ones whose output you meant to change (e.g. a regenerated
+  `Runtime.js` touches only `cases/*.expected.js`).
+- **`examples/*` are not in the suite.** They are verified by hand:
+  `bash examples/<name>/build.sh <out>`, then serve `out/server` and drive
+  `out/client` with a jsdom mjs driver (the TodoMVC ones) or
+  `node out/Main.js`. A broken example fails nothing in `run-tests.sh`.
+- **Testing a page *reload***: jsdom cannot simulate one in-process — the ES
+  module registry is cached, so re-importing `Main.js` reuses the old runtime and
+  DOM (it "passes" against stale bindings). Use a **fresh `node` process** with
+  the storage seeded, or real headless Chrome over CDP
+  (`"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new
+  --remote-debugging-port=9222 --user-data-dir=/tmp/prof …`, then `Page.reload`
+  + `Runtime.evaluate`), which is how a `true → false` toggle losing its
+  `localStorage` write was found. The suite's drivers are jsdom-only, so
+  refresh behaviour has no automated coverage.
+
 ### What the suite covers
 
 | Family | How it runs | Golden |
@@ -71,6 +109,9 @@ bash backend/tests/run-tests.sh --update    # refresh *.expected.js / *.out / *.
 | diag normalization | inline in `run-tests.sh` (an exception message ending in `)` must survive) | — |
 | `template/` | `template_gen.exe` goldens + a native render of `card_tpl` | `card_tpl.ml/.mli.expected`, `expected.out` |
 | rpc / ssr | `rpc-demo.sh`, `rpc-data.sh`, `ssr-demo.sh` | `rpc_server.out`, `rpc_data.out`, `ssr.out` |
+
+**Not covered:** `examples/*` — they are manual (see *Working loop* above), so
+build and drive them yourself after a compiler/runtime/bindings change.
 
 ## Frontend CLI (hand-debugging)
 
@@ -122,7 +163,7 @@ dotnet backend/bin/Debug/net10.0/WebSharper.OCaml.dll --ir app.wsir.json \
 | --- | --- |
 | `bindings/**` (opam packages of WebSharper bindings) | `dotnet binding-adaptor/bin/Debug/net10.0/binding-adaptor.dll gen <Binding.dll> --version <v> --dest ./bindings` (the ordered, exact command set is in `README.md`); `specs/*.spec` control the generated module names/merges, and are applied for the package **and for every `--reference`**, so a spec must exist before regenerating its dependents. `websharper-ui` **must** be generated with `--reference WebSharper.Sitelets.dll` (else `WebSharper.UI.Router`'s `Router<'T>` argument mis-binds to `Router.t`); `specs/websharper-stdlib.spec` and `specs/websharper-sitelets.spec` repair the module-name collisions the flat naming cannot decide (`System.DateTime` -> `DateTime`, `<Type>Module` helpers, `Nullable`/`NullableHelpers`, the `*Enumerator`s, `InferRouter`) |
 | `bindings-legacy/**` | raw-FFI fixture for the `jsbind`/`dom` tests (`frontend/bin/gen_bindings.ml`) |
-| `frontend/bin/stdlib_shims_data.ml` | `frontend/bin/gen_stdlib_shim.ml` |
+| `backend/tests/Stdlib__*.js` (client stdlib shims) | `frontend/bin/gen_stdlib_shim.ml`: add the unit's table to `stdlib_shims_data.ml` and map it in `impl_of_unit`, then run `./_build/default/bin/gen_stdlib_shim.exe <out.js> <Unit>` from `frontend/`. Nothing else needs registering — the build scripts and `run-tests.sh` glob `Stdlib*.js`, and the emitted imports use the unit name (`Stdlib__Seq`). A shim entry may be *defensive*: `Seq.of_seq`/`Seq.*` accept both an OCaml `Seq.t` and a WebSharper `IEnumerable`. |
 | all test goldens (`*.expected.js`, `*.out`, `*.err`, `*.expected`) | `bash backend/tests/run-tests.sh --update` |
 | every emitted JS bundle | `backend/Runtime.js` is embedded as a resource by `Program.fs` — see gotcha 1 |
 
@@ -249,7 +290,9 @@ dotnet backend/bin/Debug/net10.0/WebSharper.OCaml.dll --ir app.wsir.json \
     `TupleOf<'T1>`, `Tuple2Of<'T1,'T2>`, `Union2Of`, `FSharpFunc2Of`,
     `ThisFunc2Of`, `ParamsFunc2Of`, …). The arity is read from the metadata name
     (`arityOf`), not the class's generic count — cyclic interfaces such as
-    `IComparable<'T>`/`IDictionary<'K,'V>` are collapsed to `type t`.
+    `IComparable<'T>`/`IDictionary<'K,'V>` are collapsed to `type t`, so e.g.
+    `IDictionary2Of.t` carries the arity in its *name* but has no type
+    parameters.
     Note the fix usually has *two* entries (the generic/useful member takes the
     bare name), and after renaming check the regenerated file list for fresh
     `*2` files: `EventModule` silently collided with F#'s own
