@@ -173,26 +173,30 @@ let () =
 
   let inst =
     TodoPage.create ()
-    |> TodoPage.newTodoKey_withModel (fun e -> if is_enter e.event then add e.vars.newTodo; Var.set e.vars.newTodo "")
+    |> TodoPage.newTodoKey_withModel (fun e ->
+        if is_enter e.event then begin
+          add e.vars.newTodo;
+          Var.set e.vars.newTodo ""
+        end)
     |> TodoPage.newTodoFocus focus
     |> TodoPage.mainClass_view (cls (fun (s, _) -> hidden_if (s.todos = [])))
     |> TodoPage.footerClass_view (cls (fun (s, _) -> hidden_if (s.todos = [])))
     |> TodoPage.toggleAttr
-         (if (fst initial).todos <> [] && remaining initial = 0 then Attr.create "checked" "checked"
+        (if (fst initial).todos <> [] && remaining initial = 0 then Attr.create "checked" "checked"
           else Attr.empty ())
     |> TodoPage.toggleAll (fun _ _ -> toggle_all ())
     |> TodoPage.todos
-         (Doc.bindView
+        (Doc.bindView
             (fun m -> Doc.concat (List.map (render_item (fst m)) (List.filter (visible m) (fst m).todos)))
             view)
     |> TodoPage.count
-         (Doc.bindView
-            (fun m ->
-              let n = remaining m in
-              Doc.concat
-                [ strong [] [ Doc.text (string_of_int n) ];
-                  Doc.text (" " ^ (if n = 1 then "item" else "items") ^ " left") ])
-            view)
+        (Doc.bindView
+          (fun m ->
+            let n = remaining m in
+            Doc.concat
+              [ strong [] [ Doc.text (string_of_int n) ];
+                Doc.text (" " ^ (if n = 1 then "item" else "items") ^ " left") ])
+          view)
     |> TodoPage.allClass_view (cls (selected All))
     |> TodoPage.activeClass_view (cls (selected Active))
     |> TodoPage.completedClass_view (cls (selected Completed))

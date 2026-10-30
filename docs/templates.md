@@ -115,6 +115,14 @@ c.vars.filter           (* : string WebSharper_UI.Var.t *)
 WebSharper_UI.Var.set c.vars.filter "abc"
 ```
 
+> **Emptying a `ws-var` input.** The two-way binding re-reads the input on
+> `input`/`change`/`keypress`, and a `Var` write reaches the DOM only on the
+> (asynchronous) view scheduler. So a handler that clears the `Var` on `keydown`
+> is undone: the `keypress`/`change` that Enter still fires reads the not-yet-
+> cleared input and writes the old text back. Clear on `keyup` instead (or call
+> `Event.preventDefault` on the keydown), which is why the TodoMVC examples bind
+> the new-todo input with `ws-onkeyup`.
+
 ### Events
 
 Event holes get a **nominal** type from the event name (`click` →

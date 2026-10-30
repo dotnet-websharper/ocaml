@@ -214,8 +214,10 @@ let () =
   let inst =
     TodoPage.create ()
     |> TodoPage.newTodoKey_withModel (fun e ->
-           if is_enter e.event then add e.vars.newTodo;
-           Var.set e.vars.newTodo "")
+           if is_enter e.event then begin
+             add e.vars.newTodo;
+             Var.set e.vars.newTodo ""
+           end)
     |> TodoPage.newTodoFocus focus
     |> TodoPage.mainClass_view (cls (fun m -> hidden_if (m.todos = [])))
     |> TodoPage.footerClass_view (cls (fun m -> hidden_if (m.todos = [])))

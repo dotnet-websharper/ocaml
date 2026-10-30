@@ -13,7 +13,7 @@
 			<header class="header">
 				<h1>todos</h1>
 				<input class="new-todo" placeholder="What needs to be done?" autofocus
-				       ws-var="newTodo" ws-onkeydown="newTodoKey" ws-onafterrender="newTodoFocus">
+				       ws-var="newTodo" ws-onkeyup="newTodoKey" ws-onafterrender="newTodoFocus">
 			</header>
 			<section class="main ${mainClass}" id="main">
 				<input id="toggle-all" class="toggle-all" type="checkbox" ws-attr="toggleAttr" ws-onclick="toggleAll">
